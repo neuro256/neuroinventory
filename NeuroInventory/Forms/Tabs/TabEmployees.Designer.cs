@@ -1,4 +1,8 @@
-﻿namespace NeuroInventory
+﻿using System;
+using System.Data;
+using System.Windows.Forms;
+
+namespace NeuroInventory
 {
     partial class TabEmployees
     {
@@ -43,9 +47,9 @@
             this.chPost = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDepartment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStripEmployees = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanelEmployees.SuspendLayout();
             this.panelEmployeesBottom.SuspendLayout();
             this.contextMenuStripEmployees.SuspendLayout();
@@ -134,7 +138,6 @@
             this.lwEmployees.TabIndex = 2;
             this.lwEmployees.UseCompatibleStateImageBehavior = false;
             this.lwEmployees.View = System.Windows.Forms.View.Details;
-            this.lwEmployees.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lwEmployees_MouseUp);
             // 
             // chID
             // 
@@ -178,21 +181,7 @@
             this.editToolStripMenuItem,
             this.removeToolStripMenuItem});
             this.contextMenuStripEmployees.Name = "contextMenuStrip1";
-            this.contextMenuStripEmployees.Size = new System.Drawing.Size(187, 110);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
-            this.editToolStripMenuItem.Text = "Редактировать";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
-            // 
-            // removeToolStripMenuItem
-            // 
-            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
-            this.removeToolStripMenuItem.Text = "Удалить";
-            this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
+            this.contextMenuStripEmployees.Size = new System.Drawing.Size(187, 82);
             // 
             // addToolStripMenuItem1
             // 
@@ -200,7 +189,18 @@
             this.addToolStripMenuItem1.Size = new System.Drawing.Size(186, 26);
             this.addToolStripMenuItem1.Text = "Добавить";
             this.addToolStripMenuItem1.Visible = false;
-            this.addToolStripMenuItem1.Click += new System.EventHandler(this.addToolStripMenuItem1_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.editToolStripMenuItem.Text = "Редактировать";
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.removeToolStripMenuItem.Text = "Удалить";
             // 
             // TabEmployees
             // 

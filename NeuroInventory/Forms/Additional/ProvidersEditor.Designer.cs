@@ -1,6 +1,6 @@
 ﻿namespace NeuroInventory
 {
-    partial class ProvidersEditor
+    partial class ProviderEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -142,6 +142,7 @@
             this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnOk
             // 
@@ -151,8 +152,9 @@
             this.btnOk.TabIndex = 10;
             this.btnOk.Text = "ОК";
             this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // ProvidersEditor
+            // ProviderEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -170,7 +172,7 @@
             this.Controls.Add(this.tbPhone);
             this.Controls.Add(this.tbAddress);
             this.Controls.Add(this.tbName);
-            this.Name = "ProvidersEditor";
+            this.Name = "ProviderEditor";
             this.Text = "Редактор поставщика";
             this.ResumeLayout(false);
             this.PerformLayout();

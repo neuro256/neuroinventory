@@ -28,5 +28,10 @@ namespace NeuroInventory
         {
 
         }
+
+        internal void Remove(int m_ListviewSelectedIndex)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

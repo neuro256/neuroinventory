@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanelProviders = new System.Windows.Forms.TableLayoutPanel();
             this.lwProviders = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -41,6 +42,7 @@
             this.btnProviderEdit = new System.Windows.Forms.Button();
             this.btnProviderRemove = new System.Windows.Forms.Button();
             this.btnProviderAdd = new System.Windows.Forms.Button();
+            this.contextMenuStripProviders = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanelProviders.SuspendLayout();
             this.panelProvidersBottom.SuspendLayout();
             this.SuspendLayout();
@@ -158,6 +160,12 @@
             this.btnProviderAdd.UseVisualStyleBackColor = true;
             this.btnProviderAdd.Click += new System.EventHandler(this.btnProviderAdd_Click);
             // 
+            // contextMenuStripProviders
+            // 
+            this.contextMenuStripProviders.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStripProviders.Name = "contextMenuStripProviders";
+            this.contextMenuStripProviders.Size = new System.Drawing.Size(182, 32);
+            // 
             // TabProviders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -191,5 +199,6 @@
         private System.Windows.Forms.Button btnProviderEdit;
         private System.Windows.Forms.Button btnProviderRemove;
         private System.Windows.Forms.Button btnProviderAdd;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripProviders;
     }
 }

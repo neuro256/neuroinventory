@@ -47,18 +47,17 @@ namespace NeuroInventory
             // Создаем элементы меню и добавляем их
             ToolStripMenuItem addMenuItem = new ToolStripMenuItem("Добавить");
             addMenuItem.Name = "addToolStripMenuItem";
+            addMenuItem.Click += addToolStripMenuItem_Click;
             ToolStripMenuItem editMenuItem = new ToolStripMenuItem("Редактировать");
             editMenuItem.Name = "editToolStripMenuItem";
+            editMenuItem.Click += editToolStripMenuItem_Click;
             ToolStripMenuItem removeMenuItem = new ToolStripMenuItem("Удалить");
             removeMenuItem.Name = "removeToolStripMenuItem";
+            removeMenuItem.Click += removeToolStripMenuItem_Click;
             m_ContextMenuStrip.Items.Clear();
             m_ContextMenuStrip.Items.AddRange(new[] { addMenuItem, editMenuItem, removeMenuItem });
             // Ассоциируем контекстное меню со списком
             m_Listview.ContextMenuStrip = m_ContextMenuStrip;
-            // Устанавливаем обработчики событий для меню
-            m_ContextMenuStrip.Click += addToolStripMenuItem_Click;
-            m_ContextMenuStrip.Click += editToolStripMenuItem_Click;
-            m_ContextMenuStrip.Click += removeToolStripMenuItem_Click;
         }
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)

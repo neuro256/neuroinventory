@@ -38,9 +38,10 @@
             this.lblMail = new System.Windows.Forms.Label();
             this.lblLink = new System.Windows.Forms.Label();
             this.tbDocument = new System.Windows.Forms.TextBox();
-            this.tbLink = new System.Windows.Forms.Button();
+            this.btnLink = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
+            this.btnClearPath = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbName
@@ -49,6 +50,7 @@
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(292, 22);
             this.tbName.TabIndex = 5;
+            this.tbName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbName_KeyPress);
             // 
             // tbAddress
             // 
@@ -56,6 +58,7 @@
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(292, 22);
             this.tbAddress.TabIndex = 6;
+            this.tbAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAddress_KeyPress);
             // 
             // tbPhone
             // 
@@ -63,6 +66,7 @@
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(292, 22);
             this.tbPhone.TabIndex = 7;
+            this.tbPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPhone_KeyPress);
             // 
             // tbMail
             // 
@@ -70,6 +74,7 @@
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(292, 22);
             this.tbMail.TabIndex = 8;
+            this.tbMail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMail_KeyPress);
             // 
             // lblName
             // 
@@ -124,15 +129,15 @@
             this.tbDocument.Size = new System.Drawing.Size(292, 22);
             this.tbDocument.TabIndex = 12;
             // 
-            // tbLink
+            // btnLink
             // 
-            this.tbLink.Location = new System.Drawing.Point(501, 194);
-            this.tbLink.Name = "tbLink";
-            this.tbLink.Size = new System.Drawing.Size(88, 24);
-            this.tbLink.TabIndex = 9;
-            this.tbLink.Text = "Обзор";
-            this.tbLink.UseVisualStyleBackColor = true;
-            this.tbLink.Click += new System.EventHandler(this.tbLink_Click);
+            this.btnLink.Location = new System.Drawing.Point(501, 194);
+            this.btnLink.Name = "btnLink";
+            this.btnLink.Size = new System.Drawing.Size(88, 24);
+            this.btnLink.TabIndex = 9;
+            this.btnLink.Text = "Обзор";
+            this.btnLink.UseVisualStyleBackColor = true;
+            this.btnLink.Click += new System.EventHandler(this.btnLink_Click);
             // 
             // btnCancel
             // 
@@ -154,14 +159,25 @@
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
+            // btnClearPath
+            // 
+            this.btnClearPath.Location = new System.Drawing.Point(595, 194);
+            this.btnClearPath.Name = "btnClearPath";
+            this.btnClearPath.Size = new System.Drawing.Size(88, 24);
+            this.btnClearPath.TabIndex = 13;
+            this.btnClearPath.Text = "Очистить";
+            this.btnClearPath.UseVisualStyleBackColor = true;
+            this.btnClearPath.Click += new System.EventHandler(this.btnClearPath_Click);
+            // 
             // ProviderEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(616, 304);
+            this.ClientSize = new System.Drawing.Size(695, 304);
+            this.Controls.Add(this.btnClearPath);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.tbLink);
+            this.Controls.Add(this.btnLink);
             this.Controls.Add(this.tbDocument);
             this.Controls.Add(this.lblLink);
             this.Controls.Add(this.lblMail);
@@ -191,8 +207,9 @@
         private System.Windows.Forms.Label lblMail;
         private System.Windows.Forms.Label lblLink;
         private System.Windows.Forms.TextBox tbDocument;
-        private System.Windows.Forms.Button tbLink;
+        private System.Windows.Forms.Button btnLink;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.Button btnClearPath;
     }
 }

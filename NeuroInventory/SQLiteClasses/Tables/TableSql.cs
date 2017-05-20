@@ -14,9 +14,9 @@ namespace NeuroInventory
     public abstract class TableSql<T> where T : new()
     {
         private static T instance;
-        protected string _commandDataSet; //Команда для создания набора
-        protected string _connectionStr;//Строка для подключения 
-        public string _tableName; //Название таблицы
+        protected string m_CommandDataSet; //Команда для создания набора
+        protected string m_ConnectionStr;//Строка для подключения 
+        public string m_TableName; //Название таблицы
 
         static public T GetInstance()
         {
@@ -31,8 +31,8 @@ namespace NeuroInventory
         {
             get
             {
-                _connectionStr = SQLiteManager.GetInstance().connectionString;
-                return _connectionStr;
+                m_ConnectionStr = SQLiteManager.GetInstance().connectionString;
+                return m_ConnectionStr;
             }
         }
 
@@ -44,14 +44,14 @@ namespace NeuroInventory
         {
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
-                using (SQLiteDataAdapter myAdapter = new SQLiteDataAdapter(_commandDataSet, connection))
+                using (SQLiteDataAdapter myAdapter = new SQLiteDataAdapter(m_CommandDataSet, connection))
                 {
                     using (DataSet dataSet = new DataSet())
                     {
                         connection.Open();
                         try
                         {
-                            myAdapter.Fill(dataSet, _tableName);
+                            myAdapter.Fill(dataSet, m_TableName);
                         }
                         catch (Exception exc)
                         {

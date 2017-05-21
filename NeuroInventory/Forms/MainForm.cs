@@ -18,12 +18,12 @@ namespace NeuroInventory
         {
             inventoryTabs = new Dictionary<string, IInventoryTab>();
 
-            TabEmployees tabEmployees = new TabEmployees();
-            tabEmployees.MdiParent = this;
-            tabEmployees.Parent = tabControl.TabPages[2];
-            tabEmployees.Dock = DockStyle.Fill;
-            tabEmployees.Show();
-            inventoryTabs["tabEmployees"] = tabEmployees;
+            TabMain tabMain = new TabMain();
+            tabMain.MdiParent = this;
+            tabMain.Parent = tabControl.TabPages[0];
+            tabMain.Dock = DockStyle.Fill;
+            tabMain.Show();
+            inventoryTabs["tabInventory"] = tabMain;
 
             TabProviders tabProviders = new TabProviders();
             tabProviders.MdiParent = this;
@@ -31,6 +31,13 @@ namespace NeuroInventory
             tabProviders.Dock = DockStyle.Fill;
             tabProviders.Show();
             inventoryTabs["tabProviders"] = tabProviders;
+
+            TabEmployees tabEmployees = new TabEmployees();
+            tabEmployees.MdiParent = this;
+            tabEmployees.Parent = tabControl.TabPages[2];
+            tabEmployees.Dock = DockStyle.Fill;
+            tabEmployees.Show();
+            inventoryTabs["tabEmployees"] = tabEmployees;
         }
 
         private void createBDToolStripMenuItem_Click(object sender, EventArgs e)

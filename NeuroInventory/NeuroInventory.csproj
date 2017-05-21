@@ -64,6 +64,12 @@
     <Compile Include="Forms\Tabs\InventoryTab.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\Tabs\TabMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tabs\TabMain.Designer.cs">
+      <DependentUpon>TabMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Tabs\TabProviders.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tabs\TabMain.resx">
+      <DependentUpon>TabMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

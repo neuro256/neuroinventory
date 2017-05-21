@@ -12,7 +12,17 @@ namespace NeuroInventory
             InitForm();
             InitListView();
             InitContextMenuStrip();
+            PopulateTreeView();
             m_ListviewSelectedIndex = 0;
+        }
+
+        private void PopulateTreeView()
+        {
+            treeView.Nodes.Add("Каталог");
+            treeView.Nodes[0].Nodes.Add("ТМЦ 1");
+            treeView.Nodes[0].Nodes.Add("ТМЦ 2");
+            TreeNode node = new TreeNode("ТМЦ 3", 1, 1);
+            treeView.Nodes[0].Nodes.Add(node);
         }
 
         protected override void InitForm()

@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabMain));
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanelLeft = new System.Windows.Forms.TableLayoutPanel();
+            this.treeView = new System.Windows.Forms.TreeView();
+            this.imageListMain = new System.Windows.Forms.ImageList(this.components);
+            this.panelLeftPanelBottom = new System.Windows.Forms.Panel();
             this.tableLayoutPanelRight = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelInventory = new System.Windows.Forms.TableLayoutPanel();
             this.panelMainBottom = new System.Windows.Forms.Panel();
@@ -54,18 +58,14 @@
             this.chBalance = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnCollapseExpand = new System.Windows.Forms.Button();
             this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tableLayoutPanelLeft = new System.Windows.Forms.TableLayoutPanel();
-            this.treeView = new System.Windows.Forms.TreeView();
-            this.panelLeftPanelBottom = new System.Windows.Forms.Panel();
-            this.imageListMain = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
             this.splitContainerMain.SuspendLayout();
+            this.tableLayoutPanelLeft.SuspendLayout();
             this.tableLayoutPanelRight.SuspendLayout();
             this.tableLayoutPanelInventory.SuspendLayout();
             this.panelMainBottom.SuspendLayout();
-            this.tableLayoutPanelLeft.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainerMain
@@ -89,6 +89,53 @@
             this.splitContainerMain.SplitterDistance = 250;
             this.splitContainerMain.SplitterWidth = 1;
             this.splitContainerMain.TabIndex = 0;
+            // 
+            // tableLayoutPanelLeft
+            // 
+            this.tableLayoutPanelLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanelLeft.ColumnCount = 1;
+            this.tableLayoutPanelLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelLeft.Controls.Add(this.treeView, 0, 0);
+            this.tableLayoutPanelLeft.Controls.Add(this.panelLeftPanelBottom, 0, 1);
+            this.tableLayoutPanelLeft.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanelLeft.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanelLeft.Name = "tableLayoutPanelLeft";
+            this.tableLayoutPanelLeft.RowCount = 2;
+            this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.83477F));
+            this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.165229F));
+            this.tableLayoutPanelLeft.Size = new System.Drawing.Size(250, 650);
+            this.tableLayoutPanelLeft.TabIndex = 0;
+            // 
+            // treeView
+            // 
+            this.treeView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView.ImageIndex = 0;
+            this.treeView.ImageList = this.imageListMain;
+            this.treeView.Location = new System.Drawing.Point(0, 0);
+            this.treeView.Margin = new System.Windows.Forms.Padding(0);
+            this.treeView.Name = "treeView";
+            this.treeView.SelectedImageIndex = 0;
+            this.treeView.Size = new System.Drawing.Size(250, 590);
+            this.treeView.TabIndex = 0;
+            // 
+            // imageListMain
+            // 
+            this.imageListMain.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListMain.ImageStream")));
+            this.imageListMain.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListMain.Images.SetKeyName(0, "folder_20.png");
+            this.imageListMain.Images.SetKeyName(1, "file_20.png");
+            // 
+            // panelLeftPanelBottom
+            // 
+            this.panelLeftPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelLeftPanelBottom.Location = new System.Drawing.Point(0, 590);
+            this.panelLeftPanelBottom.Margin = new System.Windows.Forms.Padding(0);
+            this.panelLeftPanelBottom.Name = "panelLeftPanelBottom";
+            this.panelLeftPanelBottom.Size = new System.Drawing.Size(250, 60);
+            this.panelLeftPanelBottom.TabIndex = 1;
             // 
             // tableLayoutPanelRight
             // 
@@ -284,53 +331,6 @@
             this.contextMenuStripInventory.Name = "contextMenuStripInventory";
             this.contextMenuStripInventory.Size = new System.Drawing.Size(67, 4);
             // 
-            // tableLayoutPanelLeft
-            // 
-            this.tableLayoutPanelLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanelLeft.ColumnCount = 1;
-            this.tableLayoutPanelLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelLeft.Controls.Add(this.treeView, 0, 0);
-            this.tableLayoutPanelLeft.Controls.Add(this.panelLeftPanelBottom, 0, 1);
-            this.tableLayoutPanelLeft.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanelLeft.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanelLeft.Name = "tableLayoutPanelLeft";
-            this.tableLayoutPanelLeft.RowCount = 2;
-            this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.83477F));
-            this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.165229F));
-            this.tableLayoutPanelLeft.Size = new System.Drawing.Size(250, 650);
-            this.tableLayoutPanelLeft.TabIndex = 0;
-            // 
-            // treeView
-            // 
-            this.treeView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView.ImageIndex = 0;
-            this.treeView.ImageList = this.imageListMain;
-            this.treeView.Location = new System.Drawing.Point(0, 0);
-            this.treeView.Margin = new System.Windows.Forms.Padding(0);
-            this.treeView.Name = "treeView";
-            this.treeView.SelectedImageIndex = 0;
-            this.treeView.Size = new System.Drawing.Size(250, 590);
-            this.treeView.TabIndex = 0;
-            // 
-            // panelLeftPanelBottom
-            // 
-            this.panelLeftPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelLeftPanelBottom.Location = new System.Drawing.Point(0, 590);
-            this.panelLeftPanelBottom.Margin = new System.Windows.Forms.Padding(0);
-            this.panelLeftPanelBottom.Name = "panelLeftPanelBottom";
-            this.panelLeftPanelBottom.Size = new System.Drawing.Size(250, 60);
-            this.panelLeftPanelBottom.TabIndex = 1;
-            // 
-            // imageListMain
-            // 
-            this.imageListMain.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListMain.ImageStream")));
-            this.imageListMain.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListMain.Images.SetKeyName(0, "folder_20.png");
-            this.imageListMain.Images.SetKeyName(1, "file_20.png");
-            // 
             // TabMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -348,10 +348,10 @@
             this.splitContainerMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();
             this.splitContainerMain.ResumeLayout(false);
+            this.tableLayoutPanelLeft.ResumeLayout(false);
             this.tableLayoutPanelRight.ResumeLayout(false);
             this.tableLayoutPanelInventory.ResumeLayout(false);
             this.panelMainBottom.ResumeLayout(false);
-            this.tableLayoutPanelLeft.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

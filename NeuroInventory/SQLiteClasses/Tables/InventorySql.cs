@@ -6,7 +6,18 @@ namespace NeuroInventory
     {
         public InventorySql()
         {
-            m_CommandDataSet = "SELECT * FROM inventory"; // TODO : изменить запрос
+            m_CommandDataSet = "SELECT id, " +
+                "(SELECT name FROM providers WHERE providers.id = inventory.providerId)," +
+                "strftime('%d.%m.%Y', DATE(date))," +
+                "invoice," +
+                "name," +
+                "OKEIcode," +
+                "measurement," +
+                "amount," +
+                "CAST ((price) AS REAL)," +
+                "CAST ((amount*price) AS REAL)," +
+                "released" +
+                " FROM inventory"; // TODO : изменить запрос
             m_TableName = "inventory";
         }
 

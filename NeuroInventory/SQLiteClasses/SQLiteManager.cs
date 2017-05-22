@@ -51,9 +51,7 @@ namespace NeuroInventory
         /// <returns>True если имя непустое, иначе False</returns>
         private bool DatabaseNameExist()
         {
-            if (m_DatabaseName == null || m_DatabaseName == string.Empty)
-                return false;
-            return true;
+            return !String.IsNullOrEmpty(m_DatabaseName);
         }
 
         /// <summary>
@@ -64,12 +62,19 @@ namespace NeuroInventory
         {
             try
             {
-                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                if (!String.IsNullOrEmpty(connectionString) && DatabaseNameExist())
                 {
-                    connection.Open();
-                    connection.Close();
+                    using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                    {
+                        connection.Open();
+                        connection.Close();
+                    }
+                    return true;
                 }
-                return true;
+                else
+                {
+                    return false;
+                }
             }
             catch(Exception ex)
             {

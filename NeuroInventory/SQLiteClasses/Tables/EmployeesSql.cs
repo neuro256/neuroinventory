@@ -19,8 +19,8 @@ namespace NeuroInventory
             values["surename"] = p_Surename;
             values["firstname"] = p_Firstname;
             values["lastname"] = p_Lastname;
-            values["post"] = p_Post.Length > 0 ? (object)p_Post : DBNull.Value;
-            values["department"] = p_Department.Length > 0 ? (object)p_Department : DBNull.Value;
+            values["post"] = !String.IsNullOrEmpty(p_Post) ? (object)p_Post : DBNull.Value;
+            values["department"] = !String.IsNullOrEmpty(p_Department) ? (object)p_Department : DBNull.Value;
 
             SQLiteManager.GetInstance().Insert(m_TableName, values);
         }
@@ -32,8 +32,8 @@ namespace NeuroInventory
             values["surename"] = p_Surename;
             values["firstname"] = p_Firstname;
             values["lastname"] = p_Lastname;
-            values["post"] = p_Post.Length > 0 ? (object)p_Post : DBNull.Value;
-            values["department"] = p_Department.Length > 0 ? (object) p_Department : DBNull.Value;
+            values["post"] = !String.IsNullOrEmpty(p_Post) ? (object)p_Post : DBNull.Value;
+            values["department"] = !String.IsNullOrEmpty(p_Department) ? (object) p_Department : DBNull.Value;
 
             string l_Where = $"id={p_Id}";
 

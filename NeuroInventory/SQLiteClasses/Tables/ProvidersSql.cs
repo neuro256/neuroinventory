@@ -24,12 +24,12 @@ namespace NeuroInventory
             Dictionary<string, object> values = new Dictionary<string, object>();
 
             values["name"] = p_Name;
-            values["address"] = p_Address.Length > 0 ? (object) p_Address : DBNull.Value;
-            values["phone"] = p_Phone.Length > 0 ? (object)p_Phone : DBNull.Value;
-            values["mail"] = p_Mail.Length > 0 ? (object)p_Mail : DBNull.Value;
+            values["address"] = !String.IsNullOrEmpty(p_Address) ? (object) p_Address : DBNull.Value;
+            values["phone"] = !String.IsNullOrEmpty(p_Phone) ? (object)p_Phone : DBNull.Value;
+            values["mail"] = !String.IsNullOrEmpty(p_Mail) ? (object)p_Mail : DBNull.Value;
 
             // Копирование выбранного файла-документа в целевую папку приложения
-            if (p_Document.Length > 0)
+            if (!String.IsNullOrEmpty(p_Document))
             {
                 values["document"] = CopyFile(p_Document);
             }
@@ -46,12 +46,12 @@ namespace NeuroInventory
             Dictionary<string, object> values = new Dictionary<string, object>();
 
             values["name"] = p_Name;
-            values["address"] = p_Address.Length > 0 ? (object)p_Address : DBNull.Value;
-            values["phone"] = p_Phone.Length > 0 ? (object)p_Phone : DBNull.Value;
-            values["mail"] = p_Mail.Length > 0 ? (object)p_Mail : DBNull.Value;
+            values["address"] = !String.IsNullOrEmpty(p_Address) ? (object)p_Address : DBNull.Value;
+            values["phone"] = !String.IsNullOrEmpty(p_Phone) ? (object)p_Phone : DBNull.Value;
+            values["mail"] = !String.IsNullOrEmpty(p_Mail) ? (object)p_Mail : DBNull.Value;
 
             // Обновление выбранного файла-документа. 
-            if (p_SelectedDocument.Length > 0)
+            if (!String.IsNullOrEmpty(p_SelectedDocument))
             {
                 if (IsDocumentUpdated(p_SelectedDocument, p_CurrentDocument)) // файл изменен
                 {
@@ -97,7 +97,7 @@ namespace NeuroInventory
         private bool IsDocumentUpdated(string p_SelectedDocument, string p_CurrentDocument)
         {
             bool documentUpdated = false;
-            if (p_SelectedDocument.Length > 0 && p_SelectedDocument != p_CurrentDocument)
+            if (!String.IsNullOrEmpty(p_SelectedDocument) && String.Compare(p_SelectedDocument, p_CurrentDocument) != 0)
                 documentUpdated = true;
             return documentUpdated;
         }

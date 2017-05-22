@@ -51,7 +51,7 @@ namespace NeuroInventory
         private void btnOk_Click(object sender, EventArgs e)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
-            if(tbName.Text.Length == 0)
+            if(String.IsNullOrEmpty(tbName.Text))
             {
                 MessageBox.Show("Заполните обязательные поля");
                 tbName.Focus();

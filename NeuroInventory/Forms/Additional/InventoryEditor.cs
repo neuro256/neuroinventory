@@ -12,9 +12,16 @@ namespace NeuroInventory
 {
     public partial class InventoryEditor : Form
     {
+        private int m_ListviewSelectedIndex;
+
         public InventoryEditor()
         {
             InitializeComponent();
+        }
+
+        public InventoryEditor(int m_ListviewSelectedIndex)
+        {
+            this.m_ListviewSelectedIndex = m_ListviewSelectedIndex;
         }
     }
 }

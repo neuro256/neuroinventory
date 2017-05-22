@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NeuroInventory
 {
@@ -45,7 +42,7 @@ namespace NeuroInventory
 
         public void Remove(int p_ListviewSelectedItemIndex)
         {
-            DataSet dataSet = SQLiteManager.GetInstance().Employees().ReturnDataSet();
+            DataSet dataSet = ReturnDataSet();
             object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
             string l_Where = $"id={selectedRecordId}";
 

@@ -79,7 +79,7 @@ namespace NeuroInventory
 
         public void Remove(int p_ListviewSelectedItemIndex)
         {
-            DataSet dataSet = SQLiteManager.GetInstance().Providers().ReturnDataSet();
+            DataSet dataSet = ReturnDataSet();
             object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
             string currentDocument = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["document"].ToString();
             DeleteFile(currentDocument);

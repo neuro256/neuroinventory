@@ -171,6 +171,10 @@ namespace NeuroInventory
                             "document NVARCHAR(80));";
                         command.ExecuteNonQuery();
 
+                        // Вставка корневого каталого 
+                        command.CommandText = "INSERT INTO catalogs (parent, name) VALUES (null, 'Каталоги');";
+                        command.ExecuteNonQuery();
+
                         transaction.Commit();
                         connection.Close();
                     }
@@ -319,6 +323,11 @@ namespace NeuroInventory
         public ProvidersSql Providers()
         {
             return ProvidersSql.GetInstance();
+        }
+
+        public InventorySql Inventory()
+        {
+            return InventorySql.GetInstance();
         }
     }
 }

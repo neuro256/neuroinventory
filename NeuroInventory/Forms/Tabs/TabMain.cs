@@ -90,6 +90,12 @@ namespace NeuroInventory
         /// </summary>
         public override void AddRecord()
         {
+            InventoryEditor editor = new InventoryEditor();
+            if(editor.ShowDialog() == DialogResult.OK)
+            {
+                ShowTable();
+            }
+            m_Listview.SelectedItems.Clear();
         }
 
         /// <summary>
@@ -97,6 +103,12 @@ namespace NeuroInventory
         /// </summary>
         public override void RemoveRecord()
         {
+            if(m_Listview.SelectedItems.Count > 0)
+            {
+                SQLiteManager.GetInstance().Inventory().Remove(m_ListviewSelectedIndex);
+                ShowTable();
+            }
+            m_Listview.SelectedItems.Clear();
         }
 
         /// <summary>
@@ -104,6 +116,15 @@ namespace NeuroInventory
         /// </summary>
         public override void UpdateRecord()
         {
+            if(m_Listview.SelectedItems.Count > 0)
+            {
+                InventoryEditor editor = new InventoryEditor(m_ListviewSelectedIndex);
+                if(editor.ShowDialog() == DialogResult.OK)
+                {
+                    ShowTable();
+                }
+            }
+            m_Listview.SelectedItems.Clear();
         }
 
         protected override ListView GetListView()
@@ -118,7 +139,7 @@ namespace NeuroInventory
 
         public override DataSet ReturnDataSet()
         {
-            return null;
+            return SQLiteManager.GetInstance().Inventory().ReturnDataSet();
         }
 
         public override void Clear()

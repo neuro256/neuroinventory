@@ -181,25 +181,25 @@ namespace NeuroInventory
             this.editToolStripMenuItem,
             this.removeToolStripMenuItem});
             this.contextMenuStripEmployees.Name = "contextMenuStrip1";
-            this.contextMenuStripEmployees.Size = new System.Drawing.Size(187, 82);
+            this.contextMenuStripEmployees.Size = new System.Drawing.Size(181, 76);
             // 
             // addToolStripMenuItem1
             // 
             this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
-            this.addToolStripMenuItem1.Size = new System.Drawing.Size(186, 26);
+            this.addToolStripMenuItem1.Size = new System.Drawing.Size(180, 24);
             this.addToolStripMenuItem1.Text = "Добавить";
             this.addToolStripMenuItem1.Visible = false;
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.editToolStripMenuItem.Text = "Редактировать";
             // 
             // removeToolStripMenuItem
             // 
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.removeToolStripMenuItem.Text = "Удалить";
             // 
             // TabEmployees

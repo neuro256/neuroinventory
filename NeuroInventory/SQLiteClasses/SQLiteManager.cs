@@ -105,15 +105,63 @@ namespace NeuroInventory
                 {
                     using (SQLiteCommand command = new SQLiteCommand(connection))
                     {
-                        command.CommandText = "CREATE TABLE IF NOT EXISTS employees (" +
+                        // Создание таблицы "Каталоги"
+                        command.CommandText = "CREATE TABLE IF NOT EXISTS catalogs (" +
                             "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                            "surename TEXT NOT NULL, " +
-                            "firstname TEXT NOT NULL, " +
-                            "lastname TEXT NOT NULL, " +
-                            "post TEXT, " +
-                            "department TEXT);";
+                            "parent NVARCHAR(80), " +
+                            "name NVARCHAR(80) NOT NULL);";
                         command.ExecuteNonQuery();
 
+                        // Создание таблицы "Требования"
+                        command.CommandText = "CREATE TABLE IF NOT EXISTS demand (" +
+                            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                            "inventoryId INTEGER, " +
+                            "employeeId INTEGER, " +
+                            "amount INTEGER NOT NULL, " +
+                            "date DATETIME, " +
+                            "document NVARCHAR(80), " +
+                            "FOREIGN KEY(inventoryId) REFERENCES inventory(id) ON DELETE CASCADE, " +
+                            "FOREIGN KEY(employeeId) REFERENCES employees(id) ON DELETE SET NULL);";
+                        command.ExecuteNonQuery();
+
+                        // Создание таблицы "Списания"
+                        command.CommandText = "CREATE TABLE IF NOT EXISTS debit (" +
+                            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                            "inventoryId INTEGER, " +
+                            "amount INTEGER NOT NULL, " +
+                            "date DATETIME, " +
+                            "document NVARCHAR(80), " +
+                            "FOREIGN KEY (inventoryId) REFERENCES inventory(id) ON DELETE CASCADE);";
+                        command.ExecuteNonQuery();
+
+                        // Создание таблицы "ТМЦ"
+                        command.CommandText = "CREATE TABLE IF NOT EXISTS inventory (" +
+                            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                            "catalogId INTEGER, " +
+                            "providerId INTEGER, " +
+                            "date DATETIME NOT NULL, " +
+                            "invoice NVARCHAR(80), " +
+                            "name NVARCHAR(45) NOT NULL, " +
+                            "OKEIcode NVARCHAR(45), " +
+                            "measurement NVARCHAR(20), " +
+                            "amount INTEGER, " +
+                            "price INTEGER, " +
+                            "released INTEGER, " +
+                            "FOREIGN KEY (catalogId) REFERENCES catalogs(id) ON DELETE CASCADE, " +
+                            "FOREIGN KEY (providerId) REFERENCES providers(id) ON DELETE SET NULL);";
+                        command.ExecuteNonQuery();
+
+                        // Создание таблицы "Работники"
+                        command.CommandText = "CREATE TABLE IF NOT EXISTS employees (" +
+                            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                            "surename NVARCHAR(45) NOT NULL, " +
+                            "firstname NVARCHAR(45) NOT NULL, " +
+                            "lastname NVARCHAR(45) NOT NULL, " +
+                            "post NVARCHAR(45), " +
+                            "department NVARCHAR(45));";
+                        command.ExecuteNonQuery();
+
+                        // Создание таблицы "Поставщики"
                         command.CommandText = "CREATE TABLE IF NOT EXISTS providers (" +
                             "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                             "name NVARCHAR(45) NOT NULL, " +

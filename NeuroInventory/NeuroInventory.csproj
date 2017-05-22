@@ -82,6 +82,12 @@
     <Compile Include="Forms\Additional\ProvidersEditor.Designer.cs">
       <DependentUpon>ProvidersEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="InventoryEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InventoryEditor.Designer.cs">
+      <DependentUpon>InventoryEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="SQLiteClasses\Tables\ProvidersSql.cs" />
     <Compile Include="SQLiteClasses\Tables\EmployeesSql.cs" />
     <Compile Include="ListViewUtility\ColHeader.cs">
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Tabs\TabMain.resx">
       <DependentUpon>TabMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InventoryEditor.resx">
+      <DependentUpon>InventoryEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

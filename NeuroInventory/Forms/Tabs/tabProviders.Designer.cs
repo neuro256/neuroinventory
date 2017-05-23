@@ -68,6 +68,7 @@
             this.lwProviders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lwProviders.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lwProviders.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -79,6 +80,7 @@
             this.lwProviders.GridLines = true;
             this.lwProviders.Location = new System.Drawing.Point(0, 0);
             this.lwProviders.Margin = new System.Windows.Forms.Padding(0);
+            this.lwProviders.MultiSelect = false;
             this.lwProviders.Name = "lwProviders";
             this.lwProviders.Size = new System.Drawing.Size(1200, 586);
             this.lwProviders.TabIndex = 0;
@@ -164,7 +166,7 @@
             // 
             this.contextMenuStripProviders.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripProviders.Name = "contextMenuStripProviders";
-            this.contextMenuStripProviders.Size = new System.Drawing.Size(182, 32);
+            this.contextMenuStripProviders.Size = new System.Drawing.Size(67, 4);
             // 
             // TabProviders
             // 

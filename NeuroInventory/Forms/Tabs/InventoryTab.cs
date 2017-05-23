@@ -33,7 +33,10 @@ namespace NeuroInventory
             m_Listview.View = View.Details;
             m_Listview.FullRowSelect = true;
             m_Listview.MultiSelect = false;
+            m_Listview.BorderStyle = BorderStyle.None;
+            m_Listview.Scrollable = true;
             m_Listview.GridLines = true;
+            m_Listview.MinimumSize = new System.Drawing.Size(0, 0);
             m_Listview.ItemSelectionChanged += ListViewItemSelectionChanged;
             m_Listview.ColumnClick += ListViewColumnClick;
             m_Listview.ColumnWidthChanged += ListViewColumnWidthChanged;

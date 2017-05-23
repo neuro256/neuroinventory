@@ -237,10 +237,9 @@
             this.lwInventory.GridLines = true;
             this.lwInventory.Location = new System.Drawing.Point(0, 0);
             this.lwInventory.Margin = new System.Windows.Forms.Padding(0);
-            this.lwInventory.MinimumSize = new System.Drawing.Size(800, 600);
             this.lwInventory.MultiSelect = false;
             this.lwInventory.Name = "lwInventory";
-            this.lwInventory.Size = new System.Drawing.Size(929, 600);
+            this.lwInventory.Size = new System.Drawing.Size(929, 591);
             this.lwInventory.TabIndex = 2;
             this.lwInventory.UseCompatibleStateImageBehavior = false;
             this.lwInventory.View = System.Windows.Forms.View.Details;
@@ -329,7 +328,7 @@
             // 
             this.contextMenuStripInventory.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripInventory.Name = "contextMenuStripInventory";
-            this.contextMenuStripInventory.Size = new System.Drawing.Size(67, 4);
+            this.contextMenuStripInventory.Size = new System.Drawing.Size(61, 4);
             // 
             // TabMain
             // 

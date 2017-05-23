@@ -131,10 +131,9 @@ namespace NeuroInventory
             this.lwEmployees.GridLines = true;
             this.lwEmployees.Location = new System.Drawing.Point(0, 0);
             this.lwEmployees.Margin = new System.Windows.Forms.Padding(0);
-            this.lwEmployees.MinimumSize = new System.Drawing.Size(800, 600);
             this.lwEmployees.MultiSelect = false;
             this.lwEmployees.Name = "lwEmployees";
-            this.lwEmployees.Size = new System.Drawing.Size(1200, 600);
+            this.lwEmployees.Size = new System.Drawing.Size(1200, 591);
             this.lwEmployees.TabIndex = 2;
             this.lwEmployees.UseCompatibleStateImageBehavior = false;
             this.lwEmployees.View = System.Windows.Forms.View.Details;
@@ -181,25 +180,25 @@ namespace NeuroInventory
             this.editToolStripMenuItem,
             this.removeToolStripMenuItem});
             this.contextMenuStripEmployees.Name = "contextMenuStrip1";
-            this.contextMenuStripEmployees.Size = new System.Drawing.Size(181, 76);
+            this.contextMenuStripEmployees.Size = new System.Drawing.Size(187, 82);
             // 
             // addToolStripMenuItem1
             // 
             this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
-            this.addToolStripMenuItem1.Size = new System.Drawing.Size(180, 24);
+            this.addToolStripMenuItem1.Size = new System.Drawing.Size(186, 26);
             this.addToolStripMenuItem1.Text = "Добавить";
             this.addToolStripMenuItem1.Visible = false;
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.editToolStripMenuItem.Text = "Редактировать";
             // 
             // removeToolStripMenuItem
             // 
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.removeToolStripMenuItem.Text = "Удалить";
             // 
             // TabEmployees

@@ -9,7 +9,7 @@ namespace NeuroInventory
     public partial class ProviderEditor : Form
     {
         private EditorMode m_EditorMode;
-        private int m_ListviewSelectedItemIndex;
+        private int m_ListviewSelectedIndex;
         private object m_SelectedRecordId;
         private string m_SelectedDocument;
         private string m_CurrentDocument;
@@ -27,7 +27,7 @@ namespace NeuroInventory
         {
             InitializeComponent();
             m_EditorMode = EditorMode.UPDATE;
-            m_ListviewSelectedItemIndex = p_Id;
+            m_ListviewSelectedIndex = p_Id;
             m_SelectedDocument = String.Empty;
             m_CurrentDocument = String.Empty;
             ShowInfo();
@@ -37,15 +37,15 @@ namespace NeuroInventory
         private void ShowInfo()
         {
             DataSet dataSet = SQLiteManager.GetInstance().Providers().ReturnDataSet();
-            m_SelectedRecordId = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["id"];
-            tbName.Text = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["name"].ToString();
-            tbAddress.Text = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["address"].ToString();
-            tbPhone.Text = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["phone"].ToString();
-            tbMail.Text = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["mail"].ToString();
-            string fileName = Path.GetFileName(dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["document"].ToString());
+            m_SelectedRecordId = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["id"];
+            tbName.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["name"].ToString();
+            tbAddress.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["address"].ToString();
+            tbPhone.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["phone"].ToString();
+            tbMail.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["mail"].ToString();
+            string fileName = Path.GetFileName(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString());
             tbDocument.Text = fileName;
-            m_CurrentDocument = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["document"].ToString();
-            m_SelectedDocument = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["document"].ToString();
+            m_CurrentDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString();
+            m_SelectedDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString();
         }
 
         private void btnOk_Click(object sender, EventArgs e)

@@ -15,7 +15,7 @@ namespace NeuroInventory
     {
         private EditorMode m_EditorMode;
         private int m_ListviewSelectedItemIndex;
-        private object selectedRecordId;
+        private object m_SelectedRecordId;
 
         public EmployeeEditor()
         {
@@ -36,7 +36,7 @@ namespace NeuroInventory
         private void ShowInfo()
         {
             DataSet dataSet = SQLiteManager.GetInstance().Employees().ReturnDataSet();
-            selectedRecordId = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["id"];
+            m_SelectedRecordId = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["id"];
             tbSurename.Text = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["surename"].ToString();
             tbFirstname.Text = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["firstname"].ToString();
             tbLastname.Text = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["lastname"].ToString();
@@ -56,7 +56,7 @@ namespace NeuroInventory
 
             if (m_EditorMode == EditorMode.UPDATE)
             {
-                SQLiteManager.GetInstance().Employees().Update(selectedRecordId, tbSurename.Text, tbFirstname.Text, tbLastname.Text, tbPost.Text, tbDepartment.Text);
+                SQLiteManager.GetInstance().Employees().Update(m_SelectedRecordId, tbSurename.Text, tbFirstname.Text, tbLastname.Text, tbPost.Text, tbDepartment.Text);
             }
             else
             {

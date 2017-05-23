@@ -232,7 +232,7 @@ namespace NeuroInventory
             }
         }
 
-        private DataSet ReturnDataSet(string p_Command)
+        public DataSet ReturnDataSet(string p_Command)
         {
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {

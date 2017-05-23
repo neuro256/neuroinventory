@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace NeuroInventory
@@ -16,7 +13,8 @@ namespace NeuroInventory
         private static T instance;
         protected string m_CommandDataSet; //Команда для создания набора
         protected string m_ConnectionStr;//Строка для подключения 
-        public string m_TableName; //Название таблицы
+        protected string m_TableName; //Название таблицы
+        protected string m_TargetPath; // Путь к сохраняемым файлам
 
         static public T GetInstance()
         {
@@ -65,6 +63,41 @@ namespace NeuroInventory
                         return dataSet;
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Проверка на то, был ли изменен файл-документа в окне редактора
+        /// </summary>
+        /// <param name="p_SelectedDocument"></param>
+        /// <param name="p_CurrentDocument"></param>
+        /// <returns></returns>
+        public bool IsDocumentUpdated(string p_SelectedDocument, string p_CurrentDocument)
+        {
+            bool documentUpdated = false;
+            if (!String.IsNullOrEmpty(p_SelectedDocument) && String.Compare(p_SelectedDocument, p_CurrentDocument) != 0)
+                documentUpdated = true;
+            return documentUpdated;
+        }
+
+        public string CopyFile(string p_FileName)
+        {
+            string fileName = Path.GetFileName(p_FileName);
+            string sourceFile = p_FileName;
+            string destFile = Path.Combine(m_TargetPath, fileName);
+            if (!Directory.Exists(m_TargetPath))
+            {
+                Directory.CreateDirectory(m_TargetPath);
+            }
+            File.Copy(sourceFile, destFile, true);
+            return destFile;
+        }
+
+        public void DeleteFile(string p_FileName)
+        {
+            if (File.Exists(p_FileName))
+            {
+                File.Delete(p_FileName);
             }
         }
     }

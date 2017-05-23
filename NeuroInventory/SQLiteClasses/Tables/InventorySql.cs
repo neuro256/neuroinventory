@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 
 namespace NeuroInventory
 {
     public class InventorySql : TableSql<InventorySql>
     {
-        string m_TargetPath;
-
         public InventorySql()
         {
             m_CommandDataSet = "SELECT id, " +
@@ -103,41 +100,6 @@ namespace NeuroInventory
             values["catalogId"] = 1;
 
             SQLiteManager.GetInstance().Insert(m_TableName, values);
-        }
-
-        /// <summary>
-        /// Проверка на то, был ли изменен файл-документа в окне редактора
-        /// </summary>
-        /// <param name="p_SelectedDocument"></param>
-        /// <param name="p_CurrentDocument"></param>
-        /// <returns></returns>
-        private bool IsDocumentUpdated(string p_SelectedDocument, string p_CurrentDocument)
-        {
-            bool documentUpdated = false;
-            if (!String.IsNullOrEmpty(p_SelectedDocument) && String.Compare(p_SelectedDocument, p_CurrentDocument) != 0)
-                documentUpdated = true;
-            return documentUpdated;
-        }
-
-        private string CopyFile(string p_FileName)
-        {
-            string fileName = Path.GetFileName(p_FileName);
-            string sourceFile = p_FileName;
-            string destFile = Path.Combine(m_TargetPath, fileName);
-            if (!Directory.Exists(m_TargetPath))
-            {
-                Directory.CreateDirectory(m_TargetPath);
-            }
-            File.Copy(sourceFile, destFile, true);
-            return destFile;
-        }
-
-        private void DeleteFile(string p_FileName)
-        {
-            if (File.Exists(p_FileName))
-            {
-                File.Delete(p_FileName);
-            }
         }
     }
 }

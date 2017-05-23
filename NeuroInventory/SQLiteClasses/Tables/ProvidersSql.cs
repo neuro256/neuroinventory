@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NeuroInventory
 {
     public class ProvidersSql : TableSql<ProvidersSql>
     {
-        string m_TargetPath;
-
         public ProvidersSql()
         {
             m_CommandDataSet = "SELECT * FROM providers";
@@ -86,41 +80,6 @@ namespace NeuroInventory
             string l_Where = $"id={selectedRecordId}";
 
             SQLiteManager.GetInstance().Delete(m_TableName, l_Where);
-        }
-
-        /// <summary>
-        /// Проверка на то, был ли изменен файл-документа в окне редактора
-        /// </summary>
-        /// <param name="p_SelectedDocument"></param>
-        /// <param name="p_CurrentDocument"></param>
-        /// <returns></returns>
-        private bool IsDocumentUpdated(string p_SelectedDocument, string p_CurrentDocument)
-        {
-            bool documentUpdated = false;
-            if (!String.IsNullOrEmpty(p_SelectedDocument) && String.Compare(p_SelectedDocument, p_CurrentDocument) != 0)
-                documentUpdated = true;
-            return documentUpdated;
-        }
-
-        private string CopyFile(string p_FileName)
-        {
-            string fileName = Path.GetFileName(p_FileName);
-            string sourceFile = p_FileName;
-            string destFile = Path.Combine(m_TargetPath, fileName);
-            if (!Directory.Exists(m_TargetPath))
-            {
-                Directory.CreateDirectory(m_TargetPath);
-            }
-            File.Copy(sourceFile, destFile, true);
-            return destFile;
-        }
-
-        private void DeleteFile(string p_FileName)
-        {
-            if (File.Exists(p_FileName))
-            {
-                File.Delete(p_FileName);
-            }
         }
     }
 }

@@ -45,13 +45,15 @@ namespace NeuroInventory
             cbProviders.DataSource = providersDataSet.Tables[0];
             cbProviders.DisplayMember = "name"; // Отображаемое значение (столбец таблицы Поставщики)
             cbProviders.ValueMember = "id"; // Реальное значение (столбец таблицы Поставщики)
+            cbProviders.SelectedIndex = 0;
 
             // Настройка селектора единицы измерения
             cbMeasurement.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbMeasurement.Items.Add("");
-            cbMeasurement.Items.Add("Единица");
-            cbMeasurement.Items.Add("Килогорамм");
-            cbMeasurement.Items.Add("Литр");
+            cbMeasurement.Items.Add(new MeasurementNull());
+            cbMeasurement.Items.Add(new MeasurementUnit());
+            cbMeasurement.Items.Add(new MeasurementWeigh());
+            cbMeasurement.Items.Add(new MeasurementSquare());
+            cbMeasurement.SelectedIndex = 0;
 
             // Настройка селектора даты
             dateTimePicker.Format = DateTimePickerFormat.Short;

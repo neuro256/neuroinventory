@@ -10,11 +10,9 @@ namespace NeuroInventory
 
         public MainForm()
         {
-            InitializeComponent();
-            InitializeTabEmployees();
-        }
+            InitializeComponent();        }
 
-        private void InitializeTabEmployees()
+        private void InitTabs()
         {
             inventoryTabs = new Dictionary<string, IInventoryTab>();
 
@@ -54,8 +52,7 @@ namespace NeuroInventory
         {
             SQLiteManager.GetInstance().databaseName = p_FileName;
             SQLiteManager.GetInstance().CreateTables();
-            if (SQLiteManager.GetInstance().TestConnection())
-                MessageBox.Show("База данных успешно создана");
+            InitTabs();
         }
 
         private void openBDToolStripMenuItem_Click(object sender, EventArgs e)
@@ -74,7 +71,7 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().databaseName = p_DatabaseName;
             if (SQLiteManager.GetInstance().TestConnection())
             {
-                MessageBox.Show("База данных успешно открыта");
+                InitTabs();
                 if(inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
                     inventoryTabs[tabControl.SelectedTab.Name].ShowTable();
             }
@@ -104,7 +101,7 @@ namespace NeuroInventory
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
+            if (inventoryTabs != null && inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
                 inventoryTabs[tabControl.SelectedTab.Name].ShowTable();
         }
     }

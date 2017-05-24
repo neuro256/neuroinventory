@@ -1,27 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public partial class DemandEditor : InventoryView
+    public partial class DebitEditor : InventoryView
     {
         private int m_InventoryId;
         private object m_SelectedRecordId;
-        private string m_SelectedDocument;
-        private string m_CurrentDocument;
 
-        public DemandEditor(int p_InventoryId)
+        public DebitEditor(int p_InventoryId)
         {
             InitializeComponent();
-            SQLiteManager.GetInstance().Demand().SetCommandDataSet(p_InventoryId);
+            SQLiteManager.GetInstance().Debit().SetCommandDataSet(p_InventoryId);
             InitForm();
             InitListView();
             InitContextMenuStrip();
@@ -41,33 +35,24 @@ namespace NeuroInventory
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
 
-            this.Name = "DemandEditor";
-            this.Text = "Список сотрудников";
+            this.Name = "DebitEditor";
+            this.Text = "Редактор списаний";
         }
 
         public override void InitListView()
         {
             base.InitListView();
 
-            lwDemand.Columns.Clear();
-            lwDemand.Columns.Add(new ColHeader("ID", 50, HorizontalAlignment.Left, true));
-            lwDemand.Columns.Add(new ColHeader("№", 50, HorizontalAlignment.Left, true));
-            lwDemand.Columns.Add(new ColHeader("Сотрудник", 250, HorizontalAlignment.Left, true));
-            lwDemand.Columns.Add(new ColHeader("Количество отпущенных тмц", 200, HorizontalAlignment.Left, true));
-            lwDemand.Columns.Add(new ColHeader("Дата", 100, HorizontalAlignment.Left, true));
-            lwDemand.Columns.Add(new ColHeader("Документ", 250, HorizontalAlignment.Left, true));
+            lwDebit.Columns.Clear();
+            lwDebit.Columns.Add(new ColHeader("ID", 50, HorizontalAlignment.Left, true));
+            lwDebit.Columns.Add(new ColHeader("№", 50, HorizontalAlignment.Left, true));
+            lwDebit.Columns.Add(new ColHeader("Количество списанных тмц", 200, HorizontalAlignment.Left, true));
+            lwDebit.Columns.Add(new ColHeader("Дата", 100, HorizontalAlignment.Left, true));
+            lwDebit.Columns.Add(new ColHeader("Документ", 250, HorizontalAlignment.Left, true));
         }
 
         private void PopulateRedactorInfo()
         {
-            // Настройка селектора сотрудника
-            cbEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
-            DataSet employeeDataSet = SQLiteManager.GetInstance().Employees().ReturnDataSet("SELECT id, (surename || ' ' || firstname || ' ' || lastname) AS name FROM employees");
-            cbEmployee.DataSource = employeeDataSet.Tables[0];
-            cbEmployee.DisplayMember = "name";
-            cbEmployee.ValueMember = "id";
-            cbEmployee.SelectedIndex = 0;
-
             // Настройка селектора количества отпущенного тмц
             nudAmount.ThousandsSeparator = true;
             nudAmount.DecimalPlaces = 2;
@@ -100,7 +85,7 @@ namespace NeuroInventory
             if (!AmountCheck())
                 return;
 
-            SQLiteManager.GetInstance().Demand().Insert(m_InventoryId, cbEmployee.SelectedValue, nudAmount.Value, dateTimePicker.Value, m_SelectedDocument);
+            SQLiteManager.GetInstance().Debit().Insert(m_InventoryId, nudAmount.Value, dateTimePicker.Value);
             m_Listview.SelectedItems.Clear();
             ShowTable();
         }
@@ -109,7 +94,7 @@ namespace NeuroInventory
         {
             if(m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteManager.GetInstance().Demand().Remove(m_ListviewSelectedIndex);
+                SQLiteManager.GetInstance().Debit().Remove(m_ListviewSelectedIndex);
             }
 
             m_Listview.SelectedItems.Clear();
@@ -125,7 +110,7 @@ namespace NeuroInventory
                 if (!AmountCheck())
                     return;
 
-                SQLiteManager.GetInstance().Demand().Update(m_SelectedRecordId, m_InventoryId, cbEmployee.SelectedValue, nudAmount.Value, dateTimePicker.Value, m_SelectedDocument, m_CurrentDocument);
+                SQLiteManager.GetInstance().Debit().Update(m_SelectedRecordId, m_InventoryId, nudAmount.Value, dateTimePicker.Value);
             }
             m_Listview.SelectedItems.Clear();
             ShowTable();
@@ -136,7 +121,7 @@ namespace NeuroInventory
             if (nudAmount.Value == 0)
             {
                 MessageBox.Show("Заполните обязательные поля");
-                cbEmployee.Focus();
+                nudAmount.Focus();
                 return false;
             }
             return true;
@@ -144,17 +129,17 @@ namespace NeuroInventory
 
         protected override ListView GetListView()
         {
-            return lwDemand;
+            return lwDebit;
         }
 
         protected override ContextMenuStrip GetContextMenuStrip()
         {
-            return contextMenuStripDemand;
+            return contextMenuStripDebit;
         }
 
         public override DataSet ReturnDataSet()
         {
-            return SQLiteManager.GetInstance().Demand().ReturnDataSet();
+            return SQLiteManager.GetInstance().Debit().ReturnDataSet();
         }
 
         public override void Clear()
@@ -184,35 +169,21 @@ namespace NeuroInventory
 
         private void ShowInfo()
         {
-            DataSet dataSet = SQLiteManager.GetInstance().Demand().ReturnDataSet();
+            DataSet dataSet = SQLiteManager.GetInstance().Debit().ReturnDataSet();
             m_SelectedRecordId = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["id"];
-            cbEmployee.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["employeeId"].ToString();
             nudAmount.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["amount"]);
             dateTimePicker.Value = Convert.ToDateTime(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["date"]);
             string fileName = Path.GetFileName(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString());
-            tbLink.Text = fileName;
-
-            m_CurrentDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString();
-            m_SelectedDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString();
         }
 
-        private void btnLink_Click(object sender, EventArgs e)
+        private void btnCreateDebit_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            openFileDialog.Filter = "Файлы документов (*.doc; *.docx; *.xls; *.xlsx; *.jpg; *.png; *.bmp; *.pdf; *.djvu)" +
-                "|*.doc; *.docx; *.xls; *.xlsx; *.jpg; *.png; *.bmp; *.pdf; *.djvu |All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                tbLink.Text = openFileDialog.SafeFileName;
-                m_SelectedDocument = openFileDialog.FileName;
-            }
+
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
+        private void btnOpenFolder_Click(object sender, EventArgs e)
         {
-            tbLink.Text = String.Empty;
-            m_SelectedDocument = String.Empty;
+
         }
     }
 }

@@ -224,6 +224,16 @@ namespace NeuroInventory
                 }
                 m_Listview.SelectedItems.Clear();
             }
+            else if(m_Listview.GetItemAt(e.X, e.Y)?.SubItems["debit"]?.Bounds.Contains(e.X, e.Y) ?? false)
+            {
+                DebitEditor debitEditor = new DebitEditor(Convert.ToInt32(m_Listview.GetItemAt(e.X, e.Y).Text));
+                debitEditor.StartPosition = FormStartPosition.CenterParent;
+                if(debitEditor.ShowDialog() == DialogResult.OK)
+                {
+                    ShowTable();
+                }
+                m_Listview.SelectedItems.Clear();
+            }
         }
     }
 }

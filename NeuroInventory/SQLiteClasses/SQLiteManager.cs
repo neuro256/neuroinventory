@@ -339,5 +339,10 @@ namespace NeuroInventory
         {
             return DemandSql.GetInstance();
         }
+
+        public DebitSql Debit()
+        {
+            return DebitSql.GetInstance();
+        }
     }
 }

@@ -59,6 +59,7 @@ namespace NeuroInventory
         public override void AddRecord()
         {
             EmployeeEditor editor = new EmployeeEditor();
+            editor.StartPosition = FormStartPosition.CenterParent;
             if(editor.ShowDialog() == DialogResult.OK)
             {
                 ShowTable();
@@ -87,6 +88,7 @@ namespace NeuroInventory
             if(m_Listview.SelectedItems.Count > 0)
             {
                 EmployeeEditor editor = new EmployeeEditor(m_ListviewSelectedIndex);
+                editor.StartPosition = FormStartPosition.CenterParent;
                 if(editor.ShowDialog() == DialogResult.OK)
                 {
                     ShowTable();

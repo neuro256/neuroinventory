@@ -93,6 +93,7 @@ namespace NeuroInventory
         public override void AddRecord()
         {
             InventoryEditor editor = new InventoryEditor();
+            editor.StartPosition = FormStartPosition.CenterParent;
             if(editor.ShowDialog() == DialogResult.OK)
             {
                 ShowTable();
@@ -121,6 +122,7 @@ namespace NeuroInventory
             if(m_Listview.SelectedItems.Count > 0)
             {
                 InventoryEditor editor = new InventoryEditor(m_ListviewSelectedIndex);
+                editor.StartPosition = FormStartPosition.CenterParent;
                 if(editor.ShowDialog() == DialogResult.OK)
                 {
                     ShowTable();

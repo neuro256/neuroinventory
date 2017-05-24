@@ -163,7 +163,7 @@ namespace NeuroInventory
                 {
                     m_Listview.Items.Add(dataSet.Tables[0].Rows[i]["id"].ToString());
                     m_Listview.Items[i].SubItems.Add((i + 1).ToString());
-                    for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
+                    for (int j = 1; j < dataSet.Tables[0].Columns.Count - 1; j++)
                     {
                         ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
                         subitem.Text = dataSet.Tables[0].Rows[i][j].ToString();
@@ -188,7 +188,12 @@ namespace NeuroInventory
                     subitemDebit.Text = "Списать";
                     subitemDebit.Name = "debit";
                     m_Listview.Items[i].SubItems.Add(subitemDebit);
-                    // TODO : добавить столбец ОСТАТОК
+                    // Добавление столбца "Остаток"
+                    ListViewItem.ListViewSubItem subitemBalance = new ListViewItem.ListViewSubItem();
+                    subitemBalance.Text = dataSet.Tables[0].Rows[i][dataSet.Tables[0].Columns.Count - 1].ToString();
+                    subitemBalance.Name = "balance";
+                    m_Listview.Items[i].SubItems.Add(subitemBalance);
+
                     m_Listview.Items[i].UseItemStyleForSubItems = false;
                 }
                 m_Listview.EndUpdate();

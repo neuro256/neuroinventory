@@ -8,17 +8,18 @@ namespace NeuroInventory
     {
         public InventorySql()
         {
-            m_CommandDataSet = "SELECT id, " +
-                "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," +
-                "strftime('%d.%m.%Y', DATE(date)) AS date," +
-                "invoice," +
-                "name," +
-                "OKEIcode," +
-                "measurement," +
-                "amount," +
-                "CAST ((price) AS REAL) AS price," +
-                "CAST ((amount*price) AS REAL) AS sum " +
-                " FROM inventory"; // TODO : изменить запрос
+            m_CommandDataSet = "SELECT inventory.id, " +
+                "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
+                "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
+                "inventory.invoice," +
+                "inventory.name," +
+                "inventory.OKEIcode," +
+                "inventory.measurement," +
+                "inventory.amount," +
+                "CAST (inventory.price AS REAL) AS price," +
+                "CAST ((inventory.amount * inventory.price) AS REAL) AS sum," +
+                "(inventory.amount - SUM(debit.amount)) AS balance " +
+                "FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id GROUP BY inventory.id;";
             m_TableName = "inventory";
             SetTargetPath(@"documents\inventory");
         }

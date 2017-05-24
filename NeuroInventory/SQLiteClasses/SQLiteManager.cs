@@ -122,7 +122,7 @@ namespace NeuroInventory
                             "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                             "inventoryId INTEGER, " +
                             "employeeId INTEGER, " +
-                            "amount INTEGER NOT NULL, " +
+                            "amount REAL NOT NULL, " +
                             "date DATETIME, " +
                             "document NVARCHAR(80), " +
                             "FOREIGN KEY(inventoryId) REFERENCES inventory(id) ON DELETE CASCADE, " +
@@ -133,7 +133,7 @@ namespace NeuroInventory
                         command.CommandText = "CREATE TABLE IF NOT EXISTS debit (" +
                             "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                             "inventoryId INTEGER, " +
-                            "amount INTEGER NOT NULL, " +
+                            "amount REAL NOT NULL, " +
                             "date DATETIME, " +
                             "document NVARCHAR(80), " +
                             "FOREIGN KEY (inventoryId) REFERENCES inventory(id) ON DELETE CASCADE);";
@@ -149,9 +149,8 @@ namespace NeuroInventory
                             "name NVARCHAR(45) NOT NULL, " +
                             "OKEIcode NVARCHAR(45), " +
                             "measurement NVARCHAR(20), " +
-                            "amount INTEGER, " +
+                            "amount REAL, " +
                             "price INTEGER, " +
-                            "released INTEGER, " +
                             "FOREIGN KEY (catalogId) REFERENCES catalogs(id) ON DELETE CASCADE, " +
                             "FOREIGN KEY (providerId) REFERENCES providers(id) ON DELETE SET NULL);";
                         command.ExecuteNonQuery();

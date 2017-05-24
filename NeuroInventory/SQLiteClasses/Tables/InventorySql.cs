@@ -16,7 +16,7 @@ namespace NeuroInventory
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
                 "inventory.amount," +
-                "CAST (inventory.price AS REAL) AS price," +
+                "CAST (inventory.price AS REAL) / 100 AS price," +
                 "CAST ((inventory.amount * inventory.price) AS REAL) AS sum," +
                 "(inventory.amount - SUM(debit.amount)) AS balance " +
                 "FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id GROUP BY inventory.id;";
@@ -43,7 +43,7 @@ namespace NeuroInventory
             values["OKEIcode"] = !String.IsNullOrEmpty(p_OKEIcode) ? (object)p_OKEIcode : DBNull.Value;
             values["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value;
             values["amount"] = p_Amount;
-            values["price"] = p_Price;
+            values["price"] = p_Price * 100;
 
             // Обновление выбранного файла-документа. 
             if (!String.IsNullOrEmpty(p_SelectedDocument))
@@ -82,7 +82,7 @@ namespace NeuroInventory
             values["OKEIcode"] = !String.IsNullOrEmpty(p_OKEIcode) ? (object)p_OKEIcode : DBNull.Value;
             values["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value;
             values["amount"] = p_Amount;
-            values["price"] = p_Price;
+            values["price"] = p_Price * 100;
 
             // Копирование выбранного файла-документа в целевую папку приложения
             if (!String.IsNullOrEmpty(p_SelectedDocument))

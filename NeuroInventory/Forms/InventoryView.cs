@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public class InventoryTab : Form, IInventoryTab
+    public class InventoryView : Form, IInventoryView
     {
         protected int m_ListviewSelectedIndex;
         protected ListView m_Listview = null;
@@ -191,9 +191,13 @@ namespace NeuroInventory
             }
         }
 
-        public void ListViewItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        /// <summary>
+        /// Событие при выборе строки в списке
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public virtual void ListViewItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            DataSet dataSet = this.ReturnDataSet();
             try
             {
                 // При выборе строки событие ItemSelectionChanged возникает два раза:
@@ -209,13 +213,9 @@ namespace NeuroInventory
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                dataSet.Dispose();
-            }
         }
 
-        public void ListViewItemMouseUp(object sender, MouseEventArgs e)
+        public virtual void ListViewItemMouseUp(object sender, MouseEventArgs e)
         {
             //if ((m_Listview.GetItemAt(e.X, e.Y)?.SubItems[5]?.Bounds.Contains(e.X, e.Y) ?? false))
             //{

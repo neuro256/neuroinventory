@@ -17,8 +17,7 @@ namespace NeuroInventory
                 "measurement," +
                 "amount," +
                 "CAST ((price) AS REAL) AS price," +
-                "CAST ((amount*price) AS REAL) AS sum," +
-                "released" +
+                "CAST ((amount*price) AS REAL) AS sum " +
                 " FROM inventory"; // TODO : изменить запрос
             m_TableName = "inventory";
             m_TargetPath = @"documents\inventory";
@@ -33,7 +32,7 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Delete(m_TableName, l_Where);
         }
 
-        public void Update(object p_Id, object p_Provider, DateTime p_Date, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, decimal p_Released, string p_SelectedDocument, string p_CurrentDocument)
+        public void Update(object p_Id, object p_Provider, DateTime p_Date, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument, string p_CurrentDocument)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
@@ -44,7 +43,6 @@ namespace NeuroInventory
             values["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value;
             values["amount"] = p_Amount;
             values["price"] = p_Price;
-            values["released"] = p_Released;
 
             // Обновление выбранного файла-документа. 
             if (!String.IsNullOrEmpty(p_SelectedDocument))
@@ -73,7 +71,7 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Update(m_TableName, values, l_Where);
         }
 
-        public void Insert(object p_Provider, DateTime p_Date, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, decimal p_Released, string p_SelectedDocument)
+        public void Insert(object p_Provider, DateTime p_Date, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
@@ -84,7 +82,6 @@ namespace NeuroInventory
             values["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value;
             values["amount"] = p_Amount;
             values["price"] = p_Price;
-            values["released"] = p_Released;
 
             // Копирование выбранного файла-документа в целевую папку приложения
             if (!String.IsNullOrEmpty(p_SelectedDocument))

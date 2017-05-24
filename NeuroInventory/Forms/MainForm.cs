@@ -6,7 +6,7 @@ namespace NeuroInventory
 {
     public partial class MainForm : Form
     {
-        Dictionary<string, IInventoryTab> inventoryTabs;
+        Dictionary<string, IInventoryView> inventoryTabs;
 
         public MainForm()
         {
@@ -14,7 +14,7 @@ namespace NeuroInventory
 
         private void InitTabs()
         {
-            inventoryTabs = new Dictionary<string, IInventoryTab>();
+            inventoryTabs = new Dictionary<string, IInventoryView>();
 
             TabMain tabMain = new TabMain();
             tabMain.MdiParent = this;

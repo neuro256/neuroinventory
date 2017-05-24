@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NeuroInventory
@@ -23,7 +18,7 @@ namespace NeuroInventory
         {
             InitializeComponent();
             m_EditorMode = EditorMode.INSERT;
-            PopulateInfo();
+            PopulateRedactorInfo();
             cbProviders.Focus();
         }
 
@@ -32,12 +27,12 @@ namespace NeuroInventory
             InitializeComponent();
             m_EditorMode = EditorMode.UPDATE;
             m_ListviewSelectedIndex = p_Id;
-            PopulateInfo();
+            PopulateRedactorInfo();
             ShowInfo();
             cbProviders.Focus();
         }
 
-        private void PopulateInfo()
+        private void PopulateRedactorInfo()
         {
             // Настройка селектора поставщика
             cbProviders.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -61,7 +56,6 @@ namespace NeuroInventory
             dateTimePicker.ShowUpDown = false;
         }
 
-        // TODO
         private void ShowInfo()
         {
             DataSet dataSet = SQLiteManager.GetInstance().Inventory().ReturnDataSet();
@@ -75,7 +69,6 @@ namespace NeuroInventory
             cbMeasurement.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["measurement"].ToString();
             nudAmount.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["amount"]);
             nudPrice.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["price"]);
-            nudReleased.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["released"]);
 
             m_CurrentDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["invoice"].ToString();
             m_SelectedDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["invoice"].ToString();
@@ -85,7 +78,7 @@ namespace NeuroInventory
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
-            if (String.IsNullOrEmpty(tbName.Text) || nudAmount.Value == 0 || nudPrice.Value == 0 || nudReleased.Value == 0)
+            if (String.IsNullOrEmpty(tbName.Text) || nudAmount.Value == 0 || nudPrice.Value == 0)
             {
                 MessageBox.Show("Заполните обязательные поля");
                 cbProviders.Focus();
@@ -94,11 +87,11 @@ namespace NeuroInventory
 
             if(m_EditorMode == EditorMode.UPDATE)
             {
-                SQLiteManager.GetInstance().Inventory().Update(m_SelectedRecordId, cbProviders.SelectedValue, dateTimePicker.Value, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, nudReleased.Value, m_SelectedDocument, m_CurrentDocument);
+                SQLiteManager.GetInstance().Inventory().Update(m_SelectedRecordId, cbProviders.SelectedValue, dateTimePicker.Value, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, m_SelectedDocument, m_CurrentDocument);
             }
             else
             {
-                SQLiteManager.GetInstance().Inventory().Insert(cbProviders.SelectedValue, dateTimePicker.Value, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, nudReleased.Value, m_SelectedDocument);
+                SQLiteManager.GetInstance().Inventory().Insert(cbProviders.SelectedValue, dateTimePicker.Value, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, m_SelectedDocument);
             }
 
             DialogResult = DialogResult.OK;

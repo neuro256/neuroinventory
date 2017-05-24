@@ -48,11 +48,8 @@
             this.nudPrice = new System.Windows.Forms.NumericUpDown();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.nudReleased = new System.Windows.Forms.NumericUpDown();
-            this.lblReleased = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudReleased)).BeginInit();
             this.SuspendLayout();
             // 
             // lblProvider
@@ -222,7 +219,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(186, 433);
+            this.btnOK.Location = new System.Drawing.Point(186, 386);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(103, 34);
             this.btnOK.TabIndex = 18;
@@ -232,7 +229,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(330, 433);
+            this.btnCancel.Location = new System.Drawing.Point(330, 386);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(103, 34);
             this.btnCancel.TabIndex = 19;
@@ -240,36 +237,11 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // nudReleased
-            // 
-            this.nudReleased.DecimalPlaces = 3;
-            this.nudReleased.Location = new System.Drawing.Point(186, 362);
-            this.nudReleased.Maximum = new decimal(new int[] {
-            1316134911,
-            2328,
-            0,
-            131072});
-            this.nudReleased.Name = "nudReleased";
-            this.nudReleased.Size = new System.Drawing.Size(120, 22);
-            this.nudReleased.TabIndex = 21;
-            this.nudReleased.ThousandsSeparator = true;
-            // 
-            // lblReleased
-            // 
-            this.lblReleased.AutoSize = true;
-            this.lblReleased.Location = new System.Drawing.Point(26, 364);
-            this.lblReleased.Name = "lblReleased";
-            this.lblReleased.Size = new System.Drawing.Size(76, 17);
-            this.lblReleased.TabIndex = 20;
-            this.lblReleased.Text = "Отпущено";
-            // 
             // InventoryEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 479);
-            this.Controls.Add(this.nudReleased);
-            this.Controls.Add(this.lblReleased);
+            this.ClientSize = new System.Drawing.Size(649, 435);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.nudPrice);
@@ -294,7 +266,6 @@
             this.Text = "Редактор ТМЦ";
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudReleased)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -322,7 +293,5 @@
         private System.Windows.Forms.NumericUpDown nudPrice;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.NumericUpDown nudReleased;
-        private System.Windows.Forms.Label lblReleased;
     }
 }

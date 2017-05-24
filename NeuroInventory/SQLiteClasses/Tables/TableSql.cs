@@ -66,6 +66,34 @@ namespace NeuroInventory
             }
         }
 
+        public virtual DataSet ReturnDataSet(string p_Command)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                using (SQLiteDataAdapter myAdapter = new SQLiteDataAdapter(p_Command, connection))
+                {
+                    using (DataSet dataSet = new DataSet())
+                    {
+                        connection.Open();
+                        try
+                        {
+                            myAdapter.Fill(dataSet, m_TableName);
+                        }
+                        catch (Exception exc)
+                        {
+                            MessageBox.Show(exc.Message);
+                        }
+                        finally
+                        {
+                            connection.Close();
+                            myAdapter.Dispose();
+                        }
+                        return dataSet;
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Проверка на то, был ли изменен файл-документа в окне редактора
         /// </summary>

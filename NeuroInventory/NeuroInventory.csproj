@@ -61,7 +61,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\Tabs\InventoryTab.cs">
+    <Compile Include="DemandSql.cs" />
+    <Compile Include="Forms\Additional\DemandEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Additional\DemandEditor.Designer.cs">
+      <DependentUpon>DemandEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Tabs\TabMain.cs">
@@ -103,7 +110,7 @@
     </Compile>
     <Compile Include="ListViewUtility\SortWrapper.cs" />
     <Compile Include="SQLiteClasses\Tables\TableSql.cs" />
-    <Compile Include="Forms\Tabs\IInventoryTab.cs" />
+    <Compile Include="Forms\IInventoryView.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +126,9 @@
     <Compile Include="Forms\Tabs\TabEmployees.Designer.cs">
       <DependentUpon>TabEmployees.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\Additional\DemandEditor.resx">
+      <DependentUpon>DemandEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Additional\EmployeeEditor.resx">
       <DependentUpon>EmployeeEditor.cs</DependentUpon>
     </EmbeddedResource>

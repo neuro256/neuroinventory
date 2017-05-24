@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public partial class TabEmployees : InventoryTab
+    public partial class TabEmployees : InventoryView
     {
         public TabEmployees()
         {

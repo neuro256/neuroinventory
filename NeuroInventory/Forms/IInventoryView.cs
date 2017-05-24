@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    interface IInventoryTab
+    interface IInventoryView
     {
         void InitListView();
         void InitContextMenuStrip();

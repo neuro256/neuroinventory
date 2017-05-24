@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace NeuroInventory
 {
-    public partial class TabProviders : InventoryTab
+    public partial class TabProviders : InventoryView
     {
         public TabProviders()
         {

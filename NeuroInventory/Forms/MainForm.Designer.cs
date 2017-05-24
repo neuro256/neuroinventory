@@ -91,7 +91,7 @@
             this.saceBDToolStripMenuItem.Name = "saceBDToolStripMenuItem";
             this.saceBDToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.saceBDToolStripMenuItem.Text = "Сохранить БД как...";
-            this.saceBDToolStripMenuItem.Click += new System.EventHandler(this.saceBDToolStripMenuItem_Click);
+            this.saceBDToolStripMenuItem.Click += new System.EventHandler(this.saveBDToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 

@@ -20,7 +20,7 @@ namespace NeuroInventory
                 "CAST ((amount*price) AS REAL) AS sum " +
                 " FROM inventory"; // TODO : изменить запрос
             m_TableName = "inventory";
-            m_TargetPath = @"documents\inventory";
+            SetTargetPath(@"documents\inventory");
         }
 
         public void Remove(int p_ListviewSelectedItemIndex)

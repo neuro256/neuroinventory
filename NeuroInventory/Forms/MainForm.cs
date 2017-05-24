@@ -77,7 +77,7 @@ namespace NeuroInventory
             }
         }
 
-        private void saceBDToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saveBDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Базы данных SQLite (*.db)|*.db";

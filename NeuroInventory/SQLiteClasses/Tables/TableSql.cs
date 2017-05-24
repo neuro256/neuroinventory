@@ -14,7 +14,7 @@ namespace NeuroInventory
         protected string m_CommandDataSet; //Команда для создания набора
         protected string m_ConnectionStr;//Строка для подключения 
         protected string m_TableName; //Название таблицы
-        protected string m_TargetPath; // Путь к сохраняемым файлам
+        private string m_TargetPath; // Путь к сохраняемым файлам
 
         static public T GetInstance()
         {
@@ -32,6 +32,11 @@ namespace NeuroInventory
                 m_ConnectionStr = SQLiteManager.GetInstance().connectionString;
                 return m_ConnectionStr;
             }
+        }
+
+        public void SetTargetPath(string p_Path)
+        {
+            m_TargetPath = Path.Combine(Path.GetDirectoryName(SQLiteManager.GetInstance().databaseName), Path.GetFileNameWithoutExtension(SQLiteManager.GetInstance().databaseName), p_Path);
         }
 
         /// <summary>

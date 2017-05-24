@@ -10,7 +10,7 @@ namespace NeuroInventory
         {
             m_CommandDataSet = String.Empty;
             m_TableName = "demand";
-            m_TargetPath = @"documents\demand";
+            SetTargetPath(@"documents\demand");
         }
 
         public void SetCommandDataSet(int p_InventoryId)

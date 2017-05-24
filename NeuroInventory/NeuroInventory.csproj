@@ -61,7 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DemandSql.cs" />
+    <Compile Include="SQLiteClasses\Tables\DemandSql.cs" />
     <Compile Include="Forms\Additional\DemandEditor.cs">
       <SubType>Form</SubType>
     </Compile>

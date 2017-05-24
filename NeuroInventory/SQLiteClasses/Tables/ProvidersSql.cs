@@ -10,7 +10,7 @@ namespace NeuroInventory
         {
             m_CommandDataSet = "SELECT * FROM providers";
             m_TableName = "providers";
-            m_TargetPath = @"documents\providers";
+            SetTargetPath(@"documents\providers");
         }
 
         public void Insert(string p_Name, string p_Address, string p_Phone, string p_Mail, string p_Document)

@@ -89,15 +89,10 @@ namespace NeuroInventory
         /// </summary>
         /// <param name="p_DatabaseName">Путь к базе данных и ее имя</param>
         /// <returns>True если база данных создана. False если БД уже существует.</returns>
-        public bool CreateDatabase(string p_DatabaseName)
+        public void CreateDatabase(string p_DatabaseName)
         {
             m_DatabaseName = p_DatabaseName;
-            if (!File.Exists(p_DatabaseName))
-            {
-                SQLiteConnection.CreateFile(p_DatabaseName);
-                return true;
-            }
-            return false;
+            SQLiteConnection.CreateFile(p_DatabaseName);
         }
 
         public void CreateTables()

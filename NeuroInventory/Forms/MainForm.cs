@@ -50,7 +50,7 @@ namespace NeuroInventory
 
         private void CreateBase(string p_FileName)
         {
-            SQLiteManager.GetInstance().databaseName = p_FileName;
+            SQLiteManager.GetInstance().CreateDatabase(p_FileName);
             SQLiteManager.GetInstance().CreateTables();
             InitTabs();
         }

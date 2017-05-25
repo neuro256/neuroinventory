@@ -17,18 +17,20 @@ namespace NeuroInventory
             public int id { get; set; }
             public int type { get; set; }
             public int parent { get; set; }
+            public bool isRoot { get; set; }
 
             public TreeViewTag()
             {
 
             }
 
-            public TreeViewTag(string p_name, int p_id, int p_type, int p_parent)
+            public TreeViewTag(string p_name, int p_id, int p_type, int p_parent, bool p_IsRoot = false)
             {
                 name = p_name;
                 id = p_id;
                 type = p_type;
                 parent = p_parent;
+                isRoot = p_IsRoot;
             }
         }
 
@@ -40,10 +42,93 @@ namespace NeuroInventory
             InitForm();
             InitListView();
             InitContextMenuStrip();
+            InitContextMenuStripCatalogs();
             PopulateTreeView();
             m_ListviewSelectedIndex = 0;
         }
 
+        private void InitContextMenuStripCatalogs()
+        {
+            // Инициализация контекстного меню, привязанного к древовидному списку
+            ToolStripMenuItem addFolderItem = new ToolStripMenuItem("Создать каталог");
+            addFolderItem.Name = "addFolderItem";
+            addFolderItem.Click += AddFolderItem_Click;
+            ToolStripMenuItem addFileItem = new ToolStripMenuItem("Создать тмц");
+            addFileItem.Name = "addFileItem";
+            addFileItem.Click += AddFileItem_Click;
+            ToolStripMenuItem removeFolderItem = new ToolStripMenuItem("Удалить каталог");
+            removeFolderItem.Name = "removeFolderItem";
+            removeFolderItem.Click += RemoveFolderItem_Click;
+            ToolStripMenuItem removeFileItem = new ToolStripMenuItem("Удалить тмц");
+            removeFileItem.Name = "removeFileItem";
+            removeFileItem.Click += RemoveFileItem_Click;
+
+            contextMenuStripCatalogs.Items.Clear();
+            contextMenuStripCatalogs.Items.AddRange(new[] { addFolderItem, addFileItem, removeFolderItem, removeFileItem });
+            treeView.ContextMenuStrip = contextMenuStripCatalogs;
+        }
+
+        private void RemoveFileItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RemoveFolderItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AddFileItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AddFolderItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void treeView_MouseUp(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                treeView.SelectedNode = treeView.GetNodeAt(e.X, e.Y);
+
+                TreeViewTag tvTag = treeView.SelectedNode?.Tag as TreeViewTag ?? null;
+                if (tvTag != null)
+                {
+                    if (!tvTag.isRoot)
+                    {
+                        if (tvTag.type == 0) // is folder
+                        {
+                            contextMenuStripCatalogs.Items["addFolderItem"].Visible = true;
+                            contextMenuStripCatalogs.Items["addFileItem"].Visible = true;
+                            contextMenuStripCatalogs.Items["removeFolderItem"].Visible = true;
+                            contextMenuStripCatalogs.Items["removeFileItem"].Visible = false;
+                        }
+                        else if (tvTag.type == 1) // is file
+                        {
+                            contextMenuStripCatalogs.Items["addFolderItem"].Visible = false;
+                            contextMenuStripCatalogs.Items["addFileItem"].Visible = false;
+                            contextMenuStripCatalogs.Items["removeFolderItem"].Visible = false;
+                            contextMenuStripCatalogs.Items["removeFileItem"].Visible = true;
+                        }
+                    }
+                    else // is root
+                    {
+                        contextMenuStripCatalogs.Items["addFolderItem"].Visible = true;
+                        contextMenuStripCatalogs.Items["addFileItem"].Visible = true;
+                        contextMenuStripCatalogs.Items["removeFolderItem"].Visible = false;
+                        contextMenuStripCatalogs.Items["removeFileItem"].Visible = false;
+                    }
+                    contextMenuStripCatalogs.Show(treeView, e.Location);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Заполнение древовидного списка каталогов
+        /// </summary>
         private void PopulateTreeView()
         {
             DataSet dataSetCatalogs = SQLiteManager.GetInstance().Catalogs().ReturnDataSet();
@@ -51,13 +136,23 @@ namespace NeuroInventory
             treeView.BeginUpdate();
             treeView.Nodes.Clear();
 
-            TreeNode catalogRoot = new TreeNode("Каталоги");
+            TreeNode catalogRoot = new TreeNode();
             treeView.Nodes.Add(catalogRoot);
 
             object rootId = SQLiteManager.GetInstance().CommandExecuteScalar("SELECT id FROM catalogs WHERE parent IS NULL");
             // Родительский узел должен быть только один и его столбец parent должен быть равен NULL
             if(rootId != null)
             {
+                TreeViewTag tvTag = new TreeViewTag();
+                tvTag.name = "Каталоги";
+                tvTag.id = Convert.ToInt32(rootId);
+                tvTag.parent = 0;
+                tvTag.type = 0;
+                tvTag.isRoot = true;
+
+                catalogRoot.Text = tvTag.name;
+                catalogRoot.Tag = tvTag;
+
                 FillTreeNode(catalogRoot, Convert.ToInt32(rootId));
             }
 
@@ -83,6 +178,7 @@ namespace NeuroInventory
                     tvTag.id = Convert.ToInt32(catalogRow["id"]);
                     tvTag.parent = Convert.ToInt32(catalogRow["parent"]);
                     tvTag.type = Convert.ToInt32(catalogRow["type"]);
+                    tvTag.isRoot = false;
 
                     TreeNode catalogNode = new TreeNode();
                     catalogNode.Text = tvTag.name;
@@ -121,7 +217,9 @@ namespace NeuroInventory
         /// </summary>
         /// <param name="tvTag"></param>
         private void SelectInventoryByCatalog(TreeViewTag tvTag)
-        {          
+        {
+            if (tvTag == null)
+                return;
             if (tvTag.type == 1) // is file
             {
                 m_SelectedInventory = tvTag;

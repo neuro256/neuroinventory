@@ -58,6 +58,7 @@
             this.chBalance = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnCollapseExpand = new System.Windows.Forms.Button();
             this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStripCatalogs = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -121,6 +122,7 @@
             this.treeView.Size = new System.Drawing.Size(250, 585);
             this.treeView.TabIndex = 0;
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
+            this.treeView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeView_MouseUp);
             // 
             // imageListMain
             // 
@@ -331,6 +333,12 @@
             this.contextMenuStripInventory.Name = "contextMenuStripInventory";
             this.contextMenuStripInventory.Size = new System.Drawing.Size(67, 4);
             // 
+            // contextMenuStripCatalogs
+            // 
+            this.contextMenuStripCatalogs.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStripCatalogs.Name = "contextMenuStripCatalogs";
+            this.contextMenuStripCatalogs.Size = new System.Drawing.Size(67, 4);
+            // 
             // TabMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -386,5 +394,6 @@
         private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.Panel panelLeftPanelBottom;
         private System.Windows.Forms.ImageList imageListMain;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripCatalogs;
     }
 }

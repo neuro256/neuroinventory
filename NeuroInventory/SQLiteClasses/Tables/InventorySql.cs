@@ -24,6 +24,22 @@ namespace NeuroInventory
             SetTargetPath(@"documents\inventory");
         }
 
+        public void SetCommandDataSet(int p_Id)
+        {
+            m_CommandDataSet = "SELECT inventory.id, " +
+                "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
+                "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
+                "inventory.invoice," +
+                "inventory.name," +
+                "inventory.OKEIcode," +
+                "inventory.measurement," +
+                "inventory.amount," +
+                "CAST (inventory.price AS REAL) / 100 AS price," +
+                "CAST ((inventory.amount * inventory.price) AS REAL) AS sum," +
+                "(inventory.amount - SUM(debit.amount)) AS balance " +
+                $"FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id WHERE inventory.catalogId={p_Id} GROUP BY inventory.id;";
+        }
+
         public void Remove(int p_ListviewSelectedItemIndex)
         {
             DataSet dataSet = ReturnDataSet();
@@ -33,10 +49,11 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Delete(m_TableName, l_Where);
         }
 
-        public void Update(object p_Id, object p_Provider, DateTime p_Date, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument, string p_CurrentDocument)
+        public void Update(object p_Id, int p_CatalogId, object p_Provider, DateTime p_Date, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument, string p_CurrentDocument)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
+            values["catalogId"] = p_CatalogId;
             values["providerId"] = p_Provider;
             values["date"] = p_Date;
             values["name"] = p_Name;
@@ -72,10 +89,11 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Update(m_TableName, values, l_Where);
         }
 
-        public void Insert(object p_Provider, DateTime p_Date, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument)
+        public void Insert(int p_CatalogId, object p_Provider, DateTime p_Date, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
+            values["catalogId"] = p_CatalogId;
             values["providerId"] = p_Provider;
             values["date"] = p_Date;
             values["name"] = p_Name;
@@ -93,9 +111,6 @@ namespace NeuroInventory
             {
                 values["invoice"] = DBNull.Value;
             }
-
-            // TODO: 
-            values["catalogId"] = 1;
 
             SQLiteManager.GetInstance().Insert(m_TableName, values);
         }

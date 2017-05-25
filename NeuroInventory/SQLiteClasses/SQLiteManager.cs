@@ -108,7 +108,8 @@ namespace NeuroInventory
                         // Создание таблицы "Каталоги"
                         command.CommandText = "CREATE TABLE IF NOT EXISTS catalogs (" +
                             "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                            "parent NVARCHAR(80), " +
+                            "type INTEGER NOT NULL, " +
+                            "parent INTEGER, " +
                             "name NVARCHAR(80) NOT NULL);";
                         command.ExecuteNonQuery();
 
@@ -171,7 +172,7 @@ namespace NeuroInventory
                         command.ExecuteNonQuery();
 
                         // Вставка корневого каталого 
-                        command.CommandText = "INSERT INTO catalogs (parent, name) VALUES (null, 'Каталоги');";
+                        command.CommandText = "INSERT INTO catalogs (type, parent, name) VALUES (0, null, 'Каталоги');";
                         command.ExecuteNonQuery();
 
                         transaction.Commit();
@@ -337,6 +338,11 @@ namespace NeuroInventory
         public DebitSql Debit()
         {
             return DebitSql.GetInstance();
+        }
+
+        public CatalogsSql Catalogs()
+        {
+            return CatalogsSql.GetInstance();
         }
     }
 }

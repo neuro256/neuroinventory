@@ -10,19 +10,21 @@ namespace NeuroInventory
     {
         private EditorMode m_EditorMode;
         private int m_ListviewSelectedIndex;
+        private int m_CatalogId;
         private object m_SelectedRecordId;
         private string m_SelectedDocument;
         private string m_CurrentDocument;
 
-        public InventoryEditor()
+        public InventoryEditor(int p_CatalogId)
         {
             InitializeComponent();
             m_EditorMode = EditorMode.INSERT;
             PopulateRedactorInfo();
             cbProviders.Focus();
+            m_CatalogId = p_CatalogId;
         }
 
-        public InventoryEditor(int p_Id)
+        public InventoryEditor(int p_CatalogId, int p_Id)
         {
             InitializeComponent();
             m_EditorMode = EditorMode.UPDATE;
@@ -30,6 +32,7 @@ namespace NeuroInventory
             PopulateRedactorInfo();
             ShowInfo();
             cbProviders.Focus();
+            m_CatalogId = p_CatalogId;
         }
 
         private void PopulateRedactorInfo()
@@ -87,11 +90,11 @@ namespace NeuroInventory
 
             if(m_EditorMode == EditorMode.UPDATE)
             {
-                SQLiteManager.GetInstance().Inventory().Update(m_SelectedRecordId, cbProviders.SelectedValue, dateTimePicker.Value, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, m_SelectedDocument, m_CurrentDocument);
+                SQLiteManager.GetInstance().Inventory().Update(m_SelectedRecordId, m_CatalogId, cbProviders.SelectedValue, dateTimePicker.Value, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, m_SelectedDocument, m_CurrentDocument);
             }
             else
             {
-                SQLiteManager.GetInstance().Inventory().Insert(cbProviders.SelectedValue, dateTimePicker.Value, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, m_SelectedDocument);
+                SQLiteManager.GetInstance().Inventory().Insert(m_CatalogId, cbProviders.SelectedValue, dateTimePicker.Value, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, m_SelectedDocument);
             }
 
             DialogResult = DialogResult.OK;

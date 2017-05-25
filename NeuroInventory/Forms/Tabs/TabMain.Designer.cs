@@ -114,12 +114,13 @@
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView.ImageIndex = 0;
             this.treeView.ImageList = this.imageListMain;
-            this.treeView.Location = new System.Drawing.Point(0, 0);
-            this.treeView.Margin = new System.Windows.Forms.Padding(0);
+            this.treeView.Location = new System.Drawing.Point(0, 5);
+            this.treeView.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.treeView.Name = "treeView";
             this.treeView.SelectedImageIndex = 0;
-            this.treeView.Size = new System.Drawing.Size(250, 590);
+            this.treeView.Size = new System.Drawing.Size(250, 585);
             this.treeView.TabIndex = 0;
+            this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
             // 
             // imageListMain
             // 
@@ -328,7 +329,7 @@
             // 
             this.contextMenuStripInventory.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripInventory.Name = "contextMenuStripInventory";
-            this.contextMenuStripInventory.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStripInventory.Size = new System.Drawing.Size(67, 4);
             // 
             // TabMain
             // 

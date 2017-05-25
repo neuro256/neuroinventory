@@ -8,6 +8,32 @@ namespace NeuroInventory
 {
     public partial class TabMain : InventoryView
     {
+        /// <summary>
+        /// Структура, хранящая информацию о записи в таблицу Каталоги, соответствующей узлу дерева
+        /// </summary>
+        class TreeViewTag
+        {
+            public string name { get; set; }
+            public int id { get; set; }
+            public int type { get; set; }
+            public int parent { get; set; }
+
+            public TreeViewTag()
+            {
+
+            }
+
+            public TreeViewTag(string p_name, int p_id, int p_type, int p_parent)
+            {
+                name = p_name;
+                id = p_id;
+                type = p_type;
+                parent = p_parent;
+            }
+        }
+
+        private TreeViewTag m_SelectedInventory = null;
+
         public TabMain()
         {
             InitializeComponent();
@@ -20,11 +46,88 @@ namespace NeuroInventory
 
         private void PopulateTreeView()
         {
-            treeView.Nodes.Add("Каталог");
-            treeView.Nodes[0].Nodes.Add("ТМЦ 1");
-            treeView.Nodes[0].Nodes.Add("ТМЦ 2");
-            TreeNode node = new TreeNode("ТМЦ 3", 1, 1);
-            treeView.Nodes[0].Nodes.Add(node);
+            DataSet dataSetCatalogs = SQLiteManager.GetInstance().Catalogs().ReturnDataSet();
+
+            treeView.BeginUpdate();
+            treeView.Nodes.Clear();
+
+            TreeNode catalogRoot = new TreeNode("Каталоги");
+            treeView.Nodes.Add(catalogRoot);
+
+            object rootId = SQLiteManager.GetInstance().CommandExecuteScalar("SELECT id FROM catalogs WHERE parent IS NULL");
+            // Родительский узел должен быть только один и его столбец parent должен быть равен NULL
+            if(rootId != null)
+            {
+                FillTreeNode(catalogRoot, Convert.ToInt32(rootId));
+            }
+
+            treeView.EndUpdate();
+            treeView.ExpandAll();
+        }
+
+        /// <summary>
+        /// Заполнение узла дочерними узлами. Рекурсивный метод
+        /// </summary>
+        /// <param name="parentNode"></param>
+        /// <param name="p_Id"></param>
+        private void FillTreeNode(TreeNode parentNode, int p_Id)
+        {
+            DataSet dataSetChilds = SQLiteManager.GetInstance().Catalogs().ReturnDataSet($"SELECT * FROM catalogs WHERE parent = {p_Id}");
+
+            if (dataSetChilds != null && dataSetChilds.Tables.Count > 0 && dataSetChilds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow catalogRow in dataSetChilds.Tables[0].Rows)
+                {
+                    TreeViewTag tvTag = new TreeViewTag();
+                    tvTag.name = catalogRow["name"].ToString();
+                    tvTag.id = Convert.ToInt32(catalogRow["id"]);
+                    tvTag.parent = Convert.ToInt32(catalogRow["parent"]);
+                    tvTag.type = Convert.ToInt32(catalogRow["type"]);
+
+                    TreeNode catalogNode = new TreeNode();
+                    catalogNode.Text = tvTag.name;
+                    catalogNode.Tag = tvTag;
+
+                    if (tvTag.type == 0)
+                    {
+                        catalogNode.ImageIndex = 0; // folder image
+                        catalogNode.SelectedImageIndex = 0;
+                    }
+                    else
+                    {
+                        catalogNode.ImageIndex = 1; // file image
+                        catalogNode.SelectedImageIndex = 1;
+                    }
+                    
+                    parentNode.Nodes.Add(catalogNode);
+
+                    FillTreeNode(catalogNode, tvTag.id);
+                }
+            }
+
+            dataSetChilds.Dispose();
+
+            return;
+        }
+
+        private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeViewTag tvTag = e.Node.Tag as TreeViewTag;
+            SelectInventoryByCatalog(tvTag);
+        }
+
+        /// <summary>
+        /// Выбор тмц из каталога
+        /// </summary>
+        /// <param name="tvTag"></param>
+        private void SelectInventoryByCatalog(TreeViewTag tvTag)
+        {          
+            if (tvTag.type == 1) // is file
+            {
+                m_SelectedInventory = tvTag;
+                SQLiteManager.GetInstance().Inventory().SetCommandDataSet(m_SelectedInventory.id);
+                ShowTable();
+            }
         }
 
         protected override void InitForm()
@@ -92,13 +195,16 @@ namespace NeuroInventory
         /// </summary>
         public override void AddRecord()
         {
-            InventoryEditor editor = new InventoryEditor();
-            editor.StartPosition = FormStartPosition.CenterParent;
-            if(editor.ShowDialog() == DialogResult.OK)
+            if (m_SelectedInventory != null)
             {
-                ShowTable();
+                InventoryEditor editor = new InventoryEditor(m_SelectedInventory.id);
+                editor.StartPosition = FormStartPosition.CenterParent;
+                if (editor.ShowDialog() == DialogResult.OK)
+                {
+                    ShowTable();
+                }
+                m_Listview.SelectedItems.Clear();
             }
-            m_Listview.SelectedItems.Clear();
         }
 
         /// <summary>
@@ -106,7 +212,7 @@ namespace NeuroInventory
         /// </summary>
         public override void RemoveRecord()
         {
-            if(m_Listview.SelectedItems.Count > 0)
+            if (m_Listview.SelectedItems.Count > 0)
             {
                 SQLiteManager.GetInstance().Inventory().Remove(m_ListviewSelectedIndex);
                 ShowTable();
@@ -121,7 +227,7 @@ namespace NeuroInventory
         {
             if(m_Listview.SelectedItems.Count > 0)
             {
-                InventoryEditor editor = new InventoryEditor(m_ListviewSelectedIndex);
+                InventoryEditor editor = new InventoryEditor(m_SelectedInventory.id, m_ListviewSelectedIndex);
                 editor.StartPosition = FormStartPosition.CenterParent;
                 if(editor.ShowDialog() == DialogResult.OK)
                 {
@@ -154,6 +260,8 @@ namespace NeuroInventory
         public override void ShowTable()
         {
             if (!SQLiteManager.GetInstance().TestConnection())
+                return;
+            if (m_SelectedInventory == null)
                 return;
             DataSet dataSet = ReturnDataSet();
             try
@@ -221,8 +329,6 @@ namespace NeuroInventory
             if ((m_Listview.GetItemAt(e.X, e.Y)?.SubItems["released"]?.Bounds.Contains(e.X, e.Y) ?? false) ||
                 (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["demand"]?.Bounds.Contains(e.X, e.Y) ?? false))
             {
-                //MessageBox.Show($"Mouse up: {m_Listview.GetItemAt(e.X, e.Y).SubItems["date"].Text}");
-                //MessageBox.Show($"Mouse up: {m_Listview.GetItemAt(e.X, e.Y).Text}"); // Возвращает ID
                 DemandEditor demandEditor = new DemandEditor(Convert.ToInt32(m_Listview.GetItemAt(e.X, e.Y).Text));
                 demandEditor.StartPosition = FormStartPosition.CenterParent; // Применить эту опцию и к другим окнам
                 if (demandEditor.ShowDialog() == DialogResult.OK)

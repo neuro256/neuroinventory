@@ -35,8 +35,6 @@
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
             this.lblDate = new System.Windows.Forms.Label();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.lblDemand = new System.Windows.Forms.Label();
-            this.btnClear = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.splitContainerDemand = new System.Windows.Forms.SplitContainer();
@@ -49,8 +47,8 @@
             this.chDemand = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnEdit = new System.Windows.Forms.Button();
             this.contextMenuStripDemand = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnLink = new System.Windows.Forms.Button();
-            this.tbLink = new System.Windows.Forms.TextBox();
+            this.btnOpenFolder = new System.Windows.Forms.Button();
+            this.btnCreateDebit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDemand)).BeginInit();
             this.splitContainerDemand.Panel1.SuspendLayout();
@@ -108,25 +106,6 @@
             this.dateTimePicker.Size = new System.Drawing.Size(175, 22);
             this.dateTimePicker.TabIndex = 5;
             // 
-            // lblDemand
-            // 
-            this.lblDemand.AutoSize = true;
-            this.lblDemand.Location = new System.Drawing.Point(35, 160);
-            this.lblDemand.Name = "lblDemand";
-            this.lblDemand.Size = new System.Drawing.Size(88, 17);
-            this.lblDemand.TabIndex = 6;
-            this.lblDemand.Text = "Требование";
-            // 
-            // btnClear
-            // 
-            this.btnClear.Location = new System.Drawing.Point(240, 185);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(105, 29);
-            this.btnClear.TabIndex = 8;
-            this.btnClear.Text = "Очистить";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(305, 564);
@@ -162,18 +141,16 @@
             // 
             this.splitContainerDemand.Panel2.AutoScroll = true;
             this.splitContainerDemand.Panel2.BackColor = System.Drawing.Color.Silver;
-            this.splitContainerDemand.Panel2.Controls.Add(this.tbLink);
-            this.splitContainerDemand.Panel2.Controls.Add(this.btnLink);
+            this.splitContainerDemand.Panel2.Controls.Add(this.btnOpenFolder);
+            this.splitContainerDemand.Panel2.Controls.Add(this.btnCreateDebit);
             this.splitContainerDemand.Panel2.Controls.Add(this.btnEdit);
             this.splitContainerDemand.Panel2.Controls.Add(this.lblEmployee);
             this.splitContainerDemand.Panel2.Controls.Add(this.btnDelete);
             this.splitContainerDemand.Panel2.Controls.Add(this.cbEmployee);
             this.splitContainerDemand.Panel2.Controls.Add(this.btnAdd);
             this.splitContainerDemand.Panel2.Controls.Add(this.lblAmount);
-            this.splitContainerDemand.Panel2.Controls.Add(this.btnClear);
             this.splitContainerDemand.Panel2.Controls.Add(this.nudAmount);
             this.splitContainerDemand.Panel2.Controls.Add(this.lblDate);
-            this.splitContainerDemand.Panel2.Controls.Add(this.lblDemand);
             this.splitContainerDemand.Panel2.Controls.Add(this.dateTimePicker);
             this.splitContainerDemand.Panel2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.splitContainerDemand.Size = new System.Drawing.Size(1182, 605);
@@ -246,23 +223,25 @@
             this.contextMenuStripDemand.Name = "contextMenuStripDemand";
             this.contextMenuStripDemand.Size = new System.Drawing.Size(67, 4);
             // 
-            // btnLink
+            // btnOpenFolder
             // 
-            this.btnLink.Location = new System.Drawing.Point(129, 185);
-            this.btnLink.Name = "btnLink";
-            this.btnLink.Size = new System.Drawing.Size(105, 29);
-            this.btnLink.TabIndex = 15;
-            this.btnLink.Text = "Обзор";
-            this.btnLink.UseVisualStyleBackColor = true;
-            this.btnLink.Click += new System.EventHandler(this.btnLink_Click);
+            this.btnOpenFolder.Location = new System.Drawing.Point(148, 208);
+            this.btnOpenFolder.Name = "btnOpenFolder";
+            this.btnOpenFolder.Size = new System.Drawing.Size(255, 29);
+            this.btnOpenFolder.TabIndex = 18;
+            this.btnOpenFolder.Text = "Открыть папку с документом";
+            this.btnOpenFolder.UseVisualStyleBackColor = true;
+            this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
             // 
-            // tbLink
+            // btnCreateDebit
             // 
-            this.tbLink.Location = new System.Drawing.Point(129, 157);
-            this.tbLink.Name = "tbLink";
-            this.tbLink.ReadOnly = true;
-            this.tbLink.Size = new System.Drawing.Size(274, 22);
-            this.tbLink.TabIndex = 16;
+            this.btnCreateDebit.Location = new System.Drawing.Point(148, 162);
+            this.btnCreateDebit.Name = "btnCreateDebit";
+            this.btnCreateDebit.Size = new System.Drawing.Size(255, 29);
+            this.btnCreateDebit.TabIndex = 17;
+            this.btnCreateDebit.Text = "Сформировать документ списания";
+            this.btnCreateDebit.UseVisualStyleBackColor = true;
+            this.btnCreateDebit.Click += new System.EventHandler(this.btnCreateDebit_Click);
             // 
             // DemandEditor
             // 
@@ -295,8 +274,6 @@
         private System.Windows.Forms.NumericUpDown nudAmount;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
-        private System.Windows.Forms.Label lblDemand;
-        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.SplitContainer splitContainerDemand;
@@ -309,7 +286,7 @@
         private System.Windows.Forms.ColumnHeader chDemand;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripDemand;
         private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.TextBox tbLink;
-        private System.Windows.Forms.Button btnLink;
+        private System.Windows.Forms.Button btnOpenFolder;
+        private System.Windows.Forms.Button btnCreateDebit;
     }
 }

@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NeuroInventory
@@ -15,8 +10,6 @@ namespace NeuroInventory
     {
         private int m_InventoryId;
         private object m_SelectedRecordId;
-        private string m_SelectedDocument;
-        private string m_CurrentDocument;
 
         public DemandEditor(int p_InventoryId)
         {
@@ -100,7 +93,7 @@ namespace NeuroInventory
             if (!AmountCheck())
                 return;
 
-            SQLiteManager.GetInstance().Demand().Insert(m_InventoryId, cbEmployee.SelectedValue, nudAmount.Value, dateTimePicker.Value, m_SelectedDocument);
+            SQLiteManager.GetInstance().Demand().Insert(m_InventoryId, cbEmployee.SelectedValue, nudAmount.Value, dateTimePicker.Value);
             m_Listview.SelectedItems.Clear();
             ShowTable();
         }
@@ -125,7 +118,7 @@ namespace NeuroInventory
                 if (!AmountCheck())
                     return;
 
-                SQLiteManager.GetInstance().Demand().Update(m_SelectedRecordId, m_InventoryId, cbEmployee.SelectedValue, nudAmount.Value, dateTimePicker.Value, m_SelectedDocument, m_CurrentDocument);
+                SQLiteManager.GetInstance().Demand().Update(m_SelectedRecordId, m_InventoryId, cbEmployee.SelectedValue, nudAmount.Value, dateTimePicker.Value);
             }
             m_Listview.SelectedItems.Clear();
             ShowTable();
@@ -189,30 +182,16 @@ namespace NeuroInventory
             cbEmployee.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["employeeId"].ToString();
             nudAmount.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["amount"]);
             dateTimePicker.Value = Convert.ToDateTime(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["date"]);
-            string fileName = Path.GetFileName(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString());
-            tbLink.Text = fileName;
-
-            m_CurrentDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString();
-            m_SelectedDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString();
         }
 
-        private void btnLink_Click(object sender, EventArgs e)
+        private void btnCreateDebit_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            openFileDialog.Filter = "Файлы документов (*.doc; *.docx; *.xls; *.xlsx; *.jpg; *.png; *.bmp; *.pdf; *.djvu)" +
-                "|*.doc; *.docx; *.xls; *.xlsx; *.jpg; *.png; *.bmp; *.pdf; *.djvu |All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                tbLink.Text = openFileDialog.SafeFileName;
-                m_SelectedDocument = openFileDialog.FileName;
-            }
+
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
+        private void btnOpenFolder_Click(object sender, EventArgs e)
         {
-            tbLink.Text = String.Empty;
-            m_SelectedDocument = String.Empty;
+
         }
     }
 }

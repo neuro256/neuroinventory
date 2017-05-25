@@ -77,7 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DebitSql.cs" />
+    <Compile Include="SQLiteClasses\Tables\DebitSql.cs" />
     <Compile Include="Forms\Additional\DebitEditor.cs">
       <SubType>Form</SubType>
     </Compile>

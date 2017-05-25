@@ -32,7 +32,7 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Delete(m_TableName, l_Where);
         }
 
-        public void Insert(int p_InventoryId, object p_EmployeeId, decimal p_Amount, DateTime p_Date, string p_SelectedDocument)
+        public void Insert(int p_InventoryId, object p_EmployeeId, decimal p_Amount, DateTime p_Date)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
@@ -40,21 +40,11 @@ namespace NeuroInventory
             values["employeeId"] = p_EmployeeId;
             values["amount"] = p_Amount;
             values["date"] = p_Date;
-
-            // Копирование выбранного файла-документа в целевую папку приложения
-            if (!String.IsNullOrEmpty(p_SelectedDocument))
-            {
-                values["document"] = CopyFile(p_SelectedDocument);
-            }
-            else
-            {
-                values["document"] = DBNull.Value;
-            }
 
             SQLiteManager.GetInstance().Insert(m_TableName, values);
         }
 
-        public void Update(object p_Id, int p_InventoryId, object p_EmployeeId, decimal p_Amount, DateTime p_Date, string p_SelectedDocument, string p_CurrentDocument)
+        public void Update(object p_Id, int p_InventoryId, object p_EmployeeId, decimal p_Amount, DateTime p_Date)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
@@ -62,28 +52,6 @@ namespace NeuroInventory
             values["employeeId"] = p_EmployeeId;
             values["amount"] = p_Amount;
             values["date"] = p_Date;
-
-            // Обновление выбранного файла-документа. 
-            if (!String.IsNullOrEmpty(p_SelectedDocument))
-            {
-                if (IsDocumentUpdated(p_SelectedDocument, p_CurrentDocument)) // файл изменен
-                {
-                    // Удаляем старый файл
-                    DeleteFile(p_CurrentDocument);
-                    // Копируем новый файл
-                    values["document"] = CopyFile(p_SelectedDocument);
-                }
-                else
-                {
-                    values["document"] = p_CurrentDocument;
-                }
-            }
-            else
-            {
-                values["document"] = DBNull.Value;
-                // Удаляем старый файл
-                DeleteFile(p_CurrentDocument);
-            }
 
             string l_Where = $"id={p_Id}";
 

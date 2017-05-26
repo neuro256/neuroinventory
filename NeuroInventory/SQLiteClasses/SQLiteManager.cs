@@ -269,6 +269,20 @@ namespace NeuroInventory
             }
         }
 
+        public int ReturnLastInsertId(string p_TableName)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                using (SQLiteCommand command = new SQLiteCommand($"SELECT MAX(id) FROM {p_TableName};", connection))
+                {
+                    connection.Open();
+                    object lastInsertId = command.ExecuteScalar();
+                    connection.Close();
+                    return Convert.ToInt32(lastInsertId);
+                }
+            }
+        }
+
         public bool Update(string p_TableName, Dictionary<string, object> p_Data, string p_Where)
         {
             string values = string.Empty;

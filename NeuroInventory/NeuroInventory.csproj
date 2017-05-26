@@ -77,7 +77,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CatalogsSql.cs" />
+    <Compile Include="SQLiteClasses\Tables\CatalogsSql.cs" />
+    <Compile Include="Forms\Additional\DialogName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Additional\DialogName.Designer.cs">
+      <DependentUpon>DialogName.cs</DependentUpon>
+    </Compile>
     <Compile Include="SQLiteClasses\Tables\DebitSql.cs" />
     <Compile Include="Forms\Additional\DebitEditor.cs">
       <SubType>Form</SubType>
@@ -150,6 +156,10 @@
     <Compile Include="Forms\Tabs\TabEmployees.Designer.cs">
       <DependentUpon>TabEmployees.cs</DependentUpon>
     </Compile>
+    <Compile Include="TreeNodeExtension.cs" />
+    <EmbeddedResource Include="Forms\Additional\DialogName.resx">
+      <DependentUpon>DialogName.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Additional\DebitEditor.resx">
       <DependentUpon>DebitEditor.cs</DependentUpon>
     </EmbeddedResource>

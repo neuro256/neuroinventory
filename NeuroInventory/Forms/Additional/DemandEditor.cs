@@ -59,7 +59,6 @@ namespace NeuroInventory
             cbEmployee.DataSource = employeeDataSet.Tables[0];
             cbEmployee.DisplayMember = "name";
             cbEmployee.ValueMember = "id";
-            cbEmployee.SelectedIndex = 0;
 
             // Настройка селектора количества отпущенного тмц
             nudAmount.ThousandsSeparator = true;

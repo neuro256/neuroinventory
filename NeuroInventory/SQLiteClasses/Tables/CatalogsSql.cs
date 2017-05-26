@@ -14,10 +14,11 @@ namespace NeuroInventory
             m_TableName = "catalogs";
         }
 
-        public void Insert(int p_ParentId, string p_Name)
+        public void Insert(int p_Type, int p_ParentId, string p_Name)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
+            values["type"] = p_Type;
             values["parent"] = p_ParentId;
             values["name"] = p_Name;
 
@@ -31,16 +32,22 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Delete(m_TableName, l_Where);
         }
 
-        public void Update(int p_Id, int p_ParentId, string p_Name)
+        public void Update(int p_Id, int p_Type, int p_ParentId, string p_Name)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
+            values["type"] = p_Type;
             values["parent"] = p_ParentId;
             values["name"] = p_Name;
 
             string l_Where = $"id={p_Id}";
 
             SQLiteManager.GetInstance().Update(m_TableName, values, l_Where);
+        }
+
+        public int ReturnLastInsertId()
+        {
+            return SQLiteManager.GetInstance().ReturnLastInsertId(m_TableName);
         }
     }
 }

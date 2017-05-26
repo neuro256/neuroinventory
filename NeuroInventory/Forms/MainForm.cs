@@ -10,7 +10,8 @@ namespace NeuroInventory
 
         public MainForm()
         {
-            InitializeComponent();        }
+            InitializeComponent();
+        }
 
         private void InitTabs()
         {

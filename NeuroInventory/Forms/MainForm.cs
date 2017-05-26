@@ -20,6 +20,7 @@ namespace NeuroInventory
             tabMain.MdiParent = this;
             tabMain.Parent = tabControl.TabPages[0];
             tabMain.Dock = DockStyle.Fill;
+            tabMain.OnSelectedInventory += TabMain_OnSelectedInventory;
             tabMain.Show();
             inventoryTabs["tabInventory"] = tabMain;
 
@@ -36,6 +37,13 @@ namespace NeuroInventory
             tabEmployees.Dock = DockStyle.Fill;
             tabEmployees.Show();
             inventoryTabs["tabEmployees"] = tabEmployees;
+        }
+
+        private void TabMain_OnSelectedInventory(string name)
+        {
+            tabControl.SuspendLayout();
+            tabControl.TabPages["tabInventory"].Text = $"ТМЦ : {name}";
+            tabControl.ResumeLayout();
         }
 
         private void createBDToolStripMenuItem_Click(object sender, EventArgs e)

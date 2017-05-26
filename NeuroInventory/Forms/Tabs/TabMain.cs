@@ -35,6 +35,8 @@ namespace NeuroInventory
         }
 
         private TreeViewTag m_SelectedInventory = null;
+        public delegate void SelectedInventory(string name);
+        public event SelectedInventory OnSelectedInventory;
 
         public TabMain()
         {
@@ -225,6 +227,7 @@ namespace NeuroInventory
                 m_SelectedInventory = tvTag;
                 SQLiteManager.GetInstance().Inventory().SetCommandDataSet(m_SelectedInventory.id);
                 ShowTable();
+                OnSelectedInventory?.Invoke(tvTag.name);
             }
         }
 

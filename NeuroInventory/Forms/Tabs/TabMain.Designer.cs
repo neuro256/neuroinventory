@@ -331,13 +331,13 @@
             // 
             this.contextMenuStripInventory.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripInventory.Name = "contextMenuStripInventory";
-            this.contextMenuStripInventory.Size = new System.Drawing.Size(67, 4);
+            this.contextMenuStripInventory.Size = new System.Drawing.Size(61, 4);
             // 
             // contextMenuStripCatalogs
             // 
             this.contextMenuStripCatalogs.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripCatalogs.Name = "contextMenuStripCatalogs";
-            this.contextMenuStripCatalogs.Size = new System.Drawing.Size(67, 4);
+            this.contextMenuStripCatalogs.Size = new System.Drawing.Size(61, 4);
             // 
             // TabMain
             // 

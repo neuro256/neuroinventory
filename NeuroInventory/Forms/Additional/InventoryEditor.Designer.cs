@@ -219,6 +219,8 @@
             // 
             // btnOK
             // 
+            this.btnOK.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOK.Location = new System.Drawing.Point(186, 386);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(103, 34);
@@ -229,6 +231,8 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Location = new System.Drawing.Point(330, 386);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(103, 34);
@@ -241,6 +245,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(649, 435);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
@@ -262,6 +267,7 @@
             this.Controls.Add(this.lblInvoice);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblProvider);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "InventoryEditor";
             this.Text = "Редактор ТМЦ";
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();

@@ -55,7 +55,9 @@
             // 
             // lblAmount
             // 
+            this.lblAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAmount.AutoSize = true;
+            this.lblAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblAmount.Location = new System.Drawing.Point(36, 32);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(188, 17);
@@ -64,14 +66,25 @@
             // 
             // nudAmount
             // 
+            this.nudAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudAmount.DecimalPlaces = 3;
+            this.nudAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.nudAmount.Location = new System.Drawing.Point(230, 30);
+            this.nudAmount.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
             this.nudAmount.Name = "nudAmount";
             this.nudAmount.Size = new System.Drawing.Size(175, 22);
-            this.nudAmount.TabIndex = 3;
+            this.nudAmount.TabIndex = 1;
+            this.nudAmount.ThousandsSeparator = true;
             // 
             // lblDate
             // 
+            this.lblDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDate.AutoSize = true;
+            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblDate.Location = new System.Drawing.Point(182, 79);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(42, 17);
@@ -80,28 +93,38 @@
             // 
             // dateTimePicker
             // 
+            this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker.Location = new System.Drawing.Point(230, 74);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(175, 22);
-            this.dateTimePicker.TabIndex = 5;
+            this.dateTimePicker.TabIndex = 2;
             // 
             // btnDelete
             // 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnDelete.Location = new System.Drawing.Point(305, 564);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(98, 29);
-            this.btnDelete.TabIndex = 13;
+            this.btnDelete.TabIndex = 7;
             this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAdd
             // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnAdd.Location = new System.Drawing.Point(57, 564);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(98, 29);
-            this.btnAdd.TabIndex = 12;
+            this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Добавить";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -181,30 +204,42 @@
             // 
             // btnOpenFolder
             // 
+            this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenFolder.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnOpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOpenFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnOpenFolder.Location = new System.Drawing.Point(150, 164);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(255, 29);
-            this.btnOpenFolder.TabIndex = 16;
+            this.btnOpenFolder.TabIndex = 4;
             this.btnOpenFolder.Text = "Открыть папку с документом";
             this.btnOpenFolder.UseVisualStyleBackColor = true;
             this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
             // 
             // btnCreateDebit
             // 
+            this.btnCreateDebit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateDebit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnCreateDebit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCreateDebit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnCreateDebit.Location = new System.Drawing.Point(150, 118);
             this.btnCreateDebit.Name = "btnCreateDebit";
             this.btnCreateDebit.Size = new System.Drawing.Size(255, 29);
-            this.btnCreateDebit.TabIndex = 15;
+            this.btnCreateDebit.TabIndex = 3;
             this.btnCreateDebit.Text = "Сформировать документ списания";
             this.btnCreateDebit.UseVisualStyleBackColor = true;
             this.btnCreateDebit.Click += new System.EventHandler(this.btnCreateDebit_Click);
             // 
             // btnEdit
             // 
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnEdit.Location = new System.Drawing.Point(183, 564);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(98, 29);
-            this.btnEdit.TabIndex = 14;
+            this.btnEdit.TabIndex = 6;
             this.btnEdit.Text = "Изменить";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);

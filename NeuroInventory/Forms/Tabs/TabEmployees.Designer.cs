@@ -73,6 +73,7 @@ namespace NeuroInventory
             // 
             // panelEmployeesBottom
             // 
+            this.panelEmployeesBottom.BackColor = System.Drawing.Color.Silver;
             this.panelEmployeesBottom.Controls.Add(this.btnEmployeeEdit);
             this.panelEmployeesBottom.Controls.Add(this.btnEmployeeRemove);
             this.panelEmployeesBottom.Controls.Add(this.btnEmployeeAdd);
@@ -85,6 +86,9 @@ namespace NeuroInventory
             // 
             // btnEmployeeEdit
             // 
+            this.btnEmployeeEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEmployeeEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnEmployeeEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEmployeeEdit.Location = new System.Drawing.Point(392, 14);
             this.btnEmployeeEdit.Name = "btnEmployeeEdit";
             this.btnEmployeeEdit.Size = new System.Drawing.Size(184, 33);
@@ -95,6 +99,9 @@ namespace NeuroInventory
             // 
             // btnEmployeeRemove
             // 
+            this.btnEmployeeRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEmployeeRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnEmployeeRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEmployeeRemove.Location = new System.Drawing.Point(202, 14);
             this.btnEmployeeRemove.Name = "btnEmployeeRemove";
             this.btnEmployeeRemove.Size = new System.Drawing.Size(184, 33);
@@ -105,6 +112,9 @@ namespace NeuroInventory
             // 
             // btnEmployeeAdd
             // 
+            this.btnEmployeeAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEmployeeAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnEmployeeAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEmployeeAdd.Location = new System.Drawing.Point(12, 14);
             this.btnEmployeeAdd.Name = "btnEmployeeAdd";
             this.btnEmployeeAdd.Size = new System.Drawing.Size(184, 33);

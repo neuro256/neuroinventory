@@ -134,6 +134,7 @@
             // 
             // panelLeftPanelBottom
             // 
+            this.panelLeftPanelBottom.BackColor = System.Drawing.Color.Silver;
             this.panelLeftPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLeftPanelBottom.Location = new System.Drawing.Point(0, 590);
             this.panelLeftPanelBottom.Margin = new System.Windows.Forms.Padding(0);
@@ -177,6 +178,7 @@
             // 
             // panelMainBottom
             // 
+            this.panelMainBottom.BackColor = System.Drawing.Color.Silver;
             this.panelMainBottom.Controls.Add(this.btnInventoryEdit);
             this.panelMainBottom.Controls.Add(this.btnInventoryRemove);
             this.panelMainBottom.Controls.Add(this.btnInventoryAdd);
@@ -189,7 +191,10 @@
             // 
             // btnInventoryEdit
             // 
-            this.btnInventoryEdit.Location = new System.Drawing.Point(392, 14);
+            this.btnInventoryEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnInventoryEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnInventoryEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnInventoryEdit.Location = new System.Drawing.Point(396, 14);
             this.btnInventoryEdit.Name = "btnInventoryEdit";
             this.btnInventoryEdit.Size = new System.Drawing.Size(184, 33);
             this.btnInventoryEdit.TabIndex = 2;
@@ -199,7 +204,10 @@
             // 
             // btnInventoryRemove
             // 
-            this.btnInventoryRemove.Location = new System.Drawing.Point(202, 14);
+            this.btnInventoryRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnInventoryRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnInventoryRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnInventoryRemove.Location = new System.Drawing.Point(206, 14);
             this.btnInventoryRemove.Name = "btnInventoryRemove";
             this.btnInventoryRemove.Size = new System.Drawing.Size(184, 33);
             this.btnInventoryRemove.TabIndex = 1;
@@ -209,7 +217,10 @@
             // 
             // btnInventoryAdd
             // 
-            this.btnInventoryAdd.Location = new System.Drawing.Point(12, 14);
+            this.btnInventoryAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnInventoryAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnInventoryAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnInventoryAdd.Location = new System.Drawing.Point(16, 14);
             this.btnInventoryAdd.Name = "btnInventoryAdd";
             this.btnInventoryAdd.Size = new System.Drawing.Size(184, 33);
             this.btnInventoryAdd.TabIndex = 0;
@@ -316,9 +327,10 @@
             // 
             // btnCollapseExpand
             // 
+            this.btnCollapseExpand.BackColor = System.Drawing.Color.LightGray;
             this.btnCollapseExpand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnCollapseExpand.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCollapseExpand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCollapseExpand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCollapseExpand.Location = new System.Drawing.Point(0, 0);
             this.btnCollapseExpand.Margin = new System.Windows.Forms.Padding(0);
             this.btnCollapseExpand.Name = "btnCollapseExpand";
@@ -332,13 +344,13 @@
             // 
             this.contextMenuStripInventory.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripInventory.Name = "contextMenuStripInventory";
-            this.contextMenuStripInventory.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStripInventory.Size = new System.Drawing.Size(67, 4);
             // 
             // contextMenuStripCatalogs
             // 
             this.contextMenuStripCatalogs.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripCatalogs.Name = "contextMenuStripCatalogs";
-            this.contextMenuStripCatalogs.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStripCatalogs.Size = new System.Drawing.Size(67, 4);
             // 
             // TabMain
             // 

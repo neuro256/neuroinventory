@@ -112,6 +112,7 @@
             this.tabControl.Controls.Add(this.tabProviders);
             this.tabControl.Controls.Add(this.tabEmployees);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabControl.Location = new System.Drawing.Point(0, 55);
             this.tabControl.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl.Name = "tabControl";
@@ -123,30 +124,30 @@
             // 
             // tabInventory
             // 
-            this.tabInventory.Location = new System.Drawing.Point(4, 25);
+            this.tabInventory.Location = new System.Drawing.Point(4, 27);
             this.tabInventory.Margin = new System.Windows.Forms.Padding(0);
             this.tabInventory.Name = "tabInventory";
-            this.tabInventory.Size = new System.Drawing.Size(1305, 551);
+            this.tabInventory.Size = new System.Drawing.Size(1305, 549);
             this.tabInventory.TabIndex = 0;
             this.tabInventory.Text = "ТМЦ";
             this.tabInventory.UseVisualStyleBackColor = true;
             // 
             // tabProviders
             // 
-            this.tabProviders.Location = new System.Drawing.Point(4, 25);
+            this.tabProviders.Location = new System.Drawing.Point(4, 27);
             this.tabProviders.Margin = new System.Windows.Forms.Padding(0);
             this.tabProviders.Name = "tabProviders";
-            this.tabProviders.Size = new System.Drawing.Size(1305, 551);
+            this.tabProviders.Size = new System.Drawing.Size(1305, 549);
             this.tabProviders.TabIndex = 1;
             this.tabProviders.Text = "Поставщики";
             this.tabProviders.UseVisualStyleBackColor = true;
             // 
             // tabEmployees
             // 
-            this.tabEmployees.Location = new System.Drawing.Point(4, 25);
+            this.tabEmployees.Location = new System.Drawing.Point(4, 27);
             this.tabEmployees.Margin = new System.Windows.Forms.Padding(0);
             this.tabEmployees.Name = "tabEmployees";
-            this.tabEmployees.Size = new System.Drawing.Size(1305, 551);
+            this.tabEmployees.Size = new System.Drawing.Size(1305, 549);
             this.tabEmployees.TabIndex = 2;
             this.tabEmployees.Text = "Работники";
             this.tabEmployees.UseVisualStyleBackColor = true;

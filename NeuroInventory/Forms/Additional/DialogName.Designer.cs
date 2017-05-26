@@ -37,7 +37,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(48, 57);
+            this.lblName.Location = new System.Drawing.Point(27, 30);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(72, 17);
             this.lblName.TabIndex = 0;
@@ -45,7 +45,7 @@
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(126, 54);
+            this.tbName.Location = new System.Drawing.Point(105, 27);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(326, 22);
             this.tbName.TabIndex = 1;
@@ -53,7 +53,9 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(126, 113);
+            this.btnOK.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOK.Location = new System.Drawing.Point(105, 71);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(113, 28);
             this.btnOK.TabIndex = 2;
@@ -63,7 +65,9 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(292, 113);
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCancel.Location = new System.Drawing.Point(318, 71);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(113, 28);
             this.btnCancel.TabIndex = 3;
@@ -77,13 +81,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(537, 180);
+            this.BackColor = System.Drawing.Color.Silver;
+            this.ClientSize = new System.Drawing.Size(530, 128);
             this.ControlBox = false;
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.lblName);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "DialogName";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Выбор имени";

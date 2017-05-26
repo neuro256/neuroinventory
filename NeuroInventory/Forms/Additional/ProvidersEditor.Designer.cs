@@ -131,6 +131,8 @@
             // 
             // btnLink
             // 
+            this.btnLink.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnLink.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLink.Location = new System.Drawing.Point(501, 194);
             this.btnLink.Name = "btnLink";
             this.btnLink.Size = new System.Drawing.Size(88, 24);
@@ -141,7 +143,9 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(420, 256);
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCancel.Location = new System.Drawing.Point(396, 263);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(98, 29);
             this.btnCancel.TabIndex = 11;
@@ -151,7 +155,9 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(202, 256);
+            this.btnOk.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOk.Location = new System.Drawing.Point(202, 263);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(98, 29);
             this.btnOk.TabIndex = 10;
@@ -161,6 +167,8 @@
             // 
             // btnClearPath
             // 
+            this.btnClearPath.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnClearPath.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClearPath.Location = new System.Drawing.Point(595, 194);
             this.btnClearPath.Name = "btnClearPath";
             this.btnClearPath.Size = new System.Drawing.Size(88, 24);
@@ -173,6 +181,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(695, 304);
             this.Controls.Add(this.btnClearPath);
             this.Controls.Add(this.btnCancel);
@@ -188,6 +197,7 @@
             this.Controls.Add(this.tbPhone);
             this.Controls.Add(this.tbAddress);
             this.Controls.Add(this.tbName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ProviderEditor";
             this.Text = "Редактор поставщика";
             this.ResumeLayout(false);

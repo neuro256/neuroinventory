@@ -129,7 +129,9 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(63, 264);
+            this.btnOk.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOk.Location = new System.Drawing.Point(133, 244);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(98, 29);
             this.btnOk.TabIndex = 10;
@@ -139,7 +141,9 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(281, 264);
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCancel.Location = new System.Drawing.Point(327, 244);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(98, 29);
             this.btnCancel.TabIndex = 11;
@@ -151,7 +155,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 325);
+            this.BackColor = System.Drawing.Color.Silver;
+            this.ClientSize = new System.Drawing.Size(458, 285);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.tbDepartment);
@@ -164,6 +169,7 @@
             this.Controls.Add(this.lblLastname);
             this.Controls.Add(this.lblSurename);
             this.Controls.Add(this.lblFirstname);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "EmployeeEditor";
             this.Text = "Редактор сотрудника";
             this.ResumeLayout(false);

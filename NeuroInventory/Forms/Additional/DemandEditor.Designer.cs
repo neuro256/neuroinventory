@@ -45,10 +45,10 @@
             this.chAmount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDemand = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.contextMenuStripDemand = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.btnCreateDebit = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.contextMenuStripDemand = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDemand)).BeginInit();
             this.splitContainerDemand.Panel1.SuspendLayout();
@@ -58,6 +58,7 @@
             // 
             // lblEmployee
             // 
+            this.lblEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEmployee.AutoSize = true;
             this.lblEmployee.Location = new System.Drawing.Point(45, 27);
             this.lblEmployee.Name = "lblEmployee";
@@ -67,6 +68,7 @@
             // 
             // cbEmployee
             // 
+            this.cbEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbEmployee.FormattingEnabled = true;
             this.cbEmployee.Location = new System.Drawing.Point(129, 24);
             this.cbEmployee.Name = "cbEmployee";
@@ -75,6 +77,7 @@
             // 
             // lblAmount
             // 
+            this.lblAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAmount.AutoSize = true;
             this.lblAmount.Location = new System.Drawing.Point(18, 67);
             this.lblAmount.Name = "lblAmount";
@@ -84,13 +87,15 @@
             // 
             // nudAmount
             // 
+            this.nudAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nudAmount.Location = new System.Drawing.Point(228, 65);
             this.nudAmount.Name = "nudAmount";
             this.nudAmount.Size = new System.Drawing.Size(175, 22);
-            this.nudAmount.TabIndex = 3;
+            this.nudAmount.TabIndex = 2;
             // 
             // lblDate
             // 
+            this.lblDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDate.AutoSize = true;
             this.lblDate.Location = new System.Drawing.Point(180, 114);
             this.lblDate.Name = "lblDate";
@@ -100,28 +105,35 @@
             // 
             // dateTimePicker
             // 
+            this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker.Location = new System.Drawing.Point(228, 109);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(175, 22);
-            this.dateTimePicker.TabIndex = 5;
+            this.dateTimePicker.TabIndex = 3;
             // 
             // btnDelete
             // 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDelete.Location = new System.Drawing.Point(305, 564);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(98, 29);
-            this.btnDelete.TabIndex = 13;
+            this.btnDelete.TabIndex = 8;
             this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAdd
             // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAdd.Location = new System.Drawing.Point(57, 564);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(98, 29);
-            this.btnAdd.TabIndex = 12;
+            this.btnAdd.TabIndex = 6;
             this.btnAdd.Text = "Добавить";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -207,12 +219,41 @@
             this.chDemand.Text = "Требование";
             this.chDemand.Width = 200;
             // 
+            // btnOpenFolder
+            // 
+            this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenFolder.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnOpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOpenFolder.Location = new System.Drawing.Point(148, 208);
+            this.btnOpenFolder.Name = "btnOpenFolder";
+            this.btnOpenFolder.Size = new System.Drawing.Size(255, 29);
+            this.btnOpenFolder.TabIndex = 5;
+            this.btnOpenFolder.Text = "Открыть папку с документом";
+            this.btnOpenFolder.UseVisualStyleBackColor = true;
+            this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
+            // 
+            // btnCreateDebit
+            // 
+            this.btnCreateDebit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateDebit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnCreateDebit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCreateDebit.Location = new System.Drawing.Point(148, 162);
+            this.btnCreateDebit.Name = "btnCreateDebit";
+            this.btnCreateDebit.Size = new System.Drawing.Size(255, 29);
+            this.btnCreateDebit.TabIndex = 4;
+            this.btnCreateDebit.Text = "Сформировать документ списания";
+            this.btnCreateDebit.UseVisualStyleBackColor = true;
+            this.btnCreateDebit.Click += new System.EventHandler(this.btnCreateDebit_Click);
+            // 
             // btnEdit
             // 
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEdit.Location = new System.Drawing.Point(183, 564);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(98, 29);
-            this.btnEdit.TabIndex = 14;
+            this.btnEdit.TabIndex = 7;
             this.btnEdit.Text = "Изменить";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -222,26 +263,6 @@
             this.contextMenuStripDemand.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripDemand.Name = "contextMenuStripDemand";
             this.contextMenuStripDemand.Size = new System.Drawing.Size(67, 4);
-            // 
-            // btnOpenFolder
-            // 
-            this.btnOpenFolder.Location = new System.Drawing.Point(148, 208);
-            this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(255, 29);
-            this.btnOpenFolder.TabIndex = 18;
-            this.btnOpenFolder.Text = "Открыть папку с документом";
-            this.btnOpenFolder.UseVisualStyleBackColor = true;
-            this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
-            // 
-            // btnCreateDebit
-            // 
-            this.btnCreateDebit.Location = new System.Drawing.Point(148, 162);
-            this.btnCreateDebit.Name = "btnCreateDebit";
-            this.btnCreateDebit.Size = new System.Drawing.Size(255, 29);
-            this.btnCreateDebit.TabIndex = 17;
-            this.btnCreateDebit.Text = "Сформировать документ списания";
-            this.btnCreateDebit.UseVisualStyleBackColor = true;
-            this.btnCreateDebit.Click += new System.EventHandler(this.btnCreateDebit_Click);
             // 
             // DemandEditor
             // 

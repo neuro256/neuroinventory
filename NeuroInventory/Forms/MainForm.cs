@@ -11,6 +11,8 @@ namespace NeuroInventory
         public MainForm()
         {
             InitializeComponent();
+            //SpireDocWrapper test = new SpireDocWrapper();
+            //test.Run();
         }
 
         private void InitTabs()
@@ -112,6 +114,13 @@ namespace NeuroInventory
         {
             if (inventoryTabs != null && inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
                 inventoryTabs[tabControl.SelectedTab.Name].ShowTable();
+        }
+
+        private void единицыИзмеренияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MeasurementEditor editor = new MeasurementEditor();
+            editor.StartPosition = FormStartPosition.CenterParent;
+            editor.ShowDialog();
         }
     }
 }

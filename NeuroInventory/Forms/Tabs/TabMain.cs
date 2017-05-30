@@ -46,7 +46,7 @@ namespace NeuroInventory
         }
 
         private TreeViewTag m_SelectedInventory = null;
-        public delegate void SelectedInventory(string name);
+        public delegate void SelectedInventory(string sender);
         public event SelectedInventory OnSelectedInventory;
 
         public TabMain()

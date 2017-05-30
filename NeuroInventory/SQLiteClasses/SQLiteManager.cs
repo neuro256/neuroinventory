@@ -7,6 +7,21 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
+    public class SQLiteInternalManager : SQLiteManager
+    {
+        private static readonly SQLiteInternalManager instance = new SQLiteInternalManager();
+
+        public static new SQLiteInternalManager GetInstance()
+        {
+            return instance;
+        }
+
+        public MeasurementSql Measurement()
+        {
+            return MeasurementSql.GetInstance();
+        }
+    }
+
     public class SQLiteManager
     {
         /// <summary>
@@ -15,6 +30,7 @@ namespace NeuroInventory
         private static readonly SQLiteManager instance = new SQLiteManager();
 
         private string m_DatabaseName = null;
+
 
         #region INTERFACE
 
@@ -34,7 +50,7 @@ namespace NeuroInventory
         {
             get
             {
-                return $"DataSource={m_DatabaseName}; foreign keys=true; Version=3;";
+                return $"DataSource={databaseName}; foreign keys=true; Version=3;";
             }
         }
 
@@ -51,7 +67,7 @@ namespace NeuroInventory
         /// <returns>True если имя непустое, иначе False</returns>
         private bool DatabaseNameExist()
         {
-            return !String.IsNullOrEmpty(m_DatabaseName);
+            return !String.IsNullOrEmpty(databaseName);
         }
 
         /// <summary>

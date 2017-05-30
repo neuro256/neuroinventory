@@ -4,7 +4,9 @@ namespace NeuroInventory
 {
     public abstract class Measurement<T>
     {
+
         protected T m_Value;
+        protected int OKEIcode;
 
         public T value
         {

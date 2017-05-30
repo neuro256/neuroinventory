@@ -54,6 +54,15 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Spire.Doc, Version=5.7.0.54020, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.5.7\lib\net20\Spire.Doc.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.3.5.20, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.5.7\lib\net20\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=3.7.291.54020, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.5.7\lib\net20\Spire.Pdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -77,6 +86,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Additional\MeasurementEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Additional\MeasurementEditor.Designer.cs">
+      <DependentUpon>MeasurementEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpireDocWrapper.cs" />
     <Compile Include="SQLiteClasses\Tables\CatalogsSql.cs" />
     <Compile Include="Forms\Additional\DialogName.cs">
       <SubType>Form</SubType>
@@ -127,9 +143,10 @@
     </Compile>
     <Compile Include="Measurement.cs" />
     <Compile Include="SQLiteClasses\Tables\InventorySql.cs" />
+    <Compile Include="SQLiteClasses\Tables\MeasurementSql.cs" />
     <Compile Include="SQLiteClasses\Tables\ProvidersSql.cs" />
     <Compile Include="SQLiteClasses\Tables\EmployeesSql.cs" />
-    <Compile Include="ListViewUtility\ColHeader.cs">
+    <Compile Include="UtilityClasses\ColHeader.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\Additional\EmployeeEditor.cs">
@@ -138,7 +155,7 @@
     <Compile Include="Forms\Additional\EmployeeEditor.Designer.cs">
       <DependentUpon>EmployeeEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListViewUtility\SortWrapper.cs" />
+    <Compile Include="UtilityClasses\SortWrapper.cs" />
     <Compile Include="SQLiteClasses\Tables\TableSql.cs" />
     <Compile Include="Forms\IInventoryView.cs" />
     <Compile Include="Forms\MainForm.cs">
@@ -156,7 +173,10 @@
     <Compile Include="Forms\Tabs\TabEmployees.Designer.cs">
       <DependentUpon>TabEmployees.cs</DependentUpon>
     </Compile>
-    <Compile Include="TreeNodeExtension.cs" />
+    <Compile Include="UtilityClasses\TreeNodeExtension.cs" />
+    <EmbeddedResource Include="Forms\Additional\MeasurementEditor.resx">
+      <DependentUpon>MeasurementEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Additional\DialogName.resx">
       <DependentUpon>DialogName.cs</DependentUpon>
     </EmbeddedResource>

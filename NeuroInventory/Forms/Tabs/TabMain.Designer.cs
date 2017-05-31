@@ -192,6 +192,7 @@
             // btnInventoryEdit
             // 
             this.btnInventoryEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnInventoryEdit.AutoSize = true;
             this.btnInventoryEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnInventoryEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnInventoryEdit.Location = new System.Drawing.Point(396, 14);
@@ -205,6 +206,7 @@
             // btnInventoryRemove
             // 
             this.btnInventoryRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnInventoryRemove.AutoSize = true;
             this.btnInventoryRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnInventoryRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnInventoryRemove.Location = new System.Drawing.Point(206, 14);
@@ -218,6 +220,7 @@
             // btnInventoryAdd
             // 
             this.btnInventoryAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnInventoryAdd.AutoSize = true;
             this.btnInventoryAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnInventoryAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnInventoryAdd.Location = new System.Drawing.Point(16, 14);
@@ -373,6 +376,7 @@
             this.tableLayoutPanelRight.ResumeLayout(false);
             this.tableLayoutPanelInventory.ResumeLayout(false);
             this.panelMainBottom.ResumeLayout(false);
+            this.panelMainBottom.PerformLayout();
             this.ResumeLayout(false);
 
         }

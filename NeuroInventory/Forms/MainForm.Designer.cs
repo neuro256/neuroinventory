@@ -36,6 +36,7 @@
             this.saceBDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.единицыИзмеренияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabInventory = new System.Windows.Forms.TabPage();
             this.tabProviders = new System.Windows.Forms.TabPage();
@@ -44,7 +45,6 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.единицыИзмеренияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -58,7 +58,7 @@
             this.viewMenu});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1313, 28);
+            this.menuStrip.Size = new System.Drawing.Size(1262, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -109,6 +109,13 @@
             this.viewMenu.Size = new System.Drawing.Size(102, 24);
             this.viewMenu.Text = "&Параметры";
             // 
+            // единицыИзмеренияToolStripMenuItem
+            // 
+            this.единицыИзмеренияToolStripMenuItem.Name = "единицыИзмеренияToolStripMenuItem";
+            this.единицыИзмеренияToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
+            this.единицыИзмеренияToolStripMenuItem.Text = "Единицы измерения";
+            this.единицыИзмеренияToolStripMenuItem.Click += new System.EventHandler(this.единицыИзмеренияToolStripMenuItem_Click);
+            // 
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabInventory);
@@ -121,7 +128,7 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.Padding = new System.Drawing.Point(0, 0);
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1313, 580);
+            this.tabControl.Size = new System.Drawing.Size(1262, 700);
             this.tabControl.TabIndex = 1;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -130,7 +137,7 @@
             this.tabInventory.Location = new System.Drawing.Point(4, 27);
             this.tabInventory.Margin = new System.Windows.Forms.Padding(0);
             this.tabInventory.Name = "tabInventory";
-            this.tabInventory.Size = new System.Drawing.Size(1305, 549);
+            this.tabInventory.Size = new System.Drawing.Size(1254, 669);
             this.tabInventory.TabIndex = 0;
             this.tabInventory.Text = "ТМЦ";
             this.tabInventory.UseVisualStyleBackColor = true;
@@ -164,7 +171,7 @@
             this.toolStripButton3});
             this.toolStrip.Location = new System.Drawing.Point(0, 28);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1313, 27);
+            this.toolStrip.Size = new System.Drawing.Size(1262, 27);
             this.toolStrip.TabIndex = 2;
             this.toolStrip.Text = "toolStrip";
             // 
@@ -195,18 +202,11 @@
             this.toolStripButton3.Size = new System.Drawing.Size(24, 24);
             this.toolStripButton3.Text = "toolStripButton3";
             // 
-            // единицыИзмеренияToolStripMenuItem
-            // 
-            this.единицыИзмеренияToolStripMenuItem.Name = "единицыИзмеренияToolStripMenuItem";
-            this.единицыИзмеренияToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
-            this.единицыИзмеренияToolStripMenuItem.Text = "Единицы измерения";
-            this.единицыИзмеренияToolStripMenuItem.Click += new System.EventHandler(this.единицыИзмеренияToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1313, 635);
+            this.ClientSize = new System.Drawing.Size(1262, 755);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);

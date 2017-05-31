@@ -51,12 +51,9 @@ namespace NeuroInventory
         private void btnOk_Click(object sender, EventArgs e)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
-            if(String.IsNullOrEmpty(tbName.Text))
-            {
-                MessageBox.Show("Заполните обязательные поля");
-                tbName.Focus();
+
+            if (!IsValidData())
                 return;
-            }
 
             if(m_EditorMode == EditorMode.UPDATE)
             {
@@ -69,6 +66,21 @@ namespace NeuroInventory
 
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private bool IsValidData()
+        {
+            bool isValid = true;
+            errorProviderProviders.Clear();
+
+            if (String.IsNullOrEmpty(tbName.Text))
+            {
+                errorProviderProviders.SetError(tbName, "Заполните обязательные поля");
+                tbName.Focus();
+                isValid = false;
+            }
+
+            return isValid;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -126,6 +138,11 @@ namespace NeuroInventory
         {
             tbDocument.Text = String.Empty;
             m_SelectedDocument = String.Empty;
+        }
+
+        private void tbName_TextChanged(object sender, EventArgs e)
+        {
+            errorProviderProviders.Clear();
         }
     }
 }

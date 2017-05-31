@@ -90,7 +90,7 @@ namespace NeuroInventory
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
-            if (!AmountCheck())
+            if (!IsValidData())
                 return;
 
             SQLiteManager.GetInstance().Demand().Insert(m_InventoryId, cbEmployee.SelectedValue, nudAmount.Value, dateTimePicker.Value);
@@ -115,7 +115,7 @@ namespace NeuroInventory
             {
                 Dictionary<string, object> values = new Dictionary<string, object>();
 
-                if (!AmountCheck())
+                if (!IsValidData())
                     return;
 
                 SQLiteManager.GetInstance().Demand().Update(m_SelectedRecordId, m_InventoryId, cbEmployee.SelectedValue, nudAmount.Value, dateTimePicker.Value);
@@ -124,11 +124,13 @@ namespace NeuroInventory
             ShowTable();
         }
 
-        private bool AmountCheck()
+        private bool IsValidData()
         {
+            errorProviderDemand.Clear();
+
             if (nudAmount.Value == 0)
             {
-                MessageBox.Show("Заполните обязательные поля");
+                errorProviderDemand.SetError(nudAmount, "Заполните обязательные поля");
                 cbEmployee.Focus();
                 return false;
             }
@@ -192,6 +194,11 @@ namespace NeuroInventory
         private void btnOpenFolder_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void nudAmount_ValueChanged(object sender, EventArgs e)
+        {
+            errorProviderDemand.Clear();
         }
     }
 }

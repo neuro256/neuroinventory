@@ -49,17 +49,20 @@
             this.btnCreateDebit = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.contextMenuStripDemand = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.errorProviderDemand = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDemand)).BeginInit();
             this.splitContainerDemand.Panel1.SuspendLayout();
             this.splitContainerDemand.Panel2.SuspendLayout();
             this.splitContainerDemand.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDemand)).BeginInit();
             this.SuspendLayout();
             // 
             // lblEmployee
             // 
             this.lblEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEmployee.AutoSize = true;
+            this.lblEmployee.BackColor = System.Drawing.Color.LightCyan;
             this.lblEmployee.Location = new System.Drawing.Point(45, 27);
             this.lblEmployee.Name = "lblEmployee";
             this.lblEmployee.Size = new System.Drawing.Size(78, 17);
@@ -79,6 +82,7 @@
             // 
             this.lblAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAmount.AutoSize = true;
+            this.lblAmount.BackColor = System.Drawing.Color.LightCyan;
             this.lblAmount.Location = new System.Drawing.Point(18, 67);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(204, 17);
@@ -97,6 +101,7 @@
             this.nudAmount.Name = "nudAmount";
             this.nudAmount.Size = new System.Drawing.Size(175, 22);
             this.nudAmount.TabIndex = 2;
+            this.nudAmount.ValueChanged += new System.EventHandler(this.nudAmount_ValueChanged);
             // 
             // lblDate
             // 
@@ -269,6 +274,12 @@
             this.contextMenuStripDemand.Name = "contextMenuStripDemand";
             this.contextMenuStripDemand.Size = new System.Drawing.Size(67, 4);
             // 
+            // errorProviderDemand
+            // 
+            this.errorProviderDemand.BlinkRate = 0;
+            this.errorProviderDemand.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProviderDemand.ContainerControl = this;
+            // 
             // DemandEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -288,6 +299,7 @@
             this.splitContainerDemand.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDemand)).EndInit();
             this.splitContainerDemand.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDemand)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -314,5 +326,6 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnOpenFolder;
         private System.Windows.Forms.Button btnCreateDebit;
+        private System.Windows.Forms.ErrorProvider errorProviderDemand;
     }
 }

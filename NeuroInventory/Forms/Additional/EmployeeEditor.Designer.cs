@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblFirstname = new System.Windows.Forms.Label();
             this.lblSurename = new System.Windows.Forms.Label();
             this.lblLastname = new System.Windows.Forms.Label();
@@ -40,11 +41,14 @@
             this.tbDepartment = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.errorProviderEmployees = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderEmployees)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFirstname
             // 
             this.lblFirstname.AutoSize = true;
+            this.lblFirstname.BackColor = System.Drawing.Color.LightCyan;
             this.lblFirstname.Location = new System.Drawing.Point(24, 62);
             this.lblFirstname.Name = "lblFirstname";
             this.lblFirstname.Size = new System.Drawing.Size(35, 17);
@@ -54,6 +58,7 @@
             // lblSurename
             // 
             this.lblSurename.AutoSize = true;
+            this.lblSurename.BackColor = System.Drawing.Color.LightCyan;
             this.lblSurename.Location = new System.Drawing.Point(24, 27);
             this.lblSurename.Name = "lblSurename";
             this.lblSurename.Size = new System.Drawing.Size(70, 17);
@@ -63,6 +68,7 @@
             // lblLastname
             // 
             this.lblLastname.AutoSize = true;
+            this.lblLastname.BackColor = System.Drawing.Color.LightCyan;
             this.lblLastname.Location = new System.Drawing.Point(23, 100);
             this.lblLastname.Name = "lblLastname";
             this.lblLastname.Size = new System.Drawing.Size(71, 17);
@@ -151,6 +157,12 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // errorProviderEmployees
+            // 
+            this.errorProviderEmployees.BlinkRate = 0;
+            this.errorProviderEmployees.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProviderEmployees.ContainerControl = this;
+            // 
             // EmployeeEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -172,6 +184,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "EmployeeEditor";
             this.Text = "Редактор сотрудника";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderEmployees)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,5 +204,6 @@
         private System.Windows.Forms.TextBox tbDepartment;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.ErrorProvider errorProviderEmployees;
     }
 }

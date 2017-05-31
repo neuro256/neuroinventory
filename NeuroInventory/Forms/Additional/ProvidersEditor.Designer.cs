@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tbName = new System.Windows.Forms.TextBox();
             this.tbAddress = new System.Windows.Forms.TextBox();
             this.tbPhone = new System.Windows.Forms.TextBox();
@@ -42,6 +43,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnClearPath = new System.Windows.Forms.Button();
+            this.errorProviderProviders = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderProviders)).BeginInit();
             this.SuspendLayout();
             // 
             // tbName
@@ -50,6 +53,7 @@
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(292, 22);
             this.tbName.TabIndex = 5;
+            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             this.tbName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbName_KeyPress);
             // 
             // tbAddress
@@ -79,6 +83,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
+            this.lblName.BackColor = System.Drawing.Color.LightCyan;
             this.lblName.Location = new System.Drawing.Point(35, 46);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(72, 17);
@@ -177,6 +182,12 @@
             this.btnClearPath.UseVisualStyleBackColor = true;
             this.btnClearPath.Click += new System.EventHandler(this.btnClearPath_Click);
             // 
+            // errorProviderProviders
+            // 
+            this.errorProviderProviders.BlinkRate = 0;
+            this.errorProviderProviders.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProviderProviders.ContainerControl = this;
+            // 
             // ProviderEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -200,6 +211,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ProviderEditor";
             this.Text = "Редактор поставщика";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderProviders)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,5 +233,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnClearPath;
+        private System.Windows.Forms.ErrorProvider errorProviderProviders;
     }
 }

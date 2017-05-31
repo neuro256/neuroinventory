@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblName = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.errorProviderName = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderName)).BeginInit();
             this.SuspendLayout();
             // 
             // lblName
@@ -49,6 +52,7 @@
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(326, 22);
             this.tbName.TabIndex = 1;
+            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             this.tbName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbName_KeyUp);
             // 
             // btnOK
@@ -75,6 +79,12 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // errorProviderName
+            // 
+            this.errorProviderName.BlinkRate = 0;
+            this.errorProviderName.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProviderName.ContainerControl = this;
+            // 
             // DialogName
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -92,6 +102,7 @@
             this.Name = "DialogName";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Выбор имени";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderName)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,5 +114,6 @@
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.ErrorProvider errorProviderName;
     }
 }

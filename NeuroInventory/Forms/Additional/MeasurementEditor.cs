@@ -65,21 +65,30 @@ namespace NeuroInventory
 
         public override void AddRecord()
         {
-            if (!CheckFields())
+            if (!IsValidData())
                 return;
             SQLiteSettingsManager.GetInstance().Measurement().Insert(nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
             m_Listview.SelectedItems.Clear();
             ShowTable();
         }
 
-        private bool CheckFields()
+        private bool IsValidData()
         {
-            if (String.IsNullOrEmpty(tbName.Text) || String.IsNullOrEmpty(tbSymbol.Text))
+            bool isValid = true;
+            errorProviderMeasurement.Clear();
+
+            if (String.IsNullOrEmpty(tbName.Text))
             {
-                MessageBox.Show("Введите обязательные значения");
-                return false;
+                errorProviderMeasurement.SetError(tbName, "Заполните обязательные поля");
+                isValid = false;
             }
-            return true;
+
+            if(String.IsNullOrEmpty(tbSymbol.Text))
+            {
+                errorProviderMeasurement.SetError(tbSymbol, "Заполните обязательные поля");
+                isValid = false;
+            }
+            return isValid;
         }
 
         public override void RemoveRecord()
@@ -189,6 +198,16 @@ namespace NeuroInventory
             {
                 dataSet.Dispose();
             }
+        }
+
+        private void tbName_TextChanged(object sender, EventArgs e)
+        {
+            errorProviderMeasurement.Clear();
+        }
+
+        private void tbSymbol_TextChanged(object sender, EventArgs e)
+        {
+            errorProviderMeasurement.Clear();
         }
     }
 }

@@ -46,17 +46,20 @@
             this.btnCreateDebit = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.contextMenuStripDebit = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.errorProviderDebit = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDebit)).BeginInit();
             this.splitContainerDebit.Panel1.SuspendLayout();
             this.splitContainerDebit.Panel2.SuspendLayout();
             this.splitContainerDebit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDebit)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAmount
             // 
             this.lblAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAmount.AutoSize = true;
+            this.lblAmount.BackColor = System.Drawing.Color.LightCyan;
             this.lblAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblAmount.Location = new System.Drawing.Point(36, 32);
             this.lblAmount.Name = "lblAmount";
@@ -79,6 +82,7 @@
             this.nudAmount.Size = new System.Drawing.Size(175, 22);
             this.nudAmount.TabIndex = 1;
             this.nudAmount.ThousandsSeparator = true;
+            this.nudAmount.ValueChanged += new System.EventHandler(this.nudAmount_ValueChanged);
             // 
             // lblDate
             // 
@@ -250,6 +254,12 @@
             this.contextMenuStripDebit.Name = "contextMenuStripDemand";
             this.contextMenuStripDebit.Size = new System.Drawing.Size(67, 4);
             // 
+            // errorProviderDebit
+            // 
+            this.errorProviderDebit.BlinkRate = 0;
+            this.errorProviderDebit.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProviderDebit.ContainerControl = this;
+            // 
             // DebitEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -269,6 +279,7 @@
             this.splitContainerDebit.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDebit)).EndInit();
             this.splitContainerDebit.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDebit)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -291,5 +302,6 @@
         private System.Windows.Forms.ColumnHeader chDate;
         private System.Windows.Forms.ColumnHeader chDebit;
         private System.Windows.Forms.Button btnOpenFolder;
+        private System.Windows.Forms.ErrorProvider errorProviderDebit;
     }
 }

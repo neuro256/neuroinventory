@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblProvider = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblInvoice = new System.Windows.Forms.Label();
@@ -48,13 +49,16 @@
             this.nudPrice = new System.Windows.Forms.NumericUpDown();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.errorProviderInventory = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderInventory)).BeginInit();
             this.SuspendLayout();
             // 
             // lblProvider
             // 
             this.lblProvider.AutoSize = true;
+            this.lblProvider.BackColor = System.Drawing.Color.LightCyan;
             this.lblProvider.Location = new System.Drawing.Point(26, 29);
             this.lblProvider.Name = "lblProvider";
             this.lblProvider.Size = new System.Drawing.Size(81, 17);
@@ -64,6 +68,7 @@
             // lblDate
             // 
             this.lblDate.AutoSize = true;
+            this.lblDate.BackColor = System.Drawing.Color.LightCyan;
             this.lblDate.Location = new System.Drawing.Point(26, 69);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(131, 17);
@@ -82,6 +87,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
+            this.lblName.BackColor = System.Drawing.Color.LightCyan;
             this.lblName.Location = new System.Drawing.Point(26, 153);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(106, 17);
@@ -109,6 +115,7 @@
             // lblAmount
             // 
             this.lblAmount.AutoSize = true;
+            this.lblAmount.BackColor = System.Drawing.Color.LightCyan;
             this.lblAmount.Location = new System.Drawing.Point(26, 277);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(86, 17);
@@ -118,6 +125,7 @@
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
+            this.lblPrice.BackColor = System.Drawing.Color.LightCyan;
             this.lblPrice.Location = new System.Drawing.Point(26, 319);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(43, 17);
@@ -174,6 +182,7 @@
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(267, 22);
             this.tbName.TabIndex = 13;
+            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             // 
             // tbOKEI
             // 
@@ -204,6 +213,7 @@
             this.nudAmount.Size = new System.Drawing.Size(120, 22);
             this.nudAmount.TabIndex = 16;
             this.nudAmount.ThousandsSeparator = true;
+            this.nudAmount.ValueChanged += new System.EventHandler(this.nudAmount_ValueChanged);
             // 
             // nudPrice
             // 
@@ -218,6 +228,7 @@
             this.nudPrice.Size = new System.Drawing.Size(120, 22);
             this.nudPrice.TabIndex = 17;
             this.nudPrice.ThousandsSeparator = true;
+            this.nudPrice.ValueChanged += new System.EventHandler(this.nudPrice_ValueChanged);
             // 
             // btnOK
             // 
@@ -242,6 +253,12 @@
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // errorProviderInventory
+            // 
+            this.errorProviderInventory.BlinkRate = 0;
+            this.errorProviderInventory.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProviderInventory.ContainerControl = this;
             // 
             // InventoryEditor
             // 
@@ -274,6 +291,7 @@
             this.Text = "Редактор ТМЦ";
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderInventory)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,5 +319,6 @@
         private System.Windows.Forms.NumericUpDown nudPrice;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.ErrorProvider errorProviderInventory;
     }
 }

@@ -38,28 +38,31 @@
             this.lwMeasurement = new System.Windows.Forms.ListView();
             this.chId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.contextMenuStripMeasurement = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.chOKEIcode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSymbol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tbName = new System.Windows.Forms.TextBox();
-            this.tbSymbol = new System.Windows.Forms.TextBox();
-            this.lblSymbol = new System.Windows.Forms.Label();
             this.lblPlaces = new System.Windows.Forms.Label();
             this.nudPlaces = new System.Windows.Forms.NumericUpDown();
+            this.tbSymbol = new System.Windows.Forms.TextBox();
+            this.lblSymbol = new System.Windows.Forms.Label();
+            this.tbName = new System.Windows.Forms.TextBox();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.contextMenuStripMeasurement = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.errorProviderMeasurement = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudOKEI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMeasurement)).BeginInit();
             this.splitContainerMeasurement.Panel1.SuspendLayout();
             this.splitContainerMeasurement.Panel2.SuspendLayout();
             this.splitContainerMeasurement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPlaces)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMeasurement)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAmount
             // 
             this.lblAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAmount.AutoSize = true;
+            this.lblAmount.BackColor = System.Drawing.Color.LightCyan;
             this.lblAmount.Location = new System.Drawing.Point(103, 33);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(76, 17);
@@ -83,6 +86,7 @@
             // 
             this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblName.AutoSize = true;
+            this.lblName.BackColor = System.Drawing.Color.LightCyan;
             this.lblName.Location = new System.Drawing.Point(107, 74);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(72, 17);
@@ -175,6 +179,69 @@
             // 
             this.chNumber.Text = "№";
             // 
+            // chOKEIcode
+            // 
+            this.chOKEIcode.Text = "код ОКЕИ";
+            this.chOKEIcode.Width = 80;
+            // 
+            // chName
+            // 
+            this.chName.Text = "Наименование";
+            this.chName.Width = 200;
+            // 
+            // chSymbol
+            // 
+            this.chSymbol.Text = "Условное обозначение";
+            this.chSymbol.Width = 200;
+            // 
+            // lblPlaces
+            // 
+            this.lblPlaces.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPlaces.AutoSize = true;
+            this.lblPlaces.BackColor = System.Drawing.Color.LightCyan;
+            this.lblPlaces.Location = new System.Drawing.Point(27, 159);
+            this.lblPlaces.Name = "lblPlaces";
+            this.lblPlaces.Size = new System.Drawing.Size(152, 17);
+            this.lblPlaces.TabIndex = 12;
+            this.lblPlaces.Text = "Десятичные разряды";
+            // 
+            // nudPlaces
+            // 
+            this.nudPlaces.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudPlaces.Location = new System.Drawing.Point(185, 157);
+            this.nudPlaces.Name = "nudPlaces";
+            this.nudPlaces.Size = new System.Drawing.Size(175, 22);
+            this.nudPlaces.TabIndex = 4;
+            // 
+            // tbSymbol
+            // 
+            this.tbSymbol.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSymbol.Location = new System.Drawing.Point(185, 113);
+            this.tbSymbol.Name = "tbSymbol";
+            this.tbSymbol.Size = new System.Drawing.Size(175, 22);
+            this.tbSymbol.TabIndex = 3;
+            this.tbSymbol.TextChanged += new System.EventHandler(this.tbSymbol_TextChanged);
+            // 
+            // lblSymbol
+            // 
+            this.lblSymbol.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSymbol.AutoSize = true;
+            this.lblSymbol.BackColor = System.Drawing.Color.LightCyan;
+            this.lblSymbol.Location = new System.Drawing.Point(17, 116);
+            this.lblSymbol.Name = "lblSymbol";
+            this.lblSymbol.Size = new System.Drawing.Size(162, 17);
+            this.lblSymbol.TabIndex = 10;
+            this.lblSymbol.Text = "Условное обозначение";
+            // 
+            // tbName
+            // 
+            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbName.Location = new System.Drawing.Point(185, 71);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(175, 22);
+            this.tbName.TabIndex = 2;
+            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
+            // 
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -194,64 +261,11 @@
             this.contextMenuStripMeasurement.Name = "contextMenuStripDemand";
             this.contextMenuStripMeasurement.Size = new System.Drawing.Size(67, 4);
             // 
-            // chOKEIcode
+            // errorProviderMeasurement
             // 
-            this.chOKEIcode.Text = "код ОКЕИ";
-            this.chOKEIcode.Width = 80;
-            // 
-            // chName
-            // 
-            this.chName.Text = "Наименование";
-            this.chName.Width = 200;
-            // 
-            // chSymbol
-            // 
-            this.chSymbol.Text = "Условное обозначение";
-            this.chSymbol.Width = 200;
-            // 
-            // tbName
-            // 
-            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbName.Location = new System.Drawing.Point(185, 71);
-            this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(175, 22);
-            this.tbName.TabIndex = 2;
-            // 
-            // tbSymbol
-            // 
-            this.tbSymbol.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSymbol.Location = new System.Drawing.Point(185, 113);
-            this.tbSymbol.Name = "tbSymbol";
-            this.tbSymbol.Size = new System.Drawing.Size(175, 22);
-            this.tbSymbol.TabIndex = 3;
-            // 
-            // lblSymbol
-            // 
-            this.lblSymbol.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSymbol.AutoSize = true;
-            this.lblSymbol.Location = new System.Drawing.Point(17, 116);
-            this.lblSymbol.Name = "lblSymbol";
-            this.lblSymbol.Size = new System.Drawing.Size(162, 17);
-            this.lblSymbol.TabIndex = 10;
-            this.lblSymbol.Text = "Условное обозначение";
-            // 
-            // lblPlaces
-            // 
-            this.lblPlaces.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPlaces.AutoSize = true;
-            this.lblPlaces.Location = new System.Drawing.Point(27, 159);
-            this.lblPlaces.Name = "lblPlaces";
-            this.lblPlaces.Size = new System.Drawing.Size(152, 17);
-            this.lblPlaces.TabIndex = 12;
-            this.lblPlaces.Text = "Десятичные разряды";
-            // 
-            // nudPlaces
-            // 
-            this.nudPlaces.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudPlaces.Location = new System.Drawing.Point(185, 157);
-            this.nudPlaces.Name = "nudPlaces";
-            this.nudPlaces.Size = new System.Drawing.Size(175, 22);
-            this.nudPlaces.TabIndex = 4;
+            this.errorProviderMeasurement.BlinkRate = 0;
+            this.errorProviderMeasurement.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProviderMeasurement.ContainerControl = this;
             // 
             // MeasurementEditor
             // 
@@ -274,6 +288,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMeasurement)).EndInit();
             this.splitContainerMeasurement.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudPlaces)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMeasurement)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -298,5 +313,6 @@
         private System.Windows.Forms.NumericUpDown nudPlaces;
         private System.Windows.Forms.TextBox tbSymbol;
         private System.Windows.Forms.Label lblSymbol;
+        private System.Windows.Forms.ErrorProvider errorProviderMeasurement;
     }
 }

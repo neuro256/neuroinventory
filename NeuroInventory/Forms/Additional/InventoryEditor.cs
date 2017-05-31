@@ -79,9 +79,8 @@ namespace NeuroInventory
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
-            if (String.IsNullOrEmpty(tbName.Text) || nudAmount.Value == 0 || nudPrice.Value == 0)
+            if (!IsValidData())
             {
-                MessageBox.Show("Заполните обязательные поля");
                 cbProviders.Focus();
                 return;
             }
@@ -97,6 +96,32 @@ namespace NeuroInventory
 
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private bool IsValidData()
+        {
+            bool isValid = true;
+            errorProviderInventory.Clear();
+
+            if(String.IsNullOrEmpty(tbName.Text))
+            {
+                errorProviderInventory.SetError(tbName, "Заполните обязательные поля");
+                isValid = false;
+            }
+
+            if(nudAmount.Value == 0)
+            {
+                errorProviderInventory.SetError(nudAmount, "Заполните обязательные поля");
+                isValid = false;
+            }
+
+            if(nudPrice.Value == 0)
+            {
+                errorProviderInventory.SetError(nudPrice, "Заполните обязательные поля");
+                isValid = false;
+            }
+
+            return isValid;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -128,6 +153,21 @@ namespace NeuroInventory
         {
             tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.Text);
             nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.Text);
+        }
+
+        private void tbName_TextChanged(object sender, EventArgs e)
+        {
+            errorProviderInventory.Clear();
+        }
+
+        private void nudAmount_ValueChanged(object sender, EventArgs e)
+        {
+            errorProviderInventory.Clear();
+        }
+
+        private void nudPrice_ValueChanged(object sender, EventArgs e)
+        {
+            errorProviderInventory.Clear();
         }
     }
 }

@@ -21,13 +21,22 @@ namespace NeuroInventory
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if(String.IsNullOrEmpty(tbName.Text))
-            {
-                MessageBox.Show("Введите название");
+            if (!IsValidData())
                 return;
-            }
             name = tbName.Text.Trim();
             DialogResult = DialogResult.OK;
+        }
+
+        private bool IsValidData()
+        {
+            errorProviderName.Clear();
+
+            if (String.IsNullOrEmpty(tbName.Text))
+            {
+                errorProviderName.SetError(tbName, "Имя не должно быть пустым");
+                return false;
+            }
+            return true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -42,6 +51,11 @@ namespace NeuroInventory
             {
                 btnOK.Focus();
             }
+        }
+
+        private void tbName_TextChanged(object sender, EventArgs e)
+        {
+            errorProviderName.Clear();
         }
     }
 }

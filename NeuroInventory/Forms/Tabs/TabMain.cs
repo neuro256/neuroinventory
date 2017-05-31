@@ -336,14 +336,14 @@ namespace NeuroInventory
 
         private void treeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
-            TreeViewTag tvTag = e.Node.Tag as TreeViewTag;
-            SelectInventoryByCatalog(tvTag);
+            //TreeViewTag tvTag = e.Node.Tag as TreeViewTag;
+            //SelectInventoryByCatalog(tvTag);
         }
 
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            //TreeViewTag tvTag = e.Node.Tag as TreeViewTag;
-            //SelectInventoryByCatalog(tvTag);
+            TreeViewTag tvTag = e.Node.Tag as TreeViewTag;
+            SelectInventoryByCatalog(tvTag);
         }
 
         /// <summary>

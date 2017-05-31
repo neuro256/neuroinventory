@@ -569,7 +569,8 @@ namespace NeuroInventory
             if ((m_Listview.GetItemAt(e.X, e.Y)?.SubItems["released"]?.Bounds.Contains(e.X, e.Y) ?? false) ||
                 (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["demand"]?.Bounds.Contains(e.X, e.Y) ?? false))
             {
-                DemandEditor demandEditor = new DemandEditor(Convert.ToInt32(m_Listview.GetItemAt(e.X, e.Y).Text));
+                int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(m_Listview.GetItemAt(e.X, e.Y)?.SubItems["measurement"].Text);
+                DemandEditor demandEditor = new DemandEditor(Convert.ToInt32(m_Listview.GetItemAt(e.X, e.Y).Text), l_DecimalPlaces);
                 demandEditor.StartPosition = FormStartPosition.CenterParent; // Применить эту опцию и к другим окнам
                 if (demandEditor.ShowDialog() == DialogResult.OK)
                 {
@@ -579,7 +580,8 @@ namespace NeuroInventory
             }
             else if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["debit"]?.Bounds.Contains(e.X, e.Y) ?? false)
             {
-                DebitEditor debitEditor = new DebitEditor(Convert.ToInt32(m_Listview.GetItemAt(e.X, e.Y).Text));
+                int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(m_Listview.GetItemAt(e.X, e.Y)?.SubItems["measurement"].Text);
+                DebitEditor debitEditor = new DebitEditor(Convert.ToInt32(m_Listview.GetItemAt(e.X, e.Y).Text), l_DecimalPlaces);
                 debitEditor.StartPosition = FormStartPosition.CenterParent;
                 if (debitEditor.ShowDialog() == DialogResult.OK)
                 {

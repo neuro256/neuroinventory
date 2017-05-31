@@ -92,12 +92,26 @@ namespace NeuroInventory
 
         public string GetOKEIByName(string p_Name)
         {
-            return SQLiteSettingsManager.GetInstance().CommandExecuteScalar($"SELECT codeOKEI FROM measurement where name='{p_Name}';").ToString();
+            try
+            {
+                return SQLiteSettingsManager.GetInstance().CommandExecuteScalar($"SELECT codeOKEI FROM measurement where name='{p_Name}';").ToString();
+            }
+            catch
+            {
+                return String.Empty;
+            }
         }
 
         public int GetDecimalPlacesByName(string p_Name)
         {
-            return Convert.ToInt32(SQLiteSettingsManager.GetInstance().CommandExecuteScalar($"SELECT decimalPlaces FROM measurement where name='{p_Name}';"));
+            try
+            {
+                return Convert.ToInt32(SQLiteSettingsManager.GetInstance().CommandExecuteScalar($"SELECT decimalPlaces FROM measurement where name='{p_Name}';"));
+            }
+            catch
+            {
+                return 0;
+            }
         }
     }
 }

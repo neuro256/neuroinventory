@@ -11,7 +11,7 @@ namespace NeuroInventory
         private int m_InventoryId;
         private object m_SelectedRecordId;
 
-        public DemandEditor(int p_InventoryId)
+        public DemandEditor(int p_InventoryId, int p_AmountDecimalPlaces)
         {
             InitializeComponent();
             SQLiteManager.GetInstance().Demand().SetCommandDataSet(p_InventoryId);
@@ -22,6 +22,7 @@ namespace NeuroInventory
             ShowTable();
             m_ListviewSelectedIndex = 0;
             m_InventoryId = p_InventoryId;
+            nudAmount.DecimalPlaces = p_AmountDecimalPlaces;
         }
 
         protected override void InitForm()

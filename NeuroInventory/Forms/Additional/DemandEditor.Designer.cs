@@ -89,6 +89,11 @@
             // 
             this.nudAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nudAmount.Location = new System.Drawing.Point(228, 65);
+            this.nudAmount.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
             this.nudAmount.Name = "nudAmount";
             this.nudAmount.Size = new System.Drawing.Size(175, 22);
             this.nudAmount.TabIndex = 2;

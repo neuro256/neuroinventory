@@ -217,6 +217,10 @@ namespace NeuroInventory
                         command.CommandText = "INSERT INTO catalogs (type, parent, name) VALUES (0, null, 'Каталоги');";
                         command.ExecuteNonQuery();
 
+                        // Создание индекса
+                        command.CommandText = "CREATE INDEX InventoryIdIndex ON Debit (inventoryId);";
+                        command.ExecuteNonQuery();
+
                         transaction.Commit();
                     }
                 }

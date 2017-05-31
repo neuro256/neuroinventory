@@ -141,7 +141,6 @@
     <Compile Include="Forms\Additional\InventoryEditor.Designer.cs">
       <DependentUpon>InventoryEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Measurement.cs" />
     <Compile Include="SQLiteClasses\Tables\InventorySql.cs" />
     <Compile Include="SQLiteClasses\Tables\MeasurementSql.cs" />
     <Compile Include="SQLiteClasses\Tables\ProvidersSql.cs" />

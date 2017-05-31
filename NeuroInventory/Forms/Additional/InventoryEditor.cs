@@ -46,10 +46,10 @@ namespace NeuroInventory
 
             // Настройка селектора единицы измерения
             cbMeasurement.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbMeasurement.Items.Add(new MeasurementNull());
-            cbMeasurement.Items.Add(new MeasurementUnit());
-            cbMeasurement.Items.Add(new MeasurementWeigh());
-            cbMeasurement.Items.Add(new MeasurementSquare());
+            DataSet measurementDataSet = SQLiteSettingsManager.GetInstance().Measurement().ReturnDataSet();
+            cbMeasurement.DataSource = measurementDataSet.Tables[0];
+            cbMeasurement.DisplayMember = "name";
+            cbMeasurement.ValueMember = "name";
 
             // Настройка селектора даты
             dateTimePicker.Format = DateTimePickerFormat.Short;
@@ -122,6 +122,12 @@ namespace NeuroInventory
         {
             tbInvoice.Text = String.Empty;
             m_SelectedDocument = String.Empty;
+        }
+
+        private void cbMeasurement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.Text);
+            nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.Text);
         }
     }
 }

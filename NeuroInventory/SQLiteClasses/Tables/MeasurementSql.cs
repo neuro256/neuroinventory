@@ -12,7 +12,7 @@ namespace NeuroInventory
         {
             get
             {
-                m_ConnectionStr = SQLiteInternalManager.GetInstance().connectionString;
+                m_ConnectionStr = SQLiteSettingsManager.GetInstance().connectionString;
                 return m_ConnectionStr;
             }
         }
@@ -32,7 +32,7 @@ namespace NeuroInventory
             values["symbol"] = p_Symbol;
             values["decimalPlaces"] = p_DecimalPlaces;
 
-            SQLiteInternalManager.GetInstance().Insert(m_TableName, values);
+            SQLiteSettingsManager.GetInstance().Insert(m_TableName, values);
         }
 
         public void Update(object p_Id, decimal p_OKEIcode, string p_Name, string p_Symbol, decimal p_DecimalPlaces)
@@ -46,7 +46,7 @@ namespace NeuroInventory
 
             string l_Where = $"id={p_Id}";
 
-            SQLiteInternalManager.GetInstance().Update(m_TableName, values, l_Where);
+            SQLiteSettingsManager.GetInstance().Update(m_TableName, values, l_Where);
         }
 
         public void Remove(int p_ListviewSelectedItemIndex)
@@ -55,7 +55,7 @@ namespace NeuroInventory
             object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
             string l_Where = $"id={selectedRecordId}";
 
-            SQLiteInternalManager.GetInstance().Delete(m_TableName, l_Where);
+            SQLiteSettingsManager.GetInstance().Delete(m_TableName, l_Where);
         }
 
         /// <summary>
@@ -88,6 +88,16 @@ namespace NeuroInventory
                     }
                 }
             }
+        }
+
+        public string GetOKEIByName(string p_Name)
+        {
+            return SQLiteSettingsManager.GetInstance().CommandExecuteScalar($"SELECT codeOKEI FROM measurement where name='{p_Name}';").ToString();
+        }
+
+        public int GetDecimalPlacesByName(string p_Name)
+        {
+            return Convert.ToInt32(SQLiteSettingsManager.GetInstance().CommandExecuteScalar($"SELECT decimalPlaces FROM measurement where name='{p_Name}';"));
         }
     }
 }

@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using System.IO;
-using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public class SQLiteInternalManager : SQLiteManager
+    public class SQLiteSettingsManager : SQLiteManager
     {
-        private static readonly SQLiteInternalManager instance = new SQLiteInternalManager();
+        private static readonly SQLiteSettingsManager instance = new SQLiteSettingsManager();
 
-        public static new SQLiteInternalManager GetInstance()
+        public static new SQLiteSettingsManager GetInstance()
         {
             return instance;
         }
@@ -19,6 +17,34 @@ namespace NeuroInventory
         public MeasurementSql Measurement()
         {
             return MeasurementSql.GetInstance();
+        }
+
+        public override void CreateTables()
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SQLiteTransaction transaction = connection.BeginTransaction())
+                {
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        // Создание таблицы "Каталоги"
+                        command.CommandText = "CREATE TABLE IF NOT EXISTS measurement (" +
+                            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                            "codeOKEI TEXT NOT NULL, " +
+                            "name TEXT NOT NULL, " +
+                            "symbol TEXT NOT NULL, " +
+                            "decimalPlaces INTEGER NOT NULL);";
+
+                        command.ExecuteNonQuery();
+
+                        transaction.Commit();
+                    }
+                }
+
+                connection.Close();
+            }
         }
     }
 
@@ -94,7 +120,7 @@ namespace NeuroInventory
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -111,7 +137,7 @@ namespace NeuroInventory
             SQLiteConnection.CreateFile(p_DatabaseName);
         }
 
-        public void CreateTables()
+        public virtual void CreateTables()
         {
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
@@ -159,7 +185,7 @@ namespace NeuroInventory
                             "date DATETIME NOT NULL, " +
                             "invoice NVARCHAR(80), " +
                             "name NVARCHAR(45) NOT NULL, " +
-                            "OKEIcode NVARCHAR(45), " +
+                            "OKEIcode NVARCHAR(5), " +
                             "measurement NVARCHAR(20), " +
                             "amount REAL, " +
                             "price INTEGER, " +
@@ -192,9 +218,10 @@ namespace NeuroInventory
                         command.ExecuteNonQuery();
 
                         transaction.Commit();
-                        connection.Close();
                     }
                 }
+
+                connection.Close();
             }
         }
 

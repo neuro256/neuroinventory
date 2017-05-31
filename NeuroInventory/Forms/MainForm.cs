@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace NeuroInventory
@@ -11,8 +12,12 @@ namespace NeuroInventory
         public MainForm()
         {
             InitializeComponent();
-            //SpireDocWrapper test = new SpireDocWrapper();
-            //test.Run();
+            SQLiteSettingsManager.GetInstance().databaseName = @"settings.db";
+            if(!File.Exists(SQLiteSettingsManager.GetInstance().databaseName) || !SQLiteSettingsManager.GetInstance().TestConnection())
+            {
+                SQLiteSettingsManager.GetInstance().CreateDatabase(SQLiteSettingsManager.GetInstance().databaseName);
+                SQLiteSettingsManager.GetInstance().CreateTables();
+            }
         }
 
         private void InitTabs()

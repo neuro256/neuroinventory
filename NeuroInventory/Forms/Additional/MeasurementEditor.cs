@@ -14,7 +14,6 @@ namespace NeuroInventory
         public MeasurementEditor()
         {
             InitializeComponent();
-            SQLiteInternalManager.GetInstance().databaseName = @"settings.db";
             InitForm();
             InitListView();
             InitContextMenuStrip();
@@ -68,7 +67,7 @@ namespace NeuroInventory
         {
             if (!CheckFields())
                 return;
-            SQLiteInternalManager.GetInstance().Measurement().Insert(nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
+            SQLiteSettingsManager.GetInstance().Measurement().Insert(nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
             m_Listview.SelectedItems.Clear();
             ShowTable();
         }
@@ -87,7 +86,7 @@ namespace NeuroInventory
         {
             if(m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteInternalManager.GetInstance().Measurement().Remove(m_ListviewSelectedIndex);
+                SQLiteSettingsManager.GetInstance().Measurement().Remove(m_ListviewSelectedIndex);
             }
 
             m_Listview.SelectedItems.Clear();
@@ -98,7 +97,7 @@ namespace NeuroInventory
         {
             if(m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteInternalManager.GetInstance().Measurement().Update(m_SelectedRecordId, nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
+                SQLiteSettingsManager.GetInstance().Measurement().Update(m_SelectedRecordId, nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
             }
             m_Listview.SelectedItems.Clear();
             ShowTable();
@@ -116,7 +115,7 @@ namespace NeuroInventory
 
         public override DataSet ReturnDataSet()
         {
-            return SQLiteInternalManager.GetInstance().Measurement().ReturnDataSet();
+            return SQLiteSettingsManager.GetInstance().Measurement().ReturnDataSet();
         }
 
         public override void Clear()
@@ -146,7 +145,7 @@ namespace NeuroInventory
 
         private void ShowInfo()
         {
-            DataSet dataSet = SQLiteInternalManager.GetInstance().Measurement().ReturnDataSet();
+            DataSet dataSet = SQLiteSettingsManager.GetInstance().Measurement().ReturnDataSet();
             m_SelectedRecordId = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["id"];
             nudOKEI.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["codeOKEI"]);
             tbName.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["name"].ToString();
@@ -156,7 +155,7 @@ namespace NeuroInventory
 
         public override void ShowTable()
         {
-            if (!SQLiteInternalManager.GetInstance().TestConnection())
+            if (!SQLiteSettingsManager.GetInstance().TestConnection())
                 return;
             DataSet dataSet = ReturnDataSet();
             try

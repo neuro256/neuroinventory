@@ -91,7 +91,7 @@
             // lblOKEI
             // 
             this.lblOKEI.AutoSize = true;
-            this.lblOKEI.Location = new System.Drawing.Point(26, 194);
+            this.lblOKEI.Location = new System.Drawing.Point(26, 236);
             this.lblOKEI.Name = "lblOKEI";
             this.lblOKEI.Size = new System.Drawing.Size(76, 17);
             this.lblOKEI.TabIndex = 4;
@@ -100,7 +100,7 @@
             // lblMeasurement
             // 
             this.lblMeasurement.AutoSize = true;
-            this.lblMeasurement.Location = new System.Drawing.Point(26, 235);
+            this.lblMeasurement.Location = new System.Drawing.Point(26, 194);
             this.lblMeasurement.Name = "lblMeasurement";
             this.lblMeasurement.Size = new System.Drawing.Size(141, 17);
             this.lblMeasurement.TabIndex = 5;
@@ -177,18 +177,20 @@
             // 
             // tbOKEI
             // 
-            this.tbOKEI.Location = new System.Drawing.Point(186, 191);
+            this.tbOKEI.Location = new System.Drawing.Point(186, 233);
+            this.tbOKEI.MaxLength = 3;
             this.tbOKEI.Name = "tbOKEI";
-            this.tbOKEI.Size = new System.Drawing.Size(267, 22);
+            this.tbOKEI.Size = new System.Drawing.Size(121, 22);
             this.tbOKEI.TabIndex = 14;
             // 
             // cbMeasurement
             // 
             this.cbMeasurement.FormattingEnabled = true;
-            this.cbMeasurement.Location = new System.Drawing.Point(186, 232);
+            this.cbMeasurement.Location = new System.Drawing.Point(186, 191);
             this.cbMeasurement.Name = "cbMeasurement";
             this.cbMeasurement.Size = new System.Drawing.Size(121, 24);
             this.cbMeasurement.TabIndex = 15;
+            this.cbMeasurement.SelectedIndexChanged += new System.EventHandler(this.cbMeasurement_SelectedIndexChanged);
             // 
             // nudAmount
             // 

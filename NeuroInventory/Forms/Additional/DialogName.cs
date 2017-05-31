@@ -33,7 +33,7 @@ namespace NeuroInventory
 
             if (String.IsNullOrEmpty(tbName.Text))
             {
-                errorProviderName.SetError(tbName, "Имя не должно быть пустым");
+                errorProviderName.SetError(tbName, Definitions.BLANK_NAME_WARNING_STRING);
                 return false;
             }
             return true;

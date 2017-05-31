@@ -449,8 +449,12 @@ namespace NeuroInventory
             {
                 SQLiteManager.GetInstance().Inventory().Remove(m_ListviewSelectedIndex);
                 ShowTable();
+                m_Listview.SelectedItems.Clear();
             }
-            m_Listview.SelectedItems.Clear();
+            else
+            {
+                MessageBox.Show(Definitions.REMOVE_WARNING_STRING);
+            }
         }
 
         /// <summary>
@@ -466,8 +470,12 @@ namespace NeuroInventory
                 {
                     ShowTable();
                 }
+                m_Listview.SelectedItems.Clear();
             }
-            m_Listview.SelectedItems.Clear();
+            else
+            {
+                MessageBox.Show(Definitions.UPDATE_WARNING_STRING);
+            }
         }
 
         protected override ListView GetListView()

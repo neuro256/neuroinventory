@@ -79,13 +79,13 @@ namespace NeuroInventory
 
             if (String.IsNullOrEmpty(tbName.Text))
             {
-                errorProviderMeasurement.SetError(tbName, "Заполните обязательные поля");
+                errorProviderMeasurement.SetError(tbName, Definitions.VALIDATION_WARNING_STRING);
                 isValid = false;
             }
 
             if(String.IsNullOrEmpty(tbSymbol.Text))
             {
-                errorProviderMeasurement.SetError(tbSymbol, "Заполните обязательные поля");
+                errorProviderMeasurement.SetError(tbSymbol, Definitions.VALIDATION_WARNING_STRING);
                 isValid = false;
             }
             return isValid;
@@ -96,10 +96,13 @@ namespace NeuroInventory
             if(m_Listview.SelectedItems.Count > 0)
             {
                 SQLiteSettingsManager.GetInstance().Measurement().Remove(m_ListviewSelectedIndex);
+                m_Listview.SelectedItems.Clear();
+                ShowTable();
             }
-
-            m_Listview.SelectedItems.Clear();
-            ShowTable();
+            else
+            {
+                MessageBox.Show(Definitions.REMOVE_WARNING_STRING);
+            }
         }
 
         public override void UpdateRecord()
@@ -107,9 +110,13 @@ namespace NeuroInventory
             if(m_Listview.SelectedItems.Count > 0)
             {
                 SQLiteSettingsManager.GetInstance().Measurement().Update(m_SelectedRecordId, nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
+                m_Listview.SelectedItems.Clear();
+                ShowTable();
             }
-            m_Listview.SelectedItems.Clear();
-            ShowTable();
+            else
+            {
+                MessageBox.Show(Definitions.UPDATE_WARNING_STRING);
+            }
         }
 
         protected override ListView GetListView()

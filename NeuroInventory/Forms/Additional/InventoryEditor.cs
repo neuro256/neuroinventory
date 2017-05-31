@@ -105,19 +105,19 @@ namespace NeuroInventory
 
             if(String.IsNullOrEmpty(tbName.Text))
             {
-                errorProviderInventory.SetError(tbName, "Заполните обязательные поля");
+                errorProviderInventory.SetError(tbName, Definitions.VALIDATION_WARNING_STRING);
                 isValid = false;
             }
 
             if(nudAmount.Value == 0)
             {
-                errorProviderInventory.SetError(nudAmount, "Заполните обязательные поля");
+                errorProviderInventory.SetError(nudAmount, Definitions.VALIDATION_WARNING_STRING);
                 isValid = false;
             }
 
             if(nudPrice.Value == 0)
             {
-                errorProviderInventory.SetError(nudPrice, "Заполните обязательные поля");
+                errorProviderInventory.SetError(nudPrice, Definitions.VALIDATION_WARNING_STRING);
                 isValid = false;
             }
 

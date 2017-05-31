@@ -75,7 +75,7 @@ namespace NeuroInventory
 
             if (String.IsNullOrEmpty(tbName.Text))
             {
-                errorProviderProviders.SetError(tbName, "Заполните обязательные поля");
+                errorProviderProviders.SetError(tbName, Definitions.VALIDATION_WARNING_STRING);
                 tbName.Focus();
                 isValid = false;
             }

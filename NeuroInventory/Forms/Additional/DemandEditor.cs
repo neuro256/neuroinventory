@@ -103,10 +103,13 @@ namespace NeuroInventory
             if(m_Listview.SelectedItems.Count > 0)
             {
                 SQLiteManager.GetInstance().Demand().Remove(m_ListviewSelectedIndex);
+                m_Listview.SelectedItems.Clear();
+                ShowTable();
             }
-
-            m_Listview.SelectedItems.Clear();
-            ShowTable();
+            else
+            {
+                MessageBox.Show(Definitions.REMOVE_WARNING_STRING);
+            }
         }
 
         public override void UpdateRecord()
@@ -119,9 +122,13 @@ namespace NeuroInventory
                     return;
 
                 SQLiteManager.GetInstance().Demand().Update(m_SelectedRecordId, m_InventoryId, cbEmployee.SelectedValue, nudAmount.Value, dateTimePicker.Value);
+                m_Listview.SelectedItems.Clear();
+                ShowTable();
             }
-            m_Listview.SelectedItems.Clear();
-            ShowTable();
+            else
+            {
+                MessageBox.Show(Definitions.UPDATE_WARNING_STRING);
+            }
         }
 
         private bool IsValidData()
@@ -130,7 +137,7 @@ namespace NeuroInventory
 
             if (nudAmount.Value == 0)
             {
-                errorProviderDemand.SetError(nudAmount, "Заполните обязательные поля");
+                errorProviderDemand.SetError(nudAmount, Definitions.VALIDATION_WARNING_STRING);
                 cbEmployee.Focus();
                 return false;
             }

@@ -76,8 +76,12 @@ namespace NeuroInventory
             {
                 SQLiteManager.GetInstance().Employees().Remove(m_ListviewSelectedIndex);
                 ShowTable();
+                m_Listview.SelectedItems.Clear();
             }
-            m_Listview.SelectedItems.Clear();
+            else
+            {
+                MessageBox.Show(Definitions.REMOVE_WARNING_STRING);
+            }
         }
 
         /// <summary>
@@ -85,16 +89,20 @@ namespace NeuroInventory
         /// </summary>
         public override void UpdateRecord()
         {
-            if(m_Listview.SelectedItems.Count > 0)
+            if (m_Listview.SelectedItems.Count > 0)
             {
                 EmployeeEditor editor = new EmployeeEditor(m_ListviewSelectedIndex);
                 editor.StartPosition = FormStartPosition.CenterParent;
-                if(editor.ShowDialog() == DialogResult.OK)
+                if (editor.ShowDialog() == DialogResult.OK)
                 {
                     ShowTable();
                 }
+                m_Listview.SelectedItems.Clear();
             }
-            m_Listview.SelectedItems.Clear();
+            else
+            {
+                MessageBox.Show(Definitions.UPDATE_WARNING_STRING);
+            }
         }
 
         protected override ListView GetListView()

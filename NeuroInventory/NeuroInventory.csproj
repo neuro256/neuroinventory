@@ -86,6 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Definitions.cs" />
     <Compile Include="Forms\Additional\MeasurementEditor.cs">
       <SubType>Form</SubType>
     </Compile>

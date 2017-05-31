@@ -22,6 +22,8 @@ namespace NeuroInventory
 
         private void InitTabs()
         {
+            lblInfo.Visible = false; // Сокрытие информационной надписи
+
             // Закрытие открытых вкладок
             if (inventoryTabs != null && inventoryTabs.Values.Count > 0)
             {

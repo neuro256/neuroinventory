@@ -119,5 +119,10 @@ namespace NeuroInventory
         {
             throw new NotImplementedException();
         }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
     }
 }

@@ -22,6 +22,16 @@ namespace NeuroInventory
 
         private void InitTabs()
         {
+            // Закрытие открытых вкладок
+            if (inventoryTabs != null && inventoryTabs.Values.Count > 0)
+            {
+                foreach (IInventoryView tab in inventoryTabs.Values)
+                {
+                    tab.Exit();
+                }
+                inventoryTabs.Clear();
+            }
+
             inventoryTabs = new Dictionary<string, IInventoryView>();
 
             TabMain tabMain = new TabMain();

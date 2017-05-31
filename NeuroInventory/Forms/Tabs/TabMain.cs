@@ -255,7 +255,7 @@ namespace NeuroInventory
         /// <summary>
         /// Заполнение древовидного списка каталогов
         /// </summary>
-        private void PopulateTreeView()
+        public void PopulateTreeView()
         {
             DataSet dataSetCatalogs = SQLiteManager.GetInstance().Catalogs().ReturnDataSet();
 
@@ -589,6 +589,11 @@ namespace NeuroInventory
                 }
                 m_Listview.SelectedItems.Clear();
             }
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
         }
     }
 }

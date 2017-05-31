@@ -251,5 +251,10 @@ namespace NeuroInventory
         public virtual void Clear() { }
         protected virtual ListView GetListView() { return null; }
         protected virtual ContextMenuStrip GetContextMenuStrip() { return null; }
+
+        public virtual void Exit()
+        {
+            Close();
+        }
     }
 }

@@ -10,30 +10,70 @@ namespace NeuroInventory
     {
         struct table2
         {
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table2.date" никогда не используется.
             DateTime date; // Дата составления
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table2.date" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table2.operationTypeCode" никогда не используется.
             string operationTypeCode; // Код вида операции
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table2.operationTypeCode" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table2.senderUnit" никогда не используется.
             string senderUnit; // Отправитель: структурное подразделение
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table2.senderUnit" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table2.senderActivity" никогда не используется.
             string senderActivity; // Отправитель: вид деятельности
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table2.senderActivity" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table2.receiverUnit" никогда не используется.
             string receiverUnit; // Получатель: структурное подразделение
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table2.receiverUnit" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table2.receiverActivity" никогда не используется.
             string receiverActivity; // Получатель: вид деятельности
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table2.receiverActivity" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table2.account" никогда не используется.
             decimal account; // Корреспондирующий счет: счет, субсчет
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table2.account" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table2.accountingCode" никогда не используется.
             string accountingCode; // Корреспондирующий счет: код аналитического учета
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table2.accountingCode" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table2.accountingUnit" никогда не используется.
             string accountingUnit; // Учетная единица выпуска продукции (работ, услуг)
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table2.accountingUnit" никогда не используется.
         }
 
         struct table3
         {
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table3.accountingCode" никогда не используется.
             string accountingCode; // 
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table3.accountingCode" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table3.accountingUnit" никогда не используется.
             string accountingUnit;
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table3.accountingUnit" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table3.name" никогда не используется.
             string name;
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table3.name" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table3.number" никогда не используется.
             string number;
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table3.number" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table3.measurementCode" никогда не используется.
             string measurementCode;
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table3.measurementCode" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table3.measurementName" никогда не используется.
             string measurementName;
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table3.measurementName" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table3.amountDemand" никогда не используется.
             decimal amountDemand;
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table3.amountDemand" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table3.amountDebit" никогда не используется.
             decimal amountDebit;
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table3.amountDebit" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table3.price" никогда не используется.
             decimal price;
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table3.price" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table3.sum" никогда не используется.
             decimal sum;
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table3.sum" никогда не используется.
+#pragma warning disable CS0169 // Поле "SpireDocWrapper.table3.serialNumber" никогда не используется.
             string serialNumber;
+#pragma warning restore CS0169 // Поле "SpireDocWrapper.table3.serialNumber" никогда не используется.
         }
 
         private static string m_TemplateSourcePath = @"templateDemand.doc";

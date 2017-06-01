@@ -12,6 +12,24 @@ namespace NeuroInventory
             m_TableName = "employees";
         }
 
+        public void Filter(string p_Surename, string p_Firstname, string p_Lastname, string p_Post, string p_Department)
+        {
+            string l_Post = !String.IsNullOrEmpty(p_Post) ? $"post like '%{p_Post}%'" : $"(post like '%{p_Post}%' OR post IS NULL)";
+            string l_Department = !String.IsNullOrEmpty(p_Department) ? $"department like '%{p_Department}%'" : $"(department like '%{p_Department}%' OR department IS NULL)";
+
+            m_CommandDataSet = "SELECT * FROM employees WHERE " +
+                $"surename like '%{p_Surename}%' AND " +
+                $"firstname like '%{p_Firstname}%' AND " +
+                $"lastname like '%{p_Lastname}%' AND " +
+                $"{l_Post} AND " +
+                $"{l_Department}"; 
+        }
+
+        public void ClearFilter()
+        {
+            m_CommandDataSet = "SELECT * FROM employees";
+        }
+
         public void Insert(string p_Surename, string p_Firstname, string p_Lastname, string p_Post, string p_Department)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();

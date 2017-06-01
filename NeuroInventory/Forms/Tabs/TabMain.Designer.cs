@@ -93,19 +93,17 @@
             // 
             // tableLayoutPanelLeft
             // 
-            this.tableLayoutPanelLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanelLeft.ColumnCount = 1;
             this.tableLayoutPanelLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelLeft.Controls.Add(this.treeView, 0, 0);
             this.tableLayoutPanelLeft.Controls.Add(this.panelLeftPanelBottom, 0, 1);
+            this.tableLayoutPanelLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelLeft.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelLeft.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelLeft.Name = "tableLayoutPanelLeft";
             this.tableLayoutPanelLeft.RowCount = 2;
-            this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.83477F));
-            this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.165229F));
+            this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tableLayoutPanelLeft.Size = new System.Drawing.Size(250, 650);
             this.tableLayoutPanelLeft.TabIndex = 0;
             // 
@@ -119,7 +117,7 @@
             this.treeView.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.treeView.Name = "treeView";
             this.treeView.SelectedImageIndex = 0;
-            this.treeView.Size = new System.Drawing.Size(250, 585);
+            this.treeView.Size = new System.Drawing.Size(250, 590);
             this.treeView.TabIndex = 0;
             this.treeView.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView_BeforeSelect);
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
@@ -136,10 +134,10 @@
             // 
             this.panelLeftPanelBottom.BackColor = System.Drawing.Color.Silver;
             this.panelLeftPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelLeftPanelBottom.Location = new System.Drawing.Point(0, 590);
+            this.panelLeftPanelBottom.Location = new System.Drawing.Point(0, 595);
             this.panelLeftPanelBottom.Margin = new System.Windows.Forms.Padding(0);
             this.panelLeftPanelBottom.Name = "panelLeftPanelBottom";
-            this.panelLeftPanelBottom.Size = new System.Drawing.Size(250, 60);
+            this.panelLeftPanelBottom.Size = new System.Drawing.Size(250, 55);
             this.panelLeftPanelBottom.TabIndex = 1;
             // 
             // tableLayoutPanelRight
@@ -160,19 +158,17 @@
             // 
             // tableLayoutPanelInventory
             // 
-            this.tableLayoutPanelInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanelInventory.ColumnCount = 1;
             this.tableLayoutPanelInventory.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelInventory.Controls.Add(this.panelMainBottom, 0, 1);
             this.tableLayoutPanelInventory.Controls.Add(this.lwInventory, 0, 0);
+            this.tableLayoutPanelInventory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelInventory.Location = new System.Drawing.Point(20, 0);
             this.tableLayoutPanelInventory.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelInventory.Name = "tableLayoutPanelInventory";
             this.tableLayoutPanelInventory.RowCount = 2;
-            this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.99181F));
-            this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.008189F));
+            this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tableLayoutPanelInventory.Size = new System.Drawing.Size(929, 650);
             this.tableLayoutPanelInventory.TabIndex = 2;
             // 
@@ -183,10 +179,10 @@
             this.panelMainBottom.Controls.Add(this.btnInventoryRemove);
             this.panelMainBottom.Controls.Add(this.btnInventoryAdd);
             this.panelMainBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMainBottom.Location = new System.Drawing.Point(0, 591);
+            this.panelMainBottom.Location = new System.Drawing.Point(0, 595);
             this.panelMainBottom.Margin = new System.Windows.Forms.Padding(0);
             this.panelMainBottom.Name = "panelMainBottom";
-            this.panelMainBottom.Size = new System.Drawing.Size(929, 59);
+            this.panelMainBottom.Size = new System.Drawing.Size(929, 55);
             this.panelMainBottom.TabIndex = 1;
             // 
             // btnInventoryEdit
@@ -195,7 +191,7 @@
             this.btnInventoryEdit.AutoSize = true;
             this.btnInventoryEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnInventoryEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnInventoryEdit.Location = new System.Drawing.Point(396, 14);
+            this.btnInventoryEdit.Location = new System.Drawing.Point(396, 10);
             this.btnInventoryEdit.Name = "btnInventoryEdit";
             this.btnInventoryEdit.Size = new System.Drawing.Size(184, 33);
             this.btnInventoryEdit.TabIndex = 2;
@@ -209,7 +205,7 @@
             this.btnInventoryRemove.AutoSize = true;
             this.btnInventoryRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnInventoryRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnInventoryRemove.Location = new System.Drawing.Point(206, 14);
+            this.btnInventoryRemove.Location = new System.Drawing.Point(206, 10);
             this.btnInventoryRemove.Name = "btnInventoryRemove";
             this.btnInventoryRemove.Size = new System.Drawing.Size(184, 33);
             this.btnInventoryRemove.TabIndex = 1;
@@ -223,7 +219,7 @@
             this.btnInventoryAdd.AutoSize = true;
             this.btnInventoryAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnInventoryAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnInventoryAdd.Location = new System.Drawing.Point(16, 14);
+            this.btnInventoryAdd.Location = new System.Drawing.Point(16, 10);
             this.btnInventoryAdd.Name = "btnInventoryAdd";
             this.btnInventoryAdd.Size = new System.Drawing.Size(184, 33);
             this.btnInventoryAdd.TabIndex = 0;
@@ -257,7 +253,7 @@
             this.lwInventory.Margin = new System.Windows.Forms.Padding(0);
             this.lwInventory.MultiSelect = false;
             this.lwInventory.Name = "lwInventory";
-            this.lwInventory.Size = new System.Drawing.Size(929, 591);
+            this.lwInventory.Size = new System.Drawing.Size(929, 595);
             this.lwInventory.TabIndex = 2;
             this.lwInventory.UseCompatibleStateImageBehavior = false;
             this.lwInventory.View = System.Windows.Forms.View.Details;

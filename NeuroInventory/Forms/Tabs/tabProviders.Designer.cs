@@ -58,8 +58,8 @@
             this.tableLayoutPanelProviders.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelProviders.Name = "tableLayoutPanelProviders";
             this.tableLayoutPanelProviders.RowCount = 2;
-            this.tableLayoutPanelProviders.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.25271F));
-            this.tableLayoutPanelProviders.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.747292F));
+            this.tableLayoutPanelProviders.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelProviders.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tableLayoutPanelProviders.Size = new System.Drawing.Size(1200, 650);
             this.tableLayoutPanelProviders.TabIndex = 0;
             // 
@@ -82,7 +82,7 @@
             this.lwProviders.Margin = new System.Windows.Forms.Padding(0);
             this.lwProviders.MultiSelect = false;
             this.lwProviders.Name = "lwProviders";
-            this.lwProviders.Size = new System.Drawing.Size(1200, 586);
+            this.lwProviders.Size = new System.Drawing.Size(1200, 595);
             this.lwProviders.TabIndex = 0;
             this.lwProviders.UseCompatibleStateImageBehavior = false;
             this.lwProviders.View = System.Windows.Forms.View.Details;
@@ -127,10 +127,10 @@
             this.panelProvidersBottom.Controls.Add(this.btnProviderRemove);
             this.panelProvidersBottom.Controls.Add(this.btnProviderAdd);
             this.panelProvidersBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelProvidersBottom.Location = new System.Drawing.Point(0, 586);
+            this.panelProvidersBottom.Location = new System.Drawing.Point(0, 595);
             this.panelProvidersBottom.Margin = new System.Windows.Forms.Padding(0);
             this.panelProvidersBottom.Name = "panelProvidersBottom";
-            this.panelProvidersBottom.Size = new System.Drawing.Size(1200, 64);
+            this.panelProvidersBottom.Size = new System.Drawing.Size(1200, 55);
             this.panelProvidersBottom.TabIndex = 1;
             // 
             // btnProviderEdit
@@ -138,7 +138,7 @@
             this.btnProviderEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnProviderEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnProviderEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnProviderEdit.Location = new System.Drawing.Point(392, 19);
+            this.btnProviderEdit.Location = new System.Drawing.Point(392, 10);
             this.btnProviderEdit.Name = "btnProviderEdit";
             this.btnProviderEdit.Size = new System.Drawing.Size(184, 33);
             this.btnProviderEdit.TabIndex = 5;
@@ -151,7 +151,7 @@
             this.btnProviderRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnProviderRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnProviderRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnProviderRemove.Location = new System.Drawing.Point(202, 19);
+            this.btnProviderRemove.Location = new System.Drawing.Point(202, 10);
             this.btnProviderRemove.Name = "btnProviderRemove";
             this.btnProviderRemove.Size = new System.Drawing.Size(184, 33);
             this.btnProviderRemove.TabIndex = 4;
@@ -164,7 +164,7 @@
             this.btnProviderAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnProviderAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnProviderAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnProviderAdd.Location = new System.Drawing.Point(12, 19);
+            this.btnProviderAdd.Location = new System.Drawing.Point(12, 10);
             this.btnProviderAdd.Name = "btnProviderAdd";
             this.btnProviderAdd.Size = new System.Drawing.Size(184, 33);
             this.btnProviderAdd.TabIndex = 3;

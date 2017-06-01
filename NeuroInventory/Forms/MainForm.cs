@@ -137,8 +137,7 @@ namespace NeuroInventory
         {
             MeasurementEditor editor = new MeasurementEditor();
             editor.StartPosition = FormStartPosition.CenterParent;
-            //editor.ShowDialog();
-            editor.Show();
+            editor.ShowDialog();
         }
     }
 }

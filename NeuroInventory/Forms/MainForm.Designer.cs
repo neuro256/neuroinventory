@@ -39,13 +39,13 @@
             this.единицыИзмеренияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabInventory = new System.Windows.Forms.TabPage();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.tabProviders = new System.Windows.Forms.TabPage();
             this.tabEmployees = new System.Windows.Forms.TabPage();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.lblInfo = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabInventory.SuspendLayout();
@@ -145,12 +145,25 @@
             this.tabInventory.Text = "ТМЦ";
             this.tabInventory.UseVisualStyleBackColor = true;
             // 
+            // lblInfo
+            // 
+            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblInfo.ForeColor = System.Drawing.Color.DimGray;
+            this.lblInfo.Location = new System.Drawing.Point(311, 304);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(662, 29);
+            this.lblInfo.TabIndex = 0;
+            this.lblInfo.Text = "Для начала работы создайте или откройте базу данных";
+            this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // tabProviders
             // 
             this.tabProviders.Location = new System.Drawing.Point(4, 27);
             this.tabProviders.Margin = new System.Windows.Forms.Padding(0);
             this.tabProviders.Name = "tabProviders";
-            this.tabProviders.Size = new System.Drawing.Size(1305, 549);
+            this.tabProviders.Size = new System.Drawing.Size(1254, 669);
             this.tabProviders.TabIndex = 1;
             this.tabProviders.Text = "Поставщики";
             this.tabProviders.UseVisualStyleBackColor = true;
@@ -160,7 +173,7 @@
             this.tabEmployees.Location = new System.Drawing.Point(4, 27);
             this.tabEmployees.Margin = new System.Windows.Forms.Padding(0);
             this.tabEmployees.Name = "tabEmployees";
-            this.tabEmployees.Size = new System.Drawing.Size(1305, 549);
+            this.tabEmployees.Size = new System.Drawing.Size(1254, 669);
             this.tabEmployees.TabIndex = 2;
             this.tabEmployees.Text = "Работники";
             this.tabEmployees.UseVisualStyleBackColor = true;
@@ -205,21 +218,6 @@
             this.toolStripButton3.Size = new System.Drawing.Size(24, 24);
             this.toolStripButton3.Text = "toolStripButton3";
             // 
-            // lblInfo
-            // 
-            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblInfo.ForeColor = System.Drawing.Color.DimGray;
-            this.lblInfo.Location = new System.Drawing.Point(311, 304);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(668, 29);
-            this.lblInfo.TabIndex = 0;
-            this.lblInfo.Text = "Для начала работы создайте или откройте базы данных";
-            this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -231,6 +229,7 @@
             this.DoubleBuffered = true;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Склад товарно-материальных ценностей";

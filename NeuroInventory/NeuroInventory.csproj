@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -86,7 +87,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Definitions.cs" />
+    <Compile Include="Forms\Additional\EmployeeFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Additional\EmployeeFilter.Designer.cs">
+      <DependentUpon>EmployeeFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Additional\InventoryFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Additional\InventoryFilter.Designer.cs">
+      <DependentUpon>InventoryFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="UtilityClasses\Definitions.cs" />
     <Compile Include="Forms\Additional\MeasurementEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +188,12 @@
       <DependentUpon>TabEmployees.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityClasses\TreeNodeExtension.cs" />
+    <EmbeddedResource Include="Forms\Additional\EmployeeFilter.resx">
+      <DependentUpon>EmployeeFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Additional\InventoryFilter.resx">
+      <DependentUpon>InventoryFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Additional\MeasurementEditor.resx">
       <DependentUpon>MeasurementEditor.cs</DependentUpon>
     </EmbeddedResource>

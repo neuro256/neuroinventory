@@ -35,6 +35,7 @@ namespace NeuroInventory
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanelEmployees = new System.Windows.Forms.TableLayoutPanel();
             this.panelEmployeesBottom = new System.Windows.Forms.Panel();
+            this.btnFilter = new System.Windows.Forms.Button();
             this.btnEmployeeEdit = new System.Windows.Forms.Button();
             this.btnEmployeeRemove = new System.Windows.Forms.Button();
             this.btnEmployeeAdd = new System.Windows.Forms.Button();
@@ -66,8 +67,8 @@ namespace NeuroInventory
             this.tableLayoutPanelEmployees.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelEmployees.Name = "tableLayoutPanelEmployees";
             this.tableLayoutPanelEmployees.RowCount = 2;
-            this.tableLayoutPanelEmployees.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.99181F));
-            this.tableLayoutPanelEmployees.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.008189F));
+            this.tableLayoutPanelEmployees.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelEmployees.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tableLayoutPanelEmployees.Size = new System.Drawing.Size(1200, 650);
             this.tableLayoutPanelEmployees.TabIndex = 1;
             // 
@@ -77,19 +78,33 @@ namespace NeuroInventory
             this.panelEmployeesBottom.Controls.Add(this.btnEmployeeEdit);
             this.panelEmployeesBottom.Controls.Add(this.btnEmployeeRemove);
             this.panelEmployeesBottom.Controls.Add(this.btnEmployeeAdd);
+            this.panelEmployeesBottom.Controls.Add(this.btnFilter);
             this.panelEmployeesBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelEmployeesBottom.Location = new System.Drawing.Point(0, 591);
+            this.panelEmployeesBottom.Location = new System.Drawing.Point(0, 595);
             this.panelEmployeesBottom.Margin = new System.Windows.Forms.Padding(0);
             this.panelEmployeesBottom.Name = "panelEmployeesBottom";
-            this.panelEmployeesBottom.Size = new System.Drawing.Size(1200, 59);
+            this.panelEmployeesBottom.Size = new System.Drawing.Size(1200, 55);
             this.panelEmployeesBottom.TabIndex = 1;
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFilter.Location = new System.Drawing.Point(1004, 10);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(184, 33);
+            this.btnFilter.TabIndex = 3;
+            this.btnFilter.Text = "Фильтр";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // btnEmployeeEdit
             // 
             this.btnEmployeeEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEmployeeEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnEmployeeEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnEmployeeEdit.Location = new System.Drawing.Point(392, 14);
+            this.btnEmployeeEdit.Location = new System.Drawing.Point(392, 10);
             this.btnEmployeeEdit.Name = "btnEmployeeEdit";
             this.btnEmployeeEdit.Size = new System.Drawing.Size(184, 33);
             this.btnEmployeeEdit.TabIndex = 2;
@@ -102,7 +117,7 @@ namespace NeuroInventory
             this.btnEmployeeRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEmployeeRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnEmployeeRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnEmployeeRemove.Location = new System.Drawing.Point(202, 14);
+            this.btnEmployeeRemove.Location = new System.Drawing.Point(202, 10);
             this.btnEmployeeRemove.Name = "btnEmployeeRemove";
             this.btnEmployeeRemove.Size = new System.Drawing.Size(184, 33);
             this.btnEmployeeRemove.TabIndex = 1;
@@ -115,7 +130,7 @@ namespace NeuroInventory
             this.btnEmployeeAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEmployeeAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnEmployeeAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnEmployeeAdd.Location = new System.Drawing.Point(12, 14);
+            this.btnEmployeeAdd.Location = new System.Drawing.Point(12, 10);
             this.btnEmployeeAdd.Name = "btnEmployeeAdd";
             this.btnEmployeeAdd.Size = new System.Drawing.Size(184, 33);
             this.btnEmployeeAdd.TabIndex = 0;
@@ -143,7 +158,7 @@ namespace NeuroInventory
             this.lwEmployees.Margin = new System.Windows.Forms.Padding(0);
             this.lwEmployees.MultiSelect = false;
             this.lwEmployees.Name = "lwEmployees";
-            this.lwEmployees.Size = new System.Drawing.Size(1200, 591);
+            this.lwEmployees.Size = new System.Drawing.Size(1200, 595);
             this.lwEmployees.TabIndex = 2;
             this.lwEmployees.UseCompatibleStateImageBehavior = false;
             this.lwEmployees.View = System.Windows.Forms.View.Details;
@@ -190,25 +205,25 @@ namespace NeuroInventory
             this.editToolStripMenuItem,
             this.removeToolStripMenuItem});
             this.contextMenuStripEmployees.Name = "contextMenuStrip1";
-            this.contextMenuStripEmployees.Size = new System.Drawing.Size(187, 82);
+            this.contextMenuStripEmployees.Size = new System.Drawing.Size(181, 76);
             // 
             // addToolStripMenuItem1
             // 
             this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
-            this.addToolStripMenuItem1.Size = new System.Drawing.Size(186, 26);
+            this.addToolStripMenuItem1.Size = new System.Drawing.Size(180, 24);
             this.addToolStripMenuItem1.Text = "Добавить";
             this.addToolStripMenuItem1.Visible = false;
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.editToolStripMenuItem.Text = "Редактировать";
             // 
             // removeToolStripMenuItem
             // 
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.removeToolStripMenuItem.Text = "Удалить";
             // 
             // TabEmployees
@@ -250,5 +265,6 @@ namespace NeuroInventory
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem1;
+        private Button btnFilter;
     }
 }

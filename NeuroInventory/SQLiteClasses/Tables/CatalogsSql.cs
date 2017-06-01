@@ -10,8 +10,8 @@ namespace NeuroInventory
     {
         public CatalogsSql()
         {
-            m_CommandDataSet = "SELECT * FROM catalogs";
-            m_TableName = "catalogs";
+            CommandDataSet = "SELECT * FROM catalogs";
+            TableName = "catalogs";
         }
 
         public void Insert(int p_Type, int p_ParentId, string p_Name)
@@ -22,14 +22,14 @@ namespace NeuroInventory
             values["parent"] = p_ParentId;
             values["name"] = p_Name;
 
-            SQLiteManager.GetInstance().Insert(m_TableName, values);
+            SQLiteManager.GetInstance().Insert(TableName, values);
         }
 
         public void Remove(int p_Id)
         {
             string l_Where = $"id={p_Id}";
 
-            SQLiteManager.GetInstance().Delete(m_TableName, l_Where);
+            SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }
 
         public void Update(int p_Id, int p_Type, int p_ParentId, string p_Name)
@@ -42,12 +42,12 @@ namespace NeuroInventory
 
             string l_Where = $"id={p_Id}";
 
-            SQLiteManager.GetInstance().Update(m_TableName, values, l_Where);
+            SQLiteManager.GetInstance().Update(TableName, values, l_Where);
         }
 
         public int ReturnLastInsertId()
         {
-            return SQLiteManager.GetInstance().ReturnLastInsertId(m_TableName);
+            return SQLiteManager.GetInstance().ReturnLastInsertId(TableName);
         }
     }
 }

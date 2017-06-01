@@ -1,51 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Windows.Forms;
 
 namespace NeuroInventory
 {
     public partial class InventoryFilter : Form
     {
-        private EditorMode m_EditorMode;
-        private int m_ListviewSelectedIndex;
-        private int m_CatalogId;
-        private object m_SelectedRecordId;
-        private string m_SelectedDocument;
-        private string m_CurrentDocument;
+        public delegate void InventoryFilterHandler();
+        public static event InventoryFilterHandler Filtration;
 
-        public InventoryFilter(int p_CatalogId)
+        public InventoryFilter()
         {
             InitializeComponent();
-            m_EditorMode = EditorMode.INSERT;
-            PopulateRedactorInfo();
+            InitControls();
             cbProviders.Focus();
-            m_CatalogId = p_CatalogId;
         }
 
-        public InventoryFilter(int p_CatalogId, int p_Id)
-        {
-            InitializeComponent();
-            m_EditorMode = EditorMode.UPDATE;
-            m_ListviewSelectedIndex = p_Id;
-            PopulateRedactorInfo();
-            ShowInfo();
-            cbProviders.Focus();
-            m_CatalogId = p_CatalogId;
-        }
-
-        private void PopulateRedactorInfo()
+        private void InitControls()
         {
             // Настройка селектора поставщика
-            cbProviders.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbProviders.DropDownStyle = ComboBoxStyle.DropDown;
             DataSet providersDataSet = SQLiteManager.GetInstance().Providers().ReturnDataSet();
             cbProviders.DataSource = providersDataSet.Tables[0];
             cbProviders.DisplayMember = "name"; // Отображаемое значение (столбец таблицы Поставщики)
             cbProviders.ValueMember = "id"; // Реальное значение (столбец таблицы Поставщики)
 
             // Настройка селектора единицы измерения
-            cbMeasurement.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbMeasurement.DropDownStyle = ComboBoxStyle.DropDown;
             DataSet measurementDataSet = SQLiteSettingsManager.GetInstance().Measurement().ReturnDataSet();
             cbMeasurement.DataSource = measurementDataSet.Tables[0];
             cbMeasurement.DisplayMember = "name";
@@ -57,117 +38,48 @@ namespace NeuroInventory
             dateTimePicker.ShowUpDown = false;
         }
 
-        private void ShowInfo()
+        private void btnFilter_Click(object sender, EventArgs e)
         {
-            DataSet dataSet = SQLiteManager.GetInstance().Inventory().ReturnDataSet();
-            m_SelectedRecordId = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["id"];
-            cbProviders.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["providerId"].ToString();
-            dateTimePicker.Value = Convert.ToDateTime(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["date"]);
-            string fileName = Path.GetFileName(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["invoice"].ToString());
-            tbInvoice.Text = fileName;
-            tbName.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["name"].ToString();
-            tbOKEI.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["OKEIcode"].ToString();
-            cbMeasurement.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["measurement"].ToString();
-            nudAmount.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["amount"]);
-            nudPrice.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["price"]);
+            object l_Provider = chbProvider.Checked ? cbProviders.SelectedValue : null;
+            DateTime l_Date = chbDate.Checked ? dateTimePicker.Value : DateTime.MaxValue;
+            string l_Measurement = chbMeasurement.Checked ? cbMeasurement.Text : String.Empty;
+            object l_Amount = chbAmount.Checked ? (object)nudAmount.Value : null;
+            object l_Price = chbPrice.Checked ? (object)nudPrice.Value : null;
 
-            m_CurrentDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["invoice"].ToString();
-            m_SelectedDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["invoice"].ToString();
+            SQLiteManager.GetInstance().Inventory().Filter(l_Provider, l_Date, tbInvoice.Text, tbName.Text, tbOKEI.Text, l_Measurement, l_Amount, l_Price);
+            Filtration?.Invoke();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void btnClear_Click(object sender, EventArgs e)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            if (!IsValidData())
-            {
-                cbProviders.Focus();
-                return;
-            }
-
-            if(m_EditorMode == EditorMode.UPDATE)
-            {
-                SQLiteManager.GetInstance().Inventory().Update(m_SelectedRecordId, m_CatalogId, cbProviders.SelectedValue, dateTimePicker.Value, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, m_SelectedDocument, m_CurrentDocument);
-            }
-            else
-            {
-                SQLiteManager.GetInstance().Inventory().Insert(m_CatalogId, cbProviders.SelectedValue, dateTimePicker.Value, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, m_SelectedDocument);
-            }
-
-            DialogResult = DialogResult.OK;
-            Close();
-        }
-
-        private bool IsValidData()
-        {
-            bool isValid = true;
-            errorProviderInventory.Clear();
-
-            if(String.IsNullOrEmpty(tbName.Text))
-            {
-                errorProviderInventory.SetError(tbName, Definitions.VALIDATION_WARNING_STRING);
-                isValid = false;
-            }
-
-            if(nudAmount.Value == 0)
-            {
-                errorProviderInventory.SetError(nudAmount, Definitions.VALIDATION_WARNING_STRING);
-                isValid = false;
-            }
-
-            if(nudPrice.Value == 0)
-            {
-                errorProviderInventory.SetError(nudPrice, Definitions.VALIDATION_WARNING_STRING);
-                isValid = false;
-            }
-
-            return isValid;
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.OK;
-            Close();
-        }
-
-        private void btnLink_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            openFileDialog.Filter = "Файлы документов (*.doc; *.docx; *.xls; *.xlsx; *.jpg; *.png; *.bmp; *.pdf; *.djvu)" +
-                "|*.doc; *.docx; *.xls; *.xlsx; *.jpg; *.png; *.bmp; *.pdf; *.djvu |All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                tbInvoice.Text = openFileDialog.SafeFileName;
-                m_SelectedDocument = openFileDialog.FileName;
-            }
-        }
-
-        private void btnCLear_Click(object sender, EventArgs e)
-        {
+            cbProviders.SelectedIndex = 0;
+            dateTimePicker.Value = DateTime.Now;
             tbInvoice.Text = String.Empty;
-            m_SelectedDocument = String.Empty;
+            tbName.Text = String.Empty;
+            tbOKEI.Text = String.Empty;
+            cbMeasurement.SelectedIndex = 0;
+            nudAmount.Value = 0;
+            nudPrice.Value = 0;
+
+            chbProvider.Checked = false;
+            chbDate.Checked = false;
+            chbMeasurement.Checked = false;
+            chbAmount.Checked = false;
+            chbPrice.Checked = false;
+
+            SQLiteManager.GetInstance().Inventory().ClearFilter();
+            Filtration?.Invoke();
         }
 
-        private void cbMeasurement_SelectedIndexChanged(object sender, EventArgs e)
+        private void InventoryFilter_FormClosing(object sender, FormClosingEventArgs e)
         {
-            tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.Text);
-            nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.Text);
+            SQLiteManager.GetInstance().Inventory().ClearFilter();
+            Filtration?.Invoke();
         }
 
-        private void tbName_TextChanged(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
-            errorProviderInventory.Clear();
-        }
-
-        private void nudAmount_ValueChanged(object sender, EventArgs e)
-        {
-            errorProviderInventory.Clear();
-        }
-
-        private void nudPrice_ValueChanged(object sender, EventArgs e)
-        {
-            errorProviderInventory.Clear();
+            Close();
         }
     }
 }

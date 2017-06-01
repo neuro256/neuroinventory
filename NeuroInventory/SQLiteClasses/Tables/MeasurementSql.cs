@@ -19,8 +19,8 @@ namespace NeuroInventory
 
         public MeasurementSql()
         {
-            m_CommandDataSet = "SELECT * FROM measurement";
-            m_TableName = "measurement";
+            CommandDataSet = "SELECT * FROM measurement";
+            TableName = "measurement";
         }
 
         public void Insert(decimal p_OKEIcode, string p_Name, string p_Symbol, decimal p_DecimalPlaces)
@@ -32,7 +32,7 @@ namespace NeuroInventory
             values["symbol"] = p_Symbol;
             values["decimalPlaces"] = p_DecimalPlaces;
 
-            SQLiteSettingsManager.GetInstance().Insert(m_TableName, values);
+            SQLiteSettingsManager.GetInstance().Insert(TableName, values);
         }
 
         public void Update(object p_Id, decimal p_OKEIcode, string p_Name, string p_Symbol, decimal p_DecimalPlaces)
@@ -46,7 +46,7 @@ namespace NeuroInventory
 
             string l_Where = $"id={p_Id}";
 
-            SQLiteSettingsManager.GetInstance().Update(m_TableName, values, l_Where);
+            SQLiteSettingsManager.GetInstance().Update(TableName, values, l_Where);
         }
 
         public void Remove(int p_ListviewSelectedItemIndex)
@@ -55,7 +55,7 @@ namespace NeuroInventory
             object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
             string l_Where = $"id={selectedRecordId}";
 
-            SQLiteSettingsManager.GetInstance().Delete(m_TableName, l_Where);
+            SQLiteSettingsManager.GetInstance().Delete(TableName, l_Where);
         }
 
         /// <summary>
@@ -66,14 +66,14 @@ namespace NeuroInventory
         {
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
-                using (SQLiteDataAdapter myAdapter = new SQLiteDataAdapter(m_CommandDataSet, connection))
+                using (SQLiteDataAdapter myAdapter = new SQLiteDataAdapter(CommandDataSet, connection))
                 {
                     using (DataSet dataSet = new DataSet())
                     {
                         connection.Open();
                         try
                         {
-                            myAdapter.Fill(dataSet, m_TableName);
+                            myAdapter.Fill(dataSet, TableName);
                         }
                         catch (Exception exc)
                         {

@@ -11,9 +11,9 @@ namespace NeuroInventory
     public abstract class TableSql<T> where T : new()
     {
         private static T instance;
-        protected string m_CommandDataSet; //Команда для создания набора
+        private string m_CommandDataSet; //Команда для создания набора
         protected string m_ConnectionStr;//Строка для подключения 
-        protected string m_TableName; //Название таблицы
+        private string m_TableName; //Название таблицы
         private string m_TargetPath; // Путь к сохраняемым файлам
 
         static public T GetInstance()
@@ -34,9 +34,13 @@ namespace NeuroInventory
             }
         }
 
+        protected string CommandDataSet { get => m_CommandDataSet; set => m_CommandDataSet = value; }
+        protected string TableName { get => m_TableName; set => m_TableName = value; }
+        public string TargetPath { get => m_TargetPath; set => m_TargetPath = value; }
+
         public void SetTargetPath(string p_Path)
         {
-            m_TargetPath = Path.Combine(Path.GetDirectoryName(SQLiteManager.GetInstance().databaseName), Path.GetFileNameWithoutExtension(SQLiteManager.GetInstance().databaseName), p_Path);
+            TargetPath = Path.Combine(Path.GetDirectoryName(SQLiteManager.GetInstance().databaseName), Path.GetFileNameWithoutExtension(SQLiteManager.GetInstance().databaseName), p_Path);
         }
 
         /// <summary>
@@ -47,14 +51,14 @@ namespace NeuroInventory
         {
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
-                using (SQLiteDataAdapter myAdapter = new SQLiteDataAdapter(m_CommandDataSet, connection))
+                using (SQLiteDataAdapter myAdapter = new SQLiteDataAdapter(CommandDataSet, connection))
                 {
                     using (DataSet dataSet = new DataSet())
                     {
                         connection.Open();
                         try
                         {
-                            myAdapter.Fill(dataSet, m_TableName);
+                            myAdapter.Fill(dataSet, TableName);
                         }
                         catch (Exception exc)
                         {
@@ -82,7 +86,7 @@ namespace NeuroInventory
                         connection.Open();
                         try
                         {
-                            myAdapter.Fill(dataSet, m_TableName);
+                            myAdapter.Fill(dataSet, TableName);
                         }
                         catch (Exception exc)
                         {
@@ -117,10 +121,10 @@ namespace NeuroInventory
         {
             string fileName = Path.GetFileName(p_FileName);
             string sourceFile = p_FileName;
-            string destFile = Path.Combine(m_TargetPath, fileName);
-            if (!Directory.Exists(m_TargetPath))
+            string destFile = Path.Combine(TargetPath, fileName);
+            if (!Directory.Exists(TargetPath))
             {
-                Directory.CreateDirectory(m_TargetPath);
+                Directory.CreateDirectory(TargetPath);
             }
             File.Copy(sourceFile, destFile, true);
             return destFile;

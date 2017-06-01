@@ -8,8 +8,8 @@ namespace NeuroInventory
     {
         public ProvidersSql()
         {
-            m_CommandDataSet = "SELECT * FROM providers";
-            m_TableName = "providers";
+            CommandDataSet = "SELECT * FROM providers";
+            TableName = "providers";
             SetTargetPath(@"documents\providers");
         }
 
@@ -20,7 +20,7 @@ namespace NeuroInventory
             string l_Mail = !String.IsNullOrEmpty(p_Mail) ? $"mail like '%{p_Mail}%'" : $"(mail like '%{p_Mail}%' OR mail IS NULL)";
             string l_Document = !String.IsNullOrEmpty(p_Document) ? $"document like '%{p_Document}%'" : $"(document like '%{p_Document}%' OR document IS NULL)";
 
-            m_CommandDataSet = "SELECT * FROM providers WHERE " +
+            CommandDataSet = "SELECT * FROM providers WHERE " +
                 $"name like '%{p_Name}%' AND " +
                 $"{l_Address} AND " +
                 $"{l_Phone} AND " +
@@ -30,7 +30,7 @@ namespace NeuroInventory
 
         public void ClearFilter()
         {
-            m_CommandDataSet = "SELECT * FROM providers";
+            CommandDataSet = "SELECT * FROM providers";
         }
 
         public void Insert(string p_Name, string p_Address, string p_Phone, string p_Mail, string p_Document)
@@ -52,7 +52,7 @@ namespace NeuroInventory
                 values["document"] = DBNull.Value;
             }
 
-            SQLiteManager.GetInstance().Insert(m_TableName, values);
+            SQLiteManager.GetInstance().Insert(TableName, values);
         }
 
         public void Update(object p_Id, string p_Name, string p_Address, string p_Phone, string p_Mail, string p_SelectedDocument, string p_CurrentDocument)
@@ -88,7 +88,7 @@ namespace NeuroInventory
 
             string l_Where = $"id={p_Id}";
 
-            SQLiteManager.GetInstance().Update(m_TableName, values, l_Where);
+            SQLiteManager.GetInstance().Update(TableName, values, l_Where);
         }
 
         public void Remove(int p_ListviewSelectedItemIndex)
@@ -99,7 +99,7 @@ namespace NeuroInventory
             DeleteFile(currentDocument);
             string l_Where = $"id={selectedRecordId}";
 
-            SQLiteManager.GetInstance().Delete(m_TableName, l_Where);
+            SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }
     }
 }

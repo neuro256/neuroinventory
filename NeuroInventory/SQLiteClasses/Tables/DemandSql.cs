@@ -8,14 +8,14 @@ namespace NeuroInventory
     {
         public DemandSql()
         {
-            m_CommandDataSet = String.Empty;
-            m_TableName = "demand";
+            CommandDataSet = String.Empty;
+            TableName = "demand";
             SetTargetPath(@"documents\demand");
         }
 
         public void SetCommandDataSet(int p_InventoryId)
         {
-            m_CommandDataSet = "SELECT id, " +
+            CommandDataSet = "SELECT id, " +
                 "(SELECT surename || ' ' || firstname || ' ' || lastname" +
                 " FROM employees WHERE employees.id = demand.employeeId) AS employeeId, " +
                 "amount, " +
@@ -29,7 +29,7 @@ namespace NeuroInventory
             object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
             string l_Where = $"id={selectedRecordId}";
 
-            SQLiteManager.GetInstance().Delete(m_TableName, l_Where);
+            SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }
 
         public void Insert(int p_InventoryId, object p_EmployeeId, decimal p_Amount, DateTime p_Date)
@@ -41,7 +41,7 @@ namespace NeuroInventory
             values["amount"] = p_Amount;
             values["date"] = p_Date;
 
-            SQLiteManager.GetInstance().Insert(m_TableName, values);
+            SQLiteManager.GetInstance().Insert(TableName, values);
         }
 
         public void Update(object p_Id, int p_InventoryId, object p_EmployeeId, decimal p_Amount, DateTime p_Date)
@@ -55,7 +55,7 @@ namespace NeuroInventory
 
             string l_Where = $"id={p_Id}";
 
-            SQLiteManager.GetInstance().Update(m_TableName, values, l_Where);
+            SQLiteManager.GetInstance().Update(TableName, values, l_Where);
         }
     }
 }

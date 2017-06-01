@@ -45,6 +45,9 @@ namespace NeuroInventory
             }
         }
 
+        private InventoryFilter m_Filter;
+        public InventoryFilter Filter { get => m_Filter; set => m_Filter = value; }
+
         private TreeViewTag m_SelectedInventory = null;
         public delegate void SelectedInventory(string sender);
         public event SelectedInventory OnSelectedInventory;
@@ -369,6 +372,13 @@ namespace NeuroInventory
 
             this.Name = "tabInventory";
             this.Text = "tabInventory";
+
+            InventoryFilter.Filtration += InventoryFilter_Filtration;
+        }
+
+        private void InventoryFilter_Filtration()
+        {
+            ShowTable();
         }
 
         public override void InitListView()
@@ -602,6 +612,23 @@ namespace NeuroInventory
         public override void Exit()
         {
             base.Exit();
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            if (Filter == null || !Filter.Created)
+            {
+                Filter = new InventoryFilter();
+                Filter.Dock = DockStyle.Top;
+                Filter.TopLevel = false;
+                Filter.MdiParent = MdiParent;
+                Filter.Parent = Parent;
+                Filter.Show();
+            }
+            else if (Filter != null && Filter.IsHandleCreated)
+            {
+                Filter.Close();
+            }
         }
     }
 }

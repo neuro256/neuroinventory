@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 
 namespace NeuroInventory
 {
     public class InventorySql : TableSql<InventorySql>
     {
+        private string m_CommandDataSetNotFiltered;
+        private int m_SelectedCatalogId;
+
+        private string CommandDataSetNotFiltered { get => m_CommandDataSetNotFiltered; set => m_CommandDataSetNotFiltered = value; }
+        private int SelectedCatalogId { get => m_SelectedCatalogId; set => m_SelectedCatalogId = value; }
+
         public InventorySql()
         {
-            m_CommandDataSet = "SELECT inventory.id, " +
+            CommandDataSet = "SELECT inventory.id, " +
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
@@ -16,17 +23,18 @@ namespace NeuroInventory
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
                 "inventory.amount," +
-                "CAST (inventory.price AS REAL) / 100 AS price," +
-                "CAST ((inventory.amount * inventory.price) AS REAL) AS sum," +
+                "(CAST (inventory.price AS REAL) / 100) AS price," +
+                "(inventory.amount * price) / 100 AS sum," +
                 "(inventory.amount - SUM(debit.amount)) AS balance " +
                 "FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id GROUP BY inventory.id;";
-            m_TableName = "inventory";
+            CommandDataSetNotFiltered = CommandDataSet;
+            TableName = "inventory";
             SetTargetPath(@"documents\inventory");
         }
 
         public void SetCommandDataSet(int p_Id)
         {
-            m_CommandDataSet = "SELECT inventory.id, " +
+            CommandDataSet = "SELECT inventory.id, " +
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
@@ -34,10 +42,53 @@ namespace NeuroInventory
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
                 "inventory.amount," +
-                "CAST (inventory.price AS REAL) / 100 AS price," +
-                "CAST ((inventory.amount * inventory.price) AS REAL) AS sum," +
+                "(CAST (inventory.price AS REAL) / 100) AS price," +
+                "(inventory.amount * price) / 100 AS sum," +
                 "(inventory.amount - SUM(debit.amount)) AS balance " +
                 $"FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id WHERE inventory.catalogId={p_Id} GROUP BY inventory.id;";
+            CommandDataSetNotFiltered = CommandDataSet;
+            SelectedCatalogId = p_Id;
+        }
+
+        public void Filter(object p_Provider, DateTime p_Date, string p_Invoice, string p_Name, string p_OKEIcode, string p_Measurement, object p_Amount, object p_Price)
+        {
+            string l_DateStr = p_Date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+
+            string l_Name = $" AND inventory.name like '%{p_Name}%'";
+            string l_Provider = p_Provider != null ? $" AND inventory.providerId={p_Provider}" : String.Empty;
+            string l_Date = !DateTime.Equals(p_Date, DateTime.MaxValue) ? $" AND inventory.date=Datetime('{l_DateStr}')" : String.Empty;
+            string l_Invoice = !String.IsNullOrEmpty(p_Invoice) ? $" AND invoice LIKE '%{p_Invoice}%'" : $" AND (invoice LIKE '%{p_Invoice}%' OR invoice IS NULL)";
+            string l_OKEIcode = !String.IsNullOrEmpty(p_OKEIcode) ? $" AND OKEIcode LIKE '%{p_OKEIcode}%'" : $" AND (OKEIcode LIKE '%{p_OKEIcode}%' OR OKEIcode IS NULL)";
+            string l_Measurement = !String.IsNullOrEmpty(p_Measurement) ? $" AND measurement LIKE '%{p_Measurement}%'" : $" AND (measurement LIKE '%{p_Measurement}%' OR measurement IS NULL)";
+            string l_Amount = p_Amount != null ? $" AND (inventory.amount={p_Amount})" : String.Empty;
+            string l_Price = p_Price != null ? $" AND (inventory.price={p_Price})" : String.Empty;
+
+            CommandDataSet = "SELECT inventory.id, " +
+                "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
+                "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
+                "inventory.invoice," +
+                "inventory.name," +
+                "inventory.OKEIcode," +
+                "inventory.measurement," +
+                "inventory.amount," +
+                "(CAST (inventory.price AS REAL) / 100) AS price," +
+                "(inventory.amount * price) / 100 AS sum," +
+                "(inventory.amount - SUM(debit.amount)) AS balance " +
+                $"FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id WHERE inventory.catalogId={SelectedCatalogId}" +
+                l_Name +
+                l_Provider +
+                l_Date +
+                l_Invoice + 
+                l_OKEIcode +
+                l_Measurement +
+                l_Amount +
+                l_Price + 
+                $" GROUP BY inventory.id;";
+        }
+
+        public void ClearFilter()
+        {
+            CommandDataSet = CommandDataSetNotFiltered;
         }
 
         public void Remove(int p_ListviewSelectedItemIndex)
@@ -46,7 +97,7 @@ namespace NeuroInventory
             object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
             string l_Where = $"id={selectedRecordId}";
 
-            SQLiteManager.GetInstance().Delete(m_TableName, l_Where);
+            SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }
 
         public void Update(object p_Id, int p_CatalogId, object p_Provider, DateTime p_Date, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument, string p_CurrentDocument)
@@ -86,7 +137,7 @@ namespace NeuroInventory
 
             string l_Where = $"id={p_Id}";
 
-            SQLiteManager.GetInstance().Update(m_TableName, values, l_Where);
+            SQLiteManager.GetInstance().Update(TableName, values, l_Where);
         }
 
         public void Insert(int p_CatalogId, object p_Provider, DateTime p_Date, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument)
@@ -112,7 +163,7 @@ namespace NeuroInventory
                 values["invoice"] = DBNull.Value;
             }
 
-            SQLiteManager.GetInstance().Insert(m_TableName, values);
+            SQLiteManager.GetInstance().Insert(TableName, values);
         }
     }
 }

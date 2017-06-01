@@ -59,6 +59,7 @@
             this.btnCollapseExpand = new System.Windows.Forms.Button();
             this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStripCatalogs = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnFilter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -175,6 +176,7 @@
             // panelMainBottom
             // 
             this.panelMainBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelMainBottom.Controls.Add(this.btnFilter);
             this.panelMainBottom.Controls.Add(this.btnInventoryEdit);
             this.panelMainBottom.Controls.Add(this.btnInventoryRemove);
             this.panelMainBottom.Controls.Add(this.btnInventoryAdd);
@@ -351,6 +353,20 @@
             this.contextMenuStripCatalogs.Name = "contextMenuStripCatalogs";
             this.contextMenuStripCatalogs.Size = new System.Drawing.Size(67, 4);
             // 
+            // btnFilter
+            // 
+            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter.AutoSize = true;
+            this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFilter.Location = new System.Drawing.Point(733, 10);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(184, 33);
+            this.btnFilter.TabIndex = 3;
+            this.btnFilter.Text = "Фильтр";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
             // TabMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -408,5 +424,6 @@
         private System.Windows.Forms.Panel panelLeftPanelBottom;
         private System.Windows.Forms.ImageList imageListMain;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripCatalogs;
+        private System.Windows.Forms.Button btnFilter;
     }
 }

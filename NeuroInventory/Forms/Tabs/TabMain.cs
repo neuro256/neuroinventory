@@ -530,19 +530,19 @@ namespace NeuroInventory
                     }
                     // Добавление элемента столбца Отпущен
                     ListViewItem.ListViewSubItem subitemReleased = new ListViewItem.ListViewSubItem();
-                    subitemReleased.BackColor = Color.LawnGreen;
+                    subitemReleased.BackColor = Color.LightBlue;
                     subitemReleased.Text = "Отпущен";
                     subitemReleased.Name = "released";
                     m_Listview.Items[i].SubItems.Add(subitemReleased);
                     // Добавление элемента столбца Требование
                     ListViewItem.ListViewSubItem subitemDemand = new ListViewItem.ListViewSubItem();
-                    subitemDemand.BackColor = Color.DarkSeaGreen;
+                    subitemDemand.BackColor = Color.LightSalmon;
                     subitemDemand.Text = "Требование";
                     subitemDemand.Name = "demand";
                     m_Listview.Items[i].SubItems.Add(subitemDemand);
                     // Добавление элемента столбца Cписать
                     ListViewItem.ListViewSubItem subitemDebit = new ListViewItem.ListViewSubItem();
-                    subitemDebit.BackColor = Color.DarkSlateGray;
+                    subitemDebit.BackColor = Color.LightSeaGreen;
                     subitemDebit.Text = "Списать";
                     subitemDebit.Name = "debit";
                     m_Listview.Items[i].SubItems.Add(subitemDebit);

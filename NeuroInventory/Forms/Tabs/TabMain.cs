@@ -405,7 +405,6 @@ namespace NeuroInventory
 
         private void btnCollapseExpand_Click(object sender, EventArgs e)
         {
-            splitContainerMain.SuspendLayout();
             if (!splitContainerMain.Panel1Collapsed)
             {
                 splitContainerMain.Panel1Collapsed = true;

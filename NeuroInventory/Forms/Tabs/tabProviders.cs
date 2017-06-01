@@ -8,6 +8,10 @@ namespace NeuroInventory
 {
     public partial class TabProviders : InventoryView
     {
+        private ProvidersFilter m_Filter;
+
+        public ProvidersFilter Filter { get => m_Filter; set => m_Filter = value; }
+
         public TabProviders()
         {
             InitializeComponent();
@@ -23,6 +27,13 @@ namespace NeuroInventory
 
             this.Name = "tabEmployees";
             this.Text = "tabEmployees";
+
+            ProvidersFilter.Filtration += ProvidersFilter_Filtration;
+        }
+
+        private void ProvidersFilter_Filtration()
+        {
+            ShowTable();
         }
 
         public override void InitListView()
@@ -131,6 +142,23 @@ namespace NeuroInventory
         public override void Exit()
         {
             base.Exit();
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            if (Filter == null || !Filter.Created)
+            {
+                Filter = new ProvidersFilter();
+                Filter.Dock = DockStyle.Top;
+                Filter.TopLevel = false;
+                Filter.MdiParent = MdiParent;
+                Filter.Parent = Parent;
+                Filter.Show();
+            }
+            else if (Filter != null && Filter.IsHandleCreated)
+            {
+                Filter.Close();
+            }
         }
     }
 }

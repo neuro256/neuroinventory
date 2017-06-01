@@ -43,6 +43,7 @@
             this.btnProviderRemove = new System.Windows.Forms.Button();
             this.btnProviderAdd = new System.Windows.Forms.Button();
             this.contextMenuStripProviders = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnFilter = new System.Windows.Forms.Button();
             this.tableLayoutPanelProviders.SuspendLayout();
             this.panelProvidersBottom.SuspendLayout();
             this.SuspendLayout();
@@ -123,6 +124,7 @@
             // panelProvidersBottom
             // 
             this.panelProvidersBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelProvidersBottom.Controls.Add(this.btnFilter);
             this.panelProvidersBottom.Controls.Add(this.btnProviderEdit);
             this.panelProvidersBottom.Controls.Add(this.btnProviderRemove);
             this.panelProvidersBottom.Controls.Add(this.btnProviderAdd);
@@ -178,6 +180,19 @@
             this.contextMenuStripProviders.Name = "contextMenuStripProviders";
             this.contextMenuStripProviders.Size = new System.Drawing.Size(67, 4);
             // 
+            // btnFilter
+            // 
+            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFilter.Location = new System.Drawing.Point(1004, 10);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(184, 33);
+            this.btnFilter.TabIndex = 6;
+            this.btnFilter.Text = "Фильтр";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
             // TabProviders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -212,5 +227,6 @@
         private System.Windows.Forms.Button btnProviderRemove;
         private System.Windows.Forms.Button btnProviderAdd;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripProviders;
+        private System.Windows.Forms.Button btnFilter;
     }
 }

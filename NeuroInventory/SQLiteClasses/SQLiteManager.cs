@@ -28,19 +28,57 @@ namespace NeuroInventory
         {
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
+                connection.SetPassword("76cT8dbr");
                 connection.Open();
 
                 using (SQLiteTransaction transaction = connection.BeginTransaction())
                 {
                     using (SQLiteCommand command = new SQLiteCommand(connection))
                     {
-                        // Создание таблицы "Каталоги"
+                        // Создание таблицы "Единицы измерения"
                         command.CommandText = "CREATE TABLE IF NOT EXISTS measurement (" +
                             "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                             "codeOKEI TEXT NOT NULL, " +
                             "name TEXT NOT NULL, " +
                             "symbol TEXT NOT NULL, " +
                             "decimalPlaces INTEGER NOT NULL);";
+                        command.ExecuteNonQuery();
+
+                        // Заполнение таблицы "Единицы измерения
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('003', 'Миллиметр', 'мм', 0);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('004', 'Сантиметр', 'см', 2);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('006', 'Метр', 'м', 2);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('050', 'Квадратный миллиметр', 'мм2', 0);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('051', 'Квадратный сантиметр', 'см2', 2);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('055', 'Квадратный метр', 'м2', 2);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('110', 'Кубический миллиметр', 'мм3', 0);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('111', 'Кубический сантиметр', 'см3', 2);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('112', 'Литр', 'л', 3);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('163', 'Грамм', 'г', 0);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('166', 'Килограмм', 'кг', 3);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('168', 'Тонна', 'т', 3);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('018', 'Погонный метр', 'пог.м', 2);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('643', 'Единица', 'ед', 0);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('778', 'Упаковка', 'упак', 0);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('796', 'Штука', 'шт', 0);";
+                        command.ExecuteNonQuery();
+                        command.CommandText = "INSERT INTO measurement (codeOKEI, name, symbol, decimalPlaces) VALUES ('625', 'Лист', 'л.', 0);";
+                        command.ExecuteNonQuery();
 
                         command.ExecuteNonQuery();
 
@@ -62,6 +100,20 @@ namespace NeuroInventory
                 connection.Close();
             }
         }
+
+        public new int ReturnLastInsertId(string p_TableName)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                using (SQLiteCommand command = new SQLiteCommand($"SELECT MAX(id) FROM {p_TableName};", connection))
+                {
+                    connection.Open();
+                    object lastInsertId = command.ExecuteScalar();
+                    connection.Close();
+                    return Convert.ToInt32(lastInsertId);
+                }
+            }
+        }
     }
 
     public class SQLiteManager
@@ -72,6 +124,7 @@ namespace NeuroInventory
         private static readonly SQLiteManager instance = new SQLiteManager();
 
         private string m_DatabaseName = null;
+        private string m_Password = null;
 
 
         #region INTERFACE
@@ -92,9 +145,11 @@ namespace NeuroInventory
         {
             get
             {
-                return $"DataSource={databaseName}; foreign keys=true; Version=3;";
+                return $"DataSource={databaseName}; foreign keys=true; Version=3; Password={Password};";
             }
         }
+
+        public string Password { get => m_Password; set => m_Password = value; }
 
         public static SQLiteManager GetInstance()
         {

@@ -16,6 +16,7 @@ namespace NeuroInventory
         {
             // База данных с настройками программы и данными о пользователе
             SQLiteSettingsManager.GetInstance().databaseName = @"settings.db";
+            SQLiteSettingsManager.GetInstance().Password = "76cT8dbr";
             // Если файл бд не найден, создаем ее заново
             if (!File.Exists(SQLiteSettingsManager.GetInstance().databaseName) || !SQLiteSettingsManager.GetInstance().TestConnection())
             {

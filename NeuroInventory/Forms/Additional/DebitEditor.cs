@@ -9,16 +9,21 @@ namespace NeuroInventory
 {
     public partial class DebitEditor : InventoryView
     {
+        public delegate void DebitEventHandler();
+        public static event DebitEventHandler CheckDebit;
+
         private int m_InventoryId;
         private object m_SelectedRecordId;
+        private string m_InventoryName;
 
-        public DebitEditor(int p_InventoryId, int p_AmountDecimalPlaces)
+        public DebitEditor(string p_InventoryName, int p_InventoryId, int p_AmountDecimalPlaces)
         {
             InitializeComponent();
             SQLiteManager.GetInstance().Debit().SetCommandDataSet(p_InventoryId);
             InitForm();
             InitListView();
             InitContextMenuStrip();
+            m_InventoryName = p_InventoryName;
             PopulateRedactorInfo();
             ShowTable();
             m_ListviewSelectedIndex = 0;
@@ -54,6 +59,8 @@ namespace NeuroInventory
 
         private void PopulateRedactorInfo()
         {
+            tbName.Text = m_InventoryName;
+
             // Настройка селектора количества отпущенного тмц
             nudAmount.ThousandsSeparator = true;
             nudAmount.DecimalPlaces = 2;
@@ -200,6 +207,11 @@ namespace NeuroInventory
         private void nudAmount_ValueChanged(object sender, EventArgs e)
         {
             errorProviderDebit.Clear();
+        }
+
+        private void DebitEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CheckDebit?.Invoke();
         }
     }
 }

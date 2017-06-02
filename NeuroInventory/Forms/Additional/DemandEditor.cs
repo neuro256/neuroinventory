@@ -10,14 +10,16 @@ namespace NeuroInventory
     {
         private int m_InventoryId;
         private object m_SelectedRecordId;
+        private string m_InventoryName;
 
-        public DemandEditor(int p_InventoryId, int p_AmountDecimalPlaces)
+        public DemandEditor(string p_InventoryName, int p_InventoryId, int p_AmountDecimalPlaces)
         {
             InitializeComponent();
             SQLiteManager.GetInstance().Demand().SetCommandDataSet(p_InventoryId);
             InitForm();
             InitListView();
             InitContextMenuStrip();
+            m_InventoryName = p_InventoryName;
             PopulateRedactorInfo();
             ShowTable();
             m_ListviewSelectedIndex = 0;
@@ -54,6 +56,8 @@ namespace NeuroInventory
 
         private void PopulateRedactorInfo()
         {
+            tbName.Text = m_InventoryName;
+
             // Настройка селектора сотрудника
             cbEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
             DataSet employeeDataSet = SQLiteManager.GetInstance().Employees().ReturnDataSet("SELECT id, (surename || ' ' || firstname || ' ' || lastname) AS name FROM employees");

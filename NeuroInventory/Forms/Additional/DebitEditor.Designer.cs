@@ -47,12 +47,16 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.contextMenuStripDebit = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.errorProviderDebit = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblName = new System.Windows.Forms.Label();
+            this.tbName = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDebit)).BeginInit();
             this.splitContainerDebit.Panel1.SuspendLayout();
             this.splitContainerDebit.Panel2.SuspendLayout();
             this.splitContainerDebit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderDebit)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblAmount
@@ -61,7 +65,7 @@
             this.lblAmount.AutoSize = true;
             this.lblAmount.BackColor = System.Drawing.Color.LightCyan;
             this.lblAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblAmount.Location = new System.Drawing.Point(36, 32);
+            this.lblAmount.Location = new System.Drawing.Point(47, 53);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(188, 17);
             this.lblAmount.TabIndex = 2;
@@ -72,7 +76,7 @@
             this.nudAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nudAmount.DecimalPlaces = 3;
             this.nudAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.nudAmount.Location = new System.Drawing.Point(230, 30);
+            this.nudAmount.Location = new System.Drawing.Point(241, 51);
             this.nudAmount.Maximum = new decimal(new int[] {
             99999999,
             0,
@@ -89,7 +93,7 @@
             this.lblDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblDate.Location = new System.Drawing.Point(182, 79);
+            this.lblDate.Location = new System.Drawing.Point(193, 98);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(42, 17);
             this.lblDate.TabIndex = 4;
@@ -100,7 +104,7 @@
             this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker.Location = new System.Drawing.Point(230, 74);
+            this.dateTimePicker.Location = new System.Drawing.Point(241, 93);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(175, 22);
             this.dateTimePicker.TabIndex = 2;
@@ -148,6 +152,7 @@
             // 
             this.splitContainerDebit.Panel2.AutoScroll = true;
             this.splitContainerDebit.Panel2.BackColor = System.Drawing.Color.Silver;
+            this.splitContainerDebit.Panel2.Controls.Add(this.panel1);
             this.splitContainerDebit.Panel2.Controls.Add(this.btnOpenFolder);
             this.splitContainerDebit.Panel2.Controls.Add(this.btnCreateDebit);
             this.splitContainerDebit.Panel2.Controls.Add(this.btnEdit);
@@ -212,7 +217,7 @@
             this.btnOpenFolder.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnOpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOpenFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(150, 164);
+            this.btnOpenFolder.Location = new System.Drawing.Point(161, 192);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(255, 29);
             this.btnOpenFolder.TabIndex = 4;
@@ -226,7 +231,7 @@
             this.btnCreateDebit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnCreateDebit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCreateDebit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnCreateDebit.Location = new System.Drawing.Point(150, 118);
+            this.btnCreateDebit.Location = new System.Drawing.Point(161, 146);
             this.btnCreateDebit.Name = "btnCreateDebit";
             this.btnCreateDebit.Size = new System.Drawing.Size(255, 29);
             this.btnCreateDebit.TabIndex = 3;
@@ -260,6 +265,38 @@
             this.errorProviderDebit.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProviderDebit.ContainerControl = this;
             // 
+            // lblName
+            // 
+            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(67, 15);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(108, 17);
+            this.lblName.TabIndex = 8;
+            this.lblName.Text = "Название тмц: ";
+            // 
+            // tbName
+            // 
+            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbName.BackColor = System.Drawing.Color.Silver;
+            this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbName.Location = new System.Drawing.Point(181, 12);
+            this.tbName.Name = "tbName";
+            this.tbName.ReadOnly = true;
+            this.tbName.Size = new System.Drawing.Size(235, 22);
+            this.tbName.TabIndex = 9;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.lblName);
+            this.panel1.Controls.Add(this.tbName);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(428, 45);
+            this.panel1.TabIndex = 10;
+            // 
             // DebitEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -273,6 +310,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Редактор списаний";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DebitEditor_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             this.splitContainerDebit.Panel1.ResumeLayout(false);
             this.splitContainerDebit.Panel2.ResumeLayout(false);
@@ -280,6 +318,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDebit)).EndInit();
             this.splitContainerDebit.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderDebit)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -303,5 +343,8 @@
         private System.Windows.Forms.ColumnHeader chDebit;
         private System.Windows.Forms.Button btnOpenFolder;
         private System.Windows.Forms.ErrorProvider errorProviderDebit;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.Panel panel1;
     }
 }

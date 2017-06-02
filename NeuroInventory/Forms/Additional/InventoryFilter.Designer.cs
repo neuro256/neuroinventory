@@ -204,6 +204,7 @@
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker.TabIndex = 17;
+            this.dateTimePicker.CloseUp += new System.EventHandler(this.dateTimePicker_CloseUp);
             // 
             // cbMeasurement
             // 
@@ -212,6 +213,8 @@
             this.cbMeasurement.Name = "cbMeasurement";
             this.cbMeasurement.Size = new System.Drawing.Size(200, 24);
             this.cbMeasurement.TabIndex = 18;
+            this.cbMeasurement.SelectedIndexChanged += new System.EventHandler(this.cbMeasurement_SelectedIndexChanged);
+            this.cbMeasurement.DropDownClosed += new System.EventHandler(this.cbMeasurement_DropDownClosed);
             // 
             // nudAmount
             // 
@@ -224,6 +227,7 @@
             this.nudAmount.Name = "nudAmount";
             this.nudAmount.Size = new System.Drawing.Size(200, 22);
             this.nudAmount.TabIndex = 19;
+            this.nudAmount.ValueChanged += new System.EventHandler(this.nudAmount_ValueChanged);
             // 
             // nudPrice
             // 
@@ -236,6 +240,7 @@
             this.nudPrice.Name = "nudPrice";
             this.nudPrice.Size = new System.Drawing.Size(200, 22);
             this.nudPrice.TabIndex = 20;
+            this.nudPrice.ValueChanged += new System.EventHandler(this.nudPrice_ValueChanged);
             // 
             // chbProvider
             // 

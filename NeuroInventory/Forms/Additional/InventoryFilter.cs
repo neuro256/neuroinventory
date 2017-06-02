@@ -86,5 +86,31 @@ namespace NeuroInventory
         {
             chbProvider.Checked = true;
         }
+
+        private void dateTimePicker_CloseUp(object sender, EventArgs e)
+        {
+            chbDate.Checked = true;
+        }
+
+        private void cbMeasurement_DropDownClosed(object sender, EventArgs e)
+        {
+            chbMeasurement.Checked = true;
+        }
+
+        private void nudAmount_ValueChanged(object sender, EventArgs e)
+        {
+            chbAmount.Checked = true;
+        }
+
+        private void nudPrice_ValueChanged(object sender, EventArgs e)
+        {
+            chbPrice.Checked = true;
+        }
+
+        private void cbMeasurement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.Text);
+            nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.Text);
+        }
     }
 }

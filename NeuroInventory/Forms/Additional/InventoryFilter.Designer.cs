@@ -196,6 +196,7 @@
             this.cbProviders.Name = "cbProviders";
             this.cbProviders.Size = new System.Drawing.Size(200, 24);
             this.cbProviders.TabIndex = 16;
+            this.cbProviders.DropDownClosed += new System.EventHandler(this.cbProviders_DropDownClosed);
             // 
             // dateTimePicker
             // 

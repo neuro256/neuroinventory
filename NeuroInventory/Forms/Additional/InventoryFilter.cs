@@ -81,5 +81,10 @@ namespace NeuroInventory
         {
             Close();
         }
+
+        private void cbProviders_DropDownClosed(object sender, EventArgs e)
+        {
+            chbProvider.Checked = true;
+        }
     }
 }

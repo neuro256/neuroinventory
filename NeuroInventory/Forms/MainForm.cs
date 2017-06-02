@@ -12,12 +12,6 @@ namespace NeuroInventory
         public MainForm()
         {
             InitializeComponent();
-            SQLiteSettingsManager.GetInstance().databaseName = @"settings.db";
-            if(!File.Exists(SQLiteSettingsManager.GetInstance().databaseName) || !SQLiteSettingsManager.GetInstance().TestConnection())
-            {
-                SQLiteSettingsManager.GetInstance().CreateDatabase(SQLiteSettingsManager.GetInstance().databaseName);
-                SQLiteSettingsManager.GetInstance().CreateTables();
-            }
         }
 
         private void InitTabs()
@@ -138,6 +132,13 @@ namespace NeuroInventory
             MeasurementEditor editor = new MeasurementEditor();
             editor.StartPosition = FormStartPosition.CenterParent;
             editor.ShowDialog();
+        }
+
+        private void настройкиПользователяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AuthenticationEditor authEditor = new AuthenticationEditor();
+            authEditor.StartPosition = FormStartPosition.CenterParent;
+            authEditor.ShowDialog();
         }
     }
 }

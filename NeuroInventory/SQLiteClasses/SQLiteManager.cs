@@ -19,6 +19,11 @@ namespace NeuroInventory
             return MeasurementSql.GetInstance();
         }
 
+        public UserSql User()
+        {
+            return UserSql.GetInstance();
+        }
+
         public override void CreateTables()
         {
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
@@ -37,6 +42,17 @@ namespace NeuroInventory
                             "symbol TEXT NOT NULL, " +
                             "decimalPlaces INTEGER NOT NULL);";
 
+                        command.ExecuteNonQuery();
+
+                        // Создание таблицы "Пользователь"
+                        command.CommandText = "CREATE TABLE IF NOT EXISTS user (" +
+                            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                            "login TEXT NOT NULL, " +
+                            "password TEXT NOT NULL);";
+                        command.ExecuteNonQuery();
+
+                        // Вставка суперпользователя
+                        command.CommandText = "INSERT INTO user (login, password) VALUES ('admin', 'admin');";
                         command.ExecuteNonQuery();
 
                         transaction.Commit();

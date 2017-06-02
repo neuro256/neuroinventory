@@ -46,6 +46,7 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.настройкиПользователяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabInventory.SuspendLayout();
@@ -106,7 +107,8 @@
             // viewMenu
             // 
             this.viewMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.единицыИзмеренияToolStripMenuItem});
+            this.единицыИзмеренияToolStripMenuItem,
+            this.настройкиПользователяToolStripMenuItem});
             this.viewMenu.Name = "viewMenu";
             this.viewMenu.Size = new System.Drawing.Size(102, 24);
             this.viewMenu.Text = "&Параметры";
@@ -114,7 +116,7 @@
             // единицыИзмеренияToolStripMenuItem
             // 
             this.единицыИзмеренияToolStripMenuItem.Name = "единицыИзмеренияToolStripMenuItem";
-            this.единицыИзмеренияToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
+            this.единицыИзмеренияToolStripMenuItem.Size = new System.Drawing.Size(259, 26);
             this.единицыИзмеренияToolStripMenuItem.Text = "Единицы измерения";
             this.единицыИзмеренияToolStripMenuItem.Click += new System.EventHandler(this.единицыИзмеренияToolStripMenuItem_Click);
             // 
@@ -218,6 +220,13 @@
             this.toolStripButton3.Size = new System.Drawing.Size(24, 24);
             this.toolStripButton3.Text = "toolStripButton3";
             // 
+            // настройкиПользователяToolStripMenuItem
+            // 
+            this.настройкиПользователяToolStripMenuItem.Name = "настройкиПользователяToolStripMenuItem";
+            this.настройкиПользователяToolStripMenuItem.Size = new System.Drawing.Size(259, 26);
+            this.настройкиПользователяToolStripMenuItem.Text = "Настройки пользователя";
+            this.настройкиПользователяToolStripMenuItem.Click += new System.EventHandler(this.настройкиПользователяToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -264,6 +273,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripMenuItem единицыИзмеренияToolStripMenuItem;
         private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.ToolStripMenuItem настройкиПользователяToolStripMenuItem;
     }
 }
 

@@ -12,5 +12,6 @@ namespace NeuroInventory
         public static string UPDATE_WARNING_STRING = "Сначала выберите запись которую хотите изменить";
         public static string VALIDATION_WARNING_STRING = "Сначала заполните обязательные поля";
         public static string BLANK_NAME_WARNING_STRING = "Имя не должно быть пустым";
+        public static string INVALID_LOGIN_OR_PASSWORD = "Логин и/или пароль введены неверно";
     }
 }

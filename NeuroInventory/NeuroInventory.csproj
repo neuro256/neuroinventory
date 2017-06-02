@@ -87,6 +87,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Additional\AuthenticationEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Additional\AuthenticationEditor.Designer.cs">
+      <DependentUpon>AuthenticationEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Additional\AuthenticationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Additional\AuthenticationWindow.Designer.cs">
+      <DependentUpon>AuthenticationWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Additional\InventoryFilter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +118,7 @@
       <DependentUpon>EmployeeFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="SQLiteClasses\Tables\UserSql.cs" />
     <Compile Include="UtilityClasses\Definitions.cs" />
     <Compile Include="Forms\Additional\MeasurementEditor.cs">
       <SubType>Form</SubType>
@@ -194,6 +207,12 @@
       <DependentUpon>TabEmployees.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityClasses\TreeNodeExtension.cs" />
+    <EmbeddedResource Include="Forms\Additional\AuthenticationEditor.resx">
+      <DependentUpon>AuthenticationEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Additional\AuthenticationWindow.resx">
+      <DependentUpon>AuthenticationWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Additional\InventoryFilter.resx">
       <DependentUpon>InventoryFilter.cs</DependentUpon>
     </EmbeddedResource>

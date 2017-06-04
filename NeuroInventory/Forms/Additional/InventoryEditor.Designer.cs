@@ -155,6 +155,7 @@
             this.tbInvoice.ReadOnly = true;
             this.tbInvoice.Size = new System.Drawing.Size(267, 22);
             this.tbInvoice.TabIndex = 10;
+            this.tbInvoice.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbInvoice_MouseClick);
             // 
             // btnLink
             // 

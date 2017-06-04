@@ -133,6 +133,7 @@
             this.tbDocument.ReadOnly = true;
             this.tbDocument.Size = new System.Drawing.Size(292, 22);
             this.tbDocument.TabIndex = 12;
+            this.tbDocument.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbDocument_MouseClick);
             // 
             // btnLink
             // 

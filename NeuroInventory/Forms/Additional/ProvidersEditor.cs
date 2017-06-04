@@ -144,5 +144,13 @@ namespace NeuroInventory
         {
             errorProviderProviders.Clear();
         }
+
+        private void tbDocument_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(File.Exists(m_SelectedDocument))
+            {
+                System.Diagnostics.Process.Start("explorer.exe", "/select, \"" + m_SelectedDocument + "\"");
+            }
+        }
     }
 }

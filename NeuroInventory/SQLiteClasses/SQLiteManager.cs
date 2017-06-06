@@ -476,5 +476,10 @@ namespace NeuroInventory
         {
             return CatalogsSql.GetInstance();
         }
+
+        public DemandReportSql DemandReport()
+        {
+            return DemandReportSql.GetInstance();
+        }
     }
 }

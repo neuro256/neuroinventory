@@ -199,7 +199,9 @@ namespace NeuroInventory
 
         private void btnCreateDebit_Click(object sender, EventArgs e)
         {
-
+            DemandReport report = new DemandReport();
+            report.StartPosition = FormStartPosition.CenterParent;
+            report.ShowDialog();
         }
 
         private void btnOpenFolder_Click(object sender, EventArgs e)

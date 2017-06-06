@@ -87,10 +87,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\Additional\AuthenticationEditor.cs">
+    <Compile Include="DemandReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Additional\AuthenticationEditor.Designer.cs">
+    <Compile Include="DemandReport.Designer.cs">
+      <DependentUpon>DemandReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Editors\AuthenticationEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Editors\AuthenticationEditor.Designer.cs">
       <DependentUpon>AuthenticationEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Additional\AuthenticationWindow.cs">
@@ -99,31 +105,32 @@
     <Compile Include="Forms\Additional\AuthenticationWindow.Designer.cs">
       <DependentUpon>AuthenticationWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Additional\InventoryFilter.cs">
+    <Compile Include="Forms\Filters\InventoryFilter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Additional\InventoryFilter.Designer.cs">
+    <Compile Include="Forms\Filters\InventoryFilter.Designer.cs">
       <DependentUpon>InventoryFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Additional\ProvidersFilter.cs">
+    <Compile Include="Forms\Filters\ProvidersFilter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Additional\ProvidersFilter.Designer.cs">
+    <Compile Include="Forms\Filters\ProvidersFilter.Designer.cs">
       <DependentUpon>ProvidersFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Additional\EmployeeFilter.cs">
+    <Compile Include="Forms\Filters\EmployeeFilter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Additional\EmployeeFilter.Designer.cs">
+    <Compile Include="Forms\Filters\EmployeeFilter.Designer.cs">
       <DependentUpon>EmployeeFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="SQLiteClasses\Tables\DemandReportSql.cs" />
     <Compile Include="SQLiteClasses\Tables\UserSql.cs" />
     <Compile Include="UtilityClasses\Definitions.cs" />
-    <Compile Include="Forms\Additional\MeasurementEditor.cs">
+    <Compile Include="Forms\Editors\MeasurementEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Additional\MeasurementEditor.Designer.cs">
+    <Compile Include="Forms\Editors\MeasurementEditor.Designer.cs">
       <DependentUpon>MeasurementEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="SpireDocWrapper.cs" />
@@ -135,17 +142,17 @@
       <DependentUpon>DialogName.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLiteClasses\Tables\DebitSql.cs" />
-    <Compile Include="Forms\Additional\DebitEditor.cs">
+    <Compile Include="Forms\Editors\DebitEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Additional\DebitEditor.Designer.cs">
+    <Compile Include="Forms\Editors\DebitEditor.Designer.cs">
       <DependentUpon>DebitEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLiteClasses\Tables\DemandSql.cs" />
-    <Compile Include="Forms\Additional\DemandEditor.cs">
+    <Compile Include="Forms\Editors\DemandEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Additional\DemandEditor.Designer.cs">
+    <Compile Include="Forms\Editors\DemandEditor.Designer.cs">
       <DependentUpon>DemandEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\InventoryView.cs">
@@ -163,16 +170,16 @@
     <Compile Include="Forms\Tabs\TabProviders.Designer.cs">
       <DependentUpon>TabProviders.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Additional\ProvidersEditor.cs">
+    <Compile Include="Forms\Editors\ProvidersEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Additional\ProvidersEditor.Designer.cs">
+    <Compile Include="Forms\Editors\ProvidersEditor.Designer.cs">
       <DependentUpon>ProvidersEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Additional\InventoryEditor.cs">
+    <Compile Include="Forms\Editors\InventoryEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Additional\InventoryEditor.Designer.cs">
+    <Compile Include="Forms\Editors\InventoryEditor.Designer.cs">
       <DependentUpon>InventoryEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLiteClasses\Tables\InventorySql.cs" />
@@ -182,10 +189,10 @@
     <Compile Include="UtilityClasses\ColHeader.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\Additional\EmployeeEditor.cs">
+    <Compile Include="Forms\Editors\EmployeeEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Additional\EmployeeEditor.Designer.cs">
+    <Compile Include="Forms\Editors\EmployeeEditor.Designer.cs">
       <DependentUpon>EmployeeEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityClasses\SortWrapper.cs" />
@@ -207,34 +214,37 @@
       <DependentUpon>TabEmployees.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityClasses\TreeNodeExtension.cs" />
-    <EmbeddedResource Include="Forms\Additional\AuthenticationEditor.resx">
+    <EmbeddedResource Include="DemandReport.resx">
+      <DependentUpon>DemandReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Editors\AuthenticationEditor.resx">
       <DependentUpon>AuthenticationEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Additional\AuthenticationWindow.resx">
       <DependentUpon>AuthenticationWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Additional\InventoryFilter.resx">
+    <EmbeddedResource Include="Forms\Filters\InventoryFilter.resx">
       <DependentUpon>InventoryFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Additional\ProvidersFilter.resx">
+    <EmbeddedResource Include="Forms\Filters\ProvidersFilter.resx">
       <DependentUpon>ProvidersFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Additional\EmployeeFilter.resx">
+    <EmbeddedResource Include="Forms\Filters\EmployeeFilter.resx">
       <DependentUpon>EmployeeFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Additional\MeasurementEditor.resx">
+    <EmbeddedResource Include="Forms\Editors\MeasurementEditor.resx">
       <DependentUpon>MeasurementEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Additional\DialogName.resx">
       <DependentUpon>DialogName.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Additional\DebitEditor.resx">
+    <EmbeddedResource Include="Forms\Editors\DebitEditor.resx">
       <DependentUpon>DebitEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Additional\DemandEditor.resx">
+    <EmbeddedResource Include="Forms\Editors\DemandEditor.resx">
       <DependentUpon>DemandEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Additional\EmployeeEditor.resx">
+    <EmbeddedResource Include="Forms\Editors\EmployeeEditor.resx">
       <DependentUpon>EmployeeEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
@@ -243,7 +253,7 @@
     <EmbeddedResource Include="Forms\Tabs\TabMain.resx">
       <DependentUpon>TabMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Additional\InventoryEditor.resx">
+    <EmbeddedResource Include="Forms\Editors\InventoryEditor.resx">
       <DependentUpon>InventoryEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -261,7 +271,7 @@
     <EmbeddedResource Include="Forms\Tabs\TabProviders.resx">
       <DependentUpon>TabProviders.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Additional\ProvidersEditor.resx">
+    <EmbeddedResource Include="Forms\Editors\ProvidersEditor.resx">
       <DependentUpon>ProvidersEditor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

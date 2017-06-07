@@ -143,5 +143,13 @@ namespace NeuroInventory
             authEditor.StartPosition = FormStartPosition.CenterParent;
             authEditor.ShowDialog();
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Вы действительно хотите выйти?", "Выход из программы", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

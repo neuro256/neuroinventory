@@ -136,6 +136,11 @@
             this.lwDemandReport.TabIndex = 0;
             this.lwDemandReport.UseCompatibleStateImageBehavior = false;
             this.lwDemandReport.View = System.Windows.Forms.View.Details;
+            this.lwDemandReport.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lwDemandReport_ColumnClick);
+            this.lwDemandReport.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lwDemandReport_DrawColumnHeader);
+            this.lwDemandReport.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lwDemandReport_DrawItem);
+            this.lwDemandReport.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lwDemandReport_DrawSubItem);
+            this.lwDemandReport.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lwDemandReport_ItemSelectionChanged);
             // 
             // panelDemandReportBottom
             // 
@@ -154,6 +159,7 @@
             this.btnReport.TabIndex = 0;
             this.btnReport.Text = "Сформировать отчет";
             this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // DemandReport
             // 
@@ -161,7 +167,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 560);
             this.Controls.Add(this.tableLayoutPanelDemandReport);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "DemandReport";
             this.Text = "Формирование требования-накладной";
             this.Shown += new System.EventHandler(this.DemandReport_Shown);

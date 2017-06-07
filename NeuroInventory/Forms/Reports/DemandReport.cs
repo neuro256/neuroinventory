@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,6 +8,10 @@ namespace NeuroInventory
 {
     public partial class DemandReport : Form
     {
+        private int m_lwSelectedIndex;
+
+        public int LwSelectedIndex { get => m_lwSelectedIndex; set => m_lwSelectedIndex = value; }
+
         public DemandReport()
         {
             InitializeComponent();
@@ -33,8 +38,10 @@ namespace NeuroInventory
             lwDemandReport.FullRowSelect = true;
             lwDemandReport.Scrollable = true;
             lwDemandReport.GridLines = true;
+            lwDemandReport.CheckBoxes = true;
+            lwDemandReport.OwnerDraw = true;
+            lwDemandReport.HeaderStyle = ColumnHeaderStyle.Clickable;
             lwDemandReport.Columns.Clear();
-            lwDemandReport.Columns.Add(new ColHeader("ID", 50, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwDemandReport.Columns.Add(new ColHeader("№", 50, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwDemandReport.Columns.Add(new ColHeader("Наименование", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwDemandReport.Columns.Add(new ColHeader("Код ОКЕИ", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
@@ -43,6 +50,7 @@ namespace NeuroInventory
             lwDemandReport.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwDemandReport.Columns.Add(new ColHeader("Сумма", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwDemandReport.Columns.Add(new ColHeader("Затребовал", 250, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwDemandReport.Columns.Add(new ColHeader("Должность", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwDemandReport.Columns.Add(new ColHeader("Количество", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwDemandReport.Columns.Add(new ColHeader("Дата", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
         }
@@ -57,10 +65,14 @@ namespace NeuroInventory
                 //Заполняем список
                 lwDemandReport.BeginUpdate();
                 lwDemandReport.Items.Clear();
+                lwDemandReport.Columns[0].Tag = false;
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
-                    lwDemandReport.Items.Add(dataSet.Tables[0].Rows[i]["id"].ToString());
-                    lwDemandReport.Items[i].SubItems.Add((i + 1).ToString());
+                    ListViewItem newItem = new ListViewItem();
+                    newItem.Text = (i + 1).ToString();
+                    newItem.Name = dataSet.Tables[0].Rows[i]["id"].ToString();
+                    newItem.Tag = dataSet.Tables[0].Rows[i]["id"];
+                    lwDemandReport.Items.Add(newItem);
                     for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
                     {
                         ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
@@ -69,7 +81,6 @@ namespace NeuroInventory
                         lwDemandReport.Items[i].SubItems.Add(subitem);
                     }
                 }
-
                 lwDemandReport.EndUpdate();
             }
             catch(Exception ex)
@@ -103,6 +114,136 @@ namespace NeuroInventory
         private void cbCatalog_SelectionChangeCommitted(object sender, EventArgs e)
         {
             ShowTable();
+        }
+
+        private void lwDemandReport_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                e.DrawBackground();
+                bool value = false;
+                try
+                {
+                    value = Convert.ToBoolean(e.Header.Tag);
+                }
+                catch (Exception)
+                {
+                }
+                CheckBoxRenderer.DrawCheckBox(e.Graphics,
+                    new Point(e.Bounds.Left + 4, e.Bounds.Top + 4),
+                    value ? System.Windows.Forms.VisualStyles.CheckBoxState.CheckedNormal :
+                    System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal);
+            }
+            else
+            {
+                e.DrawDefault = true;
+            }
+        }
+
+        private void lwDemandReport_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+
+        private void lwDemandReport_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+
+        private void lwDemandReport_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == 0)
+            {
+                bool value = false;
+                try
+                {
+                    value = Convert.ToBoolean(this.lwDemandReport.Columns[e.Column].Tag);
+                }
+                catch (Exception)
+                {
+                }
+                this.lwDemandReport.Columns[e.Column].Tag = !value;
+                foreach (ListViewItem item in this.lwDemandReport.Items)
+                    item.Checked = !value;
+
+                this.lwDemandReport.Invalidate();
+            }
+            else
+            {
+                // Create an instance of the ColHeader class.
+                ColHeader clickedCol = (ColHeader)lwDemandReport.Columns[e.Column];
+
+                // Set the ascending property to sort in the opposite order.
+                clickedCol.ascending = !clickedCol.ascending;
+
+                // Get the number of items in the list.
+                int numItems = lwDemandReport.Items.Count;
+
+                // Turn off display while data is repoplulated.
+                lwDemandReport.BeginUpdate();
+
+                // Populate an ArrayList with a SortWrapper of each list item.
+                ArrayList SortArray = new ArrayList();
+                for (int i = 0; i < numItems; i++)
+                {
+                    SortArray.Add(new SortWrapper(lwDemandReport.Items[i], e.Column));
+                }
+
+                // Sort the elements in the ArrayList using a new instance of the SortComparer
+                // class. The parameters are the starting index, the length of the range to sort,
+                // and the IComparer implementation to use for comparing elements. Note that
+                // the IComparer implementation (SortComparer) requires the sort
+                // direction for its constructor; true if ascending, othwise false.
+                SortArray.Sort(0, SortArray.Count, new SortWrapper.SortComparer(clickedCol.ascending));
+
+                // Clear the list, and repopulate with the sorted items.
+                lwDemandReport.Items.Clear();
+                for (int i = 0; i < numItems; i++)
+                    lwDemandReport.Items.Add(((SortWrapper)SortArray[i]).sortItem);
+
+                // Turn display back on.
+                lwDemandReport.EndUpdate();
+            }
+        }
+
+        private void lwDemandReport_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            try
+            {
+                // При выборе строки событие ItemSelectionChanged возникает два раза:
+                // первый раз, когда выделенная в данный момент строка теряут фокус,
+                // второй - когда строка, в которой сделан щелчок, получает фокус.
+                // Нас интересует строка, которая получает фокус.
+                if (e.IsSelected)
+                {
+                    LwSelectedIndex = e.ItemIndex;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Создание отчета (требование-накладная)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            ListView.CheckedListViewItemCollection checkedItems = lwDemandReport.CheckedItems;
+            if (checkedItems.Count > 0)
+            {
+                SpireDocWrapper spireDoc = new SpireDocWrapper();
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Файлы документов (*.doc)|*.doc";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    spireDoc.CreateReport(saveFileDialog.FileName);
+                }
+            }
         }
     }
 }

@@ -113,12 +113,12 @@ namespace NeuroInventory
         {
             SQLiteManager.GetInstance().databaseName = p_FileName;
             if (SQLiteManager.GetInstance().TestConnection())
-                MessageBox.Show("База данных успешно сохранена");
+                MessageBox.Show(Definitions.DB_SUCCESSFULLY_SAVED);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Вы действительно хотите выйти?", "Выход из программы", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(Definitions.APPLICATION_CLOSE_QUESTION, Definitions.APPLICATION_CLOSE_DIALOG_CAPTION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Close();
             }
@@ -146,7 +146,7 @@ namespace NeuroInventory
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Вы действительно хотите выйти?", "Выход из программы", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBox.Show(Definitions.APPLICATION_CLOSE_QUESTION, Definitions.APPLICATION_CLOSE_DIALOG_CAPTION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 e.Cancel = true;
             }

@@ -13,5 +13,8 @@ namespace NeuroInventory
         public static string VALIDATION_WARNING_STRING = "Сначала заполните обязательные поля";
         public static string BLANK_NAME_WARNING_STRING = "Имя не должно быть пустым";
         public static string INVALID_LOGIN_OR_PASSWORD = "Логин и/или пароль введены неверно";
+        public static string APPLICATION_CLOSE_QUESTION = "Вы действительно хотите выйти?";
+        public static string APPLICATION_CLOSE_DIALOG_CAPTION = "Выход из программы";
+        public static string DB_SUCCESSFULLY_SAVED = "База данных успешно сохранена";
     }
 }

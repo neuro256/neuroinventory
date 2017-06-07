@@ -96,9 +96,6 @@ namespace NeuroInventory
                     {
                         m_Listview.Items[i].SubItems.Add(dataSet.Tables[0].Rows[i][j].ToString());
                     }
-                    // Example coloring
-                    //m_Listview.Items[i].SubItems[5].BackColor = System.Drawing.Color.GreenYellow;
-                    //m_Listview.Items[i].UseItemStyleForSubItems = false;
                 }
                 m_Listview.EndUpdate();
             }

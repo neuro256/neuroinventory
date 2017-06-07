@@ -285,7 +285,7 @@ namespace NeuroInventory
                         command.ExecuteNonQuery();
 
                         // Вставка корневого каталого 
-                        command.CommandText = "INSERT INTO catalogs (type, parent, name) VALUES (0, null, 'Каталоги');";
+                        command.CommandText = "INSERT INTO catalogs (type, parent, name) VALUES (0, null, 'Корневой каталог');";
                         command.ExecuteNonQuery();
 
                         // Создание индекса

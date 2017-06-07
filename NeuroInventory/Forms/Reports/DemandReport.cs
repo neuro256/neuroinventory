@@ -16,13 +16,15 @@ namespace NeuroInventory
         private void InitControls()
         {
             cbEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbEmployee.Sorted = false;
             DataSet employeeDataSet = SQLiteManager.GetInstance().Employees().ReturnDataSet("SELECT id, (surename || ' ' || firstname || ' ' || lastname) AS name FROM employees");
             cbEmployee.DataSource = employeeDataSet.Tables[0];
             cbEmployee.DisplayMember = "name";
             cbEmployee.ValueMember = "id";
 
             cbCatalog.DropDownStyle = ComboBoxStyle.DropDownList;
-            DataSet catalogDataSet = SQLiteManager.GetInstance().Catalogs().ReturnDataSet();
+            cbCatalog.Sorted = false;
+            DataSet catalogDataSet = SQLiteManager.GetInstance().Catalogs().ReturnDataSet("SELECT id, name FROM catalogs");
             cbCatalog.DataSource = catalogDataSet.Tables[0];
             cbCatalog.DisplayMember = "name";
             cbCatalog.ValueMember = "id";
@@ -34,19 +36,15 @@ namespace NeuroInventory
             lwDemandReport.Columns.Clear();
             lwDemandReport.Columns.Add(new ColHeader("ID", 50, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwDemandReport.Columns.Add(new ColHeader("№", 50, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Поставщик", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Дата поступления", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Накладная", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwDemandReport.Columns.Add(new ColHeader("Наименование", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Код ОКЕИ", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwDemandReport.Columns.Add(new ColHeader("Код ОКЕИ", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwDemandReport.Columns.Add(new ColHeader("Единица измерения", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Количество", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwDemandReport.Columns.Add(new ColHeader("Количество", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwDemandReport.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwDemandReport.Columns.Add(new ColHeader("Сумма", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Отпущен", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Требование", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Списать", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Остаток", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwDemandReport.Columns.Add(new ColHeader("Затребовал", 250, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwDemandReport.Columns.Add(new ColHeader("Количество", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwDemandReport.Columns.Add(new ColHeader("Дата", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
         }
 
         private void ShowTable()
@@ -63,42 +61,15 @@ namespace NeuroInventory
                 {
                     lwDemandReport.Items.Add(dataSet.Tables[0].Rows[i]["id"].ToString());
                     lwDemandReport.Items[i].SubItems.Add((i + 1).ToString());
-                    for (int j = 1; j < dataSet.Tables[0].Columns.Count - 1; j++)
+                    for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
                     {
                         ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
                         subitem.Text = dataSet.Tables[0].Rows[i][j].ToString();
                         subitem.Name = dataSet.Tables[0].Columns[j].ToString();
                         lwDemandReport.Items[i].SubItems.Add(subitem);
                     }
-                    // Добавление элемента столбца Отпущен
-                    ListViewItem.ListViewSubItem subitemReleased = new ListViewItem.ListViewSubItem();
-                    subitemReleased.BackColor = Color.LightBlue;
-                    subitemReleased.Text = "Отпущен";
-                    subitemReleased.Name = "released";
-                    lwDemandReport.Items[i].SubItems.Add(subitemReleased);
-                    // Добавление элемента столбца Требование
-                    ListViewItem.ListViewSubItem subitemDemand = new ListViewItem.ListViewSubItem();
-                    subitemDemand.BackColor = Color.LightSalmon;
-                    subitemDemand.Text = "Требование";
-                    subitemDemand.Name = "demand";
-                    lwDemandReport.Items[i].SubItems.Add(subitemDemand);
-                    // Добавление элемента столбца Cписать
-                    ListViewItem.ListViewSubItem subitemDebit = new ListViewItem.ListViewSubItem();
-                    subitemDebit.BackColor = Color.LightSeaGreen;
-                    subitemDebit.Text = "Списать";
-                    subitemDebit.Name = "debit";
-                    lwDemandReport.Items[i].SubItems.Add(subitemDebit);
-                    // Добавление столбца "Остаток"
-                    ListViewItem.ListViewSubItem subitemBalance = new ListViewItem.ListViewSubItem();
-                    object balance = dataSet.Tables[0].Rows[i][dataSet.Tables[0].Columns.Count - 1];
-                    if (!Equals(balance, DBNull.Value) && Convert.ToDecimal(balance) <= 0)
-                        subitemBalance.BackColor = Color.Red;
-                    subitemBalance.Text = balance.ToString();
-                    subitemBalance.Name = "balance";
-                    lwDemandReport.Items[i].SubItems.Add(subitemBalance);
-
-                    lwDemandReport.Items[i].UseItemStyleForSubItems = false;
                 }
+
                 lwDemandReport.EndUpdate();
             }
             catch(Exception ex)
@@ -120,6 +91,16 @@ namespace NeuroInventory
         }
 
         private void DemandReport_Shown(object sender, EventArgs e)
+        {
+            ShowTable();
+        }
+
+        private void cbEmployee_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            ShowTable();
+        }
+
+        private void cbCatalog_SelectionChangeCommitted(object sender, EventArgs e)
         {
             ShowTable();
         }

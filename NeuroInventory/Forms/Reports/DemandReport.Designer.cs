@@ -30,12 +30,12 @@
         {
             this.tableLayoutPanelDemandReport = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbCatalog = new System.Windows.Forms.ComboBox();
+            this.lblCatalog = new System.Windows.Forms.Label();
+            this.lblEmployee = new System.Windows.Forms.Label();
+            this.cbEmployee = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lwDemandReport = new System.Windows.Forms.ListView();
-            this.cbEmployee = new System.Windows.Forms.ComboBox();
-            this.lblEmployee = new System.Windows.Forms.Label();
-            this.lblCatalog = new System.Windows.Forms.Label();
-            this.cbCatalog = new System.Windows.Forms.ComboBox();
             this.panelDemandReportBottom = new System.Windows.Forms.Panel();
             this.btnReport = new System.Windows.Forms.Button();
             this.tableLayoutPanelDemandReport.SuspendLayout();
@@ -77,6 +77,44 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Выбор сотрудника и каталога";
             // 
+            // cbCatalog
+            // 
+            this.cbCatalog.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCatalog.FormattingEnabled = true;
+            this.cbCatalog.Location = new System.Drawing.Point(87, 73);
+            this.cbCatalog.Name = "cbCatalog";
+            this.cbCatalog.Size = new System.Drawing.Size(260, 24);
+            this.cbCatalog.TabIndex = 3;
+            this.cbCatalog.SelectionChangeCommitted += new System.EventHandler(this.cbCatalog_SelectionChangeCommitted);
+            // 
+            // lblCatalog
+            // 
+            this.lblCatalog.AutoSize = true;
+            this.lblCatalog.Location = new System.Drawing.Point(20, 76);
+            this.lblCatalog.Name = "lblCatalog";
+            this.lblCatalog.Size = new System.Drawing.Size(61, 17);
+            this.lblCatalog.TabIndex = 2;
+            this.lblCatalog.Text = "Каталог";
+            // 
+            // lblEmployee
+            // 
+            this.lblEmployee.AutoSize = true;
+            this.lblEmployee.Location = new System.Drawing.Point(10, 28);
+            this.lblEmployee.Name = "lblEmployee";
+            this.lblEmployee.Size = new System.Drawing.Size(71, 17);
+            this.lblEmployee.TabIndex = 1;
+            this.lblEmployee.Text = "Работник";
+            // 
+            // cbEmployee
+            // 
+            this.cbEmployee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEmployee.FormattingEnabled = true;
+            this.cbEmployee.Location = new System.Drawing.Point(87, 25);
+            this.cbEmployee.Name = "cbEmployee";
+            this.cbEmployee.Size = new System.Drawing.Size(260, 24);
+            this.cbEmployee.TabIndex = 0;
+            this.cbEmployee.SelectionChangeCommitted += new System.EventHandler(this.cbEmployee_SelectionChangeCommitted);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.lwDemandReport);
@@ -98,44 +136,6 @@
             this.lwDemandReport.TabIndex = 0;
             this.lwDemandReport.UseCompatibleStateImageBehavior = false;
             this.lwDemandReport.View = System.Windows.Forms.View.Details;
-            // 
-            // cbEmployee
-            // 
-            this.cbEmployee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEmployee.FormattingEnabled = true;
-            this.cbEmployee.Location = new System.Drawing.Point(87, 25);
-            this.cbEmployee.Name = "cbEmployee";
-            this.cbEmployee.Size = new System.Drawing.Size(260, 24);
-            this.cbEmployee.Sorted = true;
-            this.cbEmployee.TabIndex = 0;
-            // 
-            // lblEmployee
-            // 
-            this.lblEmployee.AutoSize = true;
-            this.lblEmployee.Location = new System.Drawing.Point(10, 28);
-            this.lblEmployee.Name = "lblEmployee";
-            this.lblEmployee.Size = new System.Drawing.Size(71, 17);
-            this.lblEmployee.TabIndex = 1;
-            this.lblEmployee.Text = "Работник";
-            // 
-            // lblCatalog
-            // 
-            this.lblCatalog.AutoSize = true;
-            this.lblCatalog.Location = new System.Drawing.Point(20, 76);
-            this.lblCatalog.Name = "lblCatalog";
-            this.lblCatalog.Size = new System.Drawing.Size(61, 17);
-            this.lblCatalog.TabIndex = 2;
-            this.lblCatalog.Text = "Каталог";
-            // 
-            // cbCatalog
-            // 
-            this.cbCatalog.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCatalog.FormattingEnabled = true;
-            this.cbCatalog.Location = new System.Drawing.Point(87, 73);
-            this.cbCatalog.Name = "cbCatalog";
-            this.cbCatalog.Size = new System.Drawing.Size(260, 24);
-            this.cbCatalog.Sorted = true;
-            this.cbCatalog.TabIndex = 3;
             // 
             // panelDemandReportBottom
             // 

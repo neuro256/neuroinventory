@@ -82,7 +82,7 @@ namespace NeuroInventory
             Close();
         }
 
-        private void cbProviders_DropDownClosed(object sender, EventArgs e)
+        private void cbProviders_SelectionChangeCommitted(object sender, EventArgs e)
         {
             chbProvider.Checked = true;
         }
@@ -90,11 +90,6 @@ namespace NeuroInventory
         private void dateTimePicker_CloseUp(object sender, EventArgs e)
         {
             chbDate.Checked = true;
-        }
-
-        private void cbMeasurement_DropDownClosed(object sender, EventArgs e)
-        {
-            chbMeasurement.Checked = true;
         }
 
         private void nudAmount_ValueChanged(object sender, EventArgs e)
@@ -107,7 +102,14 @@ namespace NeuroInventory
             chbPrice.Checked = true;
         }
 
-        private void cbMeasurement_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbMeasurement_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.Text);
+            nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.Text);
+            chbMeasurement.Checked = true;
+        }
+
+        private void InventoryFilter_Shown(object sender, EventArgs e)
         {
             tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.Text);
             nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.Text);

@@ -196,7 +196,7 @@
             this.cbProviders.Name = "cbProviders";
             this.cbProviders.Size = new System.Drawing.Size(200, 24);
             this.cbProviders.TabIndex = 16;
-            this.cbProviders.DropDownClosed += new System.EventHandler(this.cbProviders_DropDownClosed);
+            this.cbProviders.SelectionChangeCommitted += new System.EventHandler(this.cbProviders_SelectionChangeCommitted);
             // 
             // dateTimePicker
             // 
@@ -213,8 +213,7 @@
             this.cbMeasurement.Name = "cbMeasurement";
             this.cbMeasurement.Size = new System.Drawing.Size(200, 24);
             this.cbMeasurement.TabIndex = 18;
-            this.cbMeasurement.SelectedIndexChanged += new System.EventHandler(this.cbMeasurement_SelectedIndexChanged);
-            this.cbMeasurement.DropDownClosed += new System.EventHandler(this.cbMeasurement_DropDownClosed);
+            this.cbMeasurement.SelectionChangeCommitted += new System.EventHandler(this.cbMeasurement_SelectionChangeCommitted);
             // 
             // nudAmount
             // 
@@ -334,6 +333,7 @@
             this.Text = "Поиск сотрудника";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InventoryFilter_FormClosing);
+            this.Shown += new System.EventHandler(this.InventoryFilter_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).EndInit();
             this.ResumeLayout(false);

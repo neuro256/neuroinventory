@@ -118,7 +118,10 @@ namespace NeuroInventory
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            if (MessageBox.Show("Вы действительно хотите выйти?", "Выход из программы", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Close();
+            }
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)

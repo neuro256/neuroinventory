@@ -126,6 +126,9 @@ namespace NeuroInventory
         private string m_DatabaseName = null;
         private string m_Password = null;
 
+        private bool m_IsCreated = false;
+        private bool m_IsOpened = false;
+
 
         #region INTERFACE
 
@@ -150,6 +153,8 @@ namespace NeuroInventory
         }
 
         public string Password { get => m_Password; set => m_Password = value; }
+        public bool IsCreated { get => m_IsCreated; set => m_IsCreated = value; }
+        public bool IsOpened { get => m_IsOpened; set => m_IsOpened = value; }
 
         public static SQLiteManager GetInstance()
         {
@@ -206,6 +211,7 @@ namespace NeuroInventory
         {
             m_DatabaseName = p_DatabaseName;
             SQLiteConnection.CreateFile(p_DatabaseName);
+            IsCreated = true;
         }
 
         public virtual void CreateTables()
@@ -285,7 +291,7 @@ namespace NeuroInventory
                         command.ExecuteNonQuery();
 
                         // Вставка корневого каталого 
-                        command.CommandText = "INSERT INTO catalogs (type, parent, name) VALUES (0, null, 'Корневой каталог');";
+                        command.CommandText = $"INSERT INTO catalogs (type, parent, name) VALUES (0, null, '{Definitions.DB_ROOT_CATALOG}');";
                         command.ExecuteNonQuery();
 
                         // Создание индекса

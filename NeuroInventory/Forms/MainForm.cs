@@ -96,11 +96,18 @@ namespace NeuroInventory
                 InitTabs();
                 if(inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
                     inventoryTabs[tabControl.SelectedTab.Name].ShowTable();
+                SQLiteManager.GetInstance().IsOpened = true;
             }
         }
 
         private void saveBDToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if(!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
+            {
+                MessageBox.Show(Definitions.BD_NOT_CREATED_OR_OPENED);
+                return;
+            }
+
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Базы данных SQLite (*.db)|*.db";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)

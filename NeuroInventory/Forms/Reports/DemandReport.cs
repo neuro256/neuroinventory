@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -83,7 +84,7 @@ namespace NeuroInventory
                 }
                 lwDemandReport.EndUpdate();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -99,6 +100,41 @@ namespace NeuroInventory
             int l_SelectedCatalogId = cbCatalog.SelectedValue != null ? Convert.ToInt32(cbCatalog.SelectedValue) : 0;
             SQLiteManager.GetInstance().DemandReport().SetCommandDataSet(l_SelectedEmployeeId, l_SelectedCatalogId);
             return SQLiteManager.GetInstance().DemandReport().ReturnDataSet();
+        }
+
+        private string GetEmployeeInitials()
+        {
+            int l_SelectedEmployeeId = cbEmployee.SelectedValue != null ? Convert.ToInt32(cbEmployee.SelectedValue) : 0;
+            return SQLiteManager.GetInstance().Employees().GetInitialsById(l_SelectedEmployeeId);
+        }
+
+        private string GetEmployeeName()
+        {
+            int l_SelectedEmployeeId = cbEmployee.SelectedValue != null ? Convert.ToInt32(cbEmployee.SelectedValue) : 0;
+            return SQLiteManager.GetInstance().Employees().GetNameById(l_SelectedEmployeeId);
+        }
+
+        private string GetEmployeePost()
+        {
+            int l_SelectedEmployeeId = cbEmployee.SelectedValue != null ? Convert.ToInt32(cbEmployee.SelectedValue) : 0;
+            return SQLiteManager.GetInstance().Employees().GetEmployeePostById(l_SelectedEmployeeId);
+        }
+
+        // TODO : 
+        private string GetTotalPrice()
+        {
+            return String.Empty;
+        }
+
+        private Dictionary<string, string> GetReportFieldsData()
+        {
+            Dictionary<string, string> fieldsData = new Dictionary<string, string>();
+            fieldsData["EmployeeInitialsBefore"] = $"{GetEmployeeInitials()} {GetEmployeeName()}";
+            fieldsData["EmployeeInitialsAfter"] = $"{GetEmployeeName()} {GetEmployeeInitials()}";
+            fieldsData["EmployeePost"] = GetEmployeePost();
+            fieldsData["TotalPrice"] = GetTotalPrice();
+
+            return fieldsData;
         }
 
         private void DemandReport_Shown(object sender, EventArgs e)
@@ -232,18 +268,56 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void btnReport_Click(object sender, EventArgs e)
         {
-            ListView.CheckedListViewItemCollection checkedItems = lwDemandReport.CheckedItems;
-            if (checkedItems.Count > 0)
+            if (lwDemandReport.CheckedItems.Count > 0)
             {
+                DataSet dataSetDemandReport = GetDemandReportDataSet();
+                Dictionary<string, string> demandReportFieldsData = GetReportFieldsData();
+
                 SpireDocWrapper spireDoc = new SpireDocWrapper();
 
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "Файлы документов (*.doc)|*.doc";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    spireDoc.CreateReport(saveFileDialog.FileName);
+                    spireDoc.CreateReport(saveFileDialog.FileName, dataSetDemandReport, demandReportFieldsData);
                 }
             }
+            else
+            {
+                MessageBox.Show(Definitions.SELECT_RECORDS);
+            }
+        }
+
+        private DataSet GetDemandReportDataSet()
+        {
+            DataTable demandReportTable = new DataTable("DemandReport");
+            demandReportTable.Columns.Add("id");
+            demandReportTable.Columns.Add("name");
+            demandReportTable.Columns.Add("codeOKEI");
+            demandReportTable.Columns.Add("measurement");
+            demandReportTable.Columns.Add("price");
+            demandReportTable.Columns.Add("sum");
+            demandReportTable.Columns.Add("amount");
+
+            foreach (ListViewItem item in lwDemandReport.CheckedItems)
+            {
+                DataRow newRow = demandReportTable.NewRow();
+
+                newRow["id"] = item.Text;
+                newRow["name"] = item.SubItems[1].Text;
+                newRow["codeOKEI"] = item.SubItems[2].Text;
+                newRow["measurement"] = item.SubItems[3].Text;
+                newRow["price"] = item.SubItems[5].Text;
+                newRow["sum"] = item.SubItems[6].Text;
+                newRow["amount"] = item.SubItems[9].Text;
+
+                demandReportTable.Rows.Add(newRow);
+            }
+
+            DataSet demandReportDataSet = new DataSet("Report");
+            demandReportDataSet.Tables.Add(demandReportTable);
+
+            return demandReportDataSet;
         }
     }
 }

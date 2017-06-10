@@ -1,34 +1,23 @@
 ﻿using Spire.Doc;
-using Spire.Doc.Documents;
 using System;
-using System.Drawing;
-using System.Linq;
+using System.Data;
+using System.Collections.Generic;
+using System.Collections;
+using System.Windows.Forms;
 
 namespace NeuroInventory
 {
     public class SpireDocWrapper
     {
-        private static string m_TemplateSourcePath = @"templateDemand.doc";
+        private string m_TemplateSourcePath = @"templateDemand.doc";
 
-        public static string TemplateSourcePath
+        private void Run()
         {
-            get
-            {
-                return m_TemplateSourcePath;
-            }
-            private set
-            {
-                m_TemplateSourcePath = value;
-            }
-        }
-
-        public void Run()
-        {
-            Document doc = new Document();
-            doc.LoadFromFile(TemplateSourcePath, FileFormat.Doc);
-            doc.Replace("ПБР-Гидро", "PBR-Gydro", false, true);
+            Document document = new Document(m_TemplateSourcePath);
+            document.LoadFromFile(m_TemplateSourcePath, FileFormat.Doc);
+            document.Replace("ПБР-Гидро", "PBR-Gydro", false, true);
             //doc.SaveToFile("Result.pdf", FileFormat.PDF);
-            Section section = doc.Sections[0];
+            Section section = document.Sections[0];
             Table originalTable = (Table)section.Tables[1];
             string[] newRow = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
             AddRowInTable(originalTable, newRow);
@@ -47,7 +36,7 @@ namespace NeuroInventory
 
             //section.Tables.Add(cloneTable);
 
-            doc.SaveToFile("Result.doc", FileFormat.Doc);
+            document.SaveToFile("Result.doc", FileFormat.Doc);
 
             System.Diagnostics.Process.Start("Result.doc");
         }
@@ -62,9 +51,51 @@ namespace NeuroInventory
             }
         }
 
-        public void CreateReport(string p_DestinationPath)
+        public void CreateReport(string p_DestinationPath, DataSet p_DataSetDemandReport, Dictionary<string, string> p_FieldsData)
         {
+            try
+            {
+                Document document = new Document();
+                document.LoadFromFile(m_TemplateSourcePath, FileFormat.Doc);
 
+                string[] fieldNames = new string[p_FieldsData.Count];
+                string[] fieldValues = new string[p_FieldsData.Count];
+                int counter = 0;
+
+                foreach (KeyValuePair<string, string> pair in p_FieldsData)
+                {
+                    fieldNames[counter] = pair.Key;
+                    fieldValues[counter] = pair.Value;
+                    counter++;
+                }
+
+                List<DictionaryEntry> list = new List<DictionaryEntry>
+                {
+                    new DictionaryEntry("DemandReport", String.Empty)
+                };
+
+                document.MailMerge.ClearFields = true;
+
+                document.MailMerge.ExecuteWidthNestedRegion(p_DataSetDemandReport, list);
+
+                document.MailMerge.Execute(fieldNames, fieldValues);
+
+                document.SaveToFile(p_DestinationPath, FileFormat.Doc);
+                WordDocViewer(p_DestinationPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void WordDocViewer(string p_FileName)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(p_FileName);
+            }
+            catch { }
         }
     }
 }

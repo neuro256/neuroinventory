@@ -158,5 +158,55 @@ namespace NeuroInventory
                 e.Cancel = true;
             }
         }
+
+        private void toolStripButtonCreateBD_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Базы данных SQLite (*.db)|*.db";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                CreateBase(saveFileDialog.FileName);
+            }
+        }
+
+        private void toolStripButtonOpenBD_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            //openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            openFileDialog.Filter = "Базы данных SQLite (*.db)|*.db";
+            if (openFileDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                LoadBase(openFileDialog.FileName);
+            }
+        }
+
+        private void toolStripButtonSaveBD_Click(object sender, EventArgs e)
+        {
+            if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
+            {
+                MessageBox.Show(Definitions.BD_NOT_CREATED_OR_OPENED);
+                return;
+            }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Базы данных SQLite (*.db)|*.db";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                SaveBase(saveFileDialog.FileName);
+            }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
+            {
+                MessageBox.Show(Definitions.BD_NOT_CREATED_OR_OPENED);
+                return;
+            }
+
+            DemandReport report = new DemandReport();
+            report.StartPosition = FormStartPosition.CenterParent;
+            report.ShowDialog();
+        }
     }
 }

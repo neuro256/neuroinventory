@@ -66,5 +66,23 @@ namespace NeuroInventory
 
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }
+
+        public string GetInitialsById(int p_SelectedEmployeeId)
+        {
+            string l_EmployeeInitials = SQLiteManager.GetInstance().CommandExecuteScalar($"SELECT (SUBSTR(firstname, 0, 2) || '.' || SUBSTR(lastname, 0, 2) || '.') initials FROM employees WHERE id={p_SelectedEmployeeId};").ToString();
+            return l_EmployeeInitials;
+        }
+
+        public string GetNameById(int p_SelectedEmployeeId)
+        {
+            string l_EmployeeName = SQLiteManager.GetInstance().CommandExecuteScalar($"SELECT surename FROM employees WHERE id={p_SelectedEmployeeId};").ToString();
+            return l_EmployeeName;
+        }
+
+        public string GetEmployeePostById(int p_SelectedEmployeeId)
+        {
+            string l_EmployeePost = SQLiteManager.GetInstance().CommandExecuteScalar($"SELECT post FROM employees WHERE id={p_SelectedEmployeeId};").ToString();
+            return l_EmployeePost;
+        }
     }
 }

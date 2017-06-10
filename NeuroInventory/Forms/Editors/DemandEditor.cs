@@ -51,7 +51,6 @@ namespace NeuroInventory
             lwDemand.Columns.Add(new ColHeader("Сотрудник", 250, HorizontalAlignment.Left, true));
             lwDemand.Columns.Add(new ColHeader("Количество отпущенных тмц", 200, HorizontalAlignment.Left, true));
             lwDemand.Columns.Add(new ColHeader("Дата", 100, HorizontalAlignment.Left, true));
-            lwDemand.Columns.Add(new ColHeader("Документ", 250, HorizontalAlignment.Left, true));
         }
 
         private void PopulateRedactorInfo()
@@ -197,16 +196,11 @@ namespace NeuroInventory
             dateTimePicker.Value = Convert.ToDateTime(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["date"]);
         }
 
-        private void btnCreateDebit_Click(object sender, EventArgs e)
+        private void btnCreateDemand_Click(object sender, EventArgs e)
         {
             DemandReport report = new DemandReport();
             report.StartPosition = FormStartPosition.CenterParent;
             report.ShowDialog();
-        }
-
-        private void btnOpenFolder_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void nudAmount_ValueChanged(object sender, EventArgs e)

@@ -44,22 +44,20 @@
             this.chEmployee = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chAmount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chDemand = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnOpenFolder = new System.Windows.Forms.Button();
-            this.btnCreateDebit = new System.Windows.Forms.Button();
+            this.panelDemandUpRight = new System.Windows.Forms.Panel();
+            this.lblName = new System.Windows.Forms.Label();
+            this.tbName = new System.Windows.Forms.TextBox();
+            this.btnCreateDemand = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.contextMenuStripDemand = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.errorProviderDemand = new System.Windows.Forms.ErrorProvider(this.components);
-            this.tbName = new System.Windows.Forms.TextBox();
-            this.lblName = new System.Windows.Forms.Label();
-            this.panelDemandUpRight = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDemand)).BeginInit();
             this.splitContainerDemand.Panel1.SuspendLayout();
             this.splitContainerDemand.Panel2.SuspendLayout();
             this.splitContainerDemand.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDemand)).BeginInit();
             this.panelDemandUpRight.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDemand)).BeginInit();
             this.SuspendLayout();
             // 
             // lblEmployee
@@ -168,8 +166,7 @@
             this.splitContainerDemand.Panel2.AutoScroll = true;
             this.splitContainerDemand.Panel2.BackColor = System.Drawing.Color.Silver;
             this.splitContainerDemand.Panel2.Controls.Add(this.panelDemandUpRight);
-            this.splitContainerDemand.Panel2.Controls.Add(this.btnOpenFolder);
-            this.splitContainerDemand.Panel2.Controls.Add(this.btnCreateDebit);
+            this.splitContainerDemand.Panel2.Controls.Add(this.btnCreateDemand);
             this.splitContainerDemand.Panel2.Controls.Add(this.btnEdit);
             this.splitContainerDemand.Panel2.Controls.Add(this.lblEmployee);
             this.splitContainerDemand.Panel2.Controls.Add(this.btnDelete);
@@ -192,8 +189,7 @@
             this.chNumber,
             this.chEmployee,
             this.chAmount,
-            this.chDate,
-            this.chDemand});
+            this.chDate});
             this.lwDemand.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lwDemand.FullRowSelect = true;
             this.lwDemand.GridLines = true;
@@ -229,36 +225,50 @@
             this.chDate.Text = "Дата";
             this.chDate.Width = 100;
             // 
-            // chDemand
+            // panelDemandUpRight
             // 
-            this.chDemand.Text = "Требование";
-            this.chDemand.Width = 200;
+            this.panelDemandUpRight.BackColor = System.Drawing.Color.Gainsboro;
+            this.panelDemandUpRight.Controls.Add(this.lblName);
+            this.panelDemandUpRight.Controls.Add(this.tbName);
+            this.panelDemandUpRight.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelDemandUpRight.Location = new System.Drawing.Point(0, 0);
+            this.panelDemandUpRight.Name = "panelDemandUpRight";
+            this.panelDemandUpRight.Size = new System.Drawing.Size(428, 45);
+            this.panelDemandUpRight.TabIndex = 12;
             // 
-            // btnOpenFolder
+            // lblName
             // 
-            this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFolder.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnOpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOpenFolder.Location = new System.Drawing.Point(161, 235);
-            this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(255, 29);
-            this.btnOpenFolder.TabIndex = 5;
-            this.btnOpenFolder.Text = "Открыть папку с документом";
-            this.btnOpenFolder.UseVisualStyleBackColor = true;
-            this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
+            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(67, 15);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(108, 17);
+            this.lblName.TabIndex = 10;
+            this.lblName.Text = "Название тмц: ";
             // 
-            // btnCreateDebit
+            // tbName
             // 
-            this.btnCreateDebit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreateDebit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnCreateDebit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCreateDebit.Location = new System.Drawing.Point(161, 189);
-            this.btnCreateDebit.Name = "btnCreateDebit";
-            this.btnCreateDebit.Size = new System.Drawing.Size(255, 29);
-            this.btnCreateDebit.TabIndex = 4;
-            this.btnCreateDebit.Text = "Сформировать документ списания";
-            this.btnCreateDebit.UseVisualStyleBackColor = true;
-            this.btnCreateDebit.Click += new System.EventHandler(this.btnCreateDebit_Click);
+            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbName.BackColor = System.Drawing.Color.Silver;
+            this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbName.Location = new System.Drawing.Point(181, 12);
+            this.tbName.Name = "tbName";
+            this.tbName.ReadOnly = true;
+            this.tbName.Size = new System.Drawing.Size(235, 22);
+            this.tbName.TabIndex = 11;
+            // 
+            // btnCreateDemand
+            // 
+            this.btnCreateDemand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateDemand.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnCreateDemand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCreateDemand.Location = new System.Drawing.Point(161, 189);
+            this.btnCreateDemand.Name = "btnCreateDemand";
+            this.btnCreateDemand.Size = new System.Drawing.Size(255, 53);
+            this.btnCreateDemand.TabIndex = 4;
+            this.btnCreateDemand.Text = "Сформировать требование-накладную";
+            this.btnCreateDemand.UseVisualStyleBackColor = true;
+            this.btnCreateDemand.Click += new System.EventHandler(this.btnCreateDemand_Click);
             // 
             // btnEdit
             // 
@@ -285,38 +295,6 @@
             this.errorProviderDemand.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProviderDemand.ContainerControl = this;
             // 
-            // tbName
-            // 
-            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbName.BackColor = System.Drawing.Color.Silver;
-            this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbName.Location = new System.Drawing.Point(181, 12);
-            this.tbName.Name = "tbName";
-            this.tbName.ReadOnly = true;
-            this.tbName.Size = new System.Drawing.Size(235, 22);
-            this.tbName.TabIndex = 11;
-            // 
-            // lblName
-            // 
-            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(67, 15);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(108, 17);
-            this.lblName.TabIndex = 10;
-            this.lblName.Text = "Название тмц: ";
-            // 
-            // panelDemandUpRight
-            // 
-            this.panelDemandUpRight.BackColor = System.Drawing.Color.Gainsboro;
-            this.panelDemandUpRight.Controls.Add(this.lblName);
-            this.panelDemandUpRight.Controls.Add(this.tbName);
-            this.panelDemandUpRight.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelDemandUpRight.Location = new System.Drawing.Point(0, 0);
-            this.panelDemandUpRight.Name = "panelDemandUpRight";
-            this.panelDemandUpRight.Size = new System.Drawing.Size(428, 45);
-            this.panelDemandUpRight.TabIndex = 12;
-            // 
             // DemandEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -336,9 +314,9 @@
             this.splitContainerDemand.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDemand)).EndInit();
             this.splitContainerDemand.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDemand)).EndInit();
             this.panelDemandUpRight.ResumeLayout(false);
             this.panelDemandUpRight.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDemand)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -360,11 +338,9 @@
         private System.Windows.Forms.ColumnHeader chEmployee;
         private System.Windows.Forms.ColumnHeader chAmount;
         private System.Windows.Forms.ColumnHeader chDate;
-        private System.Windows.Forms.ColumnHeader chDemand;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripDemand;
         private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnOpenFolder;
-        private System.Windows.Forms.Button btnCreateDebit;
+        private System.Windows.Forms.Button btnCreateDemand;
         private System.Windows.Forms.ErrorProvider errorProviderDemand;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Label lblName;

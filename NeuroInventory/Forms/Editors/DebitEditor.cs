@@ -54,7 +54,6 @@ namespace NeuroInventory
             lwDebit.Columns.Add(new ColHeader("№", 50, HorizontalAlignment.Left, true));
             lwDebit.Columns.Add(new ColHeader("Количество списанных тмц", 200, HorizontalAlignment.Left, true));
             lwDebit.Columns.Add(new ColHeader("Дата", 100, HorizontalAlignment.Left, true));
-            lwDebit.Columns.Add(new ColHeader("Документ", 250, HorizontalAlignment.Left, true));
         }
 
         private void PopulateRedactorInfo()
@@ -191,15 +190,9 @@ namespace NeuroInventory
             m_SelectedRecordId = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["id"];
             nudAmount.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["amount"]);
             dateTimePicker.Value = Convert.ToDateTime(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["date"]);
-            string fileName = Path.GetFileName(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString());
         }
 
         private void btnCreateDebit_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnOpenFolder_Click(object sender, EventArgs e)
         {
 
         }

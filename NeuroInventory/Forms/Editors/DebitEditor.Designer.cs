@@ -41,22 +41,20 @@
             this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chAmount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chDebit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnOpenFolder = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblName = new System.Windows.Forms.Label();
+            this.tbName = new System.Windows.Forms.TextBox();
             this.btnCreateDebit = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.contextMenuStripDebit = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.errorProviderDebit = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblName = new System.Windows.Forms.Label();
-            this.tbName = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDebit)).BeginInit();
             this.splitContainerDebit.Panel1.SuspendLayout();
             this.splitContainerDebit.Panel2.SuspendLayout();
             this.splitContainerDebit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDebit)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDebit)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAmount
@@ -153,7 +151,6 @@
             this.splitContainerDebit.Panel2.AutoScroll = true;
             this.splitContainerDebit.Panel2.BackColor = System.Drawing.Color.Silver;
             this.splitContainerDebit.Panel2.Controls.Add(this.panel1);
-            this.splitContainerDebit.Panel2.Controls.Add(this.btnOpenFolder);
             this.splitContainerDebit.Panel2.Controls.Add(this.btnCreateDebit);
             this.splitContainerDebit.Panel2.Controls.Add(this.btnEdit);
             this.splitContainerDebit.Panel2.Controls.Add(this.btnDelete);
@@ -174,8 +171,7 @@
             this.chId,
             this.chNumber,
             this.chAmount,
-            this.chDate,
-            this.chDebit});
+            this.chDate});
             this.lwDebit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lwDebit.FullRowSelect = true;
             this.lwDebit.GridLines = true;
@@ -206,24 +202,37 @@
             this.chDate.Text = "Дата";
             this.chDate.Width = 100;
             // 
-            // chDebit
+            // panel1
             // 
-            this.chDebit.Text = "Списание";
-            this.chDebit.Width = 200;
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.lblName);
+            this.panel1.Controls.Add(this.tbName);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(428, 45);
+            this.panel1.TabIndex = 10;
             // 
-            // btnOpenFolder
+            // lblName
             // 
-            this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFolder.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnOpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOpenFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(161, 192);
-            this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(255, 29);
-            this.btnOpenFolder.TabIndex = 4;
-            this.btnOpenFolder.Text = "Открыть папку с документом";
-            this.btnOpenFolder.UseVisualStyleBackColor = true;
-            this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
+            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(67, 15);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(108, 17);
+            this.lblName.TabIndex = 8;
+            this.lblName.Text = "Название тмц: ";
+            // 
+            // tbName
+            // 
+            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbName.BackColor = System.Drawing.Color.Silver;
+            this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbName.Location = new System.Drawing.Point(181, 12);
+            this.tbName.Name = "tbName";
+            this.tbName.ReadOnly = true;
+            this.tbName.Size = new System.Drawing.Size(235, 22);
+            this.tbName.TabIndex = 9;
             // 
             // btnCreateDebit
             // 
@@ -265,38 +274,6 @@
             this.errorProviderDebit.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProviderDebit.ContainerControl = this;
             // 
-            // lblName
-            // 
-            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(67, 15);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(108, 17);
-            this.lblName.TabIndex = 8;
-            this.lblName.Text = "Название тмц: ";
-            // 
-            // tbName
-            // 
-            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbName.BackColor = System.Drawing.Color.Silver;
-            this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbName.Location = new System.Drawing.Point(181, 12);
-            this.tbName.Name = "tbName";
-            this.tbName.ReadOnly = true;
-            this.tbName.Size = new System.Drawing.Size(235, 22);
-            this.tbName.TabIndex = 9;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Controls.Add(this.lblName);
-            this.panel1.Controls.Add(this.tbName);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(428, 45);
-            this.panel1.TabIndex = 10;
-            // 
             // DebitEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -317,9 +294,9 @@
             this.splitContainerDebit.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDebit)).EndInit();
             this.splitContainerDebit.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDebit)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDebit)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -340,8 +317,6 @@
         private System.Windows.Forms.Button btnCreateDebit;
         private System.Windows.Forms.ColumnHeader chAmount;
         private System.Windows.Forms.ColumnHeader chDate;
-        private System.Windows.Forms.ColumnHeader chDebit;
-        private System.Windows.Forms.Button btnOpenFolder;
         private System.Windows.Forms.ErrorProvider errorProviderDebit;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox tbName;

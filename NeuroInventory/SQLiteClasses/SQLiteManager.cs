@@ -239,10 +239,17 @@ namespace NeuroInventory
                             "employeeId INTEGER, " +
                             "amount REAL NOT NULL, " +
                             "date DATETIME, " +
-                            "document NVARCHAR(80), " +
                             "FOREIGN KEY(inventoryId) REFERENCES inventory(id) ON DELETE CASCADE, " +
                             "FOREIGN KEY(employeeId) REFERENCES employees(id) ON DELETE SET NULL);";
                         command.ExecuteNonQuery();
+
+                        // Создание таблицы "Отчет требование"
+                        command.CommandText = "CREATE TABLE IF NOT EXISTS demandReport (" +
+                            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                            "employeeId INTEGER, " +
+                            "date DATETIME, " +
+                            "document NVARCHAR(80), " +
+                            "FOREIGN KEY(employeeId) REFERENCES employees(id) ON DELETE SET NULL);";
 
                         // Создание таблицы "Списания"
                         command.CommandText = "CREATE TABLE IF NOT EXISTS debit (" +
@@ -250,9 +257,14 @@ namespace NeuroInventory
                             "inventoryId INTEGER, " +
                             "amount REAL NOT NULL, " +
                             "date DATETIME, " +
-                            "document NVARCHAR(80), " +
                             "FOREIGN KEY (inventoryId) REFERENCES inventory(id) ON DELETE CASCADE);";
                         command.ExecuteNonQuery();
+
+                        // Создание таблицы "Отчет списания"
+                        command.CommandText = "CREATE TABLE IF NOT EXISTS debitReport (" +
+                            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                            "date DATETIME, " +
+                            "document NVARCHAR(80));";
 
                         // Создание таблицы "ТМЦ"
                         command.CommandText = "CREATE TABLE IF NOT EXISTS inventory (" +

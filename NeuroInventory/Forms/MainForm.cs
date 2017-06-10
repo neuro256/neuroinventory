@@ -196,7 +196,12 @@ namespace NeuroInventory
             }
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Создание отчета требование-накладная 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonDemandReport_Click(object sender, EventArgs e)
         {
             if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
             {
@@ -207,6 +212,21 @@ namespace NeuroInventory
             DemandReport report = new DemandReport();
             report.StartPosition = FormStartPosition.CenterParent;
             report.ShowDialog();
+        }
+
+        /// <summary>
+        /// Создание отчета списание
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonDebitReport_Click(object sender, EventArgs e)
+        {
+            if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
+            {
+                MessageBox.Show(Definitions.BD_NOT_CREATED_OR_OPENED);
+                return;
+            }
+            // TODO
         }
     }
 }

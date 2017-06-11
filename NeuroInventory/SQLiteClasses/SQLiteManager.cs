@@ -250,6 +250,7 @@ namespace NeuroInventory
                             "date DATETIME, " +
                             "document NVARCHAR(80), " +
                             "FOREIGN KEY(employeeId) REFERENCES employees(id) ON DELETE SET NULL);";
+                        command.ExecuteNonQuery();
 
                         // Создание таблицы "Списания"
                         command.CommandText = "CREATE TABLE IF NOT EXISTS debit (" +
@@ -265,6 +266,7 @@ namespace NeuroInventory
                             "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                             "date DATETIME, " +
                             "document NVARCHAR(80));";
+                        command.ExecuteNonQuery();
 
                         // Создание таблицы "ТМЦ"
                         command.CommandText = "CREATE TABLE IF NOT EXISTS inventory (" +

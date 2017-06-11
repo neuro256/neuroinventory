@@ -56,7 +56,6 @@
             this.chReleased = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDebit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chBalance = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnCollapseExpand = new System.Windows.Forms.Button();
             this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStripCatalogs = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
@@ -71,6 +70,7 @@
             // 
             // splitContainerMain
             // 
+            this.splitContainerMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainerMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerMain.Location = new System.Drawing.Point(0, 0);
             this.splitContainerMain.Margin = new System.Windows.Forms.Padding(0);
@@ -88,7 +88,7 @@
             this.splitContainerMain.Panel2MinSize = 800;
             this.splitContainerMain.Size = new System.Drawing.Size(1200, 650);
             this.splitContainerMain.SplitterDistance = 250;
-            this.splitContainerMain.SplitterWidth = 1;
+            this.splitContainerMain.SplitterWidth = 2;
             this.splitContainerMain.TabIndex = 0;
             // 
             // tableLayoutPanelLeft
@@ -104,7 +104,7 @@
             this.tableLayoutPanelLeft.RowCount = 2;
             this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tableLayoutPanelLeft.Size = new System.Drawing.Size(250, 650);
+            this.tableLayoutPanelLeft.Size = new System.Drawing.Size(248, 648);
             this.tableLayoutPanelLeft.TabIndex = 0;
             // 
             // treeView
@@ -117,7 +117,7 @@
             this.treeView.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.treeView.Name = "treeView";
             this.treeView.SelectedImageIndex = 0;
-            this.treeView.Size = new System.Drawing.Size(250, 590);
+            this.treeView.Size = new System.Drawing.Size(248, 588);
             this.treeView.TabIndex = 0;
             this.treeView.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView_BeforeSelect);
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
@@ -134,26 +134,25 @@
             // 
             this.panelLeftPanelBottom.BackColor = System.Drawing.Color.Silver;
             this.panelLeftPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelLeftPanelBottom.Location = new System.Drawing.Point(0, 595);
+            this.panelLeftPanelBottom.Location = new System.Drawing.Point(0, 593);
             this.panelLeftPanelBottom.Margin = new System.Windows.Forms.Padding(0);
             this.panelLeftPanelBottom.Name = "panelLeftPanelBottom";
-            this.panelLeftPanelBottom.Size = new System.Drawing.Size(250, 55);
+            this.panelLeftPanelBottom.Size = new System.Drawing.Size(248, 55);
             this.panelLeftPanelBottom.TabIndex = 1;
             // 
             // tableLayoutPanelRight
             // 
-            this.tableLayoutPanelRight.ColumnCount = 2;
-            this.tableLayoutPanelRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelRight.ColumnCount = 1;
             this.tableLayoutPanelRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelRight.Controls.Add(this.tableLayoutPanelInventory, 1, 0);
-            this.tableLayoutPanelRight.Controls.Add(this.btnCollapseExpand, 0, 0);
+            this.tableLayoutPanelRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelRight.Controls.Add(this.tableLayoutPanelInventory, 0, 0);
             this.tableLayoutPanelRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelRight.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelRight.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelRight.Name = "tableLayoutPanelRight";
             this.tableLayoutPanelRight.RowCount = 1;
             this.tableLayoutPanelRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelRight.Size = new System.Drawing.Size(949, 650);
+            this.tableLayoutPanelRight.Size = new System.Drawing.Size(946, 648);
             this.tableLayoutPanelRight.TabIndex = 0;
             // 
             // tableLayoutPanelInventory
@@ -163,13 +162,13 @@
             this.tableLayoutPanelInventory.Controls.Add(this.panelMainBottom, 0, 1);
             this.tableLayoutPanelInventory.Controls.Add(this.lwInventory, 0, 0);
             this.tableLayoutPanelInventory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelInventory.Location = new System.Drawing.Point(20, 0);
+            this.tableLayoutPanelInventory.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelInventory.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelInventory.Name = "tableLayoutPanelInventory";
             this.tableLayoutPanelInventory.RowCount = 2;
             this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tableLayoutPanelInventory.Size = new System.Drawing.Size(929, 650);
+            this.tableLayoutPanelInventory.Size = new System.Drawing.Size(946, 648);
             this.tableLayoutPanelInventory.TabIndex = 2;
             // 
             // panelMainBottom
@@ -180,10 +179,10 @@
             this.panelMainBottom.Controls.Add(this.btnInventoryRemove);
             this.panelMainBottom.Controls.Add(this.btnInventoryAdd);
             this.panelMainBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMainBottom.Location = new System.Drawing.Point(0, 595);
+            this.panelMainBottom.Location = new System.Drawing.Point(0, 593);
             this.panelMainBottom.Margin = new System.Windows.Forms.Padding(0);
             this.panelMainBottom.Name = "panelMainBottom";
-            this.panelMainBottom.Size = new System.Drawing.Size(929, 55);
+            this.panelMainBottom.Size = new System.Drawing.Size(946, 55);
             this.panelMainBottom.TabIndex = 1;
             // 
             // btnFilter
@@ -192,7 +191,7 @@
             this.btnFilter.AutoSize = true;
             this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFilter.Location = new System.Drawing.Point(733, 10);
+            this.btnFilter.Location = new System.Drawing.Point(750, 10);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(184, 33);
             this.btnFilter.TabIndex = 3;
@@ -267,7 +266,7 @@
             this.lwInventory.Margin = new System.Windows.Forms.Padding(0);
             this.lwInventory.MultiSelect = false;
             this.lwInventory.Name = "lwInventory";
-            this.lwInventory.Size = new System.Drawing.Size(929, 595);
+            this.lwInventory.Size = new System.Drawing.Size(946, 593);
             this.lwInventory.TabIndex = 2;
             this.lwInventory.UseCompatibleStateImageBehavior = false;
             this.lwInventory.View = System.Windows.Forms.View.Details;
@@ -333,21 +332,6 @@
             this.chBalance.DisplayIndex = 11;
             this.chBalance.Text = "Остаток";
             // 
-            // btnCollapseExpand
-            // 
-            this.btnCollapseExpand.BackColor = System.Drawing.Color.LightGray;
-            this.btnCollapseExpand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnCollapseExpand.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCollapseExpand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCollapseExpand.Location = new System.Drawing.Point(0, 0);
-            this.btnCollapseExpand.Margin = new System.Windows.Forms.Padding(0);
-            this.btnCollapseExpand.Name = "btnCollapseExpand";
-            this.btnCollapseExpand.Size = new System.Drawing.Size(20, 650);
-            this.btnCollapseExpand.TabIndex = 0;
-            this.btnCollapseExpand.Text = "<";
-            this.btnCollapseExpand.UseVisualStyleBackColor = false;
-            this.btnCollapseExpand.Click += new System.EventHandler(this.btnCollapseExpand_Click);
-            // 
             // contextMenuStripInventory
             // 
             this.contextMenuStripInventory.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -390,7 +374,6 @@
 
         private System.Windows.Forms.SplitContainer splitContainerMain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelRight;
-        private System.Windows.Forms.Button btnCollapseExpand;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelInventory;
         private System.Windows.Forms.Panel panelMainBottom;
         private System.Windows.Forms.Button btnInventoryEdit;

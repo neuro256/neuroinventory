@@ -408,20 +408,6 @@ namespace NeuroInventory
             lwInventory.Columns.Add(new ColHeader("Остаток", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
         }
 
-        private void btnCollapseExpand_Click(object sender, EventArgs e)
-        {
-            if (!splitContainerMain.Panel1Collapsed)
-            {
-                splitContainerMain.Panel1Collapsed = true;
-                btnCollapseExpand.Text = ">";
-            }
-            else
-            {
-                splitContainerMain.Panel1Collapsed = false;
-                btnCollapseExpand.Text = "<";
-            }
-        }
-
         private void btnInventoryAdd_Click(object sender, EventArgs e)
         {
             AddRecord();

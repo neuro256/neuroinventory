@@ -113,26 +113,6 @@ namespace NeuroInventory.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap employee_24 {
-            get {
-                object obj = ResourceManager.GetObject("employee_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap employee_32 {
-            get {
-                object obj = ResourceManager.GetObject("employee_32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap employee_321 {
             get {
                 object obj = ResourceManager.GetObject("employee_321", resourceCulture);

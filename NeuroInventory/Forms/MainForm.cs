@@ -203,6 +203,31 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void toolStripButtonDemandReport_Click(object sender, EventArgs e)
         {
+            OpenDemandReport();
+        }
+
+        /// <summary>
+        /// Создание отчета списание
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonDebitReport_Click(object sender, EventArgs e)
+        {
+            OpenDebitReport();
+        }
+
+        private void demadReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDemandReport();
+        }
+
+        private void debitReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDebitReport();
+        }
+
+        private void OpenDemandReport()
+        {
             if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
             {
                 MessageBox.Show(Definitions.BD_NOT_CREATED_OR_OPENED);
@@ -214,12 +239,7 @@ namespace NeuroInventory
             report.ShowDialog();
         }
 
-        /// <summary>
-        /// Создание отчета списание
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void toolStripButtonDebitReport_Click(object sender, EventArgs e)
+        private void OpenDebitReport()
         {
             if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
             {

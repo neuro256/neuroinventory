@@ -204,6 +204,7 @@
     <Compile Include="Forms\Editors\EmployeeEditor.Designer.cs">
       <DependentUpon>EmployeeEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilityClasses\DateAndMoneyConverter.cs" />
     <Compile Include="UtilityClasses\SortWrapper.cs" />
     <Compile Include="SQLiteClasses\Tables\TableSql.cs" />
     <Compile Include="Forms\IInventoryView.cs" />

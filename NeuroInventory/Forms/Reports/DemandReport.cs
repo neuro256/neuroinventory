@@ -121,10 +121,22 @@ namespace NeuroInventory
             return SQLiteManager.GetInstance().Employees().GetEmployeePostById(l_SelectedEmployeeId);
         }
 
-        // TODO : 
-        private string GetTotalPrice()
+        private double GetTotalPrice()
         {
-            return String.Empty;
+            double sum = 0.0;
+            if (lwDemandReport.CheckedItems.Count > 0)
+            {
+                foreach (ListViewItem item in lwDemandReport.CheckedItems)
+                {
+                    sum += Convert.ToDouble(item.SubItems[5].Text, CultureInfo.InvariantCulture) * Convert.ToDouble(item.SubItems[9].Text, CultureInfo.InvariantCulture);
+                }
+            }
+            return sum;
+        }
+
+        private string GetTotalPriceStr()
+        {
+            return DateAndMoneyConverter.CurrencyToTxtFull(GetTotalPrice(), false);
         }
 
         private Dictionary<string, string> GetReportFieldsData()
@@ -133,7 +145,7 @@ namespace NeuroInventory
             fieldsData["EmployeeInitialsBefore"] = $"{GetEmployeeInitials()} {GetEmployeeName()}";
             fieldsData["EmployeeInitialsAfter"] = $"{GetEmployeeName()} {GetEmployeeInitials()}";
             fieldsData["EmployeePost"] = GetEmployeePost();
-            fieldsData["TotalPrice"] = GetTotalPrice();
+            fieldsData["TotalPrice"] = GetTotalPriceStr();
 
             return fieldsData;
         }
@@ -268,6 +280,11 @@ namespace NeuroInventory
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnReport_Click(object sender, EventArgs e)
+        {
+            CreateReport();
+        }
+
+        private void CreateReport()
         {
             if (lwDemandReport.CheckedItems.Count > 0)
             {

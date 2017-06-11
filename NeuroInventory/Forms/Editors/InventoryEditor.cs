@@ -150,12 +150,6 @@ namespace NeuroInventory
             m_SelectedDocument = String.Empty;
         }
 
-        private void cbMeasurement_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.Text);
-            nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.Text);
-        }
-
         private void tbName_TextChanged(object sender, EventArgs e)
         {
             errorProviderInventory.Clear();
@@ -177,6 +171,18 @@ namespace NeuroInventory
             {
                 System.Diagnostics.Process.Start("explorer.exe", "/select, \"" + m_SelectedDocument + "\"");
             }
+        }
+
+        private void cbMeasurement_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.SelectedValue.ToString());
+            nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.SelectedValue.ToString());
+        }
+
+        private void InventoryEditor_Shown(object sender, EventArgs e)
+        {
+            tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.SelectedValue.ToString());
+            nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.SelectedValue.ToString());
         }
     }
 }

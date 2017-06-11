@@ -200,7 +200,7 @@
             this.cbMeasurement.Name = "cbMeasurement";
             this.cbMeasurement.Size = new System.Drawing.Size(121, 24);
             this.cbMeasurement.TabIndex = 15;
-            this.cbMeasurement.SelectedIndexChanged += new System.EventHandler(this.cbMeasurement_SelectedIndexChanged);
+            this.cbMeasurement.SelectionChangeCommitted += new System.EventHandler(this.cbMeasurement_SelectionChangeCommitted);
             // 
             // nudAmount
             // 
@@ -290,6 +290,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "InventoryEditor";
             this.Text = "Редактор ТМЦ";
+            this.Shown += new System.EventHandler(this.InventoryEditor_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderInventory)).EndInit();

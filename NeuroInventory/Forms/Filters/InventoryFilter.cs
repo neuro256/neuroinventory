@@ -19,14 +19,14 @@ namespace NeuroInventory
         private void InitControls()
         {
             // Настройка селектора поставщика
-            cbProviders.DropDownStyle = ComboBoxStyle.DropDown;
+            cbProviders.DropDownStyle = ComboBoxStyle.DropDownList;
             DataSet providersDataSet = SQLiteManager.GetInstance().Providers().ReturnDataSet();
             cbProviders.DataSource = providersDataSet.Tables[0];
             cbProviders.DisplayMember = "name"; // Отображаемое значение (столбец таблицы Поставщики)
             cbProviders.ValueMember = "id"; // Реальное значение (столбец таблицы Поставщики)
 
             // Настройка селектора единицы измерения
-            cbMeasurement.DropDownStyle = ComboBoxStyle.DropDown;
+            cbMeasurement.DropDownStyle = ComboBoxStyle.DropDownList;
             DataSet measurementDataSet = SQLiteSettingsManager.GetInstance().Measurement().ReturnDataSet();
             cbMeasurement.DataSource = measurementDataSet.Tables[0];
             cbMeasurement.DisplayMember = "name";
@@ -104,15 +104,17 @@ namespace NeuroInventory
 
         private void cbMeasurement_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.Text);
-            nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.Text);
+            ComboBox senderComboBox = (ComboBox)sender;
+
+            tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.SelectedValue.ToString());
+            nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.SelectedValue.ToString());
             chbMeasurement.Checked = true;
         }
 
         private void InventoryFilter_Shown(object sender, EventArgs e)
         {
-            tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.Text);
-            nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.Text);
+            tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.SelectedValue.ToString());
+            nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.SelectedValue.ToString());
         }
     }
 }

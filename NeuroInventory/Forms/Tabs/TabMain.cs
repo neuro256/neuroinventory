@@ -404,7 +404,6 @@ namespace NeuroInventory
             lwInventory.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwInventory.Columns.Add(new ColHeader("Сумма", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwInventory.Columns.Add(new ColHeader("Отпущен", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwInventory.Columns.Add(new ColHeader("Требование", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwInventory.Columns.Add(new ColHeader("Списать", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwInventory.Columns.Add(new ColHeader("Остаток", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
         }
@@ -549,12 +548,6 @@ namespace NeuroInventory
                     subitemReleased.Text = "Отпущен";
                     subitemReleased.Name = "released";
                     m_Listview.Items[i].SubItems.Add(subitemReleased);
-                    // Добавление элемента столбца Требование
-                    ListViewItem.ListViewSubItem subitemDemand = new ListViewItem.ListViewSubItem();
-                    subitemDemand.BackColor = Color.LightSalmon;
-                    subitemDemand.Text = "Требование";
-                    subitemDemand.Name = "demand";
-                    m_Listview.Items[i].SubItems.Add(subitemDemand);
                     // Добавление элемента столбца Cписать
                     ListViewItem.ListViewSubItem subitemDebit = new ListViewItem.ListViewSubItem();
                     subitemDebit.BackColor = Color.LightSeaGreen;
@@ -592,8 +585,7 @@ namespace NeuroInventory
         {
             base.ListViewItemMouseUp(sender, e);
 
-            if ((m_Listview.GetItemAt(e.X, e.Y)?.SubItems["released"]?.Bounds.Contains(e.X, e.Y) ?? false) ||
-                (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["demand"]?.Bounds.Contains(e.X, e.Y) ?? false))
+            if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["released"]?.Bounds.Contains(e.X, e.Y) ?? false)
             {
                 string l_InventoryName = m_Listview.GetItemAt(e.X, e.Y)?.SubItems["name"].Text;
                 int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(m_Listview.GetItemAt(e.X, e.Y)?.SubItems["measurement"].Text);

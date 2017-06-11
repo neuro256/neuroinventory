@@ -10,7 +10,6 @@ namespace NeuroInventory
         {
             CommandDataSet = String.Empty;
             TableName = "demand";
-            SetTargetPath(@"documents\demand");
         }
 
         public void SetCommandDataSet(int p_InventoryId)
@@ -19,8 +18,8 @@ namespace NeuroInventory
                 "(SELECT surename || ' ' || firstname || ' ' || lastname" +
                 " FROM employees WHERE employees.id = demand.employeeId) AS employeeId, " +
                 "amount, " +
-                "strftime('%d.%m.%Y', DATE(date)) AS date, " +
-                $"document FROM demand WHERE demand.inventoryId = {p_InventoryId};";
+                "strftime('%d.%m.%Y', DATE(date)) AS date " +
+                $"FROM demand WHERE demand.inventoryId = {p_InventoryId};";
         }
 
         public void Remove(int p_ListviewSelectedItemIndex)

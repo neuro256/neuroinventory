@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
@@ -69,7 +70,7 @@ namespace NeuroInventory
             tbOKEI.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["OKEIcode"].ToString();
             cbMeasurement.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["measurement"].ToString();
             nudAmount.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["amount"]);
-            nudPrice.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["price"]);
+            nudPrice.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["price"], CultureInfo.InvariantCulture);
 
             m_CurrentDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["invoice"].ToString();
             m_SelectedDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["invoice"].ToString();

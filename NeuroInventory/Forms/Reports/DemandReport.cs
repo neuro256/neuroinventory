@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace NeuroInventory
@@ -43,17 +44,17 @@ namespace NeuroInventory
             lwDemandReport.OwnerDraw = true;
             lwDemandReport.HeaderStyle = ColumnHeaderStyle.Clickable;
             lwDemandReport.Columns.Clear();
-            lwDemandReport.Columns.Add(new ColHeader("№", 50, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Наименование", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Код ОКЕИ", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Единица измерения", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Количество", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Сумма", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Затребовал", 250, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Должность", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Количество", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwDemandReport.Columns.Add(new ColHeader("Дата", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwDemandReport.Columns.Add(new ColHeader("№", 50, System.Windows.Forms.HorizontalAlignment.Left, true)); // 1
+            lwDemandReport.Columns.Add(new ColHeader("Наименование", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 2
+            lwDemandReport.Columns.Add(new ColHeader("Код ОКЕИ", 140, System.Windows.Forms.HorizontalAlignment.Left, true)); // 3
+            lwDemandReport.Columns.Add(new ColHeader("Единица измерения", 100, System.Windows.Forms.HorizontalAlignment.Left, true)); // 4
+            lwDemandReport.Columns.Add(new ColHeader("Количество", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 5
+            lwDemandReport.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true)); // 6
+            lwDemandReport.Columns.Add(new ColHeader("Сумма", 100, System.Windows.Forms.HorizontalAlignment.Left, true)); // 7
+            lwDemandReport.Columns.Add(new ColHeader("Затребовал", 250, System.Windows.Forms.HorizontalAlignment.Left, true)); // 8
+            lwDemandReport.Columns.Add(new ColHeader("Должность", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 9
+            lwDemandReport.Columns.Add(new ColHeader("Количество", 100, System.Windows.Forms.HorizontalAlignment.Left, true)); // 10
+            lwDemandReport.Columns.Add(new ColHeader("Дата", 100, System.Windows.Forms.HorizontalAlignment.Left, true)); // 11
         }
 
         private void ShowTable()
@@ -307,8 +308,8 @@ namespace NeuroInventory
                 newRow["name"] = item.SubItems[1].Text;
                 newRow["codeOKEI"] = item.SubItems[2].Text;
                 newRow["measurement"] = item.SubItems[3].Text;
-                newRow["price"] = item.SubItems[5].Text;
-                newRow["sum"] = item.SubItems[6].Text;
+                newRow["price"] = Convert.ToDecimal(item.SubItems[5].Text, CultureInfo.InvariantCulture).ToString("#.00");
+                newRow["sum"] = (Convert.ToDecimal(item.SubItems[5].Text, CultureInfo.InvariantCulture) * Convert.ToDecimal(item.SubItems[9].Text, CultureInfo.InvariantCulture)).ToString("#.00");
                 newRow["amount"] = item.SubItems[9].Text;
 
                 demandReportTable.Rows.Add(newRow);

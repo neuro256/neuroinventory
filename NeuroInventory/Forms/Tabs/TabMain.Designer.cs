@@ -38,6 +38,7 @@
             this.tableLayoutPanelRight = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelInventory = new System.Windows.Forms.TableLayoutPanel();
             this.panelMainBottom = new System.Windows.Forms.Panel();
+            this.btnFilter = new System.Windows.Forms.Button();
             this.btnInventoryEdit = new System.Windows.Forms.Button();
             this.btnInventoryRemove = new System.Windows.Forms.Button();
             this.btnInventoryAdd = new System.Windows.Forms.Button();
@@ -53,13 +54,11 @@
             this.chPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chReleased = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chDemand = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDebit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chBalance = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnCollapseExpand = new System.Windows.Forms.Button();
             this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStripCatalogs = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnFilter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -187,6 +186,20 @@
             this.panelMainBottom.Size = new System.Drawing.Size(929, 55);
             this.panelMainBottom.TabIndex = 1;
             // 
+            // btnFilter
+            // 
+            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter.AutoSize = true;
+            this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFilter.Location = new System.Drawing.Point(733, 10);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(184, 33);
+            this.btnFilter.TabIndex = 3;
+            this.btnFilter.Text = "Фильтр";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
             // btnInventoryEdit
             // 
             this.btnInventoryEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -246,7 +259,6 @@
             this.chPrice,
             this.chSum,
             this.chReleased,
-            this.chDemand,
             this.chDebit,
             this.chBalance});
             this.lwInventory.FullRowSelect = true;
@@ -303,7 +315,7 @@
             // 
             // chSum
             // 
-            this.chSum.DisplayIndex = 13;
+            this.chSum.DisplayIndex = 12;
             this.chSum.Text = "Сумма";
             // 
             // chReleased
@@ -311,19 +323,14 @@
             this.chReleased.DisplayIndex = 9;
             this.chReleased.Text = "Отпущено";
             // 
-            // chDemand
-            // 
-            this.chDemand.DisplayIndex = 10;
-            this.chDemand.Text = "Требование";
-            // 
             // chDebit
             // 
-            this.chDebit.DisplayIndex = 11;
+            this.chDebit.DisplayIndex = 10;
             this.chDebit.Text = "Списание";
             // 
             // chBalance
             // 
-            this.chBalance.DisplayIndex = 12;
+            this.chBalance.DisplayIndex = 11;
             this.chBalance.Text = "Остаток";
             // 
             // btnCollapseExpand
@@ -352,20 +359,6 @@
             this.contextMenuStripCatalogs.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripCatalogs.Name = "contextMenuStripCatalogs";
             this.contextMenuStripCatalogs.Size = new System.Drawing.Size(67, 4);
-            // 
-            // btnFilter
-            // 
-            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFilter.AutoSize = true;
-            this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFilter.Location = new System.Drawing.Point(733, 10);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(184, 33);
-            this.btnFilter.TabIndex = 3;
-            this.btnFilter.Text = "Фильтр";
-            this.btnFilter.UseVisualStyleBackColor = true;
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // TabMain
             // 
@@ -415,7 +408,6 @@
         private System.Windows.Forms.ColumnHeader chPrice;
         private System.Windows.Forms.ColumnHeader chSum;
         private System.Windows.Forms.ColumnHeader chReleased;
-        private System.Windows.Forms.ColumnHeader chDemand;
         private System.Windows.Forms.ColumnHeader chDebit;
         private System.Windows.Forms.ColumnHeader chBalance;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripInventory;

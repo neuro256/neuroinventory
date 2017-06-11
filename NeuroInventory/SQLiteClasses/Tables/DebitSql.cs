@@ -10,14 +10,13 @@ namespace NeuroInventory
         {
             CommandDataSet = String.Empty;
             TableName = "debit";
-            SetTargetPath(@"documents\debit");
         }
 
         public void SetCommandDataSet(int p_InventoryId)
         {
             CommandDataSet = "SELECT id, amount, " +
-                "strftime('%d.%m.%Y', DATE(date)) AS date, " +
-                $"document FROM debit WHERE debit.inventoryId = {p_InventoryId};";
+                "strftime('%d.%m.%Y', DATE(date)) AS date " +
+                $"FROM debit WHERE debit.inventoryId = {p_InventoryId};";
         }
 
         public void Insert(int p_InventoryId, decimal p_Amount, DateTime p_Date)

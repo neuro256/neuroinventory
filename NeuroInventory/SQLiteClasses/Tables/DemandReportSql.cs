@@ -27,8 +27,8 @@ namespace NeuroInventory
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
                 "inventory.amount," +
-                "(CAST (inventory.price AS REAL) / 100) AS price, " +
-                "(inventory.amount * price) / 100 AS sum, " +
+                @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price," +
+                @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
                 "(SELECT surename || ' ' || firstname || ' ' || lastname" +
                 " FROM employees WHERE employees.id = demand.employeeId) AS employee, " +
                 "(SELECT post FROM employees WHERE employees.id = demand.employeeId) AS post, " +

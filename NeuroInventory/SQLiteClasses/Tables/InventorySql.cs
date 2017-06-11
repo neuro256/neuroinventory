@@ -23,8 +23,8 @@ namespace NeuroInventory
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
                 "inventory.amount," +
-                "(CAST (inventory.price AS REAL) / 100) AS price," +
-                "(inventory.amount * price) / 100 AS sum," +
+                @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price," +
+                @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
                 "(inventory.amount - SUM(debit.amount)) AS balance " +
                 "FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id GROUP BY inventory.id;";
             CommandDataSetNotFiltered = CommandDataSet;
@@ -42,8 +42,8 @@ namespace NeuroInventory
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
                 "inventory.amount," +
-                "(CAST (inventory.price AS REAL) / 100) AS price," +
-                "(inventory.amount * price) / 100 AS sum," +
+                @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price," +
+                @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
                 "(inventory.amount - SUM(debit.amount)) AS balance " +
                 $"FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id WHERE inventory.catalogId={p_Id} GROUP BY inventory.id;";
             CommandDataSetNotFiltered = CommandDataSet;
@@ -71,8 +71,8 @@ namespace NeuroInventory
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
                 "inventory.amount," +
-                "(CAST (inventory.price AS REAL) / 100) AS price," +
-                "(inventory.amount * price) / 100 AS sum," +
+                @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price," +
+                @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
                 "(inventory.amount - SUM(debit.amount)) AS balance " +
                 $"FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id WHERE inventory.catalogId={SelectedCatalogId}" +
                 l_Name +

@@ -28,28 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.createBDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openBDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveBDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.единицыИзмеренияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.настройкиПользователяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabInventory = new System.Windows.Forms.TabPage();
             this.lblInfo = new System.Windows.Forms.Label();
             this.tabProviders = new System.Windows.Forms.TabPage();
             this.tabEmployees = new System.Windows.Forms.TabPage();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonCreateBD = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonOpenBD = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSaveBD = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonDemandReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDebitReport = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonDemandReport = new System.Windows.Forms.ToolStripButton();
+            this.createBDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openBDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveBDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.настройкиПользователяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabInventory.SuspendLayout();
@@ -79,43 +78,6 @@
             this.fileMenu.Size = new System.Drawing.Size(57, 24);
             this.fileMenu.Text = "&Файл";
             // 
-            // createBDToolStripMenuItem
-            // 
-            this.createBDToolStripMenuItem.Image = global::NeuroInventory.Properties.Resources.db_add_32;
-            this.createBDToolStripMenuItem.Name = "createBDToolStripMenuItem";
-            this.createBDToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.createBDToolStripMenuItem.Size = new System.Drawing.Size(306, 26);
-            this.createBDToolStripMenuItem.Text = "Создать БД";
-            this.createBDToolStripMenuItem.Click += new System.EventHandler(this.createBDToolStripMenuItem_Click);
-            // 
-            // openBDToolStripMenuItem
-            // 
-            this.openBDToolStripMenuItem.Image = global::NeuroInventory.Properties.Resources.db_down_32;
-            this.openBDToolStripMenuItem.Name = "openBDToolStripMenuItem";
-            this.openBDToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openBDToolStripMenuItem.Size = new System.Drawing.Size(306, 26);
-            this.openBDToolStripMenuItem.Text = "Открыть";
-            this.openBDToolStripMenuItem.Click += new System.EventHandler(this.openBDToolStripMenuItem_Click);
-            // 
-            // saveBDToolStripMenuItem
-            // 
-            this.saveBDToolStripMenuItem.Image = global::NeuroInventory.Properties.Resources.save_32;
-            this.saveBDToolStripMenuItem.Name = "saveBDToolStripMenuItem";
-            this.saveBDToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.S)));
-            this.saveBDToolStripMenuItem.Size = new System.Drawing.Size(306, 26);
-            this.saveBDToolStripMenuItem.Text = "Сохранить БД как...";
-            this.saveBDToolStripMenuItem.Click += new System.EventHandler(this.saveBDToolStripMenuItem_Click);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Image = global::NeuroInventory.Properties.Resources.close_32;
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(306, 26);
-            this.exitToolStripMenuItem.Text = "Выход";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
             // viewMenu
             // 
             this.viewMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -132,15 +94,6 @@
             this.единицыИзмеренияToolStripMenuItem.Size = new System.Drawing.Size(311, 26);
             this.единицыИзмеренияToolStripMenuItem.Text = "Единицы измерения";
             this.единицыИзмеренияToolStripMenuItem.Click += new System.EventHandler(this.единицыИзмеренияToolStripMenuItem_Click);
-            // 
-            // настройкиПользователяToolStripMenuItem
-            // 
-            this.настройкиПользователяToolStripMenuItem.Image = global::NeuroInventory.Properties.Resources.user_add_32;
-            this.настройкиПользователяToolStripMenuItem.Name = "настройкиПользователяToolStripMenuItem";
-            this.настройкиПользователяToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
-            this.настройкиПользователяToolStripMenuItem.Size = new System.Drawing.Size(311, 26);
-            this.настройкиПользователяToolStripMenuItem.Text = "Настройки пользователя";
-            this.настройкиПользователяToolStripMenuItem.Click += new System.EventHandler(this.настройкиПользователяToolStripMenuItem_Click);
             // 
             // tabControl
             // 
@@ -218,6 +171,11 @@
             this.toolStrip.TabIndex = 2;
             this.toolStrip.Text = "toolStrip";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            // 
             // toolStripButtonCreateBD
             // 
             this.toolStripButtonCreateBD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -248,30 +206,71 @@
             this.toolStripButtonSaveBD.Text = "toolStripButtonSaveBD";
             this.toolStripButtonSaveBD.Click += new System.EventHandler(this.toolStripButtonSaveBD_Click);
             // 
-            // toolStripSeparator1
+            // toolStripButtonDebitReport
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            this.toolStripButtonDebitReport.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButtonDebitReport.Image = global::NeuroInventory.Properties.Resources.debit_32;
+            this.toolStripButtonDebitReport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDebitReport.Name = "toolStripButtonDebitReport";
+            this.toolStripButtonDebitReport.Size = new System.Drawing.Size(158, 24);
+            this.toolStripButtonDebitReport.Text = "Создать списание";
+            this.toolStripButtonDebitReport.Click += new System.EventHandler(this.toolStripButtonDebitReport_Click);
             // 
             // toolStripButtonDemandReport
             // 
             this.toolStripButtonDemandReport.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButtonDemandReport.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDemandReport.Image")));
+            this.toolStripButtonDemandReport.Image = global::NeuroInventory.Properties.Resources.employee_321;
             this.toolStripButtonDemandReport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDemandReport.Name = "toolStripButtonDemandReport";
             this.toolStripButtonDemandReport.Size = new System.Drawing.Size(257, 24);
             this.toolStripButtonDemandReport.Text = "Создать требование-накладную";
             this.toolStripButtonDemandReport.Click += new System.EventHandler(this.toolStripButtonDemandReport_Click);
             // 
-            // toolStripButtonDebitReport
+            // createBDToolStripMenuItem
             // 
-            this.toolStripButtonDebitReport.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButtonDebitReport.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDebitReport.Image")));
-            this.toolStripButtonDebitReport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDebitReport.Name = "toolStripButtonDebitReport";
-            this.toolStripButtonDebitReport.Size = new System.Drawing.Size(158, 24);
-            this.toolStripButtonDebitReport.Text = "Создать списание";
-            this.toolStripButtonDebitReport.Click += new System.EventHandler(this.toolStripButtonDebitReport_Click);
+            this.createBDToolStripMenuItem.Image = global::NeuroInventory.Properties.Resources.db_add_32;
+            this.createBDToolStripMenuItem.Name = "createBDToolStripMenuItem";
+            this.createBDToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.createBDToolStripMenuItem.Size = new System.Drawing.Size(306, 26);
+            this.createBDToolStripMenuItem.Text = "Создать БД";
+            this.createBDToolStripMenuItem.Click += new System.EventHandler(this.createBDToolStripMenuItem_Click);
+            // 
+            // openBDToolStripMenuItem
+            // 
+            this.openBDToolStripMenuItem.Image = global::NeuroInventory.Properties.Resources.db_down_32;
+            this.openBDToolStripMenuItem.Name = "openBDToolStripMenuItem";
+            this.openBDToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openBDToolStripMenuItem.Size = new System.Drawing.Size(306, 26);
+            this.openBDToolStripMenuItem.Text = "Открыть";
+            this.openBDToolStripMenuItem.Click += new System.EventHandler(this.openBDToolStripMenuItem_Click);
+            // 
+            // saveBDToolStripMenuItem
+            // 
+            this.saveBDToolStripMenuItem.Image = global::NeuroInventory.Properties.Resources.save_32;
+            this.saveBDToolStripMenuItem.Name = "saveBDToolStripMenuItem";
+            this.saveBDToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.saveBDToolStripMenuItem.Size = new System.Drawing.Size(306, 26);
+            this.saveBDToolStripMenuItem.Text = "Сохранить БД как...";
+            this.saveBDToolStripMenuItem.Click += new System.EventHandler(this.saveBDToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Image = global::NeuroInventory.Properties.Resources.close_32;
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(306, 26);
+            this.exitToolStripMenuItem.Text = "Выход";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // настройкиПользователяToolStripMenuItem
+            // 
+            this.настройкиПользователяToolStripMenuItem.Image = global::NeuroInventory.Properties.Resources.user_add_32;
+            this.настройкиПользователяToolStripMenuItem.Name = "настройкиПользователяToolStripMenuItem";
+            this.настройкиПользователяToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
+            this.настройкиПользователяToolStripMenuItem.Size = new System.Drawing.Size(311, 26);
+            this.настройкиПользователяToolStripMenuItem.Text = "Настройки пользователя";
+            this.настройкиПользователяToolStripMenuItem.Click += new System.EventHandler(this.настройкиПользователяToolStripMenuItem_Click);
             // 
             // MainForm
             // 

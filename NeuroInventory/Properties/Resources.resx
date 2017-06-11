@@ -118,8 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="db_add_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\db_add_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="save_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\save_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="employee_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\employee_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="employee_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\employee_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="close_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\close_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -127,13 +133,19 @@
   <data name="db_down_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\db_down_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="save_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="debit_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\debit_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="close_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\close_20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="db_add_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\db_add_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="user_add_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user_add_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="employee_321" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\employee_321.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

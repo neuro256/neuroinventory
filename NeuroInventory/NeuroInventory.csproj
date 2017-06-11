@@ -142,7 +142,7 @@
     <Compile Include="Forms\Editors\MeasurementEditor.Designer.cs">
       <DependentUpon>MeasurementEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="SpireDocWrapper.cs" />
+    <Compile Include="ReportsClasses\SpireDocWrapper.cs" />
     <Compile Include="SQLiteClasses\Tables\CatalogsSql.cs" />
     <Compile Include="Forms\Additional\DialogName.cs">
       <SubType>Form</SubType>
@@ -325,9 +325,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\user_add_32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Properties\employee_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

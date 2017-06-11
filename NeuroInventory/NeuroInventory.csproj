@@ -91,6 +91,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DemandReportList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DemandReportList.Designer.cs">
+      <DependentUpon>DemandReportList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Reports\DemandReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportViewSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportViewSelection.Designer.cs">
+      <DependentUpon>ReportViewSelection.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLiteClasses\Tables\DemandReportSql.cs" />
     <Compile Include="SQLiteClasses\Tables\UserSql.cs" />
@@ -224,6 +236,9 @@
       <DependentUpon>TabEmployees.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityClasses\TreeNodeExtension.cs" />
+    <EmbeddedResource Include="DemandReportList.resx">
+      <DependentUpon>DemandReportList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Reports\DemandReport.resx">
       <DependentUpon>DemandReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -280,6 +295,9 @@
     <EmbeddedResource Include="Forms\Editors\ProvidersEditor.resx">
       <DependentUpon>ProvidersEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportViewSelection.resx">
+      <DependentUpon>ReportViewSelection.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -326,6 +344,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\user_add_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pen_128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\list_128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

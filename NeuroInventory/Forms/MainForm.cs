@@ -203,7 +203,27 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void toolStripButtonDemandReport_Click(object sender, EventArgs e)
         {
-            OpenDemandReport();
+            DemandReportViewSelector();
+        }
+
+        private void DemandReportViewSelector()
+        {
+            if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
+            {
+                MessageBox.Show(Definitions.BD_NOT_CREATED_OR_OPENED);
+                return;
+            }
+
+            ReportViewSelection viewSelection = new ReportViewSelection();
+            viewSelection.StartPosition = FormStartPosition.CenterParent;
+            if(viewSelection.ShowDialog() == DialogResult.OK)
+            {
+                OpenDemandReport();
+            }
+            else
+            {
+                OpenDemandReportList();
+            }
         }
 
         /// <summary>
@@ -214,11 +234,6 @@ namespace NeuroInventory
         private void toolStripButtonDebitReport_Click(object sender, EventArgs e)
         {
             OpenDebitReport();
-        }
-
-        private void demadReportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenDemandReport();
         }
 
         private void debitReportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -239,6 +254,19 @@ namespace NeuroInventory
             report.ShowDialog();
         }
 
+        private void OpenDemandReportList()
+        {
+            if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
+            {
+                MessageBox.Show(Definitions.BD_NOT_CREATED_OR_OPENED);
+                return;
+            }
+
+            DemandReportList reportList = new DemandReportList();
+            reportList.StartPosition = FormStartPosition.CenterParent;
+            reportList.ShowDialog();
+        }
+
         private void OpenDebitReport()
         {
             if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
@@ -247,6 +275,16 @@ namespace NeuroInventory
                 return;
             }
             // TODO
+        }
+
+        private void demandReportEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDemandReport();
+        }
+
+        private void demandReportListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDemandReportList();
         }
     }
 }

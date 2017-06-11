@@ -12,6 +12,16 @@ namespace NeuroInventory
             TableName = "demandReport";
         }
 
+        public void SetCommandDataSet()
+        {
+            CommandDataSet = "SELECT id, " +
+                "(SELECT surename || ' ' || firstname || ' ' || lastname" +
+                " FROM employees WHERE employees.id = demand.employeeId) AS employeeId, " +
+                "strftime('%d.%m.%Y', DATE(date)) AS date, " +
+                "document " + 
+                "FROM demandReport";
+        }
+
         public void SetCommandDataSet(int p_EmployeeId, int p_CatalogId)
         {
             List<int> catalogIds = GetCatalogIds(p_CatalogId);

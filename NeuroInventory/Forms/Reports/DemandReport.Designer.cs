@@ -184,6 +184,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "DemandReport";
             this.Text = "Формирование требования-накладной";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DemandReport_FormClosing);
             this.Shown += new System.EventHandler(this.DemandReport_Shown);
             this.tableLayoutPanelDemandReport.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

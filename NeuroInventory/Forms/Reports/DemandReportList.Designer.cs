@@ -37,7 +37,6 @@
             this.columnHeaderDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderDoc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panelDemandReportListBottom = new System.Windows.Forms.Panel();
-            this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.contextMenuStripDemandReportList = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -106,7 +105,6 @@
             // 
             // panelDemandReportListBottom
             // 
-            this.panelDemandReportListBottom.Controls.Add(this.btnEdit);
             this.panelDemandReportListBottom.Controls.Add(this.btnDelete);
             this.panelDemandReportListBottom.Controls.Add(this.btnAdd);
             this.panelDemandReportListBottom.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -115,27 +113,13 @@
             this.panelDemandReportListBottom.Size = new System.Drawing.Size(776, 44);
             this.panelDemandReportListBottom.TabIndex = 1;
             // 
-            // btnEdit
-            // 
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnEdit.Location = new System.Drawing.Point(135, 6);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(98, 29);
-            this.btnEdit.TabIndex = 9;
-            this.btnEdit.Text = "Изменить";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDelete.Location = new System.Drawing.Point(257, 6);
+            this.btnDelete.Location = new System.Drawing.Point(113, 6);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(98, 29);
             this.btnDelete.TabIndex = 10;
@@ -188,7 +172,6 @@
         private System.Windows.Forms.ColumnHeader columnHeaderDate;
         private System.Windows.Forms.ColumnHeader columnHeaderDoc;
         private System.Windows.Forms.Panel panelDemandReportListBottom;
-        private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripDemandReportList;

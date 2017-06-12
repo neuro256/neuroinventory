@@ -56,11 +56,6 @@ namespace NeuroInventory
             AddRecord();
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            UpdateRecord();
-        }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             RemoveRecord();
@@ -69,11 +64,6 @@ namespace NeuroInventory
         public override void AddRecord()
         {
             base.AddRecord();
-        }
-
-        public override void UpdateRecord()
-        {
-            base.UpdateRecord();
         }
 
         public override void RemoveRecord()

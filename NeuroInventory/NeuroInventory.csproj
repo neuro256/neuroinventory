@@ -134,7 +134,7 @@
       <DependentUpon>EmployeeFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="NeuroFile.cs" />
+    <Compile Include="UtilityClasses\NeuroFile.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

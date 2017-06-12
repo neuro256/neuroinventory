@@ -300,12 +300,14 @@ namespace NeuroInventory
                     if(spireDoc.CreateReport(saveFileDialog.FileName, dataSetDemandReport, demandReportFieldsData))
                     {
                         SQLiteManager.GetInstance().DemandReport().Insert(Convert.ToInt32(cbEmployee.SelectedValue), DateTime.Now, saveFileDialog.FileName);
+                        DialogResult = DialogResult.OK;
                     }
                 }
             }
             else
             {
                 MessageBox.Show(Definitions.SELECT_RECORDS);
+                DialogResult = DialogResult.Abort;
             }
         }
 
@@ -344,6 +346,7 @@ namespace NeuroInventory
         private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
+            DialogResult = DialogResult.Cancel;
         }
     }
 }

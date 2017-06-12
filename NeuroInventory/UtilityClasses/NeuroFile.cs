@@ -43,9 +43,10 @@ namespace NeuroInventory
 
         public string CopyFile(string p_FileName, string p_TargetPath)
         {
-            string fileName = Path.GetFileName(p_FileName);
+            string fileNameWithoutExt = Path.GetFileNameWithoutExtension(p_FileName);
+            string fileExt = Path.GetExtension(p_FileName);
             string sourceFile = p_FileName;
-            string destFile = Path.Combine(p_TargetPath, fileName);
+            string destFile = Path.Combine(p_TargetPath, $"{fileNameWithoutExt}_{DateTime.Now.ToFileTime()}{fileExt}");
             if (!Directory.Exists(p_TargetPath))
             {
                 Directory.CreateDirectory(p_TargetPath);

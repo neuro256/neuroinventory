@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NeuroInventory
 {
     public partial class DemandReportList : InventoryView
     {
-        private object m_SelectedRecordId;
-
         public DemandReportList()
         {
             InitializeComponent();
@@ -63,12 +56,28 @@ namespace NeuroInventory
 
         public override void AddRecord()
         {
-            base.AddRecord();
+            DemandReport report = new DemandReport();
+            report.StartPosition = FormStartPosition.CenterParent;
+            if(report.ShowDialog() == DialogResult.OK)
+            {
+                SQLiteManager.GetInstance().DemandReport().SetCommandDataSet();
+                ShowTable();
+            }
         }
 
         public override void RemoveRecord()
         {
-            base.RemoveRecord();
+            if(m_Listview.SelectedItems.Count > 0)
+            {
+                SQLiteManager.GetInstance().DemandReport().Remove(m_ListviewSelectedIndex);
+                m_Listview.SelectedItems.Clear();
+                SQLiteManager.GetInstance().DemandReport().SetCommandDataSet();
+                ShowTable();
+            }
+            else
+            {
+                MessageBox.Show(Definitions.REMOVE_WARNING_STRING);
+            }
         }
 
         protected override ListView GetListView()

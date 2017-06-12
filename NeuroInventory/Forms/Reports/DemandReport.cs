@@ -297,7 +297,10 @@ namespace NeuroInventory
                 saveFileDialog.Filter = "Файлы документов (*.doc)|*.doc";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    spireDoc.CreateReport(saveFileDialog.FileName, dataSetDemandReport, demandReportFieldsData);
+                    if(spireDoc.CreateReport(saveFileDialog.FileName, dataSetDemandReport, demandReportFieldsData))
+                    {
+                        SQLiteManager.GetInstance().DemandReport().Insert(Convert.ToInt32(cbEmployee.SelectedValue), DateTime.Now, saveFileDialog.FileName);
+                    }
                 }
             }
             else
@@ -336,6 +339,11 @@ namespace NeuroInventory
             demandReportDataSet.Tables.Add(demandReportTable);
 
             return demandReportDataSet;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

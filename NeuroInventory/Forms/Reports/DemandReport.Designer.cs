@@ -38,6 +38,7 @@
             this.lwDemandReport = new System.Windows.Forms.ListView();
             this.panelDemandReportBottom = new System.Windows.Forms.Panel();
             this.btnReport = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.tableLayoutPanelDemandReport.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -144,6 +145,7 @@
             // 
             // panelDemandReportBottom
             // 
+            this.panelDemandReportBottom.Controls.Add(this.btnClose);
             this.panelDemandReportBottom.Controls.Add(this.btnReport);
             this.panelDemandReportBottom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDemandReportBottom.Location = new System.Drawing.Point(5, 510);
@@ -153,6 +155,7 @@
             // 
             // btnReport
             // 
+            this.btnReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnReport.Location = new System.Drawing.Point(7, 4);
             this.btnReport.Name = "btnReport";
             this.btnReport.Size = new System.Drawing.Size(169, 34);
@@ -160,6 +163,17 @@
             this.btnReport.Text = "Сформировать отчет";
             this.btnReport.UseVisualStyleBackColor = true;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Location = new System.Drawing.Point(596, 8);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(169, 34);
+            this.btnClose.TabIndex = 1;
+            this.btnClose.Text = "Закрыть окно";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // DemandReport
             // 
@@ -192,5 +206,6 @@
         private System.Windows.Forms.Label lblCatalog;
         private System.Windows.Forms.Panel panelDemandReportBottom;
         private System.Windows.Forms.Button btnReport;
+        private System.Windows.Forms.Button btnClose;
     }
 }

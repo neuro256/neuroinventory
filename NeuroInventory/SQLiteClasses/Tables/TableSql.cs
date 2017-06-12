@@ -111,69 +111,27 @@ namespace NeuroInventory
         /// <returns></returns>
         public bool IsDocumentUpdated(string p_SelectedDocument, string p_CurrentDocument)
         {
-            bool documentUpdated = false;
-            if (!String.IsNullOrEmpty(p_SelectedDocument) && String.Compare(p_SelectedDocument, p_CurrentDocument) != 0)
-                documentUpdated = true;
-            return documentUpdated;
+            return NeuroFile.GetInstance().IsDocumentUpdated(p_SelectedDocument, p_CurrentDocument);
         }
 
         public string CopyFile(string p_FileName)
         {
-            string fileName = Path.GetFileName(p_FileName);
-            string sourceFile = p_FileName;
-            string destFile = Path.Combine(TargetPath, fileName);
-            if (!Directory.Exists(TargetPath))
-            {
-                Directory.CreateDirectory(TargetPath);
-            }
-            File.Copy(sourceFile, destFile, true);
-            return destFile;
+            return NeuroFile.GetInstance().CopyFile(p_FileName, TargetPath);
         }
 
         public void DeleteFile(string p_FileName)
         {
-            if (File.Exists(p_FileName))
-            {
-                File.Delete(p_FileName);
-            }
+            NeuroFile.GetInstance().DeleteFile(p_FileName);
         }
 
         public object UpdateFile(string p_SelectedDocument, string p_CurrentDocument)
         {
-            // Обновление выбранного файла-документа. 
-            if (!String.IsNullOrEmpty(p_SelectedDocument))
-            {
-                if (IsDocumentUpdated(p_SelectedDocument, p_CurrentDocument)) // файл изменен
-                {
-                    // Удаляем старый файл
-                    DeleteFile(p_CurrentDocument);
-                    // Копируем новый файл
-                    return CopyFile(p_SelectedDocument);
-                }
-                else
-                {
-                    return p_CurrentDocument;
-                }
-            }
-            else
-            {
-                // Удаляем старый файл
-                DeleteFile(p_CurrentDocument);
-                return DBNull.Value;
-            }
+            return NeuroFile.GetInstance().UpdateFile(p_SelectedDocument, p_CurrentDocument, TargetPath);
         }
 
         public object InsertFile(string p_SelectedDocument)
         {
-            // Копирование выбранного файла-документа в целевую папку приложения
-            if (!String.IsNullOrEmpty(p_SelectedDocument))
-            {
-                return CopyFile(p_SelectedDocument);
-            }
-            else
-            {
-                return DBNull.Value;
-            }
+            return NeuroFile.GetInstance().InsertFile(p_SelectedDocument, TargetPath);
         }
     }
 }

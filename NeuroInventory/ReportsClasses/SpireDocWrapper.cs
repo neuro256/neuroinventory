@@ -38,7 +38,7 @@ namespace NeuroInventory
 
             document.SaveToFile("Result.doc", FileFormat.Doc);
 
-            System.Diagnostics.Process.Start("Result.doc");
+            //System.Diagnostics.Process.Start("Result.doc");
         }
 
         private void AddRowInTable(Table p_Table, string[] p_RowData)
@@ -97,7 +97,7 @@ namespace NeuroInventory
         {
             try
             {
-                System.Diagnostics.Process.Start(p_FileName);
+                NeuroFile.GetInstance().OpenFile(p_FileName);
             }
             catch { }
         }

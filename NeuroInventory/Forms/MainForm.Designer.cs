@@ -39,6 +39,8 @@
             this.настройкиПользователяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.demadReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.demandReportEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.demandReportListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debitReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabInventory = new System.Windows.Forms.TabPage();
@@ -52,8 +54,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonDebitReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDemandReport = new System.Windows.Forms.ToolStripButton();
-            this.demandReportEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.demandReportListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabInventory.SuspendLayout();
@@ -164,6 +164,20 @@
             this.demadReportToolStripMenuItem.Name = "demadReportToolStripMenuItem";
             this.demadReportToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
             this.demadReportToolStripMenuItem.Text = "Требование-накладная";
+            // 
+            // demandReportEditorToolStripMenuItem
+            // 
+            this.demandReportEditorToolStripMenuItem.Name = "demandReportEditorToolStripMenuItem";
+            this.demandReportEditorToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.demandReportEditorToolStripMenuItem.Text = "Редактор";
+            this.demandReportEditorToolStripMenuItem.Click += new System.EventHandler(this.demandReportEditorToolStripMenuItem_Click);
+            // 
+            // demandReportListToolStripMenuItem
+            // 
+            this.demandReportListToolStripMenuItem.Name = "demandReportListToolStripMenuItem";
+            this.demandReportListToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.demandReportListToolStripMenuItem.Text = "Список";
+            this.demandReportListToolStripMenuItem.Click += new System.EventHandler(this.demandReportListToolStripMenuItem_Click);
             // 
             // debitReportToolStripMenuItem
             // 
@@ -289,8 +303,8 @@
             this.toolStripButtonDebitReport.Image = global::NeuroInventory.Properties.Resources.debit_32;
             this.toolStripButtonDebitReport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDebitReport.Name = "toolStripButtonDebitReport";
-            this.toolStripButtonDebitReport.Size = new System.Drawing.Size(158, 24);
-            this.toolStripButtonDebitReport.Text = "Создать списание";
+            this.toolStripButtonDebitReport.Size = new System.Drawing.Size(101, 24);
+            this.toolStripButtonDebitReport.Text = "Списание";
             this.toolStripButtonDebitReport.Click += new System.EventHandler(this.toolStripButtonDebitReport_Click);
             // 
             // toolStripButtonDemandReport
@@ -299,23 +313,9 @@
             this.toolStripButtonDemandReport.Image = global::NeuroInventory.Properties.Resources.employee_321;
             this.toolStripButtonDemandReport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDemandReport.Name = "toolStripButtonDemandReport";
-            this.toolStripButtonDemandReport.Size = new System.Drawing.Size(257, 24);
-            this.toolStripButtonDemandReport.Text = "Создать требование-накладную";
+            this.toolStripButtonDemandReport.Size = new System.Drawing.Size(197, 24);
+            this.toolStripButtonDemandReport.Text = "Требование-накладная";
             this.toolStripButtonDemandReport.Click += new System.EventHandler(this.toolStripButtonDemandReport_Click);
-            // 
-            // demandReportEditorToolStripMenuItem
-            // 
-            this.demandReportEditorToolStripMenuItem.Name = "demandReportEditorToolStripMenuItem";
-            this.demandReportEditorToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.demandReportEditorToolStripMenuItem.Text = "Редактор";
-            this.demandReportEditorToolStripMenuItem.Click += new System.EventHandler(this.demandReportEditorToolStripMenuItem_Click);
-            // 
-            // demandReportListToolStripMenuItem
-            // 
-            this.demandReportListToolStripMenuItem.Name = "demandReportListToolStripMenuItem";
-            this.demandReportListToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.demandReportListToolStripMenuItem.Text = "Список";
-            this.demandReportListToolStripMenuItem.Click += new System.EventHandler(this.demandReportListToolStripMenuItem_Click);
             // 
             // MainForm
             // 

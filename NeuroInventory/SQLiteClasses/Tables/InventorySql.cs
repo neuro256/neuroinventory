@@ -112,28 +112,7 @@ namespace NeuroInventory
             values["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value;
             values["amount"] = p_Amount;
             values["price"] = p_Price * 100;
-
-            // Обновление выбранного файла-документа. 
-            if (!String.IsNullOrEmpty(p_SelectedDocument))
-            {
-                if (IsDocumentUpdated(p_SelectedDocument, p_CurrentDocument)) // файл изменен
-                {
-                    // Удаляем старый файл
-                    DeleteFile(p_CurrentDocument);
-                    // Копируем новый файл
-                    values["invoice"] = CopyFile(p_SelectedDocument);
-                }
-                else
-                {
-                    values["invoice"] = p_CurrentDocument;
-                }
-            }
-            else
-            {
-                values["invoice"] = DBNull.Value;
-                // Удаляем старый файл
-                DeleteFile(p_CurrentDocument);
-            }
+            values["invoice"] = UpdateFile(p_SelectedDocument, p_CurrentDocument);
 
             string l_Where = $"id={p_Id}";
 
@@ -152,16 +131,7 @@ namespace NeuroInventory
             values["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value;
             values["amount"] = p_Amount;
             values["price"] = p_Price * 100;
-
-            // Копирование выбранного файла-документа в целевую папку приложения
-            if (!String.IsNullOrEmpty(p_SelectedDocument))
-            {
-                values["invoice"] = CopyFile(p_SelectedDocument);
-            }
-            else
-            {
-                values["invoice"] = DBNull.Value;
-            }
+            values["invoice"] = InsertFile(p_SelectedDocument);
 
             SQLiteManager.GetInstance().Insert(TableName, values);
         }

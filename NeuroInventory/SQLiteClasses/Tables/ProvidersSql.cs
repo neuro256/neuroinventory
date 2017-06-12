@@ -41,16 +41,7 @@ namespace NeuroInventory
             values["address"] = !String.IsNullOrEmpty(p_Address) ? (object) p_Address : DBNull.Value;
             values["phone"] = !String.IsNullOrEmpty(p_Phone) ? (object)p_Phone : DBNull.Value;
             values["mail"] = !String.IsNullOrEmpty(p_Mail) ? (object)p_Mail : DBNull.Value;
-
-            // Копирование выбранного файла-документа в целевую папку приложения
-            if (!String.IsNullOrEmpty(p_Document))
-            {
-                values["document"] = CopyFile(p_Document);
-            }
-            else
-            {
-                values["document"] = DBNull.Value;
-            }
+            values["document"] = InsertFile(p_Document);
 
             SQLiteManager.GetInstance().Insert(TableName, values);
         }
@@ -63,28 +54,7 @@ namespace NeuroInventory
             values["address"] = !String.IsNullOrEmpty(p_Address) ? (object)p_Address : DBNull.Value;
             values["phone"] = !String.IsNullOrEmpty(p_Phone) ? (object)p_Phone : DBNull.Value;
             values["mail"] = !String.IsNullOrEmpty(p_Mail) ? (object)p_Mail : DBNull.Value;
-
-            // Обновление выбранного файла-документа. 
-            if (!String.IsNullOrEmpty(p_SelectedDocument))
-            {
-                if (IsDocumentUpdated(p_SelectedDocument, p_CurrentDocument)) // файл изменен
-                {
-                    // Удаляем старый файл
-                    DeleteFile(p_CurrentDocument);
-                    // Копируем новый файл
-                    values["document"] = CopyFile(p_SelectedDocument);
-                }
-                else
-                {
-                    values["document"] = p_CurrentDocument;
-                }
-            }
-            else
-            {
-                values["document"] = DBNull.Value;
-                // Удаляем старый файл
-                DeleteFile(p_CurrentDocument);
-            }
+            values["document"] = UpdateFile(p_SelectedDocument, p_CurrentDocument);
 
             string l_Where = $"id={p_Id}";
 

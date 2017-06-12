@@ -51,7 +51,7 @@ namespace NeuroInventory
             }
         }
 
-        public void CreateReport(string p_DestinationPath, DataSet p_DataSetDemandReport, Dictionary<string, string> p_FieldsData)
+        public bool CreateReport(string p_DestinationPath, DataSet p_DataSetDemandReport, Dictionary<string, string> p_FieldsData)
         {
             try
             {
@@ -82,10 +82,14 @@ namespace NeuroInventory
 
                 document.SaveToFile(p_DestinationPath, FileFormat.Doc);
                 WordDocViewer(p_DestinationPath);
+
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+
+                return false;
             }
         }
 

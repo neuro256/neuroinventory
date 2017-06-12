@@ -137,5 +137,43 @@ namespace NeuroInventory
                 File.Delete(p_FileName);
             }
         }
+
+        public object UpdateFile(string p_SelectedDocument, string p_CurrentDocument)
+        {
+            // Обновление выбранного файла-документа. 
+            if (!String.IsNullOrEmpty(p_SelectedDocument))
+            {
+                if (IsDocumentUpdated(p_SelectedDocument, p_CurrentDocument)) // файл изменен
+                {
+                    // Удаляем старый файл
+                    DeleteFile(p_CurrentDocument);
+                    // Копируем новый файл
+                    return CopyFile(p_SelectedDocument);
+                }
+                else
+                {
+                    return p_CurrentDocument;
+                }
+            }
+            else
+            {
+                // Удаляем старый файл
+                DeleteFile(p_CurrentDocument);
+                return DBNull.Value;
+            }
+        }
+
+        public object InsertFile(string p_SelectedDocument)
+        {
+            // Копирование выбранного файла-документа в целевую папку приложения
+            if (!String.IsNullOrEmpty(p_SelectedDocument))
+            {
+                return CopyFile(p_SelectedDocument);
+            }
+            else
+            {
+                return DBNull.Value;
+            }
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace NeuroInventory
         {
             CommandDataSet = String.Empty;
             TableName = "demandReport";
+            SetTargetPath(@"documents\demandReports");
         }
 
         public void SetCommandDataSet()
@@ -71,6 +72,39 @@ namespace NeuroInventory
             }
             dataSetCatalogs.Dispose();
             return;
+        }
+
+        public void Insert(int p_EmployeeId, DateTime p_Date, string p_Document)
+        {
+            Dictionary<string, object> values = new Dictionary<string, object>();
+
+            values["employeeId"] = p_EmployeeId;
+            values["date"] = p_Date;
+            values["document"] = InsertFile(p_Document);
+
+            SQLiteManager.GetInstance().Insert(TableName, values);
+        }
+
+        public void Update(object p_Id, int p_EmployeeId, DateTime p_Date, string p_SelectedDocument, string p_CurrentDocument)
+        {
+            Dictionary<string, object> values = new Dictionary<string, object>();
+
+            values["employeeId"] = p_EmployeeId;
+            values["date"] = p_Date;
+            values["document"] = UpdateFile(p_SelectedDocument, p_CurrentDocument);
+
+            string l_Where = $"id={p_Id}";
+
+            SQLiteManager.GetInstance().Update(TableName, values, l_Where);
+        }
+
+        public void Remove(int p_ListviewSelectedItemIndex)
+        {
+            DataSet dataSet = ReturnDataSet();
+            object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
+            string l_Where = $"id={selectedRecordId}";
+
+            SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }
     }
 }

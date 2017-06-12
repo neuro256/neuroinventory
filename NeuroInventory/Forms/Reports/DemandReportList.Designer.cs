@@ -155,6 +155,8 @@
             this.Controls.Add(this.tableLayoutPanelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "DemandReportList";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Список требований";
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.panelDemandReportListBottom.ResumeLayout(false);

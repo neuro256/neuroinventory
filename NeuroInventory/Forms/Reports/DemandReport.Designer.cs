@@ -183,6 +183,8 @@
             this.Controls.Add(this.tableLayoutPanelDemandReport);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "DemandReport";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Формирование требования-накладной";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DemandReport_FormClosing);
             this.Shown += new System.EventHandler(this.DemandReport_Shown);

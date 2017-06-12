@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AuthenticationEditor));
             this.lblLogin = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.tbLogin = new System.Windows.Forms.TextBox();
@@ -125,7 +126,10 @@
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblLogin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AuthenticationEditor";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Сменить логин и/или пароль";
             this.TopMost = true;

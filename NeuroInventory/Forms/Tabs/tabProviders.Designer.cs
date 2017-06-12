@@ -39,11 +39,11 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panelProvidersBottom = new System.Windows.Forms.Panel();
+            this.btnFilter = new System.Windows.Forms.Button();
             this.btnProviderEdit = new System.Windows.Forms.Button();
             this.btnProviderRemove = new System.Windows.Forms.Button();
             this.btnProviderAdd = new System.Windows.Forms.Button();
             this.contextMenuStripProviders = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnFilter = new System.Windows.Forms.Button();
             this.tableLayoutPanelProviders.SuspendLayout();
             this.panelProvidersBottom.SuspendLayout();
             this.SuspendLayout();
@@ -135,6 +135,19 @@
             this.panelProvidersBottom.Size = new System.Drawing.Size(1200, 55);
             this.panelProvidersBottom.TabIndex = 1;
             // 
+            // btnFilter
+            // 
+            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFilter.Location = new System.Drawing.Point(1004, 10);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(184, 33);
+            this.btnFilter.TabIndex = 6;
+            this.btnFilter.Text = "Фильтр";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
             // btnProviderEdit
             // 
             this.btnProviderEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -180,19 +193,6 @@
             this.contextMenuStripProviders.Name = "contextMenuStripProviders";
             this.contextMenuStripProviders.Size = new System.Drawing.Size(67, 4);
             // 
-            // btnFilter
-            // 
-            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFilter.Location = new System.Drawing.Point(1004, 10);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(184, 33);
-            this.btnFilter.TabIndex = 6;
-            this.btnFilter.Text = "Фильтр";
-            this.btnFilter.UseVisualStyleBackColor = true;
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
-            // 
             // TabProviders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -203,6 +203,7 @@
             this.Controls.Add(this.tableLayoutPanelProviders);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TabProviders";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "tabProviders";
             this.tableLayoutPanelProviders.ResumeLayout(false);

@@ -189,6 +189,8 @@
             this.Controls.Add(this.lblAddress);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ProvidersFilter";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Поиск сотрудника";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProvidersFilter_FormClosing);

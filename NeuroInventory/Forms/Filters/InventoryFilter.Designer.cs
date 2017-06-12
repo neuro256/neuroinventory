@@ -330,6 +330,8 @@
             this.Controls.Add(this.lblDate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "InventoryFilter";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Поиск сотрудника";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InventoryFilter_FormClosing);

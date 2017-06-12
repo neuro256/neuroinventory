@@ -183,6 +183,8 @@
             this.Controls.Add(this.lblFirstname);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "EmployeeEditor";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Редактор сотрудника";
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderEmployees)).EndInit();
             this.ResumeLayout(false);

@@ -211,6 +211,8 @@
             this.Controls.Add(this.tbName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ProviderEditor";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Редактор поставщика";
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderProviders)).EndInit();
             this.ResumeLayout(false);

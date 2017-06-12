@@ -189,6 +189,8 @@
             this.Controls.Add(this.lblFirstname);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EmployeeFilter";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Поиск сотрудника";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EmployeeFilter_FormClosing);

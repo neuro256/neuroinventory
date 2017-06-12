@@ -289,6 +289,8 @@
             this.Controls.Add(this.lblProvider);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "InventoryEditor";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Редактор ТМЦ";
             this.Shown += new System.EventHandler(this.InventoryEditor_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();

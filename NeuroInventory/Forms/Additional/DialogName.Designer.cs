@@ -100,6 +100,8 @@
             this.Controls.Add(this.lblName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "DialogName";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Выбор имени";
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderName)).EndInit();

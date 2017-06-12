@@ -16,7 +16,7 @@ namespace NeuroInventory
         {
             CommandDataSet = "SELECT id, " +
                 "(SELECT surename || ' ' || firstname || ' ' || lastname" +
-                " FROM employees WHERE employees.id = demand.employeeId) AS employeeId, " +
+                " FROM employees WHERE employees.id = demandReport.employeeId) AS employeeId, " +
                 "strftime('%d.%m.%Y', DATE(date)) AS date, " +
                 "document " + 
                 "FROM demandReport";

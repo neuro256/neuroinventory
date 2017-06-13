@@ -48,7 +48,7 @@ namespace NeuroInventory
                 $"FROM inventory LEFT JOIN demand ON demand.inventoryId = inventory.id WHERE demand.employeeId = {p_EmployeeId} " +
                 $"AND (inventory.catalogId={p_CatalogId} " +
                 catalogIdsStr +
-                $");";
+                ");";
         }
 
         private List<int> GetCatalogIds(int p_Id)

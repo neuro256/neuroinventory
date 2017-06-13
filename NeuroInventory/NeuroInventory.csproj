@@ -138,6 +138,7 @@
       <DependentUpon>EmployeeFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ReportsClasses\SpireXlsWrapper.cs" />
     <Compile Include="UtilityClasses\NeuroFile.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -313,6 +314,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Templates\templateDebit.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Templates\templateDemand.doc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

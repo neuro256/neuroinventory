@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public partial class DemandReport : Form
+    public partial class DemandReport : Form, IReportView
     {
         private int m_lwSelectedIndex;
 
@@ -20,7 +20,7 @@ namespace NeuroInventory
             InitControls();
         }
 
-        private void InitControls()
+        public void InitControls()
         {
             cbEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
             cbEmployee.Sorted = false;
@@ -57,7 +57,7 @@ namespace NeuroInventory
             lwDemandReport.Columns.Add(new ColHeader("Дата", 100, System.Windows.Forms.HorizontalAlignment.Left, true)); // 11
         }
 
-        private void ShowTable()
+        public void ShowTable()
         {
             if (!SQLiteManager.GetInstance().TestConnection())
                 return;
@@ -95,7 +95,7 @@ namespace NeuroInventory
             }
         }
 
-        private DataSet ReturnDataSet()
+        public DataSet ReturnDataSet()
         {
             int l_SelectedEmployeeId = cbEmployee.SelectedValue != null ? Convert.ToInt32(cbEmployee.SelectedValue) : 0;
             int l_SelectedCatalogId = cbCatalog.SelectedValue != null ? Convert.ToInt32(cbCatalog.SelectedValue) : 0;
@@ -284,7 +284,7 @@ namespace NeuroInventory
             CreateReport();
         }
 
-        private void CreateReport()
+        public void CreateReport()
         {
             if (lwDemandReport.CheckedItems.Count > 0)
             {

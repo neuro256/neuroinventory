@@ -253,9 +253,9 @@ namespace NeuroInventory
             if (lwDebitReport.CheckedItems.Count > 0)
             {
                 DataSet dataSetDebitReport = GetDebitReportDataSet();
-                Dictionary<string, string> DebitReportFieldsData = GetReportFieldsData();
+                Dictionary<string, object> DebitReportFieldsData = GetReportFieldsData();
 
-                SpireXlsWrapper spireDoc = new SpireXlsWrapper();
+                ISpireReportWrapper spireDoc = new SpireXlsWrapper();
 
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "Файлы документов (*.xls)|*.xls";
@@ -273,9 +273,9 @@ namespace NeuroInventory
             }
         }
 
-        private Dictionary<string, string> GetReportFieldsData()
+        private Dictionary<string, object> GetReportFieldsData()
         {
-            Dictionary<string, string> fieldsData = new Dictionary<string, string>();
+            Dictionary<string, object> fieldsData = new Dictionary<string, object>();
             fieldsData["Date"] = dateTimePicker.Value.ToShortDateString();
             fieldsData["TotalPrice"] = GetTotalPrice().ToString();
             fieldsData["TotalPriceStr"] = GetTotalPriceStr();

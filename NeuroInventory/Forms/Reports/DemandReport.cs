@@ -139,9 +139,9 @@ namespace NeuroInventory
             return DateAndMoneyConverter.CurrencyToTxtFull(GetTotalPrice(), false);
         }
 
-        private Dictionary<string, string> GetReportFieldsData()
+        private Dictionary<string, object> GetReportFieldsData()
         {
-            Dictionary<string, string> fieldsData = new Dictionary<string, string>();
+            Dictionary<string, object> fieldsData = new Dictionary<string, object>();
             fieldsData["EmployeeInitialsBefore"] = $"{GetEmployeeInitials()} {GetEmployeeName()}";
             fieldsData["EmployeeInitialsAfter"] = $"{GetEmployeeName()} {GetEmployeeInitials()}";
             fieldsData["EmployeePost"] = GetEmployeePost();
@@ -289,9 +289,9 @@ namespace NeuroInventory
             if (lwDemandReport.CheckedItems.Count > 0)
             {
                 DataSet dataSetDemandReport = GetDemandReportDataSet();
-                Dictionary<string, string> demandReportFieldsData = GetReportFieldsData();
+                Dictionary<string, object> demandReportFieldsData = GetReportFieldsData();
 
-                SpireDocWrapper spireDoc = new SpireDocWrapper();
+                ISpireReportWrapper spireDoc = new SpireDocWrapper();
 
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "Файлы документов (*.doc)|*.doc";

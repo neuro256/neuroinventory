@@ -6,13 +6,13 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public class SpireXlsWrapper
+    public class SpireXlsWrapper : ISpireReportWrapper
     {
         private string m_TemplateSourcePath = @"templateDebit.xls";
 
         public string TemplateSourcePath { get => m_TemplateSourcePath; set => m_TemplateSourcePath = value; }
 
-        public bool CreateReport(string p_DestinationPath, DataSet p_DataSetDebitReport, Dictionary<string, string> p_FieldsData)
+        public bool CreateReport(string p_DestinationPath, DataSet p_DataSet, Dictionary<string, object> p_AdditionalData)
         {
             try
             {
@@ -21,12 +21,12 @@ namespace NeuroInventory
 
                 Worksheet sheet = book.Worksheets[0];
 
-                DataTable dataTable = (DataTable)p_DataSetDebitReport.Tables[0];
+                DataTable dataTable = p_DataSet.Tables[0];
 
                 // fill DataTable
                 book.MarkerDesigner.AddDataTable("DebitReport", dataTable);
                 // fill parameter
-                foreach(KeyValuePair<string, string> param in p_FieldsData)
+                foreach(KeyValuePair<string, object> param in p_AdditionalData)
                 {
                     book.MarkerDesigner.AddParameter(param.Key, param.Value);
                 }
@@ -37,7 +37,7 @@ namespace NeuroInventory
 
                 // save to file
                 book.SaveToFile(p_DestinationPath);
-                ExcelDocViewer(p_DestinationPath);
+                DocumentViewer(p_DestinationPath);
 
                 return true;
             }
@@ -49,11 +49,11 @@ namespace NeuroInventory
             }
         }
 
-        private void ExcelDocViewer(string fileName)
+        public void DocumentViewer(string p_FileName)
         {
             try
             {
-                NeuroFile.GetInstance().OpenFile(fileName);
+                NeuroFile.GetInstance().OpenFile(p_FileName);
             }
             catch { }
         }

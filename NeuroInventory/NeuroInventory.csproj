@@ -95,6 +95,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Reports\DebitReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reports\DebitReport.Designer.cs">
+      <DependentUpon>DebitReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reports\DebitReportList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reports\DebitReportList.Designer.cs">
+      <DependentUpon>DebitReportList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Reports\DemandReportList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,8 +149,11 @@
     <Compile Include="Forms\Filters\EmployeeFilter.Designer.cs">
       <DependentUpon>EmployeeFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Reports\IReportView.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ReportsClasses\ISpireReportWrapper.cs" />
     <Compile Include="ReportsClasses\SpireXlsWrapper.cs" />
+    <Compile Include="SQLiteClasses\Tables\DebitReportSql.cs" />
     <Compile Include="UtilityClasses\NeuroFile.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -242,6 +257,12 @@
       <DependentUpon>TabEmployees.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityClasses\TreeNodeExtension.cs" />
+    <EmbeddedResource Include="Forms\Reports\DebitReport.resx">
+      <DependentUpon>DebitReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reports\DebitReportList.resx">
+      <DependentUpon>DebitReportList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Reports\DemandReportList.resx">
       <DependentUpon>DemandReportList.cs</DependentUpon>
     </EmbeddedResource>

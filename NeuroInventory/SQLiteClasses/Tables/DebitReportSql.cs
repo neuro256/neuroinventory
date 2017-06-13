@@ -38,7 +38,7 @@ namespace NeuroInventory
                 "inventory.amount as inventoryAmount, " +
                 "debit.debitAmount, " +
                 @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price, " +
-                @"printf(""%.2f"", ((debit.debitAmount * price) / 100)) AS sum," +
+                @"printf(""%.2f"", ((debit.debitAmount * price) / 100)) AS sum " +
                 "FROM inventory LEFT JOIN " +
                 "(SELECT inventoryId, sum(amount) AS debitAmount FROM debit GROUP BY inventoryId) AS debit " +
                 "ON inventory.id = debit.inventoryId " +

@@ -206,6 +206,16 @@ namespace NeuroInventory
             DemandReportViewSelector();
         }
 
+        /// <summary>
+        /// Создание отчета списание
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonDebitReport_Click(object sender, EventArgs e)
+        {
+            DebitReportViewSelector();
+        }
+
         private void DemandReportViewSelector()
         {
             if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
@@ -226,19 +236,24 @@ namespace NeuroInventory
             }
         }
 
-        /// <summary>
-        /// Создание отчета списание
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void toolStripButtonDebitReport_Click(object sender, EventArgs e)
+        private void DebitReportViewSelector()
         {
-            OpenDebitReport();
-        }
+            if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
+            {
+                MessageBox.Show(Definitions.BD_NOT_CREATED_OR_OPENED);
+                return;
+            }
 
-        private void debitReportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenDebitReport();
+            ReportViewSelection viewSelection = new ReportViewSelection();
+            viewSelection.StartPosition = FormStartPosition.CenterParent;
+            if (viewSelection.ShowDialog() == DialogResult.OK)
+            {
+                OpenDebitReport();
+            }
+            else
+            {
+                OpenDebitReportList();
+            }
         }
 
         private void OpenDemandReport()
@@ -250,6 +265,19 @@ namespace NeuroInventory
             }
 
             DemandReport report = new DemandReport();
+            report.StartPosition = FormStartPosition.CenterParent;
+            report.ShowDialog();
+        }
+
+        private void OpenDebitReport()
+        {
+            if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
+            {
+                MessageBox.Show(Definitions.BD_NOT_CREATED_OR_OPENED);
+                return;
+            }
+
+            DebitReport report = new DebitReport();
             report.StartPosition = FormStartPosition.CenterParent;
             report.ShowDialog();
         }
@@ -267,14 +295,17 @@ namespace NeuroInventory
             reportList.ShowDialog();
         }
 
-        private void OpenDebitReport()
+        private void OpenDebitReportList()
         {
             if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
             {
                 MessageBox.Show(Definitions.BD_NOT_CREATED_OR_OPENED);
                 return;
             }
-            // TODO
+
+            DebitReportList reportList = new DebitReportList();
+            reportList.StartPosition = FormStartPosition.CenterParent;
+            reportList.ShowDialog();
         }
 
         private void demandReportEditorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -285,6 +316,16 @@ namespace NeuroInventory
         private void demandReportListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenDemandReportList();
+        }
+
+        private void debitReportEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDebitReport();
+        }
+
+        private void debitReportListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDebitReportList();
         }
     }
 }

@@ -55,6 +55,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonDebitReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDemandReport = new System.Windows.Forms.ToolStripButton();
+            this.debitReportEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debitReportListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabInventory.SuspendLayout();
@@ -169,23 +171,25 @@
             // demandReportEditorToolStripMenuItem
             // 
             this.demandReportEditorToolStripMenuItem.Name = "demandReportEditorToolStripMenuItem";
-            this.demandReportEditorToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.demandReportEditorToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.demandReportEditorToolStripMenuItem.Text = "Редактор";
             this.demandReportEditorToolStripMenuItem.Click += new System.EventHandler(this.demandReportEditorToolStripMenuItem_Click);
             // 
             // demandReportListToolStripMenuItem
             // 
             this.demandReportListToolStripMenuItem.Name = "demandReportListToolStripMenuItem";
-            this.demandReportListToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.demandReportListToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.demandReportListToolStripMenuItem.Text = "Список";
             this.demandReportListToolStripMenuItem.Click += new System.EventHandler(this.demandReportListToolStripMenuItem_Click);
             // 
             // debitReportToolStripMenuItem
             // 
+            this.debitReportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.debitReportEditorToolStripMenuItem,
+            this.debitReportListToolStripMenuItem});
             this.debitReportToolStripMenuItem.Name = "debitReportToolStripMenuItem";
             this.debitReportToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
             this.debitReportToolStripMenuItem.Text = "Списание";
-            this.debitReportToolStripMenuItem.Click += new System.EventHandler(this.debitReportToolStripMenuItem_Click);
             // 
             // tabControl
             // 
@@ -318,6 +322,20 @@
             this.toolStripButtonDemandReport.Text = "Требование-накладная";
             this.toolStripButtonDemandReport.Click += new System.EventHandler(this.toolStripButtonDemandReport_Click);
             // 
+            // debitReportEditorToolStripMenuItem
+            // 
+            this.debitReportEditorToolStripMenuItem.Name = "debitReportEditorToolStripMenuItem";
+            this.debitReportEditorToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.debitReportEditorToolStripMenuItem.Text = "Редактор";
+            this.debitReportEditorToolStripMenuItem.Click += new System.EventHandler(this.debitReportEditorToolStripMenuItem_Click);
+            // 
+            // debitReportListToolStripMenuItem
+            // 
+            this.debitReportListToolStripMenuItem.Name = "debitReportListToolStripMenuItem";
+            this.debitReportListToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.debitReportListToolStripMenuItem.Text = "Список";
+            this.debitReportListToolStripMenuItem.Click += new System.EventHandler(this.debitReportListToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -375,6 +393,8 @@
         private System.Windows.Forms.ToolStripMenuItem debitReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem demandReportEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem demandReportListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem debitReportEditorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem debitReportListToolStripMenuItem;
     }
 }
 

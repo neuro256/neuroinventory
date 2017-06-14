@@ -327,5 +327,12 @@ namespace NeuroInventory
         {
             OpenDebitReportList();
         }
+
+        private void aboutBoxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox aboutBox = new AboutBox();
+            aboutBox.StartPosition = FormStartPosition.CenterParent;
+            aboutBox.ShowDialog();
+        }
     }
 }

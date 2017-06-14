@@ -123,6 +123,16 @@ namespace NeuroInventory.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap inventory2_128 {
+            get {
+                object obj = ResourceManager.GetObject("inventory2_128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap list_128 {
             get {
                 object obj = ResourceManager.GetObject("list_128", resourceCulture);

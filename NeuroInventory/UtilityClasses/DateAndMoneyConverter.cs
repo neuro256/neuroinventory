@@ -94,7 +94,7 @@ namespace NeuroInventory
         /// <returns></returns>
         public static string DateToTextLong(DateTime _date, string _year)
         {
-            return String.Format("«{0}» {1} {2}",
+            return String.Format("{0} {1} {2}",
                                     _date.Day.ToString("D2"),
                                     MonthName(_date.Month, TextCase.Genitive),
                                     _date.Year.ToString()) + ((_year.Length != 0) ? " " : "") + _year;

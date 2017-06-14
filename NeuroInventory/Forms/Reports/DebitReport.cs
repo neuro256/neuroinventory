@@ -111,7 +111,7 @@ namespace NeuroInventory
 
         private string GetTotalPriceStr()
         {
-            return DateAndMoneyConverter.CurrencyToTxtFull(GetTotalPrice(), false);
+            return DateAndMoneyConverter.CurrencyToTxt(GetTotalPrice(), true);
         }
 
         private void DebitReport_Shown(object sender, EventArgs e)
@@ -276,8 +276,9 @@ namespace NeuroInventory
         private Dictionary<string, object> GetReportFieldsData()
         {
             Dictionary<string, object> fieldsData = new Dictionary<string, object>();
-            fieldsData["Date"] = dateTimePicker.Value.ToShortDateString();
-            fieldsData["TotalPrice"] = GetTotalPrice().ToString();
+            fieldsData["Date"] = DateAndMoneyConverter.DateToTextLong(dateTimePicker.Value, "г.");
+            fieldsData["Date2"] = DateAndMoneyConverter.DateToTextLong(dateTimePicker.Value, "г.");
+            fieldsData["TotalPrice"] = Convert.ToDecimal(GetTotalPrice(), CultureInfo.InvariantCulture).ToString("#.00"); 
             fieldsData["TotalPriceStr"] = GetTotalPriceStr();
 
             return fieldsData;

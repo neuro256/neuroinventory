@@ -103,7 +103,7 @@ namespace NeuroInventory
             {
                 foreach (ListViewItem item in lwDebitReport.CheckedItems)
                 {
-                    sum += Convert.ToDouble(item.SubItems[5].Text, CultureInfo.InvariantCulture) * Convert.ToDouble(item.SubItems[9].Text, CultureInfo.InvariantCulture);
+                    sum += Convert.ToDouble(item.SubItems[7].Text, CultureInfo.InvariantCulture);
                 }
             }
             return sum;
@@ -255,13 +255,13 @@ namespace NeuroInventory
                 DataSet dataSetDebitReport = GetDebitReportDataSet();
                 Dictionary<string, object> DebitReportFieldsData = GetReportFieldsData();
 
-                ISpireReportWrapper spireDoc = new SpireXlsWrapper();
+                ISpireReportWrapper gemboxReport = new GemboxXlsWrapper();
 
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "Файлы документов (*.xls)|*.xls";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    if(spireDoc.CreateReport(saveFileDialog.FileName, dataSetDebitReport, DebitReportFieldsData))
+                    if(gemboxReport.CreateReport(saveFileDialog.FileName, dataSetDebitReport, DebitReportFieldsData))
                     {
                         SQLiteManager.GetInstance().DebitReport().Insert(DateTime.Now, saveFileDialog.FileName);
                     }
@@ -285,15 +285,6 @@ namespace NeuroInventory
 
         private DataSet GetDebitReportDataSet()
         {
-            lwDebitReport.Columns.Add(new ColHeader("№", 50, System.Windows.Forms.HorizontalAlignment.Left, true)); // 0
-            lwDebitReport.Columns.Add(new ColHeader("Наименование", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 1
-            lwDebitReport.Columns.Add(new ColHeader("Код ОКЕИ", 140, System.Windows.Forms.HorizontalAlignment.Left, true)); // 2
-            lwDebitReport.Columns.Add(new ColHeader("Единица измерения", 100, System.Windows.Forms.HorizontalAlignment.Left, true)); // 3
-            lwDebitReport.Columns.Add(new ColHeader("Общее количество", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 4
-            lwDebitReport.Columns.Add(new ColHeader("Количество списанного", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 5
-            lwDebitReport.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true)); // 6
-            lwDebitReport.Columns.Add(new ColHeader("Сумма списанного", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 7
-
             DataTable DebitReportTable = new DataTable("DebitReport");
             DebitReportTable.Columns.Add("id");
             DebitReportTable.Columns.Add("number");

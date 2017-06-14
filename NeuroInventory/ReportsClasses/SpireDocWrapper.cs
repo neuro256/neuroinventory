@@ -9,7 +9,7 @@ namespace NeuroInventory
 {
     public class SpireDocWrapper : ISpireReportWrapper
     {
-        private string m_TemplateSourcePath = @"templateDemand.doc";
+        private string m_TemplateSourcePath = @"Templates\templateDemand.doc";
 
         public bool CreateReport(string p_DestinationPath, DataSet p_DataSet, Dictionary<string, object> p_AdditionalData)
         {

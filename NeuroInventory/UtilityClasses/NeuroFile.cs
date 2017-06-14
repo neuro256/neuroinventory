@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace NeuroInventory
 {
@@ -14,18 +15,26 @@ namespace NeuroInventory
 
         public void OpenFileInExplorer(string p_SelectedDocument)
         {
-            if (File.Exists(p_SelectedDocument))
+            try
             {
-                System.Diagnostics.Process.Start("explorer.exe", "/select, \"" + p_SelectedDocument + "\"");
+                if (File.Exists(p_SelectedDocument))
+                {
+                    System.Diagnostics.Process.Start("explorer.exe", "/select, \"" + p_SelectedDocument + "\"");
+                }
             }
+            catch { }
         }
 
         public void OpenFile(string p_SelectedDocument)
         {
-            if (File.Exists(p_SelectedDocument))
+            try
             {
-                System.Diagnostics.Process.Start(p_SelectedDocument);
+                if (File.Exists(p_SelectedDocument))
+                {
+                    System.Diagnostics.Process.Start(p_SelectedDocument);
+                }
             }
+            catch { }
         }
 
         /// <summary>
@@ -43,60 +52,91 @@ namespace NeuroInventory
 
         public string CopyFile(string p_FileName, string p_TargetPath)
         {
-            string fileNameWithoutExt = Path.GetFileNameWithoutExtension(p_FileName);
-            string fileExt = Path.GetExtension(p_FileName);
-            string sourceFile = p_FileName;
-            string destFile = Path.Combine(p_TargetPath, $"{fileNameWithoutExt}_{DateTime.Now.ToFileTime()}{fileExt}");
-            if (!Directory.Exists(p_TargetPath))
+            try
             {
-                Directory.CreateDirectory(p_TargetPath);
+                string fileNameWithoutExt = Path.GetFileNameWithoutExtension(p_FileName);
+                string fileExt = Path.GetExtension(p_FileName);
+                string sourceFile = p_FileName;
+                string destFile = Path.Combine(p_TargetPath, $"{fileNameWithoutExt}_{DateTime.Now.ToFileTime()}{fileExt}");
+                if (!Directory.Exists(p_TargetPath))
+                {
+                    Directory.CreateDirectory(p_TargetPath);
+                }
+                File.Copy(sourceFile, destFile, true);
+                return destFile;
             }
-            File.Copy(sourceFile, destFile, true);
-            return destFile;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return String.Empty;
+            }
         }
 
         public void DeleteFile(string p_FileName)
         {
-            if (File.Exists(p_FileName))
+            try
             {
-                File.Delete(p_FileName);
+                if (File.Exists(p_FileName))
+                {
+                    File.Delete(p_FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public object UpdateFile(string p_SelectedDocument, string p_CurrentDocument, string p_TargetPath)
         {
-            // Обновление выбранного файла-документа. 
-            if (!String.IsNullOrEmpty(p_SelectedDocument))
+            try
             {
-                if (IsDocumentUpdated(p_SelectedDocument, p_CurrentDocument)) // файл изменен
+                // Обновление выбранного файла-документа. 
+                if (!String.IsNullOrEmpty(p_SelectedDocument))
                 {
-                    // Удаляем старый файл
-                    DeleteFile(p_CurrentDocument);
-                    // Копируем новый файл
-                    return CopyFile(p_SelectedDocument, p_TargetPath);
+                    if (IsDocumentUpdated(p_SelectedDocument, p_CurrentDocument)) // файл изменен
+                    {
+                        // Удаляем старый файл
+                        DeleteFile(p_CurrentDocument);
+                        // Копируем новый файл
+                        return CopyFile(p_SelectedDocument, p_TargetPath);
+                    }
+                    else
+                    {
+                        return p_CurrentDocument;
+                    }
                 }
                 else
                 {
-                    return p_CurrentDocument;
+                    // Удаляем старый файл
+                    DeleteFile(p_CurrentDocument);
+                    return DBNull.Value;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                // Удаляем старый файл
-                DeleteFile(p_CurrentDocument);
+                MessageBox.Show(ex.Message);
                 return DBNull.Value;
             }
         }
 
         public object InsertFile(string p_SelectedDocument, string p_TargetPath)
         {
-            // Копирование выбранного файла-документа в целевую папку приложения
-            if (!String.IsNullOrEmpty(p_SelectedDocument))
+            try
             {
-                return CopyFile(p_SelectedDocument, p_TargetPath);
+                // Копирование выбранного файла-документа в целевую папку приложения
+                if (!String.IsNullOrEmpty(p_SelectedDocument))
+                {
+                    return CopyFile(p_SelectedDocument, p_TargetPath);
+                }
+                else
+                {
+                    return DBNull.Value;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 return DBNull.Value;
             }
         }

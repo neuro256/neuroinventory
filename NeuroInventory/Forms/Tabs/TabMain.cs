@@ -127,18 +127,22 @@ namespace NeuroInventory
 
         private void RecursiveRemoveFolder(int p_Id)
         {
-            DataSet dataSetChilds = SQLiteManager.GetInstance().Catalogs().ReturnDataSet($"SELECT * FROM catalogs WHERE parent={p_Id}");
-            if (dataSetChilds?.Tables[0]?.Rows?.Count > 0)
+            try
             {
-                foreach (DataRow childRow in dataSetChilds.Tables[0].Rows)
+                DataSet dataSetChilds = SQLiteManager.GetInstance().Catalogs().ReturnDataSet($"SELECT * FROM catalogs WHERE parent={p_Id}");
+                if (dataSetChilds?.Tables[0]?.Rows?.Count > 0)
                 {
-                    RecursiveRemoveFolder(Convert.ToInt32(childRow["id"]));
+                    foreach (DataRow childRow in dataSetChilds.Tables[0].Rows)
+                    {
+                        RecursiveRemoveFolder(Convert.ToInt32(childRow["id"]));
+                    }
                 }
+                SQLiteManager.GetInstance().Catalogs().Remove(p_Id);
+                TreeNode removedNode = GetNodeByKey(p_Id.ToString());
+                treeView.Nodes.Remove(removedNode);
+                return;
             }
-            SQLiteManager.GetInstance().Catalogs().Remove(p_Id);
-            TreeNode removedNode = GetNodeByKey(p_Id.ToString());
-            treeView.Nodes.Remove(removedNode);
-            return;
+            catch { }
         }
 
         /// <summary>
@@ -174,84 +178,98 @@ namespace NeuroInventory
 
         private void AddNode(TreeNodeType p_Type)
         {
-            DialogName dialogName = new DialogName();
-            dialogName.StartPosition = FormStartPosition.CenterParent;
-            if (dialogName.ShowDialog() == DialogResult.OK)
+            try
             {
-                if (m_SelectedInventory != null && m_SelectedInventory.type == TreeNodeType.FOLDER)
+                DialogName dialogName = new DialogName();
+                dialogName.StartPosition = FormStartPosition.CenterParent;
+                if (dialogName.ShowDialog() == DialogResult.OK)
                 {
-                    // Добавить запись в таблицу Каталоги
-                    SQLiteManager.GetInstance().Catalogs().Insert((int)p_Type, m_SelectedInventory.id, dialogName.name);
-                    // Получить id добавленной записи
-                    int lastInsertId = SQLiteManager.GetInstance().Catalogs().ReturnLastInsertId();
-
-
-                    TreeViewTag tvTag = new TreeViewTag();
-                    tvTag.name = dialogName.name;
-                    tvTag.id = lastInsertId;
-                    tvTag.parent = m_SelectedInventory.id;
-                    tvTag.type = p_Type; 
-                    tvTag.isRoot = false;
-
-                    TreeNode newNode = new TreeNode();
-                    newNode.Name = lastInsertId.ToString();
-                    newNode.Text = dialogName.name;
-                    newNode.Tag = tvTag;
-
-                    if (p_Type == TreeNodeType.FOLDER)
+                    if (m_SelectedInventory != null && m_SelectedInventory.type == TreeNodeType.FOLDER)
                     {
-                        newNode.ImageIndex = 0; // folder image
-                        newNode.SelectedImageIndex = 0;
-                    }
-                    else
-                    {
-                        newNode.ImageIndex = 1; // file image
-                        newNode.SelectedImageIndex = 1;
-                    }
+                        // Добавить запись в таблицу Каталоги
+                        SQLiteManager.GetInstance().Catalogs().Insert((int)p_Type, m_SelectedInventory.id, dialogName.name);
+                        // Получить id добавленной записи
+                        int lastInsertId = SQLiteManager.GetInstance().Catalogs().ReturnLastInsertId();
 
-                    treeView.BeginUpdate();
-                    treeView.SelectedNode.Nodes.Add(newNode);
-                    newNode.Parent.Expand();
-                    treeView.EndUpdate();
+
+                        TreeViewTag tvTag = new TreeViewTag();
+                        tvTag.name = dialogName.name;
+                        tvTag.id = lastInsertId;
+                        tvTag.parent = m_SelectedInventory.id;
+                        tvTag.type = p_Type;
+                        tvTag.isRoot = false;
+
+                        TreeNode newNode = new TreeNode();
+                        newNode.Name = lastInsertId.ToString();
+                        newNode.Text = dialogName.name;
+                        newNode.Tag = tvTag;
+
+                        if (p_Type == TreeNodeType.FOLDER)
+                        {
+                            newNode.ImageIndex = 0; // folder image
+                            newNode.SelectedImageIndex = 0;
+                        }
+                        else
+                        {
+                            newNode.ImageIndex = 1; // file image
+                            newNode.SelectedImageIndex = 1;
+                        }
+
+                        treeView.BeginUpdate();
+                        treeView.SelectedNode.Nodes.Add(newNode);
+                        newNode.Parent.Expand();
+                        treeView.EndUpdate();
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void treeView_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            try
             {
-                treeView.SelectedNode = treeView.GetNodeAt(e.X, e.Y);
-
-                TreeViewTag tvTag = treeView.SelectedNode?.Tag as TreeViewTag ?? null;
-                if (tvTag != null)
+                if (e.Button == MouseButtons.Right)
                 {
-                    if (!tvTag.isRoot)
+                    treeView.SelectedNode = treeView.GetNodeAt(e.X, e.Y);
+
+                    TreeViewTag tvTag = treeView.SelectedNode?.Tag as TreeViewTag ?? null;
+                    if (tvTag != null)
                     {
-                        if (tvTag.type == TreeNodeType.FOLDER) // is folder
+                        if (!tvTag.isRoot)
+                        {
+                            if (tvTag.type == TreeNodeType.FOLDER) // is folder
+                            {
+                                contextMenuStripCatalogs.Items["addFolderItem"].Visible = true;
+                                contextMenuStripCatalogs.Items["addFileItem"].Visible = true;
+                                contextMenuStripCatalogs.Items["removeFolderItem"].Visible = true;
+                                contextMenuStripCatalogs.Items["removeFileItem"].Visible = false;
+                            }
+                            else if (tvTag.type == TreeNodeType.FILE) // is file
+                            {
+                                contextMenuStripCatalogs.Items["addFolderItem"].Visible = false;
+                                contextMenuStripCatalogs.Items["addFileItem"].Visible = false;
+                                contextMenuStripCatalogs.Items["removeFolderItem"].Visible = false;
+                                contextMenuStripCatalogs.Items["removeFileItem"].Visible = true;
+                            }
+                        }
+                        else // is root
                         {
                             contextMenuStripCatalogs.Items["addFolderItem"].Visible = true;
                             contextMenuStripCatalogs.Items["addFileItem"].Visible = true;
-                            contextMenuStripCatalogs.Items["removeFolderItem"].Visible = true;
+                            contextMenuStripCatalogs.Items["removeFolderItem"].Visible = false;
                             contextMenuStripCatalogs.Items["removeFileItem"].Visible = false;
                         }
-                        else if (tvTag.type == TreeNodeType.FILE) // is file
-                        {
-                            contextMenuStripCatalogs.Items["addFolderItem"].Visible = false;
-                            contextMenuStripCatalogs.Items["addFileItem"].Visible = false;
-                            contextMenuStripCatalogs.Items["removeFolderItem"].Visible = false;
-                            contextMenuStripCatalogs.Items["removeFileItem"].Visible = true;
-                        }
+                        contextMenuStripCatalogs.Show(treeView, e.Location);
                     }
-                    else // is root
-                    {
-                        contextMenuStripCatalogs.Items["addFolderItem"].Visible = true;
-                        contextMenuStripCatalogs.Items["addFileItem"].Visible = true;
-                        contextMenuStripCatalogs.Items["removeFolderItem"].Visible = false;
-                        contextMenuStripCatalogs.Items["removeFileItem"].Visible = false;
-                    }
-                    contextMenuStripCatalogs.Show(treeView, e.Location);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -297,44 +315,48 @@ namespace NeuroInventory
         /// <param name="p_Id"></param>
         private void FillTreeNode(TreeNode parentNode, int p_Id)
         {
-            DataSet dataSetChilds = SQLiteManager.GetInstance().Catalogs().ReturnDataSet($"SELECT * FROM catalogs WHERE parent = {p_Id}");
-
-            if (dataSetChilds?.Tables[0]?.Rows.Count > 0)
+            try
             {
-                foreach (DataRow catalogRow in dataSetChilds.Tables[0].Rows)
+                DataSet dataSetChilds = SQLiteManager.GetInstance().Catalogs().ReturnDataSet($"SELECT * FROM catalogs WHERE parent = {p_Id}");
+
+                if (dataSetChilds?.Tables[0]?.Rows.Count > 0)
                 {
-                    TreeViewTag tvTag = new TreeViewTag();
-                    tvTag.name = catalogRow["name"].ToString();
-                    tvTag.id = Convert.ToInt32(catalogRow["id"]);
-                    tvTag.parent = Convert.ToInt32(catalogRow["parent"]);
-                    tvTag.type = (TreeNodeType) Convert.ToInt32(catalogRow["type"]);
-                    tvTag.isRoot = false;
-
-                    TreeNode catalogNode = new TreeNode();
-                    catalogNode.Name = tvTag.id.ToString();
-                    catalogNode.Text = tvTag.name;
-                    catalogNode.Tag = tvTag;
-
-                    if (tvTag.type == TreeNodeType.FOLDER)
+                    foreach (DataRow catalogRow in dataSetChilds.Tables[0].Rows)
                     {
-                        catalogNode.ImageIndex = 0; // folder image
-                        catalogNode.SelectedImageIndex = 0;
-                    }
-                    else
-                    {
-                        catalogNode.ImageIndex = 1; // file image
-                        catalogNode.SelectedImageIndex = 1;
-                    }
+                        TreeViewTag tvTag = new TreeViewTag();
+                        tvTag.name = catalogRow["name"].ToString();
+                        tvTag.id = Convert.ToInt32(catalogRow["id"]);
+                        tvTag.parent = Convert.ToInt32(catalogRow["parent"]);
+                        tvTag.type = (TreeNodeType)Convert.ToInt32(catalogRow["type"]);
+                        tvTag.isRoot = false;
 
-                    parentNode.Nodes.Add(catalogNode);
+                        TreeNode catalogNode = new TreeNode();
+                        catalogNode.Name = tvTag.id.ToString();
+                        catalogNode.Text = tvTag.name;
+                        catalogNode.Tag = tvTag;
 
-                    FillTreeNode(catalogNode, tvTag.id);
+                        if (tvTag.type == TreeNodeType.FOLDER)
+                        {
+                            catalogNode.ImageIndex = 0; // folder image
+                            catalogNode.SelectedImageIndex = 0;
+                        }
+                        else
+                        {
+                            catalogNode.ImageIndex = 1; // file image
+                            catalogNode.SelectedImageIndex = 1;
+                        }
+
+                        parentNode.Nodes.Add(catalogNode);
+
+                        FillTreeNode(catalogNode, tvTag.id);
+                    }
                 }
+
+                dataSetChilds.Dispose();
+
+                return;
             }
-
-            dataSetChilds.Dispose();
-
-            return;
+            catch { }
         }
 
         private void treeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)

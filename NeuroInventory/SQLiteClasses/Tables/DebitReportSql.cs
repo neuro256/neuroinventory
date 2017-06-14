@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows.Forms;
 
 namespace NeuroInventory
 {
@@ -57,17 +58,27 @@ namespace NeuroInventory
         private void GetCatalogIds(int p_Id, List<int> p_CatalogIds)
         {
             DataSet dataSetCatalogs = SQLiteManager.GetInstance().Catalogs().ReturnDataSet($"SELECT id FROM catalogs WHERE parent = {p_Id}");
-            if (dataSetCatalogs?.Tables[0]?.Rows.Count > 0)
+            try
             {
-                foreach (DataRow catalogRow in dataSetCatalogs.Tables[0].Rows)
+                if (dataSetCatalogs?.Tables[0]?.Rows.Count > 0)
                 {
-                    int catalogId = Convert.ToInt32(catalogRow["id"]);
-                    p_CatalogIds.Add(catalogId);
-                    GetCatalogIds(catalogId, p_CatalogIds);
+                    foreach (DataRow catalogRow in dataSetCatalogs.Tables[0].Rows)
+                    {
+                        int catalogId = Convert.ToInt32(catalogRow["id"]);
+                        p_CatalogIds.Add(catalogId);
+                        GetCatalogIds(catalogId, p_CatalogIds);
+                    }
                 }
+                return;
             }
-            dataSetCatalogs.Dispose();
-            return;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                dataSetCatalogs.Dispose();
+            }
         }
 
         public void Insert(DateTime p_Date, string p_Document)

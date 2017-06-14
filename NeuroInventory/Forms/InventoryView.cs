@@ -116,39 +116,46 @@ namespace NeuroInventory
         /// <param name="e"></param>
         public void ListViewColumnClick(object sender, ColumnClickEventArgs e)
         {
-            // Create an instance of the ColHeader class.
-            ColHeader clickedCol = (ColHeader)m_Listview.Columns[e.Column];
-
-            // Set the ascending property to sort in the opposite order.
-            clickedCol.ascending = !clickedCol.ascending;
-
-            // Get the number of items in the list.
-            int numItems = m_Listview.Items.Count;
-
-            // Turn off display while data is repoplulated.
-            m_Listview.BeginUpdate();
-
-            // Populate an ArrayList with a SortWrapper of each list item.
-            ArrayList SortArray = new ArrayList();
-            for (int i = 0; i < numItems; i++)
+            try
             {
-                SortArray.Add(new SortWrapper(m_Listview.Items[i], e.Column));
+                // Create an instance of the ColHeader class.
+                ColHeader clickedCol = (ColHeader)m_Listview.Columns[e.Column];
+
+                // Set the ascending property to sort in the opposite order.
+                clickedCol.ascending = !clickedCol.ascending;
+
+                // Get the number of items in the list.
+                int numItems = m_Listview.Items.Count;
+
+                // Turn off display while data is repoplulated.
+                m_Listview.BeginUpdate();
+
+                // Populate an ArrayList with a SortWrapper of each list item.
+                ArrayList SortArray = new ArrayList();
+                for (int i = 0; i < numItems; i++)
+                {
+                    SortArray.Add(new SortWrapper(m_Listview.Items[i], e.Column));
+                }
+
+                // Sort the elements in the ArrayList using a new instance of the SortComparer
+                // class. The parameters are the starting index, the length of the range to sort,
+                // and the IComparer implementation to use for comparing elements. Note that
+                // the IComparer implementation (SortComparer) requires the sort
+                // direction for its constructor; true if ascending, othwise false.
+                SortArray.Sort(0, SortArray.Count, new SortWrapper.SortComparer(clickedCol.ascending));
+
+                // Clear the list, and repopulate with the sorted items.
+                m_Listview.Items.Clear();
+                for (int i = 0; i < numItems; i++)
+                    m_Listview.Items.Add(((SortWrapper)SortArray[i]).sortItem);
+
+                // Turn display back on.
+                m_Listview.EndUpdate();
             }
-
-            // Sort the elements in the ArrayList using a new instance of the SortComparer
-            // class. The parameters are the starting index, the length of the range to sort,
-            // and the IComparer implementation to use for comparing elements. Note that
-            // the IComparer implementation (SortComparer) requires the sort
-            // direction for its constructor; true if ascending, othwise false.
-            SortArray.Sort(0, SortArray.Count, new SortWrapper.SortComparer(clickedCol.ascending));
-
-            // Clear the list, and repopulate with the sorted items.
-            m_Listview.Items.Clear();
-            for (int i = 0; i < numItems; i++)
-                m_Listview.Items.Add(((SortWrapper)SortArray[i]).sortItem);
-
-            // Turn display back on.
-            m_Listview.EndUpdate();
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -158,12 +165,19 @@ namespace NeuroInventory
         /// <param name="e"></param>
         public void ListViewColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
         {
-            // Удаляем из обработчика
-            m_Listview.ColumnWidthChanged -= ListViewColumnWidthChanged;
-            // Изменяем размер
-            m_Listview.Columns[0].Width = 0;
-            // Возвращаем обработчику
-            m_Listview.ColumnWidthChanged += ListViewColumnWidthChanged;
+            try
+            {
+                // Удаляем из обработчика
+                m_Listview.ColumnWidthChanged -= ListViewColumnWidthChanged;
+                // Изменяем размер
+                m_Listview.Columns[0].Width = 0;
+                // Возвращаем обработчику
+                m_Listview.ColumnWidthChanged += ListViewColumnWidthChanged;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -173,14 +187,21 @@ namespace NeuroInventory
         /// <param name="e"></param>
         public void ListViewItemDoubleClick(object sender, MouseEventArgs e)
         {
-            ListViewHitTestInfo info = m_Listview.HitTest(e.X, e.Y);
-            ListViewItem item = info.Item;
-
-            if (item != null && item.Selected)
+            try
             {
-                m_ListviewSelectedIndex = item.Index;
-                UpdateRecord();
-                m_Listview.SelectedItems.Clear();
+                ListViewHitTestInfo info = m_Listview.HitTest(e.X, e.Y);
+                ListViewItem item = info.Item;
+
+                if (item != null && item.Selected)
+                {
+                    m_ListviewSelectedIndex = item.Index;
+                    UpdateRecord();
+                    m_Listview.SelectedItems.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -210,30 +231,33 @@ namespace NeuroInventory
 
         public virtual void ListViewItemMouseUp(object sender, MouseEventArgs e)
         {
-            //if ((m_Listview.GetItemAt(e.X, e.Y)?.SubItems[5]?.Bounds.Contains(e.X, e.Y) ?? false))
-            //{
-            //    MessageBox.Show($"Mouse up: {m_Listview.GetItemAt(e.X, e.Y).SubItems[5].Text}");
-            //}
-            if (e.Button == MouseButtons.Right)
+            try
             {
-                ListViewHitTestInfo info = m_Listview.HitTest(e.X, e.Y);
-                ListViewItem item = info.Item;
+                if (e.Button == MouseButtons.Right)
+                {
+                    ListViewHitTestInfo info = m_Listview.HitTest(e.X, e.Y);
+                    ListViewItem item = info.Item;
 
-                if (item != null)
-                {
-                    m_ListviewSelectedIndex = item.Index;
-                    m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = false;
-                    m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = true;
-                    m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = true;
+                    if (item != null)
+                    {
+                        m_ListviewSelectedIndex = item.Index;
+                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = false;
+                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = true;
+                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = true;
+                    }
+                    else
+                    {
+                        // No item is selected
+                        this.m_Listview.SelectedItems.Clear();
+                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = true;
+                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
+                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = false;
+                    }
                 }
-                else
-                {
-                    // No item is selected
-                    this.m_Listview.SelectedItems.Clear();
-                    m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = true;
-                    m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
-                    m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = false;
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

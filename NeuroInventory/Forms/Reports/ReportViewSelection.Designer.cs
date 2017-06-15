@@ -34,8 +34,8 @@
             // 
             // btnReportList
             // 
+            this.btnReportList.BackgroundImage = global::NeuroInventory.Properties.Resources.list_128;
             this.btnReportList.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnReportList.Image = global::NeuroInventory.Properties.Resources.list_128;
             this.btnReportList.Location = new System.Drawing.Point(146, 12);
             this.btnReportList.Name = "btnReportList";
             this.btnReportList.Size = new System.Drawing.Size(128, 128);
@@ -48,8 +48,8 @@
             // 
             // btnReportEditor
             // 
+            this.btnReportEditor.BackgroundImage = global::NeuroInventory.Properties.Resources.pen_128;
             this.btnReportEditor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnReportEditor.Image = global::NeuroInventory.Properties.Resources.pen_128;
             this.btnReportEditor.Location = new System.Drawing.Point(12, 12);
             this.btnReportEditor.Name = "btnReportEditor";
             this.btnReportEditor.Size = new System.Drawing.Size(128, 128);

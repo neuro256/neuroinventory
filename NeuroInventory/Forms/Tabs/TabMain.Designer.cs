@@ -80,14 +80,14 @@
             // 
             this.splitContainerMain.Panel1.AutoScroll = true;
             this.splitContainerMain.Panel1.Controls.Add(this.tableLayoutPanelLeft);
-            this.splitContainerMain.Panel1MinSize = 200;
+            this.splitContainerMain.Panel1MinSize = 150;
             // 
             // splitContainerMain.Panel2
             // 
             this.splitContainerMain.Panel2.Controls.Add(this.tableLayoutPanelRight);
-            this.splitContainerMain.Panel2MinSize = 800;
+            this.splitContainerMain.Panel2MinSize = 600;
             this.splitContainerMain.Size = new System.Drawing.Size(1200, 650);
-            this.splitContainerMain.SplitterDistance = 250;
+            this.splitContainerMain.SplitterDistance = 200;
             this.splitContainerMain.SplitterWidth = 2;
             this.splitContainerMain.TabIndex = 0;
             // 
@@ -104,7 +104,7 @@
             this.tableLayoutPanelLeft.RowCount = 2;
             this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tableLayoutPanelLeft.Size = new System.Drawing.Size(248, 648);
+            this.tableLayoutPanelLeft.Size = new System.Drawing.Size(198, 648);
             this.tableLayoutPanelLeft.TabIndex = 0;
             // 
             // treeView
@@ -117,7 +117,7 @@
             this.treeView.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.treeView.Name = "treeView";
             this.treeView.SelectedImageIndex = 0;
-            this.treeView.Size = new System.Drawing.Size(248, 588);
+            this.treeView.Size = new System.Drawing.Size(198, 588);
             this.treeView.TabIndex = 0;
             this.treeView.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView_BeforeSelect);
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
@@ -137,7 +137,7 @@
             this.panelLeftPanelBottom.Location = new System.Drawing.Point(0, 593);
             this.panelLeftPanelBottom.Margin = new System.Windows.Forms.Padding(0);
             this.panelLeftPanelBottom.Name = "panelLeftPanelBottom";
-            this.panelLeftPanelBottom.Size = new System.Drawing.Size(248, 55);
+            this.panelLeftPanelBottom.Size = new System.Drawing.Size(198, 55);
             this.panelLeftPanelBottom.TabIndex = 1;
             // 
             // tableLayoutPanelRight
@@ -152,7 +152,7 @@
             this.tableLayoutPanelRight.Name = "tableLayoutPanelRight";
             this.tableLayoutPanelRight.RowCount = 1;
             this.tableLayoutPanelRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelRight.Size = new System.Drawing.Size(946, 648);
+            this.tableLayoutPanelRight.Size = new System.Drawing.Size(996, 648);
             this.tableLayoutPanelRight.TabIndex = 0;
             // 
             // tableLayoutPanelInventory
@@ -168,7 +168,7 @@
             this.tableLayoutPanelInventory.RowCount = 2;
             this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tableLayoutPanelInventory.Size = new System.Drawing.Size(946, 648);
+            this.tableLayoutPanelInventory.Size = new System.Drawing.Size(996, 648);
             this.tableLayoutPanelInventory.TabIndex = 2;
             // 
             // panelMainBottom
@@ -182,7 +182,7 @@
             this.panelMainBottom.Location = new System.Drawing.Point(0, 593);
             this.panelMainBottom.Margin = new System.Windows.Forms.Padding(0);
             this.panelMainBottom.Name = "panelMainBottom";
-            this.panelMainBottom.Size = new System.Drawing.Size(946, 55);
+            this.panelMainBottom.Size = new System.Drawing.Size(996, 55);
             this.panelMainBottom.TabIndex = 1;
             // 
             // btnFilter
@@ -191,7 +191,7 @@
             this.btnFilter.AutoSize = true;
             this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFilter.Location = new System.Drawing.Point(750, 10);
+            this.btnFilter.Location = new System.Drawing.Point(800, 10);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(184, 33);
             this.btnFilter.TabIndex = 3;
@@ -266,7 +266,7 @@
             this.lwInventory.Margin = new System.Windows.Forms.Padding(0);
             this.lwInventory.MultiSelect = false;
             this.lwInventory.Name = "lwInventory";
-            this.lwInventory.Size = new System.Drawing.Size(946, 593);
+            this.lwInventory.Size = new System.Drawing.Size(996, 593);
             this.lwInventory.TabIndex = 2;
             this.lwInventory.UseCompatibleStateImageBehavior = false;
             this.lwInventory.View = System.Windows.Forms.View.Details;

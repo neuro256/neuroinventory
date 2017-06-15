@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -547,6 +548,12 @@ namespace NeuroInventory
                         ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
                         subitem.Text = dataSet.Tables[0].Rows[i][j].ToString();
                         subitem.Name = dataSet.Tables[0].Columns[j].ToString();
+                        if (subitem.Name == "invoice")
+                        {
+                            subitem.BackColor = Color.LightBlue;
+                            subitem.Tag = subitem.Text;
+                            subitem.Text = Path.GetFileName(subitem.Text);
+                        }
                         m_Listview.Items[i].SubItems.Add(subitem);
                     }
                     // Добавление элемента столбца Отпущен
@@ -592,29 +599,38 @@ namespace NeuroInventory
         {
             base.ListViewItemMouseUp(sender, e);
 
-            if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["released"]?.Bounds.Contains(e.X, e.Y) ?? false)
+            if (e.Button == MouseButtons.Left)
             {
-                string l_InventoryName = m_Listview.GetItemAt(e.X, e.Y)?.SubItems["name"].Text;
-                int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(m_Listview.GetItemAt(e.X, e.Y)?.SubItems["measurement"].Text);
-                DemandEditor demandEditor = new DemandEditor(l_InventoryName, Convert.ToInt32(m_Listview.GetItemAt(e.X, e.Y).Text), l_DecimalPlaces);
-                demandEditor.StartPosition = FormStartPosition.CenterParent; // Применить эту опцию и к другим окнам
-                if (demandEditor.ShowDialog() == DialogResult.OK)
+                if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["released"]?.Bounds.Contains(e.X, e.Y) ?? false)
                 {
-                    ShowTable();
+                    string l_InventoryName = m_Listview.GetItemAt(e.X, e.Y)?.SubItems["name"].Text;
+                    int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(m_Listview.GetItemAt(e.X, e.Y)?.SubItems["measurement"].Text);
+                    DemandEditor demandEditor = new DemandEditor(l_InventoryName, Convert.ToInt32(m_Listview.GetItemAt(e.X, e.Y).Text), l_DecimalPlaces);
+                    demandEditor.StartPosition = FormStartPosition.CenterParent; // Применить эту опцию и к другим окнам
+                    if (demandEditor.ShowDialog() == DialogResult.OK)
+                    {
+                        ShowTable();
+                    }
+                    m_Listview.SelectedItems.Clear();
                 }
-                m_Listview.SelectedItems.Clear();
-            }
-            else if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["debit"]?.Bounds.Contains(e.X, e.Y) ?? false)
-            {
-                string l_InventoryName = m_Listview.GetItemAt(e.X, e.Y)?.SubItems["name"].Text;
-                int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(m_Listview.GetItemAt(e.X, e.Y)?.SubItems["measurement"].Text);
-                DebitEditor debitEditor = new DebitEditor(l_InventoryName, Convert.ToInt32(m_Listview.GetItemAt(e.X, e.Y).Text), l_DecimalPlaces);
-                debitEditor.StartPosition = FormStartPosition.CenterParent;
-                if (debitEditor.ShowDialog() == DialogResult.OK)
+                else if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["debit"]?.Bounds.Contains(e.X, e.Y) ?? false)
                 {
-                    ShowTable();
+                    string l_InventoryName = m_Listview.GetItemAt(e.X, e.Y)?.SubItems["name"].Text;
+                    int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(m_Listview.GetItemAt(e.X, e.Y)?.SubItems["measurement"].Text);
+                    DebitEditor debitEditor = new DebitEditor(l_InventoryName, Convert.ToInt32(m_Listview.GetItemAt(e.X, e.Y).Text), l_DecimalPlaces);
+                    debitEditor.StartPosition = FormStartPosition.CenterParent;
+                    if (debitEditor.ShowDialog() == DialogResult.OK)
+                    {
+                        ShowTable();
+                    }
+                    m_Listview.SelectedItems.Clear();
                 }
-                m_Listview.SelectedItems.Clear();
+                else if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["invoice"]?.Bounds.Contains(e.X, e.Y) ?? false)
+                {
+                    string l_FileName = m_Listview.GetItemAt(e.X, e.Y)?.SubItems["invoice"].Tag.ToString();
+                    NeuroFile.GetInstance().OpenFileInExplorer(l_FileName);
+                    m_Listview.SelectedItems.Clear();
+                }
             }
         }
 

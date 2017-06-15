@@ -95,6 +95,8 @@ namespace NeuroInventory
         {
             DataSet dataSet = ReturnDataSet();
             object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
+            string currentDocument = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["invoice"].ToString();
+            DeleteFile(currentDocument);
             string l_Where = $"id={selectedRecordId}";
 
             SQLiteManager.GetInstance().Delete(TableName, l_Where);

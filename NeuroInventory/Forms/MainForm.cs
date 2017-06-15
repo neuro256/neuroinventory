@@ -125,10 +125,7 @@ namespace NeuroInventory
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Definitions.APPLICATION_CLOSE_QUESTION, Definitions.APPLICATION_CLOSE_DIALOG_CAPTION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Close();
-            }
+            Close();
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DICTIONARY type="multilanguage">
+  <ENTRY id="Property.ProductName">
+    <STRING lang="ru" value="Склад товарно-материальных ценностей"/>
+  </ENTRY>
+</DICTIONARY>

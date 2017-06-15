@@ -134,6 +134,7 @@ namespace NeuroInventory
 
         public override void Exit()
         {
+            Filter.Close();
             base.Exit();
         }
 

@@ -185,6 +185,38 @@ namespace NeuroInventory
             }
         }
 
+        public override void ListViewItemMouseUp(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    ListViewHitTestInfo info = m_Listview.HitTest(e.X, e.Y);
+                    ListViewItem item = info.Item;
+
+                    if (item != null)
+                    {
+                        m_ListviewSelectedIndex = item.Index;
+                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = false;
+                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
+                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = true;
+                    }
+                    else
+                    {
+                        // No item is selected
+                        this.m_Listview.SelectedItems.Clear();
+                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = true;
+                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
+                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void ShowInfo()
         {
             DataSet dataSet = SQLiteManager.GetInstance().Debit().ReturnDataSet();

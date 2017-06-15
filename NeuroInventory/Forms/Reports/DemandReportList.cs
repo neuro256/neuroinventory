@@ -100,13 +100,42 @@ namespace NeuroInventory
 
         public override void ListViewItemMouseUp(object sender, MouseEventArgs e)
         {
-            base.ListViewItemMouseUp(sender, e);
-
-            if(m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"]?.Bounds.Contains(e.X, e.Y) ?? false)
+            try
             {
-                string l_FileName = m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"].Tag.ToString();
-                NeuroFile.GetInstance().OpenFileInExplorer(l_FileName);
-                m_Listview.SelectedItems.Clear();
+                if (e.Button == MouseButtons.Right)
+                {
+                    ListViewHitTestInfo info = m_Listview.HitTest(e.X, e.Y);
+                    ListViewItem item = info.Item;
+
+                    if (item != null)
+                    {
+                        m_ListviewSelectedIndex = item.Index;
+                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = false;
+                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
+                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = true;
+                    }
+                    else
+                    {
+                        // No item is selected
+                        this.m_Listview.SelectedItems.Clear();
+                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = true;
+                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
+                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = false;
+                    }
+                }
+                else if (e.Button == MouseButtons.Left)
+                {
+                    if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"]?.Bounds.Contains(e.X, e.Y) ?? false)
+                    {
+                        string l_FileName = m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"].Tag.ToString();
+                        NeuroFile.GetInstance().OpenFileInExplorer(l_FileName);
+                        m_Listview.SelectedItems.Clear();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

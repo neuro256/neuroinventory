@@ -230,6 +230,7 @@
             // 
             // nudPrice
             // 
+            this.nudPrice.DecimalPlaces = 2;
             this.nudPrice.Location = new System.Drawing.Point(496, 77);
             this.nudPrice.Maximum = new decimal(new int[] {
             999999999,

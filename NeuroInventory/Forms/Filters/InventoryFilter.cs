@@ -113,7 +113,6 @@ namespace NeuroInventory
 
         private void InventoryFilter_Shown(object sender, EventArgs e)
         {
-            tbOKEI.Text = SQLiteSettingsManager.GetInstance().Measurement().GetOKEIByName(cbMeasurement.SelectedValue.ToString());
             nudAmount.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(cbMeasurement.SelectedValue.ToString());
         }
     }

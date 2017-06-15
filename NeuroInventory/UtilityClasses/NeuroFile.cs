@@ -72,6 +72,20 @@ namespace NeuroInventory
             }
         }
 
+        public string CopyDataBase(string p_FileName, string p_TargetPath)
+        {
+            try
+            {
+                File.Copy(p_FileName, p_TargetPath, true);
+                return p_TargetPath;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return String.Empty;
+            }
+        }
+
         public void DeleteFile(string p_FileName)
         {
             try

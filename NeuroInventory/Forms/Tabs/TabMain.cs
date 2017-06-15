@@ -523,8 +523,6 @@ namespace NeuroInventory
 
         public override void ShowTable()
         {
-            if (!SQLiteManager.GetInstance().TestConnection())
-                return;
             if (treeView.SelectedNode == null)
             {
                 m_Listview.BeginUpdate();

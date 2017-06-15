@@ -59,8 +59,6 @@ namespace NeuroInventory
 
         public void ShowTable()
         {
-            if (!SQLiteManager.GetInstance().TestConnection())
-                return;
             DataSet dataSet = ReturnDataSet();
             try
             {

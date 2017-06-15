@@ -26,6 +26,31 @@ namespace NeuroInventory
             return UserSql.GetInstance();
         }
 
+        public override bool TestConnection()
+        {
+            try
+            {
+                if (!String.IsNullOrEmpty(connectionString) && DatabaseNameExist())
+                {
+                    using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                    {
+                        connection.Open();
+                        connection.Close();
+                    }
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
         public override void CreateTables()
         {
             CreateTablesAsync().GetAwaiter();
@@ -192,7 +217,7 @@ namespace NeuroInventory
         /// Проверка пути и мени базы данных на пустоту
         /// </summary>
         /// <returns>True если имя непустое, иначе False</returns>
-        private bool DatabaseNameExist()
+        protected bool DatabaseNameExist()
         {
             return !String.IsNullOrEmpty(databaseName);
         }
@@ -201,18 +226,69 @@ namespace NeuroInventory
         /// Проверка соединения с базой данных
         /// </summary>
         /// <returns>True если есть соединение, иначе False</returns>
-        public bool TestConnection()
+        public virtual bool TestConnection()
         {
             try
             {
+                bool connectionSuccess = true;
+
                 if (!String.IsNullOrEmpty(connectionString) && DatabaseNameExist())
                 {
                     using (SQLiteConnection connection = new SQLiteConnection(connectionString))
                     {
                         connection.Open();
+
+                        object catalogTable = CommandExecuteScalar("SELECT name FROM sqlite_master WHERE type='table' AND name='catalogs'");
+                        if (catalogTable == null)
+                        {
+                            connectionSuccess = false;
+                        }
+
+                        object inventoryTable = CommandExecuteScalar("SELECT name FROM sqlite_master WHERE type='table' AND name='inventory'");
+                        if (inventoryTable == null)
+                        {
+                            connectionSuccess = false;
+                        }
+
+                        object demandTable = CommandExecuteScalar("SELECT name FROM sqlite_master WHERE type='table' AND name='demand'");
+                        if (demandTable == null)
+                        {
+                            connectionSuccess = false;
+                        }
+
+                        object demandReportTable = CommandExecuteScalar("SELECT name FROM sqlite_master WHERE type='table' AND name='demandReport'");
+                        if (demandReportTable == null)
+                        {
+                            connectionSuccess = false;
+                        }
+
+                        object debitTable = CommandExecuteScalar("SELECT name FROM sqlite_master WHERE type='table' AND name='debit'");
+                        if (debitTable == null)
+                        {
+                            connectionSuccess = false;
+                        }
+
+                        object debitReportTable = CommandExecuteScalar("SELECT name FROM sqlite_master WHERE type='table' AND name='debitReport'");
+                        if (debitReportTable == null)
+                        {
+                            connectionSuccess = false;
+                        }
+
+                        object employeesTable = CommandExecuteScalar("SELECT name FROM sqlite_master WHERE type='table' AND name='employees'");
+                        if (employeesTable == null)
+                        {
+                            connectionSuccess = false;
+                        }
+
+                        object providersTable = CommandExecuteScalar("SELECT name FROM sqlite_master WHERE type='table' AND name='providers'");
+                        if (providersTable == null)
+                        {
+                            connectionSuccess = false;
+                        }
+
                         connection.Close();
                     }
-                    return true;
+                    return connectionSuccess;
                 }
                 else
                 {

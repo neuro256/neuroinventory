@@ -49,57 +49,73 @@ namespace NeuroInventory
         /// <returns></returns>
         public virtual DataSet ReturnDataSet()
         {
-            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            try
             {
-                using (SQLiteDataAdapter myAdapter = new SQLiteDataAdapter(CommandDataSet, connection))
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
                 {
-                    using (DataSet dataSet = new DataSet())
+                    using (SQLiteDataAdapter myAdapter = new SQLiteDataAdapter(CommandDataSet, connection))
                     {
-                        connection.Open();
-                        try
+                        using (DataSet dataSet = new DataSet())
                         {
-                            myAdapter.Fill(dataSet, TableName);
+                            connection.Open();
+                            try
+                            {
+                                myAdapter.Fill(dataSet, TableName);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show(exc.Message);
+                            }
+                            finally
+                            {
+                                connection.Close();
+                                myAdapter.Dispose();
+                            }
+                            return dataSet;
                         }
-                        catch (Exception exc)
-                        {
-                            MessageBox.Show(exc.Message);
-                        }
-                        finally
-                        {
-                            connection.Close();
-                            myAdapter.Dispose();
-                        }
-                        return dataSet;
                     }
                 }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
             }
         }
 
         public virtual DataSet ReturnDataSet(string p_Command)
         {
-            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            try
             {
-                using (SQLiteDataAdapter myAdapter = new SQLiteDataAdapter(p_Command, connection))
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
                 {
-                    using (DataSet dataSet = new DataSet())
+                    using (SQLiteDataAdapter myAdapter = new SQLiteDataAdapter(p_Command, connection))
                     {
-                        connection.Open();
-                        try
+                        using (DataSet dataSet = new DataSet())
                         {
-                            myAdapter.Fill(dataSet, TableName);
+                            connection.Open();
+                            try
+                            {
+                                myAdapter.Fill(dataSet, TableName);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show(exc.Message);
+                            }
+                            finally
+                            {
+                                connection.Close();
+                                myAdapter.Dispose();
+                            }
+                            return dataSet;
                         }
-                        catch (Exception exc)
-                        {
-                            MessageBox.Show(exc.Message);
-                        }
-                        finally
-                        {
-                            connection.Close();
-                            myAdapter.Dispose();
-                        }
-                        return dataSet;
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
             }
         }
 

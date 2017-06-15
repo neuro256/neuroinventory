@@ -13,5 +13,6 @@
         public static string BD_NOT_CREATED_OR_OPENED = "Для начала создайте или откройте базу данных";
         public static string DB_ROOT_CATALOG = "Корневой каталог";
         public static string SELECT_RECORDS = "Отчет должен включать хотя бы одну запись из таблицы. Пожалуйста, выберите интересующие записи и отметьте их галочками.";
+        public static string DB_INCORRECT = "Похоже, Вы попытались открыть некорректную базу данных.";
     }
 }

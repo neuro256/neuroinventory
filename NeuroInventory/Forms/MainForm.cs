@@ -94,15 +94,20 @@ namespace NeuroInventory
             if (SQLiteManager.GetInstance().TestConnection())
             {
                 InitTabs();
-                if(inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
+                if (inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
                     inventoryTabs[tabControl.SelectedTab.Name].ShowTable();
                 SQLiteManager.GetInstance().IsOpened = true;
+            }
+            else
+            {
+                SQLiteManager.GetInstance().databaseName = String.Empty;
+                MessageBox.Show(Definitions.DB_INCORRECT);
             }
         }
 
         private void saveBDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
+            if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
             {
                 MessageBox.Show(Definitions.BD_NOT_CREATED_OR_OPENED);
                 return;
@@ -118,9 +123,14 @@ namespace NeuroInventory
 
         private void SaveBase(string p_FileName)
         {
-            SQLiteManager.GetInstance().databaseName = p_FileName;
-            if (SQLiteManager.GetInstance().TestConnection())
-                MessageBox.Show(Definitions.DB_SUCCESSFULLY_SAVED);
+            try
+            {
+                if(String.IsNullOrEmpty(NeuroFile.GetInstance().CopyDataBase(SQLiteManager.GetInstance().databaseName, p_FileName)))
+                {
+                    MessageBox.Show(Definitions.DB_SUCCESSFULLY_SAVED);
+                }
+            }
+            catch { }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -223,7 +233,7 @@ namespace NeuroInventory
 
             ReportViewSelection viewSelection = new ReportViewSelection();
             viewSelection.StartPosition = FormStartPosition.CenterParent;
-            if(viewSelection.ShowDialog() == DialogResult.OK)
+            if (viewSelection.ShowDialog() == DialogResult.OK)
             {
                 OpenDemandReport();
             }

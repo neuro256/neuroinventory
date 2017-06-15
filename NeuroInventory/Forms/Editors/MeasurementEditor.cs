@@ -70,6 +70,7 @@ namespace NeuroInventory
             SQLiteSettingsManager.GetInstance().Measurement().Insert(nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
             m_Listview.SelectedItems.Clear();
             ShowTable();
+            m_Listview.EnsureVisible(m_Listview.Items.Count - 1);
         }
 
         private bool IsValidData()
@@ -96,8 +97,8 @@ namespace NeuroInventory
             if(m_Listview.SelectedItems.Count > 0)
             {
                 SQLiteSettingsManager.GetInstance().Measurement().Remove(m_ListviewSelectedIndex);
-                m_Listview.SelectedItems.Clear();
                 ShowTable();
+                m_Listview.SelectedItems.Clear();
             }
             else
             {
@@ -110,8 +111,8 @@ namespace NeuroInventory
             if(m_Listview.SelectedItems.Count > 0)
             {
                 SQLiteSettingsManager.GetInstance().Measurement().Update(m_SelectedRecordId, nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
-                m_Listview.SelectedItems.Clear();
                 ShowTable();
+                m_Listview.SelectedItems.Clear();
             }
             else
             {
@@ -187,9 +188,6 @@ namespace NeuroInventory
                     {
                         m_Listview.Items[i].SubItems.Add(dataSet.Tables[0].Rows[i][j].ToString());
                     }
-                    // Example coloring
-                    //m_Listview.Items[i].SubItems[5].BackColor = System.Drawing.Color.GreenYellow;
-                    //m_Listview.Items[i].UseItemStyleForSubItems = false;
                 }
                 m_Listview.EndUpdate();
             }

@@ -99,6 +99,7 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Demand().Insert(m_InventoryId, cbEmployee.SelectedValue, nudAmount.Value, dateTimePicker.Value);
             m_Listview.SelectedItems.Clear();
             ShowTable();
+            m_Listview.EnsureVisible(m_Listview.Items.Count - 1);
         }
 
         public override void RemoveRecord()

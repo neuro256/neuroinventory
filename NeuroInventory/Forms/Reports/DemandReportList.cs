@@ -64,6 +64,7 @@ namespace NeuroInventory
             {
                 SQLiteManager.GetInstance().DemandReport().SetCommandDataSet();
                 ShowTable();
+                m_Listview.EnsureVisible(m_Listview.Items.Count - 1);
             }
         }
 

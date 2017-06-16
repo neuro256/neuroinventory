@@ -30,6 +30,8 @@
         {
             this.tableLayoutPanelDebitReport = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.cbCatalog = new System.Windows.Forms.ComboBox();
             this.lblCatalog = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -37,8 +39,7 @@
             this.panelDebitReportBottom = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
-            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.lblDate = new System.Windows.Forms.Label();
+            this.cbFilter = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanelDebitReport.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -57,14 +58,15 @@
             this.tableLayoutPanelDebitReport.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelDebitReport.Name = "tableLayoutPanelDebitReport";
             this.tableLayoutPanelDebitReport.RowCount = 3;
-            this.tableLayoutPanelDebitReport.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.82327F));
-            this.tableLayoutPanelDebitReport.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85.17673F));
+            this.tableLayoutPanelDebitReport.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.13079F));
+            this.tableLayoutPanelDebitReport.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.86922F));
             this.tableLayoutPanelDebitReport.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanelDebitReport.Size = new System.Drawing.Size(782, 560);
             this.tableLayoutPanelDebitReport.TabIndex = 0;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbFilter);
             this.groupBox1.Controls.Add(this.lblDate);
             this.groupBox1.Controls.Add(this.dateTimePicker);
             this.groupBox1.Controls.Add(this.cbCatalog);
@@ -73,10 +75,27 @@
             this.groupBox1.Location = new System.Drawing.Point(2, 2);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(778, 74);
+            this.groupBox1.Size = new System.Drawing.Size(778, 91);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Выбор каталога";
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(432, 31);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(130, 17);
+            this.lblDate.TabIndex = 5;
+            this.lblDate.Text = "Дата составления";
+            // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker.Location = new System.Drawing.Point(568, 28);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker.TabIndex = 4;
             // 
             // cbCatalog
             // 
@@ -101,10 +120,10 @@
             // 
             this.groupBox2.Controls.Add(this.lwDebitReport);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(2, 78);
+            this.groupBox2.Location = new System.Drawing.Point(2, 95);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(778, 427);
+            this.groupBox2.Size = new System.Drawing.Size(778, 410);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Выбор записей";
@@ -114,7 +133,7 @@
             this.lwDebitReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lwDebitReport.Location = new System.Drawing.Point(3, 18);
             this.lwDebitReport.Name = "lwDebitReport";
-            this.lwDebitReport.Size = new System.Drawing.Size(772, 406);
+            this.lwDebitReport.Size = new System.Drawing.Size(772, 389);
             this.lwDebitReport.TabIndex = 0;
             this.lwDebitReport.UseCompatibleStateImageBehavior = false;
             this.lwDebitReport.View = System.Windows.Forms.View.Details;
@@ -156,22 +175,18 @@
             this.btnReport.UseVisualStyleBackColor = true;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
-            // dateTimePicker
+            // cbFilter
             // 
-            this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker.Location = new System.Drawing.Point(568, 28);
-            this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePicker.TabIndex = 4;
-            // 
-            // lblDate
-            // 
-            this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(432, 31);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(130, 17);
-            this.lblDate.TabIndex = 5;
-            this.lblDate.Text = "Дата составления";
+            this.cbFilter.AutoSize = true;
+            this.cbFilter.Checked = true;
+            this.cbFilter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbFilter.Location = new System.Drawing.Point(77, 64);
+            this.cbFilter.Name = "cbFilter";
+            this.cbFilter.Size = new System.Drawing.Size(247, 21);
+            this.cbFilter.TabIndex = 6;
+            this.cbFilter.Text = "Включать только списанные тмц";
+            this.cbFilter.UseVisualStyleBackColor = true;
+            this.cbFilter.CheckedChanged += new System.EventHandler(this.cbFilter_CheckedChanged);
             // 
             // DebitReport
             // 
@@ -208,5 +223,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
+        private System.Windows.Forms.CheckBox cbFilter;
     }
 }

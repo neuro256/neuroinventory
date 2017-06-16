@@ -22,7 +22,7 @@ namespace NeuroInventory
                 "FROM debitReport";
         }
 
-        public void SetCommandDataSet(int p_CatalogId)
+        public void SetCommandDataSetLeft(int p_CatalogId)
         {
             List<int> catalogIds = GetCatalogIds(p_CatalogId);
             string catalogIdsStr = String.Empty;
@@ -41,6 +41,32 @@ namespace NeuroInventory
                 @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price, " +
                 @"printf(""%.2f"", ((debit.debitAmount * price) / 100)) AS sum " +
                 "FROM inventory LEFT JOIN " +
+                "(SELECT inventoryId, sum(amount) AS debitAmount FROM debit GROUP BY inventoryId) AS debit " +
+                "ON inventory.id = debit.inventoryId " +
+                $"WHERE (inventory.catalogId={p_CatalogId} " +
+                catalogIdsStr +
+                ");";
+        }
+
+        public void SetCommandDataSetInner(int p_CatalogId)
+        {
+            List<int> catalogIds = GetCatalogIds(p_CatalogId);
+            string catalogIdsStr = String.Empty;
+
+            foreach (int cId in catalogIds)
+            {
+                catalogIdsStr += $"OR inventory.catalogId={cId} ";
+            }
+
+            CommandDataSet = "SELECT inventory.id, " +
+                "inventory.name, " +
+                "inventory.OKEIcode, " +
+                "inventory.measurement, " +
+                "inventory.amount as inventoryAmount, " +
+                "debit.debitAmount, " +
+                @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price, " +
+                @"printf(""%.2f"", ((debit.debitAmount * price) / 100)) AS sum " +
+                "FROM inventory INNER JOIN " +
                 "(SELECT inventoryId, sum(amount) AS debitAmount FROM debit GROUP BY inventoryId) AS debit " +
                 "ON inventory.id = debit.inventoryId " +
                 $"WHERE (inventory.catalogId={p_CatalogId} " +

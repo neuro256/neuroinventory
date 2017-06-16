@@ -90,7 +90,12 @@ namespace NeuroInventory
         public DataSet ReturnDataSet()
         {
             int l_SelectedCatalogId = cbCatalog.SelectedValue != null ? Convert.ToInt32(cbCatalog.SelectedValue) : 0;
-            SQLiteManager.GetInstance().DebitReport().SetCommandDataSet(l_SelectedCatalogId);
+
+            if (cbFilter.Checked)
+                SQLiteManager.GetInstance().DebitReport().SetCommandDataSetInner(l_SelectedCatalogId);
+            else
+                SQLiteManager.GetInstance().DebitReport().SetCommandDataSetLeft(l_SelectedCatalogId);
+
             return SQLiteManager.GetInstance().DebitReport().ReturnDataSet();
         }
 
@@ -305,9 +310,9 @@ namespace NeuroInventory
                 newRow["name"] = item.SubItems[1].Text;
                 newRow["codeOKEI"] = item.SubItems[2].Text;
                 newRow["measurement"] = item.SubItems[3].Text;
-                newRow["amount"] = item.SubItems[5].Text;
+                newRow["amount"] = !String.IsNullOrEmpty(item.SubItems[5].Text) ? item.SubItems[5].Text : "0";
                 newRow["price"] = Convert.ToDecimal(item.SubItems[6].Text, CultureInfo.InvariantCulture).ToString("#.00");
-                newRow["sum"] = Convert.ToDecimal(item.SubItems[7].Text, CultureInfo.InvariantCulture).ToString("#.00");
+                newRow["sum"] = !String.Equals(item.SubItems[7].Text, "0.00") ? Convert.ToDecimal(item.SubItems[7].Text, CultureInfo.InvariantCulture).ToString("#.00") : "0.00";
 
                 counter++;
 
@@ -329,6 +334,11 @@ namespace NeuroInventory
         private void DebitReport_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void cbFilter_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowTable();
         }
     }
 }

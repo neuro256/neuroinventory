@@ -227,7 +227,9 @@ namespace NeuroInventory
 
         private void btnCreateDebit_Click(object sender, EventArgs e)
         {
-
+            DebitReport report = new DebitReport();
+            report.StartPosition = FormStartPosition.CenterParent;
+            report.ShowDialog();
         }
 
         private void nudAmount_ValueChanged(object sender, EventArgs e)

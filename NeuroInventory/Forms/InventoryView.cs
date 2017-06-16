@@ -108,6 +108,27 @@ namespace NeuroInventory
         }
 
         /// <summary>
+        /// Обновление нумерации списка
+        /// </summary>
+        public virtual void RefreshTableNumeration()
+        {
+            try
+            {
+                //Заполняем список
+                m_Listview.BeginUpdate();
+                for (int i = 0; i < m_Listview.Items.Count; i++)
+                {
+                    m_Listview.Items[i].SubItems[1].Text = (i + 1).ToString();
+                }
+                m_Listview.EndUpdate();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error!:", ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Сортировка столбцов
         /// </summary>
         /// <param name="sender"></param>

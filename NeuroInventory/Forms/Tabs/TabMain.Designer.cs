@@ -109,6 +109,7 @@
             // 
             // treeView
             // 
+            this.treeView.AllowDrop = true;
             this.treeView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView.ImageIndex = 0;
@@ -121,6 +122,8 @@
             this.treeView.TabIndex = 0;
             this.treeView.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView_BeforeSelect);
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
+            this.treeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView_DragDrop);
+            this.treeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView_DragEnter);
             this.treeView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeView_MouseUp);
             // 
             // imageListMain
@@ -243,6 +246,7 @@
             // 
             // lwInventory
             // 
+            this.lwInventory.AllowDrop = true;
             this.lwInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -270,6 +274,8 @@
             this.lwInventory.TabIndex = 2;
             this.lwInventory.UseCompatibleStateImageBehavior = false;
             this.lwInventory.View = System.Windows.Forms.View.Details;
+            this.lwInventory.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.lwInventory_ItemDrag);
+            this.lwInventory.DragOver += new System.Windows.Forms.DragEventHandler(this.lwInventory_DragOver);
             // 
             // chID
             // 

@@ -656,5 +656,54 @@ namespace NeuroInventory
                 Filter.Close();
             }
         }
+
+        #region DRAG_N_DROP
+
+        private void lwInventory_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            lwInventory.DoDragDrop(lwInventory.SelectedItems, DragDropEffects.Move);
+        }
+
+        private void lwInventory_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
+                e.Effect = e.AllowedEffect;
+        }
+
+        private void treeView_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
+                {
+                    foreach (ListViewItem item in (ListView.SelectedListViewItemCollection)e.Data.GetData(typeof(ListView.SelectedListViewItemCollection)))
+                    {
+                        Point pt = ((TreeView)sender).PointToClient(new Point(e.X, e.Y));
+                        TreeNode destNode = ((TreeView)sender).GetNodeAt(pt);
+                        // получить id тмц и тип целевого узла
+                        int itemId = Convert.ToInt32(item.Text);
+                        TreeViewTag tag = destNode.Tag as TreeViewTag;
+                        if (tag.type == TreeNodeType.FILE && SQLiteManager.GetInstance().Inventory().GetCatalogId(itemId) != tag.id)
+                        {
+                            SQLiteManager.GetInstance().Inventory().Update(itemId, tag.id);
+                            lwInventory.Items.Remove(item);
+                            RefreshTableNumeration();
+                        }
+
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void treeView_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        #endregion
     }
 }

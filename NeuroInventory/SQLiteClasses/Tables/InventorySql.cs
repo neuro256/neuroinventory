@@ -121,6 +121,17 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Update(TableName, values, l_Where);
         }
 
+        public void Update(object p_Id, int p_CatalogId)
+        {
+            Dictionary<string, object> values = new Dictionary<string, object>();
+
+            values["catalogId"] = p_CatalogId;
+
+            string l_Where = $"id={p_Id}";
+
+            SQLiteManager.GetInstance().Update(TableName, values, l_Where);
+        }
+
         public void Insert(int p_CatalogId, object p_Provider, DateTime p_Date, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
@@ -136,6 +147,11 @@ namespace NeuroInventory
             values["invoice"] = InsertFile(p_SelectedDocument);
 
             SQLiteManager.GetInstance().Insert(TableName, values);
+        }
+
+        public int GetCatalogId(int p_Id)
+        {
+            return Convert.ToInt32(SQLiteManager.GetInstance().CommandExecuteScalar($"SELECT catalogId FROM inventory WHERE id={p_Id}"));
         }
     }
 }

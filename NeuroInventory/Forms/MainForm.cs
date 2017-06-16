@@ -12,12 +12,36 @@ namespace NeuroInventory
         public MainForm()
         {
             InitializeComponent();
+            inventoryTabs = new Dictionary<string, IInventoryView>();
+            InitEmptyTabs();
+        }
+
+        private void InitEmptyTabs()
+        {
+            TabEmpty tabMain = new TabEmpty();
+            tabMain.MdiParent = this;
+            tabMain.Parent = tabControl.TabPages[0];
+            tabMain.Dock = DockStyle.Fill;
+            tabMain.Show();
+            inventoryTabs["tabEmpty1"] = tabMain;
+
+            TabEmpty tabProviders = new TabEmpty();
+            tabProviders.MdiParent = this;
+            tabProviders.Parent = tabControl.TabPages[1];
+            tabProviders.Dock = DockStyle.Fill;
+            tabProviders.Show();
+            inventoryTabs["tabEmpty2"] = tabProviders;
+
+            TabEmpty tabEmployees = new TabEmpty();
+            tabEmployees.MdiParent = this;
+            tabEmployees.Parent = tabControl.TabPages[2];
+            tabEmployees.Dock = DockStyle.Fill;
+            tabEmployees.Show();
+            inventoryTabs["tabEmpty3"] = tabEmployees;
         }
 
         private void InitTabs()
         {
-            lblInfo.Visible = false; // Сокрытие информационной надписи
-
             // Закрытие открытых вкладок
             if (inventoryTabs != null && inventoryTabs.Values.Count > 0)
             {
@@ -27,8 +51,6 @@ namespace NeuroInventory
                 }
                 inventoryTabs.Clear();
             }
-
-            inventoryTabs = new Dictionary<string, IInventoryView>();
 
             TabMain tabMain = new TabMain();
             tabMain.MdiParent = this;

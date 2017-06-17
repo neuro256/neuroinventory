@@ -43,7 +43,7 @@
     <ROW Property="ProductCode" Value="1033:{90DFA41B-7010-4C20-BABC-645FC781C690} 1049:{F5A4CCDC-E362-4B67-A901-FB6DCCFC2928} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="NeuroInventory" ValueLocId="Property.ProductName"/>
-    <ROW Property="ProductVersion" Value="0.3.4" Type="32"/>
+    <ROW Property="ProductVersion" Value="0.3.5" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
     <ROW Property="UpgradeCode" Value="{C1D46F78-A344-4185-BBC4-485BA5140AEF}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -68,14 +68,15 @@
     <ROW Component="AI_ExePath" ComponentId="{6B2ED3BC-723E-4CA9-B092-4F827024FE3E}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
     <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_EntityFram" ComponentId="{3F787323-73A2-4525-8AA4-C5DE37D11C69}" Directory_="APPDIR" Attributes="0" KeyPath="EntityFramework.dll" Type="0"/>
     <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_NeuroInven" ComponentId="{FCA57EE4-CB44-4CD8-9B0E-D53EAFC94E2D}" Directory_="APPDIR" Attributes="0" KeyPath="NeuroInventory.exe"/>
-    <ROW Component="ProductInformation" ComponentId="{D607F949-2162-4049-A67F-626B9F86CC32}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
+    <ROW Component="ProductInformation" ComponentId="{D607F949-2162-4049-A67F-626B9F86CC32}" Directory_="APPDIR" Attributes="4" KeyPath="Version" Options="1"/>
     <ROW Component="SHORTCUTDIR" ComponentId="{D5F5FA74-772C-4340-8AEE-8F6C085FE59A}" Directory_="SHORTCUTDIR" Attributes="0"/>
     <ROW Component="SQLite.Interop.dll" ComponentId="{8F120E42-C0BF-41C8-916E-F1D6B8DFE0A4}" Directory_="x64_Dir" Attributes="256" KeyPath="SQLite.Interop.dll"/>
     <ROW Component="SQLite.Interop.dll_1" ComponentId="{95E36EA7-0E1D-4B12-83B5-2D918016277C}" Directory_="x86_Dir" Attributes="0" KeyPath="SQLite.Interop.dll_1"/>
+    <ROW Component="Trial.dll" ComponentId="{08F60264-A0EE-436B-BB3B-47E2CC2A6249}" Directory_="APPDIR" Attributes="0" KeyPath="Trial.dll"/>
     <ROW Component="templateDebit.xls" ComponentId="{ACE2980D-F196-4C38-A57A-11637C76FA43}" Directory_="Templates_Dir" Attributes="0" KeyPath="templateDebit.xls" Type="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="AI_ExePath AI_PROPPATH_FILENAME_PERBUILD_EntityFram AI_PROPPATH_FILENAME_PERBUILD_NeuroInven ProductInformation SHORTCUTDIR SQLite.Interop.dll SQLite.Interop.dll_1 templateDebit.xls"/>
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="AI_ExePath AI_PROPPATH_FILENAME_PERBUILD_EntityFram AI_PROPPATH_FILENAME_PERBUILD_NeuroInven ProductInformation SHORTCUTDIR SQLite.Interop.dll SQLite.Interop.dll_1 Trial.dll templateDebit.xls"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
@@ -85,13 +86,14 @@
     <ROW File="NeuroInventory.exe" Component_="AI_PROPPATH_FILENAME_PERBUILD_NeuroInven" FileName="NEUROI~1.EXE|[|AI_PROPPATH_FILENAME_PERBUILD_NeuroInventory.exe]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_NeuroInventory.exe&gt;" SelfReg="false" NextFile="NeuroInventory.exe.config" DigSign="true"/>
     <ROW File="NeuroInventory.exe.config" Component_="AI_PROPPATH_FILENAME_PERBUILD_EntityFram" FileName="NEUROI~1.CON|[|AI_PROPPATH_FILENAME_PERBUILD_NeuroInventory.exe.config]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_NeuroInventory.exe.config&gt;" SelfReg="false" NextFile="templateDebit.xls"/>
     <ROW File="SQLite.Interop.dll" Component_="SQLite.Interop.dll" FileName="SQLITE~1.DLL|SQLite.Interop.dll" Attributes="0" SourcePath="..\NeuroInventory\bin\Release\x64\SQLite.Interop.dll" SelfReg="false" NextFile="SQLite.Interop.dll_1"/>
-    <ROW File="SQLite.Interop.dll_1" Component_="SQLite.Interop.dll_1" FileName="SQLITE~1.DLL|SQLite.Interop.dll" Attributes="0" SourcePath="..\NeuroInventory\bin\Release\x86\SQLite.Interop.dll" SelfReg="false"/>
+    <ROW File="SQLite.Interop.dll_1" Component_="SQLite.Interop.dll_1" FileName="SQLITE~1.DLL|SQLite.Interop.dll" Attributes="0" SourcePath="..\NeuroInventory\bin\Release\x86\SQLite.Interop.dll" SelfReg="false" NextFile="Trial.dll"/>
     <ROW File="Spire.Doc.dll" Component_="AI_PROPPATH_FILENAME_PERBUILD_EntityFram" FileName="SPIRED~1.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Spire.Doc.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Spire.Doc.dll&gt;" SelfReg="false" NextFile="Spire.License.dll"/>
     <ROW File="Spire.License.dll" Component_="AI_PROPPATH_FILENAME_PERBUILD_EntityFram" FileName="SPIREL~1.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Spire.License.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Spire.License.dll&gt;" SelfReg="false" NextFile="Spire.Pdf.dll"/>
     <ROW File="Spire.Pdf.dll" Component_="AI_PROPPATH_FILENAME_PERBUILD_EntityFram" FileName="SPIREP~1.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Spire.Pdf.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Spire.Pdf.dll&gt;" SelfReg="false" NextFile="System.Data.SQLite.dll"/>
     <ROW File="System.Data.SQLite.EF6.dll" Component_="AI_PROPPATH_FILENAME_PERBUILD_EntityFram" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.EF6.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Data.SQLite.EF6.dll&gt;" SelfReg="false" NextFile="System.Data.SQLite.Linq.dll"/>
     <ROW File="System.Data.SQLite.Linq.dll" Component_="AI_PROPPATH_FILENAME_PERBUILD_EntityFram" FileName="SYSTEM~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.Linq.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Data.SQLite.Linq.dll&gt;" SelfReg="false" NextFile="SQLite.Interop.dll"/>
     <ROW File="System.Data.SQLite.dll" Component_="AI_PROPPATH_FILENAME_PERBUILD_EntityFram" FileName="SYSTEM~1.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Data.SQLite.dll&gt;" SelfReg="false" NextFile="System.Data.SQLite.EF6.dll"/>
+    <ROW File="Trial.dll" Component_="Trial.dll" FileName="Trial.dll" Attributes="0" SourcePath="&lt;AI_STUBS&gt;trialware.dll" SelfReg="false" DigSign="true"/>
     <ROW File="templateDebit.xls" Component_="templateDebit.xls" FileName="TEMPLA~2.XLS|[|AI_PROPPATH_FILENAME_PERBUILD_templateDebit.xls]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_templateDebit.xls&gt;" SelfReg="false" NextFile="templateDemand.doc"/>
     <ROW File="templateDemand.doc" Component_="templateDebit.xls" FileName="TEMPLA~2.DOC|[|AI_PROPPATH_FILENAME_PERBUILD_templateDemand.doc]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_templateDemand.doc&gt;" SelfReg="false" NextFile="EntityFramework.dll"/>
   </COMPONENT>
@@ -134,6 +136,7 @@
     <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;classic\fragments\SequenceDialogs.aip"/>
     <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
     <ROW Fragment="StaticUIStrings.aip" Path="&lt;AI_FRAGS&gt;StaticUIStrings.aip"/>
+    <ROW Fragment="Trialware.aip" Path="&lt;AI_FRAGS&gt;Trialware.aip"/>
     <ROW Fragment="UI.aip" Path="&lt;AI_THEMES&gt;classic\fragments\UI.aip"/>
     <ROW Fragment="Validation.aip" Path="&lt;AI_FRAGS&gt;Validation.aip"/>
     <ROW Fragment="VerifyRemoveDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRemoveDlg.aip"/>
@@ -155,6 +158,7 @@
     <ROW Name="Prereq.dll" SourcePath="&lt;AI_CUSTACTS&gt;Prereq.dll"/>
     <ROW Name="SoftwareDetector.dll" SourcePath="&lt;AI_CUSTACTS&gt;SoftwareDetector.dll"/>
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
+    <ROW Name="ca30FA.dll" SourcePath="..\..\..\Users\User\AppData\Local\Temp\ca30FA.dll"/>
     <ROW Name="lzmaextractor.dll" SourcePath="&lt;AI_CUSTACTS&gt;lzmaextractor.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
@@ -212,6 +216,7 @@
     <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
     <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
     <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
+    <ROW Action="AI_Trial" Type="11265" Source="ca30FA.dll" Target="DllRegisterSrv2"/>
     <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]"/>
     <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
     <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
@@ -242,6 +247,7 @@
     <ROW Action="AI_EstimateExtractFiles" Sequence="3999" Builds="DefaultBuild"/>
     <ROW Action="AI_AppSearchEx" Sequence="102"/>
     <ROW Action="AI_DetectSoftware" Sequence="101"/>
+    <ROW Action="AI_Trial" Condition="NOT Installed" Sequence="6401"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
     <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
@@ -267,6 +273,7 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
     <ROW Registry="AI_ExePath" Root="-1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Value="[AI_SETUPEXEPATH]" Component_="AI_ExePath"/>
+    <ROW Registry="AI_InstallLanguage" Root="-1" Key="Software\Caphyon\Advanced Installer\[ProductCode]" Name="AI_InstallLanguage" Value="[ProductLanguage]" Component_="ProductInformation"/>
     <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
   </COMPONENT>
@@ -289,6 +296,28 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.PreReqSearchComponent">
     <ROW SearchKey="E6EF03A03ACB41E28F8D6A76831D390CRelease" Prereq="E6EF03A03ACB41E28F8D6A76831D390C" SearchType="9" SearchString="HKLM\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\Release" RefContent="G394801" Order="1" Property="PreReqSearch_E6EF03A03ACB41E28F8D6A76831D390C"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.TrialwareComponent">
+    <ROW TrialwareName="Trial" DisplayName="Trial" Password="09DD990F668FCC45321D490D1ADAFD012576FF074E3D7888D220431886709223C3DFC55ABC43B1C94E54A97988197965FC2F089F25F92546C74BBC8679B2CCAF358E03F16468135F77BC7C58A2D93E99E420640AFC481FC2DDBE042C0D9DF6F28AD1083BED5CFB0493EF826D520C68DF2C89369AF14D2CF00C867DDE6BC9E6689BFEBF449BB7A51E5A7D77FC506DBF1BA970EB5ACD0752E3" PrivateKey="44DDE90F1E8FCE45371D4A0D1ADAAF015076F8073F3D0188E6201718F4709923BADFCE5ACA43C8C94954D079F8190A65F72F709F50F97546BF4BEC8609B2BCAF318E3EF10268675F2CBC2B58CAD93A999F20100ABE4813C28EBE4F2C509DB7F2E4D1063B8E5CF50499EF836D640C32DF6689459AFD4D11F0208626DE02C9B968AAFEAC44D5B7F11E057D1CFC026D9F1BDF70E65ABA071FE3F754EA74E066F2DA9D057DBECF133F87490874D573A6FA961C0FCFB671223900A1857825ECCC2A66F7A0F8A41A2D1A3E9F100865F6921FE5AD2047FAB697E51D8D975528F01AC2BD22938C20F376BC6BD9B8224237189735CC730BEB39A84EDF5F77621365971369D6F5EF54EE2B20E0230DF4EAB628FEB02A109DF7721FD12E439845CA1D352243F2C9D54A668B514ECD3E251C84E78955DC2CF4B10377D26F6D11615EE50FE8EC775C84C9D2E36D4EFDC8E4F18EF9797C793C334A5FB9F4083E62F2E32BB6057410349A917E681367196EB3B5972A27A3F37A4A2CB682FAAADA9FF2AFE3F0FF5CBD58C09D7E2718C6B596F2D03DFF8965E3F3B0561839B70AA488BB0F9E827D87F467948D0942DB484173EDEEB3C6F010089FF84390535750A2E0AFCF8B15D1965827B4954DA33D76D9AE9E07366ADB318745718A1DFE656DA100667037CFCC5E3273FD8A812C5C8EF7A881EF7C8A140ABC5ADFC59370788225205B2B9EF4AA90CE3F5410A71466839EB3F46D1E69561906D70AD8F7AC0952FE540C553FEBB0491EB946209829D524C67CCB530FC41C2B47D7DF84F77AA36FE906DBF148FB73DF529201D6C8AC275C29FC6775A524B3FA85EBC3D7A9CAF2EAEAF90F51E97185F2B0702887C6E576FE6DE71A65129115318B05BB547D4E" DllFile="Trial.dll" TrialwareCA="AI_Trial" IconIndex="0" BannerImagePath="..\..\..\Users\User\Documents\ТМЦ\Icons\box_32.jpg" Platform64="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.TrialwareSettingsComponent">
+    <ROW Trialware="Trial" Section="Full" Key="PubKey" Value="2EAAAAAaAABLqeLNA2AAAJAAIADc@c152xT@odZ28Ap5exeqVHUJI4rhyD4ynhPopRveiZgf2IAum7v2strauVNyeKN"/>
+    <ROW Trialware="Trial" Section="Full" Key="RegPathStoreLoc" Value="Software\[|Manufacturer]\[|ProductName]"/>
+    <ROW Trialware="Trial" Section="Full" Key="RegRootStoreLoc" Value="2147483650"/>
+    <ROW Trialware="Trial" Section="Full" Key="RegValuesStoreLoc" Value="Registration Key"/>
+    <ROW Trialware="Trial" Section="Properties" Key="BuildDate" Value="1497700475"/>
+    <ROW Trialware="Trial" Section="Properties" Key="BuyUrl" Value="[|ARPURLINFOABOUT]"/>
+    <ROW Trialware="Trial" Section="Properties" Key="ExtendContactAction" Value="ExtendContact"/>
+    <ROW Trialware="Trial" Section="Properties" Key="LicReqContact" Value="[|ARPCONTACT]"/>
+    <ROW Trialware="Trial" Section="Properties" Key="TrialExtendContact" Value="[|ARPCONTACT]"/>
+    <ROW Trialware="Trial" Section="Properties" Key="TrialName" Value="[|ProductName]"/>
+    <ROW Trialware="Trial" Section="Trial" Key="DlgAppearFrequencyPercent" Value="30"/>
+    <ROW Trialware="Trial" Section="Trial" Key="ExtensionQuantity" Value="25"/>
+    <ROW Trialware="Trial" Section="Trial" Key="NoOfMaxExtension" Value="0"/>
+    <ROW Trialware="Trial" Section="Trial" Key="NoOfUsages" Value="true"/>
+    <ROW Trialware="Trial" Section="Trial" Key="Quantity" Value="30"/>
+    <ROW Trialware="Trial" Section="Trial" Key="SerialToExtend" Value="4F46FD13 7A5A4D97 38B1870F EB08CFBF 22C24D0C "/>
+    <ROW Trialware="Trial" Section="Trial" Key="TrialId" Value="{89FBD1C2-0543-4A54-874A-2DABDDA13D51}"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.VsProjectComponent">
     <ROW ProjectId="{f406846b-f3e2-41e5-8df1-986571b19e45}" ProjectName="NeuroInventory" OutputGroup="PrimaryOutput" OutputFile="NeuroInventory.exe"/>

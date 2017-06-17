@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -8,12 +9,55 @@ namespace NeuroInventory
     public partial class MainForm : Form
     {
         Dictionary<string, IInventoryView> inventoryTabs;
+        private readonly object counts = 25;
+
+        public object Counts => counts;
 
         public MainForm()
         {
             InitializeComponent();
             inventoryTabs = new Dictionary<string, IInventoryView>();
             InitEmptyTabs();
+            CheckDemo();
+        }
+
+        private void CheckDemo()
+        {
+            Demo();
+            RegistryKey reg = Registry.CurrentUser;
+            reg = reg.OpenSubKey(@"Software\NeuroInventory", true);
+            int count = Convert.ToInt32(reg.GetValue("StartsCount"));
+            if (count != 0)
+            {
+                MessageBox.Show("Осталось пробных открытий:" + count);
+            }
+            if (count == 0)
+            {
+                MessageBox.Show("Пробные открытия закончились:" + count);
+                Environment.Exit(0);
+            }
+        }
+
+        private void Demo()
+        {
+            RegistryKey regedit = Registry.CurrentUser;
+            regedit = regedit.OpenSubKey("Software", true);
+            if (Registry.CurrentUser.OpenSubKey(@"Software\NeuroInventory") == null)
+            {
+                regedit = regedit.CreateSubKey("NeuroInventory", true);//ProgramName - Название программы в реестре
+                regedit.SetValue("StartsCount", Counts);//MyFirtsProgram - Название значение программы/Opencount - колчество пробных открытий
+            }
+            else
+            {
+                RegistryKey reg = Registry.CurrentUser;
+                reg = reg.OpenSubKey(@"Software\NeuroInventory", true);
+                int count = Convert.ToInt32(reg.GetValue("StartsCount"));
+                if (count > 0)
+                {
+                    count--;
+                }
+                reg.SetValue("StartsCount", count);
+            }
         }
 
         private void InitEmptyTabs()

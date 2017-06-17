@@ -18,8 +18,10 @@ namespace NeuroInventory
             InitializeComponent();
             inventoryTabs = new Dictionary<string, IInventoryView>();
             InitEmptyTabs();
-            CheckDemo();
+            //CheckDemo();
         }
+
+        #region DEMO
 
         private void CheckDemo()
         {
@@ -59,6 +61,8 @@ namespace NeuroInventory
                 reg.SetValue("StartsCount", count);
             }
         }
+
+        #endregion
 
         private void InitEmptyTabs()
         {

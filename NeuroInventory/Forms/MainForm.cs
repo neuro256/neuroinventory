@@ -18,7 +18,13 @@ namespace NeuroInventory
             InitializeComponent();
             inventoryTabs = new Dictionary<string, IInventoryView>();
             InitEmptyTabs();
+            TabRecent.LoadRecentFile += TabRecent_LoadRecentFile;
             //CheckDemo();
+        }
+
+        private void TabRecent_LoadRecentFile(string path)
+        {
+            LoadBase(path);
         }
 
         #region DEMO
@@ -66,26 +72,55 @@ namespace NeuroInventory
 
         private void InitEmptyTabs()
         {
-            TabEmpty tabMain = new TabEmpty();
-            tabMain.MdiParent = this;
-            tabMain.Parent = tabControl.TabPages[0];
-            tabMain.Dock = DockStyle.Fill;
-            tabMain.Show();
-            inventoryTabs["tabEmpty1"] = tabMain;
+            if (SQLiteSettingsManager.GetInstance().Recents().ReturnCount() > 0)
+            {
+                TabRecent tabMain = new TabRecent();
+                tabMain.MdiParent = this;
+                tabMain.Parent = tabControl.TabPages[0];
+                tabMain.Dock = DockStyle.Fill;
+                tabMain.Show();
+                inventoryTabs["tabInventory"] = tabMain;
 
-            TabEmpty tabProviders = new TabEmpty();
-            tabProviders.MdiParent = this;
-            tabProviders.Parent = tabControl.TabPages[1];
-            tabProviders.Dock = DockStyle.Fill;
-            tabProviders.Show();
-            inventoryTabs["tabEmpty2"] = tabProviders;
+                TabRecent tabProviders = new TabRecent();
+                tabProviders.MdiParent = this;
+                tabProviders.Parent = tabControl.TabPages[1];
+                tabProviders.Dock = DockStyle.Fill;
+                tabProviders.Show();
+                inventoryTabs["tabProviders"] = tabProviders;
 
-            TabEmpty tabEmployees = new TabEmpty();
-            tabEmployees.MdiParent = this;
-            tabEmployees.Parent = tabControl.TabPages[2];
-            tabEmployees.Dock = DockStyle.Fill;
-            tabEmployees.Show();
-            inventoryTabs["tabEmpty3"] = tabEmployees;
+                TabRecent tabEmployees = new TabRecent();
+                tabEmployees.MdiParent = this;
+                tabEmployees.Parent = tabControl.TabPages[2];
+                tabEmployees.Dock = DockStyle.Fill;
+                tabEmployees.Show();
+                inventoryTabs["tabEmployees"] = tabEmployees;
+
+                if (inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
+                    inventoryTabs[tabControl.SelectedTab.Name].ShowTable();
+            }
+            else
+            {
+                TabEmpty tabMain = new TabEmpty();
+                tabMain.MdiParent = this;
+                tabMain.Parent = tabControl.TabPages[0];
+                tabMain.Dock = DockStyle.Fill;
+                tabMain.Show();
+                inventoryTabs["tabEmpty1"] = tabMain;
+
+                TabEmpty tabProviders = new TabEmpty();
+                tabProviders.MdiParent = this;
+                tabProviders.Parent = tabControl.TabPages[1];
+                tabProviders.Dock = DockStyle.Fill;
+                tabProviders.Show();
+                inventoryTabs["tabEmpty2"] = tabProviders;
+
+                TabEmpty tabEmployees = new TabEmpty();
+                tabEmployees.MdiParent = this;
+                tabEmployees.Parent = tabControl.TabPages[2];
+                tabEmployees.Dock = DockStyle.Fill;
+                tabEmployees.Show();
+                inventoryTabs["tabEmpty3"] = tabEmployees;
+            }
         }
 
         private void InitTabs()
@@ -145,6 +180,7 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().CreateDatabase(p_FileName);
             SQLiteManager.GetInstance().CreateTables();
             InitTabs();
+            SQLiteSettingsManager.GetInstance().Recents().Insert(p_FileName);
         }
 
         private void openBDToolStripMenuItem_Click(object sender, EventArgs e)
@@ -167,6 +203,7 @@ namespace NeuroInventory
                 if (inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
                     inventoryTabs[tabControl.SelectedTab.Name].ShowTable();
                 SQLiteManager.GetInstance().IsOpened = true;
+                SQLiteSettingsManager.GetInstance().Recents().Insert(p_DatabaseName);
             }
             else
             {

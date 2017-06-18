@@ -26,6 +26,11 @@ namespace NeuroInventory
             return UserSql.GetInstance();
         }
 
+        public RecentsSql Recents()
+        {
+            return RecentsSql.GetInstance();
+        }
+
         public override bool TestConnection()
         {
             try
@@ -123,6 +128,11 @@ namespace NeuroInventory
 
                             // Вставка суперпользователя
                             command.CommandText = "INSERT INTO user (login, password) VALUES ('admin', 'admin');";
+                            await command.ExecuteNonQueryAsync();
+
+                            command.CommandText = "CREATE TABLE IF NOT EXISTS recents (" +
+                                "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                                "path TEXT NOT NULL);";
                             await command.ExecuteNonQueryAsync();
 
                             transaction.Commit();

@@ -29,7 +29,7 @@ namespace NeuroInventory
                 "FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id GROUP BY inventory.id;";
             CommandDataSetNotFiltered = CommandDataSet;
             TableName = "inventory";
-            SetTargetPath(@"documents\inventory");
+            SetTargetPath(@"Документы\Накладные");
         }
 
         public void SetCommandDataSet(int p_Id)

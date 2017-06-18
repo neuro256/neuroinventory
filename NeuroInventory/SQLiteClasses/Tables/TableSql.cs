@@ -155,12 +155,13 @@ namespace NeuroInventory
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyProductAttribute)attributes[0]).Product;
+                //object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+                //if (attributes.Length == 0)
+                //{
+                //    return "";
+                //}
+                //return ((AssemblyProductAttribute)attributes[0]).Product;
+                return "Учет ТМЦ";
             }
         }
     }

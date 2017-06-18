@@ -11,7 +11,7 @@ namespace NeuroInventory
         {
             CommandDataSet = String.Empty;
             TableName = "debitReport";
-            SetTargetPath(@"documents\debitReports");
+            SetTargetPath(@"Документы\Списания");
         }
 
         public void SetCommandDataSet()

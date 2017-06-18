@@ -10,7 +10,7 @@ namespace NeuroInventory
         {
             CommandDataSet = "SELECT * FROM providers";
             TableName = "providers";
-            SetTargetPath(@"documents\providers");
+            SetTargetPath(@"Документы\Поставщики");
         }
 
         public void Filter(string p_Name, string p_Address, string p_Phone, string p_Mail, string p_Document)

@@ -472,7 +472,7 @@ namespace NeuroInventory
             if (m_Listview.SelectedItems.Count > 0)
             {
                 SQLiteManager.GetInstance().Inventory().Remove(m_ListviewSelectedIndex);
-                ShowTable();
+                RemoveFromLListViewAt(m_ListviewSelectedIndex);
                 m_Listview.SelectedItems.Clear();
             }
             else
@@ -686,8 +686,7 @@ namespace NeuroInventory
                         if (tag.type == TreeNodeType.FILE && SQLiteManager.GetInstance().Inventory().GetCatalogId(itemId) != tag.id)
                         {
                             SQLiteManager.GetInstance().Inventory().Update(itemId, tag.id);
-                            lwInventory.Items.Remove(item);
-                            RefreshTableNumeration();
+                            RemoveFromListView(item);
                         }
 
                     }

@@ -75,7 +75,7 @@ namespace NeuroInventory
                 SQLiteManager.GetInstance().DemandReport().Remove(m_ListviewSelectedIndex);
                 m_Listview.SelectedItems.Clear();
                 SQLiteManager.GetInstance().DemandReport().SetCommandDataSet();
-                ShowTable();
+                RemoveFromLListViewAt(m_ListviewSelectedIndex);
             }
             else
             {

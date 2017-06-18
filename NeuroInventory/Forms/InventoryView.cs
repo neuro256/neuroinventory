@@ -280,6 +280,18 @@ namespace NeuroInventory
             }
         }
 
+        public void RemoveFromListView(ListViewItem p_Item)
+        {
+            m_Listview.Items.Remove(p_Item);
+            RefreshTableNumeration();
+        }
+
+        public void RemoveFromLListViewAt(int p_Index)
+        {
+            m_Listview.Items.RemoveAt(p_Index);
+            RefreshTableNumeration();
+        }
+
         public virtual DataSet ReturnDataSet() { return null; }
         public virtual void AddRecord() { }
         public virtual void RemoveRecord() { }

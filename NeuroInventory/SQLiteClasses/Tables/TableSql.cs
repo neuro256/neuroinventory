@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace NeuroInventory
@@ -40,7 +41,7 @@ namespace NeuroInventory
 
         public void SetTargetPath(string p_Path)
         {
-            TargetPath = Path.Combine(Path.GetDirectoryName(SQLiteManager.GetInstance().databaseName), Path.GetFileNameWithoutExtension(SQLiteManager.GetInstance().databaseName), p_Path);
+            TargetPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), GetApplicationName, Path.GetFileNameWithoutExtension(SQLiteManager.GetInstance().databaseName), p_Path);
         }
 
         /// <summary>
@@ -148,6 +149,19 @@ namespace NeuroInventory
         public object InsertFile(string p_SelectedDocument)
         {
             return NeuroFile.GetInstance().InsertFile(p_SelectedDocument, TargetPath);
+        }
+
+        private string GetApplicationName
+        {
+            get
+            {
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    return "";
+                }
+                return ((AssemblyProductAttribute)attributes[0]).Product;
+            }
         }
     }
 }

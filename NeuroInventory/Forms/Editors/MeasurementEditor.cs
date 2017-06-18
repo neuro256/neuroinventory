@@ -112,6 +112,7 @@ namespace NeuroInventory
             {
                 SQLiteSettingsManager.GetInstance().Measurement().Update(m_SelectedRecordId, nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
                 ShowTable();
+                m_Listview.EnsureVisible(m_ListviewSelectedIndex);
                 m_Listview.SelectedItems.Clear();
             }
             else

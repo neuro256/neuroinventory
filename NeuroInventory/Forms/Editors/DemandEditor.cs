@@ -128,6 +128,7 @@ namespace NeuroInventory
                 SQLiteManager.GetInstance().Demand().Update(m_SelectedRecordId, m_InventoryId, cbEmployee.SelectedValue, nudAmount.Value, dateTimePicker.Value);
                 m_Listview.SelectedItems.Clear();
                 ShowTable();
+                m_Listview.EnsureVisible(m_ListviewSelectedIndex);
             }
             else
             {

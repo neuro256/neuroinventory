@@ -125,6 +125,7 @@ namespace NeuroInventory
 
                 m_Listview.SelectedItems.Clear();
                 ShowTable();
+                m_Listview.EnsureVisible(m_ListviewSelectedIndex);
             }
             else
             {

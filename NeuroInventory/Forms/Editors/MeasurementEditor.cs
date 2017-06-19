@@ -70,7 +70,10 @@ namespace NeuroInventory
             SQLiteSettingsManager.GetInstance().Measurement().Insert(nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
             m_Listview.SelectedItems.Clear();
             ShowTable();
-            m_Listview.EnsureVisible(m_Listview.Items.Count - 1);
+            if (m_Listview.Items.Count > 0)
+            {
+                m_Listview.EnsureVisible(m_Listview.Items.Count - 1);
+            }
         }
 
         private bool IsValidData()

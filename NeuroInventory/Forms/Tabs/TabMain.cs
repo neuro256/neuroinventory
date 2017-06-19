@@ -458,7 +458,10 @@ namespace NeuroInventory
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
                     ShowTable();
-                    m_Listview.EnsureVisible(m_Listview.Items.Count - 1);
+                    if (m_Listview.Items.Count > 0)
+                    {
+                        m_Listview.EnsureVisible(m_Listview.Items.Count - 1);
+                    }
                 }
                 m_Listview.SelectedItems.Clear();
             }

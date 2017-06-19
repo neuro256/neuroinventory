@@ -167,11 +167,16 @@ namespace NeuroInventory
 
         private void createBDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Базы данных SQLite (*.db)|*.db";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            DialogName dialogName = new DialogName();
+            dialogName.StartPosition = FormStartPosition.CenterParent;
+            if(dialogName.ShowDialog() == DialogResult.OK)
             {
-                CreateBase(saveFileDialog.FileName);
+                string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Учет ТМЦ", dialogName.name);
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                string extStr = ".db";
+                string fileName = Path.Combine(path, dialogName.name + extStr);
+                CreateBase(fileName);
             }
         }
 

@@ -241,7 +241,7 @@
             this.tabInventory.Name = "tabInventory";
             this.tabInventory.Size = new System.Drawing.Size(1254, 669);
             this.tabInventory.TabIndex = 0;
-            this.tabInventory.Text = "ТМЦ";
+            this.tabInventory.Text = "Склад ТМЦ";
             this.tabInventory.UseVisualStyleBackColor = true;
             // 
             // tabProviders

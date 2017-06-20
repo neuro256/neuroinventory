@@ -161,7 +161,7 @@ namespace NeuroInventory
         private void TabMain_OnSelectedInventory(string name)
         {
             tabControl.SuspendLayout();
-            tabControl.TabPages["tabInventory"].Text = $"ТМЦ : {name}";
+            tabControl.TabPages["tabInventory"].Text = $"Склад ТМЦ : {name}";
             tabControl.ResumeLayout();
         }
 

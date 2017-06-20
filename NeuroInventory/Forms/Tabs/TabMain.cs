@@ -70,13 +70,13 @@ namespace NeuroInventory
             ToolStripMenuItem addFolderItem = new ToolStripMenuItem("Создать каталог");
             addFolderItem.Name = "addFolderItem";
             addFolderItem.Click += AddFolderItem_Click;
-            ToolStripMenuItem addFileItem = new ToolStripMenuItem("Создать тмц");
+            ToolStripMenuItem addFileItem = new ToolStripMenuItem("Создать список тмц");
             addFileItem.Name = "addFileItem";
             addFileItem.Click += AddFileItem_Click;
             ToolStripMenuItem removeFolderItem = new ToolStripMenuItem("Удалить каталог");
             removeFolderItem.Name = "removeFolderItem";
             removeFolderItem.Click += RemoveFolderItem_Click;
-            ToolStripMenuItem removeFileItem = new ToolStripMenuItem("Удалить тмц");
+            ToolStripMenuItem removeFileItem = new ToolStripMenuItem("Удалить список тмц");
             removeFileItem.Name = "removeFileItem";
             removeFileItem.Click += RemoveFileItem_Click;
 
@@ -265,6 +265,14 @@ namespace NeuroInventory
                             contextMenuStripCatalogs.Items["removeFileItem"].Visible = false;
                         }
                         contextMenuStripCatalogs.Show(treeView, e.Location);
+                    }
+                    else
+                    {
+                        contextMenuStripCatalogs.Hide();
+                        contextMenuStripCatalogs.Items["addFolderItem"].Visible = false;
+                        contextMenuStripCatalogs.Items["addFileItem"].Visible = false;
+                        contextMenuStripCatalogs.Items["removeFolderItem"].Visible = false;
+                        contextMenuStripCatalogs.Items["removeFileItem"].Visible = false;
                     }
                 }
             }

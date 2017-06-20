@@ -81,16 +81,23 @@ namespace NeuroInventory
                 tabMain.Show();
                 inventoryTabs["tabInventory"] = tabMain;
 
+                TabReleased tabReleased = new TabReleased();
+                tabReleased.MdiParent = this;
+                tabReleased.Parent = tabControl.TabPages[1];
+                tabReleased.Dock = DockStyle.Fill;
+                tabReleased.Show();
+                inventoryTabs["tabReleased"] = tabReleased;
+
                 TabRecent tabProviders = new TabRecent();
                 tabProviders.MdiParent = this;
-                tabProviders.Parent = tabControl.TabPages[1];
+                tabProviders.Parent = tabControl.TabPages[2];
                 tabProviders.Dock = DockStyle.Fill;
                 tabProviders.Show();
                 inventoryTabs["tabProviders"] = tabProviders;
 
                 TabRecent tabEmployees = new TabRecent();
                 tabEmployees.MdiParent = this;
-                tabEmployees.Parent = tabControl.TabPages[2];
+                tabEmployees.Parent = tabControl.TabPages[3];
                 tabEmployees.Dock = DockStyle.Fill;
                 tabEmployees.Show();
                 inventoryTabs["tabEmployees"] = tabEmployees;
@@ -100,26 +107,15 @@ namespace NeuroInventory
             }
             else
             {
-                TabEmpty tabMain = new TabEmpty();
-                tabMain.MdiParent = this;
-                tabMain.Parent = tabControl.TabPages[0];
-                tabMain.Dock = DockStyle.Fill;
-                tabMain.Show();
-                inventoryTabs["tabEmpty1"] = tabMain;
-
-                TabEmpty tabProviders = new TabEmpty();
-                tabProviders.MdiParent = this;
-                tabProviders.Parent = tabControl.TabPages[1];
-                tabProviders.Dock = DockStyle.Fill;
-                tabProviders.Show();
-                inventoryTabs["tabEmpty2"] = tabProviders;
-
-                TabEmpty tabEmployees = new TabEmpty();
-                tabEmployees.MdiParent = this;
-                tabEmployees.Parent = tabControl.TabPages[2];
-                tabEmployees.Dock = DockStyle.Fill;
-                tabEmployees.Show();
-                inventoryTabs["tabEmpty3"] = tabEmployees;
+                for(int i = 0; i < tabControl.TabPages.Count; i++)
+                {
+                    TabEmpty tabEmpty = new TabEmpty();
+                    tabEmpty.MdiParent = this;
+                    tabEmpty.Parent = tabControl.TabPages[i];
+                    tabEmpty.Dock = DockStyle.Fill;
+                    tabEmpty.Show();
+                    inventoryTabs[$"tabEmpty{i+1}"] = tabEmpty;
+                }
             }
         }
 
@@ -143,16 +139,23 @@ namespace NeuroInventory
             tabMain.Show();
             inventoryTabs["tabInventory"] = tabMain;
 
+            TabReleased tabReleased = new TabReleased();
+            tabReleased.MdiParent = this;
+            tabReleased.Parent = tabControl.TabPages[1];
+            tabReleased.Dock = DockStyle.Fill;
+            tabReleased.Show();
+            inventoryTabs["tabReleased"] = tabReleased;
+
             TabProviders tabProviders = new TabProviders();
             tabProviders.MdiParent = this;
-            tabProviders.Parent = tabControl.TabPages[1];
+            tabProviders.Parent = tabControl.TabPages[2];
             tabProviders.Dock = DockStyle.Fill;
             tabProviders.Show();
             inventoryTabs["tabProviders"] = tabProviders;
 
             TabEmployees tabEmployees = new TabEmployees();
             tabEmployees.MdiParent = this;
-            tabEmployees.Parent = tabControl.TabPages[2];
+            tabEmployees.Parent = tabControl.TabPages[3];
             tabEmployees.Dock = DockStyle.Fill;
             tabEmployees.Show();
             inventoryTabs["tabEmployees"] = tabEmployees;

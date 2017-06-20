@@ -133,7 +133,7 @@ namespace NeuroInventory
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void ListViewColumnClick(object sender, ColumnClickEventArgs e)
+        public virtual void ListViewColumnClick(object sender, ColumnClickEventArgs e)
         {
             try
             {
@@ -182,7 +182,7 @@ namespace NeuroInventory
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void ListViewColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        public virtual void ListViewColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
         {
             try
             {

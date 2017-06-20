@@ -327,7 +327,7 @@ namespace NeuroInventory
                 newRow["codeOKEI"] = item.SubItems[2].Text;
                 newRow["measurement"] = item.SubItems[3].Text;
                 newRow["price"] = Convert.ToDecimal(item.SubItems[5].Text, CultureInfo.InvariantCulture).ToString("#.00");
-                newRow["sum"] = (Convert.ToDecimal(item.SubItems[5].Text, CultureInfo.InvariantCulture) * Convert.ToDecimal(item.SubItems[9].Text, CultureInfo.InvariantCulture)).ToString("#.00");
+                newRow["sum"] = (Convert.ToDecimal(item.SubItems[5].Text, CultureInfo.InvariantCulture) * CustomParse(item.SubItems[9].Text)).ToString("#.00");
                 newRow["amount"] = item.SubItems[9].Text;
 
                 demandReportTable.Rows.Add(newRow);
@@ -337,6 +337,14 @@ namespace NeuroInventory
             demandReportDataSet.Tables.Add(demandReportTable);
 
             return demandReportDataSet;
+        }
+
+        public decimal CustomParse(string incomingValue)
+        {
+            decimal val;
+            if (!decimal.TryParse(incomingValue.Replace(",", "."), NumberStyles.Number, CultureInfo.InvariantCulture, out val))
+                return 0;
+            return val;
         }
 
         private void btnClose_Click(object sender, EventArgs e)

@@ -286,7 +286,7 @@ namespace NeuroInventory
             RefreshTableNumeration();
         }
 
-        public void RemoveFromLListViewAt(int p_Index)
+        public void RemoveFromListViewAt(int p_Index)
         {
             m_Listview.Items.RemoveAt(p_Index);
             RefreshTableNumeration();

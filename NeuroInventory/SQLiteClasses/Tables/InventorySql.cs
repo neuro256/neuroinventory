@@ -9,13 +9,16 @@ namespace NeuroInventory
     {
         private string m_CommandDataSetNotFiltered;
         private int m_SelectedCatalogId;
+        private List<int> m_SelectedCatalogIds;
 
         private string CommandDataSetNotFiltered { get => m_CommandDataSetNotFiltered; set => m_CommandDataSetNotFiltered = value; }
         private int SelectedCatalogId { get => m_SelectedCatalogId; set => m_SelectedCatalogId = value; }
+        public List<int> SelectedCatalogIds { get => m_SelectedCatalogIds; set => m_SelectedCatalogIds = value; }
 
         public InventorySql()
         {
             CommandDataSet = "SELECT inventory.id, " +
+                "inventory.catalogId, " +
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
@@ -35,6 +38,7 @@ namespace NeuroInventory
         public void SetCommandDataSet(int p_Id)
         {
             CommandDataSet = "SELECT inventory.id, " +
+                "inventory.catalogId, " +
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
@@ -50,8 +54,40 @@ namespace NeuroInventory
             SelectedCatalogId = p_Id;
         }
 
+        public void SetCommandDataSet(List<int> p_CatalogIds)
+        {
+            string catalogIdsStr = String.Empty;
+            foreach(var id in p_CatalogIds)
+            {
+                catalogIdsStr += $" inventory.catalogId={id} OR";
+            }
+            catalogIdsStr = catalogIdsStr.Substring(0, catalogIdsStr.Length - 2);
+            CommandDataSet = "SELECT inventory.id, " +
+                "inventory.catalogId, " +
+                "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
+                "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
+                "inventory.invoice," +
+                "inventory.name," +
+                "inventory.OKEIcode," +
+                "inventory.measurement," +
+                "inventory.amount," +
+                @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price," +
+                @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
+                "(inventory.amount - SUM(debit.amount)) AS balance " +
+                $"FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id WHERE {catalogIdsStr} GROUP BY inventory.id;";
+            CommandDataSetNotFiltered = CommandDataSet;
+            SelectedCatalogIds = p_CatalogIds;
+        }
+
         public void Filter(object p_Provider, DateTime p_Date, string p_Invoice, string p_Name, string p_OKEIcode, string p_Measurement, object p_Amount, object p_Price)
         {
+            string catalogIdsStr = String.Empty;
+            foreach (var id in SelectedCatalogIds)
+            {
+                catalogIdsStr += $" inventory.catalogId={id} OR";
+            }
+            catalogIdsStr = catalogIdsStr.Substring(0, catalogIdsStr.Length - 2);
+
             string l_DateStr = p_Date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
             string l_Name = $" AND inventory.name like '%{p_Name}%'";
@@ -74,7 +110,7 @@ namespace NeuroInventory
                 @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price," +
                 @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
                 "(inventory.amount - SUM(debit.amount)) AS balance " +
-                $"FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id WHERE inventory.catalogId={SelectedCatalogId}" +
+                $"FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id WHERE ({catalogIdsStr}) " +
                 l_Name +
                 l_Provider +
                 l_Date +

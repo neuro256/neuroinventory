@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabMain));
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanelLeft = new System.Windows.Forms.TableLayoutPanel();
-            this.treeView = new System.Windows.Forms.TreeView();
+            this.treeView = new NeuroInventory.MultiSelectTreeview();
             this.imageListMain = new System.Windows.Forms.ImageList(this.components);
             this.panelLeftPanelBottom = new System.Windows.Forms.Panel();
             this.tableLayoutPanelRight = new System.Windows.Forms.TableLayoutPanel();
@@ -118,6 +118,7 @@
             this.treeView.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.treeView.Name = "treeView";
             this.treeView.SelectedImageIndex = 0;
+            this.treeView.SelectedNodes = ((System.Collections.Generic.List<System.Windows.Forms.TreeNode>)(resources.GetObject("treeView.SelectedNodes")));
             this.treeView.Size = new System.Drawing.Size(198, 588);
             this.treeView.TabIndex = 0;
             this.treeView.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView_BeforeSelect);
@@ -401,7 +402,7 @@
         private System.Windows.Forms.ColumnHeader chBalance;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripInventory;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelLeft;
-        private System.Windows.Forms.TreeView treeView;
+        private MultiSelectTreeview treeView;
         private System.Windows.Forms.Panel panelLeftPanelBottom;
         private System.Windows.Forms.ImageList imageListMain;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripCatalogs;

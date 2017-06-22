@@ -378,6 +378,30 @@ namespace NeuroInventory
         {
             TreeViewTag tvTag = e.Node.Tag as TreeViewTag;
             SelectInventoryByCatalog(tvTag);
+            SelectInventoryByCatalog(treeView.SelectedNodes);
+            //foreach (var node in treeView.SelectedNodes)
+            //{
+            //    MessageBox.Show((node.Tag as TreeViewTag).name);
+            //}
+        }
+
+        private void SelectInventoryByCatalog(List<TreeNode> selectedNodes)
+        {
+            List<int> l_InventoryIds = new List<int>();
+            lwInventory.Groups.Clear();
+            foreach (var node in treeView.SelectedNodes)
+            {
+                if((node.Tag as TreeViewTag).type == TreeNodeType.FILE)
+                {
+                    l_InventoryIds.Add((node.Tag as TreeViewTag).id);
+                    lwInventory.Groups.Add((node.Tag as TreeViewTag).id.ToString(), (node.Tag as TreeViewTag).name);
+                }
+            }
+            if (l_InventoryIds.Count > 0)
+            {
+                SQLiteManager.GetInstance().Inventory().SetCommandDataSet(l_InventoryIds);
+                ShowTable();
+            }
         }
 
         /// <summary>
@@ -391,8 +415,8 @@ namespace NeuroInventory
             m_SelectedInventory = tvTag;
             if (tvTag.type == TreeNodeType.FILE) // is file
             {
-                SQLiteManager.GetInstance().Inventory().SetCommandDataSet(m_SelectedInventory.id);
-                ShowTable();
+                //SQLiteManager.GetInstance().Inventory().SetCommandDataSet(m_SelectedInventory.id);
+                //ShowTable();
                 OnSelectedInventory?.Invoke(tvTag.name);
             }
         }
@@ -483,7 +507,7 @@ namespace NeuroInventory
             if (m_Listview.SelectedItems.Count > 0)
             {
                 SQLiteManager.GetInstance().Inventory().Remove(m_ListviewSelectedIndex);
-                RemoveFromLListViewAt(m_ListviewSelectedIndex);
+                RemoveFromListViewAt(m_ListviewSelectedIndex);
                 m_Listview.SelectedItems.Clear();
             }
             else
@@ -555,6 +579,7 @@ namespace NeuroInventory
                 {
                     m_Listview.Items.Add(dataSet.Tables[0].Rows[i]["id"].ToString());
                     m_Listview.Items[i].SubItems.Add((i + 1).ToString());
+                    m_Listview.Items[i].Group = m_Listview.Groups[dataSet.Tables[0].Rows[i]["catalogId"].ToString()];
                     for (int j = 1; j < dataSet.Tables[0].Columns.Count - 1; j++)
                     {
                         ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
@@ -566,7 +591,8 @@ namespace NeuroInventory
                             subitem.Tag = subitem.Text;
                             subitem.Text = Path.GetFileName(subitem.Text);
                         }
-                        m_Listview.Items[i].SubItems.Add(subitem);
+                        if(subitem.Name != "catalogId")
+                            m_Listview.Items[i].SubItems.Add(subitem);
                     }
                     // Добавление элемента столбца Отпущен
                     ListViewItem.ListViewSubItem subitemReleased = new ListViewItem.ListViewSubItem();

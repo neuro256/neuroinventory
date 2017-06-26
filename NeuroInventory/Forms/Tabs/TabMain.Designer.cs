@@ -251,6 +251,7 @@
             this.lwInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lwInventory.CheckBoxes = true;
             this.lwInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chID,
             this.chNumber,
@@ -275,6 +276,9 @@
             this.lwInventory.TabIndex = 2;
             this.lwInventory.UseCompatibleStateImageBehavior = false;
             this.lwInventory.View = System.Windows.Forms.View.Details;
+            this.lwInventory.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lwInventory_DrawColumnHeader);
+            this.lwInventory.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lwInventory_DrawItem);
+            this.lwInventory.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lwInventory_DrawSubItem);
             this.lwInventory.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.lwInventory_ItemDrag);
             this.lwInventory.DragOver += new System.Windows.Forms.DragEventHandler(this.lwInventory_DragOver);
             // 

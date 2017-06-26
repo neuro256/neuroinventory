@@ -445,8 +445,11 @@ namespace NeuroInventory
         {
             base.InitListView();
 
+            lwInventory.CheckBoxes = true;
+            lwInventory.OwnerDraw = true;
+            lwInventory.HeaderStyle = ColumnHeaderStyle.Clickable;
+
             lwInventory.Columns.Clear();
-            lwInventory.Columns.Add(new ColHeader("ID", 50, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwInventory.Columns.Add(new ColHeader("№", 50, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwInventory.Columns.Add(new ColHeader("Поставщик", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwInventory.Columns.Add(new ColHeader("Дата поступления", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
@@ -574,11 +577,17 @@ namespace NeuroInventory
                 //Заполняем список
                 m_Listview.BeginUpdate();
                 m_Listview.Items.Clear();
+                m_Listview.Columns[0].Tag = false;
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
-                    m_Listview.Items.Add(dataSet.Tables[0].Rows[i]["id"].ToString());
-                    m_Listview.Items[i].SubItems.Add((i + 1).ToString());
-                    m_Listview.Items[i].Group = m_Listview.Groups[dataSet.Tables[0].Rows[i]["catalogId"].ToString()];
+                    ListViewItem newItem = new ListViewItem();
+                    newItem.Text = (i + 1).ToString();
+                    newItem.Name = dataSet.Tables[0].Rows[i]["id"].ToString();
+                    newItem.Tag = dataSet.Tables[0].Rows[i]["id"];
+                    m_Listview.Items.Add(newItem);
+
+                    //m_Listview.Items[i].Group = m_Listview.Groups[dataSet.Tables[0].Rows[i]["catalogId"].ToString()];
+                    // Цикл идет до dataSet.Tables[0].Columns.Count - 1 потому, что еще надо добавить колонки Отпущен и Списать, и только потом колонку Остаток
                     for (int j = 1; j < dataSet.Tables[0].Columns.Count - 1; j++)
                     {
                         ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
@@ -590,7 +599,8 @@ namespace NeuroInventory
                             subitem.Tag = subitem.Text;
                             subitem.Text = Path.GetFileName(subitem.Text);
                         }
-                        if(subitem.Name != "catalogId")
+
+                        if (subitem.Name != "catalogId")
                             m_Listview.Items[i].SubItems.Add(subitem);
                     }
                     // Добавление элемента столбца Отпущен
@@ -738,6 +748,73 @@ namespace NeuroInventory
         private void treeView_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
+        }
+
+        #endregion
+
+        #region DRAW CHECKBOX
+
+        private void lwInventory_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                e.DrawBackground();
+                bool value = false;
+                try
+                {
+                    value = Convert.ToBoolean(e.Header.Tag);
+                }
+                catch (Exception)
+                {
+                }
+                CheckBoxRenderer.DrawCheckBox(e.Graphics,
+                    new Point(e.Bounds.Left + 4, e.Bounds.Top + 4),
+                    value ? System.Windows.Forms.VisualStyles.CheckBoxState.CheckedNormal :
+                    System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal);
+            }
+            else
+            {
+                e.DrawDefault = true;
+            }
+        }
+
+        private void lwInventory_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+
+        private void lwInventory_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+
+        public override void ListViewColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == 0)
+            {
+                bool value = false;
+                try
+                {
+                    value = Convert.ToBoolean(this.lwInventory.Columns[e.Column].Tag);
+                }
+                catch (Exception)
+                {
+                }
+                this.lwInventory.Columns[e.Column].Tag = !value;
+                foreach (ListViewItem item in this.lwInventory.Items)
+                    item.Checked = !value;
+
+                this.lwInventory.Invalidate();
+            }
+            else
+            {
+                base.ListViewColumnClick(sender, e);
+            }
+        }
+
+        public override void ListViewColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        {
+            
         }
 
         #endregion

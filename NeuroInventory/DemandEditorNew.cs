@@ -7,21 +7,31 @@ namespace NeuroInventory
 {
     public partial class DemandEditorNew : Form
     {
-        public DemandEditorNew()
+        private DataSet m_DemandDataSet;
+
+        public DataSet DemandDataSet { get => m_DemandDataSet; private set => m_DemandDataSet = value; }
+
+        public DemandEditorNew(DataSet p_DataSet)
         {
             InitializeComponent();
-            dataListView1.AutoGenerateColumns = false;
-            DataSet inventoryData = SQLiteManager.GetInstance().Inventory().ReturnDataSet();
-            dataListView1.DataSource = new BindingSource(inventoryData, "inventory");
 
-            dataListView1.CellEditActivation = ObjectListView.CellEditActivateMode.DoubleClick;
-            OLVColumn aNewColumn = new OLVColumn();
-            aNewColumn.IsButton = true;
-            aNewColumn.ButtonSize = new Size(200, 35);
-            aNewColumn.Text = "asdfaf";
+            DemandDataSet = p_DataSet;
+            lwDemandData.AutoGenerateColumns = false;
+            lwDemandData.DataSource = new BindingSource(DemandDataSet, "demand");
+
+            lwDemandData.CellEditActivation = ObjectListView.CellEditActivateMode.DoubleClick;
+            //OLVColumn aNewColumn = new OLVColumn();
+            //aNewColumn.IsButton = true;
+            //aNewColumn.ButtonSize = new Size(200, 35);
+            //aNewColumn.Text = "asdfaf";
             // ... configure it and finally ...
-            this.dataListView1.AllColumns.Add(aNewColumn);
-            this.dataListView1.RebuildColumns();
+            //this.lwDemandData.AllColumns.Add(aNewColumn);
+            //this.lwDemandData.RebuildColumns();
+        }
+
+        private void btnClose_Click(object sender, System.EventArgs e)
+        {
+            Close();
         }
     }
 }

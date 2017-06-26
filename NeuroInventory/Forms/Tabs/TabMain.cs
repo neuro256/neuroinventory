@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -834,14 +835,48 @@ namespace NeuroInventory
 
         public override void ListViewColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
         {
-            
+            // Пусто, т.к. просто надо убрать выполнение родительского метода
         }
 
         #endregion
 
         private void btnDemand_Click(object sender, EventArgs e)
         {
-            //lwInventory.CheckedItems
+            DemandEditorNew editor = new DemandEditorNew(GetDemandDataSet());
+            editor.StartPosition = FormStartPosition.CenterParent;
+            editor.ShowDialog();
+        }
+
+        private DataSet GetDemandDataSet()
+        {
+            DataTable demandTable = new DataTable("demand");
+            demandTable.Columns.Add("id");
+            demandTable.Columns.Add("name");
+            demandTable.Columns.Add("OKEIcode");
+            demandTable.Columns.Add("measurement");
+            demandTable.Columns.Add("price");
+            demandTable.Columns.Add("amount");
+            demandTable.Columns.Add("sum");
+
+            foreach (ListViewItem item in lwInventory.CheckedItems)
+            {
+                DataRow newRow = demandTable.NewRow();
+
+                newRow["id"] = item.Tag;
+                newRow["name"] = item.SubItems[4].Text;
+                newRow["OKEIcode"] = item.SubItems[5].Text;
+                newRow["measurement"] = item.SubItems[6].Text;
+                newRow["price"] = Convert.ToDecimal(item.SubItems[8].Text, CultureInfo.InvariantCulture).ToString("#.00");
+                newRow["amount"] = Convert.ToDecimal(item.SubItems[7].Text, CultureInfo.InvariantCulture);
+                newRow["sum"] = item.SubItems[9].Text;
+
+                demandTable.Rows.Add(newRow);
+            }
+
+            DataSet demandDataSet = new DataSet("InventoryDemand");
+            demandDataSet.Tables.Add(demandTable);
+
+            return demandDataSet;
         }
     }
 }

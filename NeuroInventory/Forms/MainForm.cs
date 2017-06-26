@@ -419,11 +419,5 @@ namespace NeuroInventory
             aboutBox.StartPosition = FormStartPosition.CenterParent;
             aboutBox.ShowDialog();
         }
-
-        private void testToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DemandEditorNew test = new DemandEditorNew();
-            test.Show();
-        }
     }
 }

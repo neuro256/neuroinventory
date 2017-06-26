@@ -184,11 +184,11 @@
     <Compile Include="ReportsClasses\SpireXlsWrapper.cs" />
     <Compile Include="SQLiteClasses\Tables\DebitReportSql.cs" />
     <Compile Include="SQLiteClasses\Tables\RecentsSql.cs" />
-    <Compile Include="TestObjectListView.cs">
+    <Compile Include="DemandEditorNew.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TestObjectListView.Designer.cs">
-      <DependentUpon>TestObjectListView.cs</DependentUpon>
+    <Compile Include="DemandEditorNew.Designer.cs">
+      <DependentUpon>DemandEditorNew.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityClasses\MultiSelectTreeview.cs">
       <SubType>Component</SubType>
@@ -376,8 +376,8 @@
     <EmbeddedResource Include="Forms\Reports\ReportViewSelection.resx">
       <DependentUpon>ReportViewSelection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TestObjectListView.resx">
-      <DependentUpon>TestObjectListView.cs</DependentUpon>
+    <EmbeddedResource Include="DemandEditorNew.resx">
+      <DependentUpon>DemandEditorNew.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -129,6 +129,27 @@ namespace NeuroInventory
         }
 
         /// <summary>
+        /// Обновление нумерации списка
+        /// </summary>
+        public virtual void RefreshTableNumeration(int p_SubitemNumber)
+        {
+            try
+            {
+                //Заполняем список
+                m_Listview.BeginUpdate();
+                for (int i = 0; i < m_Listview.Items.Count; i++)
+                {
+                    m_Listview.Items[i].SubItems[p_SubitemNumber].Text = (i + 1).ToString();
+                }
+                m_Listview.EndUpdate();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error!:", ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Сортировка столбцов
         /// </summary>
         /// <param name="sender"></param>
@@ -290,6 +311,12 @@ namespace NeuroInventory
         {
             m_Listview.Items.RemoveAt(p_Index);
             RefreshTableNumeration();
+        }
+
+        public void RemoveFromListViewAt(int p_Index, int p_SubitemNumber)
+        {
+            m_Listview.Items.RemoveAt(p_Index);
+            RefreshTableNumeration(p_SubitemNumber);
         }
 
         public virtual DataSet ReturnDataSet() { return null; }

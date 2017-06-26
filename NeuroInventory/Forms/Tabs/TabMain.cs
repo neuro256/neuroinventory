@@ -509,7 +509,7 @@ namespace NeuroInventory
             if (m_Listview.SelectedItems.Count > 0)
             {
                 SQLiteManager.GetInstance().Inventory().Remove(m_ListviewSelectedIndex);
-                RemoveFromListViewAt(m_ListviewSelectedIndex);
+                RemoveFromListViewAt(m_ListviewSelectedIndex, 0);
                 m_Listview.SelectedItems.Clear();
             }
             else
@@ -821,7 +821,7 @@ namespace NeuroInventory
 
         private void btnDemand_Click(object sender, EventArgs e)
         {
-
+            //lwInventory.CheckedItems
         }
     }
 }

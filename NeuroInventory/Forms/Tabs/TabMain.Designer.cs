@@ -58,6 +58,7 @@
             this.chBalance = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStripCatalogs = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnDemand = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -178,6 +179,7 @@
             // panelMainBottom
             // 
             this.panelMainBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelMainBottom.Controls.Add(this.btnDemand);
             this.panelMainBottom.Controls.Add(this.btnFilter);
             this.panelMainBottom.Controls.Add(this.btnInventoryEdit);
             this.panelMainBottom.Controls.Add(this.btnInventoryRemove);
@@ -355,6 +357,20 @@
             this.contextMenuStripCatalogs.Name = "contextMenuStripCatalogs";
             this.contextMenuStripCatalogs.Size = new System.Drawing.Size(67, 4);
             // 
+            // btnDemand
+            // 
+            this.btnDemand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDemand.AutoSize = true;
+            this.btnDemand.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnDemand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDemand.Location = new System.Drawing.Point(586, 11);
+            this.btnDemand.Name = "btnDemand";
+            this.btnDemand.Size = new System.Drawing.Size(184, 33);
+            this.btnDemand.TabIndex = 4;
+            this.btnDemand.Text = "Отпустить";
+            this.btnDemand.UseVisualStyleBackColor = true;
+            this.btnDemand.Click += new System.EventHandler(this.btnDemand_Click);
+            // 
             // TabMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -412,5 +428,6 @@
         private System.Windows.Forms.ImageList imageListMain;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripCatalogs;
         private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.Button btnDemand;
     }
 }

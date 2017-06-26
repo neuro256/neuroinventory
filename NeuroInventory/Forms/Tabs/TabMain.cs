@@ -818,5 +818,10 @@ namespace NeuroInventory
         }
 
         #endregion
+
+        private void btnDemand_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

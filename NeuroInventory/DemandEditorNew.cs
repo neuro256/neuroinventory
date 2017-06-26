@@ -20,6 +20,9 @@ namespace NeuroInventory
             lwDemandData.DataSource = new BindingSource(DemandDataSet, "demand");
 
             lwDemandData.CellEditActivation = ObjectListView.CellEditActivateMode.DoubleClick;
+            lwDemandData.SelectedBackColor = Color.LightBlue;
+            lwDemandData.SelectedForeColor = Color.MidnightBlue;
+
             //OLVColumn aNewColumn = new OLVColumn();
             //aNewColumn.IsButton = true;
             //aNewColumn.ButtonSize = new Size(200, 35);

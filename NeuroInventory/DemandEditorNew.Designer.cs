@@ -79,11 +79,11 @@
             this.olvColumn1.AspectName = "name";
             this.olvColumn1.ButtonPadding = new System.Drawing.Size(10, 10);
             this.olvColumn1.IsTileViewColumn = true;
-            this.olvColumn1.Renderer = this.highlightTextRenderer1;
+            //this.olvColumn1.Renderer = this.highlightTextRenderer1;
             this.olvColumn1.Text = "Название";
             this.olvColumn1.UseInitialLetterForGroup = true;
             this.olvColumn1.Width = 250;
-            this.olvColumn1.WordWrap = true;
+            //this.olvColumn1.WordWrap = true;
             // 
             // highlightTextRenderer1
             // 

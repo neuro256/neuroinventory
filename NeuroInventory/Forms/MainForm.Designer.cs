@@ -47,6 +47,7 @@
             this.debitReportListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabInventory = new System.Windows.Forms.TabPage();
             this.tabReleased = new System.Windows.Forms.TabPage();
@@ -56,7 +57,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonDebitReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDemandReport = new System.Windows.Forms.ToolStripButton();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -217,9 +217,16 @@
             // aboutBoxToolStripMenuItem
             // 
             this.aboutBoxToolStripMenuItem.Name = "aboutBoxToolStripMenuItem";
-            this.aboutBoxToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.aboutBoxToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.aboutBoxToolStripMenuItem.Text = "О программе";
             this.aboutBoxToolStripMenuItem.Click += new System.EventHandler(this.aboutBoxToolStripMenuItem_Click);
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
+            this.testToolStripMenuItem.Text = "Test";
+            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // tabControl
             // 
@@ -316,13 +323,6 @@
             this.toolStripButtonDemandReport.Text = "Требование-накладная";
             this.toolStripButtonDemandReport.Click += new System.EventHandler(this.toolStripButtonDemandReport_Click);
             // 
-            // testToolStripMenuItem
-            // 
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.testToolStripMenuItem.Text = "Test";
-            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -339,6 +339,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Склад товарно-материальных ценностей";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

@@ -28,8 +28,8 @@ namespace NeuroInventory
                 "inventory.amount," +
                 @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price," +
                 @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
-                "(inventory.amount - SUM(debit.amount)) AS balance " +
-                "FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id GROUP BY inventory.id;";
+                "(inventory.amount - SUM(demand.amount)) AS balance " +
+                "FROM inventory LEFT JOIN demand ON demand.inventoryId = inventory.id GROUP BY inventory.id;";
             CommandDataSetNotFiltered = CommandDataSet;
             TableName = "inventory";
             SetTargetPath(@"Документы\Накладные");
@@ -48,8 +48,8 @@ namespace NeuroInventory
                 "inventory.amount," +
                 @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price," +
                 @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
-                "(inventory.amount - SUM(debit.amount)) AS balance " +
-                $"FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id WHERE inventory.catalogId={p_Id} GROUP BY inventory.id;";
+                "(inventory.amount - SUM(demand.amount)) AS balance " +
+                $"FROM inventory LEFT JOIN demand ON demand.inventoryId = inventory.id WHERE inventory.catalogId={p_Id} GROUP BY inventory.id;";
             CommandDataSetNotFiltered = CommandDataSet;
             SelectedCatalogId = p_Id;
         }
@@ -73,8 +73,8 @@ namespace NeuroInventory
                 "inventory.amount," +
                 @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price," +
                 @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
-                "(inventory.amount - SUM(debit.amount)) AS balance " +
-                $"FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id WHERE {catalogIdsStr} GROUP BY inventory.id;";
+                "(inventory.amount - SUM(demand.amount)) AS balance " +
+                $"FROM inventory LEFT JOIN demand ON demand.inventoryId = inventory.id WHERE {catalogIdsStr} GROUP BY inventory.id;";
             CommandDataSetNotFiltered = CommandDataSet;
             SelectedCatalogIds = p_CatalogIds;
         }
@@ -109,8 +109,8 @@ namespace NeuroInventory
                 "inventory.amount," +
                 @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price," +
                 @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
-                "(inventory.amount - SUM(debit.amount)) AS balance " +
-                $"FROM inventory LEFT JOIN debit ON debit.inventoryId = inventory.id WHERE ({catalogIdsStr}) " +
+                "(inventory.amount - SUM(demand.amount)) AS balance " +
+                $"FROM inventory LEFT JOIN demand ON demand.inventoryId = inventory.id WHERE ({catalogIdsStr}) " +
                 l_Name +
                 l_Provider +
                 l_Date +

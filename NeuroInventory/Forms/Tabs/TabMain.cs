@@ -395,7 +395,8 @@ namespace NeuroInventory
             if (SelectedInventory != tvTag) // Выбран единственный узел
             {
                 SelectedInventory = tvTag;
-                OnSelectInventory?.Invoke(tvTag.name);
+                if (tvTag.type == TreeNodeType.FILE)
+                    OnSelectInventory?.Invoke(tvTag.name);
 
                 List<int> l_InventoryIds = new List<int>();
 

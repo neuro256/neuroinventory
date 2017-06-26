@@ -378,11 +378,7 @@ namespace NeuroInventory
         {
             TreeViewTag tvTag = e.Node.Tag as TreeViewTag;
             SelectInventoryByCatalog(tvTag);
-            SelectInventoryByCatalog(treeView.SelectedNodes);
-            //foreach (var node in treeView.SelectedNodes)
-            //{
-            //    MessageBox.Show((node.Tag as TreeViewTag).name);
-            //}
+            //SelectInventoryByCatalog(treeView.SelectedNodes);
         }
 
         private void SelectInventoryByCatalog(List<TreeNode> selectedNodes)
@@ -412,12 +408,15 @@ namespace NeuroInventory
         {
             if (tvTag == null)
                 return;
-            m_SelectedInventory = tvTag;
-            if (tvTag.type == TreeNodeType.FILE) // is file
+            if (m_SelectedInventory != tvTag)
             {
-                //SQLiteManager.GetInstance().Inventory().SetCommandDataSet(m_SelectedInventory.id);
-                //ShowTable();
-                OnSelectedInventory?.Invoke(tvTag.name);
+                m_SelectedInventory = tvTag;
+                if (tvTag.type == TreeNodeType.FILE) // is file
+                {
+                    SQLiteManager.GetInstance().Inventory().SetCommandDataSet(m_SelectedInventory.id);
+                    ShowTable();
+                    OnSelectedInventory?.Invoke(tvTag.name);
+                }
             }
         }
 

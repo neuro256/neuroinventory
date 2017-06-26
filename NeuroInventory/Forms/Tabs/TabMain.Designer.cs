@@ -359,6 +359,7 @@
             this.ClientSize = new System.Drawing.Size(1200, 650);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainerMain);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TabMain";
             this.ShowIcon = false;

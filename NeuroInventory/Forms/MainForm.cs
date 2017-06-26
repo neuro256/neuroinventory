@@ -135,7 +135,7 @@ namespace NeuroInventory
             tabMain.MdiParent = this;
             tabMain.Parent = tabControl.TabPages[0];
             tabMain.Dock = DockStyle.Fill;
-            tabMain.OnSelectedInventory += TabMain_OnSelectedInventory;
+            tabMain.OnSelectInventory += TabMain_OnSelectedInventory;
             tabMain.Show();
             inventoryTabs["tabInventory"] = tabMain;
 

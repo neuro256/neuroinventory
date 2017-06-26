@@ -48,10 +48,11 @@ namespace NeuroInventory
 
         private InventoryFilter m_Filter;
         public InventoryFilter Filter { get => m_Filter; set => m_Filter = value; }
+        private TreeViewTag SelectedInventory { get => m_SelectedInventory; set => m_SelectedInventory = value; }
 
         private TreeViewTag m_SelectedInventory = null;
-        public delegate void SelectedInventory(string sender);
-        public event SelectedInventory OnSelectedInventory;
+        public delegate void SelectInventory(string sender);
+        public event SelectInventory OnSelectInventory;
 
         public TabMain()
         {
@@ -86,26 +87,26 @@ namespace NeuroInventory
         }
 
         /// <summary>
-        /// Удаление файла тмц
+        /// Удаление списка тмц
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void RemoveFileItem_Click(object sender, EventArgs e)
         {
-            if (m_SelectedInventory != null && m_SelectedInventory.type == TreeNodeType.FILE)
+            if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FILE)
             {
                 // Удалить тмц из базы данных
-                SQLiteManager.GetInstance().Catalogs().Remove(m_SelectedInventory.id);
+                SQLiteManager.GetInstance().Catalogs().Remove(SelectedInventory.id);
                 // Удалить тмц из древовидного списка
                 treeView.Nodes.Remove(treeView.SelectedNode);
 
                 treeView.SelectedNode = null;
-                m_SelectedInventory = null;
+                SelectedInventory = null;
 
                 // Очистить таблицу ТМЦ
                 ShowTable();
                 // Очистить заголовок
-                OnSelectedInventory?.Invoke(String.Empty);
+                OnSelectInventory?.Invoke(String.Empty);
             }
         }
 
@@ -116,10 +117,10 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void RemoveFolderItem_Click(object sender, EventArgs e)
         {
-            if (m_SelectedInventory != null && m_SelectedInventory.type == TreeNodeType.FOLDER)
+            if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FOLDER)
             {
                 treeView.BeginUpdate();
-                RecursiveRemoveFolder(m_SelectedInventory.id);
+                RecursiveRemoveFolder(SelectedInventory.id);
                 treeView.EndUpdate();
                 // Очистить таблицу ТМЦ
                 ShowTable();
@@ -185,10 +186,10 @@ namespace NeuroInventory
                 dialogName.StartPosition = FormStartPosition.CenterParent;
                 if (dialogName.ShowDialog() == DialogResult.OK)
                 {
-                    if (m_SelectedInventory != null && m_SelectedInventory.type == TreeNodeType.FOLDER)
+                    if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FOLDER)
                     {
                         // Добавить запись в таблицу Каталоги
-                        SQLiteManager.GetInstance().Catalogs().Insert((int)p_Type, m_SelectedInventory.id, dialogName.name);
+                        SQLiteManager.GetInstance().Catalogs().Insert((int)p_Type, SelectedInventory.id, dialogName.name);
                         // Получить id добавленной записи
                         int lastInsertId = SQLiteManager.GetInstance().Catalogs().ReturnLastInsertId();
 
@@ -196,7 +197,7 @@ namespace NeuroInventory
                         TreeViewTag tvTag = new TreeViewTag();
                         tvTag.name = dialogName.name;
                         tvTag.id = lastInsertId;
-                        tvTag.parent = m_SelectedInventory.id;
+                        tvTag.parent = SelectedInventory.id;
                         tvTag.type = p_Type;
                         tvTag.isRoot = false;
 
@@ -377,45 +378,59 @@ namespace NeuroInventory
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeViewTag tvTag = e.Node.Tag as TreeViewTag;
-            SelectInventoryByCatalog(tvTag);
-            //SelectInventoryByCatalog(treeView.SelectedNodes);
+            //SelectInventorySingle(tvTag);
+            SelectInventoryMulti(tvTag, treeView.SelectedNodes);
         }
 
-        private void SelectInventoryByCatalog(List<TreeNode> selectedNodes)
+        /// <summary>
+        /// Множественный выбор узлов в древовидном списке
+        /// </summary>
+        /// <param name="selectedNodes"></param>
+        private void SelectInventoryMulti(TreeViewTag tvTag, List<TreeNode> selectedNodes)
         {
-            List<int> l_InventoryIds = new List<int>();
-            lwInventory.Groups.Clear();
-            foreach (var node in treeView.SelectedNodes)
+            //lwInventory.Groups.Clear(); // Группировка пока не нужна
+            if (tvTag == null)
+                return;
+
+            if (SelectedInventory != tvTag) // Выбран единственный узел
             {
-                if((node.Tag as TreeViewTag).type == TreeNodeType.FILE)
+                SelectedInventory = tvTag;
+                OnSelectInventory?.Invoke(tvTag.name);
+
+                List<int> l_InventoryIds = new List<int>();
+
+                foreach (var node in treeView.SelectedNodes)
                 {
-                    l_InventoryIds.Add((node.Tag as TreeViewTag).id);
-                    lwInventory.Groups.Add((node.Tag as TreeViewTag).id.ToString(), (node.Tag as TreeViewTag).name);
+                    if ((node.Tag as TreeViewTag).type == TreeNodeType.FILE)
+                    {
+                        l_InventoryIds.Add((node.Tag as TreeViewTag).id);
+                        //lwInventory.Groups.Add((node.Tag as TreeViewTag).id.ToString(), (node.Tag as TreeViewTag).name);
+                    }
                 }
-            }
-            if (l_InventoryIds.Count > 0)
-            {
-                SQLiteManager.GetInstance().Inventory().SetCommandDataSet(l_InventoryIds);
-                ShowTable();
+                if (l_InventoryIds.Count > 0)
+                {
+                    SQLiteManager.GetInstance().Inventory().SetCommandDataSet(l_InventoryIds);
+                    ShowTable();
+                }
             }
         }
 
         /// <summary>
-        /// Выбор тмц из каталога
+        /// Выбор тмц из каталога (единственный узел можно выбрать)
         /// </summary>
         /// <param name="tvTag"></param>
-        private void SelectInventoryByCatalog(TreeViewTag tvTag)
+        private void SelectInventorySingle(TreeViewTag tvTag)
         {
             if (tvTag == null)
                 return;
-            if (m_SelectedInventory != tvTag)
+            if (SelectedInventory != tvTag)
             {
-                m_SelectedInventory = tvTag;
+                SelectedInventory = tvTag;
                 if (tvTag.type == TreeNodeType.FILE) // is file
                 {
-                    SQLiteManager.GetInstance().Inventory().SetCommandDataSet(m_SelectedInventory.id);
+                    SQLiteManager.GetInstance().Inventory().SetCommandDataSet(SelectedInventory.id);
                     ShowTable();
-                    OnSelectedInventory?.Invoke(tvTag.name);
+                    OnSelectInventory?.Invoke(tvTag.name);
                 }
             }
         }
@@ -485,9 +500,9 @@ namespace NeuroInventory
         /// </summary>
         public override void AddRecord()
         {
-            if (m_SelectedInventory != null && m_SelectedInventory.type == TreeNodeType.FILE)
+            if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FILE && treeView.SelectedNodes.Count == 1)
             {
-                InventoryEditor editor = new InventoryEditor(m_SelectedInventory.id);
+                InventoryEditor editor = new InventoryEditor(SelectedInventory.id);
                 editor.StartPosition = FormStartPosition.CenterParent;
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
@@ -498,6 +513,10 @@ namespace NeuroInventory
                     }
                 }
                 m_Listview.SelectedItems.Clear();
+            }
+            else
+            {
+                MessageBox.Show(Definitions.INSERT_WARNING_STRING);
             }
         }
 
@@ -523,9 +542,9 @@ namespace NeuroInventory
         /// </summary>
         public override void UpdateRecord()
         {
-            if (m_Listview.SelectedItems.Count > 0 && m_SelectedInventory.type == TreeNodeType.FILE)
+            if (m_Listview.SelectedItems.Count > 0 && SelectedInventory.type == TreeNodeType.FILE)
             {
-                InventoryEditor editor = new InventoryEditor(m_SelectedInventory.id, m_ListviewSelectedIndex);
+                InventoryEditor editor = new InventoryEditor(SelectedInventory.id, m_ListviewSelectedIndex);
                 editor.StartPosition = FormStartPosition.CenterParent;
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
@@ -569,7 +588,7 @@ namespace NeuroInventory
                 m_Listview.EndUpdate();
                 return;
             }
-            if (m_SelectedInventory == null || m_SelectedInventory.type == TreeNodeType.FOLDER)
+            if (SelectedInventory == null || SelectedInventory.type == TreeNodeType.FOLDER)
                 return;
             DataSet dataSet = ReturnDataSet();
             try

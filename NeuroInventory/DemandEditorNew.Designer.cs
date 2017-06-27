@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.lwDemandData = new BrightIdeasSoftware.DataListView();
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -41,9 +41,9 @@
             this.panelBottonLeft = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnReleased = new System.Windows.Forms.Button();
+            this.panelLeftUpper = new System.Windows.Forms.Panel();
             this.lblEmployee = new System.Windows.Forms.Label();
             this.cbEmployee = new System.Windows.Forms.ComboBox();
-            this.panelLeftUpper = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.lwDemandData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelBottonLeft.SuspendLayout();
@@ -83,6 +83,11 @@
             this.lwDemandData.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.lwDemandData_CellEditFinishing);
             this.lwDemandData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.lwDemandData_CellEditStarting);
             // 
+            // olvColumn7
+            // 
+            this.olvColumn7.AspectName = "id";
+            this.olvColumn7.Text = "id";
+            // 
             // olvColumn1
             // 
             this.olvColumn1.AspectName = "name";
@@ -91,11 +96,6 @@
             this.olvColumn1.Text = "Название";
             this.olvColumn1.UseInitialLetterForGroup = true;
             this.olvColumn1.Width = 250;
-            // 
-            // olvColumn7
-            // 
-            this.olvColumn7.AspectName = "id";
-            this.olvColumn7.Text = "id";
             // 
             // olvColumn2
             // 
@@ -114,6 +114,7 @@
             // olvColumn4
             // 
             this.olvColumn4.AspectName = "price";
+            this.olvColumn4.AspectToStringFormat = "{0:C}";
             this.olvColumn4.IsEditable = false;
             this.olvColumn4.Text = "Цена";
             this.olvColumn4.Width = 100;
@@ -127,7 +128,8 @@
             // olvColumn6
             // 
             this.olvColumn6.AspectName = "sum";
-            this.olvColumn6.IsEditable = false;
+            this.olvColumn6.AspectToStringFormat = "{0:C}";
+            this.olvColumn6.IsEditable = true;
             this.olvColumn6.Text = "Сумма";
             this.olvColumn6.Width = 100;
             // 
@@ -191,6 +193,16 @@
             this.btnReleased.Text = "Отпустить";
             this.btnReleased.UseVisualStyleBackColor = true;
             // 
+            // panelLeftUpper
+            // 
+            this.panelLeftUpper.Controls.Add(this.lblEmployee);
+            this.panelLeftUpper.Controls.Add(this.cbEmployee);
+            this.panelLeftUpper.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelLeftUpper.Location = new System.Drawing.Point(829, 3);
+            this.panelLeftUpper.Name = "panelLeftUpper";
+            this.panelLeftUpper.Size = new System.Drawing.Size(350, 546);
+            this.panelLeftUpper.TabIndex = 7;
+            // 
             // lblEmployee
             // 
             this.lblEmployee.AutoSize = true;
@@ -208,16 +220,6 @@
             this.cbEmployee.Name = "cbEmployee";
             this.cbEmployee.Size = new System.Drawing.Size(271, 24);
             this.cbEmployee.TabIndex = 7;
-            // 
-            // panelLeftUpper
-            // 
-            this.panelLeftUpper.Controls.Add(this.lblEmployee);
-            this.panelLeftUpper.Controls.Add(this.cbEmployee);
-            this.panelLeftUpper.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelLeftUpper.Location = new System.Drawing.Point(829, 3);
-            this.panelLeftUpper.Name = "panelLeftUpper";
-            this.panelLeftUpper.Size = new System.Drawing.Size(350, 546);
-            this.panelLeftUpper.TabIndex = 7;
             // 
             // DemandEditorNew
             // 

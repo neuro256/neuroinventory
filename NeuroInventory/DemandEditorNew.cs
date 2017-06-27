@@ -57,7 +57,7 @@ namespace NeuroInventory
                 nud.Minimum = 0.0M;
                 nud.Maximum = NudMaxValue;
                 nud.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(e.ListViewItem.SubItems[3].Text);
-                nud.Value = Convert.ToDecimal(e.Value, CultureInfo.InvariantCulture);
+                nud.Value = Convert.ToDecimal(e.Value, CultureInfo.GetCultureInfo("ru-RU"));
                 e.Control = nud;
             }
         }
@@ -66,13 +66,14 @@ namespace NeuroInventory
         {
             if (e.Column.AspectName == "amount")
             {
-                //Here you can verify data, if the data is wrong, call
                 if (Convert.ToDecimal(e.NewValue, CultureInfo.InvariantCulture) > NudMaxValue)
                     e.Cancel = true;
-                //foreach(DataRow row in DemandDataSet.Tables[0].Rows)
-                //{
-                //    row[6] = "123";
-                //}
+                if (!String.Equals(e.NewValue.ToString(), e.Value.ToString()))
+                {
+                    string l_PriceStr = DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("price");
+                    decimal l_SumNewValue = Convert.ToDecimal(e.NewValue, CultureInfo.GetCultureInfo("ru-RU")) * Decimal.Parse(l_PriceStr, NumberStyles.Currency);
+                    DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].SetField("sum", l_SumNewValue.ToString("C"));
+                }
             }
         }
     }

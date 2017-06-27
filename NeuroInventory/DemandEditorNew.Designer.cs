@@ -41,9 +41,13 @@
             this.panelBottonLeft = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnReleased = new System.Windows.Forms.Button();
+            this.lblEmployee = new System.Windows.Forms.Label();
+            this.cbEmployee = new System.Windows.Forms.ComboBox();
+            this.panelLeftUpper = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.lwDemandData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelBottonLeft.SuspendLayout();
+            this.panelLeftUpper.SuspendLayout();
             this.SuspendLayout();
             // 
             // lwDemandData
@@ -139,12 +143,14 @@
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.11209F));
             this.tableLayoutPanelMain.Controls.Add(this.lwDemandData, 0, 0);
             this.tableLayoutPanelMain.Controls.Add(this.panelBottonLeft, 1, 1);
+            this.tableLayoutPanelMain.Controls.Add(this.panelLeftUpper, 1, 0);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
             this.tableLayoutPanelMain.RowCount = 2;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.95652F));
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.04348F));
+            this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelMain.Size = new System.Drawing.Size(1182, 635);
             this.tableLayoutPanelMain.TabIndex = 1;
             // 
@@ -185,6 +191,34 @@
             this.btnReleased.Text = "Отпустить";
             this.btnReleased.UseVisualStyleBackColor = true;
             // 
+            // lblEmployee
+            // 
+            this.lblEmployee.AutoSize = true;
+            this.lblEmployee.Location = new System.Drawing.Point(3, 17);
+            this.lblEmployee.Name = "lblEmployee";
+            this.lblEmployee.Size = new System.Drawing.Size(71, 17);
+            this.lblEmployee.TabIndex = 8;
+            this.lblEmployee.Text = "Работник";
+            // 
+            // cbEmployee
+            // 
+            this.cbEmployee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEmployee.FormattingEnabled = true;
+            this.cbEmployee.Location = new System.Drawing.Point(6, 37);
+            this.cbEmployee.Name = "cbEmployee";
+            this.cbEmployee.Size = new System.Drawing.Size(271, 24);
+            this.cbEmployee.TabIndex = 7;
+            // 
+            // panelLeftUpper
+            // 
+            this.panelLeftUpper.Controls.Add(this.lblEmployee);
+            this.panelLeftUpper.Controls.Add(this.cbEmployee);
+            this.panelLeftUpper.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelLeftUpper.Location = new System.Drawing.Point(829, 3);
+            this.panelLeftUpper.Name = "panelLeftUpper";
+            this.panelLeftUpper.Size = new System.Drawing.Size(350, 546);
+            this.panelLeftUpper.TabIndex = 7;
+            // 
             // DemandEditorNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -192,7 +226,7 @@
             this.ClientSize = new System.Drawing.Size(1182, 635);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanelMain);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "DemandEditorNew";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -202,6 +236,8 @@
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.panelBottonLeft.ResumeLayout(false);
             this.panelBottonLeft.PerformLayout();
+            this.panelLeftUpper.ResumeLayout(false);
+            this.panelLeftUpper.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -221,5 +257,8 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnReleased;
         private BrightIdeasSoftware.OLVColumn olvColumn7;
+        private System.Windows.Forms.Panel panelLeftUpper;
+        private System.Windows.Forms.Label lblEmployee;
+        private System.Windows.Forms.ComboBox cbEmployee;
     }
 }

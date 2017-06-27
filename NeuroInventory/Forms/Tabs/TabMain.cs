@@ -840,8 +840,8 @@ namespace NeuroInventory
                 newRow["OKEIcode"] = item.SubItems[5].Text;
                 newRow["measurement"] = item.SubItems[6].Text;
                 newRow["price"] = item.SubItems[8].Text;
-                newRow["amount"] = item.SubItems[7].Text;
-                newRow["sum"] = item.SubItems[9].Text;
+                newRow["amount"] = 0;
+                newRow["sum"] = 0;
 
                 demandTable.Rows.Add(newRow);
             }

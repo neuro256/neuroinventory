@@ -21,14 +21,26 @@ namespace NeuroInventory
             InitializeComponent();
 
             DemandDataSet = p_DataSet;
+
+            InitControls();
+        }
+
+        private void InitControls()
+        {
+            cbEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbEmployee.Sorted = false;
+            DataSet employeeDataSet = SQLiteManager.GetInstance().Employees().ReturnDataSet("SELECT id, (surename || ' ' || firstname || ' ' || lastname) AS name FROM employees");
+            cbEmployee.DataSource = employeeDataSet.Tables[0];
+            cbEmployee.DisplayMember = "name";
+            cbEmployee.ValueMember = "id";
+
             lwDemandData.AutoGenerateColumns = false;
             lwDemandData.DataSource = new BindingSource(DemandDataSet, "demand");
-
             lwDemandData.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
             lwDemandData.SelectedBackColor = Color.LightBlue;
             lwDemandData.SelectedForeColor = Color.MidnightBlue;
             lwDemandData.RowHeight = 26;
-            lwDemandData.RebuildColumns();
+            lwDemandData.RebuildColumns(); 
         }
 
         private void btnClose_Click(object sender, System.EventArgs e)

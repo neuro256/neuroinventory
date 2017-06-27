@@ -832,7 +832,7 @@ namespace NeuroInventory
                 newRow["OKEIcode"] = item.SubItems[5].Text;
                 newRow["measurement"] = item.SubItems[6].Text;
                 newRow["price"] = Convert.ToDecimal(item.SubItems[8].Text, CultureInfo.InvariantCulture).ToString("#.00");
-                newRow["amount"] = Convert.ToDecimal(item.SubItems[7].Text, CultureInfo.InvariantCulture);
+                newRow["amount"] = Convert.ToDecimal(item.SubItems[7].Text, CultureInfo.InvariantCulture).ToString("#.#");
                 newRow["sum"] = item.SubItems[9].Text;
 
                 demandTable.Rows.Add(newRow);

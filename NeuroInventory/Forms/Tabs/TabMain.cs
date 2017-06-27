@@ -607,6 +607,14 @@ namespace NeuroInventory
                         ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
                         subitem.Text = dataSet.Tables[0].Rows[i][j].ToString();
                         subitem.Name = dataSet.Tables[0].Columns[j].ToString();
+
+                        // Костыль для правильного отображения количества тмц (десятичные знаки после запятой)
+                        if (subitem.Name == "amount")
+                        {
+                            int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][7].ToString());
+                            subitem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][j]);
+                        }
+
                         if (subitem.Name == "invoice")
                         {
                             subitem.BackColor = Color.LightBlue;
@@ -831,8 +839,8 @@ namespace NeuroInventory
                 newRow["name"] = item.SubItems[4].Text;
                 newRow["OKEIcode"] = item.SubItems[5].Text;
                 newRow["measurement"] = item.SubItems[6].Text;
-                newRow["price"] = Convert.ToDecimal(item.SubItems[8].Text, CultureInfo.InvariantCulture).ToString("#.00");
-                newRow["amount"] = Convert.ToDecimal(item.SubItems[7].Text, CultureInfo.InvariantCulture).ToString("#.#");
+                newRow["price"] = item.SubItems[8].Text;
+                newRow["amount"] = item.SubItems[7].Text;
                 newRow["sum"] = item.SubItems[9].Text;
 
                 demandTable.Rows.Add(newRow);

@@ -66,8 +66,11 @@ namespace NeuroInventory
         {
             if (e.Column.AspectName == "amount")
             {
-                if (Convert.ToDecimal(e.NewValue, CultureInfo.InvariantCulture) > NudMaxValue)
-                    e.Cancel = true;
+                string l_BalanceStr = DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("balance");
+                decimal l_Balance = Convert.ToDecimal(l_BalanceStr, CultureInfo.GetCultureInfo("ru-RU"));
+
+                if (Convert.ToDecimal(e.NewValue, CultureInfo.InvariantCulture) > l_Balance)
+                    e.NewValue = l_Balance;
                 if (!String.Equals(e.NewValue.ToString(), e.Value.ToString()))
                 {
                     string l_PriceStr = DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("price");

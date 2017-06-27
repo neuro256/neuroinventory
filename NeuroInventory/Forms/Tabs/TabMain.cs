@@ -589,6 +589,7 @@ namespace NeuroInventory
             DataSet dataSet = ReturnDataSet();
             try
             {
+                int l_DecimalPlaces = 0;
                 //Заполняем список
                 m_Listview.BeginUpdate();
                 m_Listview.Items.Clear();
@@ -611,7 +612,7 @@ namespace NeuroInventory
                         // Костыль для правильного отображения количества тмц (десятичные знаки после запятой)
                         if (subitem.Name == "amount")
                         {
-                            int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][7].ToString());
+                            l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][7].ToString());
                             subitem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][j]);
                         }
                         else if(subitem.Name == "price" || subitem.Name == "sum")
@@ -634,8 +635,10 @@ namespace NeuroInventory
                     object balance = dataSet.Tables[0].Rows[i][dataSet.Tables[0].Columns.Count - 1];
                     if (!Equals(balance, DBNull.Value) && Convert.ToDecimal(balance) <= 0)
                         subitemBalance.BackColor = Color.Red;
-                    subitemBalance.Text = balance.ToString();
                     subitemBalance.Name = "balance";
+                    l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][7].ToString());
+                    subitemBalance.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", balance);
+
                     m_Listview.Items[i].SubItems.Add(subitemBalance);
 
                     m_Listview.Items[i].UseItemStyleForSubItems = false;
@@ -833,6 +836,7 @@ namespace NeuroInventory
             demandTable.Columns.Add("price");
             demandTable.Columns.Add("amount");
             demandTable.Columns.Add("sum");
+            demandTable.Columns.Add("balance");
 
             foreach (ListViewItem item in lwInventory.CheckedItems)
             {
@@ -845,6 +849,7 @@ namespace NeuroInventory
                 newRow["price"] = item.SubItems[8].Text;
                 newRow["amount"] = 0;
                 newRow["sum"] = 0;
+                newRow["balance"] = item.SubItems[10].Text;
 
                 demandTable.Rows.Add(newRow);
             }

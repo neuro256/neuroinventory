@@ -851,5 +851,17 @@ namespace NeuroInventory
 
             return demandDataSet;
         }
+
+        private void lwInventory_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            DataSet dataSet = SQLiteManager.GetInstance().Inventory().ReturnDataSet();
+
+            decimal l_Balance = Convert.ToDecimal(dataSet.Tables[0].Rows[e.Index]["balance"]);
+
+            if(l_Balance <= 0)
+            {
+                e.NewValue = e.CurrentValue;
+            }
+        }
     }
 }

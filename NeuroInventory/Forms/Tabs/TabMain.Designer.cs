@@ -38,6 +38,7 @@
             this.tableLayoutPanelRight = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelInventory = new System.Windows.Forms.TableLayoutPanel();
             this.panelMainBottom = new System.Windows.Forms.Panel();
+            this.btnDemand = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnInventoryEdit = new System.Windows.Forms.Button();
             this.btnInventoryRemove = new System.Windows.Forms.Button();
@@ -58,7 +59,6 @@
             this.chBalance = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStripCatalogs = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnDemand = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -191,6 +191,20 @@
             this.panelMainBottom.Size = new System.Drawing.Size(996, 55);
             this.panelMainBottom.TabIndex = 1;
             // 
+            // btnDemand
+            // 
+            this.btnDemand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDemand.AutoSize = true;
+            this.btnDemand.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnDemand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDemand.Location = new System.Drawing.Point(586, 11);
+            this.btnDemand.Name = "btnDemand";
+            this.btnDemand.Size = new System.Drawing.Size(184, 33);
+            this.btnDemand.TabIndex = 4;
+            this.btnDemand.Text = "Отпустить";
+            this.btnDemand.UseVisualStyleBackColor = true;
+            this.btnDemand.Click += new System.EventHandler(this.btnDemand_Click);
+            // 
             // btnFilter
             // 
             this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -281,6 +295,7 @@
             this.lwInventory.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lwInventory_DrawColumnHeader);
             this.lwInventory.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lwInventory_DrawItem);
             this.lwInventory.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lwInventory_DrawSubItem);
+            this.lwInventory.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lwInventory_ItemCheck);
             this.lwInventory.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.lwInventory_ItemDrag);
             this.lwInventory.DragOver += new System.Windows.Forms.DragEventHandler(this.lwInventory_DragOver);
             // 
@@ -356,20 +371,6 @@
             this.contextMenuStripCatalogs.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripCatalogs.Name = "contextMenuStripCatalogs";
             this.contextMenuStripCatalogs.Size = new System.Drawing.Size(67, 4);
-            // 
-            // btnDemand
-            // 
-            this.btnDemand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDemand.AutoSize = true;
-            this.btnDemand.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnDemand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDemand.Location = new System.Drawing.Point(586, 11);
-            this.btnDemand.Name = "btnDemand";
-            this.btnDemand.Size = new System.Drawing.Size(184, 33);
-            this.btnDemand.TabIndex = 4;
-            this.btnDemand.Text = "Отпустить";
-            this.btnDemand.UseVisualStyleBackColor = true;
-            this.btnDemand.Click += new System.EventHandler(this.btnDemand_Click);
             // 
             // TabMain
             // 

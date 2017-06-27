@@ -614,8 +614,11 @@ namespace NeuroInventory
                             int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][7].ToString());
                             subitem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][j]);
                         }
-
-                        if (subitem.Name == "invoice")
+                        else if(subitem.Name == "price" || subitem.Name == "sum")
+                        {
+                            subitem.Text = Convert.ToDecimal(subitem.Text, CultureInfo.InvariantCulture).ToString("C");
+                        }
+                        else if (subitem.Name == "invoice")
                         {
                             subitem.BackColor = Color.LightBlue;
                             subitem.Tag = subitem.Text;

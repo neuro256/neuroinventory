@@ -860,7 +860,7 @@ namespace NeuroInventory
 
             if(l_Balance <= 0)
             {
-                e.NewValue = e.CurrentValue;
+                e.NewValue = CheckState.Unchecked;
             }
         }
     }

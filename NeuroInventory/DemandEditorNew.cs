@@ -64,6 +64,9 @@ namespace NeuroInventory
 
         private void lwDemandData_CellEditFinishing(object sender, CellEditEventArgs e)
         {
+            // Тестовое определение id записи
+            //int id = Convert.ToInt32(DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<object>("id") ?? 0);
+
             if (e.Column.AspectName == "amount")
             {
                 string l_BalanceStr = DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("balance");
@@ -78,6 +81,11 @@ namespace NeuroInventory
                     DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].SetField("sum", l_SumNewValue.ToString("C"));
                 }
             }
+        }
+
+        private void btnReleased_Click(object sender, EventArgs e)
+        {
+            // Передать DataSet во вкладку Отпущенные
         }
     }
 }

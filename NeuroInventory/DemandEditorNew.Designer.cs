@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.lwDemandData = new BrightIdeasSoftware.DataListView();
-            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -52,7 +51,6 @@
             // 
             // lwDemandData
             // 
-            this.lwDemandData.AllColumns.Add(this.olvColumn7);
             this.lwDemandData.AllColumns.Add(this.olvColumn1);
             this.lwDemandData.AllColumns.Add(this.olvColumn2);
             this.lwDemandData.AllColumns.Add(this.olvColumn3);
@@ -61,7 +59,6 @@
             this.lwDemandData.AllColumns.Add(this.olvColumn6);
             this.lwDemandData.CellEditUseWholeCell = false;
             this.lwDemandData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn7,
             this.olvColumn1,
             this.olvColumn2,
             this.olvColumn3,
@@ -82,11 +79,6 @@
             this.lwDemandData.View = System.Windows.Forms.View.Details;
             this.lwDemandData.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.lwDemandData_CellEditFinishing);
             this.lwDemandData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.lwDemandData_CellEditStarting);
-            // 
-            // olvColumn7
-            // 
-            this.olvColumn7.AspectName = "id";
-            this.olvColumn7.Text = "id";
             // 
             // olvColumn1
             // 
@@ -129,7 +121,6 @@
             // 
             this.olvColumn6.AspectName = "sum";
             this.olvColumn6.AspectToStringFormat = "{0:C}";
-            this.olvColumn6.IsEditable = true;
             this.olvColumn6.Text = "Сумма";
             this.olvColumn6.Width = 100;
             // 
@@ -192,6 +183,7 @@
             this.btnReleased.TabIndex = 5;
             this.btnReleased.Text = "Отпустить";
             this.btnReleased.UseVisualStyleBackColor = true;
+            this.btnReleased.Click += new System.EventHandler(this.btnReleased_Click);
             // 
             // panelLeftUpper
             // 
@@ -258,7 +250,6 @@
         private System.Windows.Forms.Panel panelBottonLeft;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnReleased;
-        private BrightIdeasSoftware.OLVColumn olvColumn7;
         private System.Windows.Forms.Panel panelLeftUpper;
         private System.Windows.Forms.Label lblEmployee;
         private System.Windows.Forms.ComboBox cbEmployee;

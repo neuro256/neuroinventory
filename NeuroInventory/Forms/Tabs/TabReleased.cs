@@ -3,6 +3,7 @@ using System.Collections;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
@@ -48,7 +49,6 @@ namespace NeuroInventory
             // Добавление столбцов
             // Необходимо добавлять столбцы именно так, иначе ColumnHeader не сможет преобразоваться в ColHeader (используется в методе сортировки)
             lwReleased.Columns.Clear();
-            lwReleased.Columns.Add(new ColHeader("ID", 50, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("№", 50, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Дата поступления", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Наименование", 200, HorizontalAlignment.Left, true));
@@ -153,18 +153,36 @@ namespace NeuroInventory
             DataSet dataSet = ReturnDataSet();
             try
             {
+                int l_DecimalPlaces = 0;
                 //Заполняем список
                 m_Listview.BeginUpdate();
                 m_Listview.Items.Clear();
+                m_Listview.Columns[0].Tag = false;
+
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
-                    m_Listview.Items.Add(dataSet.Tables[0].Rows[i]["id"].ToString());
-                    m_Listview.Items[i].SubItems.Add((i + 1).ToString());
-                    for (int j = 1; j < dataSet.Tables[0].Columns.Count - 1; j++)
+                    ListViewItem newItem = new ListViewItem();
+                    newItem.Text = (i + 1).ToString();
+                    newItem.Name = dataSet.Tables[0].Rows[i]["id"].ToString();
+                    newItem.Tag = dataSet.Tables[0].Rows[i]["id"];
+                    m_Listview.Items.Add(newItem);
+
+                    for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
                     {
                         ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
                         subitem.Text = dataSet.Tables[0].Rows[i][j].ToString();
                         subitem.Name = dataSet.Tables[0].Columns[j].ToString();
+                        // Костыль для правильного отображения количества тмц (десятичные знаки после запятой)
+                        if (subitem.Name == "amount")
+                        {
+                            l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][4].ToString());
+                            subitem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][j]);
+                        }
+                        else if (subitem.Name == "price" || subitem.Name == "sum")
+                        {
+                            subitem.Text = Convert.ToDecimal(subitem.Text, CultureInfo.InvariantCulture).ToString("C");
+                        }
+
                         if (subitem.Name == "document")
                         {
                             subitem.BackColor = Color.LightBlue;
@@ -223,6 +241,8 @@ namespace NeuroInventory
         {
             ShowTable();
         }
+
+        #region DRAW CHECKBOXES
 
         private void lwReleased_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
@@ -320,6 +340,8 @@ namespace NeuroInventory
                 MessageBox.Show(ex.Message);
             }
         }
+
+        #endregion
 
         public override void ListViewColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
         {

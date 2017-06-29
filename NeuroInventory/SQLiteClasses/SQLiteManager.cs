@@ -409,6 +409,12 @@ namespace NeuroInventory
                                 "FOREIGN KEY (providerId) REFERENCES providers(id) ON DELETE SET NULL);";
                             await command.ExecuteNonQueryAsync();
 
+                            //// Создание таблицы "Отпущенные"
+                            //command.CommandText = "CREATE TABLE IF NOT EXISTS released (" +
+                            //    "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                            //    "inventoryId INTEGER NOT NULL, ";
+                            //await command.ExecuteNonQueryAsync();
+
                             // Создание таблицы "Работники"
                             command.CommandText = "CREATE TABLE IF NOT EXISTS employees (" +
                                 "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
@@ -735,6 +741,11 @@ namespace NeuroInventory
         public DebitReportSql DebitReport()
         {
             return DebitReportSql.GetInstance();
+        }
+
+        public ReleasedSql Released()
+        {
+            return ReleasedSql.GetInstance();
         }
     }
 }

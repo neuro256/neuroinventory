@@ -190,6 +190,7 @@
     <Compile Include="DemandEditorNew.Designer.cs">
       <DependentUpon>DemandEditorNew.cs</DependentUpon>
     </Compile>
+    <Compile Include="SQLiteClasses\Tables\ReleasedSql.cs" />
     <Compile Include="UtilityClasses\MultiSelectTreeview.cs">
       <SubType>Component</SubType>
     </Compile>

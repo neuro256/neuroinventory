@@ -21,6 +21,7 @@ namespace NeuroInventory
             InitListView();
             InitContextMenuStrip();
             m_ListviewSelectedIndex = 0;
+            SQLiteManager.GetInstance().Released().SetCommandSet();
         }
 
         protected override void InitForm()
@@ -144,50 +145,50 @@ namespace NeuroInventory
 
         public override DataSet ReturnDataSet()
         {
-            return SQLiteManager.GetInstance().Employees().ReturnDataSet();
+            return SQLiteManager.GetInstance().Released().ReturnDataSet();
         }
 
         public override void ShowTable()
         {
-            //DataSet dataSet = ReturnDataSet();
-            //try
-            //{
-            //    //Заполняем список
-            //    m_Listview.BeginUpdate();
-            //    m_Listview.Items.Clear();
-            //    for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
-            //    {
-            //        m_Listview.Items.Add(dataSet.Tables[0].Rows[i]["id"].ToString());
-            //        m_Listview.Items[i].SubItems.Add((i + 1).ToString());
-            //        for (int j = 1; j < dataSet.Tables[0].Columns.Count - 1; j++)
-            //        {
-            //            ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
-            //            subitem.Text = dataSet.Tables[0].Rows[i][j].ToString();
-            //            subitem.Name = dataSet.Tables[0].Columns[j].ToString();
-            //            if (subitem.Name == "document")
-            //            {
-            //                subitem.BackColor = Color.LightBlue;
-            //                subitem.Tag = subitem.Text;
-            //                subitem.Text = Path.GetFileName(subitem.Text);
-            //            }
-            //            m_Listview.Items[i].SubItems.Add(subitem);
-            //        }
-            //        m_Listview.Items[i].UseItemStyleForSubItems = false;
-            //    }
-            //    m_Listview.EndUpdate();
-            //}
-            //catch (SQLiteException se)
-            //{
-            //    MessageBox.Show(se.Message, "Ошибка подключения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-            //catch (ArgumentException se)
-            //{
-            //    MessageBox.Show("Error!:", se.Message);
-            //}
-            //finally
-            //{
-            //    dataSet.Dispose();
-            //}
+            DataSet dataSet = ReturnDataSet();
+            try
+            {
+                //Заполняем список
+                m_Listview.BeginUpdate();
+                m_Listview.Items.Clear();
+                for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+                {
+                    m_Listview.Items.Add(dataSet.Tables[0].Rows[i]["id"].ToString());
+                    m_Listview.Items[i].SubItems.Add((i + 1).ToString());
+                    for (int j = 1; j < dataSet.Tables[0].Columns.Count - 1; j++)
+                    {
+                        ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
+                        subitem.Text = dataSet.Tables[0].Rows[i][j].ToString();
+                        subitem.Name = dataSet.Tables[0].Columns[j].ToString();
+                        if (subitem.Name == "document")
+                        {
+                            subitem.BackColor = Color.LightBlue;
+                            subitem.Tag = subitem.Text;
+                            subitem.Text = Path.GetFileName(subitem.Text);
+                        }
+                        m_Listview.Items[i].SubItems.Add(subitem);
+                    }
+                    m_Listview.Items[i].UseItemStyleForSubItems = false;
+                }
+                m_Listview.EndUpdate();
+            }
+            catch (SQLiteException se)
+            {
+                MessageBox.Show(se.Message, "Ошибка подключения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (ArgumentException se)
+            {
+                MessageBox.Show("Error!:", se.Message);
+            }
+            finally
+            {
+                dataSet.Dispose();
+            }
         }
 
         public override void Clear()

@@ -97,6 +97,7 @@ namespace NeuroInventory
             string l_OKEIcode = !String.IsNullOrEmpty(p_OKEIcode) ? $" AND OKEIcode LIKE '%{p_OKEIcode}%'" : $" AND (OKEIcode LIKE '%{p_OKEIcode}%' OR OKEIcode IS NULL)";
             string l_Measurement = !String.IsNullOrEmpty(p_Measurement) ? $" AND measurement LIKE '%{p_Measurement}%'" : $" AND (measurement LIKE '%{p_Measurement}%' OR measurement IS NULL)";
             string l_Amount = p_Amount != null ? $" AND (inventory.amount={p_Amount})" : String.Empty;
+            l_Amount = l_Amount.Replace(",", ".");
             string l_Price = p_Price != null ? $" AND (inventory.price={Convert.ToInt32(Convert.ToDecimal(p_Price) * 100)})" : String.Empty;
 
             CommandDataSet = "SELECT inventory.id, " +

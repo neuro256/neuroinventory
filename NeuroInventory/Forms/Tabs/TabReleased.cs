@@ -11,9 +11,9 @@ namespace NeuroInventory
 {
     public partial class TabReleased : InventoryView
     {
-        private EmployeeFilter m_Filter;
+        private ReleasedFilter m_Filter;
 
-        private EmployeeFilter Filter { get => m_Filter; set => m_Filter = value; }
+        private ReleasedFilter Filter { get => m_Filter; set => m_Filter = value; }
 
         public TabReleased()
         {
@@ -32,7 +32,7 @@ namespace NeuroInventory
             this.Name = "TabDemand";
             this.Text = "TabDemand";
 
-            EmployeeFilter.Filtration += EmployeeFiltration;
+            ReleasedFilter.Filtration += ReleasedFiltration;
         }
 
         public override void InitListView()
@@ -49,7 +49,7 @@ namespace NeuroInventory
             // Добавление столбцов
             // Необходимо добавлять столбцы именно так, иначе ColumnHeader не сможет преобразоваться в ColHeader (используется в методе сортировки)
             lwReleased.Columns.Clear();
-            lwReleased.Columns.Add(new ColHeader("№", 50, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("№", 60, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Дата поступления", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Наименование", 200, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Код ОКЕИ", 100, HorizontalAlignment.Left, true));
@@ -58,40 +58,12 @@ namespace NeuroInventory
             lwReleased.Columns.Add(new ColHeader("Количество", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Сумма", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Документ", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Документ", 300, System.Windows.Forms.HorizontalAlignment.Left, true));
         }
 
-        private void btnEmployeeAdd_Click(object sender, EventArgs e)
-        {
-            AddRecord();
-        }
-
-        private void btnEmployeeRemove_Click(object sender, EventArgs e)
+        private void btnReleasedRemove_Click(object sender, EventArgs e)
         {
             RemoveRecord();
-        }
-
-        private void btnEmployeeEdit_Click(object sender, EventArgs e)
-        {
-            UpdateRecord();
-        }
-
-        /// <summary>
-        /// Добавление записи в таблицу
-        /// </summary>
-        public override void AddRecord()
-        {
-            EmployeeEditor editor = new EmployeeEditor();
-            editor.StartPosition = FormStartPosition.CenterParent;
-            if(editor.ShowDialog() == DialogResult.OK)
-            {
-                ShowTable();
-                if (m_Listview.Items.Count > 0)
-                {
-                    m_Listview.EnsureVisible(m_Listview.Items.Count - 1);
-                }
-            }
-            m_Listview.SelectedItems.Clear();
         }
 
         /// <summary>
@@ -101,35 +73,13 @@ namespace NeuroInventory
         {
             if(m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteManager.GetInstance().Employees().Remove(m_ListviewSelectedIndex);
+                SQLiteManager.GetInstance().Released().Remove(m_ListviewSelectedIndex);
                 RemoveFromListViewAt(m_ListviewSelectedIndex);
                 m_Listview.SelectedItems.Clear();
             }
             else
             {
                 MessageBox.Show(Definitions.REMOVE_WARNING_STRING);
-            }
-        }
-
-        /// <summary>
-        /// Редактирование записи из таблицы
-        /// </summary>
-        public override void UpdateRecord()
-        {
-            if (m_Listview.SelectedItems.Count > 0)
-            {
-                EmployeeEditor editor = new EmployeeEditor(m_ListviewSelectedIndex);
-                editor.StartPosition = FormStartPosition.CenterParent;
-                if (editor.ShowDialog() == DialogResult.OK)
-                {
-                    ShowTable();
-                    lwReleased.EnsureVisible(m_ListviewSelectedIndex);
-                }
-                m_Listview.SelectedItems.Clear();
-            }
-            else
-            {
-                MessageBox.Show(Definitions.UPDATE_WARNING_STRING);
             }
         }
 
@@ -224,7 +174,7 @@ namespace NeuroInventory
         {
             if(Filter == null || !Filter.Created)
             {
-                Filter = new EmployeeFilter();
+                Filter = new ReleasedFilter();
                 Filter.Dock = DockStyle.Top;
                 Filter.TopLevel = false;
                 Filter.MdiParent = MdiParent;
@@ -237,7 +187,7 @@ namespace NeuroInventory
             }
         }
 
-        private void EmployeeFiltration()
+        private void ReleasedFiltration()
         {
             ShowTable();
         }
@@ -346,6 +296,47 @@ namespace NeuroInventory
         public override void ListViewColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
         {
             
+        }
+
+        public override void ListViewItemMouseUp(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    ListViewHitTestInfo info = m_Listview.HitTest(e.X, e.Y);
+                    ListViewItem item = info.Item;
+
+                    if (item != null)
+                    {
+                        m_ListviewSelectedIndex = item.Index;
+                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = false;
+                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
+                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = true;
+                    }
+                    else
+                    {
+                        // No item is selected
+                        this.m_Listview.SelectedItems.Clear();
+                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = false;
+                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
+                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = false;
+                    }
+                }
+                else if(e.Button == MouseButtons.Left)
+                {
+                    if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"]?.Bounds.Contains(e.X, e.Y) ?? false)
+                    {
+                        string l_FileName = m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"].Tag.ToString();
+                        NeuroFile.GetInstance().OpenFileInExplorer(l_FileName);
+                        m_Listview.SelectedItems.Clear();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

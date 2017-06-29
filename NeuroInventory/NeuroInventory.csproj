@@ -105,6 +105,12 @@
     <Compile Include="Forms\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Filters\ReleasedFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Filters\ReleasedFilter.Designer.cs">
+      <DependentUpon>ReleasedFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Reports\DebitReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -299,6 +305,9 @@
     <Compile Include="UtilityClasses\TreeNodeExtension.cs" />
     <EmbeddedResource Include="Forms\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Filters\ReleasedFilter.resx">
+      <DependentUpon>ReleasedFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Reports\DebitReport.resx">
       <DependentUpon>DebitReport.cs</DependentUpon>

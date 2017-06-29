@@ -36,7 +36,6 @@ namespace NeuroInventory
             this.tableLayoutPanelReleased = new System.Windows.Forms.TableLayoutPanel();
             this.panelReleasedBottom = new System.Windows.Forms.Panel();
             this.btnReleasedRemove = new System.Windows.Forms.Button();
-            this.btnReleasedAdd = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
             this.lwReleased = new System.Windows.Forms.ListView();
             this.chID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -46,10 +45,10 @@ namespace NeuroInventory
             this.chLastname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chPost = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDepartment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenuStripReleased = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripReleased = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanelReleased.SuspendLayout();
             this.panelReleasedBottom.SuspendLayout();
             this.contextMenuStripReleased.SuspendLayout();
@@ -75,7 +74,6 @@ namespace NeuroInventory
             // 
             this.panelReleasedBottom.BackColor = System.Drawing.Color.Silver;
             this.panelReleasedBottom.Controls.Add(this.btnReleasedRemove);
-            this.panelReleasedBottom.Controls.Add(this.btnReleasedAdd);
             this.panelReleasedBottom.Controls.Add(this.btnFilter);
             this.panelReleasedBottom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelReleasedBottom.Location = new System.Drawing.Point(0, 595);
@@ -89,26 +87,13 @@ namespace NeuroInventory
             this.btnReleasedRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnReleasedRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnReleasedRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnReleasedRemove.Location = new System.Drawing.Point(202, 10);
+            this.btnReleasedRemove.Location = new System.Drawing.Point(12, 10);
             this.btnReleasedRemove.Name = "btnReleasedRemove";
             this.btnReleasedRemove.Size = new System.Drawing.Size(184, 33);
             this.btnReleasedRemove.TabIndex = 1;
             this.btnReleasedRemove.Text = "Удалить";
             this.btnReleasedRemove.UseVisualStyleBackColor = true;
-            this.btnReleasedRemove.Click += new System.EventHandler(this.btnEmployeeRemove_Click);
-            // 
-            // btnReleasedAdd
-            // 
-            this.btnReleasedAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnReleasedAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnReleasedAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnReleasedAdd.Location = new System.Drawing.Point(12, 10);
-            this.btnReleasedAdd.Name = "btnReleasedAdd";
-            this.btnReleasedAdd.Size = new System.Drawing.Size(184, 33);
-            this.btnReleasedAdd.TabIndex = 0;
-            this.btnReleasedAdd.Text = "Добавить";
-            this.btnReleasedAdd.UseVisualStyleBackColor = true;
-            this.btnReleasedAdd.Click += new System.EventHandler(this.btnEmployeeAdd_Click);
+            this.btnReleasedRemove.Click += new System.EventHandler(this.btnReleasedRemove_Click);
             // 
             // btnFilter
             // 
@@ -186,16 +171,6 @@ namespace NeuroInventory
             this.chDepartment.Text = "Отдел";
             this.chDepartment.Width = 200;
             // 
-            // contextMenuStripReleased
-            // 
-            this.contextMenuStripReleased.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStripReleased.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem1,
-            this.editToolStripMenuItem,
-            this.removeToolStripMenuItem});
-            this.contextMenuStripReleased.Name = "contextMenuStrip1";
-            this.contextMenuStripReleased.Size = new System.Drawing.Size(187, 82);
-            // 
             // addToolStripMenuItem1
             // 
             this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
@@ -214,6 +189,16 @@ namespace NeuroInventory
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
             this.removeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.removeToolStripMenuItem.Text = "Удалить";
+            // 
+            // contextMenuStripReleased
+            // 
+            this.contextMenuStripReleased.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStripReleased.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem1,
+            this.editToolStripMenuItem,
+            this.removeToolStripMenuItem});
+            this.contextMenuStripReleased.Name = "contextMenuStrip1";
+            this.contextMenuStripReleased.Size = new System.Drawing.Size(187, 82);
             // 
             // TabReleased
             // 
@@ -240,7 +225,6 @@ namespace NeuroInventory
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelReleased;
         private System.Windows.Forms.Panel panelReleasedBottom;
         private System.Windows.Forms.Button btnReleasedRemove;
-        private System.Windows.Forms.Button btnReleasedAdd;
         private System.Windows.Forms.ListView lwReleased;
         private System.Windows.Forms.ColumnHeader chNumber;
         private System.Windows.Forms.ColumnHeader chSurename;
@@ -249,10 +233,10 @@ namespace NeuroInventory
         private System.Windows.Forms.ColumnHeader chPost;
         private System.Windows.Forms.ColumnHeader chDepartment;
         private System.Windows.Forms.ColumnHeader chID;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStripReleased;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem1;
         private Button btnFilter;
+        private ContextMenuStrip contextMenuStripReleased;
+        private ToolStripMenuItem addToolStripMenuItem1;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripMenuItem removeToolStripMenuItem;
     }
 }

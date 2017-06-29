@@ -81,7 +81,7 @@ namespace NeuroInventory
                 tabMain.Show();
                 inventoryTabs["tabInventory"] = tabMain;
 
-                TabReleased tabReleased = new TabReleased();
+                TabRecent tabReleased = new TabRecent();
                 tabReleased.MdiParent = this;
                 tabReleased.Parent = tabControl.TabPages[1];
                 tabReleased.Dock = DockStyle.Fill;

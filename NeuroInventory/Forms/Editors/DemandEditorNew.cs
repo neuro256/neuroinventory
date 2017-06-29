@@ -43,6 +43,11 @@ namespace NeuroInventory
             lwDemandData.RebuildColumns(); 
         }
 
+        /// <summary>
+        /// Начало редактирования ячейки столбца "количество"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lwDemandData_CellEditStarting(object sender, CellEditEventArgs e)
         {
             if (e.Column.AspectName == "amount")
@@ -51,12 +56,17 @@ namespace NeuroInventory
                 nud.Bounds = e.CellBounds;
                 nud.Minimum = 0.0M;
                 nud.Maximum = NudMaxValue;
-                nud.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(e.ListViewItem.SubItems[3].Text);
+                nud.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(e.ListViewItem.SubItems[2].Text); // subitem[2] is measurement
                 nud.Value = Convert.ToDecimal(e.Value, CultureInfo.GetCultureInfo("ru-RU"));
                 e.Control = nud;
             }
         }
 
+        /// <summary>
+        /// Завершение редактирования ячейки столбца "количество"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lwDemandData_CellEditFinishing(object sender, CellEditEventArgs e)
         {
             // Тестовое определение id записи
@@ -67,10 +77,12 @@ namespace NeuroInventory
                 string l_BalanceStr = DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("balance");
                 decimal l_Balance = Convert.ToDecimal(l_BalanceStr, CultureInfo.GetCultureInfo("ru-RU"));
 
+                // Идет проверка, не выбрано ли количество, большее чем остаток тмц на складе
                 if (Convert.ToDecimal(e.NewValue, CultureInfo.InvariantCulture) > l_Balance)
                     e.NewValue = l_Balance;
                 if (!String.Equals(e.NewValue.ToString(), e.Value.ToString()))
                 {
+                    // Вычисление стоимости отпущенного тмц
                     string l_PriceStr = DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("price");
                     decimal l_SumNewValue = Convert.ToDecimal(e.NewValue, CultureInfo.GetCultureInfo("ru-RU")) * Decimal.Parse(l_PriceStr, NumberStyles.Currency);
                     DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].SetField("sum", l_SumNewValue.ToString("C"));

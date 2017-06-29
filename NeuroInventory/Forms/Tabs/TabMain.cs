@@ -848,7 +848,7 @@ namespace NeuroInventory
                 newRow["measurement"] = item.SubItems[6].Text;
                 newRow["price"] = item.SubItems[8].Text;
                 newRow["amount"] = 0;
-                newRow["sum"] = 0;
+                newRow["sum"] = String.Format("{0:C}", 0);
                 newRow["balance"] = item.SubItems[10].Text;
 
                 demandTable.Rows.Add(newRow);

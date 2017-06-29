@@ -37,7 +37,6 @@
             this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
-            this.panelBottonLeft = new System.Windows.Forms.Panel();
             this.btnReleased = new System.Windows.Forms.Button();
             this.panelLeftUpper = new System.Windows.Forms.Panel();
             this.lblEmployee = new System.Windows.Forms.Label();
@@ -71,7 +70,7 @@
             this.lwDemandData.Location = new System.Drawing.Point(3, 3);
             this.lwDemandData.Name = "lwDemandData";
             this.lwDemandData.ShowGroups = false;
-            this.lwDemandData.Size = new System.Drawing.Size(840, 546);
+            this.lwDemandData.Size = new System.Drawing.Size(840, 629);
             this.lwDemandData.TabIndex = 0;
             this.lwDemandData.UseCompatibleStateImageBehavior = false;
             this.lwDemandData.View = System.Windows.Forms.View.Details;
@@ -119,6 +118,7 @@
             // 
             this.olvColumn6.AspectName = "sum";
             this.olvColumn6.AspectToStringFormat = "{0:C}";
+            this.olvColumn6.IsEditable = false;
             this.olvColumn6.Text = "Сумма";
             this.olvColumn6.Width = 100;
             // 
@@ -133,34 +133,25 @@
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.59237F));
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.40763F));
             this.tableLayoutPanelMain.Controls.Add(this.lwDemandData, 0, 0);
-            this.tableLayoutPanelMain.Controls.Add(this.panelBottonLeft, 1, 1);
             this.tableLayoutPanelMain.Controls.Add(this.panelLeftUpper, 1, 0);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
-            this.tableLayoutPanelMain.RowCount = 2;
-            this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.95652F));
-            this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.04348F));
+            this.tableLayoutPanelMain.RowCount = 1;
+            this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelMain.Size = new System.Drawing.Size(1182, 635);
             this.tableLayoutPanelMain.TabIndex = 1;
             // 
-            // panelBottonLeft
-            // 
-            this.panelBottonLeft.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBottonLeft.Location = new System.Drawing.Point(849, 555);
-            this.panelBottonLeft.Name = "panelBottonLeft";
-            this.panelBottonLeft.Size = new System.Drawing.Size(330, 77);
-            this.panelBottonLeft.TabIndex = 6;
-            // 
             // btnReleased
             // 
-            this.btnReleased.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnReleased.AutoSize = true;
+            this.btnReleased.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReleased.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnReleased.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnReleased.Location = new System.Drawing.Point(137, 510);
+            this.btnReleased.Location = new System.Drawing.Point(3, 587);
             this.btnReleased.Name = "btnReleased";
-            this.btnReleased.Size = new System.Drawing.Size(184, 33);
+            this.btnReleased.Size = new System.Drawing.Size(318, 33);
             this.btnReleased.TabIndex = 5;
             this.btnReleased.Text = "Отпустить";
             this.btnReleased.UseVisualStyleBackColor = true;
@@ -168,31 +159,39 @@
             // 
             // panelLeftUpper
             // 
-            this.panelLeftUpper.Controls.Add(this.lblEmployee);
             this.panelLeftUpper.Controls.Add(this.btnReleased);
+            this.panelLeftUpper.Controls.Add(this.lblEmployee);
             this.panelLeftUpper.Controls.Add(this.cbEmployee);
             this.panelLeftUpper.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLeftUpper.Location = new System.Drawing.Point(849, 3);
             this.panelLeftUpper.Name = "panelLeftUpper";
-            this.panelLeftUpper.Size = new System.Drawing.Size(330, 546);
+            this.panelLeftUpper.Size = new System.Drawing.Size(330, 629);
             this.panelLeftUpper.TabIndex = 7;
             // 
             // lblEmployee
             // 
             this.lblEmployee.AutoSize = true;
-            this.lblEmployee.Location = new System.Drawing.Point(3, 17);
+            this.lblEmployee.BackColor = System.Drawing.Color.Silver;
+            this.lblEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblEmployee.Location = new System.Drawing.Point(3, 16);
             this.lblEmployee.Name = "lblEmployee";
-            this.lblEmployee.Size = new System.Drawing.Size(71, 17);
+            this.lblEmployee.Size = new System.Drawing.Size(75, 18);
             this.lblEmployee.TabIndex = 8;
             this.lblEmployee.Text = "Работник";
             // 
             // cbEmployee
             // 
+            this.cbEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbEmployee.DropDownHeight = 115;
             this.cbEmployee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cbEmployee.FormattingEnabled = true;
+            this.cbEmployee.IntegralHeight = false;
             this.cbEmployee.Location = new System.Drawing.Point(6, 37);
             this.cbEmployee.Name = "cbEmployee";
-            this.cbEmployee.Size = new System.Drawing.Size(271, 24);
+            this.cbEmployee.Size = new System.Drawing.Size(315, 24);
             this.cbEmployee.TabIndex = 7;
             // 
             // DemandEditorNew
@@ -227,7 +226,6 @@
         private BrightIdeasSoftware.OLVColumn olvColumn4;
         private BrightIdeasSoftware.OLVColumn olvColumn5;
         private BrightIdeasSoftware.OLVColumn olvColumn6;
-        private System.Windows.Forms.Panel panelBottonLeft;
         private System.Windows.Forms.Button btnReleased;
         private System.Windows.Forms.Panel panelLeftUpper;
         private System.Windows.Forms.Label lblEmployee;

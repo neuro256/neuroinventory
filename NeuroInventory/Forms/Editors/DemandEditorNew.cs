@@ -43,11 +43,6 @@ namespace NeuroInventory
             lwDemandData.RebuildColumns(); 
         }
 
-        private void btnClose_Click(object sender, System.EventArgs e)
-        {
-            Close();
-        }
-
         private void lwDemandData_CellEditStarting(object sender, CellEditEventArgs e)
         {
             if (e.Column.AspectName == "amount")

@@ -38,14 +38,12 @@
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.panelBottonLeft = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.Button();
             this.btnReleased = new System.Windows.Forms.Button();
             this.panelLeftUpper = new System.Windows.Forms.Panel();
             this.lblEmployee = new System.Windows.Forms.Label();
             this.cbEmployee = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.lwDemandData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
-            this.panelBottonLeft.SuspendLayout();
             this.panelLeftUpper.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +71,7 @@
             this.lwDemandData.Location = new System.Drawing.Point(3, 3);
             this.lwDemandData.Name = "lwDemandData";
             this.lwDemandData.ShowGroups = false;
-            this.lwDemandData.Size = new System.Drawing.Size(820, 546);
+            this.lwDemandData.Size = new System.Drawing.Size(840, 546);
             this.lwDemandData.TabIndex = 0;
             this.lwDemandData.UseCompatibleStateImageBehavior = false;
             this.lwDemandData.View = System.Windows.Forms.View.Details;
@@ -132,8 +130,8 @@
             // tableLayoutPanelMain
             // 
             this.tableLayoutPanelMain.ColumnCount = 2;
-            this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.88791F));
-            this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.11209F));
+            this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.59237F));
+            this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.40763F));
             this.tableLayoutPanelMain.Controls.Add(this.lwDemandData, 0, 0);
             this.tableLayoutPanelMain.Controls.Add(this.panelBottonLeft, 1, 1);
             this.tableLayoutPanelMain.Controls.Add(this.panelLeftUpper, 1, 0);
@@ -143,33 +141,16 @@
             this.tableLayoutPanelMain.RowCount = 2;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.95652F));
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.04348F));
-            this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelMain.Size = new System.Drawing.Size(1182, 635);
             this.tableLayoutPanelMain.TabIndex = 1;
             // 
             // panelBottonLeft
             // 
-            this.panelBottonLeft.Controls.Add(this.btnClose);
-            this.panelBottonLeft.Controls.Add(this.btnReleased);
             this.panelBottonLeft.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBottonLeft.Location = new System.Drawing.Point(829, 555);
+            this.panelBottonLeft.Location = new System.Drawing.Point(849, 555);
             this.panelBottonLeft.Name = "panelBottonLeft";
-            this.panelBottonLeft.Size = new System.Drawing.Size(350, 77);
+            this.panelBottonLeft.Size = new System.Drawing.Size(330, 77);
             this.panelBottonLeft.TabIndex = 6;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClose.AutoSize = true;
-            this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClose.Location = new System.Drawing.Point(3, 41);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(184, 33);
-            this.btnClose.TabIndex = 6;
-            this.btnClose.Text = "Закрыть";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnReleased
             // 
@@ -177,7 +158,7 @@
             this.btnReleased.AutoSize = true;
             this.btnReleased.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnReleased.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnReleased.Location = new System.Drawing.Point(3, 3);
+            this.btnReleased.Location = new System.Drawing.Point(137, 510);
             this.btnReleased.Name = "btnReleased";
             this.btnReleased.Size = new System.Drawing.Size(184, 33);
             this.btnReleased.TabIndex = 5;
@@ -188,11 +169,12 @@
             // panelLeftUpper
             // 
             this.panelLeftUpper.Controls.Add(this.lblEmployee);
+            this.panelLeftUpper.Controls.Add(this.btnReleased);
             this.panelLeftUpper.Controls.Add(this.cbEmployee);
             this.panelLeftUpper.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelLeftUpper.Location = new System.Drawing.Point(829, 3);
+            this.panelLeftUpper.Location = new System.Drawing.Point(849, 3);
             this.panelLeftUpper.Name = "panelLeftUpper";
-            this.panelLeftUpper.Size = new System.Drawing.Size(350, 546);
+            this.panelLeftUpper.Size = new System.Drawing.Size(330, 546);
             this.panelLeftUpper.TabIndex = 7;
             // 
             // lblEmployee
@@ -218,8 +200,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1182, 635);
-            this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanelMain);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "DemandEditorNew";
             this.ShowIcon = false;
@@ -228,8 +210,6 @@
             this.Text = "Редактор требований";
             ((System.ComponentModel.ISupportInitialize)(this.lwDemandData)).EndInit();
             this.tableLayoutPanelMain.ResumeLayout(false);
-            this.panelBottonLeft.ResumeLayout(false);
-            this.panelBottonLeft.PerformLayout();
             this.panelLeftUpper.ResumeLayout(false);
             this.panelLeftUpper.PerformLayout();
             this.ResumeLayout(false);
@@ -248,7 +228,6 @@
         private BrightIdeasSoftware.OLVColumn olvColumn5;
         private BrightIdeasSoftware.OLVColumn olvColumn6;
         private System.Windows.Forms.Panel panelBottonLeft;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnReleased;
         private System.Windows.Forms.Panel panelLeftUpper;
         private System.Windows.Forms.Label lblEmployee;

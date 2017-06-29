@@ -1,5 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
@@ -35,12 +36,16 @@ namespace NeuroInventory
             cbEmployee.ValueMember = "id";
 
             lwDemandData.AutoGenerateColumns = false;
-            lwDemandData.DataSource = new BindingSource(DemandDataSet, "demand");
+            lwDemandData.DataSource = new BindingSource(DemandDataSet, "DemandReport");
             lwDemandData.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
             lwDemandData.SelectedBackColor = Color.LightBlue;
             lwDemandData.SelectedForeColor = Color.MidnightBlue;
             lwDemandData.RowHeight = 26;
-            lwDemandData.RebuildColumns(); 
+            lwDemandData.RebuildColumns();
+
+            dateTimePicker.Format = DateTimePickerFormat.Long;
+            dateTimePicker.Value = DateTime.Today;
+            dateTimePicker.ShowUpDown = false;
         }
 
         /// <summary>
@@ -92,7 +97,95 @@ namespace NeuroInventory
 
         private void btnReleased_Click(object sender, EventArgs e)
         {
-            // Передать DataSet во вкладку Отпущенные
+            try
+            {
+                // В первую очередь создаем отчет. Если отчет успешно создан и сохранен, записываем данные в базу данных
+                if (CreateReport())
+                {
+                    // Отпускаем выбранные тмц 
+                    foreach (DataRow row in DemandDataSet.Tables[0].Rows)
+                    {
+                        AddRecord(Convert.ToInt32(row["id"]), cbEmployee.SelectedValue, Convert.ToDecimal(row["amount"]), dateTimePicker.Value);
+                    }
+
+                    Close();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, Definitions.CREATE_REPORT_FAILED);
+            }
+        }
+
+        private void AddRecord(int p_InventoryId, object p_EmployeeId, decimal p_Amount, DateTime p_Date)
+        {
+            SQLiteManager.GetInstance().Demand().Insert(p_InventoryId, p_EmployeeId, p_Amount, p_Date);
+        }
+
+        public bool CreateReport()
+        {
+            Dictionary<string, object> demandReportFieldsData = GetReportFieldsData();
+
+            ISpireReportWrapper spireDoc = new SpireDocWrapper();
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Файлы документов (*.doc)|*.doc";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (spireDoc.CreateReport(saveFileDialog.FileName, DemandDataSet, demandReportFieldsData))
+                {
+                    SQLiteManager.GetInstance().DemandReport().Insert(Convert.ToInt32(cbEmployee.SelectedValue), DateTime.Now, saveFileDialog.FileName);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private Dictionary<string, object> GetReportFieldsData()
+        {
+            Dictionary<string, object> fieldsData = new Dictionary<string, object>();
+            fieldsData["EmployeeInitialsBefore"] = $"{GetEmployeeInitials()} {GetEmployeeName()}";
+            fieldsData["EmployeeInitialsAfter"] = $"{GetEmployeeName()} {GetEmployeeInitials()}";
+            fieldsData["EmployeePost"] = GetEmployeePost();
+            fieldsData["TotalPrice"] = GetTotalPriceStr();
+
+            return fieldsData;
+        }
+
+        private string GetEmployeeInitials()
+        {
+            int l_SelectedEmployeeId = cbEmployee.SelectedValue != null ? Convert.ToInt32(cbEmployee.SelectedValue) : 0;
+            return SQLiteManager.GetInstance().Employees().GetInitialsById(l_SelectedEmployeeId);
+        }
+
+        private string GetEmployeeName()
+        {
+            int l_SelectedEmployeeId = cbEmployee.SelectedValue != null ? Convert.ToInt32(cbEmployee.SelectedValue) : 0;
+            return SQLiteManager.GetInstance().Employees().GetNameById(l_SelectedEmployeeId);
+        }
+
+        private string GetEmployeePost()
+        {
+            int l_SelectedEmployeeId = cbEmployee.SelectedValue != null ? Convert.ToInt32(cbEmployee.SelectedValue) : 0;
+            return SQLiteManager.GetInstance().Employees().GetEmployeePostById(l_SelectedEmployeeId);
+        }
+
+        private double GetTotalPrice()
+        {
+            double sum = 0.0;
+
+            foreach (DataRow row in DemandDataSet.Tables[0].Rows)
+            {
+                sum += Double.Parse(row["sum"].ToString(), NumberStyles.Currency);
+            }
+
+            return sum;
+        }
+
+        private string GetTotalPriceStr()
+        {
+            return DateAndMoneyConverter.CurrencyToTxtFull(GetTotalPrice(), false);
         }
     }
 }

@@ -312,7 +312,7 @@ namespace NeuroInventory
             DataTable demandReportTable = new DataTable("DemandReport");
             demandReportTable.Columns.Add("id");
             demandReportTable.Columns.Add("name");
-            demandReportTable.Columns.Add("codeOKEI");
+            demandReportTable.Columns.Add("OKEIcode");
             demandReportTable.Columns.Add("measurement");
             demandReportTable.Columns.Add("price");
             demandReportTable.Columns.Add("sum");
@@ -324,7 +324,7 @@ namespace NeuroInventory
 
                 newRow["id"] = item.Text;
                 newRow["name"] = item.SubItems[1].Text;
-                newRow["codeOKEI"] = item.SubItems[2].Text;
+                newRow["OKEIcode"] = item.SubItems[2].Text;
                 newRow["measurement"] = item.SubItems[3].Text;
                 newRow["price"] = Convert.ToDecimal(item.SubItems[5].Text, CultureInfo.InvariantCulture).ToString("#.00");
                 newRow["sum"] = (Convert.ToDecimal(item.SubItems[5].Text, CultureInfo.InvariantCulture) * CustomParse(item.SubItems[9].Text)).ToString("#.00");

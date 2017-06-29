@@ -828,7 +828,7 @@ namespace NeuroInventory
 
         private DataSet GetDemandDataSet()
         {
-            DataTable demandTable = new DataTable("demand");
+            DataTable demandTable = new DataTable("DemandReport");
             demandTable.Columns.Add("id");
             demandTable.Columns.Add("name");
             demandTable.Columns.Add("OKEIcode");
@@ -854,7 +854,7 @@ namespace NeuroInventory
                 demandTable.Rows.Add(newRow);
             }
 
-            DataSet demandDataSet = new DataSet("InventoryDemand");
+            DataSet demandDataSet = new DataSet("Report");
             demandDataSet.Tables.Add(demandTable);
 
             return demandDataSet;

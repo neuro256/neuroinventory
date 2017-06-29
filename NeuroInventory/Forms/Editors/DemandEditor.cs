@@ -91,8 +91,6 @@ namespace NeuroInventory
 
         public override void AddRecord()
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
             if (!IsValidData())
                 return;
 

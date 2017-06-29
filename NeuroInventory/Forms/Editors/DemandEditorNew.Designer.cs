@@ -41,6 +41,8 @@
             this.panelLeftUpper = new System.Windows.Forms.Panel();
             this.lblEmployee = new System.Windows.Forms.Label();
             this.cbEmployee = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.lblDate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.lwDemandData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelLeftUpper.SuspendLayout();
@@ -159,6 +161,8 @@
             // 
             // panelLeftUpper
             // 
+            this.panelLeftUpper.Controls.Add(this.lblDate);
+            this.panelLeftUpper.Controls.Add(this.dateTimePicker);
             this.panelLeftUpper.Controls.Add(this.btnReleased);
             this.panelLeftUpper.Controls.Add(this.lblEmployee);
             this.panelLeftUpper.Controls.Add(this.cbEmployee);
@@ -193,6 +197,27 @@
             this.cbEmployee.Name = "cbEmployee";
             this.cbEmployee.Size = new System.Drawing.Size(315, 24);
             this.cbEmployee.TabIndex = 7;
+            // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker.Location = new System.Drawing.Point(3, 95);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(318, 22);
+            this.dateTimePicker.TabIndex = 9;
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.BackColor = System.Drawing.Color.Silver;
+            this.lblDate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblDate.Location = new System.Drawing.Point(3, 74);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(43, 18);
+            this.lblDate.TabIndex = 11;
+            this.lblDate.Text = "Дата";
             // 
             // DemandEditorNew
             // 
@@ -230,5 +255,7 @@
         private System.Windows.Forms.Panel panelLeftUpper;
         private System.Windows.Forms.Label lblEmployee;
         private System.Windows.Forms.ComboBox cbEmployee;
+        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.DateTimePicker dateTimePicker;
     }
 }

@@ -818,7 +818,10 @@ namespace NeuroInventory
             {
                 DemandEditorNew editor = new DemandEditorNew(GetDemandDataSet());
                 editor.StartPosition = FormStartPosition.CenterParent;
-                editor.ShowDialog();
+                if(editor.ShowDialog() == DialogResult.OK)
+                {
+                    ShowTable();
+                }
             }
             else
             {

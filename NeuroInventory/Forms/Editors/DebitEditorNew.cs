@@ -97,7 +97,7 @@ namespace NeuroInventory
                     {
                         AddRecord(Convert.ToInt32(row["id"]), Convert.ToDecimal(row["amount"]), dateTimePicker.Value);
                     }
-
+                    DialogResult = DialogResult.OK;
                     Close();
                 }
             }

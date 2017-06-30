@@ -59,7 +59,7 @@ namespace NeuroInventory
             lwReleased.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Сумма", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Документ", 300, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Остаток", 300, System.Windows.Forms.HorizontalAlignment.Left, true));
+            //lwReleased.Columns.Add(new ColHeader("Остаток", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
         }
 
         private void btnReleasedRemove_Click(object sender, EventArgs e)

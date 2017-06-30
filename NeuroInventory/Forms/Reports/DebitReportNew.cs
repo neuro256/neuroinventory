@@ -8,47 +8,45 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public partial class DebitReport : Form, IReportView
+    public partial class DebitReportNew : Form, IReportView
     {
         private int m_lwSelectedIndex;
+        private DataSet m_DebitDataSet;
 
         public int LwSelectedIndex { get => m_lwSelectedIndex; set => m_lwSelectedIndex = value; }
+        public DataSet DebitDataSet { get => m_DebitDataSet; set => m_DebitDataSet = value; }
 
-        public DebitReport()
+        public DebitReportNew(DataSet p_DataSet)
         {
             InitializeComponent();
+
+            DebitDataSet = p_DataSet;
+
             InitControls();
         }
 
         public void InitControls()
         {
-            cbCatalog.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbCatalog.Sorted = false;
-            DataSet catalogDataSet = SQLiteManager.GetInstance().Catalogs().ReturnDataSet("SELECT id, name FROM catalogs");
-            cbCatalog.DataSource = catalogDataSet.Tables[0];
-            cbCatalog.DisplayMember = "name";
-            cbCatalog.ValueMember = "id";
-
             dateTimePicker.Format = DateTimePickerFormat.Short;
             dateTimePicker.Value = DateTime.Today;
             dateTimePicker.ShowUpDown = false;
 
-            lwDebitReport.View = View.Details;
-            lwDebitReport.FullRowSelect = true;
-            lwDebitReport.Scrollable = true;
-            lwDebitReport.GridLines = true;
-            lwDebitReport.CheckBoxes = true;
-            lwDebitReport.OwnerDraw = true;
-            lwDebitReport.HeaderStyle = ColumnHeaderStyle.Clickable;
-            lwDebitReport.Columns.Clear();
-            lwDebitReport.Columns.Add(new ColHeader("№", 50, System.Windows.Forms.HorizontalAlignment.Left, true)); // 1
-            lwDebitReport.Columns.Add(new ColHeader("Наименование", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 2
-            lwDebitReport.Columns.Add(new ColHeader("Код ОКЕИ", 140, System.Windows.Forms.HorizontalAlignment.Left, true)); // 3
-            lwDebitReport.Columns.Add(new ColHeader("Единица измерения", 100, System.Windows.Forms.HorizontalAlignment.Left, true)); // 4
-            lwDebitReport.Columns.Add(new ColHeader("Общее количество", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 5
-            lwDebitReport.Columns.Add(new ColHeader("Количество списанного", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 6
-            lwDebitReport.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true)); // 7
-            lwDebitReport.Columns.Add(new ColHeader("Сумма списанного", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 8
+            lwDebitReportNew.View = View.Details;
+            lwDebitReportNew.FullRowSelect = true;
+            lwDebitReportNew.Scrollable = true;
+            lwDebitReportNew.GridLines = true;
+            lwDebitReportNew.CheckBoxes = true;
+            lwDebitReportNew.OwnerDraw = true;
+            lwDebitReportNew.HeaderStyle = ColumnHeaderStyle.Clickable;
+            lwDebitReportNew.Columns.Clear();
+            lwDebitReportNew.Columns.Add(new ColHeader("№", 50, System.Windows.Forms.HorizontalAlignment.Left, true)); // 1
+            lwDebitReportNew.Columns.Add(new ColHeader("Наименование", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 2
+            lwDebitReportNew.Columns.Add(new ColHeader("Код ОКЕИ", 140, System.Windows.Forms.HorizontalAlignment.Left, true)); // 3
+            lwDebitReportNew.Columns.Add(new ColHeader("Единица измерения", 100, System.Windows.Forms.HorizontalAlignment.Left, true)); // 4
+            lwDebitReportNew.Columns.Add(new ColHeader("Общее количество", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 5
+            lwDebitReportNew.Columns.Add(new ColHeader("Количество списанного", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 6
+            lwDebitReportNew.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true)); // 7
+            lwDebitReportNew.Columns.Add(new ColHeader("Сумма списанного", 200, System.Windows.Forms.HorizontalAlignment.Left, true)); // 8
         }
 
         public void ShowTable()
@@ -57,25 +55,25 @@ namespace NeuroInventory
             try
             {
                 //Заполняем список
-                lwDebitReport.BeginUpdate();
-                lwDebitReport.Items.Clear();
-                lwDebitReport.Columns[0].Tag = false;
+                lwDebitReportNew.BeginUpdate();
+                lwDebitReportNew.Items.Clear();
+                lwDebitReportNew.Columns[0].Tag = false;
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
                     ListViewItem newItem = new ListViewItem();
                     newItem.Text = (i + 1).ToString();
                     newItem.Name = dataSet.Tables[0].Rows[i]["id"].ToString();
                     newItem.Tag = dataSet.Tables[0].Rows[i]["id"];
-                    lwDebitReport.Items.Add(newItem);
+                    lwDebitReportNew.Items.Add(newItem);
                     for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
                     {
                         ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
                         subitem.Text = dataSet.Tables[0].Rows[i][j].ToString();
                         subitem.Name = dataSet.Tables[0].Columns[j].ToString();
-                        lwDebitReport.Items[i].SubItems.Add(subitem);
+                        lwDebitReportNew.Items[i].SubItems.Add(subitem);
                     }
                 }
-                lwDebitReport.EndUpdate();
+                lwDebitReportNew.EndUpdate();
             }
             catch (Exception ex)
             {
@@ -89,7 +87,7 @@ namespace NeuroInventory
 
         public DataSet ReturnDataSet()
         {
-            int l_SelectedCatalogId = cbCatalog.SelectedValue != null ? Convert.ToInt32(cbCatalog.SelectedValue) : 0;
+            int l_SelectedCatalogId =  0;
 
             if (cbFilter.Checked)
                 SQLiteManager.GetInstance().DebitReport().SetCommandDataSetInner(l_SelectedCatalogId);
@@ -102,9 +100,9 @@ namespace NeuroInventory
         private double GetTotalPrice()
         {
             double sum = 0.0;
-            if (lwDebitReport.CheckedItems.Count > 0)
+            if (lwDebitReportNew.CheckedItems.Count > 0)
             {
-                foreach (ListViewItem item in lwDebitReport.CheckedItems)
+                foreach (ListViewItem item in lwDebitReportNew.CheckedItems)
                 {
                     sum += Convert.ToDouble(item.SubItems[7].Text, CultureInfo.InvariantCulture);
                 }
@@ -117,7 +115,7 @@ namespace NeuroInventory
             return DateAndMoneyConverter.CurrencyToTxt(GetTotalPrice(), true);
         }
 
-        private void DebitReport_Shown(object sender, EventArgs e)
+        private void DebitReportNew_Shown(object sender, EventArgs e)
         {
             ShowTable();
         }
@@ -132,7 +130,7 @@ namespace NeuroInventory
             ShowTable();
         }
 
-        private void lwDebitReport_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        private void lwDebitReportNew_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
@@ -156,53 +154,53 @@ namespace NeuroInventory
             }
         }
 
-        private void lwDebitReport_DrawItem(object sender, DrawListViewItemEventArgs e)
+        private void lwDebitReportNew_DrawItem(object sender, DrawListViewItemEventArgs e)
         {
             e.DrawDefault = true;
         }
 
-        private void lwDebitReport_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        private void lwDebitReportNew_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
             e.DrawDefault = true;
         }
 
-        private void lwDebitReport_ColumnClick(object sender, ColumnClickEventArgs e)
+        private void lwDebitReportNew_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             if (e.Column == 0)
             {
                 bool value = false;
                 try
                 {
-                    value = Convert.ToBoolean(this.lwDebitReport.Columns[e.Column].Tag);
+                    value = Convert.ToBoolean(this.lwDebitReportNew.Columns[e.Column].Tag);
                 }
                 catch (Exception)
                 {
                 }
-                this.lwDebitReport.Columns[e.Column].Tag = !value;
-                foreach (ListViewItem item in this.lwDebitReport.Items)
+                this.lwDebitReportNew.Columns[e.Column].Tag = !value;
+                foreach (ListViewItem item in this.lwDebitReportNew.Items)
                     item.Checked = !value;
 
-                this.lwDebitReport.Invalidate();
+                this.lwDebitReportNew.Invalidate();
             }
             else
             {
                 // Create an instance of the ColHeader class.
-                ColHeader clickedCol = (ColHeader)lwDebitReport.Columns[e.Column];
+                ColHeader clickedCol = (ColHeader)lwDebitReportNew.Columns[e.Column];
 
                 // Set the ascending property to sort in the opposite order.
                 clickedCol.ascending = !clickedCol.ascending;
 
                 // Get the number of items in the list.
-                int numItems = lwDebitReport.Items.Count;
+                int numItems = lwDebitReportNew.Items.Count;
 
                 // Turn off display while data is repoplulated.
-                lwDebitReport.BeginUpdate();
+                lwDebitReportNew.BeginUpdate();
 
                 // Populate an ArrayList with a SortWrapper of each list item.
                 ArrayList SortArray = new ArrayList();
                 for (int i = 0; i < numItems; i++)
                 {
-                    SortArray.Add(new SortWrapper(lwDebitReport.Items[i], e.Column));
+                    SortArray.Add(new SortWrapper(lwDebitReportNew.Items[i], e.Column));
                 }
 
                 // Sort the elements in the ArrayList using a new instance of the SortComparer
@@ -213,16 +211,16 @@ namespace NeuroInventory
                 SortArray.Sort(0, SortArray.Count, new SortWrapper.SortComparer(clickedCol.ascending));
 
                 // Clear the list, and repopulate with the sorted items.
-                lwDebitReport.Items.Clear();
+                lwDebitReportNew.Items.Clear();
                 for (int i = 0; i < numItems; i++)
-                    lwDebitReport.Items.Add(((SortWrapper)SortArray[i]).sortItem);
+                    lwDebitReportNew.Items.Add(((SortWrapper)SortArray[i]).sortItem);
 
                 // Turn display back on.
-                lwDebitReport.EndUpdate();
+                lwDebitReportNew.EndUpdate();
             }
         }
 
-        private void lwDebitReport_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private void lwDebitReportNew_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             try
             {
@@ -253,10 +251,10 @@ namespace NeuroInventory
 
         public void CreateReport()
         {
-            if (lwDebitReport.CheckedItems.Count > 0)
+            if (lwDebitReportNew.CheckedItems.Count > 0)
             {
-                DataSet dataSetDebitReport = GetDebitReportDataSet();
-                Dictionary<string, object> DebitReportFieldsData = GetReportFieldsData();
+                DataSet dataSetDebitReportNew = GetDebitReportNewDataSet();
+                Dictionary<string, object> DebitReportNewFieldsData = GetReportFieldsData();
 
                 ISpireReportWrapper gemboxReport = new GemboxXlsWrapper();
 
@@ -264,7 +262,7 @@ namespace NeuroInventory
                 saveFileDialog.Filter = "Файлы документов (*.xls)|*.xls";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    if(gemboxReport.CreateReport(saveFileDialog.FileName, dataSetDebitReport, DebitReportFieldsData))
+                    if(gemboxReport.CreateReport(saveFileDialog.FileName, dataSetDebitReportNew, DebitReportNewFieldsData))
                     {
                         SQLiteManager.GetInstance().DebitReport().Insert(DateTime.Now, saveFileDialog.FileName);
                     }
@@ -287,28 +285,28 @@ namespace NeuroInventory
             return fieldsData;
         }
 
-        private DataSet GetDebitReportDataSet()
+        private DataSet GetDebitReportNewDataSet()
         {
-            DataTable DebitReportTable = new DataTable("DebitReport");
-            DebitReportTable.Columns.Add("id");
-            DebitReportTable.Columns.Add("number");
-            DebitReportTable.Columns.Add("name");
-            DebitReportTable.Columns.Add("OKEIcode");
-            DebitReportTable.Columns.Add("measurement");
-            DebitReportTable.Columns.Add("amount");
-            DebitReportTable.Columns.Add("price");
-            DebitReportTable.Columns.Add("sum");
+            DataTable DebitReportNewTable = new DataTable("DebitReportNew");
+            DebitReportNewTable.Columns.Add("id");
+            DebitReportNewTable.Columns.Add("number");
+            DebitReportNewTable.Columns.Add("name");
+            DebitReportNewTable.Columns.Add("codeOKEI");
+            DebitReportNewTable.Columns.Add("measurement");
+            DebitReportNewTable.Columns.Add("amount");
+            DebitReportNewTable.Columns.Add("price");
+            DebitReportNewTable.Columns.Add("sum");
 
             int counter = 1;
 
-            foreach (ListViewItem item in lwDebitReport.CheckedItems)
+            foreach (ListViewItem item in lwDebitReportNew.CheckedItems)
             {
-                DataRow newRow = DebitReportTable.NewRow();
+                DataRow newRow = DebitReportNewTable.NewRow();
 
                 newRow["id"] = item.Text;
                 newRow["number"] = counter;
                 newRow["name"] = item.SubItems[1].Text;
-                newRow["OKEIcode"] = item.SubItems[2].Text;
+                newRow["codeOKEI"] = item.SubItems[2].Text;
                 newRow["measurement"] = item.SubItems[3].Text;
                 newRow["amount"] = !String.IsNullOrEmpty(item.SubItems[5].Text) ? item.SubItems[5].Text : "0";
                 newRow["price"] = Convert.ToDecimal(item.SubItems[6].Text, CultureInfo.InvariantCulture).ToString("0.00");
@@ -316,13 +314,13 @@ namespace NeuroInventory
 
                 counter++;
 
-                DebitReportTable.Rows.Add(newRow);
+                DebitReportNewTable.Rows.Add(newRow);
             }
 
-            DataSet DebitReportDataSet = new DataSet("Report");
-            DebitReportDataSet.Tables.Add(DebitReportTable);
+            DataSet DebitReportNewDataSet = new DataSet("Report");
+            DebitReportNewDataSet.Tables.Add(DebitReportNewTable);
 
-            return DebitReportDataSet;
+            return DebitReportNewDataSet;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -331,7 +329,7 @@ namespace NeuroInventory
             DialogResult = DialogResult.OK;
         }
 
-        private void DebitReport_FormClosing(object sender, FormClosingEventArgs e)
+        private void DebitReportNew_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.OK;
         }

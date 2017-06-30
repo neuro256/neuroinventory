@@ -44,7 +44,7 @@ namespace NeuroInventory
                         currentRow.Cells["A"].SetValue(Convert.ToInt32(dataRow["number"]));
                         currentRow.Cells["B"].SetValue(Convert.ToString(dataRow["name"]));
                         currentRow.Cells["J"].SetValue(Convert.ToString(dataRow["measurement"]));
-                        currentRow.Cells["L"].SetValue(Convert.ToString(dataRow["codeOKEI"]));
+                        currentRow.Cells["L"].SetValue(Convert.ToString(dataRow["OKEIcode"]));
                         currentRow.Cells["M"].SetValue(Convert.ToString(dataRow["amount"]));
                         currentRow.Cells["X"].SetValue(Convert.ToString(dataRow["price"]));
                         currentRow.Cells["Z"].SetValue(Convert.ToString(dataRow["sum"]));

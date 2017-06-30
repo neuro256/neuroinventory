@@ -16,6 +16,7 @@
         public static string DB_INCORRECT = "Похоже, Вы попытались открыть некорректную базу данных.";
         public static string INSERT_WARNING_STRING = "Неоднозначность целевого каталога. Пожалуйста, сначала выберите ЕДИНСТВЕННЫЙ список тмц, куда хотите добавить тмц.";
         public static string DEMAND_SELECTION_WARNING_STRING = "Чтобы отпустить тмц, сначала выберите и отметьте галочками нужные тмц в таблице";
+        public static string DEBIT_SELECTION_WARNING_STRING = "Чтобы списать тмц, сначала выберите и отметьте галочками нужные тмц в таблице";
         public static string CREATE_REPORT_FAILED = "Попытка создать отчет провалилась";
     }
 }

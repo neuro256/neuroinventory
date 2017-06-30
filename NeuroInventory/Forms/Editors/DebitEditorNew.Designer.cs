@@ -1,6 +1,6 @@
 ﻿namespace NeuroInventory
 {
-    partial class DemandEditorNew
+    partial class DebitEditorNew
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lwDemandData = new BrightIdeasSoftware.DataListView();
+            this.lwDebitData = new BrightIdeasSoftware.DataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -41,43 +41,41 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.btnReleased = new System.Windows.Forms.Button();
-            this.lblEmployee = new System.Windows.Forms.Label();
-            this.cbEmployee = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.lwDemandData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lwDebitData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelLeftUpper.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lwDemandData
+            // lwDebitData
             // 
-            this.lwDemandData.AllColumns.Add(this.olvColumn1);
-            this.lwDemandData.AllColumns.Add(this.olvColumn2);
-            this.lwDemandData.AllColumns.Add(this.olvColumn3);
-            this.lwDemandData.AllColumns.Add(this.olvColumn4);
-            this.lwDemandData.AllColumns.Add(this.olvColumn5);
-            this.lwDemandData.AllColumns.Add(this.olvColumn6);
-            this.lwDemandData.CellEditUseWholeCell = false;
-            this.lwDemandData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lwDebitData.AllColumns.Add(this.olvColumn1);
+            this.lwDebitData.AllColumns.Add(this.olvColumn2);
+            this.lwDebitData.AllColumns.Add(this.olvColumn3);
+            this.lwDebitData.AllColumns.Add(this.olvColumn4);
+            this.lwDebitData.AllColumns.Add(this.olvColumn5);
+            this.lwDebitData.AllColumns.Add(this.olvColumn6);
+            this.lwDebitData.CellEditUseWholeCell = false;
+            this.lwDebitData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
             this.olvColumn2,
             this.olvColumn3,
             this.olvColumn4,
             this.olvColumn5,
             this.olvColumn6});
-            this.lwDemandData.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lwDemandData.DataSource = null;
-            this.lwDemandData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lwDemandData.FullRowSelect = true;
-            this.lwDemandData.GridLines = true;
-            this.lwDemandData.Location = new System.Drawing.Point(3, 3);
-            this.lwDemandData.Name = "lwDemandData";
-            this.lwDemandData.ShowGroups = false;
-            this.lwDemandData.Size = new System.Drawing.Size(840, 629);
-            this.lwDemandData.TabIndex = 0;
-            this.lwDemandData.UseCompatibleStateImageBehavior = false;
-            this.lwDemandData.View = System.Windows.Forms.View.Details;
-            this.lwDemandData.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.lwDemandData_CellEditFinishing);
-            this.lwDemandData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.lwDemandData_CellEditStarting);
+            this.lwDebitData.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lwDebitData.DataSource = null;
+            this.lwDebitData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lwDebitData.FullRowSelect = true;
+            this.lwDebitData.GridLines = true;
+            this.lwDebitData.Location = new System.Drawing.Point(3, 3);
+            this.lwDebitData.Name = "lwDebitData";
+            this.lwDebitData.ShowGroups = false;
+            this.lwDebitData.Size = new System.Drawing.Size(840, 629);
+            this.lwDebitData.TabIndex = 0;
+            this.lwDebitData.UseCompatibleStateImageBehavior = false;
+            this.lwDebitData.View = System.Windows.Forms.View.Details;
+            this.lwDebitData.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.lwDebitData_CellEditFinishing);
+            this.lwDebitData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.lwDebitData_CellEditStarting);
             // 
             // olvColumn1
             // 
@@ -113,6 +111,7 @@
             // olvColumn5
             // 
             this.olvColumn5.AspectName = "amount";
+            this.olvColumn5.IsEditable = false;
             this.olvColumn5.Text = "Количество";
             this.olvColumn5.Width = 100;
             // 
@@ -134,7 +133,7 @@
             this.tableLayoutPanelMain.ColumnCount = 2;
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.59237F));
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.40763F));
-            this.tableLayoutPanelMain.Controls.Add(this.lwDemandData, 0, 0);
+            this.tableLayoutPanelMain.Controls.Add(this.lwDebitData, 0, 0);
             this.tableLayoutPanelMain.Controls.Add(this.panelLeftUpper, 1, 0);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
@@ -150,8 +149,6 @@
             this.panelLeftUpper.Controls.Add(this.lblDate);
             this.panelLeftUpper.Controls.Add(this.dateTimePicker);
             this.panelLeftUpper.Controls.Add(this.btnReleased);
-            this.panelLeftUpper.Controls.Add(this.lblEmployee);
-            this.panelLeftUpper.Controls.Add(this.cbEmployee);
             this.panelLeftUpper.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLeftUpper.Location = new System.Drawing.Point(849, 3);
             this.panelLeftUpper.Name = "panelLeftUpper";
@@ -164,7 +161,7 @@
             this.lblDate.BackColor = System.Drawing.Color.Silver;
             this.lblDate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblDate.Location = new System.Drawing.Point(3, 74);
+            this.lblDate.Location = new System.Drawing.Point(3, 6);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(43, 18);
             this.lblDate.TabIndex = 11;
@@ -174,7 +171,7 @@
             // 
             this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker.Location = new System.Drawing.Point(3, 95);
+            this.dateTimePicker.Location = new System.Drawing.Point(3, 27);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(318, 22);
             this.dateTimePicker.TabIndex = 9;
@@ -193,33 +190,7 @@
             this.btnReleased.UseVisualStyleBackColor = true;
             this.btnReleased.Click += new System.EventHandler(this.btnReleased_Click);
             // 
-            // lblEmployee
-            // 
-            this.lblEmployee.AutoSize = true;
-            this.lblEmployee.BackColor = System.Drawing.Color.Silver;
-            this.lblEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lblEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblEmployee.Location = new System.Drawing.Point(3, 16);
-            this.lblEmployee.Name = "lblEmployee";
-            this.lblEmployee.Size = new System.Drawing.Size(75, 18);
-            this.lblEmployee.TabIndex = 8;
-            this.lblEmployee.Text = "Работник";
-            // 
-            // cbEmployee
-            // 
-            this.cbEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbEmployee.DropDownHeight = 115;
-            this.cbEmployee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cbEmployee.FormattingEnabled = true;
-            this.cbEmployee.IntegralHeight = false;
-            this.cbEmployee.Location = new System.Drawing.Point(6, 37);
-            this.cbEmployee.Name = "cbEmployee";
-            this.cbEmployee.Size = new System.Drawing.Size(315, 24);
-            this.cbEmployee.TabIndex = 7;
-            // 
-            // DemandEditorNew
+            // DebitEditorNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -227,12 +198,12 @@
             this.Controls.Add(this.tableLayoutPanelMain);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "DemandEditorNew";
+            this.Name = "DebitEditorNew";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Редактор требований";
-            ((System.ComponentModel.ISupportInitialize)(this.lwDemandData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lwDebitData)).EndInit();
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.panelLeftUpper.ResumeLayout(false);
             this.panelLeftUpper.PerformLayout();
@@ -242,7 +213,7 @@
 
         #endregion
 
-        private BrightIdeasSoftware.DataListView lwDemandData;
+        private BrightIdeasSoftware.DataListView lwDebitData;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
@@ -253,8 +224,6 @@
         private BrightIdeasSoftware.OLVColumn olvColumn6;
         private System.Windows.Forms.Button btnReleased;
         private System.Windows.Forms.Panel panelLeftUpper;
-        private System.Windows.Forms.Label lblEmployee;
-        private System.Windows.Forms.ComboBox cbEmployee;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
     }

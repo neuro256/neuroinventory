@@ -59,6 +59,7 @@ namespace NeuroInventory
             lwReleased.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Сумма", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Документ", 300, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Остаток", 300, System.Windows.Forms.HorizontalAlignment.Left, true));
         }
 
         private void btnReleasedRemove_Click(object sender, EventArgs e)
@@ -337,6 +338,57 @@ namespace NeuroInventory
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Списать выбранные тмц
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDebitReport_Click(object sender, EventArgs e)
+        {
+            if(lwReleased.CheckedItems.Count > 0)
+            {
+                DebitEditorNew editor = new DebitEditorNew(GetDebitDataSet());
+                editor.StartPosition = FormStartPosition.CenterParent;
+                editor.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(Definitions.DEBIT_SELECTION_WARNING_STRING);
+            }
+        }
+
+        private DataSet GetDebitDataSet()
+        {
+            DataTable debitTable = new DataTable("DebitReport");
+            debitTable.Columns.Add("id");
+            debitTable.Columns.Add("name");
+            debitTable.Columns.Add("OKEIcode");
+            debitTable.Columns.Add("measurement");
+            debitTable.Columns.Add("price");
+            debitTable.Columns.Add("amount");
+            debitTable.Columns.Add("sum");
+
+            foreach (ListViewItem item in lwReleased.CheckedItems)
+            {
+                DataRow newRow = debitTable.NewRow();
+
+                newRow["id"] = item.Tag;
+                newRow["name"] = item.SubItems[2].Text;
+                newRow["OKEIcode"] = item.SubItems[3].Text;
+                newRow["measurement"] = item.SubItems[4].Text;
+                newRow["price"] = item.SubItems[7].Text;
+                newRow["amount"] = item.SubItems[6].Text;
+                newRow["sum"] = item.SubItems[8].Text;
+
+                debitTable.Rows.Add(newRow);
+            }
+
+            DataSet debitDataSet = new DataSet("Report");
+            debitDataSet.Tables.Add(debitTable);
+
+            return debitDataSet;
         }
     }
 }

@@ -45,10 +45,11 @@ namespace NeuroInventory
             this.chLastname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chPost = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDepartment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStripReleased = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStripReleased = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnDebitReport = new System.Windows.Forms.Button();
             this.tableLayoutPanelReleased.SuspendLayout();
             this.panelReleasedBottom.SuspendLayout();
             this.contextMenuStripReleased.SuspendLayout();
@@ -73,6 +74,7 @@ namespace NeuroInventory
             // panelReleasedBottom
             // 
             this.panelReleasedBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelReleasedBottom.Controls.Add(this.btnDebitReport);
             this.panelReleasedBottom.Controls.Add(this.btnReleasedRemove);
             this.panelReleasedBottom.Controls.Add(this.btnFilter);
             this.panelReleasedBottom.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -171,25 +173,6 @@ namespace NeuroInventory
             this.chDepartment.Text = "Отдел";
             this.chDepartment.Width = 200;
             // 
-            // addToolStripMenuItem1
-            // 
-            this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
-            this.addToolStripMenuItem1.Size = new System.Drawing.Size(186, 26);
-            this.addToolStripMenuItem1.Text = "Добавить";
-            this.addToolStripMenuItem1.Visible = false;
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
-            this.editToolStripMenuItem.Text = "Редактировать";
-            // 
-            // removeToolStripMenuItem
-            // 
-            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
-            this.removeToolStripMenuItem.Text = "Удалить";
-            // 
             // contextMenuStripReleased
             // 
             this.contextMenuStripReleased.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -198,7 +181,39 @@ namespace NeuroInventory
             this.editToolStripMenuItem,
             this.removeToolStripMenuItem});
             this.contextMenuStripReleased.Name = "contextMenuStrip1";
-            this.contextMenuStripReleased.Size = new System.Drawing.Size(187, 82);
+            this.contextMenuStripReleased.Size = new System.Drawing.Size(181, 76);
+            // 
+            // addToolStripMenuItem1
+            // 
+            this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
+            this.addToolStripMenuItem1.Size = new System.Drawing.Size(180, 24);
+            this.addToolStripMenuItem1.Text = "Добавить";
+            this.addToolStripMenuItem1.Visible = false;
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.editToolStripMenuItem.Text = "Редактировать";
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.removeToolStripMenuItem.Text = "Удалить";
+            // 
+            // btnDebitReport
+            // 
+            this.btnDebitReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDebitReport.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnDebitReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDebitReport.Location = new System.Drawing.Point(202, 10);
+            this.btnDebitReport.Name = "btnDebitReport";
+            this.btnDebitReport.Size = new System.Drawing.Size(184, 33);
+            this.btnDebitReport.TabIndex = 4;
+            this.btnDebitReport.Text = "Списать";
+            this.btnDebitReport.UseVisualStyleBackColor = true;
+            this.btnDebitReport.Click += new System.EventHandler(this.btnDebitReport_Click);
             // 
             // TabReleased
             // 
@@ -238,5 +253,6 @@ namespace NeuroInventory
         private ToolStripMenuItem addToolStripMenuItem1;
         private ToolStripMenuItem editToolStripMenuItem;
         private ToolStripMenuItem removeToolStripMenuItem;
+        private Button btnDebitReport;
     }
 }

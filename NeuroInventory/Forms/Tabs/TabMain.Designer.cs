@@ -201,7 +201,7 @@
             this.btnDemand.Name = "btnDemand";
             this.btnDemand.Size = new System.Drawing.Size(184, 33);
             this.btnDemand.TabIndex = 4;
-            this.btnDemand.Text = "Отпустить";
+            this.btnDemand.Text = "Отпустить ТМЦ";
             this.btnDemand.UseVisualStyleBackColor = true;
             this.btnDemand.Click += new System.EventHandler(this.btnDemand_Click);
             // 

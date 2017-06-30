@@ -30,9 +30,12 @@ namespace NeuroInventory
                 "demand.amount, " +
                 @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price, " +
                 @"printf(""%.2f"", ((demand.amount * price) / 100)) AS sum, " +
-                "demandReport.document " +
+                "demandReport.document, " +
+                "sum(debit.amount) " +
                 $"FROM inventory INNER JOIN demand ON demand.inventoryId = inventory.id " +
-                $"LEFT JOIN demandReport ON demand.reportId = demandReport.id GROUP BY demand.id";
+                $"LEFT JOIN demandReport ON demand.reportId = demandReport.id " +
+                "LEFT JOIN debit ON debit.inventoryId = inventory.id " + 
+                $" GROUP BY demand.id";
         }
 
         public void Remove(int p_ListviewSelectedItemIndex)

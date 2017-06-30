@@ -141,21 +141,26 @@ namespace NeuroInventory
             debitReportTable.Columns.Add("name");
             debitReportTable.Columns.Add("OKEIcode");
             debitReportTable.Columns.Add("measurement");
+            debitReportTable.Columns.Add("amount");
             debitReportTable.Columns.Add("price");
             debitReportTable.Columns.Add("sum");
-            debitReportTable.Columns.Add("amount");
+
+            int counter = 1;
 
             foreach (DataRow row in DebitDataSet.Tables[0].Rows)
             {
                 DataRow newRow = debitReportTable.NewRow();
 
                 newRow["id"] = row["id"].ToString();
+                newRow["number"] = counter;
                 newRow["name"] = row["name"].ToString();
                 newRow["OKEIcode"] = row["OKEIcode"].ToString();
                 newRow["measurement"] = row["measurement"].ToString();
+                newRow["amount"] = row["amount"].ToString();
                 newRow["price"] = decimal.Parse(row["price"].ToString(), NumberStyles.Currency).ToString("0.00");
                 newRow["sum"] = decimal.Parse(row["sum"].ToString(), NumberStyles.Currency).ToString("0.00");
-                newRow["amount"] = row["amount"].ToString();
+
+                counter++;
 
                 debitReportTable.Rows.Add(newRow);
             }

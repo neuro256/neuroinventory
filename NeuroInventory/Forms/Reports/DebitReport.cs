@@ -281,7 +281,7 @@ namespace NeuroInventory
             Dictionary<string, object> fieldsData = new Dictionary<string, object>();
             fieldsData["Date"] = DateAndMoneyConverter.DateToTextLong(dateTimePicker.Value, "г.");
             fieldsData["Date2"] = DateAndMoneyConverter.DateToTextLong(dateTimePicker.Value, "г.");
-            fieldsData["TotalPrice"] = Convert.ToDecimal(GetTotalPrice(), CultureInfo.InvariantCulture).ToString("#.00"); 
+            fieldsData["TotalPrice"] = Convert.ToDecimal(GetTotalPrice(), CultureInfo.InvariantCulture).ToString("0.00"); 
             fieldsData["TotalPriceStr"] = GetTotalPriceStr();
 
             return fieldsData;
@@ -311,8 +311,8 @@ namespace NeuroInventory
                 newRow["codeOKEI"] = item.SubItems[2].Text;
                 newRow["measurement"] = item.SubItems[3].Text;
                 newRow["amount"] = !String.IsNullOrEmpty(item.SubItems[5].Text) ? item.SubItems[5].Text : "0";
-                newRow["price"] = Convert.ToDecimal(item.SubItems[6].Text, CultureInfo.InvariantCulture).ToString("#.00");
-                newRow["sum"] = !String.Equals(item.SubItems[7].Text, "0.00") ? Convert.ToDecimal(item.SubItems[7].Text, CultureInfo.InvariantCulture).ToString("#.00") : "0.00";
+                newRow["price"] = Convert.ToDecimal(item.SubItems[6].Text, CultureInfo.InvariantCulture).ToString("0.00");
+                newRow["sum"] = !String.Equals(item.SubItems[7].Text, "0.00") ? Convert.ToDecimal(item.SubItems[7].Text, CultureInfo.InvariantCulture).ToString("0.00") : "0.00";
 
                 counter++;
 

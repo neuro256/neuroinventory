@@ -326,8 +326,8 @@ namespace NeuroInventory
                 newRow["name"] = item.SubItems[1].Text;
                 newRow["OKEIcode"] = item.SubItems[2].Text;
                 newRow["measurement"] = item.SubItems[3].Text;
-                newRow["price"] = Convert.ToDecimal(item.SubItems[5].Text, CultureInfo.InvariantCulture).ToString("#.00");
-                newRow["sum"] = (Convert.ToDecimal(item.SubItems[5].Text, CultureInfo.InvariantCulture) * CustomParse(item.SubItems[9].Text)).ToString("#.00");
+                newRow["price"] = Convert.ToDecimal(item.SubItems[5].Text, CultureInfo.InvariantCulture).ToString("0.00");
+                newRow["sum"] = (Convert.ToDecimal(item.SubItems[5].Text, CultureInfo.InvariantCulture) * CustomParse(item.SubItems[9].Text)).ToString("0.00");
                 newRow["amount"] = item.SubItems[9].Text;
 
                 demandReportTable.Rows.Add(newRow);

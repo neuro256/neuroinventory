@@ -102,10 +102,11 @@ namespace NeuroInventory
                 // В первую очередь создаем отчет. Если отчет успешно создан и сохранен, записываем данные в базу данных
                 if (CreateReport())
                 {
+                    int reportLastId = SQLiteManager.GetInstance().DemandReport().ReturnLastInsertId();
                     // Отпускаем выбранные тмц 
                     foreach (DataRow row in DemandDataSet.Tables[0].Rows)
                     {
-                        AddRecord(Convert.ToInt32(row["id"]), cbEmployee.SelectedValue, Convert.ToDecimal(row["amount"]), dateTimePicker.Value);
+                        AddRecord(Convert.ToInt32(row["id"]), reportLastId, cbEmployee.SelectedValue, Convert.ToDecimal(row["amount"]), dateTimePicker.Value);
                     }
 
                     Close();
@@ -117,13 +118,14 @@ namespace NeuroInventory
             }
         }
 
-        private void AddRecord(int p_InventoryId, object p_EmployeeId, decimal p_Amount, DateTime p_Date)
+        private void AddRecord(int p_InventoryId, int p_ReportLastId, object p_EmployeeId, decimal p_Amount, DateTime p_Date)
         {
-            SQLiteManager.GetInstance().Demand().Insert(p_InventoryId, p_EmployeeId, p_Amount, p_Date);
+            SQLiteManager.GetInstance().Demand().Insert(p_InventoryId, p_ReportLastId, p_EmployeeId, p_Amount, p_Date);
         }
 
         public bool CreateReport()
         {
+            DataSet dataSetDemandReport = GetDemandReportDataSet();
             Dictionary<string, object> demandReportFieldsData = GetReportFieldsData();
 
             ISpireReportWrapper spireDoc = new SpireDocWrapper();
@@ -132,7 +134,7 @@ namespace NeuroInventory
             saveFileDialog.Filter = "Файлы документов (*.doc)|*.doc";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (spireDoc.CreateReport(saveFileDialog.FileName, DemandDataSet, demandReportFieldsData))
+                if (spireDoc.CreateReport(saveFileDialog.FileName, dataSetDemandReport, demandReportFieldsData))
                 {
                     SQLiteManager.GetInstance().DemandReport().Insert(Convert.ToInt32(cbEmployee.SelectedValue), DateTime.Now, saveFileDialog.FileName);
                     return true;
@@ -140,6 +142,38 @@ namespace NeuroInventory
             }
 
             return false;
+        }
+
+        private DataSet GetDemandReportDataSet()
+        {
+            DataTable demandReportTable = new DataTable("DemandReport");
+            demandReportTable.Columns.Add("id");
+            demandReportTable.Columns.Add("name");
+            demandReportTable.Columns.Add("OKEIcode");
+            demandReportTable.Columns.Add("measurement");
+            demandReportTable.Columns.Add("price");
+            demandReportTable.Columns.Add("sum");
+            demandReportTable.Columns.Add("amount");
+
+            foreach (DataRow row in DemandDataSet.Tables[0].Rows)
+            {
+                DataRow newRow = demandReportTable.NewRow();
+
+                newRow["id"] = row["id"].ToString();
+                newRow["name"] = row["name"].ToString();
+                newRow["OKEIcode"] = row["OKEIcode"].ToString();
+                newRow["measurement"] = row["measurement"].ToString();
+                newRow["price"] = decimal.Parse(row["price"].ToString(), NumberStyles.Currency).ToString("0.00");
+                newRow["sum"] = decimal.Parse(row["sum"].ToString(), NumberStyles.Currency).ToString("0.00");
+                newRow["amount"] = row["amount"].ToString();
+
+                demandReportTable.Rows.Add(newRow);
+            }
+
+            DataSet demandReportDataSet = new DataSet("Report");
+            demandReportDataSet.Tables.Add(demandReportTable);
+
+            return demandReportDataSet;
         }
 
         private Dictionary<string, object> GetReportFieldsData()

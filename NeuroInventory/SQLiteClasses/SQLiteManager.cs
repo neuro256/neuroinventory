@@ -362,8 +362,10 @@ namespace NeuroInventory
                                 "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                                 "inventoryId INTEGER, " +
                                 "employeeId INTEGER, " +
+                                "reportId INTEGER, " +
                                 "amount REAL NOT NULL, " +
                                 "date DATETIME, " +
+                                "FOREIGN KEY(reportId) REFERENCES demandReport(id) ON DELETE SET NULL, " +
                                 "FOREIGN KEY(inventoryId) REFERENCES inventory(id) ON DELETE CASCADE, " +
                                 "FOREIGN KEY(employeeId) REFERENCES employees(id) ON DELETE SET NULL);";
                             await command.ExecuteNonQueryAsync();
@@ -408,12 +410,6 @@ namespace NeuroInventory
                                 "FOREIGN KEY (catalogId) REFERENCES catalogs(id) ON DELETE CASCADE, " +
                                 "FOREIGN KEY (providerId) REFERENCES providers(id) ON DELETE SET NULL);";
                             await command.ExecuteNonQueryAsync();
-
-                            //// Создание таблицы "Отпущенные"
-                            //command.CommandText = "CREATE TABLE IF NOT EXISTS released (" +
-                            //    "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                            //    "inventoryId INTEGER NOT NULL, ";
-                            //await command.ExecuteNonQueryAsync();
 
                             // Создание таблицы "Работники"
                             command.CommandText = "CREATE TABLE IF NOT EXISTS employees (" +

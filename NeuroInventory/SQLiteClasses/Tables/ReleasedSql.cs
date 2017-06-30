@@ -32,7 +32,7 @@ namespace NeuroInventory
                 @"printf(""%.2f"", ((demand.amount * price) / 100)) AS sum, " +
                 "demandReport.document " +
                 $"FROM inventory INNER JOIN demand ON demand.inventoryId = inventory.id " +
-                $"LEFT JOIN demandReport ON demand.employeeId = demandReport.employeeId GROUP BY demand.id";
+                $"LEFT JOIN demandReport ON demand.reportId = demandReport.id GROUP BY demand.id";
         }
 
         public void Remove(int p_ListviewSelectedItemIndex)
@@ -70,7 +70,7 @@ namespace NeuroInventory
                 @"printf(""%.2f"", ((demand.amount * price) / 100)) AS sum, " +
                 "demandReport.document " +
                 $" FROM inventory INNER JOIN demand ON demand.inventoryId = inventory.id " +
-                $" LEFT JOIN demandReport ON demand.employeeId = demandReport.employeeId " +
+                $" LEFT JOIN demandReport ON demand.reportId = demandReport.id " +
                 $" WHERE " +
                 l_Name +
                 l_Date +
@@ -85,6 +85,11 @@ namespace NeuroInventory
         public void ClearFilter()
         {
             CommandDataSet = CommandDataSetNotFiltered;
+        }
+
+        public int ReturnLastInsertId()
+        {
+            return SQLiteManager.GetInstance().ReturnLastInsertId(TableName);
         }
     }
 }

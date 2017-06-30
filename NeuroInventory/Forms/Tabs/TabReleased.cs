@@ -51,10 +51,10 @@ namespace NeuroInventory
             lwReleased.Columns.Clear();
             lwReleased.Columns.Add(new ColHeader("№", 60, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Дата поступления", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Наименование", 200, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Наименование", 400, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Код ОКЕИ", 100, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Единица измерения", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Кому отпущено", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Кому отпущено", 300, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Количество", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Сумма", 100, System.Windows.Forms.HorizontalAlignment.Left, true));

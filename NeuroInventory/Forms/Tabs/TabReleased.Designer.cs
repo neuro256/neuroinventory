@@ -223,6 +223,7 @@ namespace NeuroInventory
             this.ClientSize = new System.Drawing.Size(1200, 650);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanelReleased);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TabReleased";
             this.ShowIcon = false;

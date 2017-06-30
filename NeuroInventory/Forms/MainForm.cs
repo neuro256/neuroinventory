@@ -288,7 +288,8 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void toolStripButtonDemandReport_Click(object sender, EventArgs e)
         {
-            DemandReportViewSelector();
+            //DemandReportViewSelector();
+            OpenDemandReportList();
         }
 
         /// <summary>
@@ -298,7 +299,8 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void toolStripButtonDebitReport_Click(object sender, EventArgs e)
         {
-            DebitReportViewSelector();
+            //DebitReportViewSelector();
+            OpenDebitReportList();
         }
 
         private void DemandReportViewSelector()
@@ -391,26 +393,6 @@ namespace NeuroInventory
             DebitReportList reportList = new DebitReportList();
             reportList.StartPosition = FormStartPosition.CenterParent;
             reportList.ShowDialog();
-        }
-
-        private void demandReportEditorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenDemandReport();
-        }
-
-        private void demandReportListToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenDemandReportList();
-        }
-
-        private void debitReportEditorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenDebitReport();
-        }
-
-        private void debitReportListToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenDebitReportList();
         }
 
         private void aboutBoxToolStripMenuItem_Click(object sender, EventArgs e)

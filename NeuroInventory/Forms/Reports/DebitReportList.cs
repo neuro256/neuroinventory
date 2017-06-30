@@ -120,7 +120,7 @@ namespace NeuroInventory
                     {
                         // No item is selected
                         this.m_Listview.SelectedItems.Clear();
-                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = true;
+                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = false;
                         m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
                         m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = false;
                     }

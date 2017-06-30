@@ -99,6 +99,8 @@ namespace NeuroInventory
         {
             try
             {
+                if (!CheckAmount())
+                    return;
                 // В первую очередь создаем отчет. Если отчет успешно создан и сохранен, записываем данные в базу данных
                 if (CreateReport())
                 {
@@ -116,6 +118,24 @@ namespace NeuroInventory
             {
                 MessageBox.Show(ex.Message, Definitions.CREATE_REPORT_FAILED);
             }
+        }
+
+        private bool CheckAmount()
+        {
+            bool amountChecked = true;
+
+            foreach (DataRow row in DemandDataSet.Tables[0].Rows)
+            {
+                if(Convert.ToDecimal(row["amount"]) <= 0)
+                {
+                    amountChecked = false;
+                    break;
+                }
+            }
+
+            if (!amountChecked)
+                MessageBox.Show(Definitions.ZERO_AMOUNT);
+            return amountChecked;
         }
 
         private void AddRecord(int p_InventoryId, int p_ReportLastId, object p_EmployeeId, decimal p_Amount, DateTime p_Date)

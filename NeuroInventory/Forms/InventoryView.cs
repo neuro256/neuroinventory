@@ -118,7 +118,7 @@ namespace NeuroInventory
                 m_Listview.BeginUpdate();
                 for (int i = 0; i < m_Listview.Items.Count; i++)
                 {
-                    m_Listview.Items[i].SubItems[1].Text = (i + 1).ToString();
+                    m_Listview.Items[i].SubItems[0].Text = (i + 1).ToString();
                 }
                 m_Listview.EndUpdate();
             }

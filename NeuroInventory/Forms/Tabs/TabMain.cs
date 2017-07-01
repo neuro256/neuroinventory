@@ -714,6 +714,12 @@ namespace NeuroInventory
         {
             try
             {
+                if(treeView.SelectedNodes.Count > 1)
+                {
+                    MessageBox.Show(Definitions.TOO_MANY_SELECTED_NODES);
+                    return;
+                }
+
                 if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
                 {
                     foreach (ListViewItem item in (ListView.SelectedListViewItemCollection)e.Data.GetData(typeof(ListView.SelectedListViewItemCollection)))
@@ -812,6 +818,8 @@ namespace NeuroInventory
 
         #endregion
 
+        #region RELEASED
+
         private void btnDemand_Click(object sender, EventArgs e)
         {
             if (lwInventory.CheckedItems.Count > 0)
@@ -874,5 +882,7 @@ namespace NeuroInventory
                 e.NewValue = CheckState.Unchecked;
             }
         }
+
+        #endregion
     }
 }

@@ -21,5 +21,6 @@
         public static string ZERO_AMOUNT = "Количество тмц не должно иметь нулевое значение";
         public static string RELEASED_STR = "Списано";
         public static string NONRELEASED_STR = "Не списано";
+        public static string TOO_MANY_SELECTED_NODES = "Перемещение записей невозможно если выбрано несколько списков тмц. Сначала выберите один список тмц";
     }
 }

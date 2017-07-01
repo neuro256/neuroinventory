@@ -633,11 +633,18 @@ namespace NeuroInventory
                     // Добавление столбца "Остаток"
                     ListViewItem.ListViewSubItem subitemBalance = new ListViewItem.ListViewSubItem();
                     object balance = dataSet.Tables[0].Rows[i][dataSet.Tables[0].Columns.Count - 1];
-                    if (!Equals(balance, DBNull.Value) && Convert.ToDecimal(balance) <= 0)
-                        subitemBalance.BackColor = Color.Red;
                     subitemBalance.Name = "balance";
                     l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][7].ToString());
-                    subitemBalance.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", balance);
+                    if (!Equals(balance, DBNull.Value))
+                    {
+                        if (Convert.ToDecimal(balance) <= 0)
+                            subitemBalance.BackColor = Color.Red;               
+                        subitemBalance.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", balance);
+                    }
+                    else
+                    {
+                        subitemBalance.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][8].ToString());
+                    }
 
                     m_Listview.Items[i].SubItems.Add(subitemBalance);
 
@@ -875,11 +882,15 @@ namespace NeuroInventory
         {
             DataSet dataSet = SQLiteManager.GetInstance().Inventory().ReturnDataSet();
 
-            decimal l_Balance = Convert.ToDecimal(dataSet.Tables[0].Rows[e.Index]["balance"]);
-
-            if(l_Balance <= 0)
+            object l_Balance = dataSet.Tables[0].Rows[e.Index]["balance"];
+            if (!Equals(l_Balance, DBNull.Value))
             {
-                e.NewValue = CheckState.Unchecked;
+                decimal l_BalanceValue = Convert.ToDecimal(l_Balance);
+
+                if (l_BalanceValue <= 0)
+                {
+                    e.NewValue = CheckState.Unchecked;
+                }
             }
         }
 

@@ -72,9 +72,15 @@ namespace NeuroInventory
             ToolStripMenuItem addFolderItem = new ToolStripMenuItem("Создать каталог");
             addFolderItem.Name = "addFolderItem";
             addFolderItem.Click += AddFolderItem_Click;
+            ToolStripMenuItem renameFolderItem = new ToolStripMenuItem("Переименовать каталог");
+            renameFolderItem.Name = "renameFolderItem";
+            renameFolderItem.Click += RenameFolderItem_Click;
             ToolStripMenuItem addFileItem = new ToolStripMenuItem("Создать список тмц");
             addFileItem.Name = "addFileItem";
             addFileItem.Click += AddFileItem_Click;
+            ToolStripMenuItem renameFileItem = new ToolStripMenuItem("Переименовать список тмц");
+            renameFileItem.Name = "renameFileItem";
+            renameFileItem.Click += RenameFileItem_Click;
             ToolStripMenuItem removeFolderItem = new ToolStripMenuItem("Удалить каталог");
             removeFolderItem.Name = "removeFolderItem";
             removeFolderItem.Click += RemoveFolderItem_Click;
@@ -83,7 +89,7 @@ namespace NeuroInventory
             removeFileItem.Click += RemoveFileItem_Click;
 
             contextMenuStripCatalogs.Items.Clear();
-            contextMenuStripCatalogs.Items.AddRange(new[] { addFolderItem, addFileItem, removeFolderItem, removeFileItem });
+            contextMenuStripCatalogs.Items.AddRange(new[] { addFolderItem, addFileItem, renameFolderItem, renameFileItem, removeFolderItem, removeFileItem });
             treeView.ContextMenuStrip = contextMenuStripCatalogs;
         }
 
@@ -179,6 +185,51 @@ namespace NeuroInventory
             AddNode(TreeNodeType.FOLDER);
         }
 
+        /// <summary>
+        /// Переименовывание каталога
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RenameFolderItem_Click(object sender, EventArgs e)
+        {
+            RenameNode(TreeNodeType.FOLDER);
+        }
+
+        /// <summary>
+        /// Переименовывание списка тмц
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RenameFileItem_Click(object sender, EventArgs e)
+        {
+            RenameNode(TreeNodeType.FILE);
+        }
+
+        private void RenameNode(TreeNodeType p_Type)
+        {
+            try
+            {
+                DialogName dialogName = new DialogName();
+                dialogName.StartPosition = FormStartPosition.CenterParent;
+                if (dialogName.ShowDialog() == DialogResult.OK)
+                {
+                    if (SelectedInventory != null)
+                    {
+                        // Изменить запись в таблице Каталоги
+                        SQLiteManager.GetInstance().Catalogs().Update(SelectedInventory.id, (int)p_Type, SelectedInventory.parent, dialogName.name);
+                        // Переименовывание узла
+                        treeView.BeginUpdate();
+                        treeView.SelectedNode.Text = dialogName.name;
+                        treeView.EndUpdate();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void AddNode(TreeNodeType p_Type)
         {
             try
@@ -248,6 +299,8 @@ namespace NeuroInventory
                             {
                                 contextMenuStripCatalogs.Items["addFolderItem"].Visible = true;
                                 contextMenuStripCatalogs.Items["addFileItem"].Visible = true;
+                                contextMenuStripCatalogs.Items["renameFolderItem"].Visible = true;
+                                contextMenuStripCatalogs.Items["renameFileItem"].Visible = false;
                                 contextMenuStripCatalogs.Items["removeFolderItem"].Visible = true;
                                 contextMenuStripCatalogs.Items["removeFileItem"].Visible = false;
                             }
@@ -255,6 +308,8 @@ namespace NeuroInventory
                             {
                                 contextMenuStripCatalogs.Items["addFolderItem"].Visible = false;
                                 contextMenuStripCatalogs.Items["addFileItem"].Visible = false;
+                                contextMenuStripCatalogs.Items["renameFolderItem"].Visible = false;
+                                contextMenuStripCatalogs.Items["renameFileItem"].Visible = true;
                                 contextMenuStripCatalogs.Items["removeFolderItem"].Visible = false;
                                 contextMenuStripCatalogs.Items["removeFileItem"].Visible = true;
                             }
@@ -263,6 +318,8 @@ namespace NeuroInventory
                         {
                             contextMenuStripCatalogs.Items["addFolderItem"].Visible = true;
                             contextMenuStripCatalogs.Items["addFileItem"].Visible = true;
+                            contextMenuStripCatalogs.Items["renameFolderItem"].Visible = false;
+                            contextMenuStripCatalogs.Items["renameFileItem"].Visible = false;
                             contextMenuStripCatalogs.Items["removeFolderItem"].Visible = false;
                             contextMenuStripCatalogs.Items["removeFileItem"].Visible = false;
                         }
@@ -273,6 +330,8 @@ namespace NeuroInventory
                         contextMenuStripCatalogs.Hide();
                         contextMenuStripCatalogs.Items["addFolderItem"].Visible = false;
                         contextMenuStripCatalogs.Items["addFileItem"].Visible = false;
+                        contextMenuStripCatalogs.Items["renameFolderItem"].Visible = false;
+                        contextMenuStripCatalogs.Items["renameFileItem"].Visible = false;
                         contextMenuStripCatalogs.Items["removeFolderItem"].Visible = false;
                         contextMenuStripCatalogs.Items["removeFileItem"].Visible = false;
                     }

@@ -195,6 +195,7 @@
             // 
             this.btnDemand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDemand.AutoSize = true;
+            this.btnDemand.BackColor = System.Drawing.Color.CadetBlue;
             this.btnDemand.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDemand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDemand.Location = new System.Drawing.Point(586, 11);
@@ -202,7 +203,7 @@
             this.btnDemand.Size = new System.Drawing.Size(184, 33);
             this.btnDemand.TabIndex = 4;
             this.btnDemand.Text = "Отпустить ТМЦ";
-            this.btnDemand.UseVisualStyleBackColor = true;
+            this.btnDemand.UseVisualStyleBackColor = false;
             this.btnDemand.Click += new System.EventHandler(this.btnDemand_Click);
             // 
             // btnFilter

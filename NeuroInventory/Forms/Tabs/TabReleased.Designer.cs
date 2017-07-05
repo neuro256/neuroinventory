@@ -35,6 +35,7 @@ namespace NeuroInventory
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanelReleased = new System.Windows.Forms.TableLayoutPanel();
             this.panelReleasedBottom = new System.Windows.Forms.Panel();
+            this.btnDebitReport = new System.Windows.Forms.Button();
             this.btnReleasedRemove = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
             this.lwReleased = new System.Windows.Forms.ListView();
@@ -49,7 +50,6 @@ namespace NeuroInventory
             this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnDebitReport = new System.Windows.Forms.Button();
             this.tableLayoutPanelReleased.SuspendLayout();
             this.panelReleasedBottom.SuspendLayout();
             this.contextMenuStripReleased.SuspendLayout();
@@ -83,6 +83,20 @@ namespace NeuroInventory
             this.panelReleasedBottom.Name = "panelReleasedBottom";
             this.panelReleasedBottom.Size = new System.Drawing.Size(1200, 55);
             this.panelReleasedBottom.TabIndex = 1;
+            // 
+            // btnDebitReport
+            // 
+            this.btnDebitReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDebitReport.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnDebitReport.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnDebitReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDebitReport.Location = new System.Drawing.Point(202, 10);
+            this.btnDebitReport.Name = "btnDebitReport";
+            this.btnDebitReport.Size = new System.Drawing.Size(184, 33);
+            this.btnDebitReport.TabIndex = 4;
+            this.btnDebitReport.Text = "Списать ТМЦ";
+            this.btnDebitReport.UseVisualStyleBackColor = false;
+            this.btnDebitReport.Click += new System.EventHandler(this.btnDebitReport_Click);
             // 
             // btnReleasedRemove
             // 
@@ -181,39 +195,26 @@ namespace NeuroInventory
             this.editToolStripMenuItem,
             this.removeToolStripMenuItem});
             this.contextMenuStripReleased.Name = "contextMenuStrip1";
-            this.contextMenuStripReleased.Size = new System.Drawing.Size(181, 76);
+            this.contextMenuStripReleased.Size = new System.Drawing.Size(187, 82);
             // 
             // addToolStripMenuItem1
             // 
             this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
-            this.addToolStripMenuItem1.Size = new System.Drawing.Size(180, 24);
+            this.addToolStripMenuItem1.Size = new System.Drawing.Size(186, 26);
             this.addToolStripMenuItem1.Text = "Добавить";
             this.addToolStripMenuItem1.Visible = false;
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.editToolStripMenuItem.Text = "Редактировать";
             // 
             // removeToolStripMenuItem
             // 
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.removeToolStripMenuItem.Text = "Удалить";
-            // 
-            // btnDebitReport
-            // 
-            this.btnDebitReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDebitReport.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnDebitReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDebitReport.Location = new System.Drawing.Point(202, 10);
-            this.btnDebitReport.Name = "btnDebitReport";
-            this.btnDebitReport.Size = new System.Drawing.Size(184, 33);
-            this.btnDebitReport.TabIndex = 4;
-            this.btnDebitReport.Text = "Списать";
-            this.btnDebitReport.UseVisualStyleBackColor = true;
-            this.btnDebitReport.Click += new System.EventHandler(this.btnDebitReport_Click);
             // 
             // TabReleased
             // 

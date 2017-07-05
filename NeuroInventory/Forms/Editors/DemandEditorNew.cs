@@ -41,6 +41,11 @@ namespace NeuroInventory
             lwDemandData.SelectedBackColor = Color.LightBlue;
             lwDemandData.SelectedForeColor = Color.MidnightBlue;
             lwDemandData.RowHeight = 26;
+            // Автоматическая нумерация строк
+            lwDemandData.FormatRow += delegate (object sender, FormatRowEventArgs args) {
+                args.Item.Text = (args.RowIndex + 1).ToString();
+            };
+
             lwDemandData.RebuildColumns();
 
             dateTimePicker.Format = DateTimePickerFormat.Long;

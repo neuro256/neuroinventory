@@ -34,6 +34,11 @@ namespace NeuroInventory
             lwDebitData.SelectedBackColor = Color.LightBlue;
             lwDebitData.SelectedForeColor = Color.MidnightBlue;
             lwDebitData.RowHeight = 26;
+            // Автоматическая нумерация строк
+            lwDebitData.FormatRow += delegate (object sender, FormatRowEventArgs args) {
+                args.Item.Text = (args.RowIndex + 1).ToString();
+            };
+
             lwDebitData.RebuildColumns();
 
             dateTimePicker.Format = DateTimePickerFormat.Long;

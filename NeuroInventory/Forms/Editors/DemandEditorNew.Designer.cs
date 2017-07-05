@@ -43,6 +43,7 @@
             this.btnReleased = new System.Windows.Forms.Button();
             this.lblEmployee = new System.Windows.Forms.Label();
             this.cbEmployee = new System.Windows.Forms.ComboBox();
+            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.lwDemandData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelLeftUpper.SuspendLayout();
@@ -50,6 +51,7 @@
             // 
             // lwDemandData
             // 
+            this.lwDemandData.AllColumns.Add(this.olvColumn7);
             this.lwDemandData.AllColumns.Add(this.olvColumn1);
             this.lwDemandData.AllColumns.Add(this.olvColumn2);
             this.lwDemandData.AllColumns.Add(this.olvColumn3);
@@ -58,6 +60,7 @@
             this.lwDemandData.AllColumns.Add(this.olvColumn6);
             this.lwDemandData.CellEditUseWholeCell = false;
             this.lwDemandData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn7,
             this.olvColumn1,
             this.olvColumn2,
             this.olvColumn3,
@@ -219,6 +222,13 @@
             this.cbEmployee.Size = new System.Drawing.Size(315, 24);
             this.cbEmployee.TabIndex = 7;
             // 
+            // olvColumn7
+            // 
+            this.olvColumn7.AspectName = "";
+            this.olvColumn7.IsEditable = false;
+            this.olvColumn7.Text = "№";
+            this.olvColumn7.Width = 50;
+            // 
             // DemandEditorNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -257,5 +267,6 @@
         private System.Windows.Forms.ComboBox cbEmployee;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
+        private BrightIdeasSoftware.OLVColumn olvColumn7;
     }
 }

@@ -41,6 +41,7 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.btnReleased = new System.Windows.Forms.Button();
+            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.lwDebitData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelLeftUpper.SuspendLayout();
@@ -48,6 +49,7 @@
             // 
             // lwDebitData
             // 
+            this.lwDebitData.AllColumns.Add(this.olvColumn7);
             this.lwDebitData.AllColumns.Add(this.olvColumn1);
             this.lwDebitData.AllColumns.Add(this.olvColumn2);
             this.lwDebitData.AllColumns.Add(this.olvColumn3);
@@ -56,6 +58,7 @@
             this.lwDebitData.AllColumns.Add(this.olvColumn6);
             this.lwDebitData.CellEditUseWholeCell = false;
             this.lwDebitData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn7,
             this.olvColumn1,
             this.olvColumn2,
             this.olvColumn3,
@@ -190,6 +193,13 @@
             this.btnReleased.UseVisualStyleBackColor = true;
             this.btnReleased.Click += new System.EventHandler(this.btnReleased_Click);
             // 
+            // olvColumn7
+            // 
+            this.olvColumn7.AspectName = "";
+            this.olvColumn7.IsEditable = false;
+            this.olvColumn7.Text = "№";
+            this.olvColumn7.Width = 50;
+            // 
             // DebitEditorNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -202,7 +212,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Редактор требований";
+            this.Text = "Редактор списаний";
             ((System.ComponentModel.ISupportInitialize)(this.lwDebitData)).EndInit();
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.panelLeftUpper.ResumeLayout(false);
@@ -226,5 +236,6 @@
         private System.Windows.Forms.Panel panelLeftUpper;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
+        private BrightIdeasSoftware.OLVColumn olvColumn7;
     }
 }

@@ -42,7 +42,8 @@ namespace NeuroInventory
             lwDemandData.SelectedForeColor = Color.MidnightBlue;
             lwDemandData.RowHeight = 26;
             // Автоматическая нумерация строк
-            lwDemandData.FormatRow += delegate (object sender, FormatRowEventArgs args) {
+            lwDemandData.FormatRow += delegate (object sender, FormatRowEventArgs args)
+            {
                 args.Item.Text = (args.RowIndex + 1).ToString();
             };
 
@@ -119,7 +120,7 @@ namespace NeuroInventory
                     Close();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, Definitions.CREATE_REPORT_FAILED);
             }
@@ -131,7 +132,7 @@ namespace NeuroInventory
 
             foreach (DataRow row in DemandDataSet.Tables[0].Rows)
             {
-                if(Convert.ToDecimal(row["amount"]) <= 0)
+                if (Convert.ToDecimal(row["amount"]) <= 0)
                 {
                     amountChecked = false;
                     break;
@@ -155,15 +156,11 @@ namespace NeuroInventory
 
             ISpireReportWrapper spireDoc = new SpireDocWrapper();
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Файлы документов (*.doc)|*.doc";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            string l_FileName = SQLiteManager.GetInstance().DemandReport().CreateFileName(Definitions.DEMAND_REPORT_FILENAME).ToString();
+            if (spireDoc.CreateReport(l_FileName, dataSetDemandReport, demandReportFieldsData))
             {
-                if (spireDoc.CreateReport(saveFileDialog.FileName, dataSetDemandReport, demandReportFieldsData))
-                {
-                    SQLiteManager.GetInstance().DemandReport().Insert(Convert.ToInt32(cbEmployee.SelectedValue), DateTime.Now, saveFileDialog.FileName);
-                    return true;
-                }
+                SQLiteManager.GetInstance().DemandReport().Insert(Convert.ToInt32(cbEmployee.SelectedValue), DateTime.Now, l_FileName);
+                return true;
             }
 
             return false;

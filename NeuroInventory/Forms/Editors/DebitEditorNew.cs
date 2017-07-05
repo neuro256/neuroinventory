@@ -35,7 +35,8 @@ namespace NeuroInventory
             lwDebitData.SelectedForeColor = Color.MidnightBlue;
             lwDebitData.RowHeight = 26;
             // Автоматическая нумерация строк
-            lwDebitData.FormatRow += delegate (object sender, FormatRowEventArgs args) {
+            lwDebitData.FormatRow += delegate (object sender, FormatRowEventArgs args)
+            {
                 args.Item.Text = (args.RowIndex + 1).ToString();
             };
 
@@ -106,7 +107,7 @@ namespace NeuroInventory
                     Close();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, Definitions.CREATE_REPORT_FAILED);
             }
@@ -124,15 +125,11 @@ namespace NeuroInventory
 
             ISpireReportWrapper gemboxReport = new GemboxXlsWrapper();
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Файлы документов (*.xls)|*.xls";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            string l_FileName = SQLiteManager.GetInstance().DebitReport().CreateFileName(Definitions.DEBIT_REPORT_FILENAME).ToString();
+            if (gemboxReport.CreateReport(l_FileName, dataSetDebitReport, debitReportFieldsData))
             {
-                if (gemboxReport.CreateReport(saveFileDialog.FileName, dataSetDebitReport, debitReportFieldsData))
-                {
-                    SQLiteManager.GetInstance().DebitReport().Insert(DateTime.Now, saveFileDialog.FileName);
-                    return true;
-                }
+                SQLiteManager.GetInstance().DebitReport().Insert(DateTime.Now, l_FileName);
+                return true;
             }
 
             return false;

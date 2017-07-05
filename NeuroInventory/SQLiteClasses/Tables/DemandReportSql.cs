@@ -91,7 +91,7 @@ namespace NeuroInventory
 
             values["employeeId"] = p_EmployeeId;
             values["date"] = p_Date;
-            values["document"] = InsertFile(p_Document);
+            values["document"] = p_Document;// InsertFile(p_Document);
 
             SQLiteManager.GetInstance().Insert(TableName, values);
         }

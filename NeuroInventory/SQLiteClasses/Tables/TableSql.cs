@@ -151,6 +151,11 @@ namespace NeuroInventory
             return NeuroFile.GetInstance().InsertFile(p_SelectedDocument, TargetPath);
         }
 
+        public object CreateFileName(string p_Filename)
+        {
+            return NeuroFile.GetInstance().CreateFileName(p_Filename, TargetPath);
+        }
+
         private string GetApplicationName
         {
             get

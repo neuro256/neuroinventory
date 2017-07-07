@@ -157,7 +157,7 @@ namespace NeuroInventory
                 newRow["number"] = counter;
                 newRow["name"] = row["name"].ToString();
                 newRow["OKEIcode"] = row["OKEIcode"].ToString();
-                newRow["measurement"] = row["measurement"].ToString();
+                newRow["measurement"] = SQLiteSettingsManager.GetInstance().Measurement().GetShortName(row["measurement"].ToString());
                 newRow["amount"] = row["amount"].ToString();
                 newRow["price"] = decimal.Parse(row["price"].ToString(), NumberStyles.Currency).ToString("0.00");
                 newRow["sum"] = decimal.Parse(row["sum"].ToString(), NumberStyles.Currency).ToString("0.00");

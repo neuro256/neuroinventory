@@ -113,5 +113,17 @@ namespace NeuroInventory
                 return 0;
             }
         }
+
+        public string GetShortName(string p_Name)
+        {
+            try
+            {
+                return SQLiteSettingsManager.GetInstance().CommandExecuteScalar($"SELECT symbol FROM measurement where name='{p_Name}';").ToString();
+            }
+            catch
+            {
+                return String.Empty;
+            }
+        }
     }
 }

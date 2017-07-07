@@ -21,7 +21,8 @@ namespace NeuroInventory
         public void SetCommandSet()
         {
             CommandDataSet = "SELECT inventory.id, " +
-                "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
+                "demand.id as demandId, " +
+                "strftime('%d.%m.%Y', DATE(demand.date)) AS mydate," +
                 "inventory.name, " +
                 "inventory.OKEIcode, " +
                 "inventory.measurement, " +
@@ -35,13 +36,14 @@ namespace NeuroInventory
                 $"FROM inventory INNER JOIN demand ON demand.inventoryId = inventory.id " +
                 $"LEFT JOIN demandReport ON demand.reportId = demandReport.id " +
                 //"LEFT JOIN debit ON debit.inventoryId = inventory.id " + 
-                $" GROUP BY demand.id";
+                $" GROUP BY demand.id" +
+                $" ORDER BY DATE(demand.date) ASC";
         }
 
         public void Remove(int p_ListviewSelectedItemIndex)
         {
             DataSet dataSet = ReturnDataSet();
-            object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
+            object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["demandId"];
             string l_Where = $"id={selectedRecordId}";
 
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
@@ -50,7 +52,7 @@ namespace NeuroInventory
         public void Filter(DateTime p_Date, string p_Employee, string p_Name, string p_OKEIcode, string p_Measurement, object p_Amount, object p_Price)
         {
             string l_DateStr = p_Date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-            string l_Date = !DateTime.Equals(p_Date, DateTime.MaxValue) ? $" AND inventory.date=Datetime('{l_DateStr}')" : String.Empty;
+            string l_Date = !DateTime.Equals(p_Date, DateTime.MaxValue) ? $" AND demand.date=Datetime('{l_DateStr}')" : String.Empty;
             string l_Name = $" inventory.name like '%{p_Name}%'";
             string l_OKEIcode = !String.IsNullOrEmpty(p_OKEIcode) ? $" AND OKEIcode LIKE '%{p_OKEIcode}%'" : $" AND (OKEIcode LIKE '%{p_OKEIcode}%' OR OKEIcode IS NULL)";
             string l_Measurement = !String.IsNullOrEmpty(p_Measurement) ? $" AND measurement LIKE '%{p_Measurement}%'" : $" AND (measurement LIKE '%{p_Measurement}%' OR measurement IS NULL)";
@@ -62,7 +64,8 @@ namespace NeuroInventory
                 $"OR lastname like '%{p_Employee}%') " : String.Empty;
 
             CommandDataSet = "SELECT inventory.id, " +
-                "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
+                "demand.id as demandId, " +
+                "strftime('%d.%m.%Y', DATE(demand.date)) AS mydate," +
                 "inventory.name, " +
                 "inventory.OKEIcode, " +
                 "inventory.measurement, " +
@@ -84,7 +87,8 @@ namespace NeuroInventory
                 l_Amount +
                 l_Price +
                 l_Employee +
-                $" GROUP BY demand.id";
+                $" GROUP BY demand.id" +
+                $" ORDER BY DATE(demand.date) ASC";
         }
 
         public void ClearFilter()

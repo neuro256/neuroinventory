@@ -8,7 +8,7 @@ namespace NeuroInventory
     {
         public ProvidersSql()
         {
-            CommandDataSet = "SELECT * FROM providers";
+            CommandDataSet = "SELECT * FROM providers ORDER BY name ASC";
             TableName = "providers";
             SetTargetPath(@"Документы\Поставщики");
         }
@@ -25,12 +25,13 @@ namespace NeuroInventory
                 $"{l_Address} AND " +
                 $"{l_Phone} AND " +
                 $"{l_Mail} AND " +
-                $"{l_Document}";
+                $"{l_Document}" +
+                $" ORDER BY name ASC";
         }
 
         public void ClearFilter()
         {
-            CommandDataSet = "SELECT * FROM providers";
+            CommandDataSet = "SELECT * FROM providers ORDER BY name ASC";
         }
 
         public void Insert(string p_Name, string p_Address, string p_Phone, string p_Mail, string p_Document)

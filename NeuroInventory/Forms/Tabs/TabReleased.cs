@@ -50,7 +50,7 @@ namespace NeuroInventory
             // Необходимо добавлять столбцы именно так, иначе ColumnHeader не сможет преобразоваться в ColHeader (используется в методе сортировки)
             lwReleased.Columns.Clear();
             lwReleased.Columns.Add(new ColHeader("№", 60, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Дата поступления", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Дата отпуска", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Наименование", 400, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Код ОКЕИ", 100, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Единица измерения", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
@@ -59,7 +59,7 @@ namespace NeuroInventory
             lwReleased.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Сумма", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Документ", 300, System.Windows.Forms.HorizontalAlignment.Left, true));
-            //lwReleased.Columns.Add(new ColHeader("Остаток", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Остаток", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
         }
 
         private void btnReleasedRemove_Click(object sender, EventArgs e)
@@ -140,7 +140,11 @@ namespace NeuroInventory
                             subitem.Tag = subitem.Text;
                             subitem.Text = Path.GetFileName(subitem.Text);
                         }
-                        m_Listview.Items[i].SubItems.Add(subitem);
+
+                        if (subitem.Name != "demandId")
+                        {
+                            m_Listview.Items[i].SubItems.Add(subitem);
+                        }
                     }
                     m_Listview.Items[i].UseItemStyleForSubItems = false;
                 }

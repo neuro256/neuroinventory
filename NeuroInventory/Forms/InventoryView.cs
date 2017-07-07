@@ -158,44 +158,49 @@ namespace NeuroInventory
         {
             try
             {
-                // Create an instance of the ColHeader class.
-                ColHeader clickedCol = (ColHeader)m_Listview.Columns[e.Column];
-
-                // Set the ascending property to sort in the opposite order.
-                clickedCol.ascending = !clickedCol.ascending;
-
-                // Get the number of items in the list.
-                int numItems = m_Listview.Items.Count;
-
-                // Turn off display while data is repoplulated.
-                m_Listview.BeginUpdate();
-
-                // Populate an ArrayList with a SortWrapper of each list item.
-                ArrayList SortArray = new ArrayList();
-                for (int i = 0; i < numItems; i++)
-                {
-                    SortArray.Add(new SortWrapper(m_Listview.Items[i], e.Column));
-                }
-
-                // Sort the elements in the ArrayList using a new instance of the SortComparer
-                // class. The parameters are the starting index, the length of the range to sort,
-                // and the IComparer implementation to use for comparing elements. Note that
-                // the IComparer implementation (SortComparer) requires the sort
-                // direction for its constructor; true if ascending, othwise false.
-                SortArray.Sort(0, SortArray.Count, new SortWrapper.SortComparer(clickedCol.ascending));
-
-                // Clear the list, and repopulate with the sorted items.
-                m_Listview.Items.Clear();
-                for (int i = 0; i < numItems; i++)
-                    m_Listview.Items.Add(((SortWrapper)SortArray[i]).sortItem);
-
-                // Turn display back on.
-                m_Listview.EndUpdate();
+                ListViewSortByColumn(e.Column);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void ListViewSortByColumn(int p_ColumnIndex)
+        { 
+            // Create an instance of the ColHeader class.
+            ColHeader clickedCol = (ColHeader)m_Listview.Columns[p_ColumnIndex];
+
+            // Set the ascending property to sort in the opposite order.
+            clickedCol.ascending = !clickedCol.ascending;
+
+            // Get the number of items in the list.
+            int numItems = m_Listview.Items.Count;
+
+            // Turn off display while data is repoplulated.
+            m_Listview.BeginUpdate();
+
+            // Populate an ArrayList with a SortWrapper of each list item.
+            ArrayList SortArray = new ArrayList();
+            for (int i = 0; i < numItems; i++)
+            {
+                SortArray.Add(new SortWrapper(m_Listview.Items[i], p_ColumnIndex));
+            }
+
+            // Sort the elements in the ArrayList using a new instance of the SortComparer
+            // class. The parameters are the starting index, the length of the range to sort,
+            // and the IComparer implementation to use for comparing elements. Note that
+            // the IComparer implementation (SortComparer) requires the sort
+            // direction for its constructor; true if ascending, othwise false.
+            SortArray.Sort(0, SortArray.Count, new SortWrapper.SortComparer(clickedCol.ascending));
+
+            // Clear the list, and repopulate with the sorted items.
+            m_Listview.Items.Clear();
+            for (int i = 0; i < numItems; i++)
+                m_Listview.Items.Add(((SortWrapper)SortArray[i]).sortItem);
+
+            // Turn display back on.
+            m_Listview.EndUpdate();
         }
 
         /// <summary>

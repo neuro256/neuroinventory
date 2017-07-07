@@ -71,7 +71,7 @@ namespace NeuroInventory
                 ShowTable();
                 if (m_Listview.Items.Count > 0)
                 {
-                    m_Listview.EnsureVisible(m_Listview.Items.Count - 1);
+                    m_Listview.EnsureVisible(m_ListviewSelectedIndex);
                 }
             }
             m_Listview.SelectedItems.Clear();
@@ -85,7 +85,7 @@ namespace NeuroInventory
             if(m_Listview.SelectedItems.Count > 0)
             {
                 SQLiteManager.GetInstance().Employees().Remove(m_ListviewSelectedIndex);
-                RemoveFromListViewAt(m_ListviewSelectedIndex);
+                RemoveFromListViewAt(m_ListviewSelectedIndex, 1);
                 m_Listview.SelectedItems.Clear();
             }
             else

@@ -8,7 +8,7 @@ namespace NeuroInventory
     {
         public EmployeesSql()
         {
-            CommandDataSet = "SELECT * FROM employees";
+            CommandDataSet = "SELECT * FROM employees ORDER BY surename, firstname, lastname ASC";
             TableName = "employees";
         }
 
@@ -22,12 +22,13 @@ namespace NeuroInventory
                 $"firstname like '%{p_Firstname}%' AND " +
                 $"lastname like '%{p_Lastname}%' AND " +
                 $"{l_Post} AND " +
-                $"{l_Department}"; 
+                $"{l_Department}" +
+                $" ORDER BY surename, firstname, lastname ASC"; 
         }
 
         public void ClearFilter()
         {
-            CommandDataSet = "SELECT * FROM employees";
+            CommandDataSet = "SELECT * FROM employees ORDER BY surename, firstname, lastname ASC";
         }
 
         public void Insert(string p_Surename, string p_Firstname, string p_Lastname, string p_Post, string p_Department)

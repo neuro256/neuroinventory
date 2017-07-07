@@ -205,8 +205,14 @@ namespace NeuroInventory
             fieldsData["EmployeeInitialsAfter"] = $"{GetEmployeeName()} {GetEmployeeInitials()}";
             fieldsData["EmployeePost"] = GetEmployeePost();
             fieldsData["TotalPrice"] = GetTotalPriceStr();
+            fieldsData["Number"] = GetDocumentNumber();
 
             return fieldsData;
+        }
+
+        private object GetDocumentNumber()
+        {
+            return (SQLiteManager.GetInstance().DemandReport().ReturnRecordsCount() + 1);
         }
 
         private string GetEmployeeInitials()

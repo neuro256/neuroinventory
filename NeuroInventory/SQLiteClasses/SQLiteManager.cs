@@ -627,6 +627,33 @@ namespace NeuroInventory
             }
         }
 
+        public int ReturnRecordsCount(string p_TableName)
+        {
+            return ReturnRecordsCountAsync(p_TableName).GetAwaiter().GetResult();
+        }
+
+        private async Task<int> ReturnRecordsCountAsync(string p_TableName)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    using (SQLiteCommand command = new SQLiteCommand($"SELECT COUNT(*) FROM {p_TableName};", connection))
+                    {
+                        await connection.OpenAsync();
+                        object lastInsertId = await command.ExecuteScalarAsync();
+                        connection.Close();
+                        return Convert.ToInt32(lastInsertId);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return 0;
+            }
+        }
+
         public bool Update(string p_TableName, Dictionary<string, object> p_Data, string p_Where)
         {
             return UpdateAsync(p_TableName, p_Data, p_Where).GetAwaiter().GetResult();

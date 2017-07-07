@@ -180,8 +180,14 @@ namespace NeuroInventory
             fieldsData["Date2"] = DateAndMoneyConverter.DateToTextLong(dateTimePicker.Value, "г.");
             fieldsData["TotalPrice"] = Convert.ToDecimal(GetTotalPrice(), CultureInfo.InvariantCulture).ToString("0.00");
             fieldsData["TotalPriceStr"] = GetTotalPriceStr();
+            fieldsData["Number"] = $"гдр{GetDocumentNumber().ToString("000000000")}";
 
             return fieldsData;
+        }
+
+        private int GetDocumentNumber()
+        {
+            return (SQLiteManager.GetInstance().DebitReport().ReturnRecordsCount() + 1);
         }
 
         private double GetTotalPrice()

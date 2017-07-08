@@ -206,8 +206,14 @@ namespace NeuroInventory
             fieldsData["EmployeePost"] = GetEmployeePost();
             fieldsData["TotalPrice"] = GetTotalPriceStr();
             fieldsData["Number"] = GetDocumentNumber();
+            fieldsData["Date"] = GetDate();
 
             return fieldsData;
+        }
+
+        private string GetDate()
+        {
+            return DateAndMoneyConverter.DateToTextSimple(dateTimePicker.Value);
         }
 
         private object GetDocumentNumber()

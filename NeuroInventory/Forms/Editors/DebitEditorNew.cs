@@ -180,14 +180,36 @@ namespace NeuroInventory
             fieldsData["Date2"] = DateAndMoneyConverter.DateToTextLong(dateTimePicker.Value, "г.");
             fieldsData["TotalPrice"] = Convert.ToDecimal(GetTotalPrice(), CultureInfo.InvariantCulture).ToString("0.00");
             fieldsData["TotalPriceStr"] = GetTotalPriceStr();
-            fieldsData["Number"] = $"гдр{GetDocumentNumber().ToString("000000000")}";
+            fieldsData["Number"] = GetDocumentNumber();
 
             return fieldsData;
         }
 
-        private int GetDocumentNumber()
+        private string GetDate()
         {
-            return (SQLiteManager.GetInstance().DebitReport().ReturnRecordsCount() + 1);
+            return DateAndMoneyConverter.DateToTextSimple(dateTimePicker.Value);
+        }
+
+        private string GetDocumentNumber()
+        {
+            // number
+            int docNumber = NeuroFile.GetInstance().DebitNumeration.DocCurrentNumber;
+            NeuroFile.GetInstance().DebitNumeration.IncrementNumber();
+            // prefix
+            string prefix = String.Empty;
+            if (!String.IsNullOrEmpty(NeuroFile.GetInstance().DebitNumeration.DocPrefix))
+            {
+                prefix = $"{NeuroFile.GetInstance().DebitNumeration.DocPrefix}_";
+            }
+            // date 
+            string date = String.Empty;
+            if (NeuroFile.GetInstance().DebitNumeration.IncludeDate)
+            {
+                date = $"_{ GetDate()}";
+            }
+            // result
+            string resultNumber = $"{prefix}{docNumber.ToString("0000")}{date}";
+            return resultNumber;
         }
 
         private double GetTotalPrice()

@@ -88,6 +88,8 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.105.2\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -99,6 +101,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentNumeration.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,9 +200,17 @@
       <DependentUpon>TabEmpty.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Serialization\ISerialize.cs" />
+    <Compile Include="Serialization\JSonSerialization.cs" />
     <Compile Include="ReportsClasses\GemboxXlsWrapper.cs" />
     <Compile Include="ReportsClasses\ISpireReportWrapper.cs" />
     <Compile Include="ReportsClasses\SpireXlsWrapper.cs" />
+    <Compile Include="Forms\Additional\SettingDocumentNumeration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Additional\SettingDocumentNumeration.Designer.cs">
+      <DependentUpon>SettingDocumentNumeration.cs</DependentUpon>
+    </Compile>
     <Compile Include="SQLiteClasses\Tables\DebitReportSql.cs" />
     <Compile Include="SQLiteClasses\Tables\RecentsSql.cs" />
     <Compile Include="Forms\Editors\DemandEditorNew.cs">
@@ -406,6 +417,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Editors\DemandEditorNew.resx">
       <DependentUpon>DemandEditorNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Additional\SettingDocumentNumeration.resx">
+      <DependentUpon>SettingDocumentNumeration.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

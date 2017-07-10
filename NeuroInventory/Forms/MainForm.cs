@@ -19,6 +19,7 @@ namespace NeuroInventory
             inventoryTabs = new Dictionary<string, IInventoryView>();
             InitEmptyTabs();
             TabRecent.LoadRecentFile += TabRecent_LoadRecentFile;
+            NeuroFile.GetInstance().ParseDocNumeration();
             //CheckDemo();
         }
 
@@ -279,6 +280,7 @@ namespace NeuroInventory
             {
                 e.Cancel = true;
             }
+            NeuroFile.GetInstance().WriteDocNumeration();
         } 
 
         /// <summary>
@@ -395,11 +397,18 @@ namespace NeuroInventory
             reportList.ShowDialog();
         }
 
-        private void aboutBoxToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutBoxToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox aboutBox = new AboutBox();
             aboutBox.StartPosition = FormStartPosition.CenterParent;
             aboutBox.ShowDialog();
+        }
+
+        private void SettingDocNumerationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingDocumentNumeration docNum = new SettingDocumentNumeration();
+            docNum.StartPosition = FormStartPosition.CenterParent;
+            docNum.ShowDialog();
         }
     }
 }

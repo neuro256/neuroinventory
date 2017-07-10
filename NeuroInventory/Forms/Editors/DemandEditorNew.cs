@@ -216,9 +216,26 @@ namespace NeuroInventory
             return DateAndMoneyConverter.DateToTextSimple(dateTimePicker.Value);
         }
 
-        private object GetDocumentNumber()
+        private string GetDocumentNumber()
         {
-            return (SQLiteManager.GetInstance().DemandReport().ReturnRecordsCount() + 1);
+            // number
+            int docNumber = NeuroFile.GetInstance().DemandNumeration.DocCurrentNumber;
+            NeuroFile.GetInstance().DemandNumeration.IncrementNumber();
+            // prefix
+            string prefix = String.Empty;
+            if (!String.IsNullOrEmpty(NeuroFile.GetInstance().DemandNumeration.DocPrefix))
+            {
+                prefix = $"{NeuroFile.GetInstance().DemandNumeration.DocPrefix}_";
+            }
+            // date 
+            string date = String.Empty;
+            if(NeuroFile.GetInstance().DemandNumeration.IncludeDate)
+            {
+                date = $"_{ GetDate()}";
+            }
+            // result
+            string resultNumber = $"{prefix}{docNumber.ToString("0000")}{date}";
+            return resultNumber;
         }
 
         private string GetEmployeeInitials()

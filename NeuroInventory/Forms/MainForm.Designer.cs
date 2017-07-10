@@ -49,6 +49,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonDebitReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDemandReport = new System.Windows.Forms.ToolStripButton();
+            this.настройкаНумерацииДокументовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -119,7 +120,8 @@
             // 
             this.paramsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.единицыИзмеренияToolStripMenuItem,
-            this.настройкиПользователяToolStripMenuItem});
+            this.настройкиПользователяToolStripMenuItem,
+            this.настройкаНумерацииДокументовToolStripMenuItem});
             this.paramsMenu.Name = "paramsMenu";
             this.paramsMenu.Size = new System.Drawing.Size(102, 24);
             this.paramsMenu.Text = "&Параметры";
@@ -128,7 +130,7 @@
             // 
             this.единицыИзмеренияToolStripMenuItem.Name = "единицыИзмеренияToolStripMenuItem";
             this.единицыИзмеренияToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.единицыИзмеренияToolStripMenuItem.Size = new System.Drawing.Size(311, 26);
+            this.единицыИзмеренияToolStripMenuItem.Size = new System.Drawing.Size(327, 26);
             this.единицыИзмеренияToolStripMenuItem.Text = "Единицы измерения";
             this.единицыИзмеренияToolStripMenuItem.Click += new System.EventHandler(this.единицыИзмеренияToolStripMenuItem_Click);
             // 
@@ -137,7 +139,7 @@
             this.настройкиПользователяToolStripMenuItem.Image = global::NeuroInventory.Properties.Resources.user_add_32;
             this.настройкиПользователяToolStripMenuItem.Name = "настройкиПользователяToolStripMenuItem";
             this.настройкиПользователяToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
-            this.настройкиПользователяToolStripMenuItem.Size = new System.Drawing.Size(311, 26);
+            this.настройкиПользователяToolStripMenuItem.Size = new System.Drawing.Size(327, 26);
             this.настройкиПользователяToolStripMenuItem.Text = "Настройки пользователя";
             this.настройкиПользователяToolStripMenuItem.Click += new System.EventHandler(this.настройкиПользователяToolStripMenuItem_Click);
             // 
@@ -152,9 +154,9 @@
             // aboutBoxToolStripMenuItem
             // 
             this.aboutBoxToolStripMenuItem.Name = "aboutBoxToolStripMenuItem";
-            this.aboutBoxToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.aboutBoxToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.aboutBoxToolStripMenuItem.Text = "О программе";
-            this.aboutBoxToolStripMenuItem.Click += new System.EventHandler(this.aboutBoxToolStripMenuItem_Click);
+            this.aboutBoxToolStripMenuItem.Click += new System.EventHandler(this.AboutBoxToolStripMenuItem_Click);
             // 
             // tabControl
             // 
@@ -251,6 +253,13 @@
             this.toolStripButtonDemandReport.Text = "История отпусков";
             this.toolStripButtonDemandReport.Click += new System.EventHandler(this.toolStripButtonDemandReport_Click);
             // 
+            // настройкаНумерацииДокументовToolStripMenuItem
+            // 
+            this.настройкаНумерацииДокументовToolStripMenuItem.Name = "настройкаНумерацииДокументовToolStripMenuItem";
+            this.настройкаНумерацииДокументовToolStripMenuItem.Size = new System.Drawing.Size(327, 26);
+            this.настройкаНумерацииДокументовToolStripMenuItem.Text = "Настройка нумерации документов";
+            this.настройкаНумерацииДокументовToolStripMenuItem.Click += new System.EventHandler(this.SettingDocNumerationToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -301,6 +310,7 @@
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutBoxToolStripMenuItem;
         private System.Windows.Forms.TabPage tabReleased;
+        private System.Windows.Forms.ToolStripMenuItem настройкаНумерацииДокументовToolStripMenuItem;
     }
 }
 

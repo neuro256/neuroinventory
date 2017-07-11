@@ -672,7 +672,7 @@ namespace NeuroInventory
                         // Костыль для правильного отображения количества тмц (десятичные знаки после запятой)
                         if (subitem.Name == "amount")
                         {
-                            l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][8].ToString());
+                            l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i]["measurement"].ToString());
                             subitem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][j]);
                         }
                         else if(subitem.Name == "price" || subitem.Name == "sum")
@@ -692,9 +692,9 @@ namespace NeuroInventory
                     
                     // Добавление столбца "Остаток"
                     ListViewItem.ListViewSubItem subitemBalance = new ListViewItem.ListViewSubItem();
-                    object balance = dataSet.Tables[0].Rows[i][dataSet.Tables[0].Columns.Count - 1];
+                    object balance = dataSet.Tables[0].Rows[i]["balance"];
                     subitemBalance.Name = "balance";
-                    l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][8].ToString());
+                    l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i]["measurement"].ToString());
                     if (!Equals(balance, DBNull.Value))
                     {
                         if (Convert.ToDecimal(balance) <= 0)
@@ -703,7 +703,7 @@ namespace NeuroInventory
                     }
                     else
                     {
-                        subitemBalance.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][9].ToString());
+                        subitemBalance.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i]["amount"].ToString());
                     }
 
                     m_Listview.Items[i].SubItems.Add(subitemBalance);
@@ -794,7 +794,7 @@ namespace NeuroInventory
                         Point pt = ((TreeView)sender).PointToClient(new Point(e.X, e.Y));
                         TreeNode destNode = ((TreeView)sender).GetNodeAt(pt);
                         // получить id тмц и тип целевого узла
-                        int itemId = Convert.ToInt32(item.Text);
+                        int itemId = Convert.ToInt32(item.Tag);
                         TreeViewTag tag = destNode.Tag as TreeViewTag;
                         if (tag.type == TreeNodeType.FILE && SQLiteManager.GetInstance().Inventory().GetCatalogId(itemId) != tag.id)
                         {
@@ -921,13 +921,13 @@ namespace NeuroInventory
                 DataRow newRow = demandTable.NewRow();
 
                 newRow["id"] = item.Tag;
-                newRow["name"] = item.SubItems[5].Text;
-                newRow["OKEIcode"] = item.SubItems[6].Text;
-                newRow["measurement"] = item.SubItems[7].Text;
-                newRow["price"] = item.SubItems[9].Text;
+                newRow["name"] = item.SubItems["name"].Text;
+                newRow["OKEIcode"] = item.SubItems["OKEIcode"].Text;
+                newRow["measurement"] = item.SubItems["measurement"].Text;
+                newRow["price"] = item.SubItems["price"].Text;
                 newRow["amount"] = 0;
                 newRow["sum"] = String.Format("{0:C}", 0);
-                newRow["balance"] = item.SubItems[11].Text;
+                newRow["balance"] = item.SubItems["balance"].Text;
 
                 demandTable.Rows.Add(newRow);
             }

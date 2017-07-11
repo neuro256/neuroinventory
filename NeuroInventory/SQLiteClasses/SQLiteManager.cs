@@ -460,29 +460,34 @@ namespace NeuroInventory
             }
         }
 
-        public void UpdateDataBase()
+        public void UpdateDatabase()
         {
-            UpdateDataBaseAsync().GetAwaiter();
+            if (!CheckIfColumnExists("inventory", "invoiceCode"))
+            {
+                AlterTableAddColumn("inventory", "invoiceCode", "INTEGER DEFAULT 0");
+            }
         }
 
-        private async Task UpdateDataBaseAsync()
+        public void AlterTableAddColumn(string p_TableName, string p_ColumnName, string p_Params)
+        {
+            AlterTableAddColumnAsync(p_TableName, p_ColumnName, p_Params).GetAwaiter();
+        }
+
+        private async Task AlterTableAddColumnAsync(string p_TableName, string p_ColumnName, string p_Params)
         {
             try
             {
-                if (!CheckIfColumnExists("inventory", "invoiceCode"))
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
                 {
-                    using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                    await connection.OpenAsync();
+
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
                     {
-                        await connection.OpenAsync();
-
-                        using (SQLiteCommand command = new SQLiteCommand(connection))
-                        {
-                            command.CommandText = "ALTER TABLE inventory ADD COLUMN invoiceCode INTEGER DEFAULT 0;";
-                            await command.ExecuteNonQueryAsync();
-                        }
-
-                        connection.Close();
+                        command.CommandText = $"ALTER TABLE {p_TableName} ADD COLUMN {p_ColumnName} {p_Params};";
+                        await command.ExecuteNonQueryAsync();
                     }
+
+                    connection.Close();
                 }
             }
             catch (Exception ex)

@@ -127,7 +127,7 @@ namespace NeuroInventory
                         // Костыль для правильного отображения количества тмц (десятичные знаки после запятой)
                         if (subitem.Name == "amount")
                         {
-                            l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][5].ToString());
+                            l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i]["measurement"].ToString());
                             subitem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][j]);
                         }
                         else if (subitem.Name == "price" || subitem.Name == "sum")
@@ -385,14 +385,14 @@ namespace NeuroInventory
                 DataRow newRow = debitTable.NewRow();
 
                 newRow["id"] = item.Tag;
-                newRow["date"] = item.SubItems[1].Text;
-                newRow["invoice_code"] = item.SubItems[2].Text;
-                newRow["name"] = item.SubItems[3].Text;
-                newRow["OKEIcode"] = item.SubItems[4].Text;
-                newRow["measurement"] = item.SubItems[5].Text;
-                newRow["price"] = item.SubItems[8].Text;
-                newRow["amount"] = item.SubItems[7].Text;
-                newRow["sum"] = item.SubItems[9].Text;
+                newRow["date"] = item.SubItems["mydate"].Text;
+                newRow["invoice_code"] = item.SubItems["invoiceCode"].Text;
+                newRow["name"] = item.SubItems["name"].Text;
+                newRow["OKEIcode"] = item.SubItems["OKEIcode"].Text;
+                newRow["measurement"] = item.SubItems["measurement"].Text;
+                newRow["price"] = item.SubItems["price"].Text;
+                newRow["amount"] = item.SubItems["amount"].Text;
+                newRow["sum"] = item.SubItems["sum"].Text;
 
                 debitTable.Rows.Add(newRow);
             }

@@ -50,9 +50,12 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.errorProviderInventory = new System.Windows.Forms.ErrorProvider(this.components);
+            this.nudInvoiceCode = new System.Windows.Forms.NumericUpDown();
+            this.lblInvoiceCode = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderInventory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInvoiceCode)).BeginInit();
             this.SuspendLayout();
             // 
             // lblProvider
@@ -88,7 +91,7 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.BackColor = System.Drawing.Color.LightCyan;
-            this.lblName.Location = new System.Drawing.Point(26, 153);
+            this.lblName.Location = new System.Drawing.Point(26, 189);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(106, 17);
             this.lblName.TabIndex = 3;
@@ -97,7 +100,7 @@
             // lblOKEI
             // 
             this.lblOKEI.AutoSize = true;
-            this.lblOKEI.Location = new System.Drawing.Point(26, 236);
+            this.lblOKEI.Location = new System.Drawing.Point(26, 272);
             this.lblOKEI.Name = "lblOKEI";
             this.lblOKEI.Size = new System.Drawing.Size(76, 17);
             this.lblOKEI.TabIndex = 4;
@@ -106,7 +109,7 @@
             // lblMeasurement
             // 
             this.lblMeasurement.AutoSize = true;
-            this.lblMeasurement.Location = new System.Drawing.Point(26, 194);
+            this.lblMeasurement.Location = new System.Drawing.Point(26, 230);
             this.lblMeasurement.Name = "lblMeasurement";
             this.lblMeasurement.Size = new System.Drawing.Size(141, 17);
             this.lblMeasurement.TabIndex = 5;
@@ -116,7 +119,7 @@
             // 
             this.lblAmount.AutoSize = true;
             this.lblAmount.BackColor = System.Drawing.Color.LightCyan;
-            this.lblAmount.Location = new System.Drawing.Point(26, 277);
+            this.lblAmount.Location = new System.Drawing.Point(26, 313);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(86, 17);
             this.lblAmount.TabIndex = 6;
@@ -126,7 +129,7 @@
             // 
             this.lblPrice.AutoSize = true;
             this.lblPrice.BackColor = System.Drawing.Color.LightCyan;
-            this.lblPrice.Location = new System.Drawing.Point(26, 319);
+            this.lblPrice.Location = new System.Drawing.Point(26, 355);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(43, 17);
             this.lblPrice.TabIndex = 7;
@@ -179,7 +182,7 @@
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(186, 150);
+            this.tbName.Location = new System.Drawing.Point(186, 186);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(267, 22);
             this.tbName.TabIndex = 13;
@@ -187,7 +190,7 @@
             // 
             // tbOKEI
             // 
-            this.tbOKEI.Location = new System.Drawing.Point(186, 233);
+            this.tbOKEI.Location = new System.Drawing.Point(186, 269);
             this.tbOKEI.MaxLength = 3;
             this.tbOKEI.Name = "tbOKEI";
             this.tbOKEI.Size = new System.Drawing.Size(121, 22);
@@ -196,7 +199,7 @@
             // cbMeasurement
             // 
             this.cbMeasurement.FormattingEnabled = true;
-            this.cbMeasurement.Location = new System.Drawing.Point(186, 191);
+            this.cbMeasurement.Location = new System.Drawing.Point(186, 227);
             this.cbMeasurement.Name = "cbMeasurement";
             this.cbMeasurement.Size = new System.Drawing.Size(121, 24);
             this.cbMeasurement.TabIndex = 15;
@@ -204,7 +207,7 @@
             // 
             // nudAmount
             // 
-            this.nudAmount.Location = new System.Drawing.Point(186, 275);
+            this.nudAmount.Location = new System.Drawing.Point(186, 311);
             this.nudAmount.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -219,7 +222,7 @@
             // nudPrice
             // 
             this.nudPrice.DecimalPlaces = 2;
-            this.nudPrice.Location = new System.Drawing.Point(186, 317);
+            this.nudPrice.Location = new System.Drawing.Point(186, 353);
             this.nudPrice.Maximum = new decimal(new int[] {
             1316134911,
             2328,
@@ -235,7 +238,7 @@
             // 
             this.btnOK.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOK.Location = new System.Drawing.Point(186, 386);
+            this.btnOK.Location = new System.Drawing.Point(186, 415);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(103, 34);
             this.btnOK.TabIndex = 18;
@@ -247,7 +250,7 @@
             // 
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCancel.Location = new System.Drawing.Point(330, 386);
+            this.btnCancel.Location = new System.Drawing.Point(330, 415);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(103, 34);
             this.btnCancel.TabIndex = 19;
@@ -261,12 +264,36 @@
             this.errorProviderInventory.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProviderInventory.ContainerControl = this;
             // 
+            // nudInvoiceCode
+            // 
+            this.nudInvoiceCode.Location = new System.Drawing.Point(186, 147);
+            this.nudInvoiceCode.Maximum = new decimal(new int[] {
+            1215752191,
+            23,
+            0,
+            0});
+            this.nudInvoiceCode.Name = "nudInvoiceCode";
+            this.nudInvoiceCode.Size = new System.Drawing.Size(120, 22);
+            this.nudInvoiceCode.TabIndex = 20;
+            this.nudInvoiceCode.ThousandsSeparator = true;
+            // 
+            // lblInvoiceCode
+            // 
+            this.lblInvoiceCode.AutoSize = true;
+            this.lblInvoiceCode.Location = new System.Drawing.Point(26, 149);
+            this.lblInvoiceCode.Name = "lblInvoiceCode";
+            this.lblInvoiceCode.Size = new System.Drawing.Size(126, 17);
+            this.lblInvoiceCode.TabIndex = 21;
+            this.lblInvoiceCode.Text = "Номер накладной";
+            // 
             // InventoryEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(649, 435);
+            this.ClientSize = new System.Drawing.Size(649, 466);
+            this.Controls.Add(this.lblInvoiceCode);
+            this.Controls.Add(this.nudInvoiceCode);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.nudPrice);
@@ -296,6 +323,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderInventory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInvoiceCode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -324,5 +352,7 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ErrorProvider errorProviderInventory;
+        private System.Windows.Forms.NumericUpDown nudInvoiceCode;
+        private System.Windows.Forms.Label lblInvoiceCode;
     }
 }

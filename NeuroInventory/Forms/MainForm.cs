@@ -213,6 +213,7 @@ namespace NeuroInventory
                     inventoryTabs[tabControl.SelectedTab.Name].ShowTable();
                 SQLiteManager.GetInstance().IsOpened = true;
                 SQLiteSettingsManager.GetInstance().Recents().Insert(p_DatabaseName);
+                SQLiteManager.GetInstance().UpdateDataBase();
             }
             else
             {

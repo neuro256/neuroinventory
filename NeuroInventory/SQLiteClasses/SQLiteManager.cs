@@ -402,6 +402,7 @@ namespace NeuroInventory
                                 "providerId INTEGER, " +
                                 "date DATETIME NOT NULL, " +
                                 "invoice NVARCHAR(80), " +
+                                "invoiceCode INTEGER DEFAULT 0, " +
                                 "name NVARCHAR(45) NOT NULL, " +
                                 "OKEIcode NVARCHAR(5), " +
                                 "measurement NVARCHAR(20), " +
@@ -431,6 +432,13 @@ namespace NeuroInventory
                                 "document NVARCHAR(80));";
                             await command.ExecuteNonQueryAsync();
 
+                            // Создание таблицы "Накладная"
+                            //command.CommandText = "CREATE TABLE IF NOT EXISTS invoices (" +
+                            //    "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                            //    "reference NVARCHAR(80) NOT NULL, " +
+                            //    "code INTEGER, " +
+                            //    "date DATETIME);";
+
                             // Вставка корневого каталого 
                             command.CommandText = $"INSERT INTO catalogs (type, parent, name) VALUES (0, null, '{Definitions.DB_ROOT_CATALOG}');";
                             await command.ExecuteNonQueryAsync();
@@ -449,6 +457,73 @@ namespace NeuroInventory
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void UpdateDataBase()
+        {
+            UpdateDataBaseAsync().GetAwaiter();
+        }
+
+        private async Task UpdateDataBaseAsync()
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        if (!CheckIfColumnExists("inventory", "invoiceCode"))
+                        {
+                            command.CommandText = "ALTER TABLE inventory ADD COLUMN invoiceCode INTEGER DEFAULT 0;";
+                            await command.ExecuteNonQueryAsync();
+                        }
+                    }
+
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private bool CheckIfColumnExists(string p_TableName, string p_ColumnName)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        // Создание таблицы "Каталоги"
+                        command.CommandText = $"PRAGMA table_info({p_TableName})";
+
+                        var reader = command.ExecuteReader();
+                        int nameIndex = reader.GetOrdinal("Name");
+                        while (reader.Read())
+                        {
+                            if (reader.GetString(nameIndex).Equals(p_ColumnName))
+                            {
+                                connection.Close();
+                                return true;
+                            }
+                        }
+                    }
+
+                    connection.Close();
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
             }
         }
 

@@ -22,6 +22,7 @@ namespace NeuroInventory
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
+                "inventory.invoiceCode, " + 
                 "inventory.name," +
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
@@ -42,6 +43,7 @@ namespace NeuroInventory
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
+                "inventory.invoiceCode, " +
                 "inventory.name," +
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
@@ -67,6 +69,7 @@ namespace NeuroInventory
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
+                "inventory.invoiceCode, " +
                 "inventory.name," +
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
@@ -104,6 +107,7 @@ namespace NeuroInventory
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
+                "inventory.invoiceCode, " +
                 "inventory.name," +
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
@@ -139,13 +143,14 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }
 
-        public void Update(object p_Id, int p_CatalogId, object p_Provider, DateTime p_Date, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument, string p_CurrentDocument)
+        public void Update(object p_Id, int p_CatalogId, object p_Provider, DateTime p_Date, decimal p_InvoiceCode, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument, string p_CurrentDocument)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
             values["catalogId"] = p_CatalogId;
             values["providerId"] = p_Provider;
             values["date"] = p_Date;
+            values["invoiceCode"] = p_InvoiceCode;
             values["name"] = p_Name;
             values["OKEIcode"] = !String.IsNullOrEmpty(p_OKEIcode) ? (object)p_OKEIcode : DBNull.Value;
             values["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value;
@@ -169,13 +174,14 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Update(TableName, values, l_Where);
         }
 
-        public void Insert(int p_CatalogId, object p_Provider, DateTime p_Date, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument)
+        public void Insert(int p_CatalogId, object p_Provider, DateTime p_Date, decimal p_InvoiceCode, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
             values["catalogId"] = p_CatalogId;
             values["providerId"] = p_Provider;
             values["date"] = p_Date;
+            values["invoiceCode"] = p_InvoiceCode;
             values["name"] = p_Name;
             values["OKEIcode"] = !String.IsNullOrEmpty(p_OKEIcode) ? (object)p_OKEIcode : DBNull.Value;
             values["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value;

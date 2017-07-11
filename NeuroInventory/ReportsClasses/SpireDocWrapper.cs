@@ -53,6 +53,11 @@ namespace NeuroInventory
             }
         }
 
+        public bool CreateReport(string p_DestinationPath, DataSet p_DataSet, DataSet p_SecondDataSet, Dictionary<string, object> p_AdditionalData)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DocumentViewer(string p_FileName)
         {
             try

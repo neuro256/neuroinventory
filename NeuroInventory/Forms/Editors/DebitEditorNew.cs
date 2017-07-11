@@ -121,18 +121,57 @@ namespace NeuroInventory
         public bool CreateReport()
         {
             DataSet dataSetDebitReport = GetDebitReportDataSet();
+            DataSet dataSetInvoiceReport = GetInvoiceReportDataSet();
             Dictionary<string, object> debitReportFieldsData = GetReportFieldsData();
 
             ISpireReportWrapper gemboxReport = new GemboxXlsWrapper();
 
             string l_FileName = SQLiteManager.GetInstance().DebitReport().CreateFileName(Definitions.DEBIT_REPORT_FILENAME).ToString();
-            if (gemboxReport.CreateReport(l_FileName, dataSetDebitReport, debitReportFieldsData))
+            if (gemboxReport.CreateReport(l_FileName, dataSetDebitReport, dataSetInvoiceReport, debitReportFieldsData))
             {
                 SQLiteManager.GetInstance().DebitReport().Insert(DateTime.Now, l_FileName);
                 return true;
             }
 
             return false;
+        }
+
+        private DataSet GetInvoiceReportDataSet()
+        {
+            DataTable debitReportTable = new DataTable("InvoiceReport");
+            debitReportTable.Columns.Add("number");
+            debitReportTable.Columns.Add("date_entrance");
+            debitReportTable.Columns.Add("date_debit");
+            debitReportTable.Columns.Add("invoice_code");
+
+            int counter = 1;
+
+            List<int> l_UniqueCodes = new List<int>();
+
+            foreach (DataRow row in DebitDataSet.Tables[0].Rows)
+            {
+                int l_CurrentInvoiceCode = Convert.ToInt32(row["invoice_code"]);
+                if (l_CurrentInvoiceCode == 0 || !l_UniqueCodes.Contains(l_CurrentInvoiceCode))
+                {
+                    DataRow newRow = debitReportTable.NewRow();
+
+                    newRow["number"] = counter;
+                    string date = Convert.ToDateTime(row["date"]).ToShortDateString();
+                    newRow["date_entrance"] = DateAndMoneyConverter.DateToTextSimple(Convert.ToDateTime(row["date"]));
+                    newRow["date_debit"] = DateAndMoneyConverter.DateToTextSimple(dateTimePicker.Value);
+                    newRow["invoice_code"] = row["invoice_code"].ToString();
+
+                    counter++;
+
+                    debitReportTable.Rows.Add(newRow);
+                    l_UniqueCodes.Add(l_CurrentInvoiceCode);
+                }
+            }
+
+            DataSet debitReportDataSet = new DataSet("Invoice");
+            debitReportDataSet.Tables.Add(debitReportTable);
+
+            return debitReportDataSet;
         }
 
         private DataSet GetDebitReportDataSet()
@@ -167,7 +206,7 @@ namespace NeuroInventory
                 debitReportTable.Rows.Add(newRow);
             }
 
-            DataSet debitReportDataSet = new DataSet("Report");
+            DataSet debitReportDataSet = new DataSet("Debit");
             debitReportDataSet.Tables.Add(debitReportTable);
 
             return debitReportDataSet;

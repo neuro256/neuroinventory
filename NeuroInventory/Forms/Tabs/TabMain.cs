@@ -672,7 +672,7 @@ namespace NeuroInventory
                         // Костыль для правильного отображения количества тмц (десятичные знаки после запятой)
                         if (subitem.Name == "amount")
                         {
-                            l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][7].ToString());
+                            l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][8].ToString());
                             subitem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][j]);
                         }
                         else if(subitem.Name == "price" || subitem.Name == "sum")
@@ -694,7 +694,7 @@ namespace NeuroInventory
                     ListViewItem.ListViewSubItem subitemBalance = new ListViewItem.ListViewSubItem();
                     object balance = dataSet.Tables[0].Rows[i][dataSet.Tables[0].Columns.Count - 1];
                     subitemBalance.Name = "balance";
-                    l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][7].ToString());
+                    l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][8].ToString());
                     if (!Equals(balance, DBNull.Value))
                     {
                         if (Convert.ToDecimal(balance) <= 0)
@@ -703,7 +703,7 @@ namespace NeuroInventory
                     }
                     else
                     {
-                        subitemBalance.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][8].ToString());
+                        subitemBalance.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][9].ToString());
                     }
 
                     m_Listview.Items[i].SubItems.Add(subitemBalance);
@@ -921,13 +921,13 @@ namespace NeuroInventory
                 DataRow newRow = demandTable.NewRow();
 
                 newRow["id"] = item.Tag;
-                newRow["name"] = item.SubItems[4].Text;
-                newRow["OKEIcode"] = item.SubItems[5].Text;
-                newRow["measurement"] = item.SubItems[6].Text;
-                newRow["price"] = item.SubItems[8].Text;
+                newRow["name"] = item.SubItems[5].Text;
+                newRow["OKEIcode"] = item.SubItems[6].Text;
+                newRow["measurement"] = item.SubItems[7].Text;
+                newRow["price"] = item.SubItems[9].Text;
                 newRow["amount"] = 0;
                 newRow["sum"] = String.Format("{0:C}", 0);
-                newRow["balance"] = item.SubItems[10].Text;
+                newRow["balance"] = item.SubItems[11].Text;
 
                 demandTable.Rows.Add(newRow);
             }

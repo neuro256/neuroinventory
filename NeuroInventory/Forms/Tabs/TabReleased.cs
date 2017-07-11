@@ -51,6 +51,7 @@ namespace NeuroInventory
             lwReleased.Columns.Clear();
             lwReleased.Columns.Add(new ColHeader("№", 60, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Дата отпуска", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Код накладной", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Наименование", 400, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Код ОКЕИ", 100, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Единица измерения", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
@@ -126,7 +127,7 @@ namespace NeuroInventory
                         // Костыль для правильного отображения количества тмц (десятичные знаки после запятой)
                         if (subitem.Name == "amount")
                         {
-                            l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][4].ToString());
+                            l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i][5].ToString());
                             subitem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][j]);
                         }
                         else if (subitem.Name == "price" || subitem.Name == "sum")
@@ -370,6 +371,8 @@ namespace NeuroInventory
         {
             DataTable debitTable = new DataTable("DebitReport");
             debitTable.Columns.Add("id");
+            debitTable.Columns.Add("date");
+            debitTable.Columns.Add("invoice_code");
             debitTable.Columns.Add("name");
             debitTable.Columns.Add("OKEIcode");
             debitTable.Columns.Add("measurement");
@@ -382,12 +385,14 @@ namespace NeuroInventory
                 DataRow newRow = debitTable.NewRow();
 
                 newRow["id"] = item.Tag;
-                newRow["name"] = item.SubItems[2].Text;
-                newRow["OKEIcode"] = item.SubItems[3].Text;
-                newRow["measurement"] = item.SubItems[4].Text;
-                newRow["price"] = item.SubItems[7].Text;
-                newRow["amount"] = item.SubItems[6].Text;
-                newRow["sum"] = item.SubItems[8].Text;
+                newRow["date"] = item.SubItems[1].Text;
+                newRow["invoice_code"] = item.SubItems[2].Text;
+                newRow["name"] = item.SubItems[3].Text;
+                newRow["OKEIcode"] = item.SubItems[4].Text;
+                newRow["measurement"] = item.SubItems[5].Text;
+                newRow["price"] = item.SubItems[8].Text;
+                newRow["amount"] = item.SubItems[7].Text;
+                newRow["sum"] = item.SubItems[9].Text;
 
                 debitTable.Rows.Add(newRow);
             }

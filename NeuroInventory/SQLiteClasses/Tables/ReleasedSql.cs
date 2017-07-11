@@ -23,6 +23,7 @@ namespace NeuroInventory
             CommandDataSet = "SELECT inventory.id, " +
                 "demand.id as demandId, " +
                 "strftime('%d.%m.%Y', DATE(demand.date)) AS mydate," +
+                "inventory.invoiceCode, " +
                 "inventory.name, " +
                 "inventory.OKEIcode, " +
                 "inventory.measurement, " +
@@ -66,6 +67,7 @@ namespace NeuroInventory
             CommandDataSet = "SELECT inventory.id, " +
                 "demand.id as demandId, " +
                 "strftime('%d.%m.%Y', DATE(demand.date)) AS mydate," +
+                "inventory.invoiceCode, " +
                 "inventory.name, " +
                 "inventory.OKEIcode, " +
                 "inventory.measurement, " +

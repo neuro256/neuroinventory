@@ -142,7 +142,7 @@ namespace NeuroInventory
                     connection.Close();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -305,7 +305,7 @@ namespace NeuroInventory
                     return false;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return false;
@@ -326,7 +326,7 @@ namespace NeuroInventory
                 SQLiteConnection.CreateFile(p_DatabaseName);
                 IsCreated = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -469,20 +469,20 @@ namespace NeuroInventory
         {
             try
             {
-                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                if (!CheckIfColumnExists("inventory", "invoiceCode"))
                 {
-                    await connection.OpenAsync();
-
-                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    using (SQLiteConnection connection = new SQLiteConnection(connectionString))
                     {
-                        if (!CheckIfColumnExists("inventory", "invoiceCode"))
+                        await connection.OpenAsync();
+
+                        using (SQLiteCommand command = new SQLiteCommand(connection))
                         {
                             command.CommandText = "ALTER TABLE inventory ADD COLUMN invoiceCode INTEGER DEFAULT 0;";
                             await command.ExecuteNonQueryAsync();
                         }
-                    }
 
-                    connection.Close();
+                        connection.Close();
+                    }
                 }
             }
             catch (Exception ex)
@@ -504,14 +504,16 @@ namespace NeuroInventory
                         // Создание таблицы "Каталоги"
                         command.CommandText = $"PRAGMA table_info({p_TableName})";
 
-                        var reader = command.ExecuteReader();
-                        int nameIndex = reader.GetOrdinal("Name");
-                        while (reader.Read())
+                        using (SQLiteDataReader reader = command.ExecuteReader())
                         {
-                            if (reader.GetString(nameIndex).Equals(p_ColumnName))
+                            int nameIndex = reader.GetOrdinal("Name");
+                            while (reader.Read())
                             {
-                                connection.Close();
-                                return true;
+                                if (reader.GetString(nameIndex).Equals(p_ColumnName))
+                                {
+                                    connection.Close();
+                                    return true;
+                                }
                             }
                         }
                     }

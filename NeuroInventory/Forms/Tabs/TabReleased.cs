@@ -56,17 +56,18 @@ namespace NeuroInventory
             // Необходимо добавлять столбцы именно так, иначе ColumnHeader не сможет преобразоваться в ColHeader (используется в методе сортировки)
             lwReleased.Columns.Clear();
             lwReleased.Columns.Add(new ColHeader("№", 60, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Дата отпуска", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Код накладной", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Наименование", 400, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Код ОКЕИ", 100, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Дата поступления", 120, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Дата отпуска", 120, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Код накладной", 120, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Наименование", 350, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Код ОКЕИ", 80, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Единица измерения", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Кому отпущено", 300, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Кому отпущено", 250, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Количество", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Сумма", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Документ", 300, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Остаток", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Документ", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Состояние списания", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
         }
 
         private void btnReleasedRemove_Click(object sender, EventArgs e)
@@ -416,7 +417,7 @@ namespace NeuroInventory
 
                 newRow["id"] = (item.Tag as ReleasedIds).inventoryId;
                 newRow["demandId"] = (item.Tag as ReleasedIds).demandId;
-                newRow["date"] = item.SubItems["mydate"].Text;
+                newRow["date"] = item.SubItems["ordate"].Text;
                 newRow["invoice_code"] = item.SubItems["invoiceCode"].Text;
                 newRow["name"] = item.SubItems["name"].Text;
                 newRow["OKEIcode"] = item.SubItems["OKEIcode"].Text;

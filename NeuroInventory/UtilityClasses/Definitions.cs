@@ -24,5 +24,8 @@
         public static string TOO_MANY_SELECTED_NODES = "Перемещение записей невозможно если выбрано несколько списков тмц. Сначала выберите один список тмц";
         public static string DEMAND_REPORT_FILENAME = "Требование-накладная.doc";
         public static string DEBIT_REPORT_FILENAME = "Списание.xls";
+        public static string NOT_DEBIT_STRING = "Не списано";
+        public static string DEBIT_STRING = "Списано";
+        public static string MAYBE_NOT_DEBIT_STRING = "Возможно не списано";
     }
 }

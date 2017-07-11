@@ -383,8 +383,10 @@ namespace NeuroInventory
                             command.CommandText = "CREATE TABLE IF NOT EXISTS debit (" +
                                 "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                                 "inventoryId INTEGER, " +
+                                "demandId INTEGER, " + 
                                 "amount REAL NOT NULL, " +
                                 "date DATETIME, " +
+                                "FOREIGN KEY (demandId) REFERENCES demand(id) ON DELETE CASCADE, " +
                                 "FOREIGN KEY (inventoryId) REFERENCES inventory(id) ON DELETE CASCADE);";
                             await command.ExecuteNonQueryAsync();
 
@@ -465,6 +467,10 @@ namespace NeuroInventory
             if (!CheckIfColumnExists("inventory", "invoiceCode"))
             {
                 AlterTableAddColumn("inventory", "invoiceCode", "INTEGER DEFAULT 0");
+            }
+            if(!CheckIfColumnExists("debit", "demandId"))
+            {
+                AlterTableAddColumn("debit", "demandId", "INTEGER");
             }
         }
 

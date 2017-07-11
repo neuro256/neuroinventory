@@ -92,7 +92,7 @@ namespace NeuroInventory
             if (!IsValidData())
                 return;
 
-            SQLiteManager.GetInstance().Debit().Insert(m_InventoryId, nudAmount.Value, dateTimePicker.Value);
+            SQLiteManager.GetInstance().Debit().Insert(m_InventoryId, m_InventoryId, nudAmount.Value, dateTimePicker.Value);
             m_Listview.SelectedItems.Clear();
             ShowTable();
             if (m_Listview.Items.Count > 0)

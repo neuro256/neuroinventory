@@ -19,11 +19,12 @@ namespace NeuroInventory
                 $"FROM debit WHERE debit.inventoryId = {p_InventoryId};";
         }
 
-        public void Insert(int p_InventoryId, decimal p_Amount, DateTime p_Date)
+        public void Insert(int p_InventoryId, int p_DemandId, decimal p_Amount, DateTime p_Date)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
             values["inventoryId"] = p_InventoryId;
+            values["demandId"] = p_DemandId;
             values["amount"] = p_Amount;
             values["date"] = p_Date;
 

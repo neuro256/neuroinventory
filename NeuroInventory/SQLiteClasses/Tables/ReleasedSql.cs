@@ -32,11 +32,11 @@ namespace NeuroInventory
                 "demand.amount, " +
                 @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price, " +
                 @"printf(""%.2f"", ((demand.amount * price) / 100)) AS sum, " +
-                "demandReport.document " +
-                //"sum(debit.amount) " +
+                "demandReport.document, " +
+                "demand.amount - sum(debit.amount) as balance " +
                 $"FROM inventory INNER JOIN demand ON demand.inventoryId = inventory.id " +
                 $"LEFT JOIN demandReport ON demand.reportId = demandReport.id " +
-                //"LEFT JOIN debit ON debit.inventoryId = inventory.id " + 
+                "LEFT JOIN debit ON debit.demandId = demand.id " + 
                 $" GROUP BY demand.id" +
                 $" ORDER BY DATE(demand.date) ASC";
         }
@@ -76,11 +76,11 @@ namespace NeuroInventory
                 "demand.amount, " +
                 @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price, " +
                 @"printf(""%.2f"", ((demand.amount * price) / 100)) AS sum, " +
-                "demandReport.document " +
-                //"sum(debit.amount) " +
+                "demandReport.document, " +
+                "demand.amount - sum(debit.amount) as balance " +
                 $" FROM inventory INNER JOIN demand ON demand.inventoryId = inventory.id " +
                 $" LEFT JOIN demandReport ON demand.reportId = demandReport.id " +
-                //" LEFT JOIN debit ON debit.inventoryId = inventory.id " +
+                "LEFT JOIN debit ON debit.demandId = demand.id " +
                 $" WHERE " +
                 l_Name +
                 l_Date +

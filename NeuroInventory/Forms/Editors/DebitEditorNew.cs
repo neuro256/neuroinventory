@@ -101,7 +101,7 @@ namespace NeuroInventory
                     // Отпускаем выбранные тмц 
                     foreach (DataRow row in DebitDataSet.Tables[0].Rows)
                     {
-                        AddRecord(Convert.ToInt32(row["id"]), Convert.ToDecimal(row["amount"]), dateTimePicker.Value);
+                        AddRecord(Convert.ToInt32(row["id"]), Convert.ToInt32(row["demandId"]), Convert.ToDecimal(row["amount"]), dateTimePicker.Value);
                     }
                     DialogResult = DialogResult.OK;
                     Close();
@@ -113,9 +113,9 @@ namespace NeuroInventory
             }
         }
 
-        private void AddRecord(int p_InventoryId, decimal p_Amount, DateTime p_Date)
+        private void AddRecord(int p_InventoryId, int p_DemandId, decimal p_Amount, DateTime p_Date)
         {
-            SQLiteManager.GetInstance().Debit().Insert(p_InventoryId, p_Amount, p_Date);
+            SQLiteManager.GetInstance().Debit().Insert(p_InventoryId, p_DemandId, p_Amount, p_Date);
         }
 
         public bool CreateReport()

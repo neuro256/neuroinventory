@@ -11,6 +11,12 @@ namespace NeuroInventory
 {
     public partial class TabReleased : InventoryView
     {
+        class ReleasedIds
+        {
+            public int inventoryId;
+            public int demandId;
+        }
+
         private ReleasedFilter m_Filter;
 
         private ReleasedFilter Filter { get => m_Filter; set => m_Filter = value; }
@@ -116,7 +122,10 @@ namespace NeuroInventory
                     ListViewItem newItem = new ListViewItem();
                     newItem.Text = (i + 1).ToString();
                     newItem.Name = dataSet.Tables[0].Rows[i]["id"].ToString();
-                    newItem.Tag = dataSet.Tables[0].Rows[i]["id"];
+                    ReleasedIds ids = new ReleasedIds();
+                    ids.inventoryId = Convert.ToInt32(dataSet.Tables[0].Rows[i]["id"]);
+                    ids.demandId = Convert.ToInt32(dataSet.Tables[0].Rows[i]["demandId"]);
+                    newItem.Tag = ids;
                     m_Listview.Items.Add(newItem);
 
                     for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
@@ -140,6 +149,26 @@ namespace NeuroInventory
                             subitem.BackColor = Color.LightBlue;
                             subitem.Tag = subitem.Text;
                             subitem.Text = Path.GetFileName(subitem.Text);
+                        }
+
+                        if(subitem.Name == "balance")
+                        {
+                            object balance = dataSet.Tables[0].Rows[i]["balance"];
+                            if (Equals(balance, DBNull.Value))
+                            {
+                                subitem.BackColor = Color.DarkOrange;
+                                subitem.Text = Definitions.NOT_DEBIT_STRING;
+                            }
+                            else if(!Convert.ToInt32(balance).Equals(0))
+                            {
+                                subitem.BackColor = Color.Coral;
+                                subitem.Text = Definitions.NOT_DEBIT_STRING;
+                            }
+                            else
+                            {
+                                subitem.BackColor = Color.LightGreen;
+                                subitem.Text = Definitions.DEBIT_STRING;
+                            }
                         }
 
                         if (subitem.Name != "demandId")
@@ -371,6 +400,7 @@ namespace NeuroInventory
         {
             DataTable debitTable = new DataTable("DebitReport");
             debitTable.Columns.Add("id");
+            debitTable.Columns.Add("demandId");
             debitTable.Columns.Add("date");
             debitTable.Columns.Add("invoice_code");
             debitTable.Columns.Add("name");
@@ -384,7 +414,8 @@ namespace NeuroInventory
             {
                 DataRow newRow = debitTable.NewRow();
 
-                newRow["id"] = item.Tag;
+                newRow["id"] = (item.Tag as ReleasedIds).inventoryId;
+                newRow["demandId"] = (item.Tag as ReleasedIds).demandId;
                 newRow["date"] = item.SubItems["mydate"].Text;
                 newRow["invoice_code"] = item.SubItems["invoiceCode"].Text;
                 newRow["name"] = item.SubItems["name"].Text;

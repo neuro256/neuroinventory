@@ -59,6 +59,8 @@
             this.chBalance = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStripCatalogs = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.panelInventoryTop = new System.Windows.Forms.Panel();
+            this.lblInventoryName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -67,6 +69,7 @@
             this.tableLayoutPanelRight.SuspendLayout();
             this.tableLayoutPanelInventory.SuspendLayout();
             this.panelMainBottom.SuspendLayout();
+            this.panelInventoryTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainerMain
@@ -164,13 +167,15 @@
             // 
             this.tableLayoutPanelInventory.ColumnCount = 1;
             this.tableLayoutPanelInventory.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelInventory.Controls.Add(this.panelMainBottom, 0, 1);
-            this.tableLayoutPanelInventory.Controls.Add(this.lwInventory, 0, 0);
+            this.tableLayoutPanelInventory.Controls.Add(this.panelMainBottom, 0, 2);
+            this.tableLayoutPanelInventory.Controls.Add(this.lwInventory, 0, 1);
+            this.tableLayoutPanelInventory.Controls.Add(this.panelInventoryTop, 0, 0);
             this.tableLayoutPanelInventory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelInventory.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelInventory.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelInventory.Name = "tableLayoutPanelInventory";
-            this.tableLayoutPanelInventory.RowCount = 2;
+            this.tableLayoutPanelInventory.RowCount = 3;
+            this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tableLayoutPanelInventory.Size = new System.Drawing.Size(996, 648);
@@ -198,7 +203,7 @@
             this.btnDemand.BackColor = System.Drawing.Color.CadetBlue;
             this.btnDemand.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDemand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDemand.Location = new System.Drawing.Point(586, 11);
+            this.btnDemand.Location = new System.Drawing.Point(580, 11);
             this.btnDemand.Name = "btnDemand";
             this.btnDemand.Size = new System.Drawing.Size(184, 33);
             this.btnDemand.TabIndex = 4;
@@ -212,7 +217,7 @@
             this.btnFilter.AutoSize = true;
             this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFilter.Location = new System.Drawing.Point(800, 10);
+            this.btnFilter.Location = new System.Drawing.Point(801, 11);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(184, 33);
             this.btnFilter.TabIndex = 3;
@@ -226,7 +231,7 @@
             this.btnInventoryEdit.AutoSize = true;
             this.btnInventoryEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnInventoryEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnInventoryEdit.Location = new System.Drawing.Point(396, 10);
+            this.btnInventoryEdit.Location = new System.Drawing.Point(390, 11);
             this.btnInventoryEdit.Name = "btnInventoryEdit";
             this.btnInventoryEdit.Size = new System.Drawing.Size(184, 33);
             this.btnInventoryEdit.TabIndex = 2;
@@ -240,7 +245,7 @@
             this.btnInventoryRemove.AutoSize = true;
             this.btnInventoryRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnInventoryRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnInventoryRemove.Location = new System.Drawing.Point(206, 10);
+            this.btnInventoryRemove.Location = new System.Drawing.Point(200, 11);
             this.btnInventoryRemove.Name = "btnInventoryRemove";
             this.btnInventoryRemove.Size = new System.Drawing.Size(184, 33);
             this.btnInventoryRemove.TabIndex = 1;
@@ -254,7 +259,7 @@
             this.btnInventoryAdd.AutoSize = true;
             this.btnInventoryAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnInventoryAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnInventoryAdd.Location = new System.Drawing.Point(16, 10);
+            this.btnInventoryAdd.Location = new System.Drawing.Point(10, 11);
             this.btnInventoryAdd.Name = "btnInventoryAdd";
             this.btnInventoryAdd.Size = new System.Drawing.Size(184, 33);
             this.btnInventoryAdd.TabIndex = 0;
@@ -285,11 +290,11 @@
             this.chBalance});
             this.lwInventory.FullRowSelect = true;
             this.lwInventory.GridLines = true;
-            this.lwInventory.Location = new System.Drawing.Point(0, 0);
+            this.lwInventory.Location = new System.Drawing.Point(0, 30);
             this.lwInventory.Margin = new System.Windows.Forms.Padding(0);
             this.lwInventory.MultiSelect = false;
             this.lwInventory.Name = "lwInventory";
-            this.lwInventory.Size = new System.Drawing.Size(996, 593);
+            this.lwInventory.Size = new System.Drawing.Size(996, 563);
             this.lwInventory.TabIndex = 2;
             this.lwInventory.UseCompatibleStateImageBehavior = false;
             this.lwInventory.View = System.Windows.Forms.View.Details;
@@ -373,6 +378,27 @@
             this.contextMenuStripCatalogs.Name = "contextMenuStripCatalogs";
             this.contextMenuStripCatalogs.Size = new System.Drawing.Size(67, 4);
             // 
+            // panelInventoryTop
+            // 
+            this.panelInventoryTop.AutoSize = true;
+            this.panelInventoryTop.Controls.Add(this.lblInventoryName);
+            this.panelInventoryTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelInventoryTop.Location = new System.Drawing.Point(3, 3);
+            this.panelInventoryTop.Name = "panelInventoryTop";
+            this.panelInventoryTop.Size = new System.Drawing.Size(990, 24);
+            this.panelInventoryTop.TabIndex = 3;
+            // 
+            // lblInventoryName
+            // 
+            this.lblInventoryName.AutoSize = true;
+            this.lblInventoryName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblInventoryName.ForeColor = System.Drawing.Color.DimGray;
+            this.lblInventoryName.Location = new System.Drawing.Point(4, 1);
+            this.lblInventoryName.Name = "lblInventoryName";
+            this.lblInventoryName.Size = new System.Drawing.Size(176, 18);
+            this.lblInventoryName.TabIndex = 0;
+            this.lblInventoryName.Text = "Название списка тмц";
+            // 
             // TabMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -394,8 +420,11 @@
             this.tableLayoutPanelLeft.ResumeLayout(false);
             this.tableLayoutPanelRight.ResumeLayout(false);
             this.tableLayoutPanelInventory.ResumeLayout(false);
+            this.tableLayoutPanelInventory.PerformLayout();
             this.panelMainBottom.ResumeLayout(false);
             this.panelMainBottom.PerformLayout();
+            this.panelInventoryTop.ResumeLayout(false);
+            this.panelInventoryTop.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -431,5 +460,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStripCatalogs;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button btnDemand;
+        private System.Windows.Forms.Panel panelInventoryTop;
+        private System.Windows.Forms.Label lblInventoryName;
     }
 }

@@ -15,6 +15,7 @@
         public static string SELECT_RECORDS = "Отчет должен включать хотя бы одну запись из таблицы. Пожалуйста, выберите интересующие записи и отметьте их галочками.";
         public static string DB_INCORRECT = "Похоже, Вы попытались открыть некорректную базу данных.";
         public static string INSERT_WARNING_STRING = "Неоднозначность целевого каталога. Пожалуйста, сначала выберите ЕДИНСТВЕННЫЙ список тмц, куда хотите добавить тмц.";
+        public static string AMBIGUITY_TARGET_CATALOG = "Неоднозначность целевого каталога";
         public static string DEMAND_SELECTION_WARNING_STRING = "Чтобы отпустить тмц, сначала выберите и отметьте галочками нужные тмц в таблице";
         public static string DEBIT_SELECTION_WARNING_STRING = "Чтобы списать тмц, сначала выберите и отметьте галочками нужные тмц в таблице";
         public static string CREATE_REPORT_FAILED = "Попытка создать отчет провалилась";
@@ -27,5 +28,6 @@
         public static string NOT_DEBIT_STRING = "Не списано";
         public static string DEBIT_STRING = "Списано";
         public static string MAYBE_NOT_DEBIT_STRING = "Возможно не списано";
+        public static string SELECTED_SEVERAL_NODES = "Выбрано несколько списков тмц";
     }
 }

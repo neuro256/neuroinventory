@@ -52,8 +52,6 @@ namespace NeuroInventory
         private TreeViewTag SelectedInventory { get => m_SelectedInventory; set => m_SelectedInventory = value; }
 
         private TreeViewTag m_SelectedInventory = null;
-        public delegate void SelectInventory(string sender);
-        public event SelectInventory OnSelectInventory;
 
         public TabMain()
         {
@@ -64,6 +62,12 @@ namespace NeuroInventory
             InitContextMenuStripCatalogs();
             PopulateTreeView();
             m_ListviewSelectedIndex = 0;
+            DisplayInventoryName(String.Empty);
+        }
+
+        private void DisplayInventoryName(string p_InventoryName)
+        {
+            lblInventoryName.Text = p_InventoryName;
         }
 
         private void InitContextMenuStripCatalogs()
@@ -113,7 +117,7 @@ namespace NeuroInventory
                 // Очистить таблицу ТМЦ
                 ShowTable();
                 // Очистить заголовок
-                OnSelectInventory?.Invoke(String.Empty);
+                DisplayInventoryName(String.Empty);
             }
         }
 
@@ -217,6 +221,8 @@ namespace NeuroInventory
                     {
                         // Изменить запись в таблице Каталоги
                         SQLiteManager.GetInstance().Catalogs().Update(SelectedInventory.id, (int)p_Type, SelectedInventory.parent, dialogName.name);
+
+                        SelectedInventory.name = dialogName.name;
                         // Переименовывание узла
                         treeView.BeginUpdate();
                         treeView.SelectedNode.Text = dialogName.name;
@@ -451,9 +457,22 @@ namespace NeuroInventory
 
             if (SelectedInventory != tvTag) // Выбран единственный узел
             {
-                SelectedInventory = tvTag;
-                if (tvTag.type == TreeNodeType.FILE)
-                    OnSelectInventory?.Invoke(tvTag.name);
+                if(treeView.SelectedNodes.Count > 1)
+                {
+                    SelectedInventory = null;
+                    if (tvTag.type == TreeNodeType.FILE)
+                    {
+                        DisplayInventoryName(Definitions.SELECTED_SEVERAL_NODES);
+                    }
+                }
+                else
+                {
+                    SelectedInventory = tvTag;
+                    if (tvTag.type == TreeNodeType.FILE)
+                    {
+                        DisplayInventoryName(tvTag.name);
+                    }
+                }
 
                 List<int> l_InventoryIds = new List<int>();
 
@@ -487,7 +506,7 @@ namespace NeuroInventory
                 {
                     SQLiteManager.GetInstance().Inventory().SetCommandDataSet(SelectedInventory.id);
                     ShowTable();
-                    OnSelectInventory?.Invoke(tvTag.name);
+                    DisplayInventoryName(tvTag.name);
                 }
             }
         }
@@ -581,6 +600,12 @@ namespace NeuroInventory
         /// </summary>
         public override void RemoveRecord()
         {
+            if (SelectedInventory == null)
+            {
+                MessageBox.Show(Definitions.AMBIGUITY_TARGET_CATALOG);
+                return;
+            }
+
             if (m_Listview.SelectedItems.Count > 0)
             {
                 SQLiteManager.GetInstance().Inventory().Remove(m_ListviewSelectedIndex);
@@ -598,6 +623,12 @@ namespace NeuroInventory
         /// </summary>
         public override void UpdateRecord()
         {
+            if (SelectedInventory == null)
+            {
+                MessageBox.Show(Definitions.AMBIGUITY_TARGET_CATALOG);
+                return;
+            }
+
             if (m_Listview.SelectedItems.Count > 0 && SelectedInventory.type == TreeNodeType.FILE)
             {
                 InventoryEditor editor = new InventoryEditor(SelectedInventory.id, m_ListviewSelectedIndex);
@@ -644,7 +675,7 @@ namespace NeuroInventory
                 m_Listview.EndUpdate();
                 return;
             }
-            if (SelectedInventory == null || SelectedInventory.type == TreeNodeType.FOLDER)
+            if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FOLDER)
                 return;
             DataSet dataSet = ReturnDataSet();
             try

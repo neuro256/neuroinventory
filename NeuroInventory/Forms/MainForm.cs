@@ -234,7 +234,7 @@ namespace NeuroInventory
         {
             try
             {
-                if(String.IsNullOrEmpty(NeuroFile.GetInstance().CopyDataBase(SQLiteManager.GetInstance().databaseName, p_FileName)))
+                if(String.IsNullOrEmpty(NeuroFile.CopyDataBase(SQLiteManager.GetInstance().databaseName, p_FileName)))
                 {
                     MessageBox.Show(Definitions.DB_SUCCESSFULLY_SAVED);
                 }

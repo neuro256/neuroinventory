@@ -4,16 +4,9 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public sealed class NeuroFile
+    public static class NeuroFile
     {
-        private static readonly NeuroFile instance = new NeuroFile();
-
-        public static NeuroFile GetInstance()
-        {
-            return instance;
-        }
-
-        public void OpenFileInExplorer(string p_SelectedDocument)
+        public static void OpenFileInExplorer(string p_SelectedDocument)
         {
             try
             {
@@ -25,7 +18,7 @@ namespace NeuroInventory
             catch { }
         }
 
-        public void OpenFile(string p_SelectedDocument)
+        public static void OpenFile(string p_SelectedDocument)
         {
             try
             {
@@ -43,14 +36,14 @@ namespace NeuroInventory
         /// <param name="p_SelectedDocument"></param>
         /// <param name="p_CurrentDocument"></param>
         /// <returns></returns>
-        public bool IsDocumentUpdated(string p_SelectedDocument, string p_CurrentDocument)
+        public static bool IsDocumentUpdated(string p_SelectedDocument, string p_CurrentDocument)
         {
             if (!String.IsNullOrEmpty(p_SelectedDocument) && String.Compare(p_SelectedDocument, p_CurrentDocument) != 0)
                 return true;
             return false;
         }
 
-        public string CopyFile(string p_FileName, string p_TargetPath)
+        public static string CopyFile(string p_FileName, string p_TargetPath)
         {
             try
             {
@@ -72,7 +65,7 @@ namespace NeuroInventory
             }
         }
 
-        private string ComposeAndCreateFileName(string p_Filename, string p_TargetPath)
+        private static string ComposeAndCreateFileName(string p_Filename, string p_TargetPath)
         {
             try
             {
@@ -94,7 +87,7 @@ namespace NeuroInventory
             }
         }
 
-        public string CopyDataBase(string p_FileName, string p_TargetPath)
+        public static string CopyDataBase(string p_FileName, string p_TargetPath)
         {
             try
             {
@@ -108,7 +101,7 @@ namespace NeuroInventory
             }
         }
 
-        public void DeleteFile(string p_FileName)
+        public static void DeleteFile(string p_FileName)
         {
             try
             {
@@ -123,7 +116,7 @@ namespace NeuroInventory
             }
         }
 
-        public object UpdateFile(string p_SelectedDocument, string p_CurrentDocument, string p_TargetPath)
+        public static object UpdateFile(string p_SelectedDocument, string p_CurrentDocument, string p_TargetPath)
         {
             try
             {
@@ -156,7 +149,7 @@ namespace NeuroInventory
             }
         }
 
-        public object InsertFile(string p_SelectedDocument, string p_TargetPath)
+        public static object InsertFile(string p_SelectedDocument, string p_TargetPath)
         {
             try
             {
@@ -177,7 +170,7 @@ namespace NeuroInventory
             }
         }
 
-        public object CreateFileName(string p_Filename, string p_TargetPath)
+        public static object CreateFileName(string p_Filename, string p_TargetPath)
         {
             try
             {

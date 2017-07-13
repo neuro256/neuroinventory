@@ -147,7 +147,7 @@ namespace NeuroInventory
 
         private void tbDocument_MouseClick(object sender, MouseEventArgs e)
         {
-            NeuroFile.GetInstance().OpenFileInExplorer(m_SelectedDocument);
+            NeuroFile.OpenFileInExplorer(m_SelectedDocument);
         }
     }
 }

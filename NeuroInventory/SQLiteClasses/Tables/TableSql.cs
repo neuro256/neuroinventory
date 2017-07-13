@@ -138,32 +138,32 @@ namespace NeuroInventory
         /// <returns></returns>
         public bool IsDocumentUpdated(string p_SelectedDocument, string p_CurrentDocument)
         {
-            return NeuroFile.GetInstance().IsDocumentUpdated(p_SelectedDocument, p_CurrentDocument);
+            return NeuroFile.IsDocumentUpdated(p_SelectedDocument, p_CurrentDocument);
         }
 
         public string CopyFile(string p_FileName)
         {
-            return NeuroFile.GetInstance().CopyFile(p_FileName, TargetPath);
+            return NeuroFile.CopyFile(p_FileName, TargetPath);
         }
 
         public void DeleteFile(string p_FileName)
         {
-            NeuroFile.GetInstance().DeleteFile(p_FileName);
+            NeuroFile.DeleteFile(p_FileName);
         }
 
         public object UpdateFile(string p_SelectedDocument, string p_CurrentDocument)
         {
-            return NeuroFile.GetInstance().UpdateFile(p_SelectedDocument, p_CurrentDocument, TargetPath);
+            return NeuroFile.UpdateFile(p_SelectedDocument, p_CurrentDocument, TargetPath);
         }
 
         public object InsertFile(string p_SelectedDocument)
         {
-            return NeuroFile.GetInstance().InsertFile(p_SelectedDocument, TargetPath);
+            return NeuroFile.InsertFile(p_SelectedDocument, TargetPath);
         }
 
         public object CreateFileName(string p_Filename)
         {
-            return NeuroFile.GetInstance().CreateFileName(p_Filename, TargetPath);
+            return NeuroFile.CreateFileName(p_Filename, TargetPath);
         }
 
         private string GetApplicationName

@@ -364,7 +364,7 @@ namespace NeuroInventory
                     if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"]?.Bounds.Contains(e.X, e.Y) ?? false)
                     {
                         string l_FileName = m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"].Tag.ToString();
-                        NeuroFile.GetInstance().OpenFileInExplorer(l_FileName);
+                        NeuroFile.OpenFileInExplorer(l_FileName);
                         m_Listview.SelectedItems.Clear();
                     }
                 }

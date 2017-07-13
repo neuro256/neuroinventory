@@ -169,7 +169,7 @@ namespace NeuroInventory
 
         private void tbInvoice_MouseClick(object sender, MouseEventArgs e)
         {
-            NeuroFile.GetInstance().OpenFileInExplorer(m_SelectedDocument);
+            NeuroFile.OpenFileInExplorer(m_SelectedDocument);
         }
 
         private void cbMeasurement_SelectionChangeCommitted(object sender, EventArgs e)

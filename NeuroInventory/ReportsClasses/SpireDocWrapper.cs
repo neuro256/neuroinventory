@@ -67,7 +67,7 @@ namespace NeuroInventory
         {
             try
             {
-                NeuroFile.GetInstance().OpenFile(p_FileName);
+                NeuroFile.OpenFile(p_FileName);
             }
             catch { }
         }

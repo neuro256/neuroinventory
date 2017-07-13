@@ -127,10 +127,5 @@ namespace NeuroInventory
 
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }
-
-        public int ReturnRecordsCount()
-        {
-            return SQLiteManager.GetInstance().ReturnRecordsCount(TableName);
-        }
     }
 }

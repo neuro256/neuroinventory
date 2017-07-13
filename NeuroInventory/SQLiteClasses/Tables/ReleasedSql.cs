@@ -99,10 +99,5 @@ namespace NeuroInventory
         {
             CommandDataSet = CommandDataSetNotFiltered;
         }
-
-        public int ReturnLastInsertId()
-        {
-            return SQLiteManager.GetInstance().ReturnLastInsertId(TableName);
-        }
     }
 }

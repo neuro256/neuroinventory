@@ -39,11 +39,6 @@ namespace NeuroInventory
             SQLiteSettingsManager.GetInstance().Delete(TableName, l_Where);
         }
 
-        public int ReturnLastInsertId()
-        {
-            return SQLiteSettingsManager.GetInstance().ReturnLastInsertId(TableName);
-        }
-
         public int ReturnCount()
         {
             return Convert.ToInt32(SQLiteSettingsManager.GetInstance().CommandExecuteScalar("SELECT COUNT(id) FROM recents"));

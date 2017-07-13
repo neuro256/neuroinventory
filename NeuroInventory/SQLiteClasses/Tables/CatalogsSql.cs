@@ -44,10 +44,5 @@ namespace NeuroInventory
 
             SQLiteManager.GetInstance().Update(TableName, values, l_Where);
         }
-
-        public int ReturnLastInsertId()
-        {
-            return SQLiteManager.GetInstance().ReturnLastInsertId(TableName);
-        }
     }
 }

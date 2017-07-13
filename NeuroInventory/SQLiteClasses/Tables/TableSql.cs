@@ -120,6 +120,16 @@ namespace NeuroInventory
             }
         }
 
+        public int ReturnLastInsertId()
+        {
+            return SQLiteManager.GetInstance().ReturnLastInsertId(TableName);
+        }
+
+        public int ReturnRecordsCount()
+        {
+            return SQLiteManager.GetInstance().ReturnRecordsCount(TableName);
+        }
+
         /// <summary>
         /// Проверка на то, был ли изменен файл-документа в окне редактора
         /// </summary>

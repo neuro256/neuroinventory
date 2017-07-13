@@ -41,7 +41,7 @@ namespace NeuroInventory
             return SQLiteSettingsManager.GetInstance().CommandExecuteScalar($"SELECT password FROM user WHERE id={ReturnLastInsertId()};").ToString();
         }
 
-        public int ReturnLastInsertId()
+        public new int ReturnLastInsertId()
         {
             return SQLiteSettingsManager.GetInstance().ReturnLastInsertId(TableName);
         }

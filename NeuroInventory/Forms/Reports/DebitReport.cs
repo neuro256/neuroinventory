@@ -258,16 +258,16 @@ namespace NeuroInventory
                 DataSet dataSetDebitReport = GetDebitReportDataSet();
                 Dictionary<string, object> DebitReportFieldsData = GetReportFieldsData();
 
-                ISpireReportWrapper gemboxReport = new GemboxXlsWrapper();
-
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "Файлы документов (*.xls)|*.xls";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    if(gemboxReport.CreateReport(saveFileDialog.FileName, dataSetDebitReport, DebitReportFieldsData))
-                    {
-                        SQLiteManager.GetInstance().DebitReport().Insert(DateTime.Now, saveFileDialog.FileName);
-                    }
+                    // Устаревший код
+                    //IReportWrapper gemboxReport = new GemboxXlsWrapper(saveFileDialog.FileName, dataSetDebitReport, DebitReportFieldsData);
+                    //if (gemboxReport.CreateReport(saveFileDialog.FileName, dataSetDebitReport, DebitReportFieldsData))
+                    //{
+                    //    SQLiteManager.GetInstance().DebitReport().Insert(DateTime.Now, saveFileDialog.FileName);
+                    //}
                 }
             }
             else

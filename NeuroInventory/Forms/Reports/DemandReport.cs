@@ -289,17 +289,18 @@ namespace NeuroInventory
                 DataSet dataSetDemandReport = GetDemandReportDataSet();
                 Dictionary<string, object> demandReportFieldsData = GetReportFieldsData();
 
-                ISpireReportWrapper spireDoc = new SpireDocWrapper();
+                // Устаревший код
+                //IReportWrapper spireDoc = new SpireDocWrapper();
 
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Файлы документов (*.doc)|*.doc";
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    if(spireDoc.CreateReport(saveFileDialog.FileName, dataSetDemandReport, demandReportFieldsData))
-                    {
-                        SQLiteManager.GetInstance().DemandReport().Insert(Convert.ToInt32(cbEmployee.SelectedValue), DateTime.Now, saveFileDialog.FileName);
-                    }
-                }
+                //SaveFileDialog saveFileDialog = new SaveFileDialog();
+                //saveFileDialog.Filter = "Файлы документов (*.doc)|*.doc";
+                //if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                //{
+                //    if(spireDoc.CreateReport(saveFileDialog.FileName, dataSetDemandReport, demandReportFieldsData))
+                //    {
+                //        SQLiteManager.GetInstance().DemandReport().Insert(Convert.ToInt32(cbEmployee.SelectedValue), DateTime.Now, saveFileDialog.FileName);
+                //    }
+                //}
             }
             else
             {

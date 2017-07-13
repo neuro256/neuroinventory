@@ -153,11 +153,11 @@ namespace NeuroInventory
         {
             DataSet dataSetDemandReport = GetDemandReportDataSet();
             Dictionary<string, object> demandReportFieldsData = GetReportFieldsData();
-
-            ISpireReportWrapper spireDoc = new SpireDocWrapper();
-
             string l_FileName = SQLiteManager.GetInstance().DemandReport().CreateFileName(Definitions.DEMAND_REPORT_FILENAME).ToString();
-            if (spireDoc.CreateReport(l_FileName, dataSetDemandReport, demandReportFieldsData))
+
+            IReportWrapper spireDoc = new SpireDocWrapper(l_FileName, dataSetDemandReport, demandReportFieldsData);
+
+            if (spireDoc.CreateReport())
             {
                 SQLiteManager.GetInstance().DemandReport().Insert(Convert.ToInt32(cbEmployee.SelectedValue), DateTime.Now, l_FileName);
                 return true;

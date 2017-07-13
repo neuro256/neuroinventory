@@ -86,7 +86,7 @@
             this.createBDToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.createBDToolStripMenuItem.Size = new System.Drawing.Size(306, 26);
             this.createBDToolStripMenuItem.Text = "Создать БД";
-            this.createBDToolStripMenuItem.Click += new System.EventHandler(this.createBDToolStripMenuItem_Click);
+            this.createBDToolStripMenuItem.Click += new System.EventHandler(this.CreateBDToolStripMenuItem_Click);
             // 
             // openBDToolStripMenuItem
             // 
@@ -95,7 +95,7 @@
             this.openBDToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.openBDToolStripMenuItem.Size = new System.Drawing.Size(306, 26);
             this.openBDToolStripMenuItem.Text = "Открыть";
-            this.openBDToolStripMenuItem.Click += new System.EventHandler(this.openBDToolStripMenuItem_Click);
+            this.openBDToolStripMenuItem.Click += new System.EventHandler(this.OpenBDToolStripMenuItem_Click);
             // 
             // saveBDToolStripMenuItem
             // 
@@ -105,7 +105,7 @@
             | System.Windows.Forms.Keys.S)));
             this.saveBDToolStripMenuItem.Size = new System.Drawing.Size(306, 26);
             this.saveBDToolStripMenuItem.Text = "Сохранить БД как...";
-            this.saveBDToolStripMenuItem.Click += new System.EventHandler(this.saveBDToolStripMenuItem_Click);
+            this.saveBDToolStripMenuItem.Click += new System.EventHandler(this.SaveBDToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 

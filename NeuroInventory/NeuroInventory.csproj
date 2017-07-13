@@ -101,7 +101,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocumentNumeration.cs" />
+    <Compile Include="UtilityClasses\DocumentNumeration.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,12 +119,6 @@
     </Compile>
     <Compile Include="Forms\Filters\ReleasedFilter.Designer.cs">
       <DependentUpon>ReleasedFilter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Reports\DebitReportNew.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Reports\DebitReportNew.Designer.cs">
-      <DependentUpon>DebitReportNew.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Reports\DebitReport.cs">
       <SubType>Form</SubType>
@@ -337,9 +331,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Filters\ReleasedFilter.resx">
       <DependentUpon>ReleasedFilter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Reports\DebitReportNew.resx">
-      <DependentUpon>DebitReportNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Reports\DebitReport.resx">
       <DependentUpon>DebitReport.cs</DependentUpon>

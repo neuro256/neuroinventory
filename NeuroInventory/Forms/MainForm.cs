@@ -161,7 +161,7 @@ namespace NeuroInventory
             inventoryTabs["tabEmployees"] = tabEmployees;
         }
 
-        private void createBDToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CreateBDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogName dialogName = new DialogName();
             dialogName.StartPosition = FormStartPosition.CenterParent;
@@ -184,7 +184,7 @@ namespace NeuroInventory
             SQLiteSettingsManager.GetInstance().Recents().Insert(p_FileName);
         }
 
-        private void openBDToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenBDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             //openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
@@ -200,12 +200,12 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().databaseName = p_DatabaseName;
             if (SQLiteManager.GetInstance().TestConnection())
             {
+                SQLiteManager.GetInstance().UpdateDatabase();
                 InitTabs();
                 if (inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
                     inventoryTabs[tabControl.SelectedTab.Name].ShowTable();
                 SQLiteManager.GetInstance().IsOpened = true;
                 SQLiteSettingsManager.GetInstance().Recents().Insert(p_DatabaseName);
-                SQLiteManager.GetInstance().UpdateDatabase();
             }
             else
             {
@@ -214,7 +214,7 @@ namespace NeuroInventory
             }
         }
 
-        private void saveBDToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveBDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!SQLiteManager.GetInstance().IsCreated && !SQLiteManager.GetInstance().IsOpened)
             {

@@ -211,6 +211,7 @@
     <Compile Include="Forms\Additional\SettingDocumentNumeration.Designer.cs">
       <DependentUpon>SettingDocumentNumeration.cs</DependentUpon>
     </Compile>
+    <Compile Include="SQLiteClasses\SQLManageBase.cs" />
     <Compile Include="SQLiteClasses\Tables\DebitReportSql.cs" />
     <Compile Include="SQLiteClasses\Tables\RecentsSql.cs" />
     <Compile Include="Forms\Editors\DemandEditorNew.cs">

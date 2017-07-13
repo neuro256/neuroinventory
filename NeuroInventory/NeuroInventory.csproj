@@ -211,6 +211,7 @@
     <Compile Include="Forms\Additional\SettingDocumentNumeration.Designer.cs">
       <DependentUpon>SettingDocumentNumeration.cs</DependentUpon>
     </Compile>
+    <Compile Include="SQLiteClasses\SQLiteSettingsManager.cs" />
     <Compile Include="SQLiteClasses\SQLManageBase.cs" />
     <Compile Include="SQLiteClasses\Tables\DebitReportSql.cs" />
     <Compile Include="SQLiteClasses\Tables\RecentsSql.cs" />
@@ -308,6 +309,7 @@
       <DependentUpon>EmployeeEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityClasses\DateAndMoneyConverter.cs" />
+    <Compile Include="UtilityClasses\Numeration.cs" />
     <Compile Include="UtilityClasses\SortWrapper.cs" />
     <Compile Include="SQLiteClasses\Tables\TableSql.cs" />
     <Compile Include="Forms\IInventoryView.cs" />

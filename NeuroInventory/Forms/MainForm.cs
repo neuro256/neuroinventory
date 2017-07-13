@@ -19,7 +19,7 @@ namespace NeuroInventory
             inventoryTabs = new Dictionary<string, IInventoryView>();
             InitEmptyTabs();
             TabRecent.LoadRecentFile += TabRecent_LoadRecentFile;
-            NeuroFile.GetInstance().ParseDocNumeration();
+            Numeration.GetInstance().ParseDocNumeration();
             //CheckDemo();
         }
 
@@ -273,7 +273,7 @@ namespace NeuroInventory
             {
                 e.Cancel = true;
             }
-            NeuroFile.GetInstance().WriteDocNumeration();
+            Numeration.GetInstance().WriteDocNumeration();
         } 
 
         /// <summary>

@@ -219,17 +219,17 @@ namespace NeuroInventory
         private string GetDocumentNumber()
         {
             // number
-            int docNumber = NeuroFile.GetInstance().DemandNumeration.DocCurrentNumber;
-            NeuroFile.GetInstance().DemandNumeration.IncrementNumber();
+            int docNumber = Numeration.GetInstance().DemandNumeration.DocCurrentNumber;
+            Numeration.GetInstance().DemandNumeration.IncrementNumber();
             // prefix
             string prefix = String.Empty;
-            if (!String.IsNullOrEmpty(NeuroFile.GetInstance().DemandNumeration.DocPrefix))
+            if (!String.IsNullOrEmpty(Numeration.GetInstance().DemandNumeration.DocPrefix))
             {
-                prefix = $"{NeuroFile.GetInstance().DemandNumeration.DocPrefix}_";
+                prefix = $"{Numeration.GetInstance().DemandNumeration.DocPrefix}_";
             }
             // date 
             string date = String.Empty;
-            if(NeuroFile.GetInstance().DemandNumeration.IncludeDate)
+            if(Numeration.GetInstance().DemandNumeration.IncludeDate)
             {
                 date = $"_{ GetDate()}";
             }

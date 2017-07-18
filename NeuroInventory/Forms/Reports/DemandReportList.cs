@@ -46,29 +46,9 @@ namespace NeuroInventory
             lvDemandReportList.Columns.Add(new ColHeader("Документ", 250, HorizontalAlignment.Left, true));
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            AddRecord();
-        }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             RemoveRecord();
-        }
-
-        public override void AddRecord()
-        {
-            DemandReport report = new DemandReport();
-            report.StartPosition = FormStartPosition.CenterParent;
-            if(report.ShowDialog() == DialogResult.OK)
-            {
-                SQLiteManager.GetInstance().DemandReport().SetCommandDataSet();
-                ShowTable();
-                if (m_Listview.Items.Count > 0)
-                {
-                    m_Listview.EnsureVisible(m_Listview.Items.Count - 1);
-                }
-            }
         }
 
         public override void RemoveRecord()

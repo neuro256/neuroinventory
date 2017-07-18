@@ -110,23 +110,17 @@
     <Compile Include="Forms\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Editors\DebitEditorNew.cs">
+    <Compile Include="Forms\Editors\DebitEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Editors\DebitEditorNew.Designer.cs">
-      <DependentUpon>DebitEditorNew.cs</DependentUpon>
+    <Compile Include="Forms\Editors\DebitEditor.Designer.cs">
+      <DependentUpon>DebitEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Filters\ReleasedFilter.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Filters\ReleasedFilter.Designer.cs">
       <DependentUpon>ReleasedFilter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Reports\DebitReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Reports\DebitReport.Designer.cs">
-      <DependentUpon>DebitReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Reports\DebitReportList.cs">
       <SubType>Form</SubType>
@@ -139,12 +133,6 @@
     </Compile>
     <Compile Include="Forms\Reports\DemandReportList.Designer.cs">
       <DependentUpon>DemandReportList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Reports\DemandReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Reports\DemandReport.Designer.cs">
-      <DependentUpon>DemandReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Editors\AuthenticationEditor.cs">
       <SubType>Form</SubType>
@@ -200,7 +188,6 @@
     <Compile Include="Serialization\JSonSerialization.cs" />
     <Compile Include="ReportsClasses\GemboxXlsWrapper.cs" />
     <Compile Include="ReportsClasses\ISpireReportWrapper.cs" />
-    <Compile Include="ReportsClasses\SpireXlsWrapper.cs" />
     <Compile Include="Forms\Additional\SettingDocumentNumeration.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,11 +198,11 @@
     <Compile Include="SQLiteClasses\SQLManageBase.cs" />
     <Compile Include="SQLiteClasses\Tables\DebitReportSql.cs" />
     <Compile Include="SQLiteClasses\Tables\RecentsSql.cs" />
-    <Compile Include="Forms\Editors\DemandEditorNew.cs">
+    <Compile Include="Forms\Editors\DemandEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Editors\DemandEditorNew.Designer.cs">
-      <DependentUpon>DemandEditorNew.cs</DependentUpon>
+    <Compile Include="Forms\Editors\DemandEditor.Designer.cs">
+      <DependentUpon>DemandEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLiteClasses\Tables\ReleasedSql.cs" />
     <Compile Include="UtilityClasses\MultiSelectTreeview.cs">
@@ -226,12 +213,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Reports\ReportViewSelection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Reports\ReportViewSelection.Designer.cs">
-      <DependentUpon>ReportViewSelection.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLiteClasses\Tables\DemandReportSql.cs" />
     <Compile Include="SQLiteClasses\Tables\UserSql.cs" />
@@ -251,19 +232,7 @@
       <DependentUpon>DialogName.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLiteClasses\Tables\DebitSql.cs" />
-    <Compile Include="Forms\Editors\DebitEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Editors\DebitEditor.Designer.cs">
-      <DependentUpon>DebitEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="SQLiteClasses\Tables\DemandSql.cs" />
-    <Compile Include="Forms\Editors\DemandEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Editors\DemandEditor.Designer.cs">
-      <DependentUpon>DemandEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\InventoryView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -328,23 +297,17 @@
     <EmbeddedResource Include="Forms\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Editors\DebitEditorNew.resx">
-      <DependentUpon>DebitEditorNew.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Editors\DebitEditor.resx">
+      <DependentUpon>DebitEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Filters\ReleasedFilter.resx">
       <DependentUpon>ReleasedFilter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Reports\DebitReport.resx">
-      <DependentUpon>DebitReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Reports\DebitReportList.resx">
       <DependentUpon>DebitReportList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Reports\DemandReportList.resx">
       <DependentUpon>DemandReportList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Reports\DemandReport.resx">
-      <DependentUpon>DemandReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Editors\AuthenticationEditor.resx">
       <DependentUpon>AuthenticationEditor.cs</DependentUpon>
@@ -366,12 +329,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Additional\DialogName.resx">
       <DependentUpon>DialogName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Editors\DebitEditor.resx">
-      <DependentUpon>DebitEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Editors\DemandEditor.resx">
-      <DependentUpon>DemandEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Editors\EmployeeEditor.resx">
       <DependentUpon>EmployeeEditor.cs</DependentUpon>
@@ -408,11 +365,8 @@
     <EmbeddedResource Include="Forms\Editors\ProvidersEditor.resx">
       <DependentUpon>ProvidersEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Reports\ReportViewSelection.resx">
-      <DependentUpon>ReportViewSelection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Editors\DemandEditorNew.resx">
-      <DependentUpon>DemandEditorNew.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Editors\DemandEditor.resx">
+      <DependentUpon>DemandEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Additional\SettingDocumentNumeration.resx">
       <DependentUpon>SettingDocumentNumeration.cs</DependentUpon>

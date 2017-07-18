@@ -1,249 +1,275 @@
-﻿using System;
+﻿using BrightIdeasSoftware;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.IO;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public partial class DebitEditor : InventoryView
+    public partial class DebitEditor : Form
     {
-        public delegate void DebitEventHandler();
-        public static event DebitEventHandler CheckDebit;
+        private const decimal m_NudMaxValue = 9999999.0M;
+        private DataSet m_DebitDataSet;
 
-        private int m_InventoryId;
-        private object m_SelectedRecordId;
-        private string m_InventoryName;
+        public DataSet DebitDataSet { get => m_DebitDataSet; private set => m_DebitDataSet = value; }
 
-        public DebitEditor(string p_InventoryName, int p_InventoryId, int p_AmountDecimalPlaces)
+        public static decimal NudMaxValue => m_NudMaxValue;
+
+        public DebitEditor(DataSet p_DataSet)
         {
             InitializeComponent();
-            SQLiteManager.GetInstance().Debit().SetCommandDataSet(p_InventoryId);
-            InitForm();
-            InitListView();
-            InitContextMenuStrip();
-            m_InventoryName = p_InventoryName;
-            PopulateRedactorInfo();
-            ShowTable();
-            m_ListviewSelectedIndex = 0;
-            m_InventoryId = p_InventoryId;
-            nudAmount.DecimalPlaces = p_AmountDecimalPlaces;
+
+            DebitDataSet = p_DataSet;
+
+            InitControls();
         }
 
-        protected override void InitForm()
+        private void InitControls()
         {
-            this.Size = new Size(1200, 650);
-            this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ControlBox = true;
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
+            lwDebitData.AutoGenerateColumns = false;
+            lwDebitData.DataSource = new BindingSource(DebitDataSet, "DebitReport");
+            lwDebitData.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
+            lwDebitData.SelectedBackColor = Color.LightBlue;
+            lwDebitData.SelectedForeColor = Color.MidnightBlue;
+            lwDebitData.RowHeight = 26;
+            // Автоматическая нумерация строк
+            lwDebitData.FormatRow += delegate (object sender, FormatRowEventArgs args)
+            {
+                args.Item.Text = (args.RowIndex + 1).ToString();
+            };
 
-            this.Name = "DebitEditor";
-            this.Text = "Редактор списаний";
-        }
+            lwDebitData.RebuildColumns();
 
-        public override void InitListView()
-        {
-            base.InitListView();
-
-            lwDebit.Columns.Clear();
-            lwDebit.Columns.Add(new ColHeader("ID", 50, HorizontalAlignment.Left, true));
-            lwDebit.Columns.Add(new ColHeader("№", 50, HorizontalAlignment.Left, true));
-            lwDebit.Columns.Add(new ColHeader("Количество списанных тмц", 200, HorizontalAlignment.Left, true));
-            lwDebit.Columns.Add(new ColHeader("Дата", 100, HorizontalAlignment.Left, true));
-        }
-
-        private void PopulateRedactorInfo()
-        {
-            tbName.Text = m_InventoryName;
-
-            // Настройка селектора количества отпущенного тмц
-            nudAmount.ThousandsSeparator = true;
-            nudAmount.DecimalPlaces = 2;
-
-            // Настройка селектора даты
-            dateTimePicker.Format = DateTimePickerFormat.Short;
+            dateTimePicker.Format = DateTimePickerFormat.Long;
             dateTimePicker.Value = DateTime.Today;
             dateTimePicker.ShowUpDown = false;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Начало редактирования ячейки столбца "количество"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lwDebitData_CellEditStarting(object sender, CellEditEventArgs e)
         {
-            AddRecord();
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            RemoveRecord();
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            UpdateRecord();
-        }
-
-        public override void AddRecord()
-        {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            if (!IsValidData())
-                return;
-
-            SQLiteManager.GetInstance().Debit().Insert(m_InventoryId, m_InventoryId, nudAmount.Value, dateTimePicker.Value);
-            m_Listview.SelectedItems.Clear();
-            ShowTable();
-            if (m_Listview.Items.Count > 0)
+            if (e.Column.AspectName == "amount")
             {
-                m_Listview.EnsureVisible(m_Listview.Items.Count - 1);
+                NumericUpDown nud = new NumericUpDown();
+                nud.Bounds = e.CellBounds;
+                nud.Minimum = 0.0M;
+                nud.Maximum = NudMaxValue;
+                nud.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(e.ListViewItem.SubItems[2].Text); // subitem[2] is measurement
+                nud.Value = Convert.ToDecimal(e.Value, CultureInfo.GetCultureInfo("ru-RU"));
+                e.Control = nud;
             }
         }
 
-        public override void RemoveRecord()
+        /// <summary>
+        /// Завершение редактирования ячейки столбца "количество"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lwDebitData_CellEditFinishing(object sender, CellEditEventArgs e)
         {
-            if(m_Listview.SelectedItems.Count > 0)
+            if (e.Column.AspectName == "amount")
             {
-                SQLiteManager.GetInstance().Debit().Remove(m_ListviewSelectedIndex);
-                RemoveFromListViewAt(m_ListviewSelectedIndex);
-                m_Listview.SelectedItems.Clear();
-            }
-            else
-            {
-                MessageBox.Show(Definitions.REMOVE_WARNING_STRING);
-            }
-        }
+                string l_BalanceStr = DebitDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("balance");
+                decimal l_Balance = Convert.ToDecimal(l_BalanceStr, CultureInfo.GetCultureInfo("ru-RU"));
 
-        public override void UpdateRecord()
-        {
-            if(m_Listview.SelectedItems.Count > 0)
-            {
-                Dictionary<string, object> values = new Dictionary<string, object>();
-
-                if (!IsValidData())
-                    return;
-
-                SQLiteManager.GetInstance().Debit().Update(m_SelectedRecordId, m_InventoryId, nudAmount.Value, dateTimePicker.Value);
-
-                m_Listview.SelectedItems.Clear();
-                ShowTable();
-                m_Listview.EnsureVisible(m_ListviewSelectedIndex);
-            }
-            else
-            {
-                MessageBox.Show(Definitions.UPDATE_WARNING_STRING);
+                // Идет проверка, не выбрано ли количество, большее чем остаток тмц на складе
+                if (Convert.ToDecimal(e.NewValue, CultureInfo.InvariantCulture) > l_Balance)
+                    e.NewValue = l_Balance;
+                if (!String.Equals(e.NewValue.ToString(), e.Value.ToString()))
+                {
+                    // Вычисление стоимости отпущенного тмц
+                    string l_PriceStr = DebitDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("price");
+                    decimal l_SumNewValue = Convert.ToDecimal(e.NewValue, CultureInfo.GetCultureInfo("ru-RU")) * Decimal.Parse(l_PriceStr, NumberStyles.Currency);
+                    DebitDataSet.Tables[0].Rows[e.ListViewItem.Index].SetField("sum", l_SumNewValue.ToString("C"));
+                }
             }
         }
 
-        private bool IsValidData()
-        {
-            errorProviderDebit.Clear();
-
-            if (nudAmount.Value == 0)
-            {
-                errorProviderDebit.SetError(nudAmount, Definitions.VALIDATION_WARNING_STRING);
-                nudAmount.Focus();
-                return false;
-            }
-            return true;
-        }
-
-        protected override ListView GetListView()
-        {
-            return lwDebit;
-        }
-
-        protected override ContextMenuStrip GetContextMenuStrip()
-        {
-            return contextMenuStripDebit;
-        }
-
-        public override DataSet ReturnDataSet()
-        {
-            return SQLiteManager.GetInstance().Debit().ReturnDataSet();
-        }
-
-        public override void Clear()
-        {
-            base.Clear();
-        }
-
-        public override void ListViewItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private void btnReleased_Click(object sender, EventArgs e)
         {
             try
             {
-                // При выборе строки событие ItemSelectionChanged возникает два раза:
-                // первый раз, когда выделенная в данный момент строка теряут фокус,
-                // второй - когда строка, в которой сделан щелчок, получает фокус.
-                // Нас интересует строка, которая получает фокус.
-                if (e.IsSelected)
+                // В первую очередь создаем отчет. Если отчет успешно создан и сохранен, записываем данные в базу данных
+                if (CreateReport())
                 {
-                    m_ListviewSelectedIndex = e.ItemIndex;
-                    ShowInfo();
+                    // Отпускаем выбранные тмц 
+                    foreach (DataRow row in DebitDataSet.Tables[0].Rows)
+                    {
+                        AddRecord(Convert.ToInt32(row["id"]), Convert.ToInt32(row["demandId"]), Convert.ToDecimal(row["amount"]), dateTimePicker.Value);
+                    }
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, Definitions.CREATE_REPORT_FAILED);
             }
         }
 
-        public override void ListViewItemMouseUp(object sender, MouseEventArgs e)
+        private void AddRecord(int p_InventoryId, int p_DemandId, decimal p_Amount, DateTime p_Date)
         {
-            try
-            {
-                if (e.Button == MouseButtons.Right)
-                {
-                    ListViewHitTestInfo info = m_Listview.HitTest(e.X, e.Y);
-                    ListViewItem item = info.Item;
+            SQLiteManager.GetInstance().Debit().Insert(p_InventoryId, p_DemandId, p_Amount, p_Date);
+        }
 
-                    if (item != null)
-                    {
-                        m_ListviewSelectedIndex = item.Index;
-                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = false;
-                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
-                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = true;
-                    }
-                    else
-                    {
-                        // No item is selected
-                        this.m_Listview.SelectedItems.Clear();
-                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = true;
-                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
-                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = false;
-                    }
+        public bool CreateReport()
+        {
+            string l_FileName = SQLiteManager.GetInstance().DebitReport().CreateFileName(Definitions.DEBIT_REPORT_FILENAME).ToString();
+
+            GemboxReportBuilder builder = new GemboxReportBuilder();
+            builder.AddAdditionalData(GetReportFieldsData());
+            builder.AddDebitDataSet(GetDebitReportDataSet());
+            builder.AddInvoiceDataSet(GetInvoiceReportDataSet());
+            builder.AddDestinationPath(l_FileName);
+
+            ReportData l_ReportData = builder.Build();
+
+            IReportWrapper gemboxReport = new GemboxXlsWrapper(l_ReportData);
+            if (gemboxReport.CreateReport())
+            {
+                SQLiteManager.GetInstance().DebitReport().Insert(DateTime.Now, l_FileName);
+                return true;
+            }
+
+            return false;
+        }
+
+        private DataSet GetInvoiceReportDataSet()
+        {
+            DataTable debitReportTable = new DataTable("InvoiceReport");
+            debitReportTable.Columns.Add("number");
+            debitReportTable.Columns.Add("date_entrance");
+            debitReportTable.Columns.Add("date_debit");
+            debitReportTable.Columns.Add("invoice_code");
+
+            int counter = 1;
+
+            List<int> l_UniqueCodes = new List<int>();
+
+            foreach (DataRow row in DebitDataSet.Tables[0].Rows)
+            {
+                int l_CurrentInvoiceCode = Convert.ToInt32(row["invoice_code"]);
+                if (l_CurrentInvoiceCode == 0 || !l_UniqueCodes.Contains(l_CurrentInvoiceCode))
+                {
+                    DataRow newRow = debitReportTable.NewRow();
+
+                    newRow["number"] = counter;
+                    string date = Convert.ToDateTime(row["date"]).ToShortDateString();
+                    newRow["date_entrance"] = DateAndMoneyConverter.DateToTextSimple(Convert.ToDateTime(row["date"]));
+                    newRow["date_debit"] = DateAndMoneyConverter.DateToTextSimple(dateTimePicker.Value);
+                    newRow["invoice_code"] = row["invoice_code"].ToString();
+
+                    counter++;
+
+                    debitReportTable.Rows.Add(newRow);
+                    l_UniqueCodes.Add(l_CurrentInvoiceCode);
                 }
             }
-            catch (Exception ex)
+
+            DataSet debitReportDataSet = new DataSet("Invoice");
+            debitReportDataSet.Tables.Add(debitReportTable);
+
+            return debitReportDataSet;
+        }
+
+        private DataSet GetDebitReportDataSet()
+        {
+            DataTable debitReportTable = new DataTable("DebitReport");
+            debitReportTable.Columns.Add("id");
+            debitReportTable.Columns.Add("number");
+            debitReportTable.Columns.Add("name");
+            debitReportTable.Columns.Add("OKEIcode");
+            debitReportTable.Columns.Add("measurement");
+            debitReportTable.Columns.Add("amount");
+            debitReportTable.Columns.Add("price");
+            debitReportTable.Columns.Add("sum");
+
+            int counter = 1;
+
+            foreach (DataRow row in DebitDataSet.Tables[0].Rows)
             {
-                MessageBox.Show(ex.Message);
+                DataRow newRow = debitReportTable.NewRow();
+
+                newRow["id"] = row["id"].ToString();
+                newRow["number"] = counter;
+                newRow["name"] = row["name"].ToString();
+                newRow["OKEIcode"] = row["OKEIcode"].ToString();
+                newRow["measurement"] = SQLiteSettingsManager.GetInstance().Measurement().GetShortName(row["measurement"].ToString());
+                newRow["amount"] = row["amount"].ToString();
+                newRow["price"] = decimal.Parse(row["price"].ToString(), NumberStyles.Currency).ToString("0.00");
+                newRow["sum"] = decimal.Parse(row["sum"].ToString(), NumberStyles.Currency).ToString("0.00");
+
+                counter++;
+
+                debitReportTable.Rows.Add(newRow);
             }
+
+            DataSet debitReportDataSet = new DataSet("Debit");
+            debitReportDataSet.Tables.Add(debitReportTable);
+
+            return debitReportDataSet;
         }
 
-        private void ShowInfo()
+        private Dictionary<string, object> GetReportFieldsData()
         {
-            DataSet dataSet = SQLiteManager.GetInstance().Debit().ReturnDataSet();
-            m_SelectedRecordId = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["id"];
-            nudAmount.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["amount"]);
-            dateTimePicker.Value = Convert.ToDateTime(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["date"]);
+            Dictionary<string, object> fieldsData = new Dictionary<string, object>();
+            fieldsData["Date"] = DateAndMoneyConverter.DateToTextLong(dateTimePicker.Value, "г.");
+            fieldsData["Date2"] = DateAndMoneyConverter.DateToTextLong(dateTimePicker.Value, "г.");
+            fieldsData["TotalPrice"] = Convert.ToDecimal(GetTotalPrice(), CultureInfo.InvariantCulture).ToString("0.00");
+            fieldsData["TotalPriceStr"] = GetTotalPriceStr();
+            fieldsData["Number"] = GetDocumentNumber();
+
+            return fieldsData;
         }
 
-        private void btnCreateDebit_Click(object sender, EventArgs e)
+        private string GetDate()
         {
-            DebitReport report = new DebitReport();
-            report.StartPosition = FormStartPosition.CenterParent;
-            report.ShowDialog();
+            return DateAndMoneyConverter.DateToTextSimple(dateTimePicker.Value);
         }
 
-        private void nudAmount_ValueChanged(object sender, EventArgs e)
+        private string GetDocumentNumber()
         {
-            errorProviderDebit.Clear();
+            // number
+            int docNumber = Numeration.GetInstance().DebitNumeration.DocCurrentNumber;
+            Numeration.GetInstance().DebitNumeration.IncrementNumber();
+            // prefix
+            string prefix = String.Empty;
+            if (!String.IsNullOrEmpty(Numeration.GetInstance().DebitNumeration.DocPrefix))
+            {
+                prefix = $"{Numeration.GetInstance().DebitNumeration.DocPrefix}_";
+            }
+            // date 
+            string date = String.Empty;
+            if (Numeration.GetInstance().DebitNumeration.IncludeDate)
+            {
+                date = $"_{ GetDate()}";
+            }
+            // result
+            string resultNumber = $"{prefix}{docNumber.ToString("0000")}{date}";
+            return resultNumber;
         }
 
-        private void DebitEditor_FormClosing(object sender, FormClosingEventArgs e)
+        private double GetTotalPrice()
         {
-            CheckDebit?.Invoke();
+            double sum = 0.0;
+
+            foreach (DataRow row in DebitDataSet.Tables[0].Rows)
+            {
+                sum += Double.Parse(row["sum"].ToString(), NumberStyles.Currency);
+            }
+
+            return sum;
+        }
+
+        private string GetTotalPriceStr()
+        {
+            return DateAndMoneyConverter.CurrencyToTxt(GetTotalPrice(), true);
         }
     }
 }

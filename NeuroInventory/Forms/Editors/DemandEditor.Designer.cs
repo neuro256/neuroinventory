@@ -28,322 +28,245 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.lblEmployee = new System.Windows.Forms.Label();
-            this.cbEmployee = new System.Windows.Forms.ComboBox();
-            this.lblAmount = new System.Windows.Forms.Label();
-            this.nudAmount = new System.Windows.Forms.NumericUpDown();
+            this.lwDemandData = new BrightIdeasSoftware.DataListView();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
+            this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
+            this.panelLeftUpper = new System.Windows.Forms.Panel();
             this.lblDate = new System.Windows.Forms.Label();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.splitContainerDemand = new System.Windows.Forms.SplitContainer();
-            this.lwDemand = new System.Windows.Forms.ListView();
-            this.chId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chEmployee = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chAmount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panelDemandUpRight = new System.Windows.Forms.Panel();
-            this.lblName = new System.Windows.Forms.Label();
-            this.tbName = new System.Windows.Forms.TextBox();
-            this.btnCreateDemand = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.contextMenuStripDemand = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.errorProviderDemand = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerDemand)).BeginInit();
-            this.splitContainerDemand.Panel1.SuspendLayout();
-            this.splitContainerDemand.Panel2.SuspendLayout();
-            this.splitContainerDemand.SuspendLayout();
-            this.panelDemandUpRight.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDemand)).BeginInit();
+            this.btnReleased = new System.Windows.Forms.Button();
+            this.lblEmployee = new System.Windows.Forms.Label();
+            this.cbEmployee = new System.Windows.Forms.ComboBox();
+            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            ((System.ComponentModel.ISupportInitialize)(this.lwDemandData)).BeginInit();
+            this.tableLayoutPanelMain.SuspendLayout();
+            this.panelLeftUpper.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblEmployee
+            // lwDemandData
             // 
-            this.lblEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEmployee.AutoSize = true;
-            this.lblEmployee.BackColor = System.Drawing.Color.LightCyan;
-            this.lblEmployee.Location = new System.Drawing.Point(58, 54);
-            this.lblEmployee.Name = "lblEmployee";
-            this.lblEmployee.Size = new System.Drawing.Size(78, 17);
-            this.lblEmployee.TabIndex = 0;
-            this.lblEmployee.Text = "Сотрудник";
+            this.lwDemandData.AllColumns.Add(this.olvColumn7);
+            this.lwDemandData.AllColumns.Add(this.olvColumn1);
+            this.lwDemandData.AllColumns.Add(this.olvColumn2);
+            this.lwDemandData.AllColumns.Add(this.olvColumn3);
+            this.lwDemandData.AllColumns.Add(this.olvColumn4);
+            this.lwDemandData.AllColumns.Add(this.olvColumn5);
+            this.lwDemandData.AllColumns.Add(this.olvColumn6);
+            this.lwDemandData.CellEditUseWholeCell = false;
+            this.lwDemandData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn7,
+            this.olvColumn1,
+            this.olvColumn2,
+            this.olvColumn3,
+            this.olvColumn4,
+            this.olvColumn5,
+            this.olvColumn6});
+            this.lwDemandData.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lwDemandData.DataSource = null;
+            this.lwDemandData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lwDemandData.FullRowSelect = true;
+            this.lwDemandData.GridLines = true;
+            this.lwDemandData.Location = new System.Drawing.Point(3, 3);
+            this.lwDemandData.Name = "lwDemandData";
+            this.lwDemandData.ShowGroups = false;
+            this.lwDemandData.Size = new System.Drawing.Size(840, 629);
+            this.lwDemandData.TabIndex = 0;
+            this.lwDemandData.UseCompatibleStateImageBehavior = false;
+            this.lwDemandData.View = System.Windows.Forms.View.Details;
+            this.lwDemandData.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.lwDemandData_CellEditFinishing);
+            this.lwDemandData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.lwDemandData_CellEditStarting);
             // 
-            // cbEmployee
+            // olvColumn1
             // 
-            this.cbEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbEmployee.FormattingEnabled = true;
-            this.cbEmployee.Location = new System.Drawing.Point(142, 51);
-            this.cbEmployee.Name = "cbEmployee";
-            this.cbEmployee.Size = new System.Drawing.Size(274, 24);
-            this.cbEmployee.TabIndex = 1;
+            this.olvColumn1.AspectName = "name";
+            this.olvColumn1.ButtonPadding = new System.Drawing.Size(10, 10);
+            this.olvColumn1.IsTileViewColumn = true;
+            this.olvColumn1.Text = "Название";
+            this.olvColumn1.UseInitialLetterForGroup = true;
+            this.olvColumn1.Width = 250;
             // 
-            // lblAmount
+            // olvColumn2
             // 
-            this.lblAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAmount.AutoSize = true;
-            this.lblAmount.BackColor = System.Drawing.Color.LightCyan;
-            this.lblAmount.Location = new System.Drawing.Point(31, 94);
-            this.lblAmount.Name = "lblAmount";
-            this.lblAmount.Size = new System.Drawing.Size(204, 17);
-            this.lblAmount.TabIndex = 2;
-            this.lblAmount.Text = "Количество отпущенного тмц";
+            this.olvColumn2.AspectName = "OKEIcode";
+            this.olvColumn2.IsEditable = false;
+            this.olvColumn2.Text = "Код ОКЕИ";
+            this.olvColumn2.Width = 90;
             // 
-            // nudAmount
+            // olvColumn3
             // 
-            this.nudAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudAmount.Location = new System.Drawing.Point(241, 92);
-            this.nudAmount.Maximum = new decimal(new int[] {
-            999999999,
-            0,
-            0,
-            0});
-            this.nudAmount.Name = "nudAmount";
-            this.nudAmount.Size = new System.Drawing.Size(175, 22);
-            this.nudAmount.TabIndex = 2;
-            this.nudAmount.ValueChanged += new System.EventHandler(this.nudAmount_ValueChanged);
+            this.olvColumn3.AspectName = "measurement";
+            this.olvColumn3.IsEditable = false;
+            this.olvColumn3.Text = "Единица измерения";
+            this.olvColumn3.Width = 150;
+            // 
+            // olvColumn4
+            // 
+            this.olvColumn4.AspectName = "price";
+            this.olvColumn4.AspectToStringFormat = "{0:C}";
+            this.olvColumn4.IsEditable = false;
+            this.olvColumn4.Text = "Цена";
+            this.olvColumn4.Width = 100;
+            // 
+            // olvColumn5
+            // 
+            this.olvColumn5.AspectName = "amount";
+            this.olvColumn5.Text = "Количество";
+            this.olvColumn5.Width = 100;
+            // 
+            // olvColumn6
+            // 
+            this.olvColumn6.AspectName = "sum";
+            this.olvColumn6.AspectToStringFormat = "{0:C}";
+            this.olvColumn6.IsEditable = false;
+            this.olvColumn6.Text = "Сумма";
+            this.olvColumn6.Width = 100;
+            // 
+            // highlightTextRenderer1
+            // 
+            this.highlightTextRenderer1.CanWrap = true;
+            this.highlightTextRenderer1.UseGdiTextRendering = false;
+            // 
+            // tableLayoutPanelMain
+            // 
+            this.tableLayoutPanelMain.ColumnCount = 2;
+            this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.59237F));
+            this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.40763F));
+            this.tableLayoutPanelMain.Controls.Add(this.lwDemandData, 0, 0);
+            this.tableLayoutPanelMain.Controls.Add(this.panelLeftUpper, 1, 0);
+            this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
+            this.tableLayoutPanelMain.RowCount = 1;
+            this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(1182, 635);
+            this.tableLayoutPanelMain.TabIndex = 1;
+            // 
+            // panelLeftUpper
+            // 
+            this.panelLeftUpper.Controls.Add(this.lblDate);
+            this.panelLeftUpper.Controls.Add(this.dateTimePicker);
+            this.panelLeftUpper.Controls.Add(this.btnReleased);
+            this.panelLeftUpper.Controls.Add(this.lblEmployee);
+            this.panelLeftUpper.Controls.Add(this.cbEmployee);
+            this.panelLeftUpper.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelLeftUpper.Location = new System.Drawing.Point(849, 3);
+            this.panelLeftUpper.Name = "panelLeftUpper";
+            this.panelLeftUpper.Size = new System.Drawing.Size(330, 629);
+            this.panelLeftUpper.TabIndex = 7;
             // 
             // lblDate
             // 
-            this.lblDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(193, 141);
+            this.lblDate.BackColor = System.Drawing.Color.Silver;
+            this.lblDate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblDate.Location = new System.Drawing.Point(3, 74);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(42, 17);
-            this.lblDate.TabIndex = 4;
+            this.lblDate.Size = new System.Drawing.Size(43, 18);
+            this.lblDate.TabIndex = 11;
             this.lblDate.Text = "Дата";
             // 
             // dateTimePicker
             // 
-            this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker.Location = new System.Drawing.Point(241, 136);
+            this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker.Location = new System.Drawing.Point(3, 95);
             this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(175, 22);
-            this.dateTimePicker.TabIndex = 3;
+            this.dateTimePicker.Size = new System.Drawing.Size(318, 22);
+            this.dateTimePicker.TabIndex = 9;
             // 
-            // btnDelete
+            // btnReleased
             // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDelete.Location = new System.Drawing.Point(305, 564);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(98, 29);
-            this.btnDelete.TabIndex = 8;
-            this.btnDelete.Text = "Удалить";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnReleased.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReleased.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnReleased.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnReleased.Location = new System.Drawing.Point(3, 587);
+            this.btnReleased.Name = "btnReleased";
+            this.btnReleased.Size = new System.Drawing.Size(318, 33);
+            this.btnReleased.TabIndex = 5;
+            this.btnReleased.Text = "Сформировать отчет";
+            this.btnReleased.UseVisualStyleBackColor = true;
+            this.btnReleased.Click += new System.EventHandler(this.btnReleased_Click);
             // 
-            // btnAdd
+            // lblEmployee
             // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAdd.Location = new System.Drawing.Point(57, 564);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(98, 29);
-            this.btnAdd.TabIndex = 6;
-            this.btnAdd.Text = "Добавить";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.lblEmployee.AutoSize = true;
+            this.lblEmployee.BackColor = System.Drawing.Color.Silver;
+            this.lblEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblEmployee.Location = new System.Drawing.Point(3, 16);
+            this.lblEmployee.Name = "lblEmployee";
+            this.lblEmployee.Size = new System.Drawing.Size(75, 18);
+            this.lblEmployee.TabIndex = 8;
+            this.lblEmployee.Text = "Работник";
             // 
-            // splitContainerDemand
+            // cbEmployee
             // 
-            this.splitContainerDemand.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerDemand.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerDemand.Margin = new System.Windows.Forms.Padding(0);
-            this.splitContainerDemand.Name = "splitContainerDemand";
+            this.cbEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbEmployee.DropDownHeight = 115;
+            this.cbEmployee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cbEmployee.FormattingEnabled = true;
+            this.cbEmployee.IntegralHeight = false;
+            this.cbEmployee.Location = new System.Drawing.Point(6, 37);
+            this.cbEmployee.Name = "cbEmployee";
+            this.cbEmployee.Size = new System.Drawing.Size(315, 24);
+            this.cbEmployee.TabIndex = 7;
             // 
-            // splitContainerDemand.Panel1
+            // olvColumn7
             // 
-            this.splitContainerDemand.Panel1.Controls.Add(this.lwDemand);
+            this.olvColumn7.AspectName = "";
+            this.olvColumn7.IsEditable = false;
+            this.olvColumn7.Text = "№";
+            this.olvColumn7.Width = 50;
             // 
-            // splitContainerDemand.Panel2
-            // 
-            this.splitContainerDemand.Panel2.AutoScroll = true;
-            this.splitContainerDemand.Panel2.BackColor = System.Drawing.Color.Silver;
-            this.splitContainerDemand.Panel2.Controls.Add(this.panelDemandUpRight);
-            this.splitContainerDemand.Panel2.Controls.Add(this.btnCreateDemand);
-            this.splitContainerDemand.Panel2.Controls.Add(this.btnEdit);
-            this.splitContainerDemand.Panel2.Controls.Add(this.lblEmployee);
-            this.splitContainerDemand.Panel2.Controls.Add(this.btnDelete);
-            this.splitContainerDemand.Panel2.Controls.Add(this.cbEmployee);
-            this.splitContainerDemand.Panel2.Controls.Add(this.btnAdd);
-            this.splitContainerDemand.Panel2.Controls.Add(this.lblAmount);
-            this.splitContainerDemand.Panel2.Controls.Add(this.nudAmount);
-            this.splitContainerDemand.Panel2.Controls.Add(this.lblDate);
-            this.splitContainerDemand.Panel2.Controls.Add(this.dateTimePicker);
-            this.splitContainerDemand.Panel2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.splitContainerDemand.Size = new System.Drawing.Size(1182, 605);
-            this.splitContainerDemand.SplitterDistance = 750;
-            this.splitContainerDemand.TabIndex = 14;
-            // 
-            // lwDemand
-            // 
-            this.lwDemand.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lwDemand.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chId,
-            this.chNumber,
-            this.chEmployee,
-            this.chAmount,
-            this.chDate});
-            this.lwDemand.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lwDemand.FullRowSelect = true;
-            this.lwDemand.GridLines = true;
-            this.lwDemand.Location = new System.Drawing.Point(0, 0);
-            this.lwDemand.Margin = new System.Windows.Forms.Padding(0);
-            this.lwDemand.MultiSelect = false;
-            this.lwDemand.Name = "lwDemand";
-            this.lwDemand.Size = new System.Drawing.Size(750, 605);
-            this.lwDemand.TabIndex = 0;
-            this.lwDemand.UseCompatibleStateImageBehavior = false;
-            this.lwDemand.View = System.Windows.Forms.View.Details;
-            // 
-            // chId
-            // 
-            this.chId.Text = "id";
-            // 
-            // chNumber
-            // 
-            this.chNumber.Text = "№";
-            // 
-            // chEmployee
-            // 
-            this.chEmployee.Text = "Сотрудник";
-            this.chEmployee.Width = 200;
-            // 
-            // chAmount
-            // 
-            this.chAmount.Text = "Количество";
-            this.chAmount.Width = 100;
-            // 
-            // chDate
-            // 
-            this.chDate.Text = "Дата";
-            this.chDate.Width = 100;
-            // 
-            // panelDemandUpRight
-            // 
-            this.panelDemandUpRight.BackColor = System.Drawing.Color.Gainsboro;
-            this.panelDemandUpRight.Controls.Add(this.lblName);
-            this.panelDemandUpRight.Controls.Add(this.tbName);
-            this.panelDemandUpRight.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelDemandUpRight.Location = new System.Drawing.Point(0, 0);
-            this.panelDemandUpRight.Name = "panelDemandUpRight";
-            this.panelDemandUpRight.Size = new System.Drawing.Size(428, 45);
-            this.panelDemandUpRight.TabIndex = 12;
-            // 
-            // lblName
-            // 
-            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(67, 15);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(108, 17);
-            this.lblName.TabIndex = 10;
-            this.lblName.Text = "Название тмц: ";
-            // 
-            // tbName
-            // 
-            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbName.BackColor = System.Drawing.Color.Silver;
-            this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbName.Location = new System.Drawing.Point(181, 12);
-            this.tbName.Name = "tbName";
-            this.tbName.ReadOnly = true;
-            this.tbName.Size = new System.Drawing.Size(235, 22);
-            this.tbName.TabIndex = 11;
-            // 
-            // btnCreateDemand
-            // 
-            this.btnCreateDemand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreateDemand.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnCreateDemand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCreateDemand.Location = new System.Drawing.Point(161, 189);
-            this.btnCreateDemand.Name = "btnCreateDemand";
-            this.btnCreateDemand.Size = new System.Drawing.Size(255, 53);
-            this.btnCreateDemand.TabIndex = 4;
-            this.btnCreateDemand.Text = "Сформировать требование-накладную";
-            this.btnCreateDemand.UseVisualStyleBackColor = true;
-            this.btnCreateDemand.Click += new System.EventHandler(this.btnCreateDemand_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnEdit.Location = new System.Drawing.Point(183, 564);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(98, 29);
-            this.btnEdit.TabIndex = 7;
-            this.btnEdit.Text = "Изменить";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // contextMenuStripDemand
-            // 
-            this.contextMenuStripDemand.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStripDemand.Name = "contextMenuStripDemand";
-            this.contextMenuStripDemand.Size = new System.Drawing.Size(67, 4);
-            // 
-            // errorProviderDemand
-            // 
-            this.errorProviderDemand.BlinkRate = 0;
-            this.errorProviderDemand.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.errorProviderDemand.ContainerControl = this;
-            // 
-            // DemandEditor
+            // DemandEditorNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1182, 605);
-            this.Controls.Add(this.splitContainerDemand);
+            this.ClientSize = new System.Drawing.Size(1182, 635);
+            this.Controls.Add(this.tableLayoutPanelMain);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "DemandEditor";
+            this.Name = "DemandEditorNew";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Редактор требований";
-            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
-            this.splitContainerDemand.Panel1.ResumeLayout(false);
-            this.splitContainerDemand.Panel2.ResumeLayout(false);
-            this.splitContainerDemand.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerDemand)).EndInit();
-            this.splitContainerDemand.ResumeLayout(false);
-            this.panelDemandUpRight.ResumeLayout(false);
-            this.panelDemandUpRight.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDemand)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lwDemandData)).EndInit();
+            this.tableLayoutPanelMain.ResumeLayout(false);
+            this.panelLeftUpper.ResumeLayout(false);
+            this.panelLeftUpper.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private BrightIdeasSoftware.DataListView lwDemandData;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn olvColumn4;
+        private BrightIdeasSoftware.OLVColumn olvColumn5;
+        private BrightIdeasSoftware.OLVColumn olvColumn6;
+        private System.Windows.Forms.Button btnReleased;
+        private System.Windows.Forms.Panel panelLeftUpper;
         private System.Windows.Forms.Label lblEmployee;
         private System.Windows.Forms.ComboBox cbEmployee;
-        private System.Windows.Forms.Label lblAmount;
-        private System.Windows.Forms.NumericUpDown nudAmount;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.SplitContainer splitContainerDemand;
-        private System.Windows.Forms.ListView lwDemand;
-        private System.Windows.Forms.ColumnHeader chId;
-        private System.Windows.Forms.ColumnHeader chNumber;
-        private System.Windows.Forms.ColumnHeader chEmployee;
-        private System.Windows.Forms.ColumnHeader chAmount;
-        private System.Windows.Forms.ColumnHeader chDate;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStripDemand;
-        private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnCreateDemand;
-        private System.Windows.Forms.ErrorProvider errorProviderDemand;
-        private System.Windows.Forms.TextBox tbName;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Panel panelDemandUpRight;
+        private BrightIdeasSoftware.OLVColumn olvColumn7;
     }
 }

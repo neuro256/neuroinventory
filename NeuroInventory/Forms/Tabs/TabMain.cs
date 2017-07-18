@@ -519,7 +519,6 @@ namespace NeuroInventory
             this.Text = "tabInventory";
 
             InventoryFilter.Filtration += InventoryFilter_Filtration;
-            DebitEditor.CheckDebit += DebitEditor_CheckDebit;
         }
 
         private void DebitEditor_CheckDebit()
@@ -922,7 +921,7 @@ namespace NeuroInventory
         {
             if (lwInventory.CheckedItems.Count > 0)
             {
-                DemandEditorNew editor = new DemandEditorNew(GetDemandDataSet());
+                DemandEditor editor = new DemandEditor(GetDemandDataSet());
                 editor.StartPosition = FormStartPosition.CenterParent;
                 if(editor.ShowDialog() == DialogResult.OK)
                 {

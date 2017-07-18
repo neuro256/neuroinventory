@@ -384,7 +384,7 @@ namespace NeuroInventory
         {
             if(lwReleased.CheckedItems.Count > 0)
             {
-                DebitEditorNew editor = new DebitEditorNew(GetDebitDataSet());
+                DebitEditor editor = new DebitEditor(GetDebitDataSet());
                 editor.StartPosition = FormStartPosition.CenterParent;
                 if(editor.ShowDialog() == DialogResult.OK)
                 {

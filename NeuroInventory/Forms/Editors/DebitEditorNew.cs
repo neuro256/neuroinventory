@@ -120,12 +120,17 @@ namespace NeuroInventory
 
         public bool CreateReport()
         {
-            DataSet dataSetDebitReport = GetDebitReportDataSet();
-            DataSet dataSetInvoiceReport = GetInvoiceReportDataSet();
-            Dictionary<string, object> debitReportFieldsData = GetReportFieldsData();
             string l_FileName = SQLiteManager.GetInstance().DebitReport().CreateFileName(Definitions.DEBIT_REPORT_FILENAME).ToString();
 
-            IReportWrapper gemboxReport = new GemboxXlsWrapper(l_FileName, dataSetDebitReport, dataSetInvoiceReport, debitReportFieldsData);
+            GemboxReportBuilder builder = new GemboxReportBuilder();
+            builder.AddAdditionalData(GetReportFieldsData());
+            builder.AddDebitDataSet(GetDebitReportDataSet());
+            builder.AddInvoiceDataSet(GetInvoiceReportDataSet());
+            builder.AddDestinationPath(l_FileName);
+
+            ReportData l_ReportData = builder.Build();
+
+            IReportWrapper gemboxReport = new GemboxXlsWrapper(l_ReportData);
             if (gemboxReport.CreateReport())
             {
                 SQLiteManager.GetInstance().DebitReport().Insert(DateTime.Now, l_FileName);

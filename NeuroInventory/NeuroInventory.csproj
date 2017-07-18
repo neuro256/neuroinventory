@@ -101,6 +101,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ReportsClasses\ReportBuilder.cs" />
+    <Compile Include="ReportsClasses\ReportData.cs" />
     <Compile Include="UtilityClasses\DocumentNumeration.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>

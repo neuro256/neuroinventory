@@ -17,12 +17,12 @@ namespace NeuroInventory
         private DataSet m_InvoiceDataSet;
         private Dictionary<string, object> m_AdditionalData;
 
-        public GemboxXlsWrapper(string p_DestinationPath, DataSet p_DebitDataSet, DataSet p_InvoiceDataSet, Dictionary<string, object> p_AdditionalData)
+        public GemboxXlsWrapper(ReportData p_ReportData)
         {
-            m_DestinationPath = p_DestinationPath;
-            m_DebitDataSet = p_DebitDataSet;
-            m_InvoiceDataSet = p_InvoiceDataSet;
-            m_AdditionalData = p_AdditionalData;
+            m_DestinationPath = p_ReportData.DestinationPath;
+            m_DebitDataSet = p_ReportData.DebitDataSet;
+            m_InvoiceDataSet = p_ReportData.InvoiceDataSet;
+            m_AdditionalData = p_ReportData.AdditionalData;
         }
 
         public bool CreateReport()

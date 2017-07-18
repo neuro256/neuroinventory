@@ -151,11 +151,16 @@ namespace NeuroInventory
 
         public bool CreateReport()
         {
-            DataSet dataSetDemandReport = GetDemandReportDataSet();
-            Dictionary<string, object> demandReportFieldsData = GetReportFieldsData();
             string l_FileName = SQLiteManager.GetInstance().DemandReport().CreateFileName(Definitions.DEMAND_REPORT_FILENAME).ToString();
 
-            IReportWrapper spireDoc = new SpireDocWrapper(l_FileName, dataSetDemandReport, demandReportFieldsData);
+            SpireReportBuilder builder = new SpireReportBuilder();
+            builder.AddDestinationPath(l_FileName);
+            builder.AddDemandDataSet(GetDemandReportDataSet());
+            builder.AddAdditionalData(GetReportFieldsData());
+
+            ReportData l_ReportData = builder.Build();
+
+            IReportWrapper spireDoc = new SpireDocWrapper(l_ReportData);
 
             if (spireDoc.CreateReport())
             {

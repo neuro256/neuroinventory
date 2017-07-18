@@ -14,11 +14,11 @@ namespace NeuroInventory
         private DataSet m_DataSet;
         private Dictionary<string, object> m_AdditionalData;
 
-        public SpireDocWrapper(string p_DestinationPath, DataSet p_DataSet, Dictionary<string, object> p_AdditionalData)
+        public SpireDocWrapper(ReportData p_ReportData)
         {
-            m_DestinationPath = p_DestinationPath;
-            m_DataSet = p_DataSet;
-            m_AdditionalData = p_AdditionalData;
+            m_DestinationPath = p_ReportData.DestinationPath;
+            m_DataSet = p_ReportData.DemandDataSet;
+            m_AdditionalData = p_ReportData.AdditionalData;
         }
 
         public bool CreateReport()

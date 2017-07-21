@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace NeuroInventory
 {
-    public class InventorySql : TableSql<InventorySql>
+    public class InventorySql : TableSql
     {
         private string m_CommandDataSetNotFiltered;
         private int m_SelectedCatalogId;

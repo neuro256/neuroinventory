@@ -7,6 +7,10 @@ namespace NeuroInventory
 {
     public class SQLiteSettingsManager : SQLManagerBase<SQLiteSettingsManager>
     {
+        private static MeasurementSql m_MeasurementSql = null;
+        private static UserSql m_UserSql = null;
+        private static RecentsSql m_RecentsSql = null;
+
         public override bool TestConnection()
         {
             try
@@ -126,17 +130,23 @@ namespace NeuroInventory
 
         public MeasurementSql Measurement()
         {
-            return MeasurementSql.GetInstance();
+            if (m_MeasurementSql == null)
+                m_MeasurementSql = new MeasurementSql();
+            return m_MeasurementSql;
         }
 
         public UserSql User()
         {
-            return UserSql.GetInstance();
+            if (m_UserSql == null)
+                m_UserSql = new UserSql();
+            return m_UserSql;
         }
 
         public RecentsSql Recents()
         {
-            return RecentsSql.GetInstance();
+            if (m_RecentsSql == null)
+                m_RecentsSql = new RecentsSql();
+            return m_RecentsSql;
         }
     }
 }

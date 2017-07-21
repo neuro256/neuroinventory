@@ -2,7 +2,7 @@
 
 namespace NeuroInventory
 {
-    public class UserSql : TableSql<UserSql>
+    public class UserSql : TableSql
     {
         public new string connectionString
         {

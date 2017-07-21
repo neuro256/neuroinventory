@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NeuroInventory
 {
-    public class CatalogsSql : TableSql<CatalogsSql>
+    public class CatalogsSql : TableSql
     {
         public CatalogsSql()
         {

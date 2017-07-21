@@ -1,14 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.SQLite;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public class SQLiteManager : SQLManagerBase<SQLiteManager>
+    public sealed class SQLiteManager : SQLManagerBase<SQLiteManager>
     {
+        private static EmployeesSql m_EmployeeSql = null;
+        private static ProvidersSql m_ProviderSql = null;
+        private static InventorySql m_InventorySql = null;
+        private static DemandSql m_DemandSql = null;
+        private static DebitSql m_DebitSql = null;
+        private static CatalogsSql m_CatalogSql = null;
+        private static DemandReportSql m_DemandReportSql = null;
+        private static DebitReportSql m_DebitReportSql = null;
+        private static ReleasedSql m_ReleasedSql = null;
+
         /// <summary>
         /// Проверка соединения с базой данных
         /// </summary>
@@ -233,47 +241,65 @@ namespace NeuroInventory
 
         public EmployeesSql Employees()
         {
-            return EmployeesSql.GetInstance();
+            if (m_EmployeeSql == null)
+                m_EmployeeSql = new EmployeesSql();
+            return m_EmployeeSql;
         }
 
         public ProvidersSql Providers()
         {
-            return ProvidersSql.GetInstance();
+            if (m_ProviderSql == null)
+                m_ProviderSql = new ProvidersSql();
+            return m_ProviderSql;
         }
 
         public InventorySql Inventory()
         {
-            return InventorySql.GetInstance();
+            if (m_InventorySql == null)
+                m_InventorySql = new InventorySql();
+            return m_InventorySql;
         }
 
         public DemandSql Demand()
         {
-            return DemandSql.GetInstance();
+            if (m_DemandSql == null)
+                m_DemandSql = new DemandSql();
+            return m_DemandSql;
         }
 
         public DebitSql Debit()
         {
-            return DebitSql.GetInstance();
+            if (m_DebitSql == null)
+                m_DebitSql = new DebitSql();
+            return m_DebitSql;
         }
 
         public CatalogsSql Catalogs()
         {
-            return CatalogsSql.GetInstance();
+            if (m_CatalogSql == null)
+                m_CatalogSql = new CatalogsSql();
+            return m_CatalogSql;
         }
 
         public DemandReportSql DemandReport()
         {
-            return DemandReportSql.GetInstance();
+            if (m_DemandReportSql == null)
+                m_DemandReportSql = new DemandReportSql();
+            return m_DemandReportSql;
         }
 
         public DebitReportSql DebitReport()
         {
-            return DebitReportSql.GetInstance();
+            if (m_DebitReportSql == null)
+                m_DebitReportSql = new DebitReportSql();
+            return m_DebitReportSql;
         }
 
         public ReleasedSql Released()
         {
-            return ReleasedSql.GetInstance();
+            if (m_ReleasedSql == null)
+                m_ReleasedSql = new ReleasedSql();
+            return m_ReleasedSql;
         }
     }
 }

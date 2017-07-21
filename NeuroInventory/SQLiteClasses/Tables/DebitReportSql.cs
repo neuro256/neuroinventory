@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public class DebitReportSql : TableSql<DebitReportSql>
+    public class DebitReportSql : TableSql
     {
         public DebitReportSql()
         {

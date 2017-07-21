@@ -2,29 +2,18 @@
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace NeuroInventory
 {
     //Абстрактный класс для работы с таблицами 
     //Для каждой таблицы SQL создается отдельный класс-наследник
-    public abstract class TableSql<T> where T : new()
+    public abstract class TableSql
     {
-        private static T instance;
         private string m_CommandDataSet; //Команда для создания набора
         protected string m_ConnectionStr;//Строка для подключения 
         private string m_TableName; //Название таблицы
         private string m_TargetPath; // Путь к сохраняемым файлам
-
-        static public T GetInstance()
-        {
-            if(instance == null)
-            {
-                instance = new T();
-            }
-            return instance;
-        }
 
         public string connectionString
         {

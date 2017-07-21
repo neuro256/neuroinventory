@@ -4,7 +4,7 @@ using System.Data;
 
 namespace NeuroInventory
 {
-    public class DebitSql : TableSql<DebitSql>
+    public class DebitSql : TableSql
     {
         public DebitSql()
         {

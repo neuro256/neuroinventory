@@ -4,7 +4,7 @@ using System.Data;
 
 namespace NeuroInventory
 {
-    public class DemandSql : TableSql<DemandSql>
+    public class DemandSql : TableSql
     {
         public DemandSql()
         {

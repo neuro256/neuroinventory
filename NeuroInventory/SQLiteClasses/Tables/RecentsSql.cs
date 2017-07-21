@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public class RecentsSql : TableSql<RecentsSql>
+    public class RecentsSql : TableSql
     {
         public new string connectionString
         {

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public class DemandReportSql : TableSql<DemandReportSql>
+    public class DemandReportSql : TableSql
     {
         public DemandReportSql()
         {

@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace NeuroInventory
 {
-    public class ReleasedSql : TableSql<ReleasedSql>
+    public class ReleasedSql : TableSql
     {
         private string m_CommandDataSetNotFiltered;
 

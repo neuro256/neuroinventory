@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public class SQLiteSettingsManager : SQLManagerBase<SQLiteSettingsManager>
+    public sealed class SQLiteSettingsManager : SQLManagerBase<SQLiteSettingsManager>
     {
         private static MeasurementSql m_MeasurementSql = null;
         private static UserSql m_UserSql = null;

@@ -37,13 +37,14 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panelProvidersBottom = new System.Windows.Forms.Panel();
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnProviderEdit = new System.Windows.Forms.Button();
             this.btnProviderRemove = new System.Windows.Forms.Button();
             this.btnProviderAdd = new System.Windows.Forms.Button();
             this.contextMenuStripProviders = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanelProviders.SuspendLayout();
             this.panelProvidersBottom.SuspendLayout();
             this.SuspendLayout();
@@ -77,7 +78,8 @@
             this.columnHeader4,
             this.columnHeader5,
             this.columnHeader6,
-            this.columnHeader7});
+            this.columnHeader7,
+            this.columnHeader8});
             this.lwProviders.GridLines = true;
             this.lwProviders.Location = new System.Drawing.Point(0, 0);
             this.lwProviders.Margin = new System.Windows.Forms.Padding(0);
@@ -116,10 +118,10 @@
             this.columnHeader6.Text = "е-mail";
             this.columnHeader6.Width = 200;
             // 
-            // columnHeader7
+            // columnHeader8
             // 
-            this.columnHeader7.Text = "карточка предприятия";
-            this.columnHeader7.Width = 205;
+            this.columnHeader8.Text = "карточка предприятия";
+            this.columnHeader8.Width = 205;
             // 
             // panelProvidersBottom
             // 
@@ -191,7 +193,12 @@
             // 
             this.contextMenuStripProviders.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripProviders.Name = "contextMenuStripProviders";
-            this.contextMenuStripProviders.Size = new System.Drawing.Size(67, 4);
+            this.contextMenuStripProviders.Size = new System.Drawing.Size(61, 4);
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "ИНН";
+            this.columnHeader7.Width = 200;
             // 
             // TabProviders
             // 
@@ -222,12 +229,13 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.Panel panelProvidersBottom;
         private System.Windows.Forms.Button btnProviderEdit;
         private System.Windows.Forms.Button btnProviderRemove;
         private System.Windows.Forms.Button btnProviderAdd;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripProviders;
         private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
     }
 }

@@ -41,6 +41,8 @@
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
+            this.tbINN = new System.Windows.Forms.TextBox();
+            this.lblINN = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblAddress
@@ -85,7 +87,7 @@
             // lblDocument
             // 
             this.lblDocument.AutoSize = true;
-            this.lblDocument.Location = new System.Drawing.Point(833, 9);
+            this.lblDocument.Location = new System.Drawing.Point(836, 54);
             this.lblDocument.Name = "lblDocument";
             this.lblDocument.Size = new System.Drawing.Size(73, 17);
             this.lblDocument.TabIndex = 4;
@@ -125,7 +127,7 @@
             // 
             // tbDocument
             // 
-            this.tbDocument.Location = new System.Drawing.Point(836, 29);
+            this.tbDocument.Location = new System.Drawing.Point(839, 74);
             this.tbDocument.Name = "tbDocument";
             this.tbDocument.Size = new System.Drawing.Size(200, 22);
             this.tbDocument.TabIndex = 9;
@@ -135,7 +137,7 @@
             // 
             this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFilter.Location = new System.Drawing.Point(12, 57);
+            this.btnFilter.Location = new System.Drawing.Point(12, 102);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(98, 29);
             this.btnFilter.TabIndex = 10;
@@ -147,7 +149,7 @@
             // 
             this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClear.Location = new System.Drawing.Point(116, 57);
+            this.btnClear.Location = new System.Drawing.Point(116, 102);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(98, 29);
             this.btnClear.TabIndex = 11;
@@ -159,7 +161,7 @@
             // 
             this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClose.Location = new System.Drawing.Point(220, 57);
+            this.btnClose.Location = new System.Drawing.Point(220, 102);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(98, 29);
             this.btnClose.TabIndex = 12;
@@ -167,13 +169,33 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // tbINN
+            // 
+            this.tbINN.Location = new System.Drawing.Point(839, 29);
+            this.tbINN.MaxLength = 12;
+            this.tbINN.Name = "tbINN";
+            this.tbINN.Size = new System.Drawing.Size(200, 22);
+            this.tbINN.TabIndex = 14;
+            this.tbINN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbINN_KeyPress);
+            // 
+            // lblINN
+            // 
+            this.lblINN.AutoSize = true;
+            this.lblINN.Location = new System.Drawing.Point(836, 9);
+            this.lblINN.Name = "lblINN";
+            this.lblINN.Size = new System.Drawing.Size(38, 17);
+            this.lblINN.TabIndex = 13;
+            this.lblINN.Text = "ИНН";
+            // 
             // ProvidersFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(1200, 90);
+            this.ClientSize = new System.Drawing.Size(1200, 141);
+            this.Controls.Add(this.tbINN);
+            this.Controls.Add(this.lblINN);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnFilter);
@@ -214,5 +236,7 @@
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.TextBox tbINN;
+        private System.Windows.Forms.Label lblINN;
     }
 }

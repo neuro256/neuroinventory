@@ -196,6 +196,7 @@ namespace NeuroInventory
                                 "address NVARCHAR(50), " +
                                 "phone NVARCHAR(20), " +
                                 "mail NVARCHAR(45), " +
+                                "inn NVARCHAR(12), " +  
                                 "document NVARCHAR(80));";
                             await command.ExecuteNonQueryAsync();
 
@@ -236,6 +237,10 @@ namespace NeuroInventory
             if(!CheckIfColumnExists("debit", "demandId"))
             {
                 AlterTableAddColumn("debit", "demandId", "INTEGER");
+            }
+            if(!CheckIfColumnExists("providers", "inn"))
+            {
+                AlterTableAddColumn("providers", "inn", "NVARCHAR(12)");
             }
         }
 

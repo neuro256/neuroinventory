@@ -44,6 +44,8 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnClearPath = new System.Windows.Forms.Button();
             this.errorProviderProviders = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblINN = new System.Windows.Forms.Label();
+            this.tbINN = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderProviders)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,7 +122,7 @@
             // lblLink
             // 
             this.lblLink.AutoSize = true;
-            this.lblLink.Location = new System.Drawing.Point(35, 199);
+            this.lblLink.Location = new System.Drawing.Point(35, 238);
             this.lblLink.Name = "lblLink";
             this.lblLink.Size = new System.Drawing.Size(143, 17);
             this.lblLink.TabIndex = 4;
@@ -128,7 +130,7 @@
             // 
             // tbDocument
             // 
-            this.tbDocument.Location = new System.Drawing.Point(202, 196);
+            this.tbDocument.Location = new System.Drawing.Point(202, 235);
             this.tbDocument.Name = "tbDocument";
             this.tbDocument.ReadOnly = true;
             this.tbDocument.Size = new System.Drawing.Size(292, 22);
@@ -139,7 +141,7 @@
             // 
             this.btnLink.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnLink.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLink.Location = new System.Drawing.Point(501, 194);
+            this.btnLink.Location = new System.Drawing.Point(501, 233);
             this.btnLink.Name = "btnLink";
             this.btnLink.Size = new System.Drawing.Size(88, 24);
             this.btnLink.TabIndex = 9;
@@ -151,7 +153,7 @@
             // 
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCancel.Location = new System.Drawing.Point(396, 263);
+            this.btnCancel.Location = new System.Drawing.Point(396, 301);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(98, 29);
             this.btnCancel.TabIndex = 11;
@@ -163,7 +165,7 @@
             // 
             this.btnOk.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOk.Location = new System.Drawing.Point(202, 263);
+            this.btnOk.Location = new System.Drawing.Point(202, 301);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(98, 29);
             this.btnOk.TabIndex = 10;
@@ -175,7 +177,7 @@
             // 
             this.btnClearPath.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnClearPath.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClearPath.Location = new System.Drawing.Point(595, 194);
+            this.btnClearPath.Location = new System.Drawing.Point(595, 233);
             this.btnClearPath.Name = "btnClearPath";
             this.btnClearPath.Size = new System.Drawing.Size(88, 24);
             this.btnClearPath.TabIndex = 13;
@@ -189,12 +191,31 @@
             this.errorProviderProviders.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProviderProviders.ContainerControl = this;
             // 
+            // lblINN
+            // 
+            this.lblINN.AutoSize = true;
+            this.lblINN.Location = new System.Drawing.Point(35, 198);
+            this.lblINN.Name = "lblINN";
+            this.lblINN.Size = new System.Drawing.Size(38, 17);
+            this.lblINN.TabIndex = 14;
+            this.lblINN.Text = "ИНН";
+            // 
+            // tbINN
+            // 
+            this.tbINN.Location = new System.Drawing.Point(202, 195);
+            this.tbINN.Name = "tbINN";
+            this.tbINN.Size = new System.Drawing.Size(292, 22);
+            this.tbINN.TabIndex = 15;
+            this.tbINN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbINN_KeyPress);
+            // 
             // ProviderEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(695, 304);
+            this.ClientSize = new System.Drawing.Size(695, 342);
+            this.Controls.Add(this.lblINN);
+            this.Controls.Add(this.tbINN);
             this.Controls.Add(this.btnClearPath);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -237,5 +258,7 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnClearPath;
         private System.Windows.Forms.ErrorProvider errorProviderProviders;
+        private System.Windows.Forms.Label lblINN;
+        private System.Windows.Forms.TextBox tbINN;
     }
 }

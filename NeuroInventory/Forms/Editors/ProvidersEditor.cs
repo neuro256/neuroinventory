@@ -42,6 +42,7 @@ namespace NeuroInventory
             tbAddress.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["address"].ToString();
             tbPhone.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["phone"].ToString();
             tbMail.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["mail"].ToString();
+            tbINN.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["inn"].ToString();
             string fileName = Path.GetFileName(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString());
             tbDocument.Text = fileName;
             m_CurrentDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString();
@@ -57,11 +58,11 @@ namespace NeuroInventory
 
             if(m_EditorMode == EditorMode.UPDATE)
             {
-                SQLiteManager.GetInstance().Providers().Update(m_SelectedRecordId, tbName.Text, tbAddress.Text, tbPhone.Text, tbMail.Text, m_SelectedDocument, m_CurrentDocument);
+                SQLiteManager.GetInstance().Providers().Update(m_SelectedRecordId, tbName.Text, tbAddress.Text, tbPhone.Text, tbMail.Text, tbINN.Text, m_SelectedDocument, m_CurrentDocument);
             }
             else
             {
-                SQLiteManager.GetInstance().Providers().Insert(tbName.Text, tbAddress.Text, tbPhone.Text, tbMail.Text, m_SelectedDocument);
+                SQLiteManager.GetInstance().Providers().Insert(tbName.Text, tbAddress.Text, tbPhone.Text, tbMail.Text, tbINN.Text, m_SelectedDocument);
             }
 
             DialogResult = DialogResult.OK;
@@ -116,6 +117,18 @@ namespace NeuroInventory
         private void tbMail_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(e.KeyChar == 13)
+            {
+                tbINN.Focus();
+            }
+        }
+
+        private void tbINN_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8) // цифры и клавиша BackSpace
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == 13)
             {
                 btnLink.Focus();
             }

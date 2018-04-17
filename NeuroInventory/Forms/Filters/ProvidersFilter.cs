@@ -37,6 +37,16 @@ namespace NeuroInventory
         private void tbPost_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
+                tbINN.Focus();
+        }
+
+        private void tbINN_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8) // цифры и клавиша BackSpace
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == 13)
                 tbDocument.Focus();
         }
 
@@ -48,7 +58,7 @@ namespace NeuroInventory
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            SQLiteManager.GetInstance().Providers().Filter(tbName.Text, tbAddress.Text, tbPhone.Text, tbMail.Text, tbDocument.Text);
+            SQLiteManager.GetInstance().Providers().Filter(tbName.Text, tbAddress.Text, tbPhone.Text, tbMail.Text, tbINN.Text, tbDocument.Text);
             Filtration?.Invoke();
         }
 
@@ -58,6 +68,7 @@ namespace NeuroInventory
             tbAddress.Text = String.Empty;
             tbPhone.Text = String.Empty;
             tbMail.Text = String.Empty;
+            tbINN.Text = String.Empty;
             tbDocument.Text = String.Empty;
             SQLiteManager.GetInstance().Providers().ClearFilter();
             Filtration?.Invoke();

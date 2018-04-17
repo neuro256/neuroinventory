@@ -13,11 +13,12 @@ namespace NeuroInventory
             SetTargetPath(@"Документы\Поставщики");
         }
 
-        public void Filter(string p_Name, string p_Address, string p_Phone, string p_Mail, string p_Document)
+        public void Filter(string p_Name, string p_Address, string p_Phone, string p_Mail, string p_INN, string p_Document)
         {
             string l_Address = !String.IsNullOrEmpty(p_Address) ? $"address like '%{p_Address}%'" : $"(address like '%{p_Address}%' OR address IS NULL)";
             string l_Phone = !String.IsNullOrEmpty(p_Phone) ? $"phone like '%{p_Phone}%'" : $"(phone like '%{p_Phone}%' OR phone IS NULL)";
             string l_Mail = !String.IsNullOrEmpty(p_Mail) ? $"mail like '%{p_Mail}%'" : $"(mail like '%{p_Mail}%' OR mail IS NULL)";
+            string l_INN = !String.IsNullOrEmpty(p_INN) ? $"inn like '%{p_INN}%'" : $"(inn like '%{p_INN}%' OR inn IS NULL)";
             string l_Document = !String.IsNullOrEmpty(p_Document) ? $"document like '%{p_Document}%'" : $"(document like '%{p_Document}%' OR document IS NULL)";
 
             CommandDataSet = "SELECT * FROM providers WHERE " +
@@ -25,6 +26,7 @@ namespace NeuroInventory
                 $"{l_Address} AND " +
                 $"{l_Phone} AND " +
                 $"{l_Mail} AND " +
+                $"{l_INN} AND " +
                 $"{l_Document}" +
                 $" ORDER BY name ASC";
         }
@@ -34,7 +36,7 @@ namespace NeuroInventory
             CommandDataSet = "SELECT * FROM providers ORDER BY name ASC";
         }
 
-        public void Insert(string p_Name, string p_Address, string p_Phone, string p_Mail, string p_Document)
+        public void Insert(string p_Name, string p_Address, string p_Phone, string p_Mail, string p_INN, string p_Document)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
@@ -42,12 +44,13 @@ namespace NeuroInventory
             values["address"] = !String.IsNullOrEmpty(p_Address) ? (object) p_Address : DBNull.Value;
             values["phone"] = !String.IsNullOrEmpty(p_Phone) ? (object)p_Phone : DBNull.Value;
             values["mail"] = !String.IsNullOrEmpty(p_Mail) ? (object)p_Mail : DBNull.Value;
+            values["inn"] = !String.IsNullOrEmpty(p_INN) ? (object)p_INN : DBNull.Value;
             values["document"] = InsertFile(p_Document);
 
             SQLiteManager.GetInstance().Insert(TableName, values);
         }
 
-        public void Update(object p_Id, string p_Name, string p_Address, string p_Phone, string p_Mail, string p_SelectedDocument, string p_CurrentDocument)
+        public void Update(object p_Id, string p_Name, string p_Address, string p_Phone, string p_Mail, string p_INN, string p_SelectedDocument, string p_CurrentDocument)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
@@ -55,6 +58,7 @@ namespace NeuroInventory
             values["address"] = !String.IsNullOrEmpty(p_Address) ? (object)p_Address : DBNull.Value;
             values["phone"] = !String.IsNullOrEmpty(p_Phone) ? (object)p_Phone : DBNull.Value;
             values["mail"] = !String.IsNullOrEmpty(p_Mail) ? (object)p_Mail : DBNull.Value;
+            values["inn"] = !String.IsNullOrEmpty(p_INN) ? (object)p_INN : DBNull.Value;
             values["document"] = UpdateFile(p_SelectedDocument, p_CurrentDocument);
 
             string l_Where = $"id={p_Id}";

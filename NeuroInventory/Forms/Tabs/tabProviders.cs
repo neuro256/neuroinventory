@@ -49,8 +49,9 @@ namespace NeuroInventory
             lwProviders.Columns.Add(new ColHeader("Название", 200, HorizontalAlignment.Left, true));
             lwProviders.Columns.Add(new ColHeader("адрес", 200, HorizontalAlignment.Left, true));
             lwProviders.Columns.Add(new ColHeader("телефон", 200, HorizontalAlignment.Left, true));
-            lwProviders.Columns.Add(new ColHeader("e-mail", 200, HorizontalAlignment.Left, true));
+            lwProviders.Columns.Add(new ColHeader("e-mail", 200, HorizontalAlignment.Left, true));          
             lwProviders.Columns.Add(new ColHeader("Карточка предприятия", 200, HorizontalAlignment.Left, true));
+            lwProviders.Columns.Add(new ColHeader("ИНН", 200, HorizontalAlignment.Left, true));
         }
 
         private void btnProviderAdd_Click(object sender, EventArgs e)

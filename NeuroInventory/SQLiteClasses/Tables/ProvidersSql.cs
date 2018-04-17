@@ -8,7 +8,14 @@ namespace NeuroInventory
     {
         public ProvidersSql()
         {
-            CommandDataSet = "SELECT * FROM providers ORDER BY name ASC";
+            CommandDataSet = "SELECT providers.id, " +
+                "providers.name, " +
+                "providers.address, " +
+                "providers.phone, " +
+                "providers.mail, " +
+                "providers.inn, " +
+                "providers.document " +
+                "FROM providers ORDER BY name ASC";
             TableName = "providers";
             SetTargetPath(@"Документы\Поставщики");
         }

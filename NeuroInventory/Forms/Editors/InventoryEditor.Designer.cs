@@ -50,12 +50,11 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.errorProviderInventory = new System.Windows.Forms.ErrorProvider(this.components);
-            this.nudInvoiceCode = new System.Windows.Forms.NumericUpDown();
             this.lblInvoiceCode = new System.Windows.Forms.Label();
+            this.tbInvoiceCodeStr = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderInventory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudInvoiceCode)).BeginInit();
             this.SuspendLayout();
             // 
             // lblProvider
@@ -264,19 +263,6 @@
             this.errorProviderInventory.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProviderInventory.ContainerControl = this;
             // 
-            // nudInvoiceCode
-            // 
-            this.nudInvoiceCode.Location = new System.Drawing.Point(186, 147);
-            this.nudInvoiceCode.Maximum = new decimal(new int[] {
-            1215752191,
-            23,
-            0,
-            0});
-            this.nudInvoiceCode.Name = "nudInvoiceCode";
-            this.nudInvoiceCode.Size = new System.Drawing.Size(120, 22);
-            this.nudInvoiceCode.TabIndex = 20;
-            this.nudInvoiceCode.ThousandsSeparator = true;
-            // 
             // lblInvoiceCode
             // 
             this.lblInvoiceCode.AutoSize = true;
@@ -286,14 +272,22 @@
             this.lblInvoiceCode.TabIndex = 21;
             this.lblInvoiceCode.Text = "Номер накладной";
             // 
+            // tbInvoiceCodeStr
+            // 
+            this.tbInvoiceCodeStr.Location = new System.Drawing.Point(186, 149);
+            this.tbInvoiceCodeStr.MaxLength = 30;
+            this.tbInvoiceCodeStr.Name = "tbInvoiceCodeStr";
+            this.tbInvoiceCodeStr.Size = new System.Drawing.Size(267, 22);
+            this.tbInvoiceCodeStr.TabIndex = 22;
+            // 
             // InventoryEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(649, 466);
+            this.Controls.Add(this.tbInvoiceCodeStr);
             this.Controls.Add(this.lblInvoiceCode);
-            this.Controls.Add(this.nudInvoiceCode);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.nudPrice);
@@ -323,7 +317,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderInventory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudInvoiceCode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -352,7 +345,7 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ErrorProvider errorProviderInventory;
-        private System.Windows.Forms.NumericUpDown nudInvoiceCode;
         private System.Windows.Forms.Label lblInvoiceCode;
+        private System.Windows.Forms.TextBox tbInvoiceCodeStr;
     }
 }

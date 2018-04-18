@@ -169,7 +169,7 @@ namespace NeuroInventory
                                 "providerId INTEGER, " +
                                 "date DATETIME NOT NULL, " +
                                 "invoice NVARCHAR(80), " +
-                                "invoiceCode INTEGER DEFAULT 0, " +
+                                "invoiceCode NVARCHAR(30), " +
                                 "name NVARCHAR(45) NOT NULL, " +
                                 "OKEIcode NVARCHAR(5), " +
                                 "measurement NVARCHAR(20), " +
@@ -230,9 +230,14 @@ namespace NeuroInventory
 
         public void UpdateDatabase()
         {
-            if (!CheckIfColumnExists("inventory", "invoiceCode"))
+            //if (!CheckIfColumnExists("inventory", "invoiceCode"))
+            //{
+            //   AlterTableAddColumn("inventory", "invoiceCode", "INTEGER DEFAULT 0");
+            //}
+            if(!CheckIfColumnExists("inventory", "invoiceCodeStr"))
             {
-                AlterTableAddColumn("inventory", "invoiceCode", "INTEGER DEFAULT 0");
+                AlterTableAddColumn("inventory", "invoiceCodeStr", "NVARCHAR(30)");
+                CopyColumn("inventory", "invoiceCode", "invoiceCodeStr");
             }
             if(!CheckIfColumnExists("debit", "demandId"))
             {

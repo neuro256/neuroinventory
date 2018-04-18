@@ -24,7 +24,7 @@ namespace NeuroInventory
                 "demand.id as demandId, " +
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS ordate," +
                 "strftime('%d.%m.%Y', DATE(demand.date)) AS mydate," +
-                "inventory.invoiceCode, " +
+                "inventory.invoiceCodeStr, " +
                 "inventory.name, " +
                 "inventory.OKEIcode, " +
                 "inventory.measurement, " +
@@ -69,7 +69,7 @@ namespace NeuroInventory
                 "demand.id as demandId, " +
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS ordate," +
                 "strftime('%d.%m.%Y', DATE(demand.date)) AS mydate," +
-                "inventory.invoiceCode, " +
+                "inventory.invoiceCodeStr, " +
                 "inventory.name, " +
                 "inventory.OKEIcode, " +
                 "inventory.measurement, " +

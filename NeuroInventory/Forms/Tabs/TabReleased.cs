@@ -58,7 +58,7 @@ namespace NeuroInventory
             lwReleased.Columns.Add(new ColHeader("№", 60, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Дата поступления", 120, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Дата отпуска", 120, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Код накладной", 120, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Номер накладной", 120, System.Windows.Forms.HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Наименование", 350, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Код ОКЕИ", 80, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Единица измерения", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
@@ -418,7 +418,7 @@ namespace NeuroInventory
                 newRow["id"] = (item.Tag as ReleasedIds).inventoryId;
                 newRow["demandId"] = (item.Tag as ReleasedIds).demandId;
                 newRow["date"] = item.SubItems["ordate"].Text;
-                newRow["invoice_code"] = item.SubItems["invoiceCode"].Text;
+                newRow["invoice_code"] = item.SubItems["invoiceCodeStr"].Text;
                 newRow["name"] = item.SubItems["name"].Text;
                 newRow["OKEIcode"] = item.SubItems["OKEIcode"].Text;
                 newRow["measurement"] = item.SubItems["measurement"].Text;

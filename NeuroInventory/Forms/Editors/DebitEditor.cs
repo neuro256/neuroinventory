@@ -150,12 +150,12 @@ namespace NeuroInventory
 
             int counter = 1;
 
-            List<int> l_UniqueCodes = new List<int>();
+            List<string> l_UniqueCodes = new List<string>();
 
             foreach (DataRow row in DebitDataSet.Tables[0].Rows)
             {
-                int l_CurrentInvoiceCode = Convert.ToInt32(row["invoice_code"]);
-                if (l_CurrentInvoiceCode == 0 || !l_UniqueCodes.Contains(l_CurrentInvoiceCode))
+                string l_CurrentInvoiceCode = row["invoice_code"].ToString();
+                if (!String.IsNullOrEmpty(l_CurrentInvoiceCode) && !l_UniqueCodes.Contains(l_CurrentInvoiceCode))
                 {
                     DataRow newRow = debitReportTable.NewRow();
 

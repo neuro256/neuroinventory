@@ -111,6 +111,34 @@ namespace NeuroInventory
             }
         }
 
+        public void CopyColumn(string p_TableName, string p_SourceColumn, string p_DestColumn)
+        {
+            CopyColumnAsync(p_TableName, p_SourceColumn, p_DestColumn).GetAwaiter();
+        }
+
+        private async Task CopyColumnAsync(string p_TableName, string p_SourceColumn, string p_DestColumn)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText = $"UPDATE {p_TableName} SET {p_DestColumn} = {p_SourceColumn};";
+                        await command.ExecuteNonQueryAsync();
+                    }
+
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         protected bool CheckIfColumnExists(string p_TableName, string p_ColumnName)
         {
             try

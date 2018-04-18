@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.lwDebitData = new BrightIdeasSoftware.DataListView();
+            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -41,7 +42,7 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.btnReleased = new System.Windows.Forms.Button();
-            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.lwDebitData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelLeftUpper.SuspendLayout();
@@ -52,6 +53,7 @@
             this.lwDebitData.AllColumns.Add(this.olvColumn7);
             this.lwDebitData.AllColumns.Add(this.olvColumn1);
             this.lwDebitData.AllColumns.Add(this.olvColumn2);
+            this.lwDebitData.AllColumns.Add(this.olvColumn8);
             this.lwDebitData.AllColumns.Add(this.olvColumn3);
             this.lwDebitData.AllColumns.Add(this.olvColumn4);
             this.lwDebitData.AllColumns.Add(this.olvColumn5);
@@ -61,6 +63,7 @@
             this.olvColumn7,
             this.olvColumn1,
             this.olvColumn2,
+            this.olvColumn8,
             this.olvColumn3,
             this.olvColumn4,
             this.olvColumn5,
@@ -79,6 +82,13 @@
             this.lwDebitData.View = System.Windows.Forms.View.Details;
             this.lwDebitData.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.lwDebitData_CellEditFinishing);
             this.lwDebitData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.lwDebitData_CellEditStarting);
+            // 
+            // olvColumn7
+            // 
+            this.olvColumn7.AspectName = "";
+            this.olvColumn7.IsEditable = false;
+            this.olvColumn7.Text = "№";
+            this.olvColumn7.Width = 50;
             // 
             // olvColumn1
             // 
@@ -193,14 +203,14 @@
             this.btnReleased.UseVisualStyleBackColor = true;
             this.btnReleased.Click += new System.EventHandler(this.btnReleased_Click);
             // 
-            // olvColumn7
+            // olvColumn8
             // 
-            this.olvColumn7.AspectName = "";
-            this.olvColumn7.IsEditable = false;
-            this.olvColumn7.Text = "№";
-            this.olvColumn7.Width = 50;
+            this.olvColumn8.AspectName = "invoice_code";
+            this.olvColumn8.IsEditable = false;
+            this.olvColumn8.Text = "Код накладной";
+            this.olvColumn8.Width = 120;
             // 
-            // DebitEditorNew
+            // DebitEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -208,7 +218,7 @@
             this.Controls.Add(this.tableLayoutPanelMain);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "DebitEditorNew";
+            this.Name = "DebitEditor";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -237,5 +247,6 @@
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private BrightIdeasSoftware.OLVColumn olvColumn7;
+        private BrightIdeasSoftware.OLVColumn olvColumn8;
     }
 }

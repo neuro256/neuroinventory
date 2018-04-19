@@ -271,7 +271,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(1200, 154);
+            this.ClientSize = new System.Drawing.Size(1650, 160);
             this.Controls.Add(this.tbEmployee);
             this.Controls.Add(this.lblEmployee);
             this.Controls.Add(this.label1);

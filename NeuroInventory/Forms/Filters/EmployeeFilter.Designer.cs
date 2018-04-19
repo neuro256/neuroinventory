@@ -161,7 +161,8 @@
             // 
             this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFilter.Location = new System.Drawing.Point(3, 3);
+            this.btnFilter.Location = new System.Drawing.Point(10, 3);
+            this.btnFilter.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(98, 29);
             this.btnFilter.TabIndex = 10;
@@ -173,7 +174,8 @@
             // 
             this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClear.Location = new System.Drawing.Point(107, 3);
+            this.btnClear.Location = new System.Drawing.Point(128, 3);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(98, 29);
             this.btnClear.TabIndex = 11;
@@ -185,7 +187,8 @@
             // 
             this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClose.Location = new System.Drawing.Point(211, 3);
+            this.btnClose.Location = new System.Drawing.Point(246, 3);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(98, 29);
             this.btnClose.TabIndex = 12;
@@ -315,12 +318,11 @@
             this.tbPanelBottom.Controls.Add(this.btnClear, 1, 0);
             this.tbPanelBottom.Controls.Add(this.btnClose, 2, 0);
             this.tbPanelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tbPanelBottom.Location = new System.Drawing.Point(10, 115);
-            this.tbPanelBottom.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.tbPanelBottom.Location = new System.Drawing.Point(3, 115);
             this.tbPanelBottom.Name = "tbPanelBottom";
             this.tbPanelBottom.RowCount = 1;
             this.tbPanelBottom.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tbPanelBottom.Size = new System.Drawing.Size(1630, 42);
+            this.tbPanelBottom.Size = new System.Drawing.Size(1644, 42);
             this.tbPanelBottom.TabIndex = 14;
             // 
             // EmployeeFilter

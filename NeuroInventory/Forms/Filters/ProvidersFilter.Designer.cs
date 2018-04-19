@@ -43,15 +43,34 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.tbINN = new System.Windows.Forms.TextBox();
             this.lblINN = new System.Windows.Forms.Label();
+            this.tbPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.tbPanelBottom = new System.Windows.Forms.TableLayoutPanel();
+            this.tbPanelMain = new System.Windows.Forms.TableLayoutPanel();
+            this.tbPanel1.SuspendLayout();
+            this.tbPanel2.SuspendLayout();
+            this.tbPanel3.SuspendLayout();
+            this.tbPanel4.SuspendLayout();
+            this.tbPanel5.SuspendLayout();
+            this.tbPanel6.SuspendLayout();
+            this.flowPanel1.SuspendLayout();
+            this.tbPanelBottom.SuspendLayout();
+            this.tbPanelMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
             this.lblAddress.BackColor = System.Drawing.Color.Silver;
-            this.lblAddress.Location = new System.Drawing.Point(215, 9);
+            this.lblAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAddress.Location = new System.Drawing.Point(3, 0);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(48, 17);
+            this.lblAddress.Size = new System.Drawing.Size(200, 17);
             this.lblAddress.TabIndex = 0;
             this.lblAddress.Text = "Адрес";
             // 
@@ -59,9 +78,10 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.BackColor = System.Drawing.Color.Silver;
-            this.lblName.Location = new System.Drawing.Point(9, 9);
+            this.lblName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblName.Location = new System.Drawing.Point(3, 0);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(72, 17);
+            this.lblName.Size = new System.Drawing.Size(200, 17);
             this.lblName.TabIndex = 1;
             this.lblName.Text = "Название";
             // 
@@ -69,33 +89,37 @@
             // 
             this.lblPhone.AutoSize = true;
             this.lblPhone.BackColor = System.Drawing.Color.Silver;
-            this.lblPhone.Location = new System.Drawing.Point(421, 9);
+            this.lblPhone.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPhone.Location = new System.Drawing.Point(3, 0);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(68, 17);
+            this.lblPhone.Size = new System.Drawing.Size(200, 17);
             this.lblPhone.TabIndex = 2;
             this.lblPhone.Text = "Телефон";
             // 
             // lblMail
             // 
             this.lblMail.AutoSize = true;
-            this.lblMail.Location = new System.Drawing.Point(627, 9);
+            this.lblMail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMail.Location = new System.Drawing.Point(3, 0);
             this.lblMail.Name = "lblMail";
-            this.lblMail.Size = new System.Drawing.Size(72, 17);
+            this.lblMail.Size = new System.Drawing.Size(200, 17);
             this.lblMail.TabIndex = 3;
             this.lblMail.Text = "Эл. почта";
             // 
             // lblDocument
             // 
             this.lblDocument.AutoSize = true;
-            this.lblDocument.Location = new System.Drawing.Point(836, 54);
+            this.lblDocument.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDocument.Location = new System.Drawing.Point(3, 0);
             this.lblDocument.Name = "lblDocument";
-            this.lblDocument.Size = new System.Drawing.Size(73, 17);
+            this.lblDocument.Size = new System.Drawing.Size(200, 17);
             this.lblDocument.TabIndex = 4;
             this.lblDocument.Text = "Документ";
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(12, 29);
+            this.tbName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbName.Location = new System.Drawing.Point(3, 20);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(200, 22);
             this.tbName.TabIndex = 5;
@@ -103,7 +127,8 @@
             // 
             // tbAddress
             // 
-            this.tbAddress.Location = new System.Drawing.Point(218, 29);
+            this.tbAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbAddress.Location = new System.Drawing.Point(3, 20);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(200, 22);
             this.tbAddress.TabIndex = 6;
@@ -111,7 +136,8 @@
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(424, 29);
+            this.tbPhone.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbPhone.Location = new System.Drawing.Point(3, 20);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(200, 22);
             this.tbPhone.TabIndex = 7;
@@ -119,7 +145,8 @@
             // 
             // tbMail
             // 
-            this.tbMail.Location = new System.Drawing.Point(630, 29);
+            this.tbMail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbMail.Location = new System.Drawing.Point(3, 20);
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(200, 22);
             this.tbMail.TabIndex = 8;
@@ -127,7 +154,8 @@
             // 
             // tbDocument
             // 
-            this.tbDocument.Location = new System.Drawing.Point(839, 74);
+            this.tbDocument.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbDocument.Location = new System.Drawing.Point(3, 20);
             this.tbDocument.Name = "tbDocument";
             this.tbDocument.Size = new System.Drawing.Size(200, 22);
             this.tbDocument.TabIndex = 9;
@@ -137,7 +165,8 @@
             // 
             this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFilter.Location = new System.Drawing.Point(12, 102);
+            this.btnFilter.Location = new System.Drawing.Point(10, 3);
+            this.btnFilter.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(98, 29);
             this.btnFilter.TabIndex = 10;
@@ -149,7 +178,8 @@
             // 
             this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClear.Location = new System.Drawing.Point(116, 102);
+            this.btnClear.Location = new System.Drawing.Point(128, 3);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(98, 29);
             this.btnClear.TabIndex = 11;
@@ -161,7 +191,8 @@
             // 
             this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClose.Location = new System.Drawing.Point(220, 102);
+            this.btnClose.Location = new System.Drawing.Point(246, 3);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(98, 29);
             this.btnClose.TabIndex = 12;
@@ -171,7 +202,8 @@
             // 
             // tbINN
             // 
-            this.tbINN.Location = new System.Drawing.Point(839, 29);
+            this.tbINN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbINN.Location = new System.Drawing.Point(3, 20);
             this.tbINN.MaxLength = 12;
             this.tbINN.Name = "tbINN";
             this.tbINN.Size = new System.Drawing.Size(200, 22);
@@ -181,11 +213,155 @@
             // lblINN
             // 
             this.lblINN.AutoSize = true;
-            this.lblINN.Location = new System.Drawing.Point(836, 9);
+            this.lblINN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblINN.Location = new System.Drawing.Point(3, 0);
             this.lblINN.Name = "lblINN";
-            this.lblINN.Size = new System.Drawing.Size(38, 17);
+            this.lblINN.Size = new System.Drawing.Size(200, 17);
             this.lblINN.TabIndex = 13;
             this.lblINN.Text = "ИНН";
+            // 
+            // tbPanel1
+            // 
+            this.tbPanel1.AutoSize = true;
+            this.tbPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tbPanel1.ColumnCount = 1;
+            this.tbPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbPanel1.Controls.Add(this.lblName, 0, 0);
+            this.tbPanel1.Controls.Add(this.tbName, 0, 1);
+            this.tbPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tbPanel1.Name = "tbPanel1";
+            this.tbPanel1.RowCount = 2;
+            this.tbPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbPanel1.Size = new System.Drawing.Size(206, 45);
+            this.tbPanel1.TabIndex = 15;
+            // 
+            // tbPanel2
+            // 
+            this.tbPanel2.AutoSize = true;
+            this.tbPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tbPanel2.ColumnCount = 1;
+            this.tbPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbPanel2.Controls.Add(this.lblAddress, 0, 0);
+            this.tbPanel2.Controls.Add(this.tbAddress, 0, 1);
+            this.tbPanel2.Location = new System.Drawing.Point(215, 3);
+            this.tbPanel2.Name = "tbPanel2";
+            this.tbPanel2.RowCount = 2;
+            this.tbPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbPanel2.Size = new System.Drawing.Size(206, 45);
+            this.tbPanel2.TabIndex = 16;
+            // 
+            // tbPanel3
+            // 
+            this.tbPanel3.AutoSize = true;
+            this.tbPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tbPanel3.ColumnCount = 1;
+            this.tbPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbPanel3.Controls.Add(this.lblPhone, 0, 0);
+            this.tbPanel3.Controls.Add(this.tbPhone, 0, 1);
+            this.tbPanel3.Location = new System.Drawing.Point(427, 3);
+            this.tbPanel3.Name = "tbPanel3";
+            this.tbPanel3.RowCount = 2;
+            this.tbPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbPanel3.Size = new System.Drawing.Size(206, 45);
+            this.tbPanel3.TabIndex = 17;
+            // 
+            // tbPanel4
+            // 
+            this.tbPanel4.AutoSize = true;
+            this.tbPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tbPanel4.ColumnCount = 1;
+            this.tbPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbPanel4.Controls.Add(this.lblMail, 0, 0);
+            this.tbPanel4.Controls.Add(this.tbMail, 0, 1);
+            this.tbPanel4.Location = new System.Drawing.Point(639, 3);
+            this.tbPanel4.Name = "tbPanel4";
+            this.tbPanel4.RowCount = 2;
+            this.tbPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbPanel4.Size = new System.Drawing.Size(206, 45);
+            this.tbPanel4.TabIndex = 18;
+            // 
+            // tbPanel5
+            // 
+            this.tbPanel5.AutoSize = true;
+            this.tbPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tbPanel5.ColumnCount = 1;
+            this.tbPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbPanel5.Controls.Add(this.lblINN, 0, 0);
+            this.tbPanel5.Controls.Add(this.tbINN, 0, 1);
+            this.tbPanel5.Location = new System.Drawing.Point(851, 3);
+            this.tbPanel5.Name = "tbPanel5";
+            this.tbPanel5.RowCount = 2;
+            this.tbPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbPanel5.Size = new System.Drawing.Size(206, 45);
+            this.tbPanel5.TabIndex = 19;
+            // 
+            // tbPanel6
+            // 
+            this.tbPanel6.AutoSize = true;
+            this.tbPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tbPanel6.ColumnCount = 1;
+            this.tbPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbPanel6.Controls.Add(this.lblDocument, 0, 0);
+            this.tbPanel6.Controls.Add(this.tbDocument, 0, 1);
+            this.tbPanel6.Location = new System.Drawing.Point(1063, 3);
+            this.tbPanel6.Name = "tbPanel6";
+            this.tbPanel6.RowCount = 2;
+            this.tbPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbPanel6.Size = new System.Drawing.Size(206, 45);
+            this.tbPanel6.TabIndex = 20;
+            // 
+            // flowPanel1
+            // 
+            this.flowPanel1.AutoScroll = true;
+            this.flowPanel1.Controls.Add(this.tbPanel1);
+            this.flowPanel1.Controls.Add(this.tbPanel2);
+            this.flowPanel1.Controls.Add(this.tbPanel3);
+            this.flowPanel1.Controls.Add(this.tbPanel4);
+            this.flowPanel1.Controls.Add(this.tbPanel5);
+            this.flowPanel1.Controls.Add(this.tbPanel6);
+            this.flowPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowPanel1.Name = "flowPanel1";
+            this.flowPanel1.Size = new System.Drawing.Size(1644, 98);
+            this.flowPanel1.TabIndex = 21;
+            // 
+            // tbPanelBottom
+            // 
+            this.tbPanelBottom.ColumnCount = 3;
+            this.tbPanelBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbPanelBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbPanelBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbPanelBottom.Controls.Add(this.btnFilter, 0, 0);
+            this.tbPanelBottom.Controls.Add(this.btnClear, 1, 0);
+            this.tbPanelBottom.Controls.Add(this.btnClose, 2, 0);
+            this.tbPanelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tbPanelBottom.Location = new System.Drawing.Point(3, 116);
+            this.tbPanelBottom.Name = "tbPanelBottom";
+            this.tbPanelBottom.RowCount = 1;
+            this.tbPanelBottom.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tbPanelBottom.Size = new System.Drawing.Size(1644, 41);
+            this.tbPanelBottom.TabIndex = 22;
+            // 
+            // tbPanelMain
+            // 
+            this.tbPanelMain.ColumnCount = 1;
+            this.tbPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tbPanelMain.Controls.Add(this.tbPanelBottom, 0, 1);
+            this.tbPanelMain.Controls.Add(this.flowPanel1, 0, 0);
+            this.tbPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbPanelMain.Location = new System.Drawing.Point(0, 0);
+            this.tbPanelMain.Name = "tbPanelMain";
+            this.tbPanelMain.RowCount = 2;
+            this.tbPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.tbPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tbPanelMain.Size = new System.Drawing.Size(1650, 160);
+            this.tbPanelMain.TabIndex = 23;
             // 
             // ProvidersFilter
             // 
@@ -193,31 +369,34 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(1200, 141);
-            this.Controls.Add(this.tbINN);
-            this.Controls.Add(this.lblINN);
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.btnFilter);
-            this.Controls.Add(this.tbDocument);
-            this.Controls.Add(this.tbMail);
-            this.Controls.Add(this.tbPhone);
-            this.Controls.Add(this.tbAddress);
-            this.Controls.Add(this.tbName);
-            this.Controls.Add(this.lblDocument);
-            this.Controls.Add(this.lblMail);
-            this.Controls.Add(this.lblPhone);
-            this.Controls.Add(this.lblName);
-            this.Controls.Add(this.lblAddress);
+            this.ClientSize = new System.Drawing.Size(1650, 160);
+            this.Controls.Add(this.tbPanelMain);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ProvidersFilter";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Поиск сотрудника";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProvidersFilter_FormClosing);
+            this.tbPanel1.ResumeLayout(false);
+            this.tbPanel1.PerformLayout();
+            this.tbPanel2.ResumeLayout(false);
+            this.tbPanel2.PerformLayout();
+            this.tbPanel3.ResumeLayout(false);
+            this.tbPanel3.PerformLayout();
+            this.tbPanel4.ResumeLayout(false);
+            this.tbPanel4.PerformLayout();
+            this.tbPanel5.ResumeLayout(false);
+            this.tbPanel5.PerformLayout();
+            this.tbPanel6.ResumeLayout(false);
+            this.tbPanel6.PerformLayout();
+            this.flowPanel1.ResumeLayout(false);
+            this.flowPanel1.PerformLayout();
+            this.tbPanelBottom.ResumeLayout(false);
+            this.tbPanelMain.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -238,5 +417,14 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox tbINN;
         private System.Windows.Forms.Label lblINN;
+        private System.Windows.Forms.TableLayoutPanel tbPanel1;
+        private System.Windows.Forms.TableLayoutPanel tbPanel2;
+        private System.Windows.Forms.TableLayoutPanel tbPanel3;
+        private System.Windows.Forms.TableLayoutPanel tbPanel4;
+        private System.Windows.Forms.TableLayoutPanel tbPanel5;
+        private System.Windows.Forms.TableLayoutPanel tbPanel6;
+        private System.Windows.Forms.FlowLayoutPanel flowPanel1;
+        private System.Windows.Forms.TableLayoutPanel tbPanelBottom;
+        private System.Windows.Forms.TableLayoutPanel tbPanelMain;
     }
 }

@@ -294,7 +294,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Gainsboro;
             this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label1.Location = new System.Drawing.Point(824, 25);
+            this.label1.Location = new System.Drawing.Point(825, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(816, 17);
             this.label1.TabIndex = 26;
@@ -496,7 +496,7 @@
             this.flowPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowPanel1.Name = "flowPanel1";
-            this.flowPanel1.Size = new System.Drawing.Size(1643, 53);
+            this.flowPanel1.Size = new System.Drawing.Size(1644, 98);
             this.flowPanel1.TabIndex = 32;
             // 
             // tbPanelButtons
@@ -509,11 +509,11 @@
             this.tbPanelButtons.Controls.Add(this.btnClear, 1, 0);
             this.tbPanelButtons.Controls.Add(this.btnClose, 2, 0);
             this.tbPanelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tbPanelButtons.Location = new System.Drawing.Point(3, 4);
+            this.tbPanelButtons.Location = new System.Drawing.Point(3, 12);
             this.tbPanelButtons.Name = "tbPanelButtons";
             this.tbPanelButtons.RowCount = 1;
             this.tbPanelButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tbPanelButtons.Size = new System.Drawing.Size(815, 35);
+            this.tbPanelButtons.Size = new System.Drawing.Size(816, 35);
             this.tbPanelButtons.TabIndex = 33;
             // 
             // tbPanelMain
@@ -528,7 +528,7 @@
             this.tbPanelMain.RowCount = 2;
             this.tbPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
             this.tbPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tbPanelMain.Size = new System.Drawing.Size(1649, 160);
+            this.tbPanelMain.Size = new System.Drawing.Size(1650, 160);
             this.tbPanelMain.TabIndex = 34;
             // 
             // tbPanelBottom
@@ -539,11 +539,11 @@
             this.tbPanelBottom.Controls.Add(this.tbPanelButtons, 0, 0);
             this.tbPanelBottom.Controls.Add(this.label1, 1, 0);
             this.tbPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbPanelBottom.Location = new System.Drawing.Point(3, 62);
+            this.tbPanelBottom.Location = new System.Drawing.Point(3, 107);
             this.tbPanelBottom.Name = "tbPanelBottom";
             this.tbPanelBottom.RowCount = 1;
             this.tbPanelBottom.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tbPanelBottom.Size = new System.Drawing.Size(1643, 42);
+            this.tbPanelBottom.Size = new System.Drawing.Size(1644, 50);
             this.tbPanelBottom.TabIndex = 33;
             // 
             // InventoryFilter
@@ -552,7 +552,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(1649, 160);
+            this.ClientSize = new System.Drawing.Size(1650, 160);
             this.Controls.Add(this.tbPanelMain);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

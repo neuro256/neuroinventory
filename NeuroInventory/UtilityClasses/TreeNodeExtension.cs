@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace NeuroInventory
@@ -14,6 +15,24 @@ namespace NeuroInventory
                 nodesList.AddRange(child.GetAllNodes());
             }
             return nodesList;
+        }
+
+        /// <summary>
+        /// Метод-расширение класса TreeView. Возвращает потомков указанного узла
+        /// </summary>
+        /// <param name="tNode"></param>
+        /// <returns></returns>
+        public static IEnumerable<TreeNode> Descendants(this TreeNodeCollection tNode)
+        {
+            foreach (var node in tNode.OfType<TreeNode>())
+            {
+                yield return node;
+
+                foreach (var child in node.Nodes.Descendants())
+                {
+                    yield return child;
+                }
+            }
         }
     }
 }

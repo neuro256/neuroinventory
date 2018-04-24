@@ -57,15 +57,17 @@
             this.chReleased = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDebit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chBalance = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.contextMenuStripCatalogs = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panelInventoryTop = new System.Windows.Forms.Panel();
             this.lblInventoryName = new System.Windows.Forms.Label();
+            this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStripCatalogs = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tbSelectionHelp = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
             this.splitContainerMain.SuspendLayout();
             this.tableLayoutPanelLeft.SuspendLayout();
+            this.panelLeftPanelBottom.SuspendLayout();
             this.tableLayoutPanelRight.SuspendLayout();
             this.tableLayoutPanelInventory.SuspendLayout();
             this.panelMainBottom.SuspendLayout();
@@ -141,6 +143,7 @@
             // panelLeftPanelBottom
             // 
             this.panelLeftPanelBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelLeftPanelBottom.Controls.Add(this.tbSelectionHelp);
             this.panelLeftPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLeftPanelBottom.Location = new System.Drawing.Point(0, 593);
             this.panelLeftPanelBottom.Margin = new System.Windows.Forms.Padding(0);
@@ -366,18 +369,6 @@
             this.chBalance.DisplayIndex = 11;
             this.chBalance.Text = "Остаток";
             // 
-            // contextMenuStripInventory
-            // 
-            this.contextMenuStripInventory.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStripInventory.Name = "contextMenuStripInventory";
-            this.contextMenuStripInventory.Size = new System.Drawing.Size(67, 4);
-            // 
-            // contextMenuStripCatalogs
-            // 
-            this.contextMenuStripCatalogs.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStripCatalogs.Name = "contextMenuStripCatalogs";
-            this.contextMenuStripCatalogs.Size = new System.Drawing.Size(67, 4);
-            // 
             // panelInventoryTop
             // 
             this.panelInventoryTop.AutoSize = true;
@@ -399,6 +390,32 @@
             this.lblInventoryName.TabIndex = 0;
             this.lblInventoryName.Text = "Название списка тмц";
             // 
+            // contextMenuStripInventory
+            // 
+            this.contextMenuStripInventory.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStripInventory.Name = "contextMenuStripInventory";
+            this.contextMenuStripInventory.Size = new System.Drawing.Size(61, 4);
+            // 
+            // contextMenuStripCatalogs
+            // 
+            this.contextMenuStripCatalogs.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStripCatalogs.Name = "contextMenuStripCatalogs";
+            this.contextMenuStripCatalogs.Size = new System.Drawing.Size(61, 4);
+            // 
+            // tbSelectionHelp
+            // 
+            this.tbSelectionHelp.BackColor = System.Drawing.Color.Silver;
+            this.tbSelectionHelp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbSelectionHelp.Location = new System.Drawing.Point(0, 0);
+            this.tbSelectionHelp.Multiline = true;
+            this.tbSelectionHelp.Name = "tbSelectionHelp";
+            this.tbSelectionHelp.ReadOnly = true;
+            this.tbSelectionHelp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbSelectionHelp.Size = new System.Drawing.Size(198, 55);
+            this.tbSelectionHelp.TabIndex = 1;
+            this.tbSelectionHelp.Text = "Для того чтобы выделить несколько каталогов, используйте комбинацию ctrl+левый кл" +
+    "ик мышью";
+            // 
             // TabMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -418,6 +435,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();
             this.splitContainerMain.ResumeLayout(false);
             this.tableLayoutPanelLeft.ResumeLayout(false);
+            this.panelLeftPanelBottom.ResumeLayout(false);
+            this.panelLeftPanelBottom.PerformLayout();
             this.tableLayoutPanelRight.ResumeLayout(false);
             this.tableLayoutPanelInventory.ResumeLayout(false);
             this.tableLayoutPanelInventory.PerformLayout();
@@ -462,5 +481,6 @@
         private System.Windows.Forms.Button btnDemand;
         private System.Windows.Forms.Panel panelInventoryTop;
         private System.Windows.Forms.Label lblInventoryName;
+        private System.Windows.Forms.TextBox tbSelectionHelp;
     }
 }

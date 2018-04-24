@@ -12,6 +12,7 @@ namespace NeuroInventory
     {
         private const decimal m_NudMaxValue = 9999999.0M;
         private DataSet m_DemandDataSet;
+        private bool m_Clicked = false;
 
         public DataSet DemandDataSet { get => m_DemandDataSet; private set => m_DemandDataSet = value; }
 
@@ -105,8 +106,9 @@ namespace NeuroInventory
         {
             try
             {
-                if (!CheckAmount())
+                if (!CheckAmount() || m_Clicked)
                     return;
+                m_Clicked = true;
                 // В первую очередь создаем отчет. Если отчет успешно создан и сохранен, записываем данные в базу данных
                 if (CreateReport())
                 {
@@ -122,6 +124,7 @@ namespace NeuroInventory
             }
             catch (Exception ex)
             {
+                m_Clicked = false;
                 MessageBox.Show(ex.Message, Definitions.CREATE_REPORT_FAILED);
             }
         }

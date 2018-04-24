@@ -940,6 +940,7 @@ namespace NeuroInventory
             demandTable.Columns.Add("id");
             demandTable.Columns.Add("name");
             demandTable.Columns.Add("OKEIcode");
+            demandTable.Columns.Add("invoice_code");
             demandTable.Columns.Add("measurement");
             demandTable.Columns.Add("price");
             demandTable.Columns.Add("amount");
@@ -953,6 +954,7 @@ namespace NeuroInventory
                 newRow["id"] = item.Tag;
                 newRow["name"] = item.SubItems["name"].Text;
                 newRow["OKEIcode"] = item.SubItems["OKEIcode"].Text;
+                newRow["invoice_code"] = item.SubItems["invoiceCodeStr"].Text;
                 newRow["measurement"] = item.SubItems["measurement"].Text;
                 newRow["price"] = item.SubItems["price"].Text;
                 newRow["amount"] = 0;

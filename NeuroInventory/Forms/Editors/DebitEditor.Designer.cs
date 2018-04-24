@@ -32,6 +32,7 @@
             this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -42,7 +43,6 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.btnReleased = new System.Windows.Forms.Button();
-            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.lwDebitData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelLeftUpper.SuspendLayout();
@@ -105,6 +105,13 @@
             this.olvColumn2.IsEditable = false;
             this.olvColumn2.Text = "Код ОКЕИ";
             this.olvColumn2.Width = 90;
+            // 
+            // olvColumn8
+            // 
+            this.olvColumn8.AspectName = "invoice_code";
+            this.olvColumn8.IsEditable = false;
+            this.olvColumn8.Text = "Номер накладной";
+            this.olvColumn8.Width = 120;
             // 
             // olvColumn3
             // 
@@ -202,13 +209,6 @@
             this.btnReleased.Text = "Сформировать отчет";
             this.btnReleased.UseVisualStyleBackColor = true;
             this.btnReleased.Click += new System.EventHandler(this.btnReleased_Click);
-            // 
-            // olvColumn8
-            // 
-            this.olvColumn8.AspectName = "invoice_code";
-            this.olvColumn8.IsEditable = false;
-            this.olvColumn8.Text = "Код накладной";
-            this.olvColumn8.Width = 120;
             // 
             // DebitEditor
             // 

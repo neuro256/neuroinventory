@@ -154,7 +154,7 @@ namespace NeuroInventory
 
         public bool CreateReport()
         {
-            string l_FileName = SQLiteManager.GetInstance().DemandReport().CreateFileName(Definitions.DEMAND_REPORT_FILENAME).ToString();
+            string l_FileName = SQLiteManager.GetInstance().DemandReport().CreateFileName(GetFilePrefix(), Definitions.DEMAND_REPORT_FILENAME, Definitions.DEMAND_REPORT_EXTENSION).ToString();
 
             SpireReportBuilder builder = new SpireReportBuilder();
             builder.AddDestinationPath(l_FileName);
@@ -172,6 +172,20 @@ namespace NeuroInventory
             }
 
             return false;
+        }
+
+        private List<string> GetFilePrefix()
+        {
+            List<string> l_prefixes = new List<string>();
+            foreach (DataRow row in DemandDataSet.Tables[0].Rows)
+            {
+                string l_invoiceCode = row["invoice_code"].ToString();
+                if (!String.IsNullOrEmpty(l_invoiceCode) && !l_prefixes.Contains(l_invoiceCode))
+                {
+                    l_prefixes.Add(l_invoiceCode);
+                }
+            }
+            return l_prefixes;
         }
 
         private DataSet GetDemandReportDataSet()

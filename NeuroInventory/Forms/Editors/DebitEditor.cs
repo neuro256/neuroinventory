@@ -125,7 +125,7 @@ namespace NeuroInventory
 
         public bool CreateReport()
         {
-            string l_FileName = SQLiteManager.GetInstance().DebitReport().CreateFileName(Definitions.DEBIT_REPORT_FILENAME).ToString();
+            string l_FileName = SQLiteManager.GetInstance().DebitReport().CreateFileName(GetFilePrefix(), Definitions.DEBIT_REPORT_FILENAME, Definitions.DEBIT_REPORT_EXTENSION).ToString();
 
             GemboxReportBuilder builder = new GemboxReportBuilder();
             builder.AddAdditionalData(GetReportFieldsData());
@@ -143,6 +143,20 @@ namespace NeuroInventory
             }
 
             return false;
+        }
+
+        private List<string> GetFilePrefix()
+        {
+            List<string> l_prefixes = new List<string>();
+            foreach (DataRow row in DebitDataSet.Tables[0].Rows)
+            {
+                string l_invoiceCode = row["invoice_code"].ToString();
+                if (!String.IsNullOrEmpty(l_invoiceCode) && !l_prefixes.Contains(l_invoiceCode))
+                {
+                    l_prefixes.Add(l_invoiceCode);
+                }
+            }
+            return l_prefixes;
         }
 
         private DataSet GetInvoiceReportDataSet()

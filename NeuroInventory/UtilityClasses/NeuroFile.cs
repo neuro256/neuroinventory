@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -50,7 +51,7 @@ namespace NeuroInventory
                 string fileNameWithoutExt = Path.GetFileNameWithoutExtension(p_FileName);
                 string fileExt = Path.GetExtension(p_FileName);
                 string sourceFile = p_FileName;
-                string destFile = Path.Combine(p_TargetPath, $"{fileNameWithoutExt}_{DateTime.Now.ToFileTime()}{fileExt}");
+                string destFile = Path.Combine(p_TargetPath, $"{fileNameWithoutExt}{fileExt}");
                 if (!Directory.Exists(p_TargetPath))
                 {
                     Directory.CreateDirectory(p_TargetPath);
@@ -65,14 +66,17 @@ namespace NeuroInventory
             }
         }
 
-        private static string ComposeAndCreateFileName(string p_Filename, string p_TargetPath)
+        private static string ComposeAndCreateFileName(List<string> p_FilenamePrefix, string p_FilenameBody, string p_FileExt, string p_TargetPath)
         {
             try
             {
-                string fileNameWithoutExt = Path.GetFileNameWithoutExtension(p_Filename);
-                string fileExt = Path.GetExtension(p_Filename);
-                string sourceFile = p_Filename;
-                string destFile = Path.Combine(p_TargetPath, $"{fileNameWithoutExt}_{DateTime.Now.ToFileTime()}{fileExt}");
+                string fileExt = p_FileExt;
+                string filePrefix = "";
+                foreach(var prefix in p_FilenamePrefix)
+                {
+                    filePrefix += $"{prefix}_";
+                }
+                string destFile = Path.Combine(p_TargetPath, $"{filePrefix}{p_FilenameBody}_{DateTime.Now.ToFileTime()}{fileExt}");
                 if (!Directory.Exists(p_TargetPath))
                 {
                     Directory.CreateDirectory(p_TargetPath);
@@ -170,14 +174,14 @@ namespace NeuroInventory
             }
         }
 
-        public static object CreateFileName(string p_Filename, string p_TargetPath)
+        public static object CreateFileName(List<string> p_FilenamePrefix, string p_FilenameBody, string p_FileExt, string p_TargetPath)
         {
             try
             {
                 // Копирование выбранного файла-документа в целевую папку приложения
-                if (!String.IsNullOrEmpty(p_Filename))
+                if (p_FilenamePrefix != null)
                 {
-                    return ComposeAndCreateFileName(p_Filename, p_TargetPath);
+                    return ComposeAndCreateFileName(p_FilenamePrefix, p_FilenameBody, p_FileExt, p_TargetPath);
                 }
                 else
                 {

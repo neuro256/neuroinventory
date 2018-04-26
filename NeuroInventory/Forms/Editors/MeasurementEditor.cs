@@ -46,6 +46,7 @@ namespace NeuroInventory
             lwMeasurement.Columns.Add(new ColHeader("Наименование", 200, HorizontalAlignment.Left, true));
             lwMeasurement.Columns.Add(new ColHeader("Условное обозначение", 200, HorizontalAlignment.Left, true));
             lwMeasurement.Columns.Add(new ColHeader("Количество десятичных разрядов", 250, HorizontalAlignment.Left, true));
+            lwMeasurement.DoubleBuffered(true);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

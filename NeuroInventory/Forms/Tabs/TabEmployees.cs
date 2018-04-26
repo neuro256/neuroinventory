@@ -42,6 +42,7 @@ namespace NeuroInventory
             lwEmployees.Columns.Add(new ColHeader("Отчество", 200, HorizontalAlignment.Left, true));
             lwEmployees.Columns.Add(new ColHeader("Должность", 200, HorizontalAlignment.Left, true));
             lwEmployees.Columns.Add(new ColHeader("Отдел", 200, HorizontalAlignment.Left, true));
+            lwEmployees.DoubleBuffered(true);
         }
 
         private void btnEmployeeAdd_Click(object sender, EventArgs e)

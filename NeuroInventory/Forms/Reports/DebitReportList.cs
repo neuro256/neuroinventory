@@ -43,6 +43,7 @@ namespace NeuroInventory
             lvDebitReportList.Columns.Add(new ColHeader("№", 50, HorizontalAlignment.Left, true));
             lvDebitReportList.Columns.Add(new ColHeader("Дата", 100, HorizontalAlignment.Left, true));
             lvDebitReportList.Columns.Add(new ColHeader("Документ", 250, HorizontalAlignment.Left, true));
+            lvDebitReportList.DoubleBuffered(true);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

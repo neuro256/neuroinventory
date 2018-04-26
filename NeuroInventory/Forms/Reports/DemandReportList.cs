@@ -44,6 +44,7 @@ namespace NeuroInventory
             lvDemandReportList.Columns.Add(new ColHeader("Сотрудник", 250, HorizontalAlignment.Left, true));
             lvDemandReportList.Columns.Add(new ColHeader("Дата", 100, HorizontalAlignment.Left, true));
             lvDemandReportList.Columns.Add(new ColHeader("Документ", 250, HorizontalAlignment.Left, true));
+            lvDemandReportList.DoubleBuffered(true);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

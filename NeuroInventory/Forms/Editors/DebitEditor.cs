@@ -35,6 +35,7 @@ namespace NeuroInventory
             lwDebitData.SelectedBackColor = Color.LightBlue;
             lwDebitData.SelectedForeColor = Color.MidnightBlue;
             lwDebitData.RowHeight = 26;
+            lwDebitData.DoubleBuffered(true);
             // Автоматическая нумерация строк
             lwDebitData.FormatRow += delegate (object sender, FormatRowEventArgs args)
             {

@@ -356,6 +356,7 @@ namespace NeuroInventory
         {
             DataSet dataSetCatalogs = SQLiteManager.GetInstance().Catalogs().ReturnDataSet();
 
+            treeView.DoubleBuffered(true); // Устранение мерцания 
             treeView.BeginUpdate();
             treeView.Nodes.Clear();
 
@@ -538,6 +539,7 @@ namespace NeuroInventory
             lwInventory.CheckBoxes = true;
             lwInventory.OwnerDraw = true;
             lwInventory.HeaderStyle = ColumnHeaderStyle.Clickable;
+            lwInventory.DoubleBuffered(true);
 
             lwInventory.Columns.Clear();
             lwInventory.Columns.Add(new ColHeader("№", 50, System.Windows.Forms.HorizontalAlignment.Left, true));

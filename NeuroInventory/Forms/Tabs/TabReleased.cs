@@ -52,6 +52,7 @@ namespace NeuroInventory
             lwReleased.CheckBoxes = true;
             lwReleased.OwnerDraw = true;
             lwReleased.HeaderStyle = ColumnHeaderStyle.Clickable;
+            lwReleased.DoubleBuffered(true);
             // Добавление столбцов
             // Необходимо добавлять столбцы именно так, иначе ColumnHeader не сможет преобразоваться в ColHeader (используется в методе сортировки)
             lwReleased.Columns.Clear();

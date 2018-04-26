@@ -205,6 +205,7 @@
       <DependentUpon>DemandEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLiteClasses\Tables\ReleasedSql.cs" />
+    <Compile Include="UtilityClasses\ListviewExtension.cs" />
     <Compile Include="UtilityClasses\MultiSelectTreeview.cs">
       <SubType>Component</SubType>
     </Compile>

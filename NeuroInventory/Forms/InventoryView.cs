@@ -158,7 +158,10 @@ namespace NeuroInventory
         {
             try
             {
-                ListViewSortByColumn(e.Column);
+                // TODO: Сортировка ведет к ошибке. Listview и Dataset связаны не по id строки, а по индеку строки. 
+                // После сортировки индексация перемешивается и связность Listview и Dataset нарушается, что ведет к тому, что
+                // редактируется не та строка, которая была выбрана 
+                //ListViewSortByColumn(e.Column);
             }
             catch (Exception ex)
             {
@@ -166,6 +169,10 @@ namespace NeuroInventory
             }
         }
 
+        /// <summary>
+        /// Сортировка по столбцу
+        /// </summary>
+        /// <param name="p_ColumnIndex"></param>
         private void ListViewSortByColumn(int p_ColumnIndex)
         { 
             // Create an instance of the ColHeader class.

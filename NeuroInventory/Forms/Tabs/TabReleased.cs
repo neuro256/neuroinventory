@@ -287,6 +287,9 @@ namespace NeuroInventory
                 }
                 else
                 {
+                    // Сортировка по столбцу 
+
+                    /*
                     // Create an instance of the ColHeader class.
                     ColHeader clickedCol = (ColHeader)m_Listview.Columns[e.Column];
 
@@ -319,7 +322,7 @@ namespace NeuroInventory
                         m_Listview.Items.Add(((SortWrapper)SortArray[i]).sortItem);
 
                     // Turn display back on.
-                    m_Listview.EndUpdate();
+                    m_Listview.EndUpdate(); */
                 }
             }
             catch (Exception ex)

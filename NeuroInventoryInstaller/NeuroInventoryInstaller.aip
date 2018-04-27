@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="13.8.1" version="13.8.1" Modules="architect" RootPath="." Language="en" Id="{A2526E65-FECB-4172-8ED8-506194EBB445}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="13.8.1" version="14.7" Modules="architect" RootPath="." Language="en" Id="{A2526E65-FECB-4172-8ED8-506194EBB445}">
   <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
     <ROW Name="HiddenItems" Value="AppXProductDetailsComponent;AppXDependenciesComponent;AppXAppDetailsComponent;AppXVisualAssetsComponent;AppXCapabilitiesComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent"/>
   </COMPONENT>
@@ -30,14 +30,15 @@
     <ROW Property="AI_REQUIRED_DOTNET_DISPLAY" MultiBuildValue="DefaultBuild:4.6.2" ValueLocId="-"/>
     <ROW Property="AI_REQUIRED_DOTNET_VERSION" MultiBuildValue="DefaultBuild:4.6.2" ValueLocId="-"/>
     <ROW Property="AI_ThemeStyle" Value="default" MultiBuildValue="DefaultBuild:classic" MsiKey="AI_ThemeStyle"/>
-    <ROW Property="ALLUSERS" Value="1"/>
+    <ROW Property="ALLUSERS" Value="1" MultiBuildValue="DefaultBuild:2"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
-    <ROW Property="ARPPRODUCTICON" Value="inventory_64.exe" Type="8"/>
+    <ROW Property="ARPNOREPAIR" MultiBuildValue="DefaultBuild:1"/>
+    <ROW Property="ARPPRODUCTICON" Value="inventory_64_1.exe" Type="8"/>
     <ROW Property="Manufacturer" Value="NeuroBlackBox"/>
     <ROW Property="ProductCode" Value="1033:{90DFA41B-7010-4C20-BABC-645FC781C690} 1049:{F5A4CCDC-E362-4B67-A901-FB6DCCFC2928} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="NeuroInventory" ValueLocId="Property.ProductName"/>
-    <ROW Property="ProductVersion" Value="0.5.1" Type="32"/>
+    <ROW Property="ProductVersion" Value="0.6.0" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
     <ROW Property="UpgradeCode" Value="{C1D46F78-A344-4185-BBC4-485BA5140AEF}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -94,6 +95,9 @@
     <ROW File="templateDebit.xls" Component_="templateDebit.xls" FileName="TEMPLA~2.XLS|[|AI_PROPPATH_FILENAME_PERBUILD_templateDebit.xls]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_templateDebit.xls&gt;" SelfReg="false" NextFile="templateDemand.doc"/>
     <ROW File="templateDemand.doc" Component_="templateDebit.xls" FileName="TEMPLA~2.DOC|[|AI_PROPPATH_FILENAME_PERBUILD_templateDemand.doc]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_templateDemand.doc&gt;" SelfReg="false" NextFile="EntityFramework.dll"/>
   </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.custcomp.AiIconAliasComponent">
+    <ROW AliasRowId="NeuroInventory.exe" AliasRowOperation="2" Data="C:\Users\User\Documents\ТМЦ\Icons\inventory_256.ico"/>
+  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="AI_APPPATH_PERBUILD_EntityFramework.SqlServer.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_EntityFramework.SqlServer.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.SqlServer.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_EntityFramework.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.dll]" Type="2" Content="0"/>
@@ -110,7 +114,7 @@
     <ROW Action="AI_DetectSoftware" Sequence="101"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFileName="SetupNeuroInventory" Languages="en;ru" LangOpt="2" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" ExeIconPath="..\..\..\Users\User\Documents\ТМЦ\Icons\inventory_64.ico" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName] [|ProductVersion]\install" LangsDialog="true" UseLargeSchema="true" Unicode="true" ExeName="SetupNeuroInventory"/>
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFileName="SetupNeuroInventory" Languages="en;ru" LangOpt="2" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" ExeIconPath="C:\Users\User\Documents\ТМЦ\Icons\inventory_64.ico" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName] [|ProductVersion]\install" ExtUI="true" LangsDialog="true" UseLargeSchema="true" Unicode="true" ExeName="SetupNeuroInventory"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
     <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
@@ -180,6 +184,8 @@
     <ROW Dialog_="PrerequisitesDlg" Control_="Next" Event="EndDialog" Argument="Return" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
     <ROW Dialog_="PrerequisitesDlg" Control_="Back" Event="NewDialog" Argument="WelcomePrereqDlg" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
     <ROW Dialog_="LanguageDlg" Control_="Next" Event="EndDialog" Argument="Return" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Next" Event="DoAction" Argument="AI_InstallModeCheck" Condition="AI_MAINT" Ordering="100" MsiKey="CustomizeDlg#Next#DoAction#AI_InstallModeCheck#AI_MAINT"/>
+    <ROW Dialog_="FatalError" Control_="Finish" Event="DoAction" Argument="AI_SHOW_LOG" Condition="(MsiLogFileLocation AND AI_LOG_CHECKBOX)" Ordering="101" MsiKey="FatalError#Finish#DoAction#AI_SHOW_LOG#(MsiLogFileLocation AND AI_LOG_CHECKBOX)"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
     <ROW Directory_="SHORTCUTDIR" Component_="SHORTCUTDIR" ManualDelete="false"/>
@@ -206,16 +212,17 @@
     <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH" Target="[AI_SETUPEXEPATH_ORIGINAL]"/>
     <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
     <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
+    <ROW Action="AI_SETMIXINSTLOCATION" Type="1" Source="aicustact.dll" Target="MixedAllUsersInstallLocation"/>
     <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
     <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
-    <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]"/>
+    <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]" MultiBuildTarget="DefaultBuild:[AI_UserProgramFiles][Manufacturer]\[ProductName]"/>
     <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
     <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
-    <ROW Name="AI_PROPPATH_FILENAME_PERBUILD_NeuroInventory.exe" SourcePath="..\..\..\Users\User\Documents\ТМЦ\Icons\inventory_128.ico" Index="0"/>
+    <ROW Name="NeuroInventory.exe" SourcePath="C:\Users\User\Documents\ТМЦ\Icons\inventory_128.ico" Index="0"/>
     <ROW Name="SystemFoldermsiexec.exe" SourcePath="&lt;AI_RES&gt;uninstall.ico" Index="0"/>
-    <ROW Name="inventory_64.exe" SourcePath="..\..\..\Users\User\Documents\ТМЦ\Icons\inventory_64.ico" Index="0"/>
+    <ROW Name="inventory_64_1.exe" SourcePath="C:\Users\User\Documents\ТМЦ\Icons\inventory_64.ico" Index="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
@@ -238,6 +245,7 @@
     <ROW Action="AI_EstimateExtractFiles" Sequence="3999" Builds="DefaultBuild"/>
     <ROW Action="AI_AppSearchEx" Sequence="102"/>
     <ROW Action="AI_DetectSoftware" Sequence="101"/>
+    <ROW Action="AI_SETMIXINSTLOCATION" Sequence="748"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
     <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
@@ -248,6 +256,7 @@
     <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="103"/>
     <ROW Action="AI_AppSearchEx" Sequence="102"/>
     <ROW Action="AI_DetectSoftware" Sequence="101"/>
+    <ROW Action="AI_SETMIXINSTLOCATION" Sequence="748"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
     <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] cannot be installed on [WindowsTypeNT40Display]." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild"/>
@@ -268,8 +277,8 @@
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="ProductName" Directory_="DesktopFolder" Name="NEUROI~1|[|ProductName]" Component_="AI_PROPPATH_FILENAME_PERBUILD_NeuroInven" Target="[#NeuroInventory.exe]" Hotkey="0" Icon_="AI_PROPPATH_FILENAME_PERBUILD_NeuroInventory.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
-    <ROW Shortcut="ProductName_1" Directory_="SHORTCUTDIR" Name="NEUROI~1|[|ProductName]" Component_="AI_PROPPATH_FILENAME_PERBUILD_NeuroInven" Target="[#NeuroInventory.exe]" Hotkey="0" Icon_="AI_PROPPATH_FILENAME_PERBUILD_NeuroInventory.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="ProductName" Directory_="DesktopFolder" Name="NEUROI~1|[|ProductName]" Component_="AI_PROPPATH_FILENAME_PERBUILD_NeuroInven" Target="[#NeuroInventory.exe]" Hotkey="0" Icon_="NeuroInventory.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="ProductName_1" Directory_="SHORTCUTDIR" Name="NEUROI~1|[|ProductName]" Component_="AI_PROPPATH_FILENAME_PERBUILD_NeuroInven" Target="[#NeuroInventory.exe]" Hotkey="0" Icon_="NeuroInventory.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
     <ROW Shortcut="Uninstall" Directory_="APPDIR" Name="UNINST~1|Uninstall" Component_="ProductInformation" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Hotkey="0" Icon_="SystemFoldermsiexec.exe" IconIndex="0" ShowCmd="1"/>
     <ROW Shortcut="Uninstall_1" Directory_="SHORTCUTDIR" Name="UNINST~1|Uninstall" Component_="AI_ExePath" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Hotkey="0" Icon_="SystemFoldermsiexec.exe" IconIndex="0" ShowCmd="1"/>
   </COMPONENT>
@@ -281,11 +290,11 @@
     <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.PreReqComponent">
-    <ROW PrereqKey="E6EF03A03ACB41E28F8D6A76831D390C" DisplayName=".NET Framework 4.6.2" SetupFileUrl="Prerequisites\.NET Framework 4.6.2\NDP462-KB3151800-x86-x64-AllOS-ENU.exe" Location="0" ExactSize="0" WinNTVersions="Windows XP x86 Service Pack 3, Windows Server 2003 x86 Service Pack 2, Windows Vista x86, Windows Vista x86 Service Pack 1, Windows Vista x86 Service Pack 2, Windows Server 2008 x86, Windows 7 x86" WinNT64Versions="Windows XP x64 Service Pack 2, Windows Server 2003 x64 Service Pack 2, Windows Vista x64, Windows Vista x64 Service Pack 1, Windows Vista x64 Service Pack 2, Windows Server 2008 x64, Windows 7 x64, Windows Server 2008 R2 x64, Windows Server 2016 x64" Operator="1" NoUiComLine="/q /norestart" Options="xy" TargetName=".NET Framework 4.6.2\NDP462-KB3151800-x86-x64-AllOS-ENU.exe"/>
+    <ROW PrereqKey="E6EF03A03ACB41E28F8D6A76831D390C" DisplayName=".NET Framework 4.6.2" SetupFileUrl="Prerequisites\.NET Framework 4.6.2\NDP462-KB3151800-x86-x64-AllOS-ENU.exe" Location="0" ExactSize="0" WinNTVersions="Windows XP SP3 x86, Windows Server 2003 SP2 x86, Windows Vista x86, Windows Server 2008 x86, Windows 7 RTM x86" WinNT64Versions="Windows XP SP2 x64, Windows Server 2003 SP2 x64, Windows Vista x64, Windows Server 2008 x64, Windows 7 RTM x64, Windows Server 2008 R2 RTM x64, Windows Server 2016 x64" Operator="1" NoUiComLine="/q /norestart" Options="xy" TargetName=".NET Framework 4.6.2\NDP462-KB3151800-x86-x64-AllOS-ENU.exe"/>
     <ATTRIBUTE name="PrereqsOrder" value="E6EF03A03ACB41E28F8D6A76831D390C"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.PreReqSearchComponent">
-    <ROW SearchKey="E6EF03A03ACB41E28F8D6A76831D390CRelease" Prereq="E6EF03A03ACB41E28F8D6A76831D390C" SearchType="9" SearchString="HKLM\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\Release" RefContent="G394801" Order="1" Property="PreReqSearch_E6EF03A03ACB41E28F8D6A76831D390C"/>
+    <ROW SearchKey="E6EF03A03ACB41E28F8D6A76831D390CRelease" Prereq="E6EF03A03ACB41E28F8D6A76831D390C" SearchType="9" SearchString="HKLM\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\Release" RefContent="G394801" Order="1" Property="PreReqSearch_E6EF03A03ACB41E28F8D6A"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.VsProjectComponent">
     <ROW ProjectId="{f406846b-f3e2-41e5-8df1-986571b19e45}" ProjectName="NeuroInventory" OutputGroup="PrimaryOutput" OutputFile="NeuroInventory.exe"/>

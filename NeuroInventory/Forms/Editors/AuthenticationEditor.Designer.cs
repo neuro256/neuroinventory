@@ -151,10 +151,10 @@
             this.tbLayoutBottom.Controls.Add(this.btnOK, 0, 0);
             this.tbLayoutBottom.Controls.Add(this.btnCancel, 1, 0);
             this.tbLayoutBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tbLayoutBottom.Location = new System.Drawing.Point(0, 150);
+            this.tbLayoutBottom.Location = new System.Drawing.Point(0, 186);
             this.tbLayoutBottom.Name = "tbLayoutBottom";
             this.tbLayoutBottom.RowCount = 1;
-            this.tbLayoutBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbLayoutBottom.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tbLayoutBottom.Size = new System.Drawing.Size(532, 60);
             this.tbLayoutBottom.TabIndex = 9;
             // 
@@ -163,7 +163,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(532, 210);
+            this.ClientSize = new System.Drawing.Size(532, 246);
             this.ControlBox = false;
             this.Controls.Add(this.tbLayoutBottom);
             this.Controls.Add(this.tbLayoutMain);

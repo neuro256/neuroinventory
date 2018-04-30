@@ -409,6 +409,7 @@ namespace NeuroInventory
             debitTable.Columns.Add("demandId");
             debitTable.Columns.Add("date");
             debitTable.Columns.Add("invoice_code");
+            debitTable.Columns.Add("invoiceDate");
             debitTable.Columns.Add("name");
             debitTable.Columns.Add("OKEIcode");
             debitTable.Columns.Add("measurement");
@@ -424,6 +425,7 @@ namespace NeuroInventory
                 newRow["demandId"] = (item.Tag as ReleasedIds).demandId;
                 newRow["date"] = item.SubItems["ordate"].Text;
                 newRow["invoice_code"] = item.SubItems["invoiceCodeStr"].Text;
+                newRow["invoiceDate"] = item.SubItems["invoiceDate"].Text;
                 newRow["name"] = item.SubItems["name"].Text;
                 newRow["OKEIcode"] = item.SubItems["OKEIcode"].Text;
                 newRow["measurement"] = item.SubItems["measurement"].Text;

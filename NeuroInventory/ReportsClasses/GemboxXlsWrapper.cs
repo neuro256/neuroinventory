@@ -58,6 +58,7 @@ namespace NeuroInventory
                         currentRow.Cells["B"].SetValue(Convert.ToString(dataRow["date_entrance"]));
                         currentRow.Cells["D"].SetValue(Convert.ToString(dataRow["date_debit"]));
                         currentRow.Cells["J"].SetValue(Convert.ToString(dataRow["invoice_code"]));
+                        currentRow.Cells["O"].SetValue(Convert.ToString(dataRow["invoiceDate"]));
                         i++;
                     }
                 }

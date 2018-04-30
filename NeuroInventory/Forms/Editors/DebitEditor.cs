@@ -167,6 +167,7 @@ namespace NeuroInventory
             debitReportTable.Columns.Add("date_entrance");
             debitReportTable.Columns.Add("date_debit");
             debitReportTable.Columns.Add("invoice_code");
+            debitReportTable.Columns.Add("invoiceDate");
 
             int counter = 1;
 
@@ -184,6 +185,10 @@ namespace NeuroInventory
                     newRow["date_entrance"] = DateAndMoneyConverter.DateToTextSimple(Convert.ToDateTime(row["date"]));
                     newRow["date_debit"] = DateAndMoneyConverter.DateToTextSimple(dateTimePicker.Value);
                     newRow["invoice_code"] = row["invoice_code"].ToString();
+                    if (!String.IsNullOrEmpty(row["invoiceDate"].ToString()))
+                    {
+                        newRow["invoiceDate"] = DateAndMoneyConverter.DateToTextSimple(Convert.ToDateTime(row["invoiceDate"]));
+                    }
 
                     counter++;
 

@@ -97,9 +97,9 @@
             this.lblInvoice.BackColor = System.Drawing.Color.Silver;
             this.lblInvoice.Location = new System.Drawing.Point(3, 0);
             this.lblInvoice.Name = "lblInvoice";
-            this.lblInvoice.Size = new System.Drawing.Size(81, 17);
+            this.lblInvoice.Size = new System.Drawing.Size(108, 17);
             this.lblInvoice.TabIndex = 2;
-            this.lblInvoice.Text = "Накладная";
+            this.lblInvoice.Text = "Код накладной";
             // 
             // lblName
             // 

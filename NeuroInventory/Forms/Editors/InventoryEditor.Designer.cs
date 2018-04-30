@@ -55,10 +55,12 @@
             this.tbLayoutMain = new System.Windows.Forms.TableLayoutPanel();
             this.lblInvoiceDate = new System.Windows.Forms.Label();
             this.invoiceDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.tbLayoutBottom = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderInventory)).BeginInit();
             this.tbLayoutMain.SuspendLayout();
+            this.tbLayoutBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblProvider
@@ -257,9 +259,11 @@
             // 
             // btnOK
             // 
+            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOK.Location = new System.Drawing.Point(12, 443);
+            this.btnOK.Location = new System.Drawing.Point(287, 10);
+            this.btnOK.Margin = new System.Windows.Forms.Padding(10);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(103, 34);
             this.btnOK.TabIndex = 18;
@@ -271,7 +275,8 @@
             // 
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCancel.Location = new System.Drawing.Point(156, 443);
+            this.btnCancel.Location = new System.Drawing.Point(410, 10);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(10);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(103, 34);
             this.btnCancel.TabIndex = 19;
@@ -369,15 +374,29 @@
             this.invoiceDateTimePicker.Size = new System.Drawing.Size(382, 22);
             this.invoiceDateTimePicker.TabIndex = 25;
             // 
+            // tbLayoutBottom
+            // 
+            this.tbLayoutBottom.ColumnCount = 2;
+            this.tbLayoutBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbLayoutBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbLayoutBottom.Controls.Add(this.btnOK, 0, 0);
+            this.tbLayoutBottom.Controls.Add(this.btnCancel, 1, 0);
+            this.tbLayoutBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tbLayoutBottom.Location = new System.Drawing.Point(0, 435);
+            this.tbLayoutBottom.Name = "tbLayoutBottom";
+            this.tbLayoutBottom.RowCount = 1;
+            this.tbLayoutBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbLayoutBottom.Size = new System.Drawing.Size(800, 58);
+            this.tbLayoutBottom.TabIndex = 24;
+            // 
             // InventoryEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(800, 489);
+            this.ClientSize = new System.Drawing.Size(800, 493);
+            this.Controls.Add(this.tbLayoutBottom);
             this.Controls.Add(this.tbLayoutMain);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "InventoryEditor";
             this.ShowIcon = false;
@@ -389,6 +408,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderInventory)).EndInit();
             this.tbLayoutMain.ResumeLayout(false);
             this.tbLayoutMain.PerformLayout();
+            this.tbLayoutBottom.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -421,5 +441,6 @@
         private System.Windows.Forms.TableLayoutPanel tbLayoutMain;
         private System.Windows.Forms.Label lblInvoiceDate;
         private System.Windows.Forms.DateTimePicker invoiceDateTimePicker;
+        private System.Windows.Forms.TableLayoutPanel tbLayoutBottom;
     }
 }

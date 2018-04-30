@@ -46,39 +46,47 @@
             this.errorProviderProviders = new System.Windows.Forms.ErrorProvider(this.components);
             this.lblINN = new System.Windows.Forms.Label();
             this.tbINN = new System.Windows.Forms.TextBox();
+            this.tbLayoutMain = new System.Windows.Forms.TableLayoutPanel();
+            this.tbLayoutBottom = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderProviders)).BeginInit();
+            this.tbLayoutMain.SuspendLayout();
+            this.tbLayoutBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(202, 41);
+            this.tbName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbName.Location = new System.Drawing.Point(187, 3);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(292, 22);
+            this.tbName.Size = new System.Drawing.Size(364, 22);
             this.tbName.TabIndex = 5;
             this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             this.tbName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbName_KeyPress);
             // 
             // tbAddress
             // 
-            this.tbAddress.Location = new System.Drawing.Point(202, 77);
+            this.tbAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbAddress.Location = new System.Drawing.Point(187, 43);
             this.tbAddress.Name = "tbAddress";
-            this.tbAddress.Size = new System.Drawing.Size(292, 22);
+            this.tbAddress.Size = new System.Drawing.Size(364, 22);
             this.tbAddress.TabIndex = 6;
             this.tbAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAddress_KeyPress);
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(202, 116);
+            this.tbPhone.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbPhone.Location = new System.Drawing.Point(187, 83);
             this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(292, 22);
+            this.tbPhone.Size = new System.Drawing.Size(364, 22);
             this.tbPhone.TabIndex = 7;
             this.tbPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPhone_KeyPress);
             // 
             // tbMail
             // 
-            this.tbMail.Location = new System.Drawing.Point(202, 156);
+            this.tbMail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbMail.Location = new System.Drawing.Point(187, 123);
             this.tbMail.Name = "tbMail";
-            this.tbMail.Size = new System.Drawing.Size(292, 22);
+            this.tbMail.Size = new System.Drawing.Size(364, 22);
             this.tbMail.TabIndex = 8;
             this.tbMail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMail_KeyPress);
             // 
@@ -86,64 +94,71 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.BackColor = System.Drawing.Color.LightCyan;
-            this.lblName.Location = new System.Drawing.Point(35, 46);
+            this.lblName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblName.Location = new System.Drawing.Point(3, 0);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(72, 17);
+            this.lblName.Size = new System.Drawing.Size(178, 40);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "Название";
             // 
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(35, 80);
+            this.lblAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAddress.Location = new System.Drawing.Point(3, 40);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(48, 17);
+            this.lblAddress.Size = new System.Drawing.Size(178, 40);
             this.lblAddress.TabIndex = 1;
             this.lblAddress.Text = "Адрес";
             // 
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
-            this.lblPhone.Location = new System.Drawing.Point(35, 119);
+            this.lblPhone.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPhone.Location = new System.Drawing.Point(3, 80);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(68, 17);
+            this.lblPhone.Size = new System.Drawing.Size(178, 40);
             this.lblPhone.TabIndex = 2;
             this.lblPhone.Text = "Телефон";
             // 
             // lblMail
             // 
             this.lblMail.AutoSize = true;
-            this.lblMail.Location = new System.Drawing.Point(35, 159);
+            this.lblMail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMail.Location = new System.Drawing.Point(3, 120);
             this.lblMail.Name = "lblMail";
-            this.lblMail.Size = new System.Drawing.Size(138, 17);
+            this.lblMail.Size = new System.Drawing.Size(178, 40);
             this.lblMail.TabIndex = 3;
             this.lblMail.Text = "Электронная почта";
             // 
             // lblLink
             // 
             this.lblLink.AutoSize = true;
-            this.lblLink.Location = new System.Drawing.Point(35, 238);
+            this.lblLink.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblLink.Location = new System.Drawing.Point(3, 200);
             this.lblLink.Name = "lblLink";
-            this.lblLink.Size = new System.Drawing.Size(143, 17);
+            this.lblLink.Size = new System.Drawing.Size(178, 40);
             this.lblLink.TabIndex = 4;
             this.lblLink.Text = "Ссылка на документ";
             // 
             // tbDocument
             // 
-            this.tbDocument.Location = new System.Drawing.Point(202, 235);
+            this.tbDocument.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbDocument.Location = new System.Drawing.Point(187, 203);
             this.tbDocument.Name = "tbDocument";
             this.tbDocument.ReadOnly = true;
-            this.tbDocument.Size = new System.Drawing.Size(292, 22);
+            this.tbDocument.Size = new System.Drawing.Size(364, 22);
             this.tbDocument.TabIndex = 12;
             this.tbDocument.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbDocument_MouseClick);
             // 
             // btnLink
             // 
+            this.btnLink.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLink.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnLink.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLink.Location = new System.Drawing.Point(501, 233);
+            this.btnLink.Location = new System.Drawing.Point(557, 203);
             this.btnLink.Name = "btnLink";
-            this.btnLink.Size = new System.Drawing.Size(88, 24);
+            this.btnLink.Size = new System.Drawing.Size(104, 34);
             this.btnLink.TabIndex = 9;
             this.btnLink.Text = "Обзор";
             this.btnLink.UseVisualStyleBackColor = true;
@@ -153,7 +168,8 @@
             // 
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCancel.Location = new System.Drawing.Point(396, 301);
+            this.btnCancel.Location = new System.Drawing.Point(409, 10);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(10);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(98, 29);
             this.btnCancel.TabIndex = 11;
@@ -163,9 +179,11 @@
             // 
             // btnOk
             // 
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOk.Location = new System.Drawing.Point(202, 301);
+            this.btnOk.Location = new System.Drawing.Point(291, 10);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(10);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(98, 29);
             this.btnOk.TabIndex = 10;
@@ -175,11 +193,12 @@
             // 
             // btnClearPath
             // 
+            this.btnClearPath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClearPath.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnClearPath.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClearPath.Location = new System.Drawing.Point(595, 233);
+            this.btnClearPath.Location = new System.Drawing.Point(667, 203);
             this.btnClearPath.Name = "btnClearPath";
-            this.btnClearPath.Size = new System.Drawing.Size(88, 24);
+            this.btnClearPath.Size = new System.Drawing.Size(107, 34);
             this.btnClearPath.TabIndex = 13;
             this.btnClearPath.Text = "Очистить";
             this.btnClearPath.UseVisualStyleBackColor = true;
@@ -194,50 +213,88 @@
             // lblINN
             // 
             this.lblINN.AutoSize = true;
-            this.lblINN.Location = new System.Drawing.Point(35, 198);
+            this.lblINN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblINN.Location = new System.Drawing.Point(3, 160);
             this.lblINN.Name = "lblINN";
-            this.lblINN.Size = new System.Drawing.Size(38, 17);
+            this.lblINN.Size = new System.Drawing.Size(178, 40);
             this.lblINN.TabIndex = 14;
             this.lblINN.Text = "ИНН";
             // 
             // tbINN
             // 
-            this.tbINN.Location = new System.Drawing.Point(202, 195);
+            this.tbINN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbINN.Location = new System.Drawing.Point(187, 163);
             this.tbINN.Name = "tbINN";
-            this.tbINN.Size = new System.Drawing.Size(292, 22);
+            this.tbINN.Size = new System.Drawing.Size(364, 22);
             this.tbINN.TabIndex = 15;
             this.tbINN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbINN_KeyPress);
+            // 
+            // tbLayoutMain
+            // 
+            this.tbLayoutMain.ColumnCount = 4;
+            this.tbLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.80952F));
+            this.tbLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.61905F));
+            this.tbLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tbLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tbLayoutMain.Controls.Add(this.lblName, 0, 0);
+            this.tbLayoutMain.Controls.Add(this.btnClearPath, 3, 5);
+            this.tbLayoutMain.Controls.Add(this.tbINN, 1, 4);
+            this.tbLayoutMain.Controls.Add(this.lblINN, 0, 4);
+            this.tbLayoutMain.Controls.Add(this.tbName, 1, 0);
+            this.tbLayoutMain.Controls.Add(this.btnLink, 2, 5);
+            this.tbLayoutMain.Controls.Add(this.lblAddress, 0, 1);
+            this.tbLayoutMain.Controls.Add(this.tbDocument, 1, 5);
+            this.tbLayoutMain.Controls.Add(this.tbAddress, 1, 1);
+            this.tbLayoutMain.Controls.Add(this.lblLink, 0, 5);
+            this.tbLayoutMain.Controls.Add(this.lblPhone, 0, 2);
+            this.tbLayoutMain.Controls.Add(this.tbPhone, 1, 2);
+            this.tbLayoutMain.Controls.Add(this.lblMail, 0, 3);
+            this.tbLayoutMain.Controls.Add(this.tbMail, 1, 3);
+            this.tbLayoutMain.Location = new System.Drawing.Point(12, 12);
+            this.tbLayoutMain.Name = "tbLayoutMain";
+            this.tbLayoutMain.RowCount = 6;
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.Size = new System.Drawing.Size(777, 240);
+            this.tbLayoutMain.TabIndex = 16;
+            // 
+            // tbLayoutBottom
+            // 
+            this.tbLayoutBottom.ColumnCount = 2;
+            this.tbLayoutBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbLayoutBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbLayoutBottom.Controls.Add(this.btnOk, 0, 0);
+            this.tbLayoutBottom.Controls.Add(this.btnCancel, 1, 0);
+            this.tbLayoutBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tbLayoutBottom.Location = new System.Drawing.Point(0, 282);
+            this.tbLayoutBottom.Name = "tbLayoutBottom";
+            this.tbLayoutBottom.RowCount = 1;
+            this.tbLayoutBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutBottom.Size = new System.Drawing.Size(798, 53);
+            this.tbLayoutBottom.TabIndex = 17;
             // 
             // ProviderEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(695, 342);
-            this.Controls.Add(this.lblINN);
-            this.Controls.Add(this.tbINN);
-            this.Controls.Add(this.btnClearPath);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.btnLink);
-            this.Controls.Add(this.tbDocument);
-            this.Controls.Add(this.lblLink);
-            this.Controls.Add(this.lblMail);
-            this.Controls.Add(this.lblPhone);
-            this.Controls.Add(this.lblAddress);
-            this.Controls.Add(this.lblName);
-            this.Controls.Add(this.tbMail);
-            this.Controls.Add(this.tbPhone);
-            this.Controls.Add(this.tbAddress);
-            this.Controls.Add(this.tbName);
+            this.ClientSize = new System.Drawing.Size(798, 335);
+            this.Controls.Add(this.tbLayoutBottom);
+            this.Controls.Add(this.tbLayoutMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ProviderEditor";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Редактор поставщика";
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderProviders)).EndInit();
+            this.tbLayoutMain.ResumeLayout(false);
+            this.tbLayoutMain.PerformLayout();
+            this.tbLayoutBottom.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -260,5 +317,7 @@
         private System.Windows.Forms.ErrorProvider errorProviderProviders;
         private System.Windows.Forms.Label lblINN;
         private System.Windows.Forms.TextBox tbINN;
+        private System.Windows.Forms.TableLayoutPanel tbLayoutMain;
+        private System.Windows.Forms.TableLayoutPanel tbLayoutBottom;
     }
 }

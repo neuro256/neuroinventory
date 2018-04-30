@@ -52,18 +52,23 @@
             this.errorProviderInventory = new System.Windows.Forms.ErrorProvider(this.components);
             this.lblInvoiceCode = new System.Windows.Forms.Label();
             this.tbInvoiceCodeStr = new System.Windows.Forms.TextBox();
+            this.tbLayoutMain = new System.Windows.Forms.TableLayoutPanel();
+            this.lblInvoiceDate = new System.Windows.Forms.Label();
+            this.invoiceDateTimePicker = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderInventory)).BeginInit();
+            this.tbLayoutMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblProvider
             // 
             this.lblProvider.AutoSize = true;
             this.lblProvider.BackColor = System.Drawing.Color.LightCyan;
-            this.lblProvider.Location = new System.Drawing.Point(26, 29);
+            this.lblProvider.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblProvider.Location = new System.Drawing.Point(3, 0);
             this.lblProvider.Name = "lblProvider";
-            this.lblProvider.Size = new System.Drawing.Size(81, 17);
+            this.lblProvider.Size = new System.Drawing.Size(170, 40);
             this.lblProvider.TabIndex = 0;
             this.lblProvider.Text = "Поставщик";
             // 
@@ -71,18 +76,20 @@
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.BackColor = System.Drawing.Color.LightCyan;
-            this.lblDate.Location = new System.Drawing.Point(26, 69);
+            this.lblDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDate.Location = new System.Drawing.Point(3, 40);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(131, 17);
+            this.lblDate.Size = new System.Drawing.Size(170, 40);
             this.lblDate.TabIndex = 1;
             this.lblDate.Text = "Дата поступления";
             // 
             // lblInvoice
             // 
             this.lblInvoice.AutoSize = true;
-            this.lblInvoice.Location = new System.Drawing.Point(26, 111);
+            this.lblInvoice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblInvoice.Location = new System.Drawing.Point(3, 80);
             this.lblInvoice.Name = "lblInvoice";
-            this.lblInvoice.Size = new System.Drawing.Size(81, 17);
+            this.lblInvoice.Size = new System.Drawing.Size(170, 40);
             this.lblInvoice.TabIndex = 2;
             this.lblInvoice.Text = "Накладная";
             // 
@@ -90,27 +97,30 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.BackColor = System.Drawing.Color.LightCyan;
-            this.lblName.Location = new System.Drawing.Point(26, 189);
+            this.lblName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblName.Location = new System.Drawing.Point(3, 200);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(106, 17);
+            this.lblName.Size = new System.Drawing.Size(170, 40);
             this.lblName.TabIndex = 3;
             this.lblName.Text = "Наименование";
             // 
             // lblOKEI
             // 
             this.lblOKEI.AutoSize = true;
-            this.lblOKEI.Location = new System.Drawing.Point(26, 272);
+            this.lblOKEI.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblOKEI.Location = new System.Drawing.Point(3, 280);
             this.lblOKEI.Name = "lblOKEI";
-            this.lblOKEI.Size = new System.Drawing.Size(76, 17);
+            this.lblOKEI.Size = new System.Drawing.Size(170, 40);
             this.lblOKEI.TabIndex = 4;
             this.lblOKEI.Text = "Код ОКЕИ";
             // 
             // lblMeasurement
             // 
             this.lblMeasurement.AutoSize = true;
-            this.lblMeasurement.Location = new System.Drawing.Point(26, 230);
+            this.lblMeasurement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMeasurement.Location = new System.Drawing.Point(3, 240);
             this.lblMeasurement.Name = "lblMeasurement";
-            this.lblMeasurement.Size = new System.Drawing.Size(141, 17);
+            this.lblMeasurement.Size = new System.Drawing.Size(170, 40);
             this.lblMeasurement.TabIndex = 5;
             this.lblMeasurement.Text = "Единица измерения";
             // 
@@ -118,9 +128,10 @@
             // 
             this.lblAmount.AutoSize = true;
             this.lblAmount.BackColor = System.Drawing.Color.LightCyan;
-            this.lblAmount.Location = new System.Drawing.Point(26, 313);
+            this.lblAmount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAmount.Location = new System.Drawing.Point(3, 320);
             this.lblAmount.Name = "lblAmount";
-            this.lblAmount.Size = new System.Drawing.Size(86, 17);
+            this.lblAmount.Size = new System.Drawing.Size(170, 40);
             this.lblAmount.TabIndex = 6;
             this.lblAmount.Text = "Количество";
             // 
@@ -128,42 +139,47 @@
             // 
             this.lblPrice.AutoSize = true;
             this.lblPrice.BackColor = System.Drawing.Color.LightCyan;
-            this.lblPrice.Location = new System.Drawing.Point(26, 355);
+            this.lblPrice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPrice.Location = new System.Drawing.Point(3, 360);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(43, 17);
+            this.lblPrice.Size = new System.Drawing.Size(170, 40);
             this.lblPrice.TabIndex = 7;
             this.lblPrice.Text = "Цена";
             // 
             // cbProviders
             // 
+            this.cbProviders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbProviders.FormattingEnabled = true;
-            this.cbProviders.Location = new System.Drawing.Point(186, 26);
+            this.cbProviders.Location = new System.Drawing.Point(179, 3);
             this.cbProviders.Name = "cbProviders";
-            this.cbProviders.Size = new System.Drawing.Size(267, 24);
+            this.cbProviders.Size = new System.Drawing.Size(382, 24);
             this.cbProviders.TabIndex = 8;
             // 
             // dateTimePicker
             // 
+            this.dateTimePicker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker.Location = new System.Drawing.Point(186, 64);
+            this.dateTimePicker.Location = new System.Drawing.Point(179, 43);
             this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(185, 22);
+            this.dateTimePicker.Size = new System.Drawing.Size(382, 22);
             this.dateTimePicker.TabIndex = 9;
             // 
             // tbInvoice
             // 
-            this.tbInvoice.Location = new System.Drawing.Point(186, 108);
+            this.tbInvoice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbInvoice.Location = new System.Drawing.Point(179, 83);
             this.tbInvoice.Name = "tbInvoice";
             this.tbInvoice.ReadOnly = true;
-            this.tbInvoice.Size = new System.Drawing.Size(267, 22);
+            this.tbInvoice.Size = new System.Drawing.Size(382, 22);
             this.tbInvoice.TabIndex = 10;
             this.tbInvoice.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbInvoice_MouseClick);
             // 
             // btnLink
             // 
-            this.btnLink.Location = new System.Drawing.Point(459, 108);
+            this.btnLink.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnLink.Location = new System.Drawing.Point(567, 83);
             this.btnLink.Name = "btnLink";
-            this.btnLink.Size = new System.Drawing.Size(75, 23);
+            this.btnLink.Size = new System.Drawing.Size(99, 34);
             this.btnLink.TabIndex = 11;
             this.btnLink.Text = "Обзор";
             this.btnLink.UseVisualStyleBackColor = true;
@@ -171,9 +187,10 @@
             // 
             // btnCLear
             // 
-            this.btnCLear.Location = new System.Drawing.Point(549, 108);
+            this.btnCLear.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCLear.Location = new System.Drawing.Point(672, 83);
             this.btnCLear.Name = "btnCLear";
-            this.btnCLear.Size = new System.Drawing.Size(88, 23);
+            this.btnCLear.Size = new System.Drawing.Size(102, 34);
             this.btnCLear.TabIndex = 12;
             this.btnCLear.Text = "Очистить";
             this.btnCLear.UseVisualStyleBackColor = true;
@@ -181,39 +198,43 @@
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(186, 186);
+            this.tbName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbName.Location = new System.Drawing.Point(179, 203);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(267, 22);
+            this.tbName.Size = new System.Drawing.Size(382, 22);
             this.tbName.TabIndex = 13;
             this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             // 
             // tbOKEI
             // 
-            this.tbOKEI.Location = new System.Drawing.Point(186, 269);
+            this.tbOKEI.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbOKEI.Location = new System.Drawing.Point(179, 283);
             this.tbOKEI.MaxLength = 3;
             this.tbOKEI.Name = "tbOKEI";
-            this.tbOKEI.Size = new System.Drawing.Size(121, 22);
+            this.tbOKEI.Size = new System.Drawing.Size(382, 22);
             this.tbOKEI.TabIndex = 14;
             // 
             // cbMeasurement
             // 
+            this.cbMeasurement.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbMeasurement.FormattingEnabled = true;
-            this.cbMeasurement.Location = new System.Drawing.Point(186, 227);
+            this.cbMeasurement.Location = new System.Drawing.Point(179, 243);
             this.cbMeasurement.Name = "cbMeasurement";
-            this.cbMeasurement.Size = new System.Drawing.Size(121, 24);
+            this.cbMeasurement.Size = new System.Drawing.Size(382, 24);
             this.cbMeasurement.TabIndex = 15;
             this.cbMeasurement.SelectionChangeCommitted += new System.EventHandler(this.cbMeasurement_SelectionChangeCommitted);
             // 
             // nudAmount
             // 
-            this.nudAmount.Location = new System.Drawing.Point(186, 311);
+            this.nudAmount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nudAmount.Location = new System.Drawing.Point(179, 323);
             this.nudAmount.Maximum = new decimal(new int[] {
             1215752191,
             23,
             0,
             0});
             this.nudAmount.Name = "nudAmount";
-            this.nudAmount.Size = new System.Drawing.Size(120, 22);
+            this.nudAmount.Size = new System.Drawing.Size(382, 22);
             this.nudAmount.TabIndex = 16;
             this.nudAmount.ThousandsSeparator = true;
             this.nudAmount.ValueChanged += new System.EventHandler(this.nudAmount_ValueChanged);
@@ -221,14 +242,15 @@
             // nudPrice
             // 
             this.nudPrice.DecimalPlaces = 2;
-            this.nudPrice.Location = new System.Drawing.Point(186, 353);
+            this.nudPrice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nudPrice.Location = new System.Drawing.Point(179, 363);
             this.nudPrice.Maximum = new decimal(new int[] {
             1316134911,
             2328,
             0,
             131072});
             this.nudPrice.Name = "nudPrice";
-            this.nudPrice.Size = new System.Drawing.Size(120, 22);
+            this.nudPrice.Size = new System.Drawing.Size(382, 22);
             this.nudPrice.TabIndex = 17;
             this.nudPrice.ThousandsSeparator = true;
             this.nudPrice.ValueChanged += new System.EventHandler(this.nudPrice_ValueChanged);
@@ -237,7 +259,7 @@
             // 
             this.btnOK.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOK.Location = new System.Drawing.Point(186, 415);
+            this.btnOK.Location = new System.Drawing.Point(12, 443);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(103, 34);
             this.btnOK.TabIndex = 18;
@@ -249,7 +271,7 @@
             // 
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCancel.Location = new System.Drawing.Point(330, 415);
+            this.btnCancel.Location = new System.Drawing.Point(156, 443);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(103, 34);
             this.btnCancel.TabIndex = 19;
@@ -266,48 +288,96 @@
             // lblInvoiceCode
             // 
             this.lblInvoiceCode.AutoSize = true;
-            this.lblInvoiceCode.Location = new System.Drawing.Point(26, 149);
+            this.lblInvoiceCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblInvoiceCode.Location = new System.Drawing.Point(3, 120);
             this.lblInvoiceCode.Name = "lblInvoiceCode";
-            this.lblInvoiceCode.Size = new System.Drawing.Size(126, 17);
+            this.lblInvoiceCode.Size = new System.Drawing.Size(170, 40);
             this.lblInvoiceCode.TabIndex = 21;
             this.lblInvoiceCode.Text = "Номер накладной";
             // 
             // tbInvoiceCodeStr
             // 
-            this.tbInvoiceCodeStr.Location = new System.Drawing.Point(186, 149);
+            this.tbInvoiceCodeStr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbInvoiceCodeStr.Location = new System.Drawing.Point(179, 123);
             this.tbInvoiceCodeStr.MaxLength = 30;
             this.tbInvoiceCodeStr.Name = "tbInvoiceCodeStr";
-            this.tbInvoiceCodeStr.Size = new System.Drawing.Size(267, 22);
+            this.tbInvoiceCodeStr.Size = new System.Drawing.Size(382, 22);
             this.tbInvoiceCodeStr.TabIndex = 22;
+            // 
+            // tbLayoutMain
+            // 
+            this.tbLayoutMain.ColumnCount = 4;
+            this.tbLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.72727F));
+            this.tbLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.63636F));
+            this.tbLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.63636F));
+            this.tbLayoutMain.Controls.Add(this.lblInvoiceDate, 0, 4);
+            this.tbLayoutMain.Controls.Add(this.lblProvider, 0, 0);
+            this.tbLayoutMain.Controls.Add(this.tbInvoiceCodeStr, 1, 3);
+            this.tbLayoutMain.Controls.Add(this.nudPrice, 1, 9);
+            this.tbLayoutMain.Controls.Add(this.cbProviders, 1, 0);
+            this.tbLayoutMain.Controls.Add(this.lblPrice, 0, 9);
+            this.tbLayoutMain.Controls.Add(this.nudAmount, 1, 8);
+            this.tbLayoutMain.Controls.Add(this.lblInvoiceCode, 0, 3);
+            this.tbLayoutMain.Controls.Add(this.tbOKEI, 1, 7);
+            this.tbLayoutMain.Controls.Add(this.lblAmount, 0, 8);
+            this.tbLayoutMain.Controls.Add(this.cbMeasurement, 1, 6);
+            this.tbLayoutMain.Controls.Add(this.lblDate, 0, 1);
+            this.tbLayoutMain.Controls.Add(this.dateTimePicker, 1, 1);
+            this.tbLayoutMain.Controls.Add(this.lblOKEI, 0, 7);
+            this.tbLayoutMain.Controls.Add(this.tbName, 1, 5);
+            this.tbLayoutMain.Controls.Add(this.lblInvoice, 0, 2);
+            this.tbLayoutMain.Controls.Add(this.lblMeasurement, 0, 6);
+            this.tbLayoutMain.Controls.Add(this.tbInvoice, 1, 2);
+            this.tbLayoutMain.Controls.Add(this.btnLink, 2, 2);
+            this.tbLayoutMain.Controls.Add(this.btnCLear, 3, 2);
+            this.tbLayoutMain.Controls.Add(this.invoiceDateTimePicker, 1, 4);
+            this.tbLayoutMain.Controls.Add(this.lblName, 0, 5);
+            this.tbLayoutMain.Location = new System.Drawing.Point(12, 12);
+            this.tbLayoutMain.Name = "tbLayoutMain";
+            this.tbLayoutMain.RowCount = 10;
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tbLayoutMain.Size = new System.Drawing.Size(777, 400);
+            this.tbLayoutMain.TabIndex = 23;
+            // 
+            // lblInvoiceDate
+            // 
+            this.lblInvoiceDate.AutoSize = true;
+            this.lblInvoiceDate.BackColor = System.Drawing.Color.Silver;
+            this.lblInvoiceDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblInvoiceDate.Location = new System.Drawing.Point(3, 160);
+            this.lblInvoiceDate.Name = "lblInvoiceDate";
+            this.lblInvoiceDate.Size = new System.Drawing.Size(170, 40);
+            this.lblInvoiceDate.TabIndex = 24;
+            this.lblInvoiceDate.Text = "Дата накладной";
+            // 
+            // invoiceDateTimePicker
+            // 
+            this.invoiceDateTimePicker.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.invoiceDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.invoiceDateTimePicker.Location = new System.Drawing.Point(179, 163);
+            this.invoiceDateTimePicker.Name = "invoiceDateTimePicker";
+            this.invoiceDateTimePicker.Size = new System.Drawing.Size(382, 22);
+            this.invoiceDateTimePicker.TabIndex = 25;
             // 
             // InventoryEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(649, 466);
-            this.Controls.Add(this.tbInvoiceCodeStr);
-            this.Controls.Add(this.lblInvoiceCode);
+            this.ClientSize = new System.Drawing.Size(800, 489);
+            this.Controls.Add(this.tbLayoutMain);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.nudPrice);
-            this.Controls.Add(this.nudAmount);
-            this.Controls.Add(this.cbMeasurement);
-            this.Controls.Add(this.tbOKEI);
-            this.Controls.Add(this.tbName);
-            this.Controls.Add(this.btnCLear);
-            this.Controls.Add(this.btnLink);
-            this.Controls.Add(this.tbInvoice);
-            this.Controls.Add(this.dateTimePicker);
-            this.Controls.Add(this.cbProviders);
-            this.Controls.Add(this.lblPrice);
-            this.Controls.Add(this.lblAmount);
-            this.Controls.Add(this.lblMeasurement);
-            this.Controls.Add(this.lblOKEI);
-            this.Controls.Add(this.lblName);
-            this.Controls.Add(this.lblInvoice);
-            this.Controls.Add(this.lblDate);
-            this.Controls.Add(this.lblProvider);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "InventoryEditor";
             this.ShowIcon = false;
@@ -317,8 +387,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderInventory)).EndInit();
+            this.tbLayoutMain.ResumeLayout(false);
+            this.tbLayoutMain.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -347,5 +418,8 @@
         private System.Windows.Forms.ErrorProvider errorProviderInventory;
         private System.Windows.Forms.Label lblInvoiceCode;
         private System.Windows.Forms.TextBox tbInvoiceCodeStr;
+        private System.Windows.Forms.TableLayoutPanel tbLayoutMain;
+        private System.Windows.Forms.Label lblInvoiceDate;
+        private System.Windows.Forms.DateTimePicker invoiceDateTimePicker;
     }
 }

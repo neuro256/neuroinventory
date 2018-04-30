@@ -56,6 +56,11 @@ namespace NeuroInventory
             dateTimePicker.Format = DateTimePickerFormat.Short;
             dateTimePicker.Value = DateTime.Today;
             dateTimePicker.ShowUpDown = false;
+
+            // Настройка селектора даты накладной 
+            invoiceDateTimePicker.Format = DateTimePickerFormat.Short;
+            dateTimePicker.Value = DateTime.Today;
+            dateTimePicker.ShowUpDown = false;
         }
 
         private void ShowInfo()
@@ -66,7 +71,11 @@ namespace NeuroInventory
             dateTimePicker.Value = Convert.ToDateTime(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["date"]);
             string fileName = Path.GetFileName(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["invoice"].ToString());
             tbInvoice.Text = fileName;
-            tbInvoiceCodeStr.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["invoiceCodeStr"].ToString(); 
+            tbInvoiceCodeStr.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["invoiceCodeStr"].ToString();
+            if(!Equals(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["invoiceDate"], DBNull.Value))
+            {
+                invoiceDateTimePicker.Value = Convert.ToDateTime(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["invoiceDate"]);
+            }
             tbName.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["name"].ToString();
             tbOKEI.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["OKEIcode"].ToString();
             cbMeasurement.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["measurement"].ToString();
@@ -89,11 +98,11 @@ namespace NeuroInventory
 
             if(m_EditorMode == EditorMode.UPDATE)
             {
-                SQLiteManager.GetInstance().Inventory().Update(m_SelectedRecordId, m_CatalogId, cbProviders.SelectedValue, dateTimePicker.Value, tbInvoiceCodeStr.Text, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, m_SelectedDocument, m_CurrentDocument);
+                SQLiteManager.GetInstance().Inventory().Update(m_SelectedRecordId, m_CatalogId, cbProviders.SelectedValue, dateTimePicker.Value, tbInvoiceCodeStr.Text, invoiceDateTimePicker.Value, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, m_SelectedDocument, m_CurrentDocument);
             }
             else
             {
-                SQLiteManager.GetInstance().Inventory().Insert(m_CatalogId, cbProviders.SelectedValue, dateTimePicker.Value, tbInvoiceCodeStr.Text, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, m_SelectedDocument);
+                SQLiteManager.GetInstance().Inventory().Insert(m_CatalogId, cbProviders.SelectedValue, dateTimePicker.Value, tbInvoiceCodeStr.Text, invoiceDateTimePicker.Value, tbName.Text, tbOKEI.Text, cbMeasurement.Text, nudAmount.Value, nudPrice.Value, m_SelectedDocument);
             }
 
             DialogResult = DialogResult.OK;

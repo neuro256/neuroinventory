@@ -22,7 +22,8 @@ namespace NeuroInventory
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
-                "inventory.invoiceCodeStr, " + 
+                "inventory.invoiceCodeStr, " +
+                "strftime('%d.%m.%Y', DATE(inventory.invoiceDate)) AS invoiceDate, " + 
                 "inventory.name," +
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
@@ -44,6 +45,7 @@ namespace NeuroInventory
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
                 "inventory.invoiceCodeStr, " +
+                "strftime('%d.%m.%Y', DATE(inventory.invoiceDate)) AS invoiceDate, " + 
                 "inventory.name," +
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
@@ -67,9 +69,10 @@ namespace NeuroInventory
             CommandDataSet = "SELECT inventory.id, " +
                 "inventory.catalogId, " +
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
-                "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
-                "inventory.invoice," +
+                "strftime('%d.%m.%Y', DATE(inventory.date)) AS date, " +
+                "inventory.invoice, " +
                 "inventory.invoiceCodeStr, " +
+                "strftime('%d.%m.%Y', DATE(inventory.invoiceDate)) AS invoiceDate," + 
                 "inventory.name," +
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
@@ -82,7 +85,7 @@ namespace NeuroInventory
             SelectedCatalogIds = p_CatalogIds;
         }
 
-        public void Filter(object p_Provider, DateTime p_Date, string p_Invoice, string p_Name, string p_OKEIcode, string p_Measurement, object p_Amount, object p_Price)
+        public void Filter(object p_Provider, DateTime p_Date, string p_InvoiceCode, string p_Name, string p_OKEIcode, string p_Measurement, object p_Amount, object p_Price)
         {
             string catalogIdsStr = String.Empty;
             foreach (var id in SelectedCatalogIds)
@@ -96,7 +99,7 @@ namespace NeuroInventory
             string l_Name = $" AND inventory.name like '%{p_Name}%'";
             string l_Provider = p_Provider != null ? $" AND inventory.providerId={p_Provider}" : String.Empty;
             string l_Date = !DateTime.Equals(p_Date, DateTime.MaxValue) ? $" AND inventory.date=Datetime('{l_DateStr}')" : String.Empty;
-            string l_Invoice = !String.IsNullOrEmpty(p_Invoice) ? $" AND invoice LIKE '%{p_Invoice}%'" : $" AND (invoice LIKE '%{p_Invoice}%' OR invoice IS NULL)";
+            string l_InvoiceCode = !String.IsNullOrEmpty(p_InvoiceCode) ? $" AND invoiceCodeStr LIKE '%{p_InvoiceCode}%'" : $" AND (invoiceCodeStr LIKE '%{p_InvoiceCode}%' OR invoiceCodeStr IS NULL)";
             string l_OKEIcode = !String.IsNullOrEmpty(p_OKEIcode) ? $" AND OKEIcode LIKE '%{p_OKEIcode}%'" : $" AND (OKEIcode LIKE '%{p_OKEIcode}%' OR OKEIcode IS NULL)";
             string l_Measurement = !String.IsNullOrEmpty(p_Measurement) ? $" AND measurement LIKE '%{p_Measurement}%'" : $" AND (measurement LIKE '%{p_Measurement}%' OR measurement IS NULL)";
             string l_Amount = p_Amount != null ? $" AND (inventory.amount={p_Amount})" : String.Empty;
@@ -119,7 +122,7 @@ namespace NeuroInventory
                 l_Name +
                 l_Provider +
                 l_Date +
-                l_Invoice + 
+                l_InvoiceCode + 
                 l_OKEIcode +
                 l_Measurement +
                 l_Amount +
@@ -143,7 +146,7 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }
 
-        public void Update(object p_Id, int p_CatalogId, object p_Provider, DateTime p_Date, string p_InvoiceCodeStr, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument, string p_CurrentDocument)
+        public void Update(object p_Id, int p_CatalogId, object p_Provider, DateTime p_Date, string p_InvoiceCodeStr, DateTime p_InvoiceDate, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument, string p_CurrentDocument)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
@@ -151,6 +154,7 @@ namespace NeuroInventory
             values["providerId"] = p_Provider;
             values["date"] = p_Date;
             values["invoiceCodeStr"] = !String.IsNullOrEmpty(p_InvoiceCodeStr) ? (object)p_InvoiceCodeStr : DBNull.Value;
+            values["invoiceDate"] = p_InvoiceDate;
             values["name"] = p_Name;
             values["OKEIcode"] = !String.IsNullOrEmpty(p_OKEIcode) ? (object)p_OKEIcode : DBNull.Value;
             values["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value;
@@ -174,7 +178,7 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Update(TableName, values, l_Where);
         }
 
-        public void Insert(int p_CatalogId, object p_Provider, DateTime p_Date, string p_InvoiceCodeStr, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument)
+        public void Insert(int p_CatalogId, object p_Provider, DateTime p_Date, string p_InvoiceCodeStr, DateTime p_InvoiceDate, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
@@ -182,6 +186,7 @@ namespace NeuroInventory
             values["providerId"] = p_Provider;
             values["date"] = p_Date;
             values["invoiceCodeStr"] = !String.IsNullOrEmpty(p_InvoiceCodeStr) ? (object)p_InvoiceCodeStr : DBNull.Value;
+            values["invoiceDate"] = p_InvoiceDate;
             values["name"] = p_Name;
             values["OKEIcode"] = !String.IsNullOrEmpty(p_OKEIcode) ? (object)p_OKEIcode : DBNull.Value;
             values["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value;

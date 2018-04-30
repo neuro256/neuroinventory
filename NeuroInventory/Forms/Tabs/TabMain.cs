@@ -542,18 +542,19 @@ namespace NeuroInventory
             lwInventory.DoubleBuffered(true);
 
             lwInventory.Columns.Clear();
-            lwInventory.Columns.Add(new ColHeader("№", 50, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwInventory.Columns.Add(new ColHeader("Поставщик", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwInventory.Columns.Add(new ColHeader("Дата поступления", 140, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwInventory.Columns.Add(new ColHeader("Накладная", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwInventory.Columns.Add(new ColHeader("Номер накладной", 150, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwInventory.Columns.Add(new ColHeader("Наименование", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwInventory.Columns.Add(new ColHeader("Код ОКЕИ", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwInventory.Columns.Add(new ColHeader("Единица измерения", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwInventory.Columns.Add(new ColHeader("Количество", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwInventory.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwInventory.Columns.Add(new ColHeader("Сумма", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwInventory.Columns.Add(new ColHeader("Остаток", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwInventory.Columns.Add(new ColHeader("№", 50, HorizontalAlignment.Left, true));
+            lwInventory.Columns.Add(new ColHeader("Поставщик", 200, HorizontalAlignment.Left, true));
+            lwInventory.Columns.Add(new ColHeader("Дата поступления", 140, HorizontalAlignment.Left, true));
+            lwInventory.Columns.Add(new ColHeader("Накладная", 100, HorizontalAlignment.Left, true));
+            lwInventory.Columns.Add(new ColHeader("Номер накладной", 150, HorizontalAlignment.Left, true));
+            lwInventory.Columns.Add(new ColHeader("Дата накладной", 140, HorizontalAlignment.Left, true));
+            lwInventory.Columns.Add(new ColHeader("Наименование", 200, HorizontalAlignment.Left, true));
+            lwInventory.Columns.Add(new ColHeader("Код ОКЕИ", 100, HorizontalAlignment.Left, true));
+            lwInventory.Columns.Add(new ColHeader("Единица измерения", 100, HorizontalAlignment.Left, true));
+            lwInventory.Columns.Add(new ColHeader("Количество", 100, HorizontalAlignment.Left, true));
+            lwInventory.Columns.Add(new ColHeader("Цена", 100, HorizontalAlignment.Left, true));
+            lwInventory.Columns.Add(new ColHeader("Сумма", 100, HorizontalAlignment.Left, true));
+            lwInventory.Columns.Add(new ColHeader("Остаток", 100, HorizontalAlignment.Left, true));
         }
 
         private void btnInventoryAdd_Click(object sender, EventArgs e)

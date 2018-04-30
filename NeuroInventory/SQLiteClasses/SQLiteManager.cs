@@ -170,6 +170,7 @@ namespace NeuroInventory
                                 "date DATETIME NOT NULL, " +
                                 "invoice NVARCHAR(80), " +
                                 "invoiceCode NVARCHAR(30), " +
+                                "invoiceDate DATETIME, " + 
                                 "name NVARCHAR(45) NOT NULL, " +
                                 "OKEIcode NVARCHAR(5), " +
                                 "measurement NVARCHAR(20), " +
@@ -238,6 +239,10 @@ namespace NeuroInventory
             {
                 AlterTableAddColumn("inventory", "invoiceCodeStr", "NVARCHAR(30)");
                 CopyColumn("inventory", "invoiceCode", "invoiceCodeStr");
+            }
+            if(!CheckIfColumnExists("inventory", "invoiceDate"))
+            {
+                AlterTableAddColumn("inventory", "invoiceDate", "DATETIME");
             }
             if(!CheckIfColumnExists("debit", "demandId"))
             {

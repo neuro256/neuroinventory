@@ -82,9 +82,9 @@
             this.lblDate.BackColor = System.Drawing.Color.Silver;
             this.lblDate.Location = new System.Drawing.Point(27, 0);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(42, 17);
+            this.lblDate.Size = new System.Drawing.Size(98, 17);
             this.lblDate.TabIndex = 0;
-            this.lblDate.Text = "Дата";
+            this.lblDate.Text = "Дата отпуска";
             // 
             // lblName
             // 

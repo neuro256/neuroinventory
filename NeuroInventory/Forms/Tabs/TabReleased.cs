@@ -57,18 +57,19 @@ namespace NeuroInventory
             // Необходимо добавлять столбцы именно так, иначе ColumnHeader не сможет преобразоваться в ColHeader (используется в методе сортировки)
             lwReleased.Columns.Clear();
             lwReleased.Columns.Add(new ColHeader("№", 60, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Дата поступления", 120, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Дата отпуска", 120, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Номер накладной", 120, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Дата поступления", 120, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Дата отпуска", 120, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Номер накладной", 120, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Дата накладной", 120, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Наименование", 350, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Код ОКЕИ", 80, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Единица измерения", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Кому отпущено", 250, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Количество", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Цена", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Сумма", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Документ", 200, System.Windows.Forms.HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Состояние списания", 100, System.Windows.Forms.HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Единица измерения", 100, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Кому отпущено", 250, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Количество", 100, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Цена", 100, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Сумма", 100, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Документ", 200, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Состояние списания", 100, HorizontalAlignment.Left, true));
         }
 
         private void btnReleasedRemove_Click(object sender, EventArgs e)

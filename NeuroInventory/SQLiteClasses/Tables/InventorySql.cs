@@ -45,7 +45,7 @@ namespace NeuroInventory
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
                 "inventory.invoiceCodeStr, " +
-                "strftime('%d.%m.%Y', DATE(inventory.invoiceDate)) AS invoiceDate, " + 
+                "strftime('%d.%m.%Y', DATE(inventory.invoiceDate)) AS invoiceDate, " +
                 "inventory.name," +
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
@@ -69,10 +69,10 @@ namespace NeuroInventory
             CommandDataSet = "SELECT inventory.id, " +
                 "inventory.catalogId, " +
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
-                "strftime('%d.%m.%Y', DATE(inventory.date)) AS date, " +
-                "inventory.invoice, " +
+                "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
+                "inventory.invoice," +
                 "inventory.invoiceCodeStr, " +
-                "strftime('%d.%m.%Y', DATE(inventory.invoiceDate)) AS invoiceDate," + 
+                "strftime('%d.%m.%Y', DATE(inventory.invoiceDate)) AS invoiceDate, " +
                 "inventory.name," +
                 "inventory.OKEIcode," +
                 "inventory.measurement," +
@@ -111,6 +111,7 @@ namespace NeuroInventory
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
                 "inventory.invoiceCodeStr, " +
+                "strftime('%d.%m.%Y', DATE(inventory.invoiceDate)) AS invoiceDate, " +
                 "inventory.name," +
                 "inventory.OKEIcode," +
                 "inventory.measurement," +

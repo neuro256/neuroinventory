@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
@@ -151,7 +150,7 @@ namespace NeuroInventory
             return NeuroFile.InsertFile(p_SelectedDocument, TargetPath);
         }
 
-        public object CreateFileName(List<string> p_FilenamePrefix, string p_FilenameBody, string p_FileExt)
+        public object CreateFileName(string p_FilenamePrefix, string p_FilenameBody, string p_FileExt)
         {
             return NeuroFile.CreateFileName(p_FilenamePrefix, p_FilenameBody, p_FileExt, TargetPath);
         }

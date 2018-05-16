@@ -155,12 +155,13 @@ namespace NeuroInventory
 
         public bool CreateReport()
         {
-            string l_FileName = SQLiteManager.GetInstance().DemandReport().CreateFileName(GetFilePrefix(), Definitions.DEMAND_REPORT_FILENAME, Definitions.DEMAND_REPORT_EXTENSION).ToString();
+            string l_DocumentNumber = GetDocumentNumber();
+            string l_FileName = SQLiteManager.GetInstance().DemandReport().CreateFileName(l_DocumentNumber, Definitions.DEMAND_REPORT_FILENAME, Definitions.DEMAND_REPORT_EXTENSION).ToString();
 
             SpireReportBuilder builder = new SpireReportBuilder();
             builder.AddDestinationPath(l_FileName);
             builder.AddDemandDataSet(GetDemandReportDataSet());
-            builder.AddAdditionalData(GetReportFieldsData());
+            builder.AddAdditionalData(GetReportFieldsData(l_DocumentNumber));
 
             ReportData l_ReportData = builder.Build();
 
@@ -173,20 +174,6 @@ namespace NeuroInventory
             }
 
             return false;
-        }
-
-        private List<string> GetFilePrefix()
-        {
-            List<string> l_prefixes = new List<string>();
-            foreach (DataRow row in DemandDataSet.Tables[0].Rows)
-            {
-                string l_invoiceCode = row["invoice_code"].ToString();
-                if (!String.IsNullOrEmpty(l_invoiceCode) && !l_prefixes.Contains(l_invoiceCode))
-                {
-                    l_prefixes.Add(l_invoiceCode);
-                }
-            }
-            return l_prefixes;
         }
 
         private DataSet GetDemandReportDataSet()
@@ -221,14 +208,14 @@ namespace NeuroInventory
             return demandReportDataSet;
         }
 
-        private Dictionary<string, object> GetReportFieldsData()
+        private Dictionary<string, object> GetReportFieldsData(string p_DocumentNumber)
         {
             Dictionary<string, object> fieldsData = new Dictionary<string, object>();
             fieldsData["EmployeeInitialsBefore"] = $"{GetEmployeeInitials()} {GetEmployeeName()}";
             fieldsData["EmployeeInitialsAfter"] = $"{GetEmployeeName()} {GetEmployeeInitials()}";
             fieldsData["EmployeePost"] = GetEmployeePost();
             fieldsData["TotalPrice"] = GetTotalPriceStr();
-            fieldsData["Number"] = GetDocumentNumber();
+            fieldsData["Number"] = p_DocumentNumber;
             fieldsData["Date"] = GetDate();
 
             return fieldsData;

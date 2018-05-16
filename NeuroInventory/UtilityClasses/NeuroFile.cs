@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -66,17 +65,11 @@ namespace NeuroInventory
             }
         }
 
-        private static string ComposeAndCreateFileName(List<string> p_FilenamePrefix, string p_FilenameBody, string p_FileExt, string p_TargetPath)
+        private static string ComposeAndCreateFileName(string p_FilenamePrefix, string p_FilenameBody, string p_FileExt, string p_TargetPath)
         {
             try
             {
-                string fileExt = p_FileExt;
-                string filePrefix = "";
-                foreach(var prefix in p_FilenamePrefix)
-                {
-                    filePrefix += $"{prefix}_";
-                }
-                string destFile = Path.Combine(p_TargetPath, $"{filePrefix}{p_FilenameBody}_{DateTime.Now.ToFileTime()}{fileExt}");
+                string destFile = Path.Combine(p_TargetPath, $"{p_FilenamePrefix}_{p_FilenameBody}_{DateTime.Now.ToFileTime()}{p_FileExt}");
                 if (!Directory.Exists(p_TargetPath))
                 {
                     Directory.CreateDirectory(p_TargetPath);
@@ -174,7 +167,7 @@ namespace NeuroInventory
             }
         }
 
-        public static object CreateFileName(List<string> p_FilenamePrefix, string p_FilenameBody, string p_FileExt, string p_TargetPath)
+        public static object CreateFileName(string p_FilenamePrefix, string p_FilenameBody, string p_FileExt, string p_TargetPath)
         {
             try
             {

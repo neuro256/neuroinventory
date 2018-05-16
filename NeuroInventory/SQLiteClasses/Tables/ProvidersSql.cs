@@ -28,7 +28,14 @@ namespace NeuroInventory
             string l_INN = !String.IsNullOrEmpty(p_INN) ? $"inn like '%{p_INN}%'" : $"(inn like '%{p_INN}%' OR inn IS NULL)";
             string l_Document = !String.IsNullOrEmpty(p_Document) ? $"document like '%{p_Document}%'" : $"(document like '%{p_Document}%' OR document IS NULL)";
 
-            CommandDataSet = "SELECT * FROM providers WHERE " +
+            CommandDataSet = "SELECT providers.id, " +
+                "providers.name, " +
+                "providers.address, " +
+                "providers.phone, " +
+                "providers.mail, " +
+                "providers.inn, " +
+                "providers.document " +
+                "FROM providers WHERE " + 
                 $"name like '%{p_Name}%' AND " +
                 $"{l_Address} AND " +
                 $"{l_Phone} AND " +

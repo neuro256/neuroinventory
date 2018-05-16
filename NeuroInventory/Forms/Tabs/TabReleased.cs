@@ -69,7 +69,7 @@ namespace NeuroInventory
             lwReleased.Columns.Add(new ColHeader("Цена", 100, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Сумма", 100, HorizontalAlignment.Left, true));
             lwReleased.Columns.Add(new ColHeader("Документ", 200, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Состояние списания", 100, HorizontalAlignment.Left, true));
+            lwReleased.Columns.Add(new ColHeader("Состояние списания", 250, HorizontalAlignment.Left, true));
         }
 
         private void btnReleasedRemove_Click(object sender, EventArgs e)
@@ -82,7 +82,7 @@ namespace NeuroInventory
         /// </summary>
         public override void RemoveRecord()
         {
-            if(m_Listview.SelectedItems.Count > 0)
+            if (m_Listview.SelectedItems.Count > 0)
             {
                 SQLiteManager.GetInstance().Released().Remove(m_ListviewSelectedIndex);
                 RemoveFromListViewAt(m_ListviewSelectedIndex);
@@ -154,7 +154,7 @@ namespace NeuroInventory
                             subitem.Text = Path.GetFileName(subitem.Text);
                         }
 
-                        if(subitem.Name == "balance")
+                        if (subitem.Name == "balance")
                         {
                             object balance = dataSet.Tables[0].Rows[i]["balance"];
                             if (Equals(balance, DBNull.Value))
@@ -162,10 +162,15 @@ namespace NeuroInventory
                                 subitem.BackColor = Color.DarkOrange;
                                 subitem.Text = Definitions.NOT_DEBIT_STRING;
                             }
-                            else if(!Convert.ToInt32(balance).Equals(0))
+                            else if (Convert.ToDecimal(balance) > 0)
                             {
                                 subitem.BackColor = Color.Coral;
-                                subitem.Text = Definitions.NOT_DEBIT_STRING;
+                                subitem.Text = $"{Definitions.NOT_DEBIT_STRING} ({balance})";
+                            }
+                            else if (Convert.ToDecimal(balance) < 0)
+                            {
+                                subitem.BackColor = Color.Red;
+                                subitem.Text = $"{Definitions.ERROR_DEBIT_STRING} ({balance})";
                             }
                             else
                             {
@@ -210,7 +215,7 @@ namespace NeuroInventory
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            if(Filter == null || !Filter.Created)
+            if (Filter == null || !Filter.Created)
             {
                 Filter = new ReleasedFilter();
                 Filter.Dock = DockStyle.Top;
@@ -219,7 +224,7 @@ namespace NeuroInventory
                 Filter.Parent = Parent;
                 Filter.Show();
             }
-            else if(Filter != null && Filter.IsHandleCreated)
+            else if (Filter != null && Filter.IsHandleCreated)
             {
                 Filter.Close();
             }
@@ -336,7 +341,7 @@ namespace NeuroInventory
 
         public override void ListViewColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
         {
-            
+
         }
 
         public override void ListViewItemMouseUp(object sender, MouseEventArgs e)
@@ -364,7 +369,7 @@ namespace NeuroInventory
                         m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = false;
                     }
                 }
-                else if(e.Button == MouseButtons.Left)
+                else if (e.Button == MouseButtons.Left)
                 {
                     if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"]?.Bounds.Contains(e.X, e.Y) ?? false)
                     {
@@ -387,11 +392,11 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void btnDebitReport_Click(object sender, EventArgs e)
         {
-            if(lwReleased.CheckedItems.Count > 0)
+            if (lwReleased.CheckedItems.Count > 0)
             {
                 DebitEditor editor = new DebitEditor(GetDebitDataSet());
                 editor.StartPosition = FormStartPosition.CenterParent;
-                if(editor.ShowDialog() == DialogResult.OK)
+                if (editor.ShowDialog() == DialogResult.OK)
                 {
                     ShowTable();
                 }
@@ -440,6 +445,22 @@ namespace NeuroInventory
             debitDataSet.Tables.Add(debitTable);
 
             return debitDataSet;
+        }
+
+        private void lwReleased_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            DataSet dataSet = SQLiteManager.GetInstance().Released().ReturnDataSet();
+
+            object l_Balance = dataSet.Tables[0].Rows[e.Index]["balance"];
+            if (!Equals(l_Balance, DBNull.Value))
+            {
+                decimal l_BalanceValue = Convert.ToDecimal(l_Balance);
+
+                if (l_BalanceValue <= 0 && e.CurrentValue == CheckState.Unchecked)
+                {
+                    MessageBox.Show(Definitions.ALREADY_DEBIT_WARNING);
+                }
+            }
         }
     }
 }

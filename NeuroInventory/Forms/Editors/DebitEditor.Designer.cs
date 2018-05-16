@@ -131,7 +131,6 @@
             // olvColumn5
             // 
             this.olvColumn5.AspectName = "amount";
-            this.olvColumn5.IsEditable = false;
             this.olvColumn5.Text = "Количество";
             this.olvColumn5.Width = 100;
             // 

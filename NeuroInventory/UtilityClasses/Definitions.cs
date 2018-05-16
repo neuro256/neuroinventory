@@ -26,10 +26,12 @@
         public static string DEMAND_REPORT_FILENAME = "Требование-накладная";
         public static string DEBIT_REPORT_FILENAME = "Списание";
         public static string NOT_DEBIT_STRING = "Не списано";
+        public static string ERROR_DEBIT_STRING = "Ошибка списания";
         public static string DEBIT_STRING = "Списано";
         public static string MAYBE_NOT_DEBIT_STRING = "Возможно не списано";
         public static string SELECTED_SEVERAL_NODES = "Выбрано несколько списков тмц";
         public static string DEMAND_REPORT_EXTENSION = ".doc";
         public static string DEBIT_REPORT_EXTENSION = ".xls";
+        public static string ALREADY_DEBIT_WARNING = "Вы собираетесь редактировать уже списанную ТМЦ";
     }
 }

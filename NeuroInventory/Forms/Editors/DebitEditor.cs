@@ -77,12 +77,6 @@ namespace NeuroInventory
         {
             if (e.Column.AspectName == "amount")
             {
-                string l_BalanceStr = DebitDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("balance");
-                decimal l_Balance = Convert.ToDecimal(l_BalanceStr, CultureInfo.GetCultureInfo("ru-RU"));
-
-                // Идет проверка, не выбрано ли количество, большее чем остаток тмц на складе
-                if (Convert.ToDecimal(e.NewValue, CultureInfo.InvariantCulture) > l_Balance)
-                    e.NewValue = l_Balance;
                 if (!String.Equals(e.NewValue.ToString(), e.Value.ToString()))
                 {
                     // Вычисление стоимости отпущенного тмц

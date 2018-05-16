@@ -62,9 +62,9 @@ namespace NeuroInventory
             string l_Amount = p_Amount != null ? $" AND (demand.amount={p_Amount})" : String.Empty;
             l_Amount = l_Amount.Replace(",", ".");
             string l_Price = p_Price != null ? $" AND (inventory.price={Convert.ToInt32(Convert.ToDecimal(p_Price) * 100)})" : String.Empty;
-            string l_Employee = !String.IsNullOrEmpty(p_Employee) ? $" AND demand.employeeId = (SELECT id FROM employees WHERE surename like '%{p_Employee}%' " +
-                $"OR firstname like '%{p_Employee}%' " +
-                $"OR lastname like '%{p_Employee}%') " : String.Empty;
+            string l_Employee = !String.IsNullOrEmpty(p_Employee) ? $" AND demand.employeeId in (SELECT id FROM " +
+                $" (SELECT id, TRIM(surename || firstname || lastname) AS name FROM employees " +
+                $" WHERE name like '%{p_Employee.Replace(" ", String.Empty)}%' COLLATE NOCASE)) " : String.Empty;
 
             CommandDataSet = "SELECT inventory.id, " +
                 "demand.id as demandId, " +
@@ -75,8 +75,7 @@ namespace NeuroInventory
                 "inventory.name, " +
                 "inventory.OKEIcode, " +
                 "inventory.measurement, " +
-                "(SELECT surename || ' ' || firstname || ' ' || lastname" +
-                " FROM employees WHERE employees.id = demand.employeeId) AS employee, " +
+                "(SELECT surename || ' ' || firstname || ' ' || lastname FROM employees WHERE employees.id = demand.employeeId) AS employee, " +
                 "demand.amount, " +
                 @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price, " +
                 @"printf(""%.2f"", ((demand.amount * price) / 100)) AS sum, " +
@@ -84,7 +83,7 @@ namespace NeuroInventory
                 "demand.amount - sum(debit.amount) as balance " +
                 $" FROM inventory INNER JOIN demand ON demand.inventoryId = inventory.id " +
                 $" LEFT JOIN demandReport ON demand.reportId = demandReport.id " +
-                "LEFT JOIN debit ON debit.demandId = demand.id " +
+                " LEFT JOIN debit ON debit.demandId = demand.id " +
                 $" WHERE " +
                 l_Name +
                 l_Date +

@@ -41,7 +41,7 @@
             this.groupBoxRecent.BackColor = System.Drawing.Color.Azure;
             this.groupBoxRecent.Controls.Add(this.lwRecent);
             this.groupBoxRecent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxRecent.Font = new System.Drawing.Font("Open Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBoxRecent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBoxRecent.Location = new System.Drawing.Point(0, 0);
             this.groupBoxRecent.Name = "groupBoxRecent";
             this.groupBoxRecent.Size = new System.Drawing.Size(1200, 650);
@@ -55,11 +55,13 @@
             this.lwRecent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lwRecent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lwRecent.LargeImageList = this.imageListRecents;
-            this.lwRecent.Location = new System.Drawing.Point(3, 31);
+            this.lwRecent.Location = new System.Drawing.Point(3, 26);
             this.lwRecent.Name = "lwRecent";
-            this.lwRecent.Size = new System.Drawing.Size(1194, 616);
+            this.lwRecent.Size = new System.Drawing.Size(1194, 621);
+            this.lwRecent.SmallImageList = this.imageListRecents;
             this.lwRecent.TabIndex = 0;
             this.lwRecent.UseCompatibleStateImageBehavior = false;
+            this.lwRecent.View = System.Windows.Forms.View.List;
             this.lwRecent.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lwRecent_MouseDoubleClick);
             // 
             // imageListRecents

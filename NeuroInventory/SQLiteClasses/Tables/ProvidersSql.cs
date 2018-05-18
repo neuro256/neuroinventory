@@ -47,7 +47,14 @@ namespace NeuroInventory
 
         public void ClearFilter()
         {
-            CommandDataSet = "SELECT * FROM providers ORDER BY name ASC";
+            CommandDataSet = "SELECT providers.id, " +
+                "providers.name, " +
+                "providers.address, " +
+                "providers.phone, " +
+                "providers.mail, " +
+                "providers.inn, " +
+                "providers.document " +
+                "FROM providers ORDER BY name ASC";
         }
 
         public void Insert(string p_Name, string p_Address, string p_Phone, string p_Mail, string p_INN, string p_Document)

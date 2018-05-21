@@ -197,16 +197,8 @@ namespace NeuroInventory
         {
             try
             {
-                string fileNameWithoutExt = Path.GetFileNameWithoutExtension(p_SourcePath);
-                string fileExt = Path.GetExtension(p_SourcePath);
-                string sourceFile = p_SourcePath;
-                string destFile = Path.Combine(p_TargetPath, $"{fileNameWithoutExt}{fileExt}");
-                if (!Directory.Exists(p_TargetPath))
-                {
-                    Directory.CreateDirectory(p_TargetPath);
-                }
-                File.Copy(sourceFile, destFile, true);
-                File.Delete(sourceFile);
+                string destFile = CopyFile(p_SourcePath, p_TargetPath);
+                File.Delete(p_SourcePath);
                 return destFile;
             }
             catch (Exception ex)

@@ -86,6 +86,7 @@ namespace NeuroInventory
             {
                 SQLiteManager.GetInstance().Released().Remove(m_ListviewSelectedIndex);
                 RemoveFromListViewAt(m_ListviewSelectedIndex);
+                UpdateTable();        
                 m_Listview.SelectedItems.Clear();
             }
             else
@@ -107,6 +108,46 @@ namespace NeuroInventory
         public override DataSet ReturnDataSet()
         {
             return SQLiteManager.GetInstance().Released().ReturnDataSet();
+        }
+
+        private void UpdateTable()
+        {
+            DataSet dataSet = ReturnDataSet();
+            try
+            {
+                m_Listview.BeginUpdate();
+                for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+                {
+                    for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
+                    {
+                        ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
+                        subitem.Text = dataSet.Tables[0].Rows[i][j].ToString();
+                        subitem.Name = dataSet.Tables[0].Columns[j].ToString();
+                        if (subitem.Name == "document")
+                        {
+                            lwReleased.Items[i].SubItems["document"].Tag = subitem.Text;
+                            lwReleased.Items[i].SubItems["document"].Text = Path.GetFileName(subitem.Text);
+                        }
+                    }
+                }
+                m_Listview.EndUpdate();
+            }
+            catch (SQLiteException se)
+            {
+                MessageBox.Show(se.Message, "Ошибка подключения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (ArgumentException se)
+            {
+                MessageBox.Show("Error!:", se.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception", ex.Message);
+            }
+            finally
+            {
+                dataSet.Dispose();
+            }
         }
 
         public override void ShowTable()

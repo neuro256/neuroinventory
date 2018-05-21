@@ -33,6 +33,11 @@ namespace NeuroInventory
             TargetPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), GetApplicationName, Path.GetFileNameWithoutExtension(SQLiteManager.GetInstance().databaseName), p_Path);
         }
 
+        public string GetTargetPath(string p_Path)
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), GetApplicationName, Path.GetFileNameWithoutExtension(SQLiteManager.GetInstance().databaseName), p_Path);
+        }
+
         /// <summary>
         /// Метод возвращает dataSet таблицы 
         /// </summary>
@@ -153,6 +158,16 @@ namespace NeuroInventory
         public object CreateFileName(string p_FilenamePrefix, string p_FilenameBody, string p_FileExt)
         {
             return NeuroFile.CreateFileName(p_FilenamePrefix, p_FilenameBody, p_FileExt, TargetPath);
+        }
+
+        public object GetFileName(string p_Fullname)
+        {
+            return NeuroFile.GetFileName(p_Fullname);
+        }
+
+        public object MoveFile(string p_SourcePath, string p_TargetPath)
+        {
+            return NeuroFile.MoveFile(p_SourcePath, p_TargetPath);
         }
 
         private string GetApplicationName

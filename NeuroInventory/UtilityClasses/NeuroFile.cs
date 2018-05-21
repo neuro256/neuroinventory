@@ -146,6 +146,11 @@ namespace NeuroInventory
             }
         }
 
+        public static object GetFileName(string p_Fullname)
+        {
+            return Path.GetFileName(p_Fullname);
+        }
+
         public static object InsertFile(string p_SelectedDocument, string p_TargetPath)
         {
             try
@@ -185,6 +190,29 @@ namespace NeuroInventory
             {
                 MessageBox.Show(ex.Message);
                 return DBNull.Value;
+            }
+        }
+
+        public static object MoveFile(string p_SourcePath, string p_TargetPath)
+        {
+            try
+            {
+                string fileNameWithoutExt = Path.GetFileNameWithoutExtension(p_SourcePath);
+                string fileExt = Path.GetExtension(p_SourcePath);
+                string sourceFile = p_SourcePath;
+                string destFile = Path.Combine(p_TargetPath, $"{fileNameWithoutExt}{fileExt}");
+                if (!Directory.Exists(p_TargetPath))
+                {
+                    Directory.CreateDirectory(p_TargetPath);
+                }
+                File.Copy(sourceFile, destFile, true);
+                File.Delete(sourceFile);
+                return destFile;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return String.Empty;
             }
         }
     }

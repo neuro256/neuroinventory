@@ -70,5 +70,10 @@ namespace NeuroInventory
 
             SQLiteManager.GetInstance().Update(TableName, values, l_Where);
         }
+
+        public object GetReportId(object selectedRecordId)
+        {
+            return SQLiteManager.GetInstance().CommandExecuteScalar($"select reportId from demand where id = {selectedRecordId}");   
+        }
     }
 }

@@ -107,7 +107,7 @@ namespace NeuroInventory
             this.btnReleasedRemove.Name = "btnReleasedRemove";
             this.btnReleasedRemove.Size = new System.Drawing.Size(184, 33);
             this.btnReleasedRemove.TabIndex = 1;
-            this.btnReleasedRemove.Text = "Удалить";
+            this.btnReleasedRemove.Text = "Отменить";
             this.btnReleasedRemove.UseVisualStyleBackColor = true;
             this.btnReleasedRemove.Click += new System.EventHandler(this.btnReleasedRemove_Click);
             // 

@@ -109,6 +109,25 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Update(TableName, values, l_Where);
         }
 
+        /// <summary>
+        /// Отмена отпуска товара и создания требования-накладной
+        /// Отчет сохраняется, но помещается в папку, помеченную как "отмененные" 
+        /// </summary>
+        /// <param name="reportId"></param>
+        /// <param name="currentDocument"></param>
+        public void Rollback(object reportId, string currentDocument)
+        {
+            Dictionary<string, object> values = new Dictionary<string, object>();
+
+            string l_FileName = NeuroFile.GetFileName(currentDocument).ToString();
+
+            values["document"] = MoveFile(currentDocument, GetTargetPath(Definitions.DEMAND_ROLLBACK_PATH));
+
+            string l_Where = $"id={reportId}";
+
+            SQLiteManager.GetInstance().Update(TableName, values, l_Where);
+        }
+
         public void Remove(int p_ListviewSelectedItemIndex)
         {
             DataSet dataSet = ReturnDataSet();

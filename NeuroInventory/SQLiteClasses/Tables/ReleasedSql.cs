@@ -48,6 +48,13 @@ namespace NeuroInventory
             DataSet dataSet = ReturnDataSet();
             object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["demandId"];
             string l_Where = $"id={selectedRecordId}";
+            // Перемещение требования-накладной в другую папку 
+            object reportId = SQLiteManager.GetInstance().Demand().GetReportId(selectedRecordId); 
+            string currentDocument = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["document"].ToString();
+            if (!reportId.Equals(DBNull.Value) && reportId != null)
+            {
+                SQLiteManager.GetInstance().DemandReport().Rollback(reportId, currentDocument);
+            }
 
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }

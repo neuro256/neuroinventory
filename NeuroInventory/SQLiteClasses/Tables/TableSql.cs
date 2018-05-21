@@ -165,7 +165,7 @@ namespace NeuroInventory
             return NeuroFile.GetFileName(p_Fullname);
         }
 
-        public object MoveFile(string p_SourcePath, string p_TargetPath)
+        public string MoveFile(string p_SourcePath, string p_TargetPath)
         {
             return NeuroFile.MoveFile(p_SourcePath, p_TargetPath);
         }

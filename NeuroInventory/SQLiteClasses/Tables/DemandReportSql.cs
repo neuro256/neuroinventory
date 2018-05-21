@@ -120,12 +120,14 @@ namespace NeuroInventory
             Dictionary<string, object> values = new Dictionary<string, object>();
 
             string l_FileName = NeuroFile.GetFileName(currentDocument).ToString();
+            string l_DestFileName = MoveFile(currentDocument, GetTargetPath(Definitions.DEMAND_ROLLBACK_PATH)).ToString();
 
-            values["document"] = MoveFile(currentDocument, GetTargetPath(Definitions.DEMAND_ROLLBACK_PATH));
-
-            string l_Where = $"id={reportId}";
-
-            SQLiteManager.GetInstance().Update(TableName, values, l_Where);
+            if(!String.IsNullOrEmpty(l_DestFileName))
+            {
+                values["document"] = l_DestFileName;
+                string l_Where = $"id={reportId}";
+                SQLiteManager.GetInstance().Update(TableName, values, l_Where);
+            }
         }
 
         public void Remove(int p_ListviewSelectedItemIndex)

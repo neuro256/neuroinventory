@@ -193,13 +193,25 @@ namespace NeuroInventory
             }
         }
 
-        public static object MoveFile(string p_SourcePath, string p_TargetPath)
+        public static string MoveFile(string p_SourcePath, string p_TargetPath)
         {
             try
             {
-                string destFile = CopyFile(p_SourcePath, p_TargetPath);
-                File.Delete(p_SourcePath);
-                return destFile;
+                if (!File.Exists(p_SourcePath))
+                    return String.Empty;
+
+                string sourcePathWithoitFileName = Path.GetDirectoryName(p_SourcePath);
+                // Перемещать файл только если изменился целевой путь
+                if (IsDocumentUpdated(sourcePathWithoitFileName, p_TargetPath))
+                {
+                    string destFile = CopyFile(p_SourcePath, p_TargetPath);
+                    File.Delete(p_SourcePath);
+                    return destFile;
+                }
+                else
+                {
+                    return String.Empty;
+                }
             }
             catch (Exception ex)
             {

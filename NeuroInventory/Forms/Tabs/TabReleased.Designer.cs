@@ -50,6 +50,7 @@ namespace NeuroInventory
             this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDebitCancel = new System.Windows.Forms.Button();
             this.tableLayoutPanelReleased.SuspendLayout();
             this.panelReleasedBottom.SuspendLayout();
             this.contextMenuStripReleased.SuspendLayout();
@@ -74,6 +75,7 @@ namespace NeuroInventory
             // panelReleasedBottom
             // 
             this.panelReleasedBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelReleasedBottom.Controls.Add(this.btnDebitCancel);
             this.panelReleasedBottom.Controls.Add(this.btnDebitReport);
             this.panelReleasedBottom.Controls.Add(this.btnReleasedRemove);
             this.panelReleasedBottom.Controls.Add(this.btnFilter);
@@ -217,6 +219,20 @@ namespace NeuroInventory
             this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.removeToolStripMenuItem.Text = "Удалить";
             // 
+            // btnDebitCancel
+            // 
+            this.btnDebitCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDebitCancel.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnDebitCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnDebitCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDebitCancel.Location = new System.Drawing.Point(392, 10);
+            this.btnDebitCancel.Name = "btnDebitCancel";
+            this.btnDebitCancel.Size = new System.Drawing.Size(184, 33);
+            this.btnDebitCancel.TabIndex = 5;
+            this.btnDebitCancel.Text = "Отменить списание";
+            this.btnDebitCancel.UseVisualStyleBackColor = false;
+            this.btnDebitCancel.Click += new System.EventHandler(this.btnDebitCancel_Click);
+            // 
             // TabReleased
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -257,5 +273,6 @@ namespace NeuroInventory
         private ToolStripMenuItem editToolStripMenuItem;
         private ToolStripMenuItem removeToolStripMenuItem;
         private Button btnDebitReport;
+        private Button btnDebitCancel;
     }
 }

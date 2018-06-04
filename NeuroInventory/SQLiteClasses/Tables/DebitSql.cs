@@ -41,6 +41,13 @@ namespace NeuroInventory
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }
 
+        public void RemoveByDemandId(object p_DemandId)
+        {
+            string l_Where = $"demandId={p_DemandId}";
+
+            SQLiteManager.GetInstance().Delete(TableName, l_Where);
+        }
+
         public void Update(object p_Id, int p_InventoryId, decimal p_Amount, DateTime p_Date)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();

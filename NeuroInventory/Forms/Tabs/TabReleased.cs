@@ -84,10 +84,28 @@ namespace NeuroInventory
         {
             if (m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteManager.GetInstance().Released().Remove(m_ListviewSelectedIndex);
+                SQLiteManager.GetInstance().Released().CancelDemand(m_ListviewSelectedIndex);
                 RemoveFromListViewAt(m_ListviewSelectedIndex);
                 UpdateTable();        
                 m_Listview.SelectedItems.Clear();
+            }
+            else
+            {
+                MessageBox.Show(Definitions.REMOVE_WARNING_STRING);
+            }
+        }
+
+        private void btnDebitCancel_Click(object sender, EventArgs e)
+        {
+            CancelDebit();
+        }
+
+        private void CancelDebit()
+        {
+            if (m_Listview.SelectedItems.Count > 0)
+            {
+                SQLiteManager.GetInstance().Released().CancelDebit(m_ListviewSelectedIndex);
+                ShowTable();
             }
             else
             {

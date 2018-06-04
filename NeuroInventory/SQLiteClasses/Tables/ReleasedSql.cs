@@ -43,7 +43,7 @@ namespace NeuroInventory
                 $" ORDER BY DATE(demand.date) ASC";
         }
 
-        public void Remove(int p_ListviewSelectedItemIndex)
+        public void CancelDemand(int p_ListviewSelectedItemIndex)
         {
             DataSet dataSet = ReturnDataSet();
             object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["demandId"];
@@ -51,19 +51,33 @@ namespace NeuroInventory
             // Перемещение требования-накладной в другую папку 
             object reportId = SQLiteManager.GetInstance().Demand().GetReportId(selectedRecordId); 
             string currentDocument = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["document"].ToString();
-            if (!reportId.Equals(DBNull.Value) && reportId != null)
+            if (reportId != null && !reportId.Equals(DBNull.Value))
             {
                 SQLiteManager.GetInstance().DemandReport().Rollback(reportId, currentDocument);
             }
             // Перемещение списания в другую папку 
             reportId = SQLiteManager.GetInstance().Debit().GetReportIdByDemandId(selectedRecordId);
-            if(!reportId.Equals(DBNull.Value) && reportId != null)
+            if (reportId != null && !reportId.Equals(DBNull.Value))
             {
                 currentDocument = SQLiteManager.GetInstance().DebitReport().ReturnDocumentById(reportId);
                 SQLiteManager.GetInstance().DebitReport().Rollback(reportId, currentDocument);
             }
 
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
+        }
+
+        public void CancelDebit(int p_ListviewSelectedIndex)
+        {
+            DataSet dataSet = ReturnDataSet();
+            object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedIndex]["demandId"];
+            // Перемещение списания в другую папку 
+            object reportId = SQLiteManager.GetInstance().Debit().GetReportIdByDemandId(selectedRecordId);
+            if (reportId != null && !reportId.Equals(DBNull.Value))
+            {
+                string currentDocument = SQLiteManager.GetInstance().DebitReport().ReturnDocumentById(reportId);
+                SQLiteManager.GetInstance().DebitReport().Rollback(reportId, currentDocument);
+                SQLiteManager.GetInstance().Debit().RemoveByDemandId(selectedRecordId);
+            }          
         }
 
         public void Filter(DateTime p_Date, string p_Employee, string p_Name, string p_OKEIcode, string p_Measurement, object p_Amount, object p_Price)

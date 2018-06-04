@@ -42,6 +42,9 @@ namespace NeuroInventory
                 args.Item.Text = (args.RowIndex + 1).ToString();
             };
 
+            lwDebitData.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            lwDebitData.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
             lwDebitData.RebuildColumns();
 
             dateTimePicker.Format = DateTimePickerFormat.Long;

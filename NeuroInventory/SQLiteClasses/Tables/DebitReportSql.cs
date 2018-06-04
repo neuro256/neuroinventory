@@ -81,6 +81,31 @@ namespace NeuroInventory
             return catalogIds;
         }
 
+        public void Rollback(object reportId, string currentDocument)
+        {
+            Dictionary<string, object> values = new Dictionary<string, object>();
+
+            string l_FileName = NeuroFile.GetFileName(currentDocument).ToString();
+            string l_DestFileName = MoveFile(currentDocument, GetTargetPath(Definitions.DEBIT_ROLLBACK_PATH)).ToString();
+
+            if (!String.IsNullOrEmpty(l_DestFileName))
+            {
+                values["document"] = l_DestFileName;
+                string l_Where = $"id={reportId}";
+                SQLiteManager.GetInstance().Update(TableName, values, l_Where);
+            }
+        }
+
+        public string ReturnDocumentById(object reportId)
+        {
+            return (string) SQLiteManager.GetInstance().CommandExecuteScalar($"select document from debitReport where id = {reportId}");
+        }
+
+        public object GetReportIdByDemandId(object selectedRecordId)
+        {
+            return SQLiteManager.GetInstance().CommandExecuteScalar($"select reportId from debit where demandId = {selectedRecordId}");
+        }
+
         private void GetCatalogIds(int p_Id, List<int> p_CatalogIds)
         {
             DataSet dataSetCatalogs = SQLiteManager.GetInstance().Catalogs().ReturnDataSet($"SELECT id FROM catalogs WHERE parent = {p_Id}");

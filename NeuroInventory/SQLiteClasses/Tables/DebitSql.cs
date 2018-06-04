@@ -19,12 +19,13 @@ namespace NeuroInventory
                 $"FROM debit WHERE debit.inventoryId = {p_InventoryId};";
         }
 
-        public void Insert(int p_InventoryId, int p_DemandId, decimal p_Amount, DateTime p_Date)
+        public void Insert(int p_InventoryId, int p_DemandId, int p_reportId, decimal p_Amount, DateTime p_Date)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
             values["inventoryId"] = p_InventoryId;
             values["demandId"] = p_DemandId;
+            values["reportId"] = p_reportId;
             values["amount"] = p_Amount;
             values["date"] = p_Date;
 
@@ -51,6 +52,11 @@ namespace NeuroInventory
             string l_Where = $"id={p_Id}";
 
             SQLiteManager.GetInstance().Update(TableName, values, l_Where);
+        }
+
+        public object GetReportIdByDemandId(object selectedRecordId)
+        {
+            return SQLiteManager.GetInstance().CommandExecuteScalar($"select reportId from debit where demandId = {selectedRecordId}");
         }
     }
 }

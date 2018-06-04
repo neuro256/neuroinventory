@@ -149,8 +149,10 @@ namespace NeuroInventory
                                 "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                                 "inventoryId INTEGER, " +
                                 "demandId INTEGER, " + 
+                                "reportId INTEGER, " + 
                                 "amount REAL NOT NULL, " +
                                 "date DATETIME, " +
+                                "FOREIGN KEY (reportId) REFERENCES debitReport(id) ON DELETE SET NULL, " + 
                                 "FOREIGN KEY (demandId) REFERENCES demand(id) ON DELETE CASCADE, " +
                                 "FOREIGN KEY (inventoryId) REFERENCES inventory(id) ON DELETE CASCADE);";
                             await command.ExecuteNonQueryAsync();
@@ -251,6 +253,10 @@ namespace NeuroInventory
             if(!CheckIfColumnExists("providers", "inn"))
             {
                 AlterTableAddColumn("providers", "inn", "NVARCHAR(12)");
+            }
+            if(!CheckIfColumnExists("debit", "reportId"))
+            {
+                AlterTableAddColumn("debit", "reportId", "INTEGER");
             }
         }
 

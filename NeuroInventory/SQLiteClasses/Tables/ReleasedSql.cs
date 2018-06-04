@@ -55,6 +55,13 @@ namespace NeuroInventory
             {
                 SQLiteManager.GetInstance().DemandReport().Rollback(reportId, currentDocument);
             }
+            // Перемещение списания в другую папку 
+            reportId = SQLiteManager.GetInstance().Debit().GetReportIdByDemandId(selectedRecordId);
+            if(!reportId.Equals(DBNull.Value) && reportId != null)
+            {
+                currentDocument = SQLiteManager.GetInstance().DebitReport().ReturnDocumentById(reportId);
+                SQLiteManager.GetInstance().DebitReport().Rollback(reportId, currentDocument);
+            }
 
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }

@@ -34,5 +34,6 @@
         public static string DEBIT_REPORT_EXTENSION = ".xls";
         public static string ALREADY_DEBIT_WARNING = "Вы собираетесь редактировать уже списанную ТМЦ";
         public static string DEMAND_ROLLBACK_PATH = @"Документы\Отмененные требования";
+        public static string DEBIT_ROLLBACK_PATH = @"Документы\Отмененные списания";
     }
 }

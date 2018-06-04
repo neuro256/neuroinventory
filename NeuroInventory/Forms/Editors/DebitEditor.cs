@@ -100,10 +100,11 @@ namespace NeuroInventory
                 // В первую очередь создаем отчет. Если отчет успешно создан и сохранен, записываем данные в базу данных
                 if (CreateReport())
                 {
+                    int reportLastId = SQLiteManager.GetInstance().DebitReport().ReturnLastInsertId();
                     // Отпускаем выбранные тмц 
                     foreach (DataRow row in DebitDataSet.Tables[0].Rows)
                     {
-                        AddRecord(Convert.ToInt32(row["id"]), Convert.ToInt32(row["demandId"]), Convert.ToDecimal(row["amount"]), dateTimePicker.Value);
+                        AddRecord(Convert.ToInt32(row["id"]), Convert.ToInt32(row["demandId"]), reportLastId, Convert.ToDecimal(row["amount"]), dateTimePicker.Value);
                     }
                     DialogResult = DialogResult.OK;
                     Close();
@@ -116,9 +117,9 @@ namespace NeuroInventory
             }
         }
 
-        private void AddRecord(int p_InventoryId, int p_DemandId, decimal p_Amount, DateTime p_Date)
+        private void AddRecord(int p_InventoryId, int p_DemandId, int p_reportId, decimal p_Amount, DateTime p_Date)
         {
-            SQLiteManager.GetInstance().Debit().Insert(p_InventoryId, p_DemandId, p_Amount, p_Date);
+            SQLiteManager.GetInstance().Debit().Insert(p_InventoryId, p_DemandId, p_reportId, p_Amount, p_Date);
         }
 
         public bool CreateReport()

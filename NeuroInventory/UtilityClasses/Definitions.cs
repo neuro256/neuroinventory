@@ -28,6 +28,7 @@
         public static string NOT_DEBIT_STRING = "Не списано";
         public static string ERROR_DEBIT_STRING = "Ошибка списания";
         public static string DEBIT_STRING = "Списано";
+        public static string PARTIALLY_DEBIT = "Частично списано";
         public static string MAYBE_NOT_DEBIT_STRING = "Возможно не списано";
         public static string SELECTED_SEVERAL_NODES = "Выбрано несколько списков тмц";
         public static string DEMAND_REPORT_EXTENSION = ".doc";

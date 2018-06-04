@@ -17,6 +17,60 @@ namespace NeuroInventory
             public int demandId;
         }
 
+        enum BalanceType
+        {
+            ERROR_DEBIT, 
+            NOT_DEBIT, 
+            PARTIALLY_DEBIT, 
+            DEBIT
+        }
+
+        class BalanceInfo
+        {
+            public object balance { get; set; } 
+            public BalanceType balanceType { get; set; }
+            public Color color { get; set; } 
+            public string balanceTypeText { get; set; }
+
+            public BalanceInfo(object balance, BalanceType balanceType)
+            {
+                this.balance = balance;
+                this.balanceType = balanceType;
+            }
+
+            public static BalanceInfo GetBalanceInfo(object balance, object amount)
+            {
+                BalanceInfo balanceInfo = new BalanceInfo(balance, BalanceType.NOT_DEBIT);
+                if (Equals(balance, DBNull.Value))
+                {
+                    balanceInfo.color = Color.DarkOrange;
+                    balanceInfo.balanceTypeText = Definitions.NOT_DEBIT_STRING;
+                }
+                else if (Convert.ToDecimal(balance) > 0 && Equals(balance, amount))
+                {
+                    balanceInfo.color = Color.Coral;
+                    balanceInfo.balanceTypeText = Definitions.NOT_DEBIT_STRING;
+                }
+                else if (Convert.ToDecimal(balance) > 0 && !Equals(balance, amount))
+                {
+                    balanceInfo.color = Color.LightGreen;
+                    balanceInfo.balanceTypeText = $"{Definitions.PARTIALLY_DEBIT} ({balance})";
+                }
+                else if (Convert.ToDecimal(balance) < 0)
+                {
+                    balanceInfo.color = Color.Red;
+                    balanceInfo.balanceTypeText = $"{Definitions.ERROR_DEBIT_STRING} ({balance})";
+                }
+                else
+                {
+                    balanceInfo.color = Color.LightGreen;
+                    balanceInfo.balanceTypeText = Definitions.DEBIT_STRING;
+                }
+
+                return balanceInfo;
+            }
+        }
+
         private ReleasedFilter m_Filter;
 
         private ReleasedFilter Filter { get => m_Filter; set => m_Filter = value; }
@@ -216,26 +270,12 @@ namespace NeuroInventory
                         if (subitem.Name == "balance")
                         {
                             object balance = dataSet.Tables[0].Rows[i]["balance"];
-                            if (Equals(balance, DBNull.Value))
-                            {
-                                subitem.BackColor = Color.DarkOrange;
-                                subitem.Text = Definitions.NOT_DEBIT_STRING;
-                            }
-                            else if (Convert.ToDecimal(balance) > 0)
-                            {
-                                subitem.BackColor = Color.Coral;
-                                subitem.Text = $"{Definitions.NOT_DEBIT_STRING} ({balance})";
-                            }
-                            else if (Convert.ToDecimal(balance) < 0)
-                            {
-                                subitem.BackColor = Color.Red;
-                                subitem.Text = $"{Definitions.ERROR_DEBIT_STRING} ({balance})";
-                            }
-                            else
-                            {
-                                subitem.BackColor = Color.LightGreen;
-                                subitem.Text = Definitions.DEBIT_STRING;
-                            }
+                            object amount = dataSet.Tables[0].Rows[i]["amount"];
+                            BalanceInfo balanceInfo = BalanceInfo.GetBalanceInfo(balance, amount);
+
+                            subitem.Tag = balanceInfo;
+                            subitem.BackColor = balanceInfo.color;
+                            subitem.Text = balanceInfo.balanceTypeText;
                         }
 
                         if (subitem.Name != "demandId")
@@ -354,45 +394,6 @@ namespace NeuroInventory
 
                     this.lwReleased.Invalidate();
                 }
-                else
-                {
-                    // Сортировка по столбцу 
-
-                    /*
-                    // Create an instance of the ColHeader class.
-                    ColHeader clickedCol = (ColHeader)m_Listview.Columns[e.Column];
-
-                    // Set the ascending property to sort in the opposite order.
-                    clickedCol.ascending = !clickedCol.ascending;
-
-                    // Get the number of items in the list.
-                    int numItems = m_Listview.Items.Count;
-
-                    // Turn off display while data is repoplulated.
-                    m_Listview.BeginUpdate();
-
-                    // Populate an ArrayList with a SortWrapper of each list item.
-                    ArrayList SortArray = new ArrayList();
-                    for (int i = 0; i < numItems; i++)
-                    {
-                        SortArray.Add(new SortWrapper(m_Listview.Items[i], e.Column));
-                    }
-
-                    // Sort the elements in the ArrayList using a new instance of the SortComparer
-                    // class. The parameters are the starting index, the length of the range to sort,
-                    // and the IComparer implementation to use for comparing elements. Note that
-                    // the IComparer implementation (SortComparer) requires the sort
-                    // direction for its constructor; true if ascending, othwise false.
-                    SortArray.Sort(0, SortArray.Count, new SortWrapper.SortComparer(clickedCol.ascending));
-
-                    // Clear the list, and repopulate with the sorted items.
-                    m_Listview.Items.Clear();
-                    for (int i = 0; i < numItems; i++)
-                        m_Listview.Items.Add(((SortWrapper)SortArray[i]).sortItem);
-
-                    // Turn display back on.
-                    m_Listview.EndUpdate(); */
-                }
             }
             catch (Exception ex)
             {
@@ -482,7 +483,8 @@ namespace NeuroInventory
             debitTable.Columns.Add("OKEIcode");
             debitTable.Columns.Add("measurement");
             debitTable.Columns.Add("price");
-            debitTable.Columns.Add("amount");
+            debitTable.Columns.Add("balance");
+            debitTable.Columns.Add("debit_amount");
             debitTable.Columns.Add("sum");
 
             foreach (ListViewItem item in lwReleased.CheckedItems)
@@ -498,7 +500,8 @@ namespace NeuroInventory
                 newRow["OKEIcode"] = item.SubItems["OKEIcode"].Text;
                 newRow["measurement"] = item.SubItems["measurement"].Text;
                 newRow["price"] = item.SubItems["price"].Text;
-                newRow["amount"] = item.SubItems["amount"].Text;
+                newRow["balance"] = CalculateBalance(item);
+                newRow["debit_amount"] = 0;
                 newRow["sum"] = item.SubItems["sum"].Text;
 
                 debitTable.Rows.Add(newRow);
@@ -508,6 +511,22 @@ namespace NeuroInventory
             debitDataSet.Tables.Add(debitTable);
 
             return debitDataSet;
+        }
+
+        private static object CalculateBalance(ListViewItem item)
+        {
+            object balance = (item.SubItems["balance"].Tag as BalanceInfo).balance;
+            object balanceValue = null;
+            if (balance != null && !Equals(balance, DBNull.Value))
+            {
+                balanceValue = balance;
+            }
+            else
+            {
+                balanceValue = item.SubItems["amount"].Text;
+            }
+
+            return balanceValue;
         }
 
         private void lwReleased_ItemCheck(object sender, ItemCheckEventArgs e)

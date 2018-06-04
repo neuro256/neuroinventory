@@ -59,7 +59,7 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void lwDebitData_CellEditStarting(object sender, CellEditEventArgs e)
         {
-            if (e.Column.AspectName == "amount")
+            if (e.Column.AspectName == "debit_amount")
             {
                 NumericUpDown nud = new NumericUpDown();
                 nud.Bounds = e.CellBounds;
@@ -78,9 +78,16 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void lwDebitData_CellEditFinishing(object sender, CellEditEventArgs e)
         {
-            if (e.Column.AspectName == "amount")
+            if (e.Column.AspectName == "debit_amount")
             {
-                if (!String.Equals(e.NewValue.ToString(), e.Value.ToString()))
+                string l_BalanceStr = DebitDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("balance");
+                decimal l_Balance = Convert.ToDecimal(l_BalanceStr, CultureInfo.GetCultureInfo("ru-RU"));
+
+                // Идет проверка, не выбрано ли количество, большее чем остаток тмц на складе
+                if (Convert.ToDecimal(e.NewValue, CultureInfo.InvariantCulture) > l_Balance)
+                    e.NewValue = l_Balance;
+
+                if (!Equals(e.NewValue, e.Value))
                 {
                     // Вычисление стоимости отпущенного тмц
                     string l_PriceStr = DebitDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("price");
@@ -94,7 +101,7 @@ namespace NeuroInventory
         {
             try
             {
-                if (m_Clicked)
+                if (!CheckAmount() || m_Clicked)
                     return;
                 m_Clicked = true;
                 // В первую очередь создаем отчет. Если отчет успешно создан и сохранен, записываем данные в базу данных
@@ -104,7 +111,7 @@ namespace NeuroInventory
                     // Отпускаем выбранные тмц 
                     foreach (DataRow row in DebitDataSet.Tables[0].Rows)
                     {
-                        AddRecord(Convert.ToInt32(row["id"]), Convert.ToInt32(row["demandId"]), reportLastId, Convert.ToDecimal(row["amount"]), dateTimePicker.Value);
+                        AddRecord(Convert.ToInt32(row["id"]), Convert.ToInt32(row["demandId"]), reportLastId, Convert.ToDecimal(row["debit_amount"]), dateTimePicker.Value);
                     }
                     DialogResult = DialogResult.OK;
                     Close();
@@ -115,6 +122,24 @@ namespace NeuroInventory
                 m_Clicked = false;
                 MessageBox.Show(ex.Message, Definitions.CREATE_REPORT_FAILED);
             }
+        }
+
+        private bool CheckAmount()
+        {
+            bool amountChecked = true;
+
+            foreach (DataRow row in DebitDataSet.Tables[0].Rows)
+            {
+                if (Convert.ToDecimal(row["debit_amount"]) <= 0)
+                {
+                    amountChecked = false;
+                    break;
+                }
+            }
+
+            if (!amountChecked)
+                MessageBox.Show(Definitions.ZERO_AMOUNT);
+            return amountChecked;
         }
 
         private void AddRecord(int p_InventoryId, int p_DemandId, int p_reportId, decimal p_Amount, DateTime p_Date)
@@ -211,7 +236,7 @@ namespace NeuroInventory
                 newRow["name"] = row["name"].ToString();
                 newRow["OKEIcode"] = row["OKEIcode"].ToString();
                 newRow["measurement"] = SQLiteSettingsManager.GetInstance().Measurement().GetShortName(row["measurement"].ToString());
-                newRow["amount"] = row["amount"].ToString();
+                newRow["amount"] = row["debit_amount"].ToString();
                 newRow["price"] = decimal.Parse(row["price"].ToString(), NumberStyles.Currency).ToString("0.00");
                 newRow["sum"] = decimal.Parse(row["sum"].ToString(), NumberStyles.Currency).ToString("0.00");
 

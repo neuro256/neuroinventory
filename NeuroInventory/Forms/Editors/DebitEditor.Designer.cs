@@ -43,6 +43,7 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.btnReleased = new System.Windows.Forms.Button();
+            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.lwDebitData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelLeftUpper.SuspendLayout();
@@ -57,6 +58,7 @@
             this.lwDebitData.AllColumns.Add(this.olvColumn3);
             this.lwDebitData.AllColumns.Add(this.olvColumn4);
             this.lwDebitData.AllColumns.Add(this.olvColumn5);
+            this.lwDebitData.AllColumns.Add(this.olvColumn9);
             this.lwDebitData.AllColumns.Add(this.olvColumn6);
             this.lwDebitData.CellEditUseWholeCell = false;
             this.lwDebitData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -67,6 +69,7 @@
             this.olvColumn3,
             this.olvColumn4,
             this.olvColumn5,
+            this.olvColumn9,
             this.olvColumn6});
             this.lwDebitData.Cursor = System.Windows.Forms.Cursors.Default;
             this.lwDebitData.DataSource = null;
@@ -130,8 +133,9 @@
             // 
             // olvColumn5
             // 
-            this.olvColumn5.AspectName = "amount";
-            this.olvColumn5.Text = "Количество";
+            this.olvColumn5.AspectName = "balance";
+            this.olvColumn5.IsEditable = false;
+            this.olvColumn5.Text = "Остаток";
             this.olvColumn5.Width = 100;
             // 
             // olvColumn6
@@ -209,6 +213,12 @@
             this.btnReleased.UseVisualStyleBackColor = true;
             this.btnReleased.Click += new System.EventHandler(this.btnReleased_Click);
             // 
+            // olvColumn9
+            // 
+            this.olvColumn9.AspectName = "debit_amount";
+            this.olvColumn9.Text = "Списать";
+            this.olvColumn9.Width = 100;
+            // 
             // DebitEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -247,5 +257,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private BrightIdeasSoftware.OLVColumn olvColumn7;
         private BrightIdeasSoftware.OLVColumn olvColumn8;
+        private BrightIdeasSoftware.OLVColumn olvColumn9;
     }
 }

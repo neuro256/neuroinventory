@@ -169,7 +169,7 @@ namespace NeuroInventory
                                 "providerId INTEGER, " +
                                 "date DATETIME NOT NULL, " +
                                 "invoice NVARCHAR(80), " +
-                                "invoiceCode NVARCHAR(30), " +
+                                "invoiceCodeStr NVARCHAR(30), " +
                                 "invoiceDate DATETIME, " + 
                                 "name NVARCHAR(45) NOT NULL, " +
                                 "OKEIcode NVARCHAR(5), " +

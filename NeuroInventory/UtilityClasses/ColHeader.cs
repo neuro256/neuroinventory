@@ -1,8 +1,10 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    class ColHeader : ColumnHeader
+    [Serializable]
+    public class ColHeader : ColumnHeader
     {
         public bool ascending;
         //Класс для работы со столбцами

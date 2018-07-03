@@ -35,10 +35,10 @@ namespace NeuroInventory
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanelEmployees = new System.Windows.Forms.TableLayoutPanel();
             this.panelEmployeesBottom = new System.Windows.Forms.Panel();
-            this.btnFilter = new System.Windows.Forms.Button();
             this.btnEmployeeEdit = new System.Windows.Forms.Button();
             this.btnEmployeeRemove = new System.Windows.Forms.Button();
             this.btnEmployeeAdd = new System.Windows.Forms.Button();
+            this.btnFilter = new System.Windows.Forms.Button();
             this.lwEmployees = new System.Windows.Forms.ListView();
             this.chID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -86,19 +86,6 @@ namespace NeuroInventory
             this.panelEmployeesBottom.Size = new System.Drawing.Size(1200, 55);
             this.panelEmployeesBottom.TabIndex = 1;
             // 
-            // btnFilter
-            // 
-            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFilter.Location = new System.Drawing.Point(1004, 10);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(184, 33);
-            this.btnFilter.TabIndex = 3;
-            this.btnFilter.Text = "Фильтр";
-            this.btnFilter.UseVisualStyleBackColor = true;
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
-            // 
             // btnEmployeeEdit
             // 
             this.btnEmployeeEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -137,6 +124,19 @@ namespace NeuroInventory
             this.btnEmployeeAdd.Text = "Добавить сотрудника";
             this.btnEmployeeAdd.UseVisualStyleBackColor = true;
             this.btnEmployeeAdd.Click += new System.EventHandler(this.btnEmployeeAdd_Click);
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFilter.Location = new System.Drawing.Point(1004, 10);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(184, 33);
+            this.btnFilter.TabIndex = 3;
+            this.btnFilter.Text = "Фильтр";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // lwEmployees
             // 

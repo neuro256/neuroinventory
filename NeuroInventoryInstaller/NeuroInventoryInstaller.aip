@@ -44,7 +44,7 @@
     <ROW Property="ProductCode" Value="1033:{90DFA41B-7010-4C20-BABC-645FC781C690} 1049:{F5A4CCDC-E362-4B67-A901-FB6DCCFC2928} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="NeuroInventory" ValueLocId="Property.ProductName"/>
-    <ROW Property="ProductVersion" Value="0.6.3" Type="32"/>
+    <ROW Property="ProductVersion" Value="0.6.4" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
     <ROW Property="UpgradeCode" Value="{C1D46F78-A344-4185-BBC4-485BA5140AEF}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>

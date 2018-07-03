@@ -32,6 +32,7 @@
             this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -44,7 +45,6 @@
             this.btnReleased = new System.Windows.Forms.Button();
             this.lblEmployee = new System.Windows.Forms.Label();
             this.cbEmployee = new System.Windows.Forms.ComboBox();
-            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.lwDemandData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelLeftUpper.SuspendLayout();
@@ -78,6 +78,7 @@
             this.lwDemandData.Location = new System.Drawing.Point(3, 3);
             this.lwDemandData.Name = "lwDemandData";
             this.lwDemandData.ShowGroups = false;
+            this.lwDemandData.ShowItemToolTips = true;
             this.lwDemandData.Size = new System.Drawing.Size(840, 629);
             this.lwDemandData.TabIndex = 0;
             this.lwDemandData.UseCompatibleStateImageBehavior = false;
@@ -107,6 +108,13 @@
             this.olvColumn2.IsEditable = false;
             this.olvColumn2.Text = "Код ОКЕИ";
             this.olvColumn2.Width = 90;
+            // 
+            // olvColumn8
+            // 
+            this.olvColumn8.AspectName = "invoice_code";
+            this.olvColumn8.IsEditable = false;
+            this.olvColumn8.Text = "Номер накладной";
+            this.olvColumn8.Width = 140;
             // 
             // olvColumn3
             // 
@@ -231,13 +239,6 @@
             this.cbEmployee.Name = "cbEmployee";
             this.cbEmployee.Size = new System.Drawing.Size(315, 24);
             this.cbEmployee.TabIndex = 7;
-            // 
-            // olvColumn8
-            // 
-            this.olvColumn8.AspectName = "invoice_code";
-            this.olvColumn8.IsEditable = false;
-            this.olvColumn8.Text = "Номер накладной";
-            this.olvColumn8.Width = 140;
             // 
             // DemandEditor
             // 

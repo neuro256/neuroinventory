@@ -36,6 +36,7 @@
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
@@ -43,7 +44,6 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.btnReleased = new System.Windows.Forms.Button();
-            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.lwDebitData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelLeftUpper.SuspendLayout();
@@ -79,6 +79,7 @@
             this.lwDebitData.Location = new System.Drawing.Point(3, 3);
             this.lwDebitData.Name = "lwDebitData";
             this.lwDebitData.ShowGroups = false;
+            this.lwDebitData.ShowItemToolTips = true;
             this.lwDebitData.Size = new System.Drawing.Size(840, 629);
             this.lwDebitData.TabIndex = 0;
             this.lwDebitData.UseCompatibleStateImageBehavior = false;
@@ -137,6 +138,12 @@
             this.olvColumn5.IsEditable = false;
             this.olvColumn5.Text = "Остаток";
             this.olvColumn5.Width = 100;
+            // 
+            // olvColumn9
+            // 
+            this.olvColumn9.AspectName = "debit_amount";
+            this.olvColumn9.Text = "Списать";
+            this.olvColumn9.Width = 100;
             // 
             // olvColumn6
             // 
@@ -212,12 +219,6 @@
             this.btnReleased.Text = "Сформировать отчет";
             this.btnReleased.UseVisualStyleBackColor = true;
             this.btnReleased.Click += new System.EventHandler(this.btnReleased_Click);
-            // 
-            // olvColumn9
-            // 
-            this.olvColumn9.AspectName = "debit_amount";
-            this.olvColumn9.Text = "Списать";
-            this.olvColumn9.Width = 100;
             // 
             // DebitEditor
             // 

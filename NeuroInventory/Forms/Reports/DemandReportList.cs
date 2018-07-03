@@ -150,9 +150,6 @@ namespace NeuroInventory
                     }
                     m_Listview.Items[i].UseItemStyleForSubItems = false;
                 }
-                // Автонастройка ширины столбца под содержимое ячеек и под заголовок
-                m_Listview.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                m_Listview.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
                 m_Listview.EndUpdate();
             }

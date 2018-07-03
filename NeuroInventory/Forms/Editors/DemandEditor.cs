@@ -49,9 +49,6 @@ namespace NeuroInventory
                 args.Item.Text = (args.RowIndex + 1).ToString();
             };
 
-            lwDemandData.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            lwDemandData.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-
             lwDemandData.RebuildColumns();
 
             dateTimePicker.Format = DateTimePickerFormat.Long;

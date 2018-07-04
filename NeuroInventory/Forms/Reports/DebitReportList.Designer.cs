@@ -77,6 +77,7 @@
             this.lvDebitReportList.TabIndex = 0;
             this.lvDebitReportList.UseCompatibleStateImageBehavior = false;
             this.lvDebitReportList.View = System.Windows.Forms.View.Details;
+            this.lvDebitReportList.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvDebitReportList_ColumnWidthChanged);
             // 
             // columnHeaderId
             // 
@@ -139,7 +140,7 @@
             // 
             this.contextMenuStripDebitReportList.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripDebitReportList.Name = "contextMenuStripDebitReportList";
-            this.contextMenuStripDebitReportList.Size = new System.Drawing.Size(67, 4);
+            this.contextMenuStripDebitReportList.Size = new System.Drawing.Size(61, 4);
             // 
             // DebitReportList
             // 

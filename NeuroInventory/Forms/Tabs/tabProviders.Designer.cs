@@ -30,13 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanelProviders = new System.Windows.Forms.TableLayoutPanel();
-            this.lwProviders = new System.Windows.Forms.ListView();
+            this.lvProviders = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panelProvidersBottom = new System.Windows.Forms.Panel();
             this.btnFilter = new System.Windows.Forms.Button();
@@ -44,7 +45,6 @@
             this.btnProviderRemove = new System.Windows.Forms.Button();
             this.btnProviderAdd = new System.Windows.Forms.Button();
             this.contextMenuStripProviders = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanelProviders.SuspendLayout();
             this.panelProvidersBottom.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +53,7 @@
             // 
             this.tableLayoutPanelProviders.ColumnCount = 1;
             this.tableLayoutPanelProviders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelProviders.Controls.Add(this.lwProviders, 0, 0);
+            this.tableLayoutPanelProviders.Controls.Add(this.lvProviders, 0, 0);
             this.tableLayoutPanelProviders.Controls.Add(this.panelProvidersBottom, 0, 1);
             this.tableLayoutPanelProviders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelProviders.Location = new System.Drawing.Point(0, 0);
@@ -65,13 +65,13 @@
             this.tableLayoutPanelProviders.Size = new System.Drawing.Size(1200, 650);
             this.tableLayoutPanelProviders.TabIndex = 0;
             // 
-            // lwProviders
+            // lvProviders
             // 
-            this.lwProviders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvProviders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lwProviders.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lwProviders.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvProviders.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvProviders.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
@@ -80,15 +80,16 @@
             this.columnHeader6,
             this.columnHeader7,
             this.columnHeader8});
-            this.lwProviders.GridLines = true;
-            this.lwProviders.Location = new System.Drawing.Point(0, 0);
-            this.lwProviders.Margin = new System.Windows.Forms.Padding(0);
-            this.lwProviders.MultiSelect = false;
-            this.lwProviders.Name = "lwProviders";
-            this.lwProviders.Size = new System.Drawing.Size(1200, 595);
-            this.lwProviders.TabIndex = 0;
-            this.lwProviders.UseCompatibleStateImageBehavior = false;
-            this.lwProviders.View = System.Windows.Forms.View.Details;
+            this.lvProviders.GridLines = true;
+            this.lvProviders.Location = new System.Drawing.Point(0, 0);
+            this.lvProviders.Margin = new System.Windows.Forms.Padding(0);
+            this.lvProviders.MultiSelect = false;
+            this.lvProviders.Name = "lvProviders";
+            this.lvProviders.Size = new System.Drawing.Size(1200, 595);
+            this.lvProviders.TabIndex = 0;
+            this.lvProviders.UseCompatibleStateImageBehavior = false;
+            this.lvProviders.View = System.Windows.Forms.View.Details;
+            this.lvProviders.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvProviders_ColumnWidthChanged);
             // 
             // columnHeader1
             // 
@@ -117,6 +118,11 @@
             // 
             this.columnHeader6.Text = "е-mail";
             this.columnHeader6.Width = 200;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "ИНН";
+            this.columnHeader7.Width = 200;
             // 
             // columnHeader8
             // 
@@ -195,11 +201,6 @@
             this.contextMenuStripProviders.Name = "contextMenuStripProviders";
             this.contextMenuStripProviders.Size = new System.Drawing.Size(61, 4);
             // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "ИНН";
-            this.columnHeader7.Width = 200;
-            // 
             // TabProviders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -222,7 +223,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelProviders;
-        private System.Windows.Forms.ListView lwProviders;
+        private System.Windows.Forms.ListView lvProviders;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;

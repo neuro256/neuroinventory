@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace NeuroInventory
@@ -28,7 +29,7 @@ namespace NeuroInventory
             DocumentNumeration demandNum = new DocumentNumeration((int)nudDemandNumeration.Value, tbDemandPrefix.Text, cbDemandDate.Checked);
             DocumentNumeration debitNum = new DocumentNumeration((int)nudDebitNumeration.Value, tbDebitPrefix.Text, cbDebitDate.Checked);
 
-            Numeration.GetInstance().WriteDocNumeration(new DocumentNumeration[] { demandNum, debitNum });
+            Numeration.GetInstance().WriteDocNumeration(new List<DocumentNumeration>() { demandNum, debitNum });
 
             Close();
         }

@@ -39,14 +39,16 @@ namespace NeuroInventory
         {
             base.InitListView();
 
-            lwMeasurement.Columns.Clear();
-            lwMeasurement.Columns.Add(new ColHeader("ID", 50, HorizontalAlignment.Left, true));
-            lwMeasurement.Columns.Add(new ColHeader("№", 50, HorizontalAlignment.Left, true));
-            lwMeasurement.Columns.Add(new ColHeader("Код ОКЕИ", 80, HorizontalAlignment.Left, true));
-            lwMeasurement.Columns.Add(new ColHeader("Наименование", 200, HorizontalAlignment.Left, true));
-            lwMeasurement.Columns.Add(new ColHeader("Условное обозначение", 200, HorizontalAlignment.Left, true));
-            lwMeasurement.Columns.Add(new ColHeader("Количество десятичных разрядов", 250, HorizontalAlignment.Left, true));
-            lwMeasurement.DoubleBuffered(true);
+            lvMeasurement.Columns.Clear();
+
+            List<ColumnSettings> lvMeasurementSettings = UISettings.GetInstance().LvMeasurementSettings.GetColumnSettingsList();
+
+            foreach (var colSettings in lvMeasurementSettings)
+            {
+                lvMeasurement.Columns.Add(new ColHeader(colSettings.Text, colSettings.Width, colSettings.Align, colSettings.Ascending));
+            }
+
+            lvMeasurement.DoubleBuffered(true);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -127,7 +129,7 @@ namespace NeuroInventory
 
         protected override ListView GetListView()
         {
-            return lwMeasurement;
+            return lvMeasurement;
         }
 
         protected override ContextMenuStrip GetContextMenuStrip()
@@ -187,8 +189,14 @@ namespace NeuroInventory
                 m_Listview.Items.Clear();
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
-                    m_Listview.Items.Add(dataSet.Tables[0].Rows[i]["id"].ToString());
-                    m_Listview.Items[i].SubItems.Add((i + 1).ToString());
+                    ListViewItem lvItem = new ListViewItem
+                    {
+                        Text = (i + 1).ToString(),
+                        Tag = dataSet.Tables[0].Rows[i]["id"]
+                    };
+
+                    m_Listview.Items.Add(lvItem);
+
                     for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
                     {
                         m_Listview.Items[i].SubItems.Add(dataSet.Tables[0].Rows[i][j].ToString());
@@ -219,6 +227,18 @@ namespace NeuroInventory
         private void tbSymbol_TextChanged(object sender, EventArgs e)
         {
             errorProviderMeasurement.Clear();
+        }
+
+        private void lvMeasurement_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        {
+            List<ColumnSettings> lvNewSettings = UISettings.GetInstance().LvMeasurementSettings.GetColumnSettingsList();
+
+            if (lvNewSettings != null)
+            {
+                lvNewSettings[e.ColumnIndex].Width = lvMeasurement.Columns[e.ColumnIndex].Width;
+
+                UISettings.GetInstance().LvMeasurementSettings.SetColumnSettingsList(lvNewSettings);
+            }
         }
     }
 }

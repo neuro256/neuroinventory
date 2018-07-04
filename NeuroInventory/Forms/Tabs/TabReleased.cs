@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
@@ -99,31 +100,24 @@ namespace NeuroInventory
         {
             base.InitListView();
 
-            lwReleased.View = View.Details;
-            lwReleased.FullRowSelect = true;
-            lwReleased.Scrollable = true;
-            lwReleased.GridLines = true;
-            lwReleased.CheckBoxes = true;
-            lwReleased.OwnerDraw = true;
-            lwReleased.HeaderStyle = ColumnHeaderStyle.Clickable;
-            lwReleased.DoubleBuffered(true);
+            lvReleased.View = View.Details;
+            lvReleased.FullRowSelect = true;
+            lvReleased.Scrollable = true;
+            lvReleased.GridLines = true;
+            lvReleased.CheckBoxes = true;
+            lvReleased.OwnerDraw = true;
+            lvReleased.HeaderStyle = ColumnHeaderStyle.Clickable;
+            lvReleased.DoubleBuffered(true);
             // Добавление столбцов
             // Необходимо добавлять столбцы именно так, иначе ColumnHeader не сможет преобразоваться в ColHeader (используется в методе сортировки)
-            lwReleased.Columns.Clear();
-            lwReleased.Columns.Add(new ColHeader("№", 60, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Дата поступления", 120, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Дата отпуска", 120, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Номер накладной", 120, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Дата накладной", 120, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Наименование", 350, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Код ОКЕИ", 80, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Единица измерения", 100, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Кому отпущено", 250, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Количество", 100, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Цена", 100, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Сумма", 100, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Документ", 200, HorizontalAlignment.Left, true));
-            lwReleased.Columns.Add(new ColHeader("Состояние списания", 250, HorizontalAlignment.Left, true));
+            lvReleased.Columns.Clear();
+
+            List<ColumnSettings> lvReleasedSettings = UISettings.GetInstance().LvReleasedSettings.GetColumnSettingsList();
+
+            foreach (var colSettings in lvReleasedSettings)
+            {
+                lvReleased.Columns.Add(new ColHeader(colSettings.Text, colSettings.Width, colSettings.Align, colSettings.Ascending));
+            }
         }
 
         private void btnReleasedRemove_Click(object sender, EventArgs e)
@@ -169,7 +163,7 @@ namespace NeuroInventory
 
         protected override ListView GetListView()
         {
-            return lwReleased;
+            return lvReleased;
         }
 
         protected override ContextMenuStrip GetContextMenuStrip()
@@ -197,8 +191,8 @@ namespace NeuroInventory
                         subitem.Name = dataSet.Tables[0].Columns[j].ToString();
                         if (subitem.Name == "document")
                         {
-                            lwReleased.Items[i].SubItems["document"].Tag = subitem.Text;
-                            lwReleased.Items[i].SubItems["document"].Text = Path.GetFileName(subitem.Text);
+                            lvReleased.Items[i].SubItems["document"].Tag = subitem.Text;
+                            lvReleased.Items[i].SubItems["document"].Text = Path.GetFileName(subitem.Text);
                         }
                     }
                 }
@@ -337,7 +331,7 @@ namespace NeuroInventory
 
         #region DRAW CHECKBOXES
 
-        private void lwReleased_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        private void lvReleased_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
@@ -361,12 +355,12 @@ namespace NeuroInventory
             }
         }
 
-        private void lwReleased_DrawItem(object sender, DrawListViewItemEventArgs e)
+        private void lvReleased_DrawItem(object sender, DrawListViewItemEventArgs e)
         {
             e.DrawDefault = true;
         }
 
-        private void lwReleased_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        private void lvReleased_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
             e.DrawDefault = true;
         }
@@ -380,16 +374,16 @@ namespace NeuroInventory
                     bool value = false;
                     try
                     {
-                        value = Convert.ToBoolean(this.lwReleased.Columns[e.Column].Tag);
+                        value = Convert.ToBoolean(this.lvReleased.Columns[e.Column].Tag);
                     }
                     catch (Exception)
                     {
                     }
-                    this.lwReleased.Columns[e.Column].Tag = !value;
-                    foreach (ListViewItem item in this.lwReleased.Items)
+                    this.lvReleased.Columns[e.Column].Tag = !value;
+                    foreach (ListViewItem item in this.lvReleased.Items)
                         item.Checked = !value;
 
-                    this.lwReleased.Invalidate();
+                    this.lvReleased.Invalidate();
                 }
             }
             catch (Exception ex)
@@ -399,11 +393,6 @@ namespace NeuroInventory
         }
 
         #endregion
-
-        public override void ListViewColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
-        {
-
-        }
 
         public override void ListViewItemMouseUp(object sender, MouseEventArgs e)
         {
@@ -453,7 +442,7 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void btnDebitReport_Click(object sender, EventArgs e)
         {
-            if (lwReleased.CheckedItems.Count > 0)
+            if (lvReleased.CheckedItems.Count > 0)
             {
                 DebitEditor editor = new DebitEditor(GetDebitDataSet());
                 editor.StartPosition = FormStartPosition.CenterParent;
@@ -484,7 +473,7 @@ namespace NeuroInventory
             debitTable.Columns.Add("debit_amount");
             debitTable.Columns.Add("sum");
 
-            foreach (ListViewItem item in lwReleased.CheckedItems)
+            foreach (ListViewItem item in lvReleased.CheckedItems)
             {
                 DataRow newRow = debitTable.NewRow();
 
@@ -526,7 +515,7 @@ namespace NeuroInventory
             return balanceValue;
         }
 
-        private void lwReleased_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void lvReleased_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             DataSet dataSet = SQLiteManager.GetInstance().Released().ReturnDataSet();
 
@@ -539,6 +528,18 @@ namespace NeuroInventory
                 {
                     MessageBox.Show(Definitions.ALREADY_DEBIT_WARNING);
                 }
+            }
+        }
+
+        private void lvReleased_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        {
+            List<ColumnSettings> lvNewSettings = UISettings.GetInstance().LvReleasedSettings.GetColumnSettingsList();
+
+            if (lvNewSettings != null)
+            {
+                lvNewSettings[e.ColumnIndex].Width = lvReleased.Columns[e.ColumnIndex].Width;
+
+                UISettings.GetInstance().LvReleasedSettings.SetColumnSettingsList(lvNewSettings);
             }
         }
     }

@@ -36,7 +36,6 @@ namespace NeuroInventory
             m_Listview.MinimumSize = new System.Drawing.Size(0, 0);
             m_Listview.ItemSelectionChanged += ListViewItemSelectionChanged;
             m_Listview.ColumnClick += ListViewColumnClick;
-            m_Listview.ColumnWidthChanged += ListViewColumnWidthChanged;
             m_Listview.MouseDoubleClick += ListViewItemDoubleClick;
             m_Listview.MouseUp += ListViewItemMouseUp;
         }
@@ -85,8 +84,14 @@ namespace NeuroInventory
                 m_Listview.Items.Clear();
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
-                    m_Listview.Items.Add(dataSet.Tables[0].Rows[i]["id"].ToString());
-                    m_Listview.Items[i].SubItems.Add((i + 1).ToString());
+                    ListViewItem lvItem = new ListViewItem
+                    {
+                        Text = (i + 1).ToString(),
+                        Tag = dataSet.Tables[0].Rows[i]["id"]
+                    };
+
+                    m_Listview.Items.Add(lvItem);
+
                     for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
                     {
                         m_Listview.Items[i].SubItems.Add(dataSet.Tables[0].Rows[i][j].ToString());
@@ -210,28 +215,6 @@ namespace NeuroInventory
 
             // Turn display back on.
             m_Listview.EndUpdate();
-        }
-
-        /// <summary>
-        /// Сокрытие столбца ID
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public virtual void ListViewColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
-        {
-            try
-            {
-                // Удаляем из обработчика
-                m_Listview.ColumnWidthChanged -= ListViewColumnWidthChanged;
-                // Изменяем размер
-                m_Listview.Columns[0].Width = 0;
-                // Возвращаем обработчику
-                m_Listview.ColumnWidthChanged += ListViewColumnWidthChanged;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         /// <summary>

@@ -1,12 +1,15 @@
-﻿using System;
+﻿using System.Runtime.Serialization;
 
 namespace NeuroInventory
 {
-    [Serializable]
+    [DataContract]
     public class DocumentNumeration
     {
+        [DataMember]
         private int m_DocCurrentNumber;
+        [DataMember]
         private string m_DocPrefix;
+        [DataMember]
         private bool m_IncludeDate;
 
         public int DocCurrentNumber { get => m_DocCurrentNumber; set => m_DocCurrentNumber = value; }

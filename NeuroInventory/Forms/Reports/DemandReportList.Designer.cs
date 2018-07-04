@@ -79,6 +79,7 @@
             this.lvDemandReportList.TabIndex = 0;
             this.lvDemandReportList.UseCompatibleStateImageBehavior = false;
             this.lvDemandReportList.View = System.Windows.Forms.View.Details;
+            this.lvDemandReportList.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvDemandReportList_ColumnWidthChanged);
             // 
             // columnHeaderId
             // 
@@ -146,7 +147,7 @@
             // 
             this.contextMenuStripDemandReportList.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripDemandReportList.Name = "contextMenuStripDemandReportList";
-            this.contextMenuStripDemandReportList.Size = new System.Drawing.Size(67, 4);
+            this.contextMenuStripDemandReportList.Size = new System.Drawing.Size(61, 4);
             // 
             // DemandReportList
             // 

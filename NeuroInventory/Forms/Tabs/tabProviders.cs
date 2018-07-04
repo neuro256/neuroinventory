@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
+using System.Collections.Generic;
 
 namespace NeuroInventory
 {
@@ -43,16 +44,16 @@ namespace NeuroInventory
 
             // Добавление столбцов
             // Необходимо добавлять столбцы именно так, иначе ColumnHeader не сможет преобразоваться в ColHeader (используется в методе сортировки)
-            lwProviders.Columns.Clear();
-            lwProviders.Columns.Add(new ColHeader("ID", 50, HorizontalAlignment.Left, true));
-            lwProviders.Columns.Add(new ColHeader("№", 50, HorizontalAlignment.Left, true));
-            lwProviders.Columns.Add(new ColHeader("Название", 200, HorizontalAlignment.Left, true));
-            lwProviders.Columns.Add(new ColHeader("адрес", 200, HorizontalAlignment.Left, true));
-            lwProviders.Columns.Add(new ColHeader("телефон", 200, HorizontalAlignment.Left, true));
-            lwProviders.Columns.Add(new ColHeader("e-mail", 200, HorizontalAlignment.Left, true));
-            lwProviders.Columns.Add(new ColHeader("ИНН", 200, HorizontalAlignment.Left, true));
-            lwProviders.Columns.Add(new ColHeader("Карточка предприятия", 200, HorizontalAlignment.Left, true));
-            lwProviders.DoubleBuffered(true);
+            lvProviders.Columns.Clear();
+
+            List<ColumnSettings> lvProvidersSettings = UISettings.GetInstance().LvProvidersSettings.GetColumnSettingsList();
+
+            foreach (var colSettings in lvProvidersSettings)
+            {
+                lvProviders.Columns.Add(new ColHeader(colSettings.Text, colSettings.Width, colSettings.Align, colSettings.Ascending));
+            }
+
+            lvProviders.DoubleBuffered(true);
         }
 
         private void btnProviderAdd_Click(object sender, EventArgs e)
@@ -117,7 +118,7 @@ namespace NeuroInventory
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
                     ShowTable();
-                    lwProviders.EnsureVisible(m_ListviewSelectedIndex);
+                    lvProviders.EnsureVisible(m_ListviewSelectedIndex);
                 }
                 m_Listview.SelectedItems.Clear();
             }
@@ -129,7 +130,7 @@ namespace NeuroInventory
 
         protected override ListView GetListView()
         {
-            return lwProviders;
+            return lvProviders;
         }
 
         protected override ContextMenuStrip GetContextMenuStrip()
@@ -180,8 +181,12 @@ namespace NeuroInventory
                 m_Listview.Items.Clear();
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
-                    m_Listview.Items.Add(dataSet.Tables[0].Rows[i]["id"].ToString());
-                    m_Listview.Items[i].SubItems.Add((i + 1).ToString());
+                    ListViewItem lvItem = new ListViewItem();
+                    lvItem.Text = (i + 1).ToString();
+                    lvItem.Tag = dataSet.Tables[0].Rows[i]["id"];
+
+                    m_Listview.Items.Add(lvItem);
+
                     for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
                     {
                         ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
@@ -252,6 +257,18 @@ namespace NeuroInventory
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void lvProviders_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        {
+            List<ColumnSettings> lvNewSettings = UISettings.GetInstance().LvProvidersSettings.GetColumnSettingsList();
+
+            if (lvNewSettings != null)
+            {
+                lvNewSettings[e.ColumnIndex].Width = lvProviders.Columns[e.ColumnIndex].Width;
+
+                UISettings.GetInstance().LvProvidersSettings.SetColumnSettingsList(lvNewSettings);
             }
         }
     }

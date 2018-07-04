@@ -1,9 +1,7 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    [Serializable]
     public class ColHeader : ColumnHeader
     {
         public bool ascending;

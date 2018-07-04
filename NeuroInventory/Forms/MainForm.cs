@@ -20,6 +20,7 @@ namespace NeuroInventory
             InitEmptyTabs();
             TabRecent.LoadRecentFile += TabRecent_LoadRecentFile;
             Numeration.GetInstance().ParseDocNumeration();
+            UISettings.GetInstance().ParseSettings();
             //CheckDemo();
         }
 
@@ -273,6 +274,7 @@ namespace NeuroInventory
             {
                 e.Cancel = true;
             }
+            UISettings.GetInstance().WriteSettings();
             Numeration.GetInstance().WriteDocNumeration();
         } 
 

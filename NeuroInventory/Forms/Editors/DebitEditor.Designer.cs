@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lwDebitData = new BrightIdeasSoftware.DataListView();
+            this.lvDebitData = new BrightIdeasSoftware.DataListView();
             this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -44,24 +44,24 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.btnReleased = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.lwDebitData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lvDebitData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelLeftUpper.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lwDebitData
+            // lvDebitData
             // 
-            this.lwDebitData.AllColumns.Add(this.olvColumn7);
-            this.lwDebitData.AllColumns.Add(this.olvColumn1);
-            this.lwDebitData.AllColumns.Add(this.olvColumn2);
-            this.lwDebitData.AllColumns.Add(this.olvColumn8);
-            this.lwDebitData.AllColumns.Add(this.olvColumn3);
-            this.lwDebitData.AllColumns.Add(this.olvColumn4);
-            this.lwDebitData.AllColumns.Add(this.olvColumn5);
-            this.lwDebitData.AllColumns.Add(this.olvColumn9);
-            this.lwDebitData.AllColumns.Add(this.olvColumn6);
-            this.lwDebitData.CellEditUseWholeCell = false;
-            this.lwDebitData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvDebitData.AllColumns.Add(this.olvColumn7);
+            this.lvDebitData.AllColumns.Add(this.olvColumn1);
+            this.lvDebitData.AllColumns.Add(this.olvColumn2);
+            this.lvDebitData.AllColumns.Add(this.olvColumn8);
+            this.lvDebitData.AllColumns.Add(this.olvColumn3);
+            this.lvDebitData.AllColumns.Add(this.olvColumn4);
+            this.lvDebitData.AllColumns.Add(this.olvColumn5);
+            this.lvDebitData.AllColumns.Add(this.olvColumn9);
+            this.lvDebitData.AllColumns.Add(this.olvColumn6);
+            this.lvDebitData.CellEditUseWholeCell = false;
+            this.lvDebitData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn7,
             this.olvColumn1,
             this.olvColumn2,
@@ -71,21 +71,22 @@
             this.olvColumn5,
             this.olvColumn9,
             this.olvColumn6});
-            this.lwDebitData.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lwDebitData.DataSource = null;
-            this.lwDebitData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lwDebitData.FullRowSelect = true;
-            this.lwDebitData.GridLines = true;
-            this.lwDebitData.Location = new System.Drawing.Point(3, 3);
-            this.lwDebitData.Name = "lwDebitData";
-            this.lwDebitData.ShowGroups = false;
-            this.lwDebitData.ShowItemToolTips = true;
-            this.lwDebitData.Size = new System.Drawing.Size(840, 629);
-            this.lwDebitData.TabIndex = 0;
-            this.lwDebitData.UseCompatibleStateImageBehavior = false;
-            this.lwDebitData.View = System.Windows.Forms.View.Details;
-            this.lwDebitData.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.lwDebitData_CellEditFinishing);
-            this.lwDebitData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.lwDebitData_CellEditStarting);
+            this.lvDebitData.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lvDebitData.DataSource = null;
+            this.lvDebitData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvDebitData.FullRowSelect = true;
+            this.lvDebitData.GridLines = true;
+            this.lvDebitData.Location = new System.Drawing.Point(3, 3);
+            this.lvDebitData.Name = "lvDebitData";
+            this.lvDebitData.ShowGroups = false;
+            this.lvDebitData.ShowItemToolTips = true;
+            this.lvDebitData.Size = new System.Drawing.Size(840, 629);
+            this.lvDebitData.TabIndex = 0;
+            this.lvDebitData.UseCompatibleStateImageBehavior = false;
+            this.lvDebitData.View = System.Windows.Forms.View.Details;
+            this.lvDebitData.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.lvDebitData_CellEditFinishing);
+            this.lvDebitData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.lvDebitData_CellEditStarting);
+            this.lvDebitData.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvDebitData_ColumnWidthChanged);
             // 
             // olvColumn7
             // 
@@ -163,7 +164,7 @@
             this.tableLayoutPanelMain.ColumnCount = 2;
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.59237F));
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.40763F));
-            this.tableLayoutPanelMain.Controls.Add(this.lwDebitData, 0, 0);
+            this.tableLayoutPanelMain.Controls.Add(this.lvDebitData, 0, 0);
             this.tableLayoutPanelMain.Controls.Add(this.panelLeftUpper, 1, 0);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
@@ -233,7 +234,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Редактор списаний";
-            ((System.ComponentModel.ISupportInitialize)(this.lwDebitData)).EndInit();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DebitEditor_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.lvDebitData)).EndInit();
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.panelLeftUpper.ResumeLayout(false);
             this.panelLeftUpper.PerformLayout();
@@ -243,7 +245,7 @@
 
         #endregion
 
-        private BrightIdeasSoftware.DataListView lwDebitData;
+        private BrightIdeasSoftware.DataListView lvDebitData;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;

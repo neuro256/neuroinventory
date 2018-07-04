@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
@@ -39,10 +40,14 @@ namespace NeuroInventory
             base.InitListView();
 
             lvDebitReportList.Columns.Clear();
-            lvDebitReportList.Columns.Add(new ColHeader("ID", 50, HorizontalAlignment.Left, true));
-            lvDebitReportList.Columns.Add(new ColHeader("№", 50, HorizontalAlignment.Left, true));
-            lvDebitReportList.Columns.Add(new ColHeader("Дата", 100, HorizontalAlignment.Left, true));
-            lvDebitReportList.Columns.Add(new ColHeader("Документ", 250, HorizontalAlignment.Left, true));
+
+            List<ColumnSettings> lvDebitReportListSettings = UISettings.GetInstance().LvDebitReportListSettings.GetColumnSettingsList();
+
+            foreach (var colSettings in lvDebitReportListSettings)
+            {
+                lvDebitReportList.Columns.Add(new ColHeader(colSettings.Text, colSettings.Width, colSettings.Align, colSettings.Ascending));
+            }
+
             lvDebitReportList.DoubleBuffered(true);
         }
 
@@ -132,8 +137,14 @@ namespace NeuroInventory
                 m_Listview.Items.Clear();
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
-                    m_Listview.Items.Add(dataSet.Tables[0].Rows[i]["id"].ToString());
-                    m_Listview.Items[i].SubItems.Add((i + 1).ToString());
+                    ListViewItem lvItem = new ListViewItem
+                    {
+                        Text = (i + 1).ToString(),
+                        Tag = dataSet.Tables[0].Rows[i]["id"]
+                    };
+
+                    m_Listview.Items.Add(lvItem);
+
                     for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
                     {
                         ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
@@ -163,6 +174,18 @@ namespace NeuroInventory
             finally
             {
                 dataSet.Dispose();
+            }
+        }
+
+        private void lvDebitReportList_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        {
+            List<ColumnSettings> lvNewSettings = UISettings.GetInstance().LvDebitReportListSettings.GetColumnSettingsList();
+
+            if (lvNewSettings != null)
+            {
+                lvNewSettings[e.ColumnIndex].Width = lvDebitReportList.Columns[e.ColumnIndex].Width;
+
+                UISettings.GetInstance().LvDebitReportListSettings.SetColumnSettingsList(lvNewSettings);
             }
         }
     }

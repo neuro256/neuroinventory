@@ -35,7 +35,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.splitContainerMeasurement = new System.Windows.Forms.SplitContainer();
-            this.lwMeasurement = new System.Windows.Forms.ListView();
+            this.lvMeasurement = new System.Windows.Forms.ListView();
             this.chId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chOKEIcode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -128,7 +128,7 @@
             // 
             // splitContainerMeasurement.Panel1
             // 
-            this.splitContainerMeasurement.Panel1.Controls.Add(this.lwMeasurement);
+            this.splitContainerMeasurement.Panel1.Controls.Add(this.lvMeasurement);
             // 
             // splitContainerMeasurement.Panel2
             // 
@@ -150,26 +150,27 @@
             this.splitContainerMeasurement.SplitterDistance = 673;
             this.splitContainerMeasurement.TabIndex = 14;
             // 
-            // lwMeasurement
+            // lvMeasurement
             // 
-            this.lwMeasurement.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lwMeasurement.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvMeasurement.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvMeasurement.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chId,
             this.chNumber,
             this.chOKEIcode,
             this.chName,
             this.chSymbol});
-            this.lwMeasurement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lwMeasurement.FullRowSelect = true;
-            this.lwMeasurement.GridLines = true;
-            this.lwMeasurement.Location = new System.Drawing.Point(0, 0);
-            this.lwMeasurement.Margin = new System.Windows.Forms.Padding(0);
-            this.lwMeasurement.MultiSelect = false;
-            this.lwMeasurement.Name = "lwMeasurement";
-            this.lwMeasurement.Size = new System.Drawing.Size(673, 310);
-            this.lwMeasurement.TabIndex = 0;
-            this.lwMeasurement.UseCompatibleStateImageBehavior = false;
-            this.lwMeasurement.View = System.Windows.Forms.View.Details;
+            this.lvMeasurement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvMeasurement.FullRowSelect = true;
+            this.lvMeasurement.GridLines = true;
+            this.lvMeasurement.Location = new System.Drawing.Point(0, 0);
+            this.lvMeasurement.Margin = new System.Windows.Forms.Padding(0);
+            this.lvMeasurement.MultiSelect = false;
+            this.lvMeasurement.Name = "lvMeasurement";
+            this.lvMeasurement.Size = new System.Drawing.Size(673, 310);
+            this.lvMeasurement.TabIndex = 0;
+            this.lvMeasurement.UseCompatibleStateImageBehavior = false;
+            this.lvMeasurement.View = System.Windows.Forms.View.Details;
+            this.lvMeasurement.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvMeasurement_ColumnWidthChanged);
             // 
             // chId
             // 
@@ -259,7 +260,7 @@
             // 
             this.contextMenuStripMeasurement.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripMeasurement.Name = "contextMenuStripDemand";
-            this.contextMenuStripMeasurement.Size = new System.Drawing.Size(67, 4);
+            this.contextMenuStripMeasurement.Size = new System.Drawing.Size(61, 4);
             // 
             // errorProviderMeasurement
             // 
@@ -300,7 +301,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.SplitContainer splitContainerMeasurement;
-        private System.Windows.Forms.ListView lwMeasurement;
+        private System.Windows.Forms.ListView lvMeasurement;
         private System.Windows.Forms.ColumnHeader chId;
         private System.Windows.Forms.ColumnHeader chNumber;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripMeasurement;

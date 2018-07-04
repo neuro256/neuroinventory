@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabRecent));
             this.groupBoxRecent = new System.Windows.Forms.GroupBox();
-            this.lwRecent = new System.Windows.Forms.ListView();
+            this.lvRecent = new System.Windows.Forms.ListView();
             this.imageListRecents = new System.Windows.Forms.ImageList(this.components);
             this.groupBoxRecent.SuspendLayout();
             this.SuspendLayout();
@@ -39,7 +39,7 @@
             // groupBoxRecent
             // 
             this.groupBoxRecent.BackColor = System.Drawing.Color.Azure;
-            this.groupBoxRecent.Controls.Add(this.lwRecent);
+            this.groupBoxRecent.Controls.Add(this.lvRecent);
             this.groupBoxRecent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxRecent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBoxRecent.Location = new System.Drawing.Point(0, 0);
@@ -49,20 +49,20 @@
             this.groupBoxRecent.TabStop = false;
             this.groupBoxRecent.Text = "Последние открытые файлы баз данных";
             // 
-            // lwRecent
+            // lvRecent
             // 
-            this.lwRecent.BackColor = System.Drawing.Color.LightCyan;
-            this.lwRecent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lwRecent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lwRecent.LargeImageList = this.imageListRecents;
-            this.lwRecent.Location = new System.Drawing.Point(3, 26);
-            this.lwRecent.Name = "lwRecent";
-            this.lwRecent.Size = new System.Drawing.Size(1194, 621);
-            this.lwRecent.SmallImageList = this.imageListRecents;
-            this.lwRecent.TabIndex = 0;
-            this.lwRecent.UseCompatibleStateImageBehavior = false;
-            this.lwRecent.View = System.Windows.Forms.View.List;
-            this.lwRecent.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lwRecent_MouseDoubleClick);
+            this.lvRecent.BackColor = System.Drawing.Color.LightCyan;
+            this.lvRecent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lvRecent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvRecent.LargeImageList = this.imageListRecents;
+            this.lvRecent.Location = new System.Drawing.Point(3, 26);
+            this.lvRecent.Name = "lvRecent";
+            this.lvRecent.Size = new System.Drawing.Size(1194, 621);
+            this.lvRecent.SmallImageList = this.imageListRecents;
+            this.lvRecent.TabIndex = 0;
+            this.lvRecent.UseCompatibleStateImageBehavior = false;
+            this.lvRecent.View = System.Windows.Forms.View.List;
+            this.lvRecent.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvRecent_MouseDoubleClick);
             // 
             // imageListRecents
             // 
@@ -91,7 +91,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBoxRecent;
-        private System.Windows.Forms.ListView lwRecent;
+        private System.Windows.Forms.ListView lvRecent;
         private System.Windows.Forms.ImageList imageListRecents;
     }
 }

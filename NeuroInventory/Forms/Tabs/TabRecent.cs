@@ -31,7 +31,7 @@ namespace NeuroInventory
 
         protected override ListView GetListView()
         {
-            return lwRecent;
+            return lvRecent;
         }
 
         public override DataSet ReturnDataSet()
@@ -45,8 +45,8 @@ namespace NeuroInventory
             try
             {
                 //Заполняем список
-                lwRecent.BeginUpdate();
-                lwRecent.Items.Clear();
+                lvRecent.BeginUpdate();
+                lvRecent.Items.Clear();
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
                     ListViewItem item = new ListViewItem();
@@ -54,9 +54,9 @@ namespace NeuroInventory
                     item.ImageIndex = 0;
                     item.Tag = dataSet.Tables[0].Rows[i]["id"].ToString();
 
-                    lwRecent.Items.Add(item);
+                    lvRecent.Items.Add(item);
                 }
-                lwRecent.EndUpdate();
+                lvRecent.EndUpdate();
             }
             catch (SQLiteException se)
             {
@@ -72,17 +72,17 @@ namespace NeuroInventory
             }
         }
 
-        private void lwRecent_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void lvRecent_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             try
             {
-                ListViewHitTestInfo info = lwRecent.HitTest(e.X, e.Y);
+                ListViewHitTestInfo info = lvRecent.HitTest(e.X, e.Y);
                 ListViewItem item = info.Item;
 
                 if (item != null && item.Selected)
                 {
                     m_ListviewSelectedIndex = item.Index;
-                    ListViewItem selectedItem = lwRecent.Items[m_ListviewSelectedIndex];
+                    ListViewItem selectedItem = lvRecent.Items[m_ListviewSelectedIndex];
                     LoadRecentFile?.Invoke(selectedItem.Text);
                 }
             }

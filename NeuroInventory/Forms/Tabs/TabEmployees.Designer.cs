@@ -39,7 +39,7 @@ namespace NeuroInventory
             this.btnEmployeeRemove = new System.Windows.Forms.Button();
             this.btnEmployeeAdd = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
-            this.lwEmployees = new System.Windows.Forms.ListView();
+            this.lvEmployees = new System.Windows.Forms.ListView();
             this.chID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSurename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -61,7 +61,7 @@ namespace NeuroInventory
             this.tableLayoutPanelEmployees.ColumnCount = 1;
             this.tableLayoutPanelEmployees.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelEmployees.Controls.Add(this.panelEmployeesBottom, 0, 1);
-            this.tableLayoutPanelEmployees.Controls.Add(this.lwEmployees, 0, 0);
+            this.tableLayoutPanelEmployees.Controls.Add(this.lvEmployees, 0, 0);
             this.tableLayoutPanelEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelEmployees.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelEmployees.Margin = new System.Windows.Forms.Padding(0);
@@ -138,13 +138,13 @@ namespace NeuroInventory
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
-            // lwEmployees
+            // lvEmployees
             // 
-            this.lwEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lwEmployees.CheckBoxes = true;
-            this.lwEmployees.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvEmployees.CheckBoxes = true;
+            this.lvEmployees.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chID,
             this.chNumber,
             this.chSurename,
@@ -152,17 +152,18 @@ namespace NeuroInventory
             this.chLastname,
             this.chPost,
             this.chDepartment});
-            this.lwEmployees.ContextMenuStrip = this.contextMenuStripEmployees;
-            this.lwEmployees.FullRowSelect = true;
-            this.lwEmployees.GridLines = true;
-            this.lwEmployees.Location = new System.Drawing.Point(0, 0);
-            this.lwEmployees.Margin = new System.Windows.Forms.Padding(0);
-            this.lwEmployees.MultiSelect = false;
-            this.lwEmployees.Name = "lwEmployees";
-            this.lwEmployees.Size = new System.Drawing.Size(1200, 595);
-            this.lwEmployees.TabIndex = 2;
-            this.lwEmployees.UseCompatibleStateImageBehavior = false;
-            this.lwEmployees.View = System.Windows.Forms.View.Details;
+            this.lvEmployees.ContextMenuStrip = this.contextMenuStripEmployees;
+            this.lvEmployees.FullRowSelect = true;
+            this.lvEmployees.GridLines = true;
+            this.lvEmployees.Location = new System.Drawing.Point(0, 0);
+            this.lvEmployees.Margin = new System.Windows.Forms.Padding(0);
+            this.lvEmployees.MultiSelect = false;
+            this.lvEmployees.Name = "lvEmployees";
+            this.lvEmployees.Size = new System.Drawing.Size(1200, 595);
+            this.lvEmployees.TabIndex = 2;
+            this.lvEmployees.UseCompatibleStateImageBehavior = false;
+            this.lvEmployees.View = System.Windows.Forms.View.Details;
+            this.lvEmployees.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvEmployees_ColumnWidthChanged);
             // 
             // chID
             // 
@@ -254,7 +255,7 @@ namespace NeuroInventory
         private System.Windows.Forms.Button btnEmployeeEdit;
         private System.Windows.Forms.Button btnEmployeeRemove;
         private System.Windows.Forms.Button btnEmployeeAdd;
-        private System.Windows.Forms.ListView lwEmployees;
+        private System.Windows.Forms.ListView lvEmployees;
         private System.Windows.Forms.ColumnHeader chNumber;
         private System.Windows.Forms.ColumnHeader chSurename;
         private System.Windows.Forms.ColumnHeader chFirstname;

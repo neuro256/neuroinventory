@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -25,18 +27,21 @@ namespace NeuroInventory
         {
             try
             {
-                JSonSerialization<DocumentNumeration> js = new JSonSerialization<DocumentNumeration>();
-
                 if (!File.Exists(DocNumerationPath))
                 {
-                    js.Serialize(new DocumentNumeration[] { new DocumentNumeration(1, "", false), new DocumentNumeration(1, "", false) }, DocNumerationPath);
+                    File.WriteAllText(m_DocNumerationPath, JsonConvert.SerializeObject(new List<DocumentNumeration>()
+                    {
+                        new DocumentNumeration(1, "", false),
+                        new DocumentNumeration(1, "", false)
+                    }));
                 }
 
-                DocumentNumeration[] docsNumeration = js.DeserializeMulti(DocNumerationPath);
-                if (docsNumeration != null)
+                List<DocumentNumeration> documentNumerations = JsonConvert.DeserializeObject<List<DocumentNumeration>>(File.ReadAllText(m_DocNumerationPath));
+
+                if (documentNumerations != null)
                 {
-                    DemandNumeration = docsNumeration[0];
-                    DebitNumeration = docsNumeration[1];
+                    DemandNumeration = documentNumerations[0];
+                    DebitNumeration = documentNumerations[1];
                 }
             }
             catch (Exception ex)
@@ -49,8 +54,11 @@ namespace NeuroInventory
         {
             try
             {
-                JSonSerialization<DocumentNumeration> js = new JSonSerialization<DocumentNumeration>();
-                js.Serialize(new DocumentNumeration[] { DemandNumeration, DebitNumeration }, DocNumerationPath);
+                File.WriteAllText(m_DocNumerationPath, JsonConvert.SerializeObject(new List<DocumentNumeration>()
+                    {
+                        DemandNumeration,
+                        DebitNumeration
+                    }));
             }
             catch (Exception ex)
             {
@@ -58,12 +66,12 @@ namespace NeuroInventory
             }
         }
 
-        public void WriteDocNumeration(DocumentNumeration[] docsNumeration)
+        public void WriteDocNumeration(List<DocumentNumeration> docsNumeration)
         {
             try
             {
-                JSonSerialization<DocumentNumeration> js = new JSonSerialization<DocumentNumeration>();
-                js.Serialize(docsNumeration, DocNumerationPath);
+                File.WriteAllText(m_DocNumerationPath, JsonConvert.SerializeObject(docsNumeration));
+
                 if (docsNumeration != null)
                 {
                     DemandNumeration = docsNumeration[0];

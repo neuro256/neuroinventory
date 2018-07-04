@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -34,15 +35,16 @@ namespace NeuroInventory
             base.InitListView();
             // Добавление столбцов
             // Необходимо добавлять столбцы именно так, иначе ColumnHeader не сможет преобразоваться в ColHeader (используется в методе сортировки)
-            lwEmployees.Columns.Clear();
-            lwEmployees.Columns.Add(new ColHeader("ID", 50, HorizontalAlignment.Left, true));
-            lwEmployees.Columns.Add(new ColHeader("№", 50, HorizontalAlignment.Left, true));
-            lwEmployees.Columns.Add(new ColHeader("Фамилия", 200, HorizontalAlignment.Left, true));
-            lwEmployees.Columns.Add(new ColHeader("Имя", 200, HorizontalAlignment.Left, true));
-            lwEmployees.Columns.Add(new ColHeader("Отчество", 200, HorizontalAlignment.Left, true));
-            lwEmployees.Columns.Add(new ColHeader("Должность", 200, HorizontalAlignment.Left, true));
-            lwEmployees.Columns.Add(new ColHeader("Отдел", 200, HorizontalAlignment.Left, true));
-            lwEmployees.DoubleBuffered(true);
+            lvEmployees.Columns.Clear();
+
+            List<ColumnSettings> lvEmployeesSettings = UISettings.GetInstance().LvEmployeesSettings.GetColumnSettingsList();
+
+            foreach (var colSettings in lvEmployeesSettings)
+            {
+                lvEmployees.Columns.Add(new ColHeader(colSettings.Text, colSettings.Width, colSettings.Align, colSettings.Ascending));
+            }
+
+            lvEmployees.DoubleBuffered(true);
         }
 
         private void btnEmployeeAdd_Click(object sender, EventArgs e)
@@ -107,7 +109,7 @@ namespace NeuroInventory
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
                     ShowTable();
-                    lwEmployees.EnsureVisible(m_ListviewSelectedIndex);
+                    lvEmployees.EnsureVisible(m_ListviewSelectedIndex);
                 }
                 m_Listview.SelectedItems.Clear();
             }
@@ -119,7 +121,7 @@ namespace NeuroInventory
 
         protected override ListView GetListView()
         {
-            return lwEmployees;
+            return lvEmployees;
         }
 
         protected override ContextMenuStrip GetContextMenuStrip()
@@ -163,6 +165,18 @@ namespace NeuroInventory
         private void EmployeeFiltration()
         {
             ShowTable();
+        }
+
+        private void lvEmployees_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        {
+            List<ColumnSettings> lvNewSettings = UISettings.GetInstance().LvEmployeesSettings.GetColumnSettingsList();
+
+            if (lvNewSettings != null)
+            {
+                lvNewSettings[e.ColumnIndex].Width = lvEmployees.Columns[e.ColumnIndex].Width;
+
+                UISettings.GetInstance().LvEmployeesSettings.SetColumnSettingsList(lvNewSettings);
+            }
         }
     }
 }

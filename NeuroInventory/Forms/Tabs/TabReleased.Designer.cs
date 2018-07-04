@@ -35,10 +35,11 @@ namespace NeuroInventory
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanelReleased = new System.Windows.Forms.TableLayoutPanel();
             this.panelReleasedBottom = new System.Windows.Forms.Panel();
+            this.btnDebitCancel = new System.Windows.Forms.Button();
             this.btnDebitReport = new System.Windows.Forms.Button();
             this.btnReleasedRemove = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
-            this.lwReleased = new System.Windows.Forms.ListView();
+            this.lvReleased = new System.Windows.Forms.ListView();
             this.chID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSurename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -50,7 +51,6 @@ namespace NeuroInventory
             this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnDebitCancel = new System.Windows.Forms.Button();
             this.tableLayoutPanelReleased.SuspendLayout();
             this.panelReleasedBottom.SuspendLayout();
             this.contextMenuStripReleased.SuspendLayout();
@@ -61,7 +61,7 @@ namespace NeuroInventory
             this.tableLayoutPanelReleased.ColumnCount = 1;
             this.tableLayoutPanelReleased.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelReleased.Controls.Add(this.panelReleasedBottom, 0, 1);
-            this.tableLayoutPanelReleased.Controls.Add(this.lwReleased, 0, 0);
+            this.tableLayoutPanelReleased.Controls.Add(this.lvReleased, 0, 0);
             this.tableLayoutPanelReleased.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelReleased.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelReleased.Margin = new System.Windows.Forms.Padding(0);
@@ -85,6 +85,20 @@ namespace NeuroInventory
             this.panelReleasedBottom.Name = "panelReleasedBottom";
             this.panelReleasedBottom.Size = new System.Drawing.Size(1200, 55);
             this.panelReleasedBottom.TabIndex = 1;
+            // 
+            // btnDebitCancel
+            // 
+            this.btnDebitCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDebitCancel.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnDebitCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnDebitCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDebitCancel.Location = new System.Drawing.Point(392, 10);
+            this.btnDebitCancel.Name = "btnDebitCancel";
+            this.btnDebitCancel.Size = new System.Drawing.Size(184, 33);
+            this.btnDebitCancel.TabIndex = 5;
+            this.btnDebitCancel.Text = "Отменить списание";
+            this.btnDebitCancel.UseVisualStyleBackColor = false;
+            this.btnDebitCancel.Click += new System.EventHandler(this.btnDebitCancel_Click);
             // 
             // btnDebitReport
             // 
@@ -126,13 +140,13 @@ namespace NeuroInventory
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
-            // lwReleased
+            // lvReleased
             // 
-            this.lwReleased.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvReleased.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lwReleased.CheckBoxes = true;
-            this.lwReleased.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvReleased.CheckBoxes = true;
+            this.lvReleased.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chID,
             this.chNumber,
             this.chSurename,
@@ -140,21 +154,22 @@ namespace NeuroInventory
             this.chLastname,
             this.chPost,
             this.chDepartment});
-            this.lwReleased.ContextMenuStrip = this.contextMenuStripReleased;
-            this.lwReleased.FullRowSelect = true;
-            this.lwReleased.GridLines = true;
-            this.lwReleased.Location = new System.Drawing.Point(0, 0);
-            this.lwReleased.Margin = new System.Windows.Forms.Padding(0);
-            this.lwReleased.MultiSelect = false;
-            this.lwReleased.Name = "lwReleased";
-            this.lwReleased.Size = new System.Drawing.Size(1200, 595);
-            this.lwReleased.TabIndex = 2;
-            this.lwReleased.UseCompatibleStateImageBehavior = false;
-            this.lwReleased.View = System.Windows.Forms.View.Details;
-            this.lwReleased.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lwReleased_DrawColumnHeader);
-            this.lwReleased.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lwReleased_DrawItem);
-            this.lwReleased.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lwReleased_DrawSubItem);
-            this.lwReleased.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lwReleased_ItemCheck);
+            this.lvReleased.ContextMenuStrip = this.contextMenuStripReleased;
+            this.lvReleased.FullRowSelect = true;
+            this.lvReleased.GridLines = true;
+            this.lvReleased.Location = new System.Drawing.Point(0, 0);
+            this.lvReleased.Margin = new System.Windows.Forms.Padding(0);
+            this.lvReleased.MultiSelect = false;
+            this.lvReleased.Name = "lvReleased";
+            this.lvReleased.Size = new System.Drawing.Size(1200, 595);
+            this.lvReleased.TabIndex = 2;
+            this.lvReleased.UseCompatibleStateImageBehavior = false;
+            this.lvReleased.View = System.Windows.Forms.View.Details;
+            this.lvReleased.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvReleased_ColumnWidthChanged);
+            this.lvReleased.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lvReleased_DrawColumnHeader);
+            this.lvReleased.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lvReleased_DrawItem);
+            this.lvReleased.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lvReleased_DrawSubItem);
+            this.lvReleased.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvReleased_ItemCheck);
             // 
             // chID
             // 
@@ -219,20 +234,6 @@ namespace NeuroInventory
             this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.removeToolStripMenuItem.Text = "Удалить";
             // 
-            // btnDebitCancel
-            // 
-            this.btnDebitCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDebitCancel.BackColor = System.Drawing.Color.CadetBlue;
-            this.btnDebitCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnDebitCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDebitCancel.Location = new System.Drawing.Point(392, 10);
-            this.btnDebitCancel.Name = "btnDebitCancel";
-            this.btnDebitCancel.Size = new System.Drawing.Size(184, 33);
-            this.btnDebitCancel.TabIndex = 5;
-            this.btnDebitCancel.Text = "Отменить списание";
-            this.btnDebitCancel.UseVisualStyleBackColor = false;
-            this.btnDebitCancel.Click += new System.EventHandler(this.btnDebitCancel_Click);
-            // 
             // TabReleased
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -259,7 +260,7 @@ namespace NeuroInventory
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelReleased;
         private System.Windows.Forms.Panel panelReleasedBottom;
         private System.Windows.Forms.Button btnReleasedRemove;
-        private System.Windows.Forms.ListView lwReleased;
+        private System.Windows.Forms.ListView lvReleased;
         private System.Windows.Forms.ColumnHeader chNumber;
         private System.Windows.Forms.ColumnHeader chSurename;
         private System.Windows.Forms.ColumnHeader chFirstname;

@@ -35,6 +35,7 @@
             this.treeView = new NeuroInventory.MultiSelectTreeview();
             this.imageListMain = new System.Windows.Forms.ImageList(this.components);
             this.panelLeftPanelBottom = new System.Windows.Forms.Panel();
+            this.tbSelectionHelp = new System.Windows.Forms.TextBox();
             this.tableLayoutPanelRight = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelInventory = new System.Windows.Forms.TableLayoutPanel();
             this.panelMainBottom = new System.Windows.Forms.Panel();
@@ -43,7 +44,7 @@
             this.btnInventoryEdit = new System.Windows.Forms.Button();
             this.btnInventoryRemove = new System.Windows.Forms.Button();
             this.btnInventoryAdd = new System.Windows.Forms.Button();
-            this.lwInventory = new System.Windows.Forms.ListView();
+            this.lvInventory = new System.Windows.Forms.ListView();
             this.chID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -61,7 +62,6 @@
             this.lblInventoryName = new System.Windows.Forms.Label();
             this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStripCatalogs = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tbSelectionHelp = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -151,6 +151,20 @@
             this.panelLeftPanelBottom.Size = new System.Drawing.Size(198, 55);
             this.panelLeftPanelBottom.TabIndex = 1;
             // 
+            // tbSelectionHelp
+            // 
+            this.tbSelectionHelp.BackColor = System.Drawing.Color.Silver;
+            this.tbSelectionHelp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbSelectionHelp.Location = new System.Drawing.Point(0, 0);
+            this.tbSelectionHelp.Multiline = true;
+            this.tbSelectionHelp.Name = "tbSelectionHelp";
+            this.tbSelectionHelp.ReadOnly = true;
+            this.tbSelectionHelp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbSelectionHelp.Size = new System.Drawing.Size(198, 55);
+            this.tbSelectionHelp.TabIndex = 1;
+            this.tbSelectionHelp.Text = "Для того чтобы выделить несколько каталогов, используйте комбинацию ctrl+левый кл" +
+    "ик мышью";
+            // 
             // tableLayoutPanelRight
             // 
             this.tableLayoutPanelRight.ColumnCount = 1;
@@ -170,8 +184,8 @@
             // 
             this.tableLayoutPanelInventory.ColumnCount = 1;
             this.tableLayoutPanelInventory.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelInventory.Controls.Add(this.lvInventory, 0, 1);
             this.tableLayoutPanelInventory.Controls.Add(this.panelMainBottom, 0, 2);
-            this.tableLayoutPanelInventory.Controls.Add(this.lwInventory, 0, 1);
             this.tableLayoutPanelInventory.Controls.Add(this.panelInventoryTop, 0, 0);
             this.tableLayoutPanelInventory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelInventory.Location = new System.Drawing.Point(0, 0);
@@ -270,14 +284,14 @@
             this.btnInventoryAdd.UseVisualStyleBackColor = true;
             this.btnInventoryAdd.Click += new System.EventHandler(this.btnInventoryAdd_Click);
             // 
-            // lwInventory
+            // lvInventory
             // 
-            this.lwInventory.AllowDrop = true;
-            this.lwInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvInventory.AllowDrop = true;
+            this.lvInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lwInventory.CheckBoxes = true;
-            this.lwInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvInventory.CheckBoxes = true;
+            this.lvInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chID,
             this.chNumber,
             this.chDate,
@@ -291,22 +305,23 @@
             this.chReleased,
             this.chDebit,
             this.chBalance});
-            this.lwInventory.FullRowSelect = true;
-            this.lwInventory.GridLines = true;
-            this.lwInventory.Location = new System.Drawing.Point(0, 30);
-            this.lwInventory.Margin = new System.Windows.Forms.Padding(0);
-            this.lwInventory.MultiSelect = false;
-            this.lwInventory.Name = "lwInventory";
-            this.lwInventory.Size = new System.Drawing.Size(996, 563);
-            this.lwInventory.TabIndex = 2;
-            this.lwInventory.UseCompatibleStateImageBehavior = false;
-            this.lwInventory.View = System.Windows.Forms.View.Details;
-            this.lwInventory.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lwInventory_DrawColumnHeader);
-            this.lwInventory.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lwInventory_DrawItem);
-            this.lwInventory.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lwInventory_DrawSubItem);
-            this.lwInventory.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lwInventory_ItemCheck);
-            this.lwInventory.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.lwInventory_ItemDrag);
-            this.lwInventory.DragOver += new System.Windows.Forms.DragEventHandler(this.lwInventory_DragOver);
+            this.lvInventory.FullRowSelect = true;
+            this.lvInventory.GridLines = true;
+            this.lvInventory.Location = new System.Drawing.Point(0, 30);
+            this.lvInventory.Margin = new System.Windows.Forms.Padding(0);
+            this.lvInventory.MultiSelect = false;
+            this.lvInventory.Name = "lvInventory";
+            this.lvInventory.Size = new System.Drawing.Size(996, 563);
+            this.lvInventory.TabIndex = 2;
+            this.lvInventory.UseCompatibleStateImageBehavior = false;
+            this.lvInventory.View = System.Windows.Forms.View.Details;
+            this.lvInventory.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvInventory_ColumnWidthChanged);
+            this.lvInventory.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lvInventory_DrawColumnHeader);
+            this.lvInventory.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lvInventory_DrawItem);
+            this.lvInventory.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lvInventory_DrawSubItem);
+            this.lvInventory.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvInventory_ItemCheck);
+            this.lvInventory.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.lvInventory_ItemDrag);
+            this.lvInventory.DragOver += new System.Windows.Forms.DragEventHandler(this.lvInventory_DragOver);
             // 
             // chID
             // 
@@ -402,20 +417,6 @@
             this.contextMenuStripCatalogs.Name = "contextMenuStripCatalogs";
             this.contextMenuStripCatalogs.Size = new System.Drawing.Size(61, 4);
             // 
-            // tbSelectionHelp
-            // 
-            this.tbSelectionHelp.BackColor = System.Drawing.Color.Silver;
-            this.tbSelectionHelp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbSelectionHelp.Location = new System.Drawing.Point(0, 0);
-            this.tbSelectionHelp.Multiline = true;
-            this.tbSelectionHelp.Name = "tbSelectionHelp";
-            this.tbSelectionHelp.ReadOnly = true;
-            this.tbSelectionHelp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbSelectionHelp.Size = new System.Drawing.Size(198, 55);
-            this.tbSelectionHelp.TabIndex = 1;
-            this.tbSelectionHelp.Text = "Для того чтобы выделить несколько каталогов, используйте комбинацию ctrl+левый кл" +
-    "ик мышью";
-            // 
             // TabMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -457,7 +458,7 @@
         private System.Windows.Forms.Button btnInventoryEdit;
         private System.Windows.Forms.Button btnInventoryRemove;
         private System.Windows.Forms.Button btnInventoryAdd;
-        private System.Windows.Forms.ListView lwInventory;
+        private System.Windows.Forms.ListView lvInventory;
         private System.Windows.Forms.ColumnHeader chID;
         private System.Windows.Forms.ColumnHeader chNumber;
         private System.Windows.Forms.ColumnHeader chDate;

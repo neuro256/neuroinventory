@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lwDemandData = new BrightIdeasSoftware.DataListView();
+            this.lvDemandData = new BrightIdeasSoftware.DataListView();
             this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -45,23 +45,23 @@
             this.btnReleased = new System.Windows.Forms.Button();
             this.lblEmployee = new System.Windows.Forms.Label();
             this.cbEmployee = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.lwDemandData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lvDemandData)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelLeftUpper.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lwDemandData
+            // lvDemandData
             // 
-            this.lwDemandData.AllColumns.Add(this.olvColumn7);
-            this.lwDemandData.AllColumns.Add(this.olvColumn1);
-            this.lwDemandData.AllColumns.Add(this.olvColumn2);
-            this.lwDemandData.AllColumns.Add(this.olvColumn8);
-            this.lwDemandData.AllColumns.Add(this.olvColumn3);
-            this.lwDemandData.AllColumns.Add(this.olvColumn4);
-            this.lwDemandData.AllColumns.Add(this.olvColumn5);
-            this.lwDemandData.AllColumns.Add(this.olvColumn6);
-            this.lwDemandData.CellEditUseWholeCell = false;
-            this.lwDemandData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvDemandData.AllColumns.Add(this.olvColumn7);
+            this.lvDemandData.AllColumns.Add(this.olvColumn1);
+            this.lvDemandData.AllColumns.Add(this.olvColumn2);
+            this.lvDemandData.AllColumns.Add(this.olvColumn8);
+            this.lvDemandData.AllColumns.Add(this.olvColumn3);
+            this.lvDemandData.AllColumns.Add(this.olvColumn4);
+            this.lvDemandData.AllColumns.Add(this.olvColumn5);
+            this.lvDemandData.AllColumns.Add(this.olvColumn6);
+            this.lvDemandData.CellEditUseWholeCell = false;
+            this.lvDemandData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn7,
             this.olvColumn1,
             this.olvColumn2,
@@ -70,21 +70,22 @@
             this.olvColumn4,
             this.olvColumn5,
             this.olvColumn6});
-            this.lwDemandData.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lwDemandData.DataSource = null;
-            this.lwDemandData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lwDemandData.FullRowSelect = true;
-            this.lwDemandData.GridLines = true;
-            this.lwDemandData.Location = new System.Drawing.Point(3, 3);
-            this.lwDemandData.Name = "lwDemandData";
-            this.lwDemandData.ShowGroups = false;
-            this.lwDemandData.ShowItemToolTips = true;
-            this.lwDemandData.Size = new System.Drawing.Size(840, 629);
-            this.lwDemandData.TabIndex = 0;
-            this.lwDemandData.UseCompatibleStateImageBehavior = false;
-            this.lwDemandData.View = System.Windows.Forms.View.Details;
-            this.lwDemandData.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.lwDemandData_CellEditFinishing);
-            this.lwDemandData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.lwDemandData_CellEditStarting);
+            this.lvDemandData.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lvDemandData.DataSource = null;
+            this.lvDemandData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvDemandData.FullRowSelect = true;
+            this.lvDemandData.GridLines = true;
+            this.lvDemandData.Location = new System.Drawing.Point(3, 3);
+            this.lvDemandData.Name = "lvDemandData";
+            this.lvDemandData.ShowGroups = false;
+            this.lvDemandData.ShowItemToolTips = true;
+            this.lvDemandData.Size = new System.Drawing.Size(840, 629);
+            this.lvDemandData.TabIndex = 0;
+            this.lvDemandData.UseCompatibleStateImageBehavior = false;
+            this.lvDemandData.View = System.Windows.Forms.View.Details;
+            this.lvDemandData.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.lvDemandData_CellEditFinishing);
+            this.lvDemandData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.lvDemandData_CellEditStarting);
+            this.lvDemandData.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvDemandData_ColumnWidthChanged);
             // 
             // olvColumn7
             // 
@@ -155,7 +156,7 @@
             this.tableLayoutPanelMain.ColumnCount = 2;
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.59237F));
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.40763F));
-            this.tableLayoutPanelMain.Controls.Add(this.lwDemandData, 0, 0);
+            this.tableLayoutPanelMain.Controls.Add(this.lvDemandData, 0, 0);
             this.tableLayoutPanelMain.Controls.Add(this.panelLeftUpper, 1, 0);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
@@ -253,7 +254,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Редактор требований";
-            ((System.ComponentModel.ISupportInitialize)(this.lwDemandData)).EndInit();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DemandEditor_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.lvDemandData)).EndInit();
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.panelLeftUpper.ResumeLayout(false);
             this.panelLeftUpper.PerformLayout();
@@ -263,7 +265,7 @@
 
         #endregion
 
-        private BrightIdeasSoftware.DataListView lwDemandData;
+        private BrightIdeasSoftware.DataListView lvDemandData;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -16,145 +17,144 @@ namespace NeuroInventory
 
         private string UISettingsPath = "UIsettings.json";
 
-        private List<ColHeader> lvInventorySettings;
-        private List<ColHeader> lvReleasedSettings;
-        private List<ColHeader> lvProvidersSettings;
-        private List<ColHeader> lvEmployeesSettings;
-        private List<ColHeader> lvDemandReportListSettings;
-        private List<ColHeader> lvDebitReportListSettings;
-        private List<ColHeader> lvMeasurementSettings;
-        private List<ColHeader> lvDemandDataSettings;
-        private List<ColHeader> lvDebitDataSettings;
+        private ColumnSettingsList lvInventorySettings;
+        private ColumnSettingsList lvReleasedSettings;
+        private ColumnSettingsList lvProvidersSettings;
+        private ColumnSettingsList lvEmployeesSettings;
+        private ColumnSettingsList lvDemandReportListSettings;
+        private ColumnSettingsList lvDebitReportListSettings;
+        private ColumnSettingsList lvMeasurementSettings;
+        private ColumnSettingsList lvDemandDataSettings;
+        private ColumnSettingsList lvDebitDataSettings;
 
-        public List<ColHeader> LvInventorySettings { get => lvInventorySettings; set => lvInventorySettings = value; }
-        public List<ColHeader> LvReleasedSettings { get => lvReleasedSettings; set => lvReleasedSettings = value; }
-        public List<ColHeader> LvProvidersSettings { get => lvProvidersSettings; set => lvProvidersSettings = value; }
-        public List<ColHeader> LvEmployeesSettings { get => lvEmployeesSettings; set => lvEmployeesSettings = value; }
-        public List<ColHeader> LvDemandReportListSettings { get => lvDemandReportListSettings; set => lvDemandReportListSettings = value; }
-        public List<ColHeader> LvDebitReportListSettings { get => lvDebitReportListSettings; set => lvDebitReportListSettings = value; }
-        public List<ColHeader> LvMeasurementSettings { get => lvMeasurementSettings; set => lvMeasurementSettings = value; }
-        public List<ColHeader> LvDemandDataSettings { get => lvDemandDataSettings; set => lvDemandDataSettings = value; }
-        public List<ColHeader> LvDebitDataSettings { get => lvDebitDataSettings; set => lvDebitDataSettings = value; }
+        public ColumnSettingsList LvInventorySettings { get => lvInventorySettings; set => lvInventorySettings = value; }
+        public ColumnSettingsList LvReleasedSettings { get => lvReleasedSettings; set => lvReleasedSettings = value; }
+        public ColumnSettingsList LvProvidersSettings { get => lvProvidersSettings; set => lvProvidersSettings = value; }
+        public ColumnSettingsList LvEmployeesSettings { get => lvEmployeesSettings; set => lvEmployeesSettings = value; }
+        public ColumnSettingsList LvDemandReportListSettings { get => lvDemandReportListSettings; set => lvDemandReportListSettings = value; }
+        public ColumnSettingsList LvDebitReportListSettings { get => lvDebitReportListSettings; set => lvDebitReportListSettings = value; }
+        public ColumnSettingsList LvMeasurementSettings { get => lvMeasurementSettings; set => lvMeasurementSettings = value; }
+        public ColumnSettingsList LvDemandDataSettings { get => lvDemandDataSettings; set => lvDemandDataSettings = value; }
+        public ColumnSettingsList LvDebitDataSettings { get => lvDebitDataSettings; set => lvDebitDataSettings = value; }
 
         public void ParseSettings()
         {
             try
             {
-                JSonSerialization<List<List<ColHeader>>> js = new JSonSerialization<List<List<ColHeader>>>();
-
                 if (!File.Exists(UISettingsPath))
                 {
-                    lvInventorySettings = new List<ColHeader>()
+                    lvInventorySettings = new ColumnSettingsList(new List<ColumnSettings>()
                     {
-                        new ColHeader("№", 50, HorizontalAlignment.Left, true),
-                        new ColHeader("Поставщик", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("Дата поступления", 140, HorizontalAlignment.Left, true),
-                        new ColHeader("Накладная", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Номер накладной", 150, HorizontalAlignment.Left, true),
-                        new ColHeader("Дата накладной", 140, HorizontalAlignment.Left, true),
-                        new ColHeader("Наименование", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("Код ОКЕИ", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Единица измерения", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Количество", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Цена", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Сумма", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Остаток", 100, HorizontalAlignment.Left, true)
-                    };
+                        new ColumnSettings("№", 50, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Поставщик", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Дата поступления", 140, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Накладная", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Номер накладной", 150, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Дата накладной", 140, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Наименование", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Код ОКЕИ", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Единица измерения", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Количество", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Цена", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Сумма", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Остаток", 100, HorizontalAlignment.Left, true)
+                    });
 
-                    lvReleasedSettings = new List<ColHeader>()
+                    lvReleasedSettings = new ColumnSettingsList(new List<ColumnSettings>()
                     {
-                        new ColHeader("№", 60, HorizontalAlignment.Left, true),
-                        new ColHeader("Дата поступления", 120, HorizontalAlignment.Left, true),
-                        new ColHeader("Дата отпуска", 120, HorizontalAlignment.Left, true),
-                        new ColHeader("Номер накладной", 120, HorizontalAlignment.Left, true),
-                        new ColHeader("Дата накладной", 120, HorizontalAlignment.Left, true),
-                        new ColHeader("Наименование", 350, HorizontalAlignment.Left, true),
-                        new ColHeader("Код ОКЕИ", 80, HorizontalAlignment.Left, true),
-                        new ColHeader("Единица измерения", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Кому отпущено", 250, HorizontalAlignment.Left, true),
-                        new ColHeader("Количество", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Цена", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Сумма", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Документ", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("Состояние списания", 250, HorizontalAlignment.Left, true)
-                    };
+                        new ColumnSettings("№", 60, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Дата поступления", 120, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Дата отпуска", 120, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Номер накладной", 120, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Дата накладной", 120, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Наименование", 350, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Код ОКЕИ", 80, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Единица измерения", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Кому отпущено", 250, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Количество", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Цена", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Сумма", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Документ", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Состояние списания", 250, HorizontalAlignment.Left, true)
+                    });
 
-                    lvProvidersSettings = new List<ColHeader>()
+                    lvProvidersSettings = new ColumnSettingsList(new List<ColumnSettings>()
                     {
-                        new ColHeader("ID", 50, HorizontalAlignment.Left, true),
-                        new ColHeader("№", 50, HorizontalAlignment.Left, true),
-                        new ColHeader("Название", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("адрес", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("телефон", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("e-mail", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("ИНН", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("Карточка предприятия", 200, HorizontalAlignment.Left, true)
-                    };
+                        //new ColumnSettings("ID", 50, HorizontalAlignment.Left, true),
+                        new ColumnSettings("№", 50, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Название", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("адрес", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("телефон", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("e-mail", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("ИНН", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Карточка предприятия", 200, HorizontalAlignment.Left, true)
+                    });
 
-                    lvEmployeesSettings = new List<ColHeader>()
+                    lvEmployeesSettings = new ColumnSettingsList(new List<ColumnSettings>()
                     {
-                        new ColHeader("ID", 50, HorizontalAlignment.Left, true),
-                        new ColHeader("№", 50, HorizontalAlignment.Left, true),
-                        new ColHeader("Фамилия", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("Имя", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("Отчество", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("Должность", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("Отдел", 200, HorizontalAlignment.Left, true)
-                    };
+                        //new ColumnSettings("ID", 50, HorizontalAlignment.Left, true),
+                        new ColumnSettings("№", 50, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Фамилия", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Имя", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Отчество", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Должность", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Отдел", 200, HorizontalAlignment.Left, true)
+                    });
 
-                    lvDemandReportListSettings = new List<ColHeader>()
+                    lvDemandReportListSettings = new ColumnSettingsList(new List<ColumnSettings>()
                     {
-                        new ColHeader("ID", 50, HorizontalAlignment.Left, true),
-                        new ColHeader("№", 50, HorizontalAlignment.Left, true),
-                        new ColHeader("Сотрудник", 250, HorizontalAlignment.Left, true),
-                        new ColHeader("Дата", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Документ", 250, HorizontalAlignment.Left, true)
-                    };
+                        //new ColumnSettings("ID", 50, HorizontalAlignment.Left, true),
+                        new ColumnSettings("№", 50, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Сотрудник", 250, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Дата", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Документ", 250, HorizontalAlignment.Left, true)
+                    });
 
-                    lvDebitReportListSettings = new List<ColHeader>()
+                    lvDebitReportListSettings = new ColumnSettingsList(new List<ColumnSettings>()
                     {
-                        new ColHeader("ID", 50, HorizontalAlignment.Left, true),
-                        new ColHeader("№", 50, HorizontalAlignment.Left, true),
-                        new ColHeader("Дата", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Документ", 250, HorizontalAlignment.Left, true)
-                    };
+                        //new ColumnSettings("ID", 50, HorizontalAlignment.Left, true),
+                        new ColumnSettings("№", 50, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Дата", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Документ", 250, HorizontalAlignment.Left, true)
+                    });
 
-                    lvMeasurementSettings = new List<ColHeader>()
+                    lvMeasurementSettings = new ColumnSettingsList(new List<ColumnSettings>()
                     {
-                        new ColHeader("ID", 50, HorizontalAlignment.Left, true),
-                        new ColHeader("№", 50, HorizontalAlignment.Left, true),
-                        new ColHeader("Код ОКЕИ", 80, HorizontalAlignment.Left, true),
-                        new ColHeader("Наименование", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("Условное обозначение", 200, HorizontalAlignment.Left, true),
-                        new ColHeader("Количество десятичных разрядов", 250, HorizontalAlignment.Left, true)
-                    };
+                        //new ColumnSettings("ID", 50, HorizontalAlignment.Left, true),
+                        new ColumnSettings("№", 50, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Код ОКЕИ", 80, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Наименование", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Условное обозначение", 200, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Количество десятичных разрядов", 250, HorizontalAlignment.Left, true)
+                    });
 
-                    lvDemandDataSettings = new List<ColHeader>()
+                    lvDemandDataSettings = new ColumnSettingsList(new List<ColumnSettings>()
                     {
-                        new ColHeader("№", 50, HorizontalAlignment.Left, true),
-                        new ColHeader("Название", 250, HorizontalAlignment.Left, true),
-                        new ColHeader("Код ОКЕИ", 90, HorizontalAlignment.Left, true),
-                        new ColHeader("Номер накладной", 140, HorizontalAlignment.Left, true),
-                        new ColHeader("Единица измерения", 150, HorizontalAlignment.Left, true),
-                        new ColHeader("Цена", 250, HorizontalAlignment.Left, true),
-                        new ColHeader("Количество", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Сумма", 100, HorizontalAlignment.Left, true)
-                    };
+                        new ColumnSettings("№", 50, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Название", 250, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Код ОКЕИ", 90, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Номер накладной", 140, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Единица измерения", 150, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Цена", 250, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Количество", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Сумма", 100, HorizontalAlignment.Left, true)
+                    });
 
-                    lvDebitDataSettings = new List<ColHeader>()
+                    lvDebitDataSettings = new ColumnSettingsList(new List<ColumnSettings>()
                     {
-                        new ColHeader("№", 50, HorizontalAlignment.Left, true),
-                        new ColHeader("Название", 250, HorizontalAlignment.Left, true),
-                        new ColHeader("Код ОКЕИ", 90, HorizontalAlignment.Left, true),
-                        new ColHeader("Номер накладной", 120, HorizontalAlignment.Left, true),
-                        new ColHeader("Единица измерения", 150, HorizontalAlignment.Left, true),
-                        new ColHeader("Цена", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Остаток", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Списать", 100, HorizontalAlignment.Left, true),
-                        new ColHeader("Сумма", 100, HorizontalAlignment.Left, true)
-                    };
+                        new ColumnSettings("№", 50, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Название", 250, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Код ОКЕИ", 90, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Номер накладной", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Единица измерения", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Цена", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Остаток", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Списать", 100, HorizontalAlignment.Left, true),
+                        new ColumnSettings("Сумма", 100, HorizontalAlignment.Left, true)
+                    });
 
-                    js.Serialize(new List<List<ColHeader>>()
+                    // serialize JSON to a string and then write string to a file
+                    File.WriteAllText(UISettingsPath, JsonConvert.SerializeObject(new List<ColumnSettingsList>()
                     {
                         lvInventorySettings,
                         lvReleasedSettings,
@@ -165,11 +165,11 @@ namespace NeuroInventory
                         lvMeasurementSettings,
                         lvDemandDataSettings,
                         lvDebitDataSettings
-                    },
-                    UISettingsPath);
+                    }));
                 }
 
-                List<List<ColHeader>> lvSettings = js.Deserialize(UISettingsPath);
+                // read file into a string and deserialize JSON to a type
+                List<ColumnSettingsList> lvSettings = JsonConvert.DeserializeObject<List<ColumnSettingsList>>(File.ReadAllText(UISettingsPath));
 
                 if (lvSettings != null)
                 {
@@ -194,20 +194,19 @@ namespace NeuroInventory
         {
             try
             {
-                JSonSerialization<List<List<ColHeader>>> js = new JSonSerialization<List<List<ColHeader>>>();
-                js.Serialize(new List<List<ColHeader>>()
-                {
-                    lvInventorySettings,
-                    lvReleasedSettings,
-                    lvProvidersSettings,
-                    lvEmployeesSettings,
-                    lvDemandReportListSettings,
-                    lvDebitReportListSettings,
-                    lvMeasurementSettings,
-                    lvDemandDataSettings,
-                    lvDebitDataSettings
-                },
-                UISettingsPath);
+                // serialize JSON to a string and then write string to a file
+                File.WriteAllText(UISettingsPath, JsonConvert.SerializeObject(new List<ColumnSettingsList>()
+                    {
+                        lvInventorySettings,
+                        lvReleasedSettings,
+                        lvProvidersSettings,
+                        lvEmployeesSettings,
+                        lvDemandReportListSettings,
+                        lvDebitReportListSettings,
+                        lvMeasurementSettings,
+                        lvDemandDataSettings,
+                        lvDebitDataSettings
+                    }));
             }
             catch (Exception ex)
             {

@@ -239,6 +239,11 @@ namespace NeuroInventory
 
                 UISettings.GetInstance().LvMeasurementSettings.SetColumnSettingsList(lvNewSettings);
             }
+
+            if (lvMeasurement.Columns[e.ColumnIndex].Width < Definitions.MIN_COLUMN_WIDTH)
+            {
+                lvMeasurement.Columns[e.ColumnIndex].Width = Definitions.MIN_COLUMN_WIDTH;
+            }
         }
     }
 }

@@ -329,6 +329,11 @@ namespace NeuroInventory
 
                 UISettings.GetInstance().LvDebitDataSettings.SetColumnSettingsList(lvNewSettings);
             }
+
+            if (lvDebitData.Columns[e.ColumnIndex].Width < Definitions.MIN_COLUMN_WIDTH)
+            {
+                lvDebitData.Columns[e.ColumnIndex].Width = Definitions.MIN_COLUMN_WIDTH;
+            }
         }
 
         private void DebitEditor_FormClosing(object sender, FormClosingEventArgs e)

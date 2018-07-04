@@ -187,6 +187,11 @@ namespace NeuroInventory
 
                 UISettings.GetInstance().LvDebitReportListSettings.SetColumnSettingsList(lvNewSettings);
             }
+
+            if (lvDebitReportList.Columns[e.ColumnIndex].Width < Definitions.MIN_COLUMN_WIDTH)
+            {
+                lvDebitReportList.Columns[e.ColumnIndex].Width = Definitions.MIN_COLUMN_WIDTH;
+            }
         }
     }
 }

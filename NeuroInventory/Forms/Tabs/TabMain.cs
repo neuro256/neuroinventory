@@ -990,6 +990,11 @@ namespace NeuroInventory
 
                 UISettings.GetInstance().LvInventorySettings.SetColumnSettingsList(lvNewSettings);
             }
+
+            if (lvInventory.Columns[e.ColumnIndex].Width < Definitions.MIN_COLUMN_WIDTH)
+            {
+                lvInventory.Columns[e.ColumnIndex].Width = Definitions.MIN_COLUMN_WIDTH;
+            }
         }
     }
 }

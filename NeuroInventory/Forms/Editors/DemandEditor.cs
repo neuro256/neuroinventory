@@ -308,6 +308,11 @@ namespace NeuroInventory
 
                 UISettings.GetInstance().LvDemandDataSettings.SetColumnSettingsList(lvNewSettings);
             }
+
+            if (lvDemandData.Columns[e.ColumnIndex].Width < Definitions.MIN_COLUMN_WIDTH)
+            {
+                lvDemandData.Columns[e.ColumnIndex].Width = Definitions.MIN_COLUMN_WIDTH;
+            }
         }
 
         private void DemandEditor_FormClosing(object sender, FormClosingEventArgs e)

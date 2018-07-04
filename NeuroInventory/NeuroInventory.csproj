@@ -189,8 +189,6 @@
       <DependentUpon>TabEmpty.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Serialization\ISerialize.cs" />
-    <Compile Include="Serialization\JSonSerialization.cs" />
     <Compile Include="ReportsClasses\GemboxXlsWrapper.cs" />
     <Compile Include="ReportsClasses\ISpireReportWrapper.cs" />
     <Compile Include="Forms\Additional\SettingDocumentNumeration.cs">

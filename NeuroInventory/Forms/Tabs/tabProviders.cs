@@ -21,6 +21,7 @@ namespace NeuroInventory
             InitListView();
             InitContextMenuStrip();
             ListviewSelectedIndex = 0;
+            SelectedItemId = 0;
         }
 
         protected override void InitForm()
@@ -96,8 +97,8 @@ namespace NeuroInventory
         {
             if (m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteManager.GetInstance().Providers().Remove(ListviewSelectedIndex);
-                RemoveFromListViewAt(ListviewSelectedIndex, 1);
+                SQLiteManager.GetInstance().Providers().Remove(SelectedItemId);
+                RemoveFromListViewAt(ListviewSelectedIndex);
                 m_Listview.SelectedItems.Clear();
             }
             else
@@ -113,7 +114,7 @@ namespace NeuroInventory
         {
             if (m_Listview.SelectedItems.Count > 0)
             {
-                ProviderEditor editor = new ProviderEditor(ListviewSelectedIndex);
+                ProviderEditor editor = new ProviderEditor(SelectedItemId);
                 editor.StartPosition = FormStartPosition.CenterParent;
                 if (editor.ShowDialog() == DialogResult.OK)
                 {

@@ -9,8 +9,7 @@ namespace NeuroInventory
     public partial class ProviderEditor : Form
     {
         private EditorMode m_EditorMode;
-        private int m_ListviewSelectedIndex;
-        private object m_SelectedRecordId;
+        private int m_SelectedItemId;
         private string m_SelectedDocument;
         private string m_CurrentDocument;
 
@@ -27,7 +26,7 @@ namespace NeuroInventory
         {
             InitializeComponent();
             m_EditorMode = EditorMode.UPDATE;
-            m_ListviewSelectedIndex = p_Id;
+            m_SelectedItemId = p_Id;
             m_SelectedDocument = String.Empty;
             m_CurrentDocument = String.Empty;
             ShowInfo();
@@ -37,16 +36,20 @@ namespace NeuroInventory
         private void ShowInfo()
         {
             DataSet dataSet = SQLiteManager.GetInstance().Providers().ReturnDataSet();
-            m_SelectedRecordId = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["id"];
-            tbName.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["name"].ToString();
-            tbAddress.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["address"].ToString();
-            tbPhone.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["phone"].ToString();
-            tbMail.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["mail"].ToString();
-            tbINN.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["inn"].ToString();
-            string fileName = Path.GetFileName(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString());
-            tbDocument.Text = fileName;
-            m_CurrentDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString();
-            m_SelectedDocument = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["document"].ToString();
+            DataRow dataRow = dataSet.Tables[0].Rows.Find(m_SelectedItemId);
+            if(dataRow != null)
+            {
+                tbName.Text = dataRow["name"].ToString();
+                tbAddress.Text = dataRow["address"].ToString();
+                tbPhone.Text = dataRow["phone"].ToString();
+                tbMail.Text = dataRow["mail"].ToString();
+                tbINN.Text = dataRow["inn"].ToString();
+                string fileName = Path.GetFileName(dataRow["document"].ToString());
+                tbDocument.Text = fileName;
+                m_CurrentDocument = dataRow["document"].ToString();
+                m_SelectedDocument = dataRow["document"].ToString();
+            }
+            
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -58,7 +61,7 @@ namespace NeuroInventory
 
             if(m_EditorMode == EditorMode.UPDATE)
             {
-                SQLiteManager.GetInstance().Providers().Update(m_SelectedRecordId, tbName.Text, tbAddress.Text, tbPhone.Text, tbMail.Text, tbINN.Text, m_SelectedDocument, m_CurrentDocument);
+                SQLiteManager.GetInstance().Providers().Update(m_SelectedItemId, tbName.Text, tbAddress.Text, tbPhone.Text, tbMail.Text, tbINN.Text, m_SelectedDocument, m_CurrentDocument);
             }
             else
             {

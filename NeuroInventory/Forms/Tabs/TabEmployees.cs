@@ -89,7 +89,7 @@ namespace NeuroInventory
             if(m_Listview.SelectedItems.Count > 0)
             {
                 SQLiteManager.GetInstance().Employees().Remove(SelectedItemId);
-                RemoveFromListViewAt(ListviewSelectedIndex, 1);
+                RemoveFromListViewAt(ListviewSelectedIndex);
                 m_Listview.SelectedItems.Clear();
             }
             else

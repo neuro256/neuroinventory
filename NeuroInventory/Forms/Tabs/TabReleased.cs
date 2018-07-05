@@ -84,6 +84,7 @@ namespace NeuroInventory
             InitContextMenuStrip();
             m_ListviewSelectedIndex = 0;
             SQLiteManager.GetInstance().Released().SetCommandSet();
+            UseCheckox = true;
         }
 
         protected override void InitForm()
@@ -363,33 +364,6 @@ namespace NeuroInventory
         private void lvReleased_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
             e.DrawDefault = true;
-        }
-
-        public override void ListViewColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            try
-            {
-                if (e.Column == 0)
-                {
-                    bool value = false;
-                    try
-                    {
-                        value = Convert.ToBoolean(this.lvReleased.Columns[e.Column].Tag);
-                    }
-                    catch (Exception)
-                    {
-                    }
-                    this.lvReleased.Columns[e.Column].Tag = !value;
-                    foreach (ListViewItem item in this.lvReleased.Items)
-                        item.Checked = !value;
-
-                    this.lvReleased.Invalidate();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         #endregion

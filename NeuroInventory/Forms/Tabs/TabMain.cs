@@ -63,6 +63,7 @@ namespace NeuroInventory
             PopulateTreeView();
             m_ListviewSelectedIndex = 0;
             DisplayInventoryName(String.Empty);
+            UseCheckox = true; 
         }
 
         private void DisplayInventoryName(string p_InventoryName)
@@ -879,30 +880,6 @@ namespace NeuroInventory
         private void lvInventory_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
             e.DrawDefault = true;
-        }
-
-        public override void ListViewColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            if (e.Column == 0)
-            {
-                bool value = false;
-                try
-                {
-                    value = Convert.ToBoolean(this.lvInventory.Columns[e.Column].Tag);
-                }
-                catch (Exception)
-                {
-                }
-                this.lvInventory.Columns[e.Column].Tag = !value;
-                foreach (ListViewItem item in this.lvInventory.Items)
-                    item.Checked = !value;
-
-                this.lvInventory.Invalidate();
-            }
-            else
-            {
-                base.ListViewColumnClick(sender, e);
-            }
         }
 
         #endregion

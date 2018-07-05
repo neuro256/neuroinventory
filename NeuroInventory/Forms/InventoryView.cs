@@ -12,6 +12,9 @@ namespace NeuroInventory
         protected int m_SelectedItemId; 
         protected ListView m_Listview = null;
         protected ContextMenuStrip m_ContextMenuStrip = null;
+        private bool useCheckox = false;
+
+        protected bool UseCheckox { get => useCheckox; set => useCheckox = value; }
 
         protected virtual void InitForm()
         {
@@ -162,14 +165,30 @@ namespace NeuroInventory
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public virtual void ListViewColumnClick(object sender, ColumnClickEventArgs e)
+        public void ListViewColumnClick(object sender, ColumnClickEventArgs e)
         {
             try
             {
-                // TODO: Сортировка ведет к ошибке. Listview и Dataset связаны не по id строки, а по индеку строки. 
-                // После сортировки индексация перемешивается и связность Listview и Dataset нарушается, что ведет к тому, что
-                // редактируется не та строка, которая была выбрана 
-                ListViewSortByColumn(e.Column);
+                if (UseCheckox && e.Column == 0)
+                {
+                    bool value = false;
+                    try
+                    {
+                        value = Convert.ToBoolean(m_Listview.Columns[e.Column].Tag);
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    GetListView().Columns[e.Column].Tag = !value;
+                    foreach (ListViewItem item in GetListView().Items)
+                        item.Checked = !value;
+
+                    GetListView().Invalidate();
+                }
+                else
+                {
+                    ListViewSortByColumn(e.Column);
+                }
             }
             catch (Exception ex)
             {

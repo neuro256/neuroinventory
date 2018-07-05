@@ -10,6 +10,7 @@ namespace NeuroInventory
         {
             CommandDataSet = String.Empty;
             TableName = "debit";
+            PrimaryKey = "id";
         }
 
         public void SetCommandDataSet(int p_InventoryId)

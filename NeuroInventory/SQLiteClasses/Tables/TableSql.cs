@@ -13,6 +13,7 @@ namespace NeuroInventory
         private string m_CommandDataSet; //Команда для создания набора
         protected string m_ConnectionStr;//Строка для подключения 
         private string m_TableName; //Название таблицы
+        private string m_PrimaryKey; // Первичный ключ таблицы 
         private string m_TargetPath; // Путь к сохраняемым файлам
 
         public string connectionString
@@ -26,6 +27,7 @@ namespace NeuroInventory
 
         protected string CommandDataSet { get => m_CommandDataSet; set => m_CommandDataSet = value; }
         protected string TableName { get => m_TableName; set => m_TableName = value; }
+        protected string PrimaryKey { get => m_PrimaryKey; set => m_PrimaryKey = value; }
         public string TargetPath { get => m_TargetPath; set => m_TargetPath = value; }
 
         public void SetTargetPath(string p_Path)
@@ -56,6 +58,9 @@ namespace NeuroInventory
                             try
                             {
                                 myAdapter.Fill(dataSet, TableName);
+                                // Set primary key
+                                dataSet.Tables[0].Columns[PrimaryKey].Unique = true;
+                                dataSet.Tables[0].PrimaryKey = new DataColumn[] { dataSet.Tables[0].Columns[PrimaryKey] };
                             }
                             catch (Exception exc)
                             {
@@ -92,6 +97,9 @@ namespace NeuroInventory
                             try
                             {
                                 myAdapter.Fill(dataSet, TableName);
+                                // Set primary key
+                                dataSet.Tables[0].Columns[PrimaryKey].Unique = true;
+                                dataSet.Tables[0].PrimaryKey = new DataColumn[] { dataSet.Tables[0].Columns[PrimaryKey] };
                             }
                             catch (Exception exc)
                             {

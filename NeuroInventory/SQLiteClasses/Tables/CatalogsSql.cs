@@ -12,6 +12,7 @@ namespace NeuroInventory
         {
             CommandDataSet = "SELECT * FROM catalogs";
             TableName = "catalogs";
+            PrimaryKey = "id";
         }
 
         public void Insert(int p_Type, int p_ParentId, string p_Name)

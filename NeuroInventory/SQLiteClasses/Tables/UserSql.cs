@@ -17,6 +17,7 @@ namespace NeuroInventory
         {
             CommandDataSet = "SELECT * FROM user";
             TableName = "user";
+            PrimaryKey = "id";
         }
 
         public void Update(string p_Login, string p_Password)

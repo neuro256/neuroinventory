@@ -10,6 +10,7 @@ namespace NeuroInventory
         {
             CommandDataSet = "SELECT * FROM employees ORDER BY surename, firstname, lastname ASC";
             TableName = "employees";
+            PrimaryKey = "id";
         }
 
         public void Filter(string p_Surename, string p_Firstname, string p_Lastname, string p_Post, string p_Department)

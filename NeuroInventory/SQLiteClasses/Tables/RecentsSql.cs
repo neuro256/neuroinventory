@@ -21,6 +21,7 @@ namespace NeuroInventory
         {
             CommandDataSet = "SELECT * FROM recents GROUP BY path ORDER BY id DESC LIMIT 10";
             TableName = "recents";
+            PrimaryKey = "id";
         }
 
         public void Insert(string p_Path)
@@ -60,6 +61,9 @@ namespace NeuroInventory
                         try
                         {
                             myAdapter.Fill(dataSet, TableName);
+                            // Set primary key
+                            dataSet.Tables[0].Columns["id"].Unique = true;
+                            dataSet.Tables[0].PrimaryKey = new DataColumn[] { dataSet.Tables[0].Columns["id"] };
                         }
                         catch (Exception exc)
                         {

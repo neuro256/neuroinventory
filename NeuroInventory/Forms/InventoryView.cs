@@ -9,6 +9,7 @@ namespace NeuroInventory
     public class InventoryView : Form, IInventoryView
     {
         protected int m_ListviewSelectedIndex;
+        protected int m_SelectedItemId; 
         protected ListView m_Listview = null;
         protected ContextMenuStrip m_ContextMenuStrip = null;
 
@@ -168,7 +169,7 @@ namespace NeuroInventory
                 // TODO: Сортировка ведет к ошибке. Listview и Dataset связаны не по id строки, а по индеку строки. 
                 // После сортировки индексация перемешивается и связность Listview и Dataset нарушается, что ведет к тому, что
                 // редактируется не та строка, которая была выбрана 
-                //ListViewSortByColumn(e.Column);
+                ListViewSortByColumn(e.Column);
             }
             catch (Exception ex)
             {
@@ -222,7 +223,7 @@ namespace NeuroInventory
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void ListViewItemDoubleClick(object sender, MouseEventArgs e)
+        public virtual void ListViewItemDoubleClick(object sender, MouseEventArgs e)
         {
             try
             {
@@ -232,6 +233,7 @@ namespace NeuroInventory
                 if (item != null && item.Selected)
                 {
                     m_ListviewSelectedIndex = item.Index;
+                    m_SelectedItemId = Convert.ToInt32(item.Tag);
                     UpdateRecord();
                     m_Listview.SelectedItems.Clear();
                 }
@@ -258,6 +260,7 @@ namespace NeuroInventory
                 if (e.IsSelected)
                 {
                     m_ListviewSelectedIndex = e.ItemIndex;
+                    m_SelectedItemId = Convert.ToInt32(e.Item.Tag);
                 }
             }
             catch (Exception ex)
@@ -278,6 +281,7 @@ namespace NeuroInventory
                     if (item != null)
                     {
                         m_ListviewSelectedIndex = item.Index;
+                        m_SelectedItemId = Convert.ToInt32(item.Tag);
                         m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = false;
                         m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = true;
                         m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = true;

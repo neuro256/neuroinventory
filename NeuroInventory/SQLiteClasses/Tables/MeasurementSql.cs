@@ -21,6 +21,7 @@ namespace NeuroInventory
         {
             CommandDataSet = "SELECT * FROM measurement";
             TableName = "measurement";
+            PrimaryKey = "id";
         }
 
         public void Insert(decimal p_OKEIcode, string p_Name, string p_Symbol, decimal p_DecimalPlaces)
@@ -74,6 +75,9 @@ namespace NeuroInventory
                         try
                         {
                             myAdapter.Fill(dataSet, TableName);
+                            // Set primary key
+                            dataSet.Tables[0].Columns["id"].Unique = true;
+                            dataSet.Tables[0].PrimaryKey = new DataColumn[] { dataSet.Tables[0].Columns["id"] };
                         }
                         catch (Exception exc)
                         {

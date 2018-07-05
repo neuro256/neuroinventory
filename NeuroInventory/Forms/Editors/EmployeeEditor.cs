@@ -14,8 +14,7 @@ namespace NeuroInventory
     public partial class EmployeeEditor : Form
     {
         private EditorMode m_EditorMode;
-        private int m_ListviewSelectedItemIndex;
-        private object m_SelectedRecordId;
+        private int m_SelectedItemId;
 
         public EmployeeEditor()
         {
@@ -28,7 +27,7 @@ namespace NeuroInventory
         {
             InitializeComponent();
             m_EditorMode = EditorMode.UPDATE;
-            m_ListviewSelectedItemIndex = p_Id;
+            m_SelectedItemId = p_Id;
             ShowInfo();
             tbSurename.Focus();
         }
@@ -36,12 +35,15 @@ namespace NeuroInventory
         private void ShowInfo()
         {
             DataSet dataSet = SQLiteManager.GetInstance().Employees().ReturnDataSet();
-            m_SelectedRecordId = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["id"];
-            tbSurename.Text = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["surename"].ToString();
-            tbFirstname.Text = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["firstname"].ToString();
-            tbLastname.Text = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["lastname"].ToString();
-            tbPost.Text = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["post"].ToString();
-            tbDepartment.Text = dataSet.Tables[0].Rows[m_ListviewSelectedItemIndex]["department"].ToString();
+            DataRow dataRow = dataSet.Tables[0].Rows.Find(m_SelectedItemId);
+            if(dataRow != null)
+            {
+                tbSurename.Text = dataRow["surename"].ToString();
+                tbFirstname.Text = dataRow["firstname"].ToString();
+                tbLastname.Text = dataRow["lastname"].ToString();
+                tbPost.Text = dataRow["post"].ToString();
+                tbDepartment.Text = dataRow["department"].ToString();
+            }
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -56,7 +58,7 @@ namespace NeuroInventory
 
             if (m_EditorMode == EditorMode.UPDATE)
             {
-                SQLiteManager.GetInstance().Employees().Update(m_SelectedRecordId, tbSurename.Text, tbFirstname.Text, tbLastname.Text, tbPost.Text, tbDepartment.Text);
+                SQLiteManager.GetInstance().Employees().Update(m_SelectedItemId, tbSurename.Text, tbFirstname.Text, tbLastname.Text, tbPost.Text, tbDepartment.Text);
             }
             else
             {

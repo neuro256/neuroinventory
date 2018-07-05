@@ -8,7 +8,7 @@ namespace NeuroInventory
     {
         public ProvidersSql()
         {
-            CommandDataSet = "SELECT providers.id, " +
+            CommandDataSet = "SELECT providers.id as id, " +
                 "providers.name, " +
                 "providers.address, " +
                 "providers.phone, " +
@@ -17,6 +17,7 @@ namespace NeuroInventory
                 "providers.document " +
                 "FROM providers ORDER BY name ASC";
             TableName = "providers";
+            PrimaryKey = "id";
             SetTargetPath(@"Документы\Поставщики");
         }
 
@@ -28,7 +29,7 @@ namespace NeuroInventory
             string l_INN = !String.IsNullOrEmpty(p_INN) ? $"inn like '%{p_INN}%'" : $"(inn like '%{p_INN}%' OR inn IS NULL)";
             string l_Document = !String.IsNullOrEmpty(p_Document) ? $"document like '%{p_Document}%'" : $"(document like '%{p_Document}%' OR document IS NULL)";
 
-            CommandDataSet = "SELECT providers.id, " +
+            CommandDataSet = "SELECT providers.id as id, " +
                 "providers.name, " +
                 "providers.address, " +
                 "providers.phone, " +
@@ -47,7 +48,7 @@ namespace NeuroInventory
 
         public void ClearFilter()
         {
-            CommandDataSet = "SELECT providers.id, " +
+            CommandDataSet = "SELECT providers.id as id, " +
                 "providers.name, " +
                 "providers.address, " +
                 "providers.phone, " +

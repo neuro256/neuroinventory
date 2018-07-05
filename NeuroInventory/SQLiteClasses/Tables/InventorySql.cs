@@ -17,7 +17,7 @@ namespace NeuroInventory
 
         public InventorySql()
         {
-            CommandDataSet = "SELECT inventory.id, " +
+            CommandDataSet = "SELECT inventory.id as id, " +
                 "inventory.catalogId, " +
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
@@ -34,12 +34,13 @@ namespace NeuroInventory
                 "FROM inventory LEFT JOIN demand ON demand.inventoryId = inventory.id GROUP BY inventory.id;";
             CommandDataSetNotFiltered = CommandDataSet;
             TableName = "inventory";
+            PrimaryKey = "id";
             SetTargetPath(@"Документы\Накладные");
         }
 
         public void SetCommandDataSet(int p_Id)
         {
-            CommandDataSet = "SELECT inventory.id, " +
+            CommandDataSet = "SELECT inventory.id as id, " +
                 "inventory.catalogId, " +
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
@@ -66,7 +67,7 @@ namespace NeuroInventory
                 catalogIdsStr += $" inventory.catalogId={id} OR";
             }
             catalogIdsStr = catalogIdsStr.Substring(0, catalogIdsStr.Length - 2);
-            CommandDataSet = "SELECT inventory.id, " +
+            CommandDataSet = "SELECT inventory.id as id, " +
                 "inventory.catalogId, " +
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
@@ -106,7 +107,7 @@ namespace NeuroInventory
             l_Amount = l_Amount.Replace(",", ".");
             string l_Price = p_Price != null ? $" AND (inventory.price={Convert.ToInt32(Convert.ToDecimal(p_Price) * 100)})" : String.Empty;
 
-            CommandDataSet = "SELECT inventory.id, " +
+            CommandDataSet = "SELECT inventory.id as id, " +
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +

@@ -14,6 +14,7 @@ namespace NeuroInventory
         {
             CommandDataSet = String.Empty;
             TableName = "demand";
+            PrimaryKey = "demandId";
             SetCommandSet();
             CommandDataSetNotFiltered = CommandDataSet;
         }

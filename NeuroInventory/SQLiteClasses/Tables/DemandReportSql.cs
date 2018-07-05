@@ -11,6 +11,7 @@ namespace NeuroInventory
         {
             CommandDataSet = String.Empty;
             TableName = "demandReport";
+            PrimaryKey = "id";
             SetTargetPath(@"Документы\Требования");
         }
 

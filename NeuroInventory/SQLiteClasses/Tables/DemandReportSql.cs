@@ -131,13 +131,12 @@ namespace NeuroInventory
             }
         }
 
-        public void Remove(int p_ListviewSelectedItemIndex)
+        public void Remove(int p_SelectedItemId)
         {
-            DataSet dataSet = ReturnDataSet();
-            object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
-            string currentDocument = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["document"].ToString();
+            DataRow dataRow = ReturnDataSet().Tables[0].Rows.Find(p_SelectedItemId);
+            string currentDocument = dataRow["document"].ToString();
             DeleteFile(currentDocument);
-            string l_Where = $"id={selectedRecordId}";
+            string l_Where = $"id={p_SelectedItemId}";
 
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }

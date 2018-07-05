@@ -20,20 +20,20 @@ namespace NeuroInventory
             InitContextMenuStripValues();
             ShowTable();
             ListviewSelectedIndex = 0;
+            SelectedItemId = 0;
         }
 
         private void InitContextMenuStripValues()
         {
-            Dictionary<string, bool> contextMenuStripValues = new Dictionary<string, bool>();
-            contextMenuStripValues = new Dictionary<string, bool>();
-            contextMenuStripValues.Add("addOnItem", false);
-            contextMenuStripValues.Add("editOnItem", false);
-            contextMenuStripValues.Add("removeOnItem", true);
-            contextMenuStripValues.Add("addOnSpace", false);
-            contextMenuStripValues.Add("editOnSpace", false);
-            contextMenuStripValues.Add("removeOnSpace", false);
-
-            ContextMenuStripValues = contextMenuStripValues;
+            ContextMenuStripValues = new Dictionary<string, bool>
+            {
+                { "addOnItem", false },
+                { "editOnItem", false },
+                { "removeOnItem", true },
+                { "addOnSpace", false },
+                { "editOnSpace", false },
+                { "removeOnSpace", false }
+            };
         }
 
         protected override void InitForm()
@@ -75,7 +75,7 @@ namespace NeuroInventory
         {
             if(m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteManager.GetInstance().DemandReport().Remove(ListviewSelectedIndex);
+                SQLiteManager.GetInstance().DemandReport().Remove(SelectedItemId);
                 m_Listview.SelectedItems.Clear();
                 SQLiteManager.GetInstance().DemandReport().SetCommandDataSet();
                 RemoveFromListViewAt(ListviewSelectedIndex);

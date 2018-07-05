@@ -138,18 +138,17 @@ namespace NeuroInventory
             Dictionary<string, object> values = new Dictionary<string, object>();
 
             values["date"] = p_Date;
-            values["document"] = p_Document;//InsertFile(p_Document);
+            values["document"] = p_Document;
 
             SQLiteManager.GetInstance().Insert(TableName, values);
         }
 
-        public void Remove(int p_ListviewSelectedItemIndex)
+        public void Remove(int p_SelectedId)
         {
-            DataSet dataSet = ReturnDataSet();
-            object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
-            string currentDocument = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["document"].ToString();
+            DataRow dataRow = ReturnDataSet().Tables[0].Rows.Find(p_SelectedId);
+            string currentDocument = dataRow["document"].ToString();
             DeleteFile(currentDocument);
-            string l_Where = $"id={selectedRecordId}";
+            string l_Where = $"id={p_SelectedId}";
 
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }

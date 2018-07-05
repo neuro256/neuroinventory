@@ -9,8 +9,6 @@ namespace NeuroInventory
 {
     public partial class MeasurementEditor : InventoryView
     {
-        private object m_SelectedRecordId;
-
         public MeasurementEditor()
         {
             InitializeComponent();
@@ -19,6 +17,7 @@ namespace NeuroInventory
             InitContextMenuStrip();
             ShowTable();
             ListviewSelectedIndex = 0;
+            SelectedItemId = 0;
         }
 
         protected override void InitForm()
@@ -102,7 +101,7 @@ namespace NeuroInventory
         {
             if(m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteSettingsManager.GetInstance().Measurement().Remove(ListviewSelectedIndex);
+                SQLiteSettingsManager.GetInstance().Measurement().Remove(SelectedItemId);
                 RemoveFromListViewAt(ListviewSelectedIndex);
                 m_Listview.SelectedItems.Clear();
             }
@@ -116,7 +115,7 @@ namespace NeuroInventory
         {
             if(m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteSettingsManager.GetInstance().Measurement().Update(m_SelectedRecordId, nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
+                SQLiteSettingsManager.GetInstance().Measurement().Update(SelectedItemId, nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
                 ShowTable();
                 m_Listview.EnsureVisible(ListviewSelectedIndex);
                 m_Listview.SelectedItems.Clear();
@@ -167,11 +166,14 @@ namespace NeuroInventory
         private void ShowInfo()
         {
             DataSet dataSet = SQLiteSettingsManager.GetInstance().Measurement().ReturnDataSet();
-            m_SelectedRecordId = dataSet.Tables[0].Rows[ListviewSelectedIndex]["id"];
-            nudOKEI.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[ListviewSelectedIndex]["codeOKEI"]);
-            tbName.Text = dataSet.Tables[0].Rows[ListviewSelectedIndex]["name"].ToString();
-            tbSymbol.Text = dataSet.Tables[0].Rows[ListviewSelectedIndex]["symbol"].ToString();
-            nudPlaces.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[ListviewSelectedIndex]["decimalPlaces"]);
+            DataRow dataRow = dataSet.Tables[0].Rows.Find(SelectedItemId);
+            if (dataRow != null)
+            {
+                nudOKEI.Value = Convert.ToDecimal(dataRow["codeOKEI"]);
+                tbName.Text = dataRow["name"].ToString();
+                tbSymbol.Text = dataRow["symbol"].ToString();
+                nudPlaces.Value = Convert.ToDecimal(dataRow["decimalPlaces"]);
+            }
         }
 
         public override void ShowTable()

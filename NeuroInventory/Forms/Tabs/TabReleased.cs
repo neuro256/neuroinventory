@@ -82,9 +82,24 @@ namespace NeuroInventory
             InitForm();
             InitListView();
             InitContextMenuStrip();
-            m_ListviewSelectedIndex = 0;
+            InitContextMenuStripValues();
+            ListviewSelectedIndex = 0;
             SQLiteManager.GetInstance().Released().SetCommandSet();
             UseCheckox = true;
+        }
+
+        private void InitContextMenuStripValues()
+        {
+            Dictionary<string, bool> contextMenuStripValues = new Dictionary<string, bool>();
+            contextMenuStripValues = new Dictionary<string, bool>();
+            contextMenuStripValues.Add("addOnItem", false);
+            contextMenuStripValues.Add("editOnItem", false);
+            contextMenuStripValues.Add("removeOnItem", true);
+            contextMenuStripValues.Add("addOnSpace", false);
+            contextMenuStripValues.Add("editOnSpace", false);
+            contextMenuStripValues.Add("removeOnSpace", false);
+
+            ContextMenuStripValues = contextMenuStripValues;
         }
 
         protected override void InitForm()
@@ -133,8 +148,8 @@ namespace NeuroInventory
         {
             if (m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteManager.GetInstance().Released().CancelDemand(m_ListviewSelectedIndex);
-                RemoveFromListViewAt(m_ListviewSelectedIndex);
+                SQLiteManager.GetInstance().Released().CancelDemand(ListviewSelectedIndex);
+                RemoveFromListViewAt(ListviewSelectedIndex);
                 UpdateTable();        
                 m_Listview.SelectedItems.Clear();
             }
@@ -153,7 +168,7 @@ namespace NeuroInventory
         {
             if (m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteManager.GetInstance().Released().CancelDebit(m_ListviewSelectedIndex);
+                SQLiteManager.GetInstance().Released().CancelDebit(ListviewSelectedIndex);
                 ShowTable();
             }
             else
@@ -372,28 +387,9 @@ namespace NeuroInventory
         {
             try
             {
-                if (e.Button == MouseButtons.Right)
-                {
-                    ListViewHitTestInfo info = m_Listview.HitTest(e.X, e.Y);
-                    ListViewItem item = info.Item;
+                base.ListViewItemMouseUp(sender, e);
 
-                    if (item != null)
-                    {
-                        m_ListviewSelectedIndex = item.Index;
-                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = false;
-                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
-                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = true;
-                    }
-                    else
-                    {
-                        // No item is selected
-                        this.m_Listview.SelectedItems.Clear();
-                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = false;
-                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
-                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = false;
-                    }
-                }
-                else if (e.Button == MouseButtons.Left)
+                if (e.Button == MouseButtons.Left)
                 {
                     if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"]?.Bounds.Contains(e.X, e.Y) ?? false)
                     {

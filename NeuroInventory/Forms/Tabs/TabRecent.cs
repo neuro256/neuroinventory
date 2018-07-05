@@ -81,8 +81,8 @@ namespace NeuroInventory
 
                 if (item != null && item.Selected)
                 {
-                    m_ListviewSelectedIndex = item.Index;
-                    ListViewItem selectedItem = lvRecent.Items[m_ListviewSelectedIndex];
+                    ListviewSelectedIndex = item.Index;
+                    ListViewItem selectedItem = lvRecent.Items[ListviewSelectedIndex];
                     LoadRecentFile?.Invoke(selectedItem.Text);
                 }
             }

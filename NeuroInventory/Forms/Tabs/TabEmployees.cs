@@ -17,8 +17,8 @@ namespace NeuroInventory
             InitForm();
             InitListView();
             InitContextMenuStrip();
-            m_ListviewSelectedIndex = 0;
-            m_SelectedItemId = 0;
+            ListviewSelectedIndex = 0;
+            SelectedItemId = 0;
         }
 
         protected override void InitForm()
@@ -75,7 +75,7 @@ namespace NeuroInventory
                 ShowTable();
                 if (m_Listview.Items.Count > 0)
                 {
-                    m_Listview.EnsureVisible(m_ListviewSelectedIndex);
+                    m_Listview.EnsureVisible(ListviewSelectedIndex);
                 }
             }
             m_Listview.SelectedItems.Clear();
@@ -88,8 +88,8 @@ namespace NeuroInventory
         {
             if(m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteManager.GetInstance().Employees().Remove(m_SelectedItemId);
-                RemoveFromListViewAt(m_ListviewSelectedIndex, 1);
+                SQLiteManager.GetInstance().Employees().Remove(SelectedItemId);
+                RemoveFromListViewAt(ListviewSelectedIndex, 1);
                 m_Listview.SelectedItems.Clear();
             }
             else
@@ -105,12 +105,12 @@ namespace NeuroInventory
         {
             if (m_Listview.SelectedItems.Count > 0)
             {
-                EmployeeEditor editor = new EmployeeEditor(m_SelectedItemId);
+                EmployeeEditor editor = new EmployeeEditor(SelectedItemId);
                 editor.StartPosition = FormStartPosition.CenterParent;
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
                     ShowTable();
-                    lvEmployees.EnsureVisible(m_ListviewSelectedIndex);
+                    lvEmployees.EnsureVisible(ListviewSelectedIndex);
                 }
                 m_Listview.SelectedItems.Clear();
             }

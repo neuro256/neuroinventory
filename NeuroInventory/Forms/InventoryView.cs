@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Windows.Forms;
@@ -8,13 +9,17 @@ namespace NeuroInventory
 {
     public class InventoryView : Form, IInventoryView
     {
-        protected int m_ListviewSelectedIndex;
-        protected int m_SelectedItemId; 
+        private int listviewSelectedIndex;
+        private int selectedItemId;
         protected ListView m_Listview = null;
         protected ContextMenuStrip m_ContextMenuStrip = null;
         private bool useCheckox = false;
+        private Dictionary<string, bool> contextMenuStripValues = null;
 
         protected bool UseCheckox { get => useCheckox; set => useCheckox = value; }
+        protected int ListviewSelectedIndex { get => listviewSelectedIndex; set => listviewSelectedIndex = value; }
+        protected int SelectedItemId { get => selectedItemId; set => selectedItemId = value; }
+        protected Dictionary<string, bool> ContextMenuStripValues { get => contextMenuStripValues; set => contextMenuStripValues = value; }
 
         protected virtual void InitForm()
         {
@@ -59,6 +64,14 @@ namespace NeuroInventory
             removeMenuItem.Click += removeToolStripMenuItem_Click;
             m_ContextMenuStrip.Items.Clear();
             m_ContextMenuStrip.Items.AddRange(new[] { addMenuItem, editMenuItem, removeMenuItem });
+            // Значения contextMenuStrip в различных ситациях по умолчанию 
+            contextMenuStripValues = new Dictionary<string, bool>();
+            contextMenuStripValues.Add("addOnItem", false);
+            contextMenuStripValues.Add("editOnItem", true);
+            contextMenuStripValues.Add("removeOnItem", true);
+            contextMenuStripValues.Add("addOnSpace", true);
+            contextMenuStripValues.Add("editOnSpace", false);
+            contextMenuStripValues.Add("removeOnSpace", false);
             // Ассоциируем контекстное меню со списком
             m_Listview.ContextMenuStrip = m_ContextMenuStrip;
         }
@@ -121,7 +134,7 @@ namespace NeuroInventory
         /// <summary>
         /// Обновление нумерации списка
         /// </summary>
-        public virtual void RefreshTableNumeration()
+        private void RefreshTableNumeration()
         {
             try
             {
@@ -142,7 +155,7 @@ namespace NeuroInventory
         /// <summary>
         /// Обновление нумерации списка
         /// </summary>
-        public virtual void RefreshTableNumeration(int p_SubitemNumber)
+        private void RefreshTableNumeration(int p_SubitemNumber)
         {
             try
             {
@@ -242,7 +255,7 @@ namespace NeuroInventory
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public virtual void ListViewItemDoubleClick(object sender, MouseEventArgs e)
+        public void ListViewItemDoubleClick(object sender, MouseEventArgs e)
         {
             try
             {
@@ -251,8 +264,8 @@ namespace NeuroInventory
 
                 if (item != null && item.Selected)
                 {
-                    m_ListviewSelectedIndex = item.Index;
-                    m_SelectedItemId = Convert.ToInt32(item.Tag);
+                    ListviewSelectedIndex = item.Index;
+                    SelectedItemId = Convert.ToInt32(item.Tag);
                     UpdateRecord();
                     m_Listview.SelectedItems.Clear();
                 }
@@ -278,8 +291,8 @@ namespace NeuroInventory
                 // Нас интересует строка, которая получает фокус.
                 if (e.IsSelected)
                 {
-                    m_ListviewSelectedIndex = e.ItemIndex;
-                    m_SelectedItemId = Convert.ToInt32(e.Item.Tag);
+                    ListviewSelectedIndex = e.ItemIndex;
+                    SelectedItemId = Convert.ToInt32(e.Item.Tag);
                 }
             }
             catch (Exception ex)
@@ -299,19 +312,19 @@ namespace NeuroInventory
 
                     if (item != null)
                     {
-                        m_ListviewSelectedIndex = item.Index;
-                        m_SelectedItemId = Convert.ToInt32(item.Tag);
-                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = false;
-                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = true;
-                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = true;
+                        ListviewSelectedIndex = item.Index;
+                        SelectedItemId = Convert.ToInt32(item.Tag);
+                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = ContextMenuStripValues["addOnItem"];
+                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = ContextMenuStripValues["editOnItem"];
+                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = ContextMenuStripValues["removeOnItem"];
                     }
                     else
                     {
                         // No item is selected
                         this.m_Listview.SelectedItems.Clear();
-                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = true;
-                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
-                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = false;
+                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = ContextMenuStripValues["addOnSpace"];
+                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = ContextMenuStripValues["editOnSpace"];
+                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = ContextMenuStripValues["removeOnSpace"];
                     }
                 }
             }

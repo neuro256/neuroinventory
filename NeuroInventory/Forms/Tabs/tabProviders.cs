@@ -20,7 +20,7 @@ namespace NeuroInventory
             InitForm();
             InitListView();
             InitContextMenuStrip();
-            m_ListviewSelectedIndex = 0;
+            ListviewSelectedIndex = 0;
         }
 
         protected override void InitForm()
@@ -83,7 +83,7 @@ namespace NeuroInventory
                 ShowTable();
                 if (m_Listview.Items.Count > 0)
                 {
-                    m_Listview.EnsureVisible(m_ListviewSelectedIndex);
+                    m_Listview.EnsureVisible(ListviewSelectedIndex);
                 }
             }
             m_Listview.SelectedItems.Clear();
@@ -96,8 +96,8 @@ namespace NeuroInventory
         {
             if (m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteManager.GetInstance().Providers().Remove(m_ListviewSelectedIndex);
-                RemoveFromListViewAt(m_ListviewSelectedIndex, 1);
+                SQLiteManager.GetInstance().Providers().Remove(ListviewSelectedIndex);
+                RemoveFromListViewAt(ListviewSelectedIndex, 1);
                 m_Listview.SelectedItems.Clear();
             }
             else
@@ -113,12 +113,12 @@ namespace NeuroInventory
         {
             if (m_Listview.SelectedItems.Count > 0)
             {
-                ProviderEditor editor = new ProviderEditor(m_ListviewSelectedIndex);
+                ProviderEditor editor = new ProviderEditor(ListviewSelectedIndex);
                 editor.StartPosition = FormStartPosition.CenterParent;
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
                     ShowTable();
-                    lvProviders.EnsureVisible(m_ListviewSelectedIndex);
+                    lvProviders.EnsureVisible(ListviewSelectedIndex);
                 }
                 m_Listview.SelectedItems.Clear();
             }
@@ -223,28 +223,9 @@ namespace NeuroInventory
         {
             try
             {
-                if (e.Button == MouseButtons.Right)
-                {
-                    ListViewHitTestInfo info = m_Listview.HitTest(e.X, e.Y);
-                    ListViewItem item = info.Item;
+                base.ListViewItemMouseUp(sender, e);
 
-                    if (item != null)
-                    {
-                        m_ListviewSelectedIndex = item.Index;
-                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = false;
-                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = true;
-                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = true;
-                    }
-                    else
-                    {
-                        // No item is selected
-                        this.m_Listview.SelectedItems.Clear();
-                        m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = true;
-                        m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = false;
-                        m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = false;
-                    }
-                }
-                else if(e.Button == MouseButtons.Left)
+                if(e.Button == MouseButtons.Left)
                 {
                     if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"]?.Bounds.Contains(e.X, e.Y) ?? false)
                     {

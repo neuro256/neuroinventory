@@ -61,7 +61,7 @@ namespace NeuroInventory
             InitContextMenuStrip();
             InitContextMenuStripCatalogs();
             PopulateTreeView();
-            m_ListviewSelectedIndex = 0;
+            ListviewSelectedIndex = 0;
             DisplayInventoryName(String.Empty);
             UseCheckox = true; 
         }
@@ -605,8 +605,8 @@ namespace NeuroInventory
 
             if (m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteManager.GetInstance().Inventory().Remove(m_ListviewSelectedIndex);
-                RemoveFromListViewAt(m_ListviewSelectedIndex, 0);
+                SQLiteManager.GetInstance().Inventory().Remove(ListviewSelectedIndex);
+                RemoveFromListViewAt(ListviewSelectedIndex, 0);
                 m_Listview.SelectedItems.Clear();
             }
             else
@@ -628,12 +628,12 @@ namespace NeuroInventory
 
             if (m_Listview.SelectedItems.Count > 0 && SelectedInventory.type == TreeNodeType.FILE)
             {
-                InventoryEditor editor = new InventoryEditor(SelectedInventory.id, m_ListviewSelectedIndex);
+                InventoryEditor editor = new InventoryEditor(SelectedInventory.id, ListviewSelectedIndex);
                 editor.StartPosition = FormStartPosition.CenterParent;
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
                     ShowTable();
-                    lvInventory.EnsureVisible(m_ListviewSelectedIndex);
+                    lvInventory.EnsureVisible(ListviewSelectedIndex);
                 }
                 m_Listview.SelectedItems.Clear();
             }

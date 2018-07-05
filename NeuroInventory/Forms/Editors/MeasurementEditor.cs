@@ -18,7 +18,7 @@ namespace NeuroInventory
             InitListView();
             InitContextMenuStrip();
             ShowTable();
-            m_ListviewSelectedIndex = 0;
+            ListviewSelectedIndex = 0;
         }
 
         protected override void InitForm()
@@ -102,8 +102,8 @@ namespace NeuroInventory
         {
             if(m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteSettingsManager.GetInstance().Measurement().Remove(m_ListviewSelectedIndex);
-                RemoveFromListViewAt(m_ListviewSelectedIndex);
+                SQLiteSettingsManager.GetInstance().Measurement().Remove(ListviewSelectedIndex);
+                RemoveFromListViewAt(ListviewSelectedIndex);
                 m_Listview.SelectedItems.Clear();
             }
             else
@@ -118,7 +118,7 @@ namespace NeuroInventory
             {
                 SQLiteSettingsManager.GetInstance().Measurement().Update(m_SelectedRecordId, nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
                 ShowTable();
-                m_Listview.EnsureVisible(m_ListviewSelectedIndex);
+                m_Listview.EnsureVisible(ListviewSelectedIndex);
                 m_Listview.SelectedItems.Clear();
             }
             else
@@ -149,19 +149,16 @@ namespace NeuroInventory
 
         public override void ListViewItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
+            base.ListViewItemSelectionChanged(sender, e);
+
             try
             {
-                // При выборе строки событие ItemSelectionChanged возникает два раза:
-                // первый раз, когда выделенная в данный момент строка теряут фокус,
-                // второй - когда строка, в которой сделан щелчок, получает фокус.
-                // Нас интересует строка, которая получает фокус.
-                if (e.IsSelected)
+                if(e.IsSelected)
                 {
-                    m_ListviewSelectedIndex = e.ItemIndex;
                     ShowInfo();
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -170,11 +167,11 @@ namespace NeuroInventory
         private void ShowInfo()
         {
             DataSet dataSet = SQLiteSettingsManager.GetInstance().Measurement().ReturnDataSet();
-            m_SelectedRecordId = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["id"];
-            nudOKEI.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["codeOKEI"]);
-            tbName.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["name"].ToString();
-            tbSymbol.Text = dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["symbol"].ToString();
-            nudPlaces.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[m_ListviewSelectedIndex]["decimalPlaces"]);
+            m_SelectedRecordId = dataSet.Tables[0].Rows[ListviewSelectedIndex]["id"];
+            nudOKEI.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[ListviewSelectedIndex]["codeOKEI"]);
+            tbName.Text = dataSet.Tables[0].Rows[ListviewSelectedIndex]["name"].ToString();
+            tbSymbol.Text = dataSet.Tables[0].Rows[ListviewSelectedIndex]["symbol"].ToString();
+            nudPlaces.Value = Convert.ToDecimal(dataSet.Tables[0].Rows[ListviewSelectedIndex]["decimalPlaces"]);
         }
 
         public override void ShowTable()

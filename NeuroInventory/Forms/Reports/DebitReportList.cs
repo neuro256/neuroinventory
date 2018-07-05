@@ -123,53 +123,15 @@ namespace NeuroInventory
             }
         }
 
-        public override void ShowTable()
+        public override void ShowTable_ModifySubItem(ListViewItem.ListViewSubItem subItem)
         {
-            DataSet dataSet = ReturnDataSet();
-            try
-            {
-                //Заполняем список
-                m_Listview.BeginUpdate();
-                m_Listview.Items.Clear();
-                for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
-                {
-                    ListViewItem lvItem = new ListViewItem
-                    {
-                        Text = (i + 1).ToString(),
-                        Tag = dataSet.Tables[0].Rows[i]["id"]
-                    };
+            base.ShowTable_ModifySubItem(subItem);
 
-                    m_Listview.Items.Add(lvItem);
-
-                    for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
-                    {
-                        ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
-                        subitem.Text = dataSet.Tables[0].Rows[i][j].ToString();
-                        subitem.Name = dataSet.Tables[0].Columns[j].ToString();
-                        if(subitem.Name == "document")
-                        {
-                            subitem.BackColor = Color.LightBlue;
-                            subitem.Tag = subitem.Text;
-                            subitem.Text = Path.GetFileName(subitem.Text);
-                        }
-                        m_Listview.Items[i].SubItems.Add(subitem);
-                    }
-                    m_Listview.Items[i].UseItemStyleForSubItems = false;
-                }
-
-                m_Listview.EndUpdate();
-            }
-            catch (SQLiteException se)
+            if (subItem.Name == "document")
             {
-                MessageBox.Show(se.Message, "Ошибка подключения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (ArgumentException se)
-            {
-                MessageBox.Show("Error!:", se.Message);
-            }
-            finally
-            {
-                dataSet.Dispose();
+                subItem.BackColor = Color.LightBlue;
+                subItem.Tag = subItem.Text;
+                subItem.Text = Path.GetFileName(subItem.Text);
             }
         }
 

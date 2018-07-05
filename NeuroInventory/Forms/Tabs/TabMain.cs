@@ -674,83 +674,44 @@ namespace NeuroInventory
             }
             if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FOLDER)
                 return;
-            DataSet dataSet = ReturnDataSet();
-            try
+
+            base.ShowTable();
+        }
+
+        public override void ShowTable_ModifySubItem(ListViewItem.ListViewSubItem subItem, DataRow dataRow)
+        {
+            base.ShowTable_ModifySubItem(subItem, dataRow);
+
+            // Костыль для правильного отображения количества тмц (десятичные знаки после запятой)
+            if (subItem.Name == "amount")
             {
-                int l_DecimalPlaces = 0;
-                //Заполняем список
-                m_Listview.BeginUpdate();
-                m_Listview.Items.Clear();
-                m_Listview.Columns[0].Tag = false;
-                for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+                int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRow["measurement"].ToString());
+                subItem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataRow["amount"]);
+            }
+            else if (subItem.Name == "price" || subItem.Name == "sum")
+            {
+                subItem.Text = Convert.ToDecimal(subItem.Text, CultureInfo.InvariantCulture).ToString("C");
+            }
+            else if (subItem.Name == "invoice")
+            {
+                subItem.BackColor = Color.LightBlue;
+                subItem.Tag = subItem.Text;
+                subItem.Text = Path.GetFileName(subItem.Text);
+            }
+            else if (subItem.Name == "balance")
+            {
+                object balance = dataRow["balance"];
+                int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRow["measurement"].ToString());
+                if (!Equals(balance, DBNull.Value))
                 {
-                    ListViewItem newItem = new ListViewItem();
-                    newItem.Text = (i + 1).ToString();
-                    newItem.Name = dataSet.Tables[0].Rows[i]["id"].ToString();
-                    newItem.Tag = dataSet.Tables[0].Rows[i]["id"];
-                    m_Listview.Items.Add(newItem);
-
-                    // Цикл идет до dataSet.Tables[0].Columns.Count - 1 потому, что еще надо добавить колонки Отпущен и Списать, и только потом колонку Остаток
-                    for (int j = 1; j < dataSet.Tables[0].Columns.Count - 1; j++)
-                    {
-                        ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
-                        subitem.Text = dataSet.Tables[0].Rows[i][j].ToString();
-                        subitem.Name = dataSet.Tables[0].Columns[j].ToString();
-
-                        // Костыль для правильного отображения количества тмц (десятичные знаки после запятой)
-                        if (subitem.Name == "amount")
-                        {
-                            l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i]["measurement"].ToString());
-                            subitem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][j]);
-                        }
-                        else if(subitem.Name == "price" || subitem.Name == "sum")
-                        {
-                            subitem.Text = Convert.ToDecimal(subitem.Text, CultureInfo.InvariantCulture).ToString("C");
-                        }
-                        else if (subitem.Name == "invoice")
-                        {
-                            subitem.BackColor = Color.LightBlue;
-                            subitem.Tag = subitem.Text;
-                            subitem.Text = Path.GetFileName(subitem.Text);
-                        }
-
-                        if (subitem.Name != "catalogId")
-                            m_Listview.Items[i].SubItems.Add(subitem);
-                    }
-                    
-                    // Добавление столбца "Остаток"
-                    ListViewItem.ListViewSubItem subitemBalance = new ListViewItem.ListViewSubItem();
-                    object balance = dataSet.Tables[0].Rows[i]["balance"];
-                    subitemBalance.Name = "balance";
-                    l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i]["measurement"].ToString());
-                    if (!Equals(balance, DBNull.Value))
-                    {
-                        if (Convert.ToDecimal(balance) <= 0)
-                            subitemBalance.BackColor = Color.Red;               
-                        subitemBalance.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", balance);
-                    }
-                    else
-                    {
-                        subitemBalance.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i]["amount"].ToString());
-                    }
-
-                    m_Listview.Items[i].SubItems.Add(subitemBalance);
-
-                    m_Listview.Items[i].UseItemStyleForSubItems = false;
+                    if (Convert.ToDecimal(balance) <= 0)
+                        subItem.BackColor = Color.Red;
+                    subItem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", balance);
                 }
-                m_Listview.EndUpdate();
-            }
-            catch (SQLiteException se)
-            {
-                MessageBox.Show(se.Message, "Ошибка подключения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (ArgumentException se)
-            {
-                MessageBox.Show("Error!:", se.Message);
-            }
-            finally
-            {
-                dataSet.Dispose();
+                else
+                {
+                    subItem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataRow["amount"].ToString());
+                }
             }
         }
 

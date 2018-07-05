@@ -12,7 +12,7 @@ namespace NeuroInventory
 {
     public partial class TabReleased : InventoryView
     {
-        class ReleasedIds
+        public class ReleasedIds
         {
             public int inventoryId;
             public int demandId;
@@ -28,14 +28,14 @@ namespace NeuroInventory
 
         class BalanceInfo
         {
-            public object balance { get; set; } 
+            public object Balance { get; set; } 
             public BalanceType balanceType { get; set; }
-            public Color color { get; set; } 
-            public string balanceTypeText { get; set; }
+            public Color Color { get; set; } 
+            public string BalanceTypeText { get; set; }
 
             public BalanceInfo(object balance, BalanceType balanceType)
             {
-                this.balance = balance;
+                this.Balance = balance;
                 this.balanceType = balanceType;
             }
 
@@ -44,28 +44,28 @@ namespace NeuroInventory
                 BalanceInfo balanceInfo = new BalanceInfo(balance, BalanceType.NOT_DEBIT);
                 if (Equals(balance, DBNull.Value))
                 {
-                    balanceInfo.color = Color.DarkOrange;
-                    balanceInfo.balanceTypeText = Definitions.NOT_DEBIT_STRING;
+                    balanceInfo.Color = Color.DarkOrange;
+                    balanceInfo.BalanceTypeText = Definitions.NOT_DEBIT_STRING;
                 }
                 else if (Convert.ToDecimal(balance) > 0 && Equals(balance, amount))
                 {
-                    balanceInfo.color = Color.Coral;
-                    balanceInfo.balanceTypeText = Definitions.NOT_DEBIT_STRING;
+                    balanceInfo.Color = Color.Coral;
+                    balanceInfo.BalanceTypeText = Definitions.NOT_DEBIT_STRING;
                 }
                 else if (Convert.ToDecimal(balance) > 0 && !Equals(balance, amount))
                 {
-                    balanceInfo.color = Color.LightGreen;
-                    balanceInfo.balanceTypeText = $"{Definitions.PARTIALLY_DEBIT} ({balance})";
+                    balanceInfo.Color = Color.LightGreen;
+                    balanceInfo.BalanceTypeText = $"{Definitions.PARTIALLY_DEBIT} ({balance})";
                 }
                 else if (Convert.ToDecimal(balance) < 0)
                 {
-                    balanceInfo.color = Color.Red;
-                    balanceInfo.balanceTypeText = $"{Definitions.ERROR_DEBIT_STRING} ({balance})";
+                    balanceInfo.Color = Color.Red;
+                    balanceInfo.BalanceTypeText = $"{Definitions.ERROR_DEBIT_STRING} ({balance})";
                 }
                 else
                 {
-                    balanceInfo.color = Color.LightGreen;
-                    balanceInfo.balanceTypeText = Definitions.DEBIT_STRING;
+                    balanceInfo.Color = Color.LightGreen;
+                    balanceInfo.BalanceTypeText = Definitions.DEBIT_STRING;
                 }
 
                 return balanceInfo;
@@ -237,7 +237,6 @@ namespace NeuroInventory
             DataSet dataSet = ReturnDataSet();
             try
             {
-                int l_DecimalPlaces = 0;
                 //Заполняем список
                 m_Listview.BeginUpdate();
                 m_Listview.Items.Clear();
@@ -245,24 +244,29 @@ namespace NeuroInventory
 
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
-                    ListViewItem newItem = new ListViewItem();
-                    newItem.Text = (i + 1).ToString();
-                    newItem.Name = dataSet.Tables[0].Rows[i]["id"].ToString();
-                    ReleasedIds ids = new ReleasedIds();
-                    ids.inventoryId = Convert.ToInt32(dataSet.Tables[0].Rows[i]["id"]);
-                    ids.demandId = Convert.ToInt32(dataSet.Tables[0].Rows[i]["demandId"]);
-                    newItem.Tag = ids;
+                    ListViewItem newItem = new ListViewItem
+                    {
+                        Text = (i + 1).ToString(),
+                        Name = dataSet.Tables[0].Rows[i]["demandId"].ToString()
+                    };
+                    newItem.Tag = new ReleasedIds
+                    {
+                        inventoryId = Convert.ToInt32(dataSet.Tables[0].Rows[i]["id"]),
+                        demandId = Convert.ToInt32(dataSet.Tables[0].Rows[i]["demandId"])
+                    };
                     m_Listview.Items.Add(newItem);
 
                     for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
                     {
-                        ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
-                        subitem.Text = dataSet.Tables[0].Rows[i][j].ToString();
-                        subitem.Name = dataSet.Tables[0].Columns[j].ToString();
+                        ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem
+                        {
+                            Text = dataSet.Tables[0].Rows[i][j].ToString(),
+                            Name = dataSet.Tables[0].Columns[j].ToString()
+                        };
                         // Костыль для правильного отображения количества тмц (десятичные знаки после запятой)
                         if (subitem.Name == "amount")
                         {
-                            l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i]["measurement"].ToString());
+                            int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataSet.Tables[0].Rows[i]["measurement"].ToString());
                             subitem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", dataSet.Tables[0].Rows[i][j]);
                         }
                         else if (subitem.Name == "price" || subitem.Name == "sum")
@@ -284,8 +288,8 @@ namespace NeuroInventory
                             BalanceInfo balanceInfo = BalanceInfo.GetBalanceInfo(balance, amount);
 
                             subitem.Tag = balanceInfo;
-                            subitem.BackColor = balanceInfo.color;
-                            subitem.Text = balanceInfo.balanceTypeText;
+                            subitem.BackColor = balanceInfo.Color;
+                            subitem.Text = balanceInfo.BalanceTypeText;
                         }
 
                         if (subitem.Name != "demandId")
@@ -471,7 +475,7 @@ namespace NeuroInventory
 
         private static object CalculateBalance(ListViewItem item)
         {
-            object balance = (item.SubItems["balance"].Tag as BalanceInfo).balance;
+            object balance = (item.SubItems["balance"].Tag as BalanceInfo).Balance;
             object balanceValue = null;
             if (balance != null && !Equals(balance, DBNull.Value))
             {

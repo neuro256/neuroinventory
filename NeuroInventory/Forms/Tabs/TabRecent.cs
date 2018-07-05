@@ -49,10 +49,12 @@ namespace NeuroInventory
                 lvRecent.Items.Clear();
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
-                    ListViewItem item = new ListViewItem();
-                    item.Text = dataSet.Tables[0].Rows[i]["path"].ToString();
-                    item.ImageIndex = 0;
-                    item.Tag = dataSet.Tables[0].Rows[i]["id"].ToString();
+                    ListViewItem item = new ListViewItem
+                    {
+                        Text = dataSet.Tables[0].Rows[i]["path"].ToString(),
+                        ImageIndex = 0,
+                        Tag = dataSet.Tables[0].Rows[i]["id"].ToString()
+                    };
 
                     lvRecent.Items.Add(item);
                 }

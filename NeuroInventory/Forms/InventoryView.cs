@@ -99,11 +99,16 @@ namespace NeuroInventory
                 //Заполняем список
                 m_Listview.BeginUpdate();
                 m_Listview.Items.Clear();
+                if(UseCheckox)
+                {
+                    m_Listview.Columns[0].Tag = false;
+                }
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
                     ListViewItem lvItem = new ListViewItem
                     {
                         Text = (i + 1).ToString(),
+                        Name = dataSet.Tables[0].Rows[i]["id"].ToString(),
                         Tag = dataSet.Tables[0].Rows[i]["id"]
                     };
 
@@ -111,10 +116,19 @@ namespace NeuroInventory
 
                     for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
                     {
-                        m_Listview.Items[i].SubItems.Add(dataSet.Tables[0].Rows[i][j].ToString());
-                    }
-                }
+                        ListViewItem.ListViewSubItem subItem = new ListViewItem.ListViewSubItem
+                        {
+                            Text = dataSet.Tables[0].Rows[i][j].ToString(),
+                            Name = dataSet.Tables[0].Columns[j].ToString()
+                        };
 
+                        ShowTable_ModifySubItem(subItem);
+                        ShowTable_ModifySubItem(subItem, dataSet.Tables[0].Rows[i]);
+
+                        m_Listview.Items[i].SubItems.Add(subItem);
+                    }
+                    m_Listview.Items[i].UseItemStyleForSubItems = false;
+                }
                 m_Listview.EndUpdate();
             }
             catch (SQLiteException se)
@@ -265,7 +279,14 @@ namespace NeuroInventory
                 if (item != null && item.Selected)
                 {
                     ListviewSelectedIndex = item.Index;
-                    SelectedItemId = Convert.ToInt32(item.Tag);
+                    if (item.Tag is TabReleased.ReleasedIds)
+                    {
+                        SelectedItemId = (item.Tag as TabReleased.ReleasedIds).demandId;
+                    }
+                    else
+                    {
+                        SelectedItemId = Convert.ToInt32(item.Tag);
+                    }
                     UpdateRecord();
                     m_Listview.SelectedItems.Clear();
                 }
@@ -292,7 +313,14 @@ namespace NeuroInventory
                 if (e.IsSelected)
                 {
                     ListviewSelectedIndex = e.ItemIndex;
-                    SelectedItemId = Convert.ToInt32(e.Item.Tag);
+                    if (e.Item.Tag is TabReleased.ReleasedIds)
+                    {
+                        SelectedItemId = (e.Item.Tag as TabReleased.ReleasedIds).demandId;
+                    }
+                    else
+                    {
+                        SelectedItemId = Convert.ToInt32(e.Item.Tag);
+                    }
                 }
             }
             catch (Exception ex)
@@ -313,7 +341,14 @@ namespace NeuroInventory
                     if (item != null)
                     {
                         ListviewSelectedIndex = item.Index;
-                        SelectedItemId = Convert.ToInt32(item.Tag);
+                        if (item.Tag is TabReleased.ReleasedIds)
+                        {
+                            SelectedItemId = (item.Tag as TabReleased.ReleasedIds).demandId;
+                        }
+                        else
+                        {
+                            SelectedItemId = Convert.ToInt32(item.Tag);
+                        }
                         m_ContextMenuStrip.Items["addToolStripMenuItem"].Visible = ContextMenuStripValues["addOnItem"];
                         m_ContextMenuStrip.Items["editToolStripMenuItem"].Visible = ContextMenuStripValues["editOnItem"];
                         m_ContextMenuStrip.Items["removeToolStripMenuItem"].Visible = ContextMenuStripValues["removeOnItem"];
@@ -359,6 +394,8 @@ namespace NeuroInventory
         public virtual void Clear() { }
         protected virtual ListView GetListView() { return null; }
         protected virtual ContextMenuStrip GetContextMenuStrip() { return null; }
+        public virtual void ShowTable_ModifySubItem(ListViewItem.ListViewSubItem subItem) { }
+        public virtual void ShowTable_ModifySubItem(ListViewItem.ListViewSubItem subItem, DataRow dataRow) { }
 
         public virtual void Exit()
         {

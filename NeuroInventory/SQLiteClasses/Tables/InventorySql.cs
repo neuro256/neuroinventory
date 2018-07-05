@@ -18,7 +18,6 @@ namespace NeuroInventory
         public InventorySql()
         {
             CommandDataSet = "SELECT inventory.id as id, " +
-                "inventory.catalogId, " +
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
@@ -41,7 +40,6 @@ namespace NeuroInventory
         public void SetCommandDataSet(int p_Id)
         {
             CommandDataSet = "SELECT inventory.id as id, " +
-                "inventory.catalogId, " +
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +
@@ -68,7 +66,6 @@ namespace NeuroInventory
             }
             catalogIdsStr = catalogIdsStr.Substring(0, catalogIdsStr.Length - 2);
             CommandDataSet = "SELECT inventory.id as id, " +
-                "inventory.catalogId, " +
                 "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
                 "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
                 "inventory.invoice," +

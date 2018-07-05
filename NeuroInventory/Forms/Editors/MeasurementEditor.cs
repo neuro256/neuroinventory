@@ -178,42 +178,7 @@ namespace NeuroInventory
         {
             if (!SQLiteSettingsManager.GetInstance().TestConnection())
                 return;
-            DataSet dataSet = ReturnDataSet();
-            try
-            {
-                //Заполняем список
-                m_Listview.BeginUpdate();
-                m_Listview.Items.Clear();
-                for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
-                {
-                    ListViewItem lvItem = new ListViewItem
-                    {
-                        Text = (i + 1).ToString(),
-                        Tag = dataSet.Tables[0].Rows[i]["id"]
-                    };
-
-                    m_Listview.Items.Add(lvItem);
-
-                    for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
-                    {
-                        m_Listview.Items[i].SubItems.Add(dataSet.Tables[0].Rows[i][j].ToString());
-                    }
-                }
-
-                m_Listview.EndUpdate();
-            }
-            catch (SQLiteException se)
-            {
-                MessageBox.Show(se.Message, "Ошибка подключения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (ArgumentException se)
-            {
-                MessageBox.Show("Error!:", se.Message);
-            }
-            finally
-            {
-                dataSet.Dispose();
-            }
+            base.ShowTable();
         }
 
         private void tbName_TextChanged(object sender, EventArgs e)

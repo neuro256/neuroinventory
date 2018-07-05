@@ -22,23 +22,21 @@ namespace NeuroInventory
 
         public void Insert(int p_InventoryId, int p_DemandId, int p_reportId, decimal p_Amount, DateTime p_Date)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["inventoryId"] = p_InventoryId;
-            values["demandId"] = p_DemandId;
-            values["reportId"] = p_reportId;
-            values["amount"] = p_Amount;
-            values["date"] = p_Date;
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["inventoryId"] = p_InventoryId,
+                ["demandId"] = p_DemandId,
+                ["reportId"] = p_reportId,
+                ["amount"] = p_Amount,
+                ["date"] = p_Date
+            };
 
             SQLiteManager.GetInstance().Insert(TableName, values);
         }
 
-        public void Remove(int p_ListviewSelectedIndex)
+        public void Remove(int p_SelectedItemId)
         {
-            DataSet dataSet = ReturnDataSet();
-            object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedIndex]["id"];
-            string l_Where = $"id={selectedRecordId}";
-
+            string l_Where = $"id={p_SelectedItemId}";
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }
 
@@ -51,11 +49,12 @@ namespace NeuroInventory
 
         public void Update(object p_Id, int p_InventoryId, decimal p_Amount, DateTime p_Date)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["inventoryId"] = p_InventoryId;
-            values["amount"] = p_Amount;
-            values["date"] = p_Date;
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["inventoryId"] = p_InventoryId,
+                ["amount"] = p_Amount,
+                ["date"] = p_Date
+            };
 
             string l_Where = $"id={p_Id}";
 

@@ -60,41 +60,42 @@ namespace NeuroInventory
 
         public void Insert(string p_Name, string p_Address, string p_Phone, string p_Mail, string p_INN, string p_Document)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["name"] = p_Name;
-            values["address"] = !String.IsNullOrEmpty(p_Address) ? (object) p_Address : DBNull.Value;
-            values["phone"] = !String.IsNullOrEmpty(p_Phone) ? (object)p_Phone : DBNull.Value;
-            values["mail"] = !String.IsNullOrEmpty(p_Mail) ? (object)p_Mail : DBNull.Value;
-            values["inn"] = !String.IsNullOrEmpty(p_INN) ? (object)p_INN : DBNull.Value;
-            values["document"] = InsertFile(p_Document);
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["name"] = p_Name,
+                ["address"] = !String.IsNullOrEmpty(p_Address) ? (object)p_Address : DBNull.Value,
+                ["phone"] = !String.IsNullOrEmpty(p_Phone) ? (object)p_Phone : DBNull.Value,
+                ["mail"] = !String.IsNullOrEmpty(p_Mail) ? (object)p_Mail : DBNull.Value,
+                ["inn"] = !String.IsNullOrEmpty(p_INN) ? (object)p_INN : DBNull.Value,
+                ["document"] = InsertFile(p_Document)
+            };
 
             SQLiteManager.GetInstance().Insert(TableName, values);
         }
 
         public void Update(object p_Id, string p_Name, string p_Address, string p_Phone, string p_Mail, string p_INN, string p_SelectedDocument, string p_CurrentDocument)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["name"] = p_Name;
-            values["address"] = !String.IsNullOrEmpty(p_Address) ? (object)p_Address : DBNull.Value;
-            values["phone"] = !String.IsNullOrEmpty(p_Phone) ? (object)p_Phone : DBNull.Value;
-            values["mail"] = !String.IsNullOrEmpty(p_Mail) ? (object)p_Mail : DBNull.Value;
-            values["inn"] = !String.IsNullOrEmpty(p_INN) ? (object)p_INN : DBNull.Value;
-            values["document"] = UpdateFile(p_SelectedDocument, p_CurrentDocument);
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["name"] = p_Name,
+                ["address"] = !String.IsNullOrEmpty(p_Address) ? (object)p_Address : DBNull.Value,
+                ["phone"] = !String.IsNullOrEmpty(p_Phone) ? (object)p_Phone : DBNull.Value,
+                ["mail"] = !String.IsNullOrEmpty(p_Mail) ? (object)p_Mail : DBNull.Value,
+                ["inn"] = !String.IsNullOrEmpty(p_INN) ? (object)p_INN : DBNull.Value,
+                ["document"] = UpdateFile(p_SelectedDocument, p_CurrentDocument)
+            };
 
             string l_Where = $"id={p_Id}";
 
             SQLiteManager.GetInstance().Update(TableName, values, l_Where);
         }
 
-        public void Remove(int p_ListviewSelectedItemIndex)
+        public void Remove(int p_SelectedItemId)
         {
-            DataSet dataSet = ReturnDataSet();
-            object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
-            string currentDocument = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["document"].ToString();
+            DataRow dataRow = ReturnDataSet().Tables[0].Rows.Find(p_SelectedItemId);
+            string currentDocument = dataRow["document"].ToString();
             DeleteFile(currentDocument);
-            string l_Where = $"id={selectedRecordId}";
+            string l_Where = $"id={p_SelectedItemId}";
 
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }

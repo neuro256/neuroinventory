@@ -26,11 +26,11 @@ namespace NeuroInventory
         /// </summary>
         class TreeViewTag
         {
-            public string name { get; set; }
-            public int id { get; set; }
+            public string Name { get; set; }
+            public int Id { get; set; }
             public TreeNodeType type { get; set; }
-            public int parent { get; set; }
-            public bool isRoot { get; set; }
+            public int Parent { get; set; }
+            public bool IsRoot { get; set; }
 
             public TreeViewTag()
             {
@@ -39,11 +39,11 @@ namespace NeuroInventory
 
             public TreeViewTag(string p_name, int p_id, TreeNodeType p_type, int p_parent, bool p_IsRoot = false)
             {
-                name = p_name;
-                id = p_id;
+                Name = p_name;
+                Id = p_id;
                 type = p_type;
-                parent = p_parent;
-                isRoot = p_IsRoot;
+                Parent = p_parent;
+                IsRoot = p_IsRoot;
             }
         }
 
@@ -62,6 +62,7 @@ namespace NeuroInventory
             InitContextMenuStripCatalogs();
             PopulateTreeView();
             ListviewSelectedIndex = 0;
+            SelectedItemId = 0;
             DisplayInventoryName(String.Empty);
             UseCheckox = true; 
         }
@@ -108,7 +109,7 @@ namespace NeuroInventory
             if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FILE)
             {
                 // Удалить тмц из базы данных
-                SQLiteManager.GetInstance().Catalogs().Remove(SelectedInventory.id);
+                SQLiteManager.GetInstance().Catalogs().Remove(SelectedInventory.Id);
                 // Удалить тмц из древовидного списка
                 treeView.Nodes.Remove(treeView.SelectedNode);
 
@@ -132,7 +133,7 @@ namespace NeuroInventory
             if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FOLDER)
             {
                 treeView.BeginUpdate();
-                RecursiveRemoveFolder(SelectedInventory.id);
+                RecursiveRemoveFolder(SelectedInventory.Id);
                 treeView.EndUpdate();
                 // Очистить таблицу ТМЦ
                 ShowTable();
@@ -221,9 +222,9 @@ namespace NeuroInventory
                     if (SelectedInventory != null)
                     {
                         // Изменить запись в таблице Каталоги
-                        SQLiteManager.GetInstance().Catalogs().Update(SelectedInventory.id, (int)p_Type, SelectedInventory.parent, dialogName.name);
+                        SQLiteManager.GetInstance().Catalogs().Update(SelectedInventory.Id, (int)p_Type, SelectedInventory.Parent, dialogName.name);
 
-                        SelectedInventory.name = dialogName.name;
+                        SelectedInventory.Name = dialogName.name;
                         // Переименовывание узла
                         treeView.BeginUpdate();
                         treeView.SelectedNode.Text = dialogName.name;
@@ -248,17 +249,17 @@ namespace NeuroInventory
                     if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FOLDER)
                     {
                         // Добавить запись в таблицу Каталоги
-                        SQLiteManager.GetInstance().Catalogs().Insert((int)p_Type, SelectedInventory.id, dialogName.name);
+                        SQLiteManager.GetInstance().Catalogs().Insert((int)p_Type, SelectedInventory.Id, dialogName.name);
                         // Получить id добавленной записи
                         int lastInsertId = SQLiteManager.GetInstance().Catalogs().ReturnLastInsertId();
 
 
                         TreeViewTag tvTag = new TreeViewTag();
-                        tvTag.name = dialogName.name;
-                        tvTag.id = lastInsertId;
-                        tvTag.parent = SelectedInventory.id;
+                        tvTag.Name = dialogName.name;
+                        tvTag.Id = lastInsertId;
+                        tvTag.Parent = SelectedInventory.Id;
                         tvTag.type = p_Type;
-                        tvTag.isRoot = false;
+                        tvTag.IsRoot = false;
 
                         TreeNode newNode = new TreeNode();
                         newNode.Name = lastInsertId.ToString();
@@ -300,7 +301,7 @@ namespace NeuroInventory
                     TreeViewTag tvTag = treeView.SelectedNode?.Tag as TreeViewTag ?? null;
                     if (tvTag != null)
                     {
-                        if (!tvTag.isRoot)
+                        if (!tvTag.IsRoot)
                         {
                             if (tvTag.type == TreeNodeType.FOLDER) // is folder
                             {
@@ -369,14 +370,14 @@ namespace NeuroInventory
             if (rootId != null)
             {
                 TreeViewTag tvTag = new TreeViewTag();
-                tvTag.name = "Каталоги";
-                tvTag.id = Convert.ToInt32(rootId);
-                tvTag.parent = 0;
+                tvTag.Name = "Каталоги";
+                tvTag.Id = Convert.ToInt32(rootId);
+                tvTag.Parent = 0;
                 tvTag.type = 0;
-                tvTag.isRoot = true;
+                tvTag.IsRoot = true;
 
-                catalogRoot.Name = tvTag.id.ToString();
-                catalogRoot.Text = tvTag.name;
+                catalogRoot.Name = tvTag.Id.ToString();
+                catalogRoot.Text = tvTag.Name;
                 catalogRoot.Tag = tvTag;
 
                 FillTreeNode(catalogRoot, Convert.ToInt32(rootId));
@@ -402,15 +403,15 @@ namespace NeuroInventory
                     foreach (DataRow catalogRow in dataSetChilds.Tables[0].Rows)
                     {
                         TreeViewTag tvTag = new TreeViewTag();
-                        tvTag.name = catalogRow["name"].ToString();
-                        tvTag.id = Convert.ToInt32(catalogRow["id"]);
-                        tvTag.parent = Convert.ToInt32(catalogRow["parent"]);
+                        tvTag.Name = catalogRow["name"].ToString();
+                        tvTag.Id = Convert.ToInt32(catalogRow["id"]);
+                        tvTag.Parent = Convert.ToInt32(catalogRow["parent"]);
                         tvTag.type = (TreeNodeType)Convert.ToInt32(catalogRow["type"]);
-                        tvTag.isRoot = false;
+                        tvTag.IsRoot = false;
 
                         TreeNode catalogNode = new TreeNode();
-                        catalogNode.Name = tvTag.id.ToString();
-                        catalogNode.Text = tvTag.name;
+                        catalogNode.Name = tvTag.Id.ToString();
+                        catalogNode.Text = tvTag.Name;
                         catalogNode.Tag = tvTag;
 
                         if (tvTag.type == TreeNodeType.FOLDER)
@@ -426,7 +427,7 @@ namespace NeuroInventory
 
                         parentNode.Nodes.Add(catalogNode);
 
-                        FillTreeNode(catalogNode, tvTag.id);
+                        FillTreeNode(catalogNode, tvTag.Id);
                     }
                 }
 
@@ -472,7 +473,7 @@ namespace NeuroInventory
                     SelectedInventory = tvTag;
                     if (tvTag.type == TreeNodeType.FILE)
                     {
-                        DisplayInventoryName(tvTag.name);
+                        DisplayInventoryName(tvTag.Name);
                     }
                 }
 
@@ -482,7 +483,7 @@ namespace NeuroInventory
                 {
                     if ((node.Tag as TreeViewTag).type == TreeNodeType.FILE)
                     {
-                        l_InventoryIds.Add((node.Tag as TreeViewTag).id);
+                        l_InventoryIds.Add((node.Tag as TreeViewTag).Id);
                     }
                 }
                 if (l_InventoryIds.Count > 0)
@@ -506,9 +507,9 @@ namespace NeuroInventory
                 SelectedInventory = tvTag;
                 if (tvTag.type == TreeNodeType.FILE) // is file
                 {
-                    SQLiteManager.GetInstance().Inventory().SetCommandDataSet(SelectedInventory.id);
+                    SQLiteManager.GetInstance().Inventory().SetCommandDataSet(SelectedInventory.Id);
                     ShowTable();
-                    DisplayInventoryName(tvTag.name);
+                    DisplayInventoryName(tvTag.Name);
                 }
             }
         }
@@ -574,7 +575,7 @@ namespace NeuroInventory
         {
             if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FILE && treeView.SelectedNodes.Count == 1)
             {
-                InventoryEditor editor = new InventoryEditor(SelectedInventory.id);
+                InventoryEditor editor = new InventoryEditor(SelectedInventory.Id);
                 editor.StartPosition = FormStartPosition.CenterParent;
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
@@ -605,7 +606,7 @@ namespace NeuroInventory
 
             if (m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteManager.GetInstance().Inventory().Remove(ListviewSelectedIndex);
+                SQLiteManager.GetInstance().Inventory().Remove(SelectedItemId);
                 RemoveFromListViewAt(ListviewSelectedIndex);
                 m_Listview.SelectedItems.Clear();
             }
@@ -628,7 +629,7 @@ namespace NeuroInventory
 
             if (m_Listview.SelectedItems.Count > 0 && SelectedInventory.type == TreeNodeType.FILE)
             {
-                InventoryEditor editor = new InventoryEditor(SelectedInventory.id, ListviewSelectedIndex);
+                InventoryEditor editor = new InventoryEditor(SelectedInventory.Id, SelectedItemId);
                 editor.StartPosition = FormStartPosition.CenterParent;
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
@@ -785,9 +786,9 @@ namespace NeuroInventory
                         // получить id тмц и тип целевого узла
                         int itemId = Convert.ToInt32(item.Tag);
                         TreeViewTag tag = destNode.Tag as TreeViewTag;
-                        if (tag.type == TreeNodeType.FILE && SQLiteManager.GetInstance().Inventory().GetCatalogId(itemId) != tag.id)
+                        if (tag.type == TreeNodeType.FILE && SQLiteManager.GetInstance().Inventory().GetCatalogId(itemId) != tag.Id)
                         {
-                            SQLiteManager.GetInstance().Inventory().Update(itemId, tag.id);
+                            SQLiteManager.GetInstance().Inventory().Update(itemId, tag.Id);
                             RemoveFromListView(item);
                         }
 

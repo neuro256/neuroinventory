@@ -26,35 +26,35 @@ namespace NeuroInventory
 
         public void Insert(decimal p_OKEIcode, string p_Name, string p_Symbol, decimal p_DecimalPlaces)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["codeOKEI"] = p_OKEIcode;
-            values["name"] = p_Name;
-            values["symbol"] = p_Symbol;
-            values["decimalPlaces"] = p_DecimalPlaces;
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["codeOKEI"] = p_OKEIcode,
+                ["name"] = p_Name,
+                ["symbol"] = p_Symbol,
+                ["decimalPlaces"] = p_DecimalPlaces
+            };
 
             SQLiteSettingsManager.GetInstance().Insert(TableName, values);
         }
 
         public void Update(object p_Id, decimal p_OKEIcode, string p_Name, string p_Symbol, decimal p_DecimalPlaces)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["codeOKEI"] = p_OKEIcode;
-            values["name"] = p_Name;
-            values["symbol"] = p_Symbol;
-            values["decimalPlaces"] = p_DecimalPlaces;
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["codeOKEI"] = p_OKEIcode,
+                ["name"] = p_Name,
+                ["symbol"] = p_Symbol,
+                ["decimalPlaces"] = p_DecimalPlaces
+            };
 
             string l_Where = $"id={p_Id}";
 
             SQLiteSettingsManager.GetInstance().Update(TableName, values, l_Where);
         }
 
-        public void Remove(int p_ListviewSelectedItemIndex)
+        public void Remove(int p_SelectedItemId)
         {
-            DataSet dataSet = ReturnDataSet();
-            object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
-            string l_Where = $"id={selectedRecordId}";
+            string l_Where = $"id={p_SelectedItemId}";
 
             SQLiteSettingsManager.GetInstance().Delete(TableName, l_Where);
         }

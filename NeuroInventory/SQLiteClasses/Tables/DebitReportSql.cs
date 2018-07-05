@@ -135,10 +135,11 @@ namespace NeuroInventory
 
         public void Insert(DateTime p_Date, string p_Document)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["date"] = p_Date;
-            values["document"] = p_Document;
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["date"] = p_Date,
+                ["document"] = p_Document
+            };
 
             SQLiteManager.GetInstance().Insert(TableName, values);
         }

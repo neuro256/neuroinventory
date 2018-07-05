@@ -23,49 +23,36 @@ namespace NeuroInventory
                 $"FROM demand WHERE demand.inventoryId = {p_InventoryId};";
         }
 
-        public void Remove(int p_ListviewSelectedItemIndex)
+        public void Remove(int p_SelectedItemId)
         {
-            DataSet dataSet = ReturnDataSet();
-            object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
-            string l_Where = $"id={selectedRecordId}";
+            string l_Where = $"id={p_SelectedItemId}";
 
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }
 
         public void Insert(int p_InventoryId, int p_ReportLastId, object p_EmployeeId, decimal p_Amount, DateTime p_Date)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["inventoryId"] = p_InventoryId;
-            values["reportId"] = p_ReportLastId;
-            values["employeeId"] = p_EmployeeId;
-            values["amount"] = p_Amount;
-            values["date"] = p_Date;
-
-            SQLiteManager.GetInstance().Insert(TableName, values);
-        }
-
-        // Старая версия без внешнего ключа
-        public void Insert(int p_InventoryId, object p_EmployeeId, decimal p_Amount, DateTime p_Date)
-        {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["inventoryId"] = p_InventoryId;
-            values["employeeId"] = p_EmployeeId;
-            values["amount"] = p_Amount;
-            values["date"] = p_Date;
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["inventoryId"] = p_InventoryId,
+                ["reportId"] = p_ReportLastId,
+                ["employeeId"] = p_EmployeeId,
+                ["amount"] = p_Amount,
+                ["date"] = p_Date
+            };
 
             SQLiteManager.GetInstance().Insert(TableName, values);
         }
 
         public void Update(object p_Id, int p_InventoryId, object p_EmployeeId, decimal p_Amount, DateTime p_Date)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["inventoryId"] = p_InventoryId;
-            values["employeeId"] = p_EmployeeId;
-            values["amount"] = p_Amount;
-            values["date"] = p_Date;
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["inventoryId"] = p_InventoryId,
+                ["employeeId"] = p_EmployeeId,
+                ["amount"] = p_Amount,
+                ["date"] = p_Date
+            };
 
             string l_Where = $"id={p_Id}";
 

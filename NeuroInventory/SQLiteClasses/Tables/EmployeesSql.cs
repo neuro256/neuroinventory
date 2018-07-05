@@ -34,37 +34,37 @@ namespace NeuroInventory
 
         public void Insert(string p_Surename, string p_Firstname, string p_Lastname, string p_Post, string p_Department)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["surename"] = p_Surename;
-            values["firstname"] = p_Firstname;
-            values["lastname"] = p_Lastname;
-            values["post"] = !String.IsNullOrEmpty(p_Post) ? (object)p_Post : DBNull.Value;
-            values["department"] = !String.IsNullOrEmpty(p_Department) ? (object)p_Department : DBNull.Value;
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["surename"] = p_Surename,
+                ["firstname"] = p_Firstname,
+                ["lastname"] = p_Lastname,
+                ["post"] = !String.IsNullOrEmpty(p_Post) ? (object)p_Post : DBNull.Value,
+                ["department"] = !String.IsNullOrEmpty(p_Department) ? (object)p_Department : DBNull.Value
+            };
 
             SQLiteManager.GetInstance().Insert(TableName, values);
         }
 
         public void Update(object p_Id, string p_Surename, string p_Firstname, string p_Lastname, string p_Post, string p_Department)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["surename"] = p_Surename;
-            values["firstname"] = p_Firstname;
-            values["lastname"] = p_Lastname;
-            values["post"] = !String.IsNullOrEmpty(p_Post) ? (object)p_Post : DBNull.Value;
-            values["department"] = !String.IsNullOrEmpty(p_Department) ? (object) p_Department : DBNull.Value;
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["surename"] = p_Surename,
+                ["firstname"] = p_Firstname,
+                ["lastname"] = p_Lastname,
+                ["post"] = !String.IsNullOrEmpty(p_Post) ? (object)p_Post : DBNull.Value,
+                ["department"] = !String.IsNullOrEmpty(p_Department) ? (object)p_Department : DBNull.Value
+            };
 
             string l_Where = $"id={p_Id}";
 
             SQLiteManager.GetInstance().Update(TableName, values, l_Where);
         }
 
-        public void Remove(int p_ListviewSelectedItemIndex)
+        public void Remove(int p_SelectedItemId)
         {
-            DataSet dataSet = ReturnDataSet();
-            object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
-            string l_Where = $"id={selectedRecordId}";
+            string l_Where = $"id={p_SelectedItemId}";
 
             SQLiteManager.GetInstance().Delete(TableName, l_Where);
         }

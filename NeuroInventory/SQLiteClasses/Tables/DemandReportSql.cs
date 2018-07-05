@@ -88,22 +88,24 @@ namespace NeuroInventory
 
         public void Insert(int p_EmployeeId, DateTime p_Date, string p_Document)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["employeeId"] = p_EmployeeId;
-            values["date"] = p_Date;
-            values["document"] = p_Document;// InsertFile(p_Document);
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["employeeId"] = p_EmployeeId,
+                ["date"] = p_Date,
+                ["document"] = p_Document// InsertFile(p_Document);
+            };
 
             SQLiteManager.GetInstance().Insert(TableName, values);
         }
 
         public void Update(object p_Id, int p_EmployeeId, DateTime p_Date, string p_SelectedDocument, string p_CurrentDocument)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["employeeId"] = p_EmployeeId;
-            values["date"] = p_Date;
-            values["document"] = UpdateFile(p_SelectedDocument, p_CurrentDocument);
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["employeeId"] = p_EmployeeId,
+                ["date"] = p_Date,
+                ["document"] = UpdateFile(p_SelectedDocument, p_CurrentDocument)
+            };
 
             string l_Where = $"id={p_Id}";
 

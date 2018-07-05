@@ -84,6 +84,7 @@ namespace NeuroInventory
             InitContextMenuStrip();
             InitContextMenuStripValues();
             ListviewSelectedIndex = 0;
+            SelectedItemId = 0;
             SQLiteManager.GetInstance().Released().SetCommandSet();
             UseCheckox = true;
         }
@@ -91,13 +92,15 @@ namespace NeuroInventory
         private void InitContextMenuStripValues()
         {
             Dictionary<string, bool> contextMenuStripValues = new Dictionary<string, bool>();
-            contextMenuStripValues = new Dictionary<string, bool>();
-            contextMenuStripValues.Add("addOnItem", false);
-            contextMenuStripValues.Add("editOnItem", false);
-            contextMenuStripValues.Add("removeOnItem", true);
-            contextMenuStripValues.Add("addOnSpace", false);
-            contextMenuStripValues.Add("editOnSpace", false);
-            contextMenuStripValues.Add("removeOnSpace", false);
+            contextMenuStripValues = new Dictionary<string, bool>
+            {
+                { "addOnItem", false },
+                { "editOnItem", false },
+                { "removeOnItem", true },
+                { "addOnSpace", false },
+                { "editOnSpace", false },
+                { "removeOnSpace", false }
+            };
 
             ContextMenuStripValues = contextMenuStripValues;
         }
@@ -148,7 +151,7 @@ namespace NeuroInventory
         {
             if (m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteManager.GetInstance().Released().CancelDemand(ListviewSelectedIndex);
+                SQLiteManager.GetInstance().Released().CancelDemand(SelectedItemId);
                 RemoveFromListViewAt(ListviewSelectedIndex);
                 UpdateTable();        
                 m_Listview.SelectedItems.Clear();
@@ -168,7 +171,7 @@ namespace NeuroInventory
         {
             if (m_Listview.SelectedItems.Count > 0)
             {
-                SQLiteManager.GetInstance().Released().CancelDebit(ListviewSelectedIndex);
+                SQLiteManager.GetInstance().Released().CancelDebit(SelectedItemId);
                 ShowTable();
             }
             else
@@ -202,9 +205,11 @@ namespace NeuroInventory
                 {
                     for (int j = 1; j < dataSet.Tables[0].Columns.Count; j++)
                     {
-                        ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
-                        subitem.Text = dataSet.Tables[0].Rows[i][j].ToString();
-                        subitem.Name = dataSet.Tables[0].Columns[j].ToString();
+                        ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem
+                        {
+                            Text = dataSet.Tables[0].Rows[i][j].ToString(),
+                            Name = dataSet.Tables[0].Columns[j].ToString()
+                        };
                         if (subitem.Name == "document")
                         {
                             lvReleased.Items[i].SubItems["document"].Tag = subitem.Text;

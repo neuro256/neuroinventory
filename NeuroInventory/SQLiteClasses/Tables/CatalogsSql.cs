@@ -35,11 +35,12 @@ namespace NeuroInventory
 
         public void Update(int p_Id, int p_Type, int p_ParentId, string p_Name)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["type"] = p_Type;
-            values["parent"] = p_ParentId;
-            values["name"] = p_Name;
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["type"] = p_Type,
+                ["parent"] = p_ParentId,
+                ["name"] = p_Name
+            };
 
             string l_Where = $"id={p_Id}";
 

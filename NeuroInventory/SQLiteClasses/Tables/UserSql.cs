@@ -22,10 +22,11 @@ namespace NeuroInventory
 
         public void Update(string p_Login, string p_Password)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["login"] = p_Login;
-            values["password"] = p_Password;
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["login"] = p_Login,
+                ["password"] = p_Password
+            };
 
             string l_Where = $"id={ReturnLastInsertId()}";
 

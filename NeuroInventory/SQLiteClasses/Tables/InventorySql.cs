@@ -134,39 +134,42 @@ namespace NeuroInventory
             CommandDataSet = CommandDataSetNotFiltered;
         }
 
-        public void Remove(int p_ListviewSelectedItemIndex)
+        public void Remove(int p_SelectedItemId)
         {
-            DataSet dataSet = ReturnDataSet();
-            object selectedRecordId = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["id"];
-            string currentDocument = dataSet.Tables[0].Rows[p_ListviewSelectedItemIndex]["invoice"].ToString();
-            DeleteFile(currentDocument);
-            string l_Where = $"id={selectedRecordId}";
+            DataRow dataRow = ReturnDataSet().Tables[0].Rows.Find(p_SelectedItemId);
+            if(dataRow != null)
+            {
+                string currentDocument = dataRow["invoice"].ToString();
+                DeleteFile(currentDocument);
+                string l_Where = $"id={p_SelectedItemId}";
 
-            SQLiteManager.GetInstance().Delete(TableName, l_Where);
+                SQLiteManager.GetInstance().Delete(TableName, l_Where);
+            }            
         }
 
-        public void Update(object p_Id, int p_CatalogId, object p_Provider, DateTime p_Date, string p_InvoiceCodeStr, DateTime p_InvoiceDate, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument, string p_CurrentDocument)
+        public void Update(int p_Id, int p_CatalogId, object p_Provider, DateTime p_Date, string p_InvoiceCodeStr, DateTime p_InvoiceDate, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument, string p_CurrentDocument)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["catalogId"] = p_CatalogId;
-            values["providerId"] = p_Provider;
-            values["date"] = p_Date;
-            values["invoiceCodeStr"] = !String.IsNullOrEmpty(p_InvoiceCodeStr) ? (object)p_InvoiceCodeStr : DBNull.Value;
-            values["invoiceDate"] = p_InvoiceDate;
-            values["name"] = p_Name;
-            values["OKEIcode"] = !String.IsNullOrEmpty(p_OKEIcode) ? (object)p_OKEIcode : DBNull.Value;
-            values["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value;
-            values["amount"] = p_Amount;
-            values["price"] = p_Price * 100;
-            values["invoice"] = UpdateFile(p_SelectedDocument, p_CurrentDocument);
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["catalogId"] = p_CatalogId,
+                ["providerId"] = p_Provider,
+                ["date"] = p_Date,
+                ["invoiceCodeStr"] = !String.IsNullOrEmpty(p_InvoiceCodeStr) ? (object)p_InvoiceCodeStr : DBNull.Value,
+                ["invoiceDate"] = p_InvoiceDate,
+                ["name"] = p_Name,
+                ["OKEIcode"] = !String.IsNullOrEmpty(p_OKEIcode) ? (object)p_OKEIcode : DBNull.Value,
+                ["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value,
+                ["amount"] = p_Amount,
+                ["price"] = p_Price * 100,
+                ["invoice"] = UpdateFile(p_SelectedDocument, p_CurrentDocument)
+            };
 
             string l_Where = $"id={p_Id}";
 
             SQLiteManager.GetInstance().Update(TableName, values, l_Where);
         }
 
-        public void Update(object p_Id, int p_CatalogId)
+        public void Update(int p_Id, int p_CatalogId)
         {
             Dictionary<string, object> values = new Dictionary<string, object>();
 
@@ -179,19 +182,20 @@ namespace NeuroInventory
 
         public void Insert(int p_CatalogId, object p_Provider, DateTime p_Date, string p_InvoiceCodeStr, DateTime p_InvoiceDate, string p_Name, string p_OKEIcode, string p_Measurement, decimal p_Amount, decimal p_Price, string p_SelectedDocument)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-
-            values["catalogId"] = p_CatalogId;
-            values["providerId"] = p_Provider;
-            values["date"] = p_Date;
-            values["invoiceCodeStr"] = !String.IsNullOrEmpty(p_InvoiceCodeStr) ? (object)p_InvoiceCodeStr : DBNull.Value;
-            values["invoiceDate"] = p_InvoiceDate;
-            values["name"] = p_Name;
-            values["OKEIcode"] = !String.IsNullOrEmpty(p_OKEIcode) ? (object)p_OKEIcode : DBNull.Value;
-            values["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value;
-            values["amount"] = p_Amount;
-            values["price"] = p_Price * 100;
-            values["invoice"] = InsertFile(p_SelectedDocument);
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                ["catalogId"] = p_CatalogId,
+                ["providerId"] = p_Provider,
+                ["date"] = p_Date,
+                ["invoiceCodeStr"] = !String.IsNullOrEmpty(p_InvoiceCodeStr) ? (object)p_InvoiceCodeStr : DBNull.Value,
+                ["invoiceDate"] = p_InvoiceDate,
+                ["name"] = p_Name,
+                ["OKEIcode"] = !String.IsNullOrEmpty(p_OKEIcode) ? (object)p_OKEIcode : DBNull.Value,
+                ["measurement"] = !String.IsNullOrEmpty(p_Measurement) ? (object)p_Measurement : DBNull.Value,
+                ["amount"] = p_Amount,
+                ["price"] = p_Price * 100,
+                ["invoice"] = InsertFile(p_SelectedDocument)
+            };
 
             SQLiteManager.GetInstance().Insert(TableName, values);
         }

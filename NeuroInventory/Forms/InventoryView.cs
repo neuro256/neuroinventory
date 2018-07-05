@@ -194,6 +194,7 @@ namespace NeuroInventory
                 else
                 {
                     ListViewSortByColumn(e.Column);
+                    RefreshTableNumeration();
                 }
             }
             catch (Exception ex)

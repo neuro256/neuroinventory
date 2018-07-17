@@ -420,6 +420,14 @@ namespace NeuroInventory
             dlvInventory.SelectedObjects = null;
         }
 
+        private void ResetList()
+        {
+            bindingSource.DataMember = "inventory";
+            bindingSource.DataSource = null;
+            dlvInventory.SelectedObject = null;
+            dlvInventory.SelectedObjects = null;
+        }
+
         protected override void InitForm()
         {
             base.InitForm();
@@ -709,6 +717,10 @@ namespace NeuroInventory
                 {
                     SQLiteManager.GetInstance().Inventory().SetCommandDataSet(l_InventoryIds);
                     RefreshList();
+                }
+                else
+                {
+                    ResetList();
                 }
             }
         }

@@ -176,12 +176,17 @@ namespace NeuroInventory
                 }
             };
 
+            dlvReleased.SelectedObject = null;
+            dlvReleased.SelectedObjects = null;
+
             dlvReleased.RebuildColumns();
         }
 
         private void RefreshList()
         {
             bindingSource.DataSource = ReturnDataSet();
+            dlvReleased.SelectedObject = null;
+            dlvReleased.SelectedObjects = null;
         }
 
         protected override void InitForm()

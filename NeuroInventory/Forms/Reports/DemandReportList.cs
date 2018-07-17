@@ -80,12 +80,17 @@ namespace NeuroInventory
                 args.Item.Text = (args.RowIndex + 1).ToString();
             };
 
+            dlvDemandReport.SelectedObject = null;
+            dlvDemandReport.SelectedObjects = null;
+
             dlvDemandReport.RebuildColumns();
         }
 
         private void RefreshList()
         {
             bindingSource.DataSource = ReturnDataSet();
+            dlvDemandReport.SelectedObject = null;
+            dlvDemandReport.SelectedObjects = null;
         }
 
         protected override void InitForm()

@@ -348,7 +348,9 @@ namespace NeuroInventory
             dlvInventory.RowHeight = Definitions.ROW_HEIGHT;
             dlvInventory.IsSimpleDragSource = true;
             dlvInventory.IsSimpleDropSink = true;
-            //dlvInventory.DoubleBuffered(true);
+            dlvInventory.SelectedObject = null;
+            dlvInventory.SelectedObjects = null;
+            dlvInventory.DoubleBuffered(true);
             // Автоматическая нумерация строк
             this.dlvInventory.FormatRow += delegate (object sender, FormatRowEventArgs args)
             {
@@ -414,6 +416,8 @@ namespace NeuroInventory
         {
             bindingSource.DataMember = "inventory";
             bindingSource.DataSource = ReturnDataSet();
+            dlvInventory.SelectedObject = null;
+            dlvInventory.SelectedObjects = null;
         }
 
         protected override void InitForm()
@@ -526,60 +530,6 @@ namespace NeuroInventory
         {
             base.Exit();
         }
-
-        #region DRAG_N_DROP
-
-        private void lvInventory_ItemDrag(object sender, ItemDragEventArgs e)
-        {
-            //lvInventory.DoDragDrop(lvInventory.SelectedItems, DragDropEffects.Move);
-        }
-
-        private void lvInventory_DragOver(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
-                e.Effect = e.AllowedEffect;
-        }
-
-        private void treeView_DragDrop(object sender, DragEventArgs e)
-        {
-            //try
-            //{
-            //    if(treeView.SelectedNodes.Count > 1)
-            //    {
-            //        MessageBox.Show(Definitions.TOO_MANY_SELECTED_NODES);
-            //        return;
-            //    }
-
-            //    if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
-            //    {
-            //        foreach (ListViewItem item in (ListView.SelectedListViewItemCollection)e.Data.GetData(typeof(ListView.SelectedListViewItemCollection)))
-            //        {
-            //            Point pt = ((TreeView)sender).PointToClient(new Point(e.X, e.Y));
-            //            TreeNode destNode = ((TreeView)sender).GetNodeAt(pt);
-            //            // получить id тмц и тип целевого узла
-            //            int itemId = Convert.ToInt32(item.Tag);
-            //            TreeViewTag tag = destNode.Tag as TreeViewTag;
-            //            if (tag.type == TreeNodeType.FILE && SQLiteManager.GetInstance().Inventory().GetCatalogId(itemId) != tag.Id)
-            //            {
-            //                SQLiteManager.GetInstance().Inventory().Update(itemId, tag.Id);
-            //                RemoveFromListView(item);
-            //            }
-
-            //        }
-            //    }
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-        }
-
-        private void treeView_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Move;
-        }
-
-        #endregion
 
         #region RELEASED
 

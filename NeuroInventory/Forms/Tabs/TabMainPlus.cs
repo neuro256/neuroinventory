@@ -40,12 +40,6 @@ namespace NeuroInventory
             InitCtxMenuStrip();
             InitContextMenuStripCatalogs();
             PopulateTreeView();
-            DisplayInventoryName(String.Empty);
-        }
-
-        private void DisplayInventoryName(string p_InventoryName)
-        {
-            lblInventoryName.Text = p_InventoryName;
         }
 
         private void InitContextMenuStripCatalogs()
@@ -87,9 +81,6 @@ namespace NeuroInventory
             {
                 // Удалить тмц из базы данных
                 SQLiteManager.GetInstance().Catalogs().Remove(Convert.ToInt32(dataRowView["id"]));
-                // Очистить заголовок
-                DisplayInventoryName(String.Empty);
-
                 RefreshCatalogs();
             }
         }
@@ -106,9 +97,6 @@ namespace NeuroInventory
             {
                 // Удалить каталога из базы данных
                 RecursiveRemoveFolder(Convert.ToInt32(dataRowView["id"]));
-                // Очистить заголовок
-                DisplayInventoryName(String.Empty);
-
                 RefreshCatalogs();
             }
         }
@@ -757,19 +745,6 @@ namespace NeuroInventory
         {
             if(selectedObjects != null && selectedObjects.Count > 0)
             {
-                if(selectedObjects.Count > 1)
-                {
-                    DisplayInventoryName(Definitions.SELECTED_SEVERAL_NODES);
-                }
-                else
-                {
-                    DataRowView dataRowView = selectedObjects[0] as DataRowView;
-                    if(GetNodeType(dataRowView["type"]) == TreeNodeType.FILE) // is file
-                    {
-                        DisplayInventoryName(dataRowView["name"].ToString());
-                    }
-                }
-
                 List<int> l_InventoryIds = new List<int>();
 
                 foreach(var node in selectedObjects)

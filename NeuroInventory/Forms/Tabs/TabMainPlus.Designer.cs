@@ -47,8 +47,6 @@
             this.btnInventoryEdit = new System.Windows.Forms.Button();
             this.btnInventoryRemove = new System.Windows.Forms.Button();
             this.btnInventoryAdd = new System.Windows.Forms.Button();
-            this.panelInventoryTop = new System.Windows.Forms.Panel();
-            this.lblInventoryName = new System.Windows.Forms.Label();
             this.dlvInventory = new BrightIdeasSoftware.DataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -75,7 +73,6 @@
             this.tableLayoutPanelRight.SuspendLayout();
             this.tableLayoutPanelInventory.SuspendLayout();
             this.panelMainBottom.SuspendLayout();
-            this.panelInventoryTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dlvInventory)).BeginInit();
             this.SuspendLayout();
             // 
@@ -214,17 +211,16 @@
             // 
             this.tableLayoutPanelInventory.ColumnCount = 1;
             this.tableLayoutPanelInventory.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelInventory.Controls.Add(this.panelMainBottom, 0, 2);
-            this.tableLayoutPanelInventory.Controls.Add(this.panelInventoryTop, 0, 0);
+            this.tableLayoutPanelInventory.Controls.Add(this.panelMainBottom, 0, 0);
             this.tableLayoutPanelInventory.Controls.Add(this.dlvInventory, 0, 1);
             this.tableLayoutPanelInventory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelInventory.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelInventory.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelInventory.Name = "tableLayoutPanelInventory";
-            this.tableLayoutPanelInventory.RowCount = 3;
-            this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelInventory.RowCount = 2;
             this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelInventory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelInventory.Size = new System.Drawing.Size(996, 648);
             this.tableLayoutPanelInventory.TabIndex = 2;
             // 
@@ -238,7 +234,7 @@
             this.panelMainBottom.Controls.Add(this.btnInventoryRemove);
             this.panelMainBottom.Controls.Add(this.btnInventoryAdd);
             this.panelMainBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMainBottom.Location = new System.Drawing.Point(0, 593);
+            this.panelMainBottom.Location = new System.Drawing.Point(0, 0);
             this.panelMainBottom.Margin = new System.Windows.Forms.Padding(0);
             this.panelMainBottom.Name = "panelMainBottom";
             this.panelMainBottom.Size = new System.Drawing.Size(996, 55);
@@ -248,7 +244,7 @@
             // 
             this.lblFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFilter.AutoSize = true;
-            this.lblFilter.Location = new System.Drawing.Point(712, 25);
+            this.lblFilter.Location = new System.Drawing.Point(712, 14);
             this.lblFilter.Name = "lblFilter";
             this.lblFilter.Size = new System.Drawing.Size(67, 17);
             this.lblFilter.TabIndex = 9;
@@ -257,7 +253,7 @@
             // tbFilter
             // 
             this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbFilter.Location = new System.Drawing.Point(785, 22);
+            this.tbFilter.Location = new System.Drawing.Point(785, 11);
             this.tbFilter.Name = "tbFilter";
             this.tbFilter.Size = new System.Drawing.Size(200, 22);
             this.tbFilter.TabIndex = 8;
@@ -265,7 +261,6 @@
             // 
             // btnDemand
             // 
-            this.btnDemand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDemand.AutoSize = true;
             this.btnDemand.BackColor = System.Drawing.Color.CadetBlue;
             this.btnDemand.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
@@ -280,7 +275,6 @@
             // 
             // btnInventoryEdit
             // 
-            this.btnInventoryEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnInventoryEdit.AutoSize = true;
             this.btnInventoryEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnInventoryEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -294,7 +288,6 @@
             // 
             // btnInventoryRemove
             // 
-            this.btnInventoryRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnInventoryRemove.AutoSize = true;
             this.btnInventoryRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnInventoryRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -308,7 +301,6 @@
             // 
             // btnInventoryAdd
             // 
-            this.btnInventoryAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnInventoryAdd.AutoSize = true;
             this.btnInventoryAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnInventoryAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -319,27 +311,6 @@
             this.btnInventoryAdd.Text = "Добавить тмц";
             this.btnInventoryAdd.UseVisualStyleBackColor = true;
             this.btnInventoryAdd.Click += new System.EventHandler(this.btnInventoryAdd_Click);
-            // 
-            // panelInventoryTop
-            // 
-            this.panelInventoryTop.AutoSize = true;
-            this.panelInventoryTop.Controls.Add(this.lblInventoryName);
-            this.panelInventoryTop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelInventoryTop.Location = new System.Drawing.Point(3, 3);
-            this.panelInventoryTop.Name = "panelInventoryTop";
-            this.panelInventoryTop.Size = new System.Drawing.Size(990, 24);
-            this.panelInventoryTop.TabIndex = 3;
-            // 
-            // lblInventoryName
-            // 
-            this.lblInventoryName.AutoSize = true;
-            this.lblInventoryName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblInventoryName.ForeColor = System.Drawing.Color.DimGray;
-            this.lblInventoryName.Location = new System.Drawing.Point(4, 1);
-            this.lblInventoryName.Name = "lblInventoryName";
-            this.lblInventoryName.Size = new System.Drawing.Size(176, 18);
-            this.lblInventoryName.TabIndex = 0;
-            this.lblInventoryName.Text = "Название списка тмц";
             // 
             // dlvInventory
             // 
@@ -374,9 +345,9 @@
             this.dlvInventory.Cursor = System.Windows.Forms.Cursors.Default;
             this.dlvInventory.DataSource = null;
             this.dlvInventory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dlvInventory.Location = new System.Drawing.Point(3, 33);
+            this.dlvInventory.Location = new System.Drawing.Point(3, 58);
             this.dlvInventory.Name = "dlvInventory";
-            this.dlvInventory.Size = new System.Drawing.Size(990, 557);
+            this.dlvInventory.Size = new System.Drawing.Size(990, 587);
             this.dlvInventory.TabIndex = 4;
             this.dlvInventory.UseCompatibleStateImageBehavior = false;
             this.dlvInventory.View = System.Windows.Forms.View.Details;
@@ -524,11 +495,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtlCatalogs)).EndInit();
             this.tableLayoutPanelRight.ResumeLayout(false);
             this.tableLayoutPanelInventory.ResumeLayout(false);
-            this.tableLayoutPanelInventory.PerformLayout();
             this.panelMainBottom.ResumeLayout(false);
             this.panelMainBottom.PerformLayout();
-            this.panelInventoryTop.ResumeLayout(false);
-            this.panelInventoryTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dlvInventory)).EndInit();
             this.ResumeLayout(false);
 
@@ -549,8 +517,6 @@
         private System.Windows.Forms.ImageList imageListMain;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripCatalogs;
         private System.Windows.Forms.Button btnDemand;
-        private System.Windows.Forms.Panel panelInventoryTop;
-        private System.Windows.Forms.Label lblInventoryName;
         private System.Windows.Forms.TextBox tbSelectionHelp;
         private BrightIdeasSoftware.DataListView dlvInventory;
         private BrightIdeasSoftware.OLVColumn olvColumn1;

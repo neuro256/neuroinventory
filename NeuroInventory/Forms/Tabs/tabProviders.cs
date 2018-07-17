@@ -166,7 +166,7 @@ namespace NeuroInventory
                 Filter.Parent = Parent;
                 Filter.Show();
             }
-            else if (Filter != null && Filter.IsHandleCreated)
+            else if (Filter.IsHandleCreated)
             {
                 Filter.Close();
             }

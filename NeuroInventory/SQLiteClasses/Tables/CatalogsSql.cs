@@ -10,7 +10,11 @@ namespace NeuroInventory
     {
         public CatalogsSql()
         {
-            CommandDataSet = "SELECT * FROM catalogs";
+            CommandDataSet = "SELECT " +
+                "CAST(catalogs.id as TEXT) as id, " +
+                "catalogs.type," +
+                "IFNULL(CAST(catalogs.parent as TEXT), '0') as parent," +
+                "catalogs.name FROM catalogs";
             TableName = "catalogs";
             PrimaryKey = "id";
         }
@@ -20,7 +24,10 @@ namespace NeuroInventory
             Dictionary<string, object> values = new Dictionary<string, object>();
 
             values["type"] = p_Type;
-            values["parent"] = p_ParentId;
+            if (p_ParentId == 0) // isRoot
+                values["parent"] = DBNull.Value;
+            else
+                values["parent"] = p_ParentId;
             values["name"] = p_Name;
 
             SQLiteManager.GetInstance().Insert(TableName, values);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrightIdeasSoftware;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -10,30 +11,81 @@ namespace NeuroInventory
 {
     public partial class DebitReportList : InventoryView
     {
+        BindingSource bindingSource = null;
+
         public DebitReportList()
         {
             InitializeComponent();
             SQLiteManager.GetInstance().DebitReport().SetCommandDataSet();
             InitForm();
-            InitListView();
-            InitContextMenuStrip();
-            InitContextMenuStripValues();
-            ShowTable();
-            ListviewSelectedIndex = 0;
-            SelectedItemId = 0;
+            InitControls();
+            InitCtxMenuStrip();
         }
 
-        private void InitContextMenuStripValues()
+        private void InitCtxMenuStrip()
         {
-            ContextMenuStripValues = new Dictionary<string, bool>
+            // Создаем элементы меню и добавляем их
+            ToolStripMenuItem addMenuItem = new ToolStripMenuItem("Добавить");
+            addMenuItem.Name = "addToolStripMenuItem";
+            addMenuItem.Click += addToolStripMenuItem_Click;
+            ToolStripMenuItem editMenuItem = new ToolStripMenuItem("Редактировать");
+            editMenuItem.Name = "editToolStripMenuItem";
+            editMenuItem.Click += editToolStripMenuItem_Click;
+            ToolStripMenuItem removeMenuItem = new ToolStripMenuItem("Удалить");
+            removeMenuItem.Name = "removeToolStripMenuItem";
+            removeMenuItem.Click += removeToolStripMenuItem_Click;
+            contextMenuStripDebitReportList.Items.Clear();
+            contextMenuStripDebitReportList.Items.AddRange(new[] { addMenuItem, editMenuItem, removeMenuItem });
+            // Ассоциируем контекстное меню со списком
+            dlvDebitReport.ContextMenuStrip = contextMenuStripDebitReportList;
+        }
+
+        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveRecord();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateRecord();
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddRecord();
+        }
+
+        private void InitControls()
+        {
+            dlvDebitReport.AutoGenerateColumns = false;
+            dlvDebitReport.FullRowSelect = true;
+            dlvDebitReport.GridLines = true;
+            dlvDebitReport.HideSelection = false;
+            dlvDebitReport.ShowGroups = false;
+            dlvDebitReport.SelectColumnsOnRightClickBehaviour = ObjectListView.ColumnSelectBehaviour.Submenu;
+            dlvDebitReport.ShowCommandMenuOnRightClick = true;
+            dlvDebitReport.ShowItemToolTips = true;
+            dlvDebitReport.UseCellFormatEvents = true;
+            dlvDebitReport.UseFilterIndicator = true;
+            dlvDebitReport.UseFiltering = true;
+            bindingSource = new BindingSource(ReturnDataSet(), "debitReport");
+            dlvDebitReport.DataSource = bindingSource;
+            dlvDebitReport.SelectedBackColor = Color.LightBlue;
+            dlvDebitReport.SelectedForeColor = Color.MidnightBlue;
+            dlvDebitReport.RowHeight = Definitions.ROW_HEIGHT;
+            dlvDebitReport.DoubleBuffered(true);
+            // Автоматическая нумерация строк
+            this.dlvDebitReport.FormatRow += delegate (object sender, FormatRowEventArgs args)
             {
-                { "addOnItem", false },
-                { "editOnItem", false },
-                { "removeOnItem", true },
-                { "addOnSpace", false },
-                { "editOnSpace", false },
-                { "removeOnSpace", false }
+                args.Item.Text = (args.RowIndex + 1).ToString();
             };
+
+            dlvDebitReport.RebuildColumns();
+        }
+
+        private void RefreshList()
+        {
+            bindingSource.DataSource = ReturnDataSet();
         }
 
         protected override void InitForm()
@@ -53,17 +105,6 @@ namespace NeuroInventory
         public override void InitListView()
         {
             base.InitListView();
-
-            lvDebitReportList.Columns.Clear();
-
-            List<ColumnSettings> lvDebitReportListSettings = UISettings.GetInstance().LvDebitReportListSettings.GetColumnSettingsList();
-
-            foreach (var colSettings in lvDebitReportListSettings)
-            {
-                lvDebitReportList.Columns.Add(new ColHeader(colSettings.Text, colSettings.Width, colSettings.Align, colSettings.Ascending));
-            }
-
-            lvDebitReportList.DoubleBuffered(true);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -73,22 +114,20 @@ namespace NeuroInventory
 
         public override void RemoveRecord()
         {
-            if(m_Listview.SelectedItems.Count > 0)
+            if (dlvDebitReport.SelectedObjects?.Count > 0)
             {
-                SQLiteManager.GetInstance().DebitReport().Remove(SelectedItemId);
-                m_Listview.SelectedItems.Clear();
+                foreach (var selectedObject in dlvDebitReport.SelectedObjects)
+                {
+                    DataRowView dataRowView = selectedObject as DataRowView;
+                    SQLiteManager.GetInstance().DebitReport().Remove(Convert.ToInt32(dataRowView["id"]));
+                }
                 SQLiteManager.GetInstance().DebitReport().SetCommandDataSet();
-                RemoveFromListViewAt(ListviewSelectedIndex);
+                RefreshList();
             }
             else
             {
                 MessageBox.Show(Definitions.REMOVE_WARNING_STRING);
             }
-        }
-
-        protected override ListView GetListView()
-        {
-            return lvDebitReportList;
         }
 
         protected override ContextMenuStrip GetContextMenuStrip()
@@ -101,55 +140,39 @@ namespace NeuroInventory
             return SQLiteManager.GetInstance().DebitReport().ReturnDataSet();
         }
 
-        public override void ListViewItemMouseUp(object sender, MouseEventArgs e)
+        private void dlvDebitReport_FormatCell(object sender, FormatCellEventArgs e)
         {
-            try
+            if (e.Column?.AspectName == "document")
             {
-                base.ListViewItemMouseUp(sender, e);
-
-                if (e.Button == MouseButtons.Left)
-                {
-                    if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"]?.Bounds.Contains(e.X, e.Y) ?? false)
-                    {
-                        string l_FileName = m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"].Tag.ToString();
-                        NeuroFile.OpenFileInExplorer(l_FileName);
-                        m_Listview.SelectedItems.Clear();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                e.SubItem.BackColor = Color.LightBlue;
+                e.SubItem.Text = Path.GetFileName(e.SubItem.Text);
             }
         }
 
-        public override void ShowTable_ModifySubItem(ListViewItem.ListViewSubItem subItem)
+        private void dlvDebitReport_CellClick(object sender, CellClickEventArgs e)
         {
-            base.ShowTable_ModifySubItem(subItem);
-
-            if (subItem.Name == "document")
+            if (e.Column?.AspectName == "document")
             {
-                subItem.BackColor = Color.LightBlue;
-                subItem.Tag = subItem.Text;
-                subItem.Text = Path.GetFileName(subItem.Text);
+                DataRowView dataRowView = e.Model as DataRowView;
+                NeuroFile.OpenFileInExplorer(dataRowView["document"].ToString());
             }
         }
 
-        private void lvDebitReportList_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        private void dlvDebitReport_CellRightClick(object sender, CellRightClickEventArgs e)
         {
-            List<ColumnSettings> lvNewSettings = UISettings.GetInstance().LvDebitReportListSettings.GetColumnSettingsList();
-
-            if (lvNewSettings != null)
+            if (e.Model != null)
             {
-                lvNewSettings[e.ColumnIndex].Width = lvDebitReportList.Columns[e.ColumnIndex].Width;
-
-                UISettings.GetInstance().LvDebitReportListSettings.SetColumnSettingsList(lvNewSettings);
+                contextMenuStripDebitReportList.Items["addToolStripMenuItem"].Visible = false;
+                contextMenuStripDebitReportList.Items["editToolStripMenuItem"].Visible = false;
+                contextMenuStripDebitReportList.Items["removeToolStripMenuItem"].Visible = true;
             }
-
-            if (lvDebitReportList.Columns[e.ColumnIndex].Width < Definitions.MIN_COLUMN_WIDTH)
+            else
             {
-                lvDebitReportList.Columns[e.ColumnIndex].Width = Definitions.MIN_COLUMN_WIDTH;
+                contextMenuStripDebitReportList.Items["addToolStripMenuItem"].Visible = false;
+                contextMenuStripDebitReportList.Items["editToolStripMenuItem"].Visible = false;
+                contextMenuStripDebitReportList.Items["removeToolStripMenuItem"].Visible = false;
             }
+            e.MenuStrip = contextMenuStripDebitReportList;
         }
     }
 }

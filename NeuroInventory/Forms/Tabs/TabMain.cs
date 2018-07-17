@@ -106,7 +106,7 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void RemoveFileItem_Click(object sender, EventArgs e)
         {
-            if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FILE)
+            if (SelectedInventory?.type == TreeNodeType.FILE)
             {
                 // Удалить тмц из базы данных
                 SQLiteManager.GetInstance().Catalogs().Remove(SelectedInventory.Id);
@@ -130,7 +130,7 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void RemoveFolderItem_Click(object sender, EventArgs e)
         {
-            if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FOLDER)
+            if (SelectedInventory?.type == TreeNodeType.FOLDER)
             {
                 treeView.BeginUpdate();
                 RecursiveRemoveFolder(SelectedInventory.Id);
@@ -246,7 +246,7 @@ namespace NeuroInventory
                 dialogName.StartPosition = FormStartPosition.CenterParent;
                 if (dialogName.ShowDialog() == DialogResult.OK)
                 {
-                    if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FOLDER)
+                    if (SelectedInventory?.type == TreeNodeType.FOLDER)
                     {
                         // Добавить запись в таблицу Каталоги
                         SQLiteManager.GetInstance().Catalogs().Insert((int)p_Type, SelectedInventory.Id, dialogName.name);
@@ -573,7 +573,7 @@ namespace NeuroInventory
         /// </summary>
         public override void AddRecord()
         {
-            if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FILE && treeView.SelectedNodes.Count == 1)
+            if (SelectedInventory?.type == TreeNodeType.FILE && treeView.SelectedNodes.Count == 1)
             {
                 InventoryEditor editor = new InventoryEditor(SelectedInventory.Id);
                 editor.StartPosition = FormStartPosition.CenterParent;
@@ -673,7 +673,7 @@ namespace NeuroInventory
                 m_Listview.EndUpdate();
                 return;
             }
-            if (SelectedInventory != null && SelectedInventory.type == TreeNodeType.FOLDER)
+            if (SelectedInventory?.type == TreeNodeType.FOLDER)
                 return;
 
             base.ShowTable();
@@ -748,7 +748,7 @@ namespace NeuroInventory
                 Filter.Parent = Parent;
                 Filter.Show();
             }
-            else if (Filter != null && Filter.IsHandleCreated)
+            else if (Filter.IsHandleCreated)
             {
                 Filter.Close();
             }

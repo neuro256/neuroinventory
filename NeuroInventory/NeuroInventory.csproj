@@ -104,6 +104,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Tabs\TabEmployeesPlus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tabs\TabEmployeesPlus.Designer.cs">
+      <DependentUpon>TabEmployeesPlus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tabs\TabMainPlus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tabs\TabMainPlus.Designer.cs">
+      <DependentUpon>TabMainPlus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tabs\TabProvidersPlus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tabs\TabProvidersPlus.Designer.cs">
+      <DependentUpon>TabProvidersPlus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tabs\TabReleasedPlus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tabs\TabReleasedPlus.Designer.cs">
+      <DependentUpon>TabReleasedPlus.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportsClasses\ReportBuilder.cs" />
     <Compile Include="ReportsClasses\ReportData.cs" />
     <Compile Include="UtilityClasses\ColumnSettingsList.cs" />
@@ -340,6 +364,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tabs\TabEmployeesPlus.resx">
+      <DependentUpon>TabEmployeesPlus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tabs\TabMainPlus.resx">
+      <DependentUpon>TabMainPlus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tabs\TabProvidersPlus.resx">
+      <DependentUpon>TabProvidersPlus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tabs\TabReleasedPlus.resx">
+      <DependentUpon>TabReleasedPlus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Tabs\TabReleased.resx">
       <DependentUpon>TabReleased.cs</DependentUpon>

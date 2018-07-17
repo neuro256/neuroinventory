@@ -4,6 +4,7 @@
     {
         public static readonly int MAX_COLUMN_WIDTH = 1000;
         public static readonly int MIN_COLUMN_WIDTH = 25;
+        public static readonly int ROW_HEIGHT = 23;
         public static string REMOVE_WARNING_STRING = "Сначала выберите запись которую хотите удалить";
         public static string UPDATE_WARNING_STRING = "Сначала выберите запись которую хотите изменить";
         public static string VALIDATION_WARNING_STRING = "Сначала заполните обязательные поля";

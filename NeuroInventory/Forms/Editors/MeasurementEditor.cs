@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrightIdeasSoftware;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -9,15 +10,80 @@ namespace NeuroInventory
 {
     public partial class MeasurementEditor : InventoryView
     {
+        BindingSource bindingSource = null;
+
         public MeasurementEditor()
         {
             InitializeComponent();
             InitForm();
-            InitListView();
-            InitContextMenuStrip();
-            ShowTable();
-            ListviewSelectedIndex = 0;
-            SelectedItemId = 0;
+            InitControls();
+            InitCtxMenuStrip();
+        }
+
+        private void InitCtxMenuStrip()
+        {
+            // Создаем элементы меню и добавляем их
+            ToolStripMenuItem addMenuItem = new ToolStripMenuItem("Добавить");
+            addMenuItem.Name = "addToolStripMenuItem";
+            addMenuItem.Click += addToolStripMenuItem_Click;
+            ToolStripMenuItem editMenuItem = new ToolStripMenuItem("Редактировать");
+            editMenuItem.Name = "editToolStripMenuItem";
+            editMenuItem.Click += editToolStripMenuItem_Click;
+            ToolStripMenuItem removeMenuItem = new ToolStripMenuItem("Удалить");
+            removeMenuItem.Name = "removeToolStripMenuItem";
+            removeMenuItem.Click += removeToolStripMenuItem_Click;
+            contextMenuStripMeasurement.Items.Clear();
+            contextMenuStripMeasurement.Items.AddRange(new[] { addMenuItem, editMenuItem, removeMenuItem });
+            // Ассоциируем контекстное меню со списком
+            dlvMeasurement.ContextMenuStrip = contextMenuStripMeasurement;
+        }
+
+        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveRecord();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateRecord();
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddRecord();
+        }
+
+        private void InitControls()
+        {
+            dlvMeasurement.AutoGenerateColumns = false;
+            dlvMeasurement.FullRowSelect = true;
+            dlvMeasurement.GridLines = true;
+            dlvMeasurement.HideSelection = false;
+            dlvMeasurement.ShowGroups = false;
+            dlvMeasurement.SelectColumnsOnRightClickBehaviour = ObjectListView.ColumnSelectBehaviour.Submenu;
+            dlvMeasurement.ShowCommandMenuOnRightClick = true;
+            dlvMeasurement.ShowItemToolTips = true;
+            dlvMeasurement.UseCellFormatEvents = true;
+            dlvMeasurement.UseFilterIndicator = true;
+            dlvMeasurement.UseFiltering = true;
+            bindingSource = new BindingSource(ReturnDataSet(), "measurement");
+            dlvMeasurement.DataSource = bindingSource;
+            dlvMeasurement.SelectedBackColor = Color.LightBlue;
+            dlvMeasurement.SelectedForeColor = Color.MidnightBlue;
+            dlvMeasurement.RowHeight = Definitions.ROW_HEIGHT;
+            dlvMeasurement.DoubleBuffered(true);
+            // Автоматическая нумерация строк
+            this.dlvMeasurement.FormatRow += delegate (object sender, FormatRowEventArgs args)
+            {
+                args.Item.Text = (args.RowIndex + 1).ToString();
+            };
+
+            dlvMeasurement.RebuildColumns();
+        }
+
+        private void RefreshList()
+        {
+            bindingSource.DataSource = ReturnDataSet();
         }
 
         protected override void InitForm()
@@ -37,17 +103,6 @@ namespace NeuroInventory
         public override void InitListView()
         {
             base.InitListView();
-
-            lvMeasurement.Columns.Clear();
-
-            List<ColumnSettings> lvMeasurementSettings = UISettings.GetInstance().LvMeasurementSettings.GetColumnSettingsList();
-
-            foreach (var colSettings in lvMeasurementSettings)
-            {
-                lvMeasurement.Columns.Add(new ColHeader(colSettings.Text, colSettings.Width, colSettings.Align, colSettings.Ascending));
-            }
-
-            lvMeasurement.DoubleBuffered(true);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -70,12 +125,7 @@ namespace NeuroInventory
             if (!IsValidData())
                 return;
             SQLiteSettingsManager.GetInstance().Measurement().Insert(nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
-            m_Listview.SelectedItems.Clear();
-            ShowTable();
-            if (m_Listview.Items.Count > 0)
-            {
-                m_Listview.EnsureVisible(m_Listview.Items.Count - 1);
-            }
+            RefreshList();
         }
 
         private bool IsValidData()
@@ -99,11 +149,14 @@ namespace NeuroInventory
 
         public override void RemoveRecord()
         {
-            if(m_Listview.SelectedItems.Count > 0)
+            if (dlvMeasurement.SelectedObjects?.Count > 0)
             {
-                SQLiteSettingsManager.GetInstance().Measurement().Remove(SelectedItemId);
-                RemoveFromListViewAt(ListviewSelectedIndex);
-                m_Listview.SelectedItems.Clear();
+                foreach (var selectedObject in dlvMeasurement.SelectedObjects)
+                {
+                    DataRowView dataRowView = selectedObject as DataRowView;
+                    SQLiteSettingsManager.GetInstance().Measurement().Remove(Convert.ToInt32(dataRowView["id"]));
+                }
+                RefreshList();
             }
             else
             {
@@ -113,22 +166,16 @@ namespace NeuroInventory
 
         public override void UpdateRecord()
         {
-            if(m_Listview.SelectedItems.Count > 0)
+            if (dlvMeasurement.SelectedObject != null)
             {
-                SQLiteSettingsManager.GetInstance().Measurement().Update(SelectedItemId, nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
-                ShowTable();
-                m_Listview.EnsureVisible(ListviewSelectedIndex);
-                m_Listview.SelectedItems.Clear();
+                DataRowView dataRowView = dlvMeasurement.SelectedObject as DataRowView;
+                SQLiteSettingsManager.GetInstance().Measurement().Update(Convert.ToInt32(dataRowView["id"]), nudOKEI.Value, tbName.Text, tbSymbol.Text, nudPlaces.Value);
+                RefreshList();
             }
             else
             {
                 MessageBox.Show(Definitions.UPDATE_WARNING_STRING);
             }
-        }
-
-        protected override ListView GetListView()
-        {
-            return lvMeasurement;
         }
 
         protected override ContextMenuStrip GetContextMenuStrip()
@@ -146,41 +193,16 @@ namespace NeuroInventory
             base.Clear();
         }
 
-        public override void ListViewItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            base.ListViewItemSelectionChanged(sender, e);
-
-            try
-            {
-                if(e.IsSelected)
-                {
-                    ShowInfo();
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void ShowInfo()
         {
-            DataSet dataSet = SQLiteSettingsManager.GetInstance().Measurement().ReturnDataSet();
-            DataRow dataRow = dataSet.Tables[0].Rows.Find(SelectedItemId);
-            if (dataRow != null)
+            DataRowView dataRowView = dlvMeasurement.SelectedObject as DataRowView;
+            if (dataRowView != null)
             {
-                nudOKEI.Value = Convert.ToDecimal(dataRow["codeOKEI"]);
-                tbName.Text = dataRow["name"].ToString();
-                tbSymbol.Text = dataRow["symbol"].ToString();
-                nudPlaces.Value = Convert.ToDecimal(dataRow["decimalPlaces"]);
+                nudOKEI.Value = Convert.ToDecimal(dataRowView["codeOKEI"]);
+                tbName.Text = dataRowView["name"].ToString();
+                tbSymbol.Text = dataRowView["symbol"].ToString();
+                nudPlaces.Value = Convert.ToDecimal(dataRowView["decimalPlaces"]);
             }
-        }
-
-        public override void ShowTable()
-        {
-            if (!SQLiteSettingsManager.GetInstance().TestConnection())
-                return;
-            base.ShowTable();
         }
 
         private void tbName_TextChanged(object sender, EventArgs e)
@@ -193,20 +215,18 @@ namespace NeuroInventory
             errorProviderMeasurement.Clear();
         }
 
-        private void lvMeasurement_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        private void dlvMeasurement_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            List<ColumnSettings> lvNewSettings = UISettings.GetInstance().LvMeasurementSettings.GetColumnSettingsList();
-
-            if (lvNewSettings != null)
+            try
             {
-                lvNewSettings[e.ColumnIndex].Width = lvMeasurement.Columns[e.ColumnIndex].Width;
-
-                UISettings.GetInstance().LvMeasurementSettings.SetColumnSettingsList(lvNewSettings);
+                if (e.IsSelected)
+                {
+                    ShowInfo();
+                }
             }
-
-            if (lvMeasurement.Columns[e.ColumnIndex].Width < Definitions.MIN_COLUMN_WIDTH)
+            catch (Exception ex)
             {
-                lvMeasurement.Columns[e.ColumnIndex].Width = Definitions.MIN_COLUMN_WIDTH;
+                MessageBox.Show(ex.Message);
             }
         }
     }

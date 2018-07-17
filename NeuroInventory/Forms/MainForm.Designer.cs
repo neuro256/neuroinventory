@@ -38,18 +38,18 @@
             this.paramsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.единицыИзмеренияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиПользователяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.настройкаНумерацииДокументовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabInventory = new System.Windows.Forms.TabPage();
-            this.tabReleased = new System.Windows.Forms.TabPage();
-            this.tabProviders = new System.Windows.Forms.TabPage();
-            this.tabEmployees = new System.Windows.Forms.TabPage();
+            this.tabInventoryPlus = new System.Windows.Forms.TabPage();
+            this.tabReleasedPlus = new System.Windows.Forms.TabPage();
+            this.tabProvidersPlus = new System.Windows.Forms.TabPage();
+            this.tabEmployeesPlus = new System.Windows.Forms.TabPage();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonDebitReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDemandReport = new System.Windows.Forms.ToolStripButton();
-            this.настройкаНумерацииДокументовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -143,6 +143,13 @@
             this.настройкиПользователяToolStripMenuItem.Text = "Настройки пользователя";
             this.настройкиПользователяToolStripMenuItem.Click += new System.EventHandler(this.настройкиПользователяToolStripMenuItem_Click);
             // 
+            // настройкаНумерацииДокументовToolStripMenuItem
+            // 
+            this.настройкаНумерацииДокументовToolStripMenuItem.Name = "настройкаНумерацииДокументовToolStripMenuItem";
+            this.настройкаНумерацииДокументовToolStripMenuItem.Size = new System.Drawing.Size(327, 26);
+            this.настройкаНумерацииДокументовToolStripMenuItem.Text = "Настройка нумерации документов";
+            this.настройкаНумерацииДокументовToolStripMenuItem.Click += new System.EventHandler(this.SettingDocNumerationToolStripMenuItem_Click);
+            // 
             // справкаToolStripMenuItem
             // 
             this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -160,10 +167,10 @@
             // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.tabInventory);
-            this.tabControl.Controls.Add(this.tabReleased);
-            this.tabControl.Controls.Add(this.tabProviders);
-            this.tabControl.Controls.Add(this.tabEmployees);
+            this.tabControl.Controls.Add(this.tabInventoryPlus);
+            this.tabControl.Controls.Add(this.tabReleasedPlus);
+            this.tabControl.Controls.Add(this.tabProvidersPlus);
+            this.tabControl.Controls.Add(this.tabEmployeesPlus);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabControl.Location = new System.Drawing.Point(0, 55);
@@ -175,44 +182,44 @@
             this.tabControl.TabIndex = 1;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
-            // tabInventory
+            // tabInventoryPlus
             // 
-            this.tabInventory.Location = new System.Drawing.Point(4, 27);
-            this.tabInventory.Margin = new System.Windows.Forms.Padding(0);
-            this.tabInventory.Name = "tabInventory";
-            this.tabInventory.Size = new System.Drawing.Size(1254, 669);
-            this.tabInventory.TabIndex = 0;
-            this.tabInventory.Text = "Склад ТМЦ";
-            this.tabInventory.UseVisualStyleBackColor = true;
+            this.tabInventoryPlus.Location = new System.Drawing.Point(4, 27);
+            this.tabInventoryPlus.Margin = new System.Windows.Forms.Padding(0);
+            this.tabInventoryPlus.Name = "tabInventoryPlus";
+            this.tabInventoryPlus.Size = new System.Drawing.Size(1254, 669);
+            this.tabInventoryPlus.TabIndex = 0;
+            this.tabInventoryPlus.Text = "Склад ТМЦ";
+            this.tabInventoryPlus.UseVisualStyleBackColor = true;
             // 
-            // tabReleased
+            // tabReleasedPlus
             // 
-            this.tabReleased.Location = new System.Drawing.Point(4, 27);
-            this.tabReleased.Name = "tabReleased";
-            this.tabReleased.Size = new System.Drawing.Size(1254, 669);
-            this.tabReleased.TabIndex = 3;
-            this.tabReleased.Text = "Отпущенные ТМЦ";
-            this.tabReleased.UseVisualStyleBackColor = true;
+            this.tabReleasedPlus.Location = new System.Drawing.Point(4, 27);
+            this.tabReleasedPlus.Name = "tabReleasedPlus";
+            this.tabReleasedPlus.Size = new System.Drawing.Size(1254, 669);
+            this.tabReleasedPlus.TabIndex = 3;
+            this.tabReleasedPlus.Text = "Отпущенные ТМЦ";
+            this.tabReleasedPlus.UseVisualStyleBackColor = true;
             // 
-            // tabProviders
+            // tabProvidersPlus
             // 
-            this.tabProviders.Location = new System.Drawing.Point(4, 27);
-            this.tabProviders.Margin = new System.Windows.Forms.Padding(0);
-            this.tabProviders.Name = "tabProviders";
-            this.tabProviders.Size = new System.Drawing.Size(1254, 669);
-            this.tabProviders.TabIndex = 1;
-            this.tabProviders.Text = "Поставщики";
-            this.tabProviders.UseVisualStyleBackColor = true;
+            this.tabProvidersPlus.Location = new System.Drawing.Point(4, 27);
+            this.tabProvidersPlus.Margin = new System.Windows.Forms.Padding(0);
+            this.tabProvidersPlus.Name = "tabProvidersPlus";
+            this.tabProvidersPlus.Size = new System.Drawing.Size(1254, 669);
+            this.tabProvidersPlus.TabIndex = 1;
+            this.tabProvidersPlus.Text = "Поставщики";
+            this.tabProvidersPlus.UseVisualStyleBackColor = true;
             // 
-            // tabEmployees
+            // tabEmployeesPlus
             // 
-            this.tabEmployees.Location = new System.Drawing.Point(4, 27);
-            this.tabEmployees.Margin = new System.Windows.Forms.Padding(0);
-            this.tabEmployees.Name = "tabEmployees";
-            this.tabEmployees.Size = new System.Drawing.Size(1254, 669);
-            this.tabEmployees.TabIndex = 2;
-            this.tabEmployees.Text = "Работники";
-            this.tabEmployees.UseVisualStyleBackColor = true;
+            this.tabEmployeesPlus.Location = new System.Drawing.Point(4, 27);
+            this.tabEmployeesPlus.Margin = new System.Windows.Forms.Padding(0);
+            this.tabEmployeesPlus.Name = "tabEmployeesPlus";
+            this.tabEmployeesPlus.Size = new System.Drawing.Size(1254, 669);
+            this.tabEmployeesPlus.TabIndex = 2;
+            this.tabEmployeesPlus.Text = "Работники";
+            this.tabEmployeesPlus.UseVisualStyleBackColor = true;
             // 
             // toolStrip
             // 
@@ -253,13 +260,6 @@
             this.toolStripButtonDemandReport.Text = "История отпусков";
             this.toolStripButtonDemandReport.Click += new System.EventHandler(this.toolStripButtonDemandReport_Click);
             // 
-            // настройкаНумерацииДокументовToolStripMenuItem
-            // 
-            this.настройкаНумерацииДокументовToolStripMenuItem.Name = "настройкаНумерацииДокументовToolStripMenuItem";
-            this.настройкаНумерацииДокументовToolStripMenuItem.Size = new System.Drawing.Size(327, 26);
-            this.настройкаНумерацииДокументовToolStripMenuItem.Text = "Настройка нумерации документов";
-            this.настройкаНумерацииДокументовToolStripMenuItem.Click += new System.EventHandler(this.SettingDocNumerationToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -295,9 +295,9 @@
         private System.Windows.Forms.ToolStripMenuItem createBDToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveBDToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabInventory;
-        private System.Windows.Forms.TabPage tabProviders;
-        private System.Windows.Forms.TabPage tabEmployees;
+        private System.Windows.Forms.TabPage tabInventoryPlus;
+        private System.Windows.Forms.TabPage tabProvidersPlus;
+        private System.Windows.Forms.TabPage tabEmployeesPlus;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paramsMenu;
         private System.Windows.Forms.ToolStripMenuItem openBDToolStripMenuItem;
@@ -309,7 +309,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonDebitReport;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutBoxToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabReleased;
+        private System.Windows.Forms.TabPage tabReleasedPlus;
         private System.Windows.Forms.ToolStripMenuItem настройкаНумерацииДокументовToolStripMenuItem;
     }
 }

@@ -30,25 +30,25 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
-            this.lvDebitReportList = new System.Windows.Forms.ListView();
-            this.columnHeaderId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderDoc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panelDebitReportListBottom = new System.Windows.Forms.Panel();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.dlvDebitReport = new BrightIdeasSoftware.DataListView();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStripDebitReportList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelDebitReportListBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dlvDebitReport)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanelMain
             // 
             this.tableLayoutPanelMain.ColumnCount = 1;
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMain.Controls.Add(this.lvDebitReportList, 0, 0);
             this.tableLayoutPanelMain.Controls.Add(this.panelDebitReportListBottom, 0, 1);
+            this.tableLayoutPanelMain.Controls.Add(this.dlvDebitReport, 0, 0);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(0);
@@ -58,44 +58,6 @@
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanelMain.Size = new System.Drawing.Size(782, 560);
             this.tableLayoutPanelMain.TabIndex = 0;
-            // 
-            // lvDebitReportList
-            // 
-            this.lvDebitReportList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lvDebitReportList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderId,
-            this.columnHeaderNumber,
-            this.columnHeaderDate,
-            this.columnHeaderDoc});
-            this.lvDebitReportList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvDebitReportList.FullRowSelect = true;
-            this.lvDebitReportList.GridLines = true;
-            this.lvDebitReportList.Location = new System.Drawing.Point(3, 3);
-            this.lvDebitReportList.MultiSelect = false;
-            this.lvDebitReportList.Name = "lvDebitReportList";
-            this.lvDebitReportList.Size = new System.Drawing.Size(776, 504);
-            this.lvDebitReportList.TabIndex = 0;
-            this.lvDebitReportList.UseCompatibleStateImageBehavior = false;
-            this.lvDebitReportList.View = System.Windows.Forms.View.Details;
-            this.lvDebitReportList.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvDebitReportList_ColumnWidthChanged);
-            // 
-            // columnHeaderId
-            // 
-            this.columnHeaderId.Text = "id";
-            // 
-            // columnHeaderNumber
-            // 
-            this.columnHeaderNumber.Text = "#";
-            // 
-            // columnHeaderDate
-            // 
-            this.columnHeaderDate.Text = "Дата";
-            this.columnHeaderDate.Width = 100;
-            // 
-            // columnHeaderDoc
-            // 
-            this.columnHeaderDoc.Text = "Документ";
-            this.columnHeaderDoc.Width = 250;
             // 
             // panelDebitReportListBottom
             // 
@@ -136,6 +98,52 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Visible = false;
             // 
+            // dlvDebitReport
+            // 
+            this.dlvDebitReport.AllColumns.Add(this.olvColumn1);
+            this.dlvDebitReport.AllColumns.Add(this.olvColumn2);
+            this.dlvDebitReport.AllColumns.Add(this.olvColumn3);
+            this.dlvDebitReport.CellEditUseWholeCell = false;
+            this.dlvDebitReport.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn1,
+            this.olvColumn2,
+            this.olvColumn3});
+            this.dlvDebitReport.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dlvDebitReport.DataSource = null;
+            this.dlvDebitReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dlvDebitReport.Location = new System.Drawing.Point(3, 3);
+            this.dlvDebitReport.Name = "dlvDebitReport";
+            this.dlvDebitReport.Size = new System.Drawing.Size(776, 504);
+            this.dlvDebitReport.TabIndex = 2;
+            this.dlvDebitReport.UseCompatibleStateImageBehavior = false;
+            this.dlvDebitReport.View = System.Windows.Forms.View.Details;
+            this.dlvDebitReport.CellClick += new System.EventHandler<BrightIdeasSoftware.CellClickEventArgs>(this.dlvDebitReport_CellClick);
+            this.dlvDebitReport.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.dlvDebitReport_CellRightClick);
+            this.dlvDebitReport.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.dlvDebitReport_FormatCell);
+            // 
+            // olvColumn1
+            // 
+            this.olvColumn1.Groupable = false;
+            this.olvColumn1.IsEditable = false;
+            this.olvColumn1.Text = "№";
+            this.olvColumn1.Width = 50;
+            // 
+            // olvColumn2
+            // 
+            this.olvColumn2.AspectName = "date";
+            this.olvColumn2.Groupable = false;
+            this.olvColumn2.IsEditable = false;
+            this.olvColumn2.Text = "Дата";
+            this.olvColumn2.Width = 200;
+            // 
+            // olvColumn3
+            // 
+            this.olvColumn3.AspectName = "document";
+            this.olvColumn3.Groupable = false;
+            this.olvColumn3.IsEditable = false;
+            this.olvColumn3.Text = "Документ";
+            this.olvColumn3.Width = 200;
+            // 
             // contextMenuStripDebitReportList
             // 
             this.contextMenuStripDebitReportList.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -155,6 +163,7 @@
             this.Text = "Список требований";
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.panelDebitReportListBottom.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dlvDebitReport)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -162,14 +171,13 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
-        private System.Windows.Forms.ListView lvDebitReportList;
-        private System.Windows.Forms.ColumnHeader columnHeaderId;
-        private System.Windows.Forms.ColumnHeader columnHeaderNumber;
-        private System.Windows.Forms.ColumnHeader columnHeaderDate;
-        private System.Windows.Forms.ColumnHeader columnHeaderDoc;
         private System.Windows.Forms.Panel panelDebitReportListBottom;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripDebitReportList;
+        private BrightIdeasSoftware.DataListView dlvDebitReport;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
     }
 }

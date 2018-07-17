@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrightIdeasSoftware;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -93,6 +94,8 @@ namespace NeuroInventory
 
         public virtual void ShowTable()
         {
+            if (m_Listview == null)
+                return;
             DataSet dataSet = ReturnDataSet();
             try
             {
@@ -374,6 +377,33 @@ namespace NeuroInventory
         public virtual void Exit()
         {
             Close();
+        }
+
+        public void TimedFilter(ObjectListView olv, string txt, int matchKind)
+        {
+            TextMatchFilter filter = null;
+            if (!String.IsNullOrEmpty(txt))
+            {
+                switch (matchKind)
+                {
+                    case 0:
+                    default:
+                        filter = TextMatchFilter.Contains(olv, txt);
+                        break;
+                    case 1:
+                        filter = TextMatchFilter.Prefix(olv, txt);
+                        break;
+                    case 2:
+                        filter = TextMatchFilter.Regex(olv, txt);
+                        break;
+                }
+            }
+
+            // Text highlighting requires at least a default renderer
+            if (olv.DefaultRenderer == null)
+                olv.DefaultRenderer = new HighlightTextRenderer(filter);
+
+            olv.AdditionalFilter = filter;
         }
     }
 }

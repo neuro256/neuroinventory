@@ -30,26 +30,26 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
-            this.lvDemandReportList = new System.Windows.Forms.ListView();
-            this.columnHeaderId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderEmployee = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderDoc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panelDemandReportListBottom = new System.Windows.Forms.Panel();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.dlvDemandReport = new BrightIdeasSoftware.DataListView();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStripDemandReportList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelDemandReportListBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dlvDemandReport)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanelMain
             // 
             this.tableLayoutPanelMain.ColumnCount = 1;
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMain.Controls.Add(this.lvDemandReportList, 0, 0);
             this.tableLayoutPanelMain.Controls.Add(this.panelDemandReportListBottom, 0, 1);
+            this.tableLayoutPanelMain.Controls.Add(this.dlvDemandReport, 0, 0);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(0);
@@ -59,50 +59,6 @@
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanelMain.Size = new System.Drawing.Size(782, 560);
             this.tableLayoutPanelMain.TabIndex = 0;
-            // 
-            // lvDemandReportList
-            // 
-            this.lvDemandReportList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lvDemandReportList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderId,
-            this.columnHeaderNumber,
-            this.columnHeaderEmployee,
-            this.columnHeaderDate,
-            this.columnHeaderDoc});
-            this.lvDemandReportList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvDemandReportList.FullRowSelect = true;
-            this.lvDemandReportList.GridLines = true;
-            this.lvDemandReportList.Location = new System.Drawing.Point(3, 3);
-            this.lvDemandReportList.MultiSelect = false;
-            this.lvDemandReportList.Name = "lvDemandReportList";
-            this.lvDemandReportList.Size = new System.Drawing.Size(776, 504);
-            this.lvDemandReportList.TabIndex = 0;
-            this.lvDemandReportList.UseCompatibleStateImageBehavior = false;
-            this.lvDemandReportList.View = System.Windows.Forms.View.Details;
-            this.lvDemandReportList.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvDemandReportList_ColumnWidthChanged);
-            // 
-            // columnHeaderId
-            // 
-            this.columnHeaderId.Text = "id";
-            // 
-            // columnHeaderNumber
-            // 
-            this.columnHeaderNumber.Text = "#";
-            // 
-            // columnHeaderEmployee
-            // 
-            this.columnHeaderEmployee.Text = "Работник";
-            this.columnHeaderEmployee.Width = 120;
-            // 
-            // columnHeaderDate
-            // 
-            this.columnHeaderDate.Text = "Дата";
-            this.columnHeaderDate.Width = 100;
-            // 
-            // columnHeaderDoc
-            // 
-            this.columnHeaderDoc.Text = "Документ";
-            this.columnHeaderDoc.Width = 250;
             // 
             // panelDemandReportListBottom
             // 
@@ -143,6 +99,61 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Visible = false;
             // 
+            // dlvDemandReport
+            // 
+            this.dlvDemandReport.AllColumns.Add(this.olvColumn1);
+            this.dlvDemandReport.AllColumns.Add(this.olvColumn2);
+            this.dlvDemandReport.AllColumns.Add(this.olvColumn3);
+            this.dlvDemandReport.AllColumns.Add(this.olvColumn4);
+            this.dlvDemandReport.CellEditUseWholeCell = false;
+            this.dlvDemandReport.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn1,
+            this.olvColumn2,
+            this.olvColumn3,
+            this.olvColumn4});
+            this.dlvDemandReport.DataSource = null;
+            this.dlvDemandReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dlvDemandReport.Location = new System.Drawing.Point(3, 3);
+            this.dlvDemandReport.Name = "dlvDemandReport";
+            this.dlvDemandReport.Size = new System.Drawing.Size(776, 504);
+            this.dlvDemandReport.TabIndex = 2;
+            this.dlvDemandReport.UseCompatibleStateImageBehavior = false;
+            this.dlvDemandReport.View = System.Windows.Forms.View.Details;
+            this.dlvDemandReport.CellClick += new System.EventHandler<BrightIdeasSoftware.CellClickEventArgs>(this.dlvDemandReport_CellClick);
+            this.dlvDemandReport.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.dlvDemandReport_CellRightClick);
+            this.dlvDemandReport.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.dlvDemandReport_FormatCell);
+            // 
+            // olvColumn1
+            // 
+            this.olvColumn1.Groupable = false;
+            this.olvColumn1.IsEditable = false;
+            this.olvColumn1.Text = "№";
+            this.olvColumn1.Width = 50;
+            // 
+            // olvColumn2
+            // 
+            this.olvColumn2.AspectName = "employeeId";
+            this.olvColumn2.Groupable = false;
+            this.olvColumn2.IsEditable = false;
+            this.olvColumn2.Text = "Работник";
+            this.olvColumn2.Width = 200;
+            // 
+            // olvColumn3
+            // 
+            this.olvColumn3.AspectName = "date";
+            this.olvColumn3.Groupable = false;
+            this.olvColumn3.IsEditable = false;
+            this.olvColumn3.Text = "Дата";
+            this.olvColumn3.Width = 200;
+            // 
+            // olvColumn4
+            // 
+            this.olvColumn4.AspectName = "document";
+            this.olvColumn4.Groupable = false;
+            this.olvColumn4.IsEditable = false;
+            this.olvColumn4.Text = "Документ";
+            this.olvColumn4.Width = 200;
+            // 
             // contextMenuStripDemandReportList
             // 
             this.contextMenuStripDemandReportList.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -162,6 +173,7 @@
             this.Text = "Список требований";
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.panelDemandReportListBottom.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dlvDemandReport)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -169,15 +181,14 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
-        private System.Windows.Forms.ListView lvDemandReportList;
-        private System.Windows.Forms.ColumnHeader columnHeaderId;
-        private System.Windows.Forms.ColumnHeader columnHeaderNumber;
-        private System.Windows.Forms.ColumnHeader columnHeaderEmployee;
-        private System.Windows.Forms.ColumnHeader columnHeaderDate;
-        private System.Windows.Forms.ColumnHeader columnHeaderDoc;
         private System.Windows.Forms.Panel panelDemandReportListBottom;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripDemandReportList;
+        private BrightIdeasSoftware.DataListView dlvDemandReport;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn olvColumn4;
     }
 }

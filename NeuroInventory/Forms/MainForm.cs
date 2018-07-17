@@ -76,33 +76,41 @@ namespace NeuroInventory
         {
             if (SQLiteSettingsManager.GetInstance().Recents().ReturnCount() > 0)
             {
-                TabRecent tabMain = new TabRecent();
-                tabMain.MdiParent = this;
-                tabMain.Parent = tabControl.TabPages[0];
-                tabMain.Dock = DockStyle.Fill;
+                TabRecent tabMain = new TabRecent
+                {
+                    MdiParent = this,
+                    Parent = tabControl.TabPages[0],
+                    Dock = DockStyle.Fill
+                };
                 tabMain.Show();
-                inventoryTabs["tabInventory"] = tabMain;
+                inventoryTabs["tabInventoryPlus"] = tabMain;
 
-                TabRecent tabReleased = new TabRecent();
-                tabReleased.MdiParent = this;
-                tabReleased.Parent = tabControl.TabPages[1];
-                tabReleased.Dock = DockStyle.Fill;
+                TabRecent tabReleased = new TabRecent
+                {
+                    MdiParent = this,
+                    Parent = tabControl.TabPages[1],
+                    Dock = DockStyle.Fill
+                };
                 tabReleased.Show();
-                inventoryTabs["tabReleased"] = tabReleased;
+                inventoryTabs["tabReleasedPlus"] = tabReleased;
 
-                TabRecent tabProviders = new TabRecent();
-                tabProviders.MdiParent = this;
-                tabProviders.Parent = tabControl.TabPages[2];
-                tabProviders.Dock = DockStyle.Fill;
+                TabRecent tabProviders = new TabRecent
+                {
+                    MdiParent = this,
+                    Parent = tabControl.TabPages[2],
+                    Dock = DockStyle.Fill
+                };
                 tabProviders.Show();
-                inventoryTabs["tabProviders"] = tabProviders;
+                inventoryTabs["tabProvidersPlus"] = tabProviders;
 
-                TabRecent tabEmployees = new TabRecent();
-                tabEmployees.MdiParent = this;
-                tabEmployees.Parent = tabControl.TabPages[3];
-                tabEmployees.Dock = DockStyle.Fill;
+                TabRecent tabEmployees = new TabRecent
+                {
+                    MdiParent = this,
+                    Parent = tabControl.TabPages[3],
+                    Dock = DockStyle.Fill
+                };
                 tabEmployees.Show();
-                inventoryTabs["tabEmployees"] = tabEmployees;
+                inventoryTabs["tabEmployeesPlus"] = tabEmployees;
 
                 if (inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
                     inventoryTabs[tabControl.SelectedTab.Name].ShowTable();
@@ -124,7 +132,7 @@ namespace NeuroInventory
         private void InitTabs()
         {
             // Закрытие открытых вкладок
-            if (inventoryTabs != null && inventoryTabs.Values.Count > 0)
+            if (inventoryTabs?.Values.Count > 0)
             {
                 foreach (IInventoryView tab in inventoryTabs.Values)
                 {
@@ -133,33 +141,33 @@ namespace NeuroInventory
                 inventoryTabs.Clear();
             }
 
-            TabMain tabMain = new TabMain();
+            TabMainPlus tabMain = new TabMainPlus();
             tabMain.MdiParent = this;
             tabMain.Parent = tabControl.TabPages[0];
             tabMain.Dock = DockStyle.Fill;
             tabMain.Show();
-            inventoryTabs["tabInventory"] = tabMain;
+            inventoryTabs["tabInventoryPlus"] = tabMain;
 
-            TabReleased tabReleased = new TabReleased();
+            TabReleasedPlus tabReleased = new TabReleasedPlus();
             tabReleased.MdiParent = this;
             tabReleased.Parent = tabControl.TabPages[1];
             tabReleased.Dock = DockStyle.Fill;
             tabReleased.Show();
-            inventoryTabs["tabReleased"] = tabReleased;
+            inventoryTabs["tabReleasedPlus"] = tabReleased;
 
-            TabProviders tabProviders = new TabProviders();
+            TabProvidersPlus tabProviders = new TabProvidersPlus();
             tabProviders.MdiParent = this;
             tabProviders.Parent = tabControl.TabPages[2];
             tabProviders.Dock = DockStyle.Fill;
             tabProviders.Show();
-            inventoryTabs["tabProviders"] = tabProviders;
+            inventoryTabs["tabProvidersPlus"] = tabProviders;
 
-            TabEmployees tabEmployees = new TabEmployees();
+            TabEmployeesPlus tabEmployees = new TabEmployeesPlus();
             tabEmployees.MdiParent = this;
             tabEmployees.Parent = tabControl.TabPages[3];
             tabEmployees.Dock = DockStyle.Fill;
             tabEmployees.Show();
-            inventoryTabs["tabEmployees"] = tabEmployees;
+            inventoryTabs["tabEmployeesPlus"] = tabEmployees;
         }
 
         private void CreateBDToolStripMenuItem_Click(object sender, EventArgs e)

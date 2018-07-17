@@ -109,7 +109,7 @@ namespace NeuroInventory
                 {
                     // Вычисление стоимости отпущенного тмц
                     string l_PriceStr = DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("price");
-                    decimal l_SumNewValue = Convert.ToDecimal(e.NewValue, CultureInfo.GetCultureInfo("ru-RU")) * Decimal.Parse(l_PriceStr, NumberStyles.Currency);
+                    decimal l_SumNewValue = Convert.ToDecimal(e.NewValue, CultureInfo.GetCultureInfo("ru-RU")) * Decimal.Parse(l_PriceStr, CultureInfo.InvariantCulture);
                     DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].SetField("sum", l_SumNewValue.ToString("C"));
                 }
             }
@@ -207,8 +207,8 @@ namespace NeuroInventory
                 newRow["name"] = row["name"].ToString();
                 newRow["OKEIcode"] = row["OKEIcode"].ToString();
                 newRow["measurement"] = SQLiteSettingsManager.GetInstance().Measurement().GetShortName(row["measurement"].ToString());
-                newRow["price"] = decimal.Parse(row["price"].ToString(), NumberStyles.Currency).ToString("0.00");
-                newRow["sum"] = decimal.Parse(row["sum"].ToString(), NumberStyles.Currency).ToString("0.00");
+                newRow["price"] = decimal.Parse(row["price"].ToString(), CultureInfo.InvariantCulture).ToString("0.00");
+                newRow["sum"] = decimal.Parse(row["sum"].ToString(), CultureInfo.InvariantCulture).ToString("0.00");
                 newRow["amount"] = row["amount"].ToString();
 
                 demandReportTable.Rows.Add(newRow);
@@ -284,7 +284,7 @@ namespace NeuroInventory
 
             foreach (DataRow row in DemandDataSet.Tables[0].Rows)
             {
-                sum += Double.Parse(row["sum"].ToString(), NumberStyles.Currency);
+                sum += Double.Parse(row["sum"].ToString(), CultureInfo.InvariantCulture);
             }
 
             return sum;

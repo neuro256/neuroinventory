@@ -38,12 +38,6 @@
             this.tbSelectionHelp = new System.Windows.Forms.TextBox();
             this.tableLayoutPanelRight = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelInventory = new System.Windows.Forms.TableLayoutPanel();
-            this.panelMainBottom = new System.Windows.Forms.Panel();
-            this.btnDemand = new System.Windows.Forms.Button();
-            this.btnFilter = new System.Windows.Forms.Button();
-            this.btnInventoryEdit = new System.Windows.Forms.Button();
-            this.btnInventoryRemove = new System.Windows.Forms.Button();
-            this.btnInventoryAdd = new System.Windows.Forms.Button();
             this.lvInventory = new System.Windows.Forms.ListView();
             this.chID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -58,6 +52,12 @@
             this.chReleased = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDebit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chBalance = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panelMainBottom = new System.Windows.Forms.Panel();
+            this.btnDemand = new System.Windows.Forms.Button();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.btnInventoryEdit = new System.Windows.Forms.Button();
+            this.btnInventoryRemove = new System.Windows.Forms.Button();
+            this.btnInventoryAdd = new System.Windows.Forms.Button();
             this.panelInventoryTop = new System.Windows.Forms.Panel();
             this.lblInventoryName = new System.Windows.Forms.Label();
             this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -198,92 +198,6 @@
             this.tableLayoutPanelInventory.Size = new System.Drawing.Size(996, 648);
             this.tableLayoutPanelInventory.TabIndex = 2;
             // 
-            // panelMainBottom
-            // 
-            this.panelMainBottom.BackColor = System.Drawing.Color.Silver;
-            this.panelMainBottom.Controls.Add(this.btnDemand);
-            this.panelMainBottom.Controls.Add(this.btnFilter);
-            this.panelMainBottom.Controls.Add(this.btnInventoryEdit);
-            this.panelMainBottom.Controls.Add(this.btnInventoryRemove);
-            this.panelMainBottom.Controls.Add(this.btnInventoryAdd);
-            this.panelMainBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMainBottom.Location = new System.Drawing.Point(0, 593);
-            this.panelMainBottom.Margin = new System.Windows.Forms.Padding(0);
-            this.panelMainBottom.Name = "panelMainBottom";
-            this.panelMainBottom.Size = new System.Drawing.Size(996, 55);
-            this.panelMainBottom.TabIndex = 1;
-            // 
-            // btnDemand
-            // 
-            this.btnDemand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDemand.AutoSize = true;
-            this.btnDemand.BackColor = System.Drawing.Color.CadetBlue;
-            this.btnDemand.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnDemand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDemand.Location = new System.Drawing.Point(580, 11);
-            this.btnDemand.Name = "btnDemand";
-            this.btnDemand.Size = new System.Drawing.Size(184, 33);
-            this.btnDemand.TabIndex = 4;
-            this.btnDemand.Text = "Отпустить ТМЦ";
-            this.btnDemand.UseVisualStyleBackColor = false;
-            this.btnDemand.Click += new System.EventHandler(this.btnDemand_Click);
-            // 
-            // btnFilter
-            // 
-            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFilter.AutoSize = true;
-            this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFilter.Location = new System.Drawing.Point(801, 11);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(184, 33);
-            this.btnFilter.TabIndex = 3;
-            this.btnFilter.Text = "Фильтр";
-            this.btnFilter.UseVisualStyleBackColor = true;
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
-            // 
-            // btnInventoryEdit
-            // 
-            this.btnInventoryEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnInventoryEdit.AutoSize = true;
-            this.btnInventoryEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnInventoryEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnInventoryEdit.Location = new System.Drawing.Point(390, 11);
-            this.btnInventoryEdit.Name = "btnInventoryEdit";
-            this.btnInventoryEdit.Size = new System.Drawing.Size(184, 33);
-            this.btnInventoryEdit.TabIndex = 2;
-            this.btnInventoryEdit.Text = "Редактировать";
-            this.btnInventoryEdit.UseVisualStyleBackColor = true;
-            this.btnInventoryEdit.Click += new System.EventHandler(this.btnInventoryEdit_Click);
-            // 
-            // btnInventoryRemove
-            // 
-            this.btnInventoryRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnInventoryRemove.AutoSize = true;
-            this.btnInventoryRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnInventoryRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnInventoryRemove.Location = new System.Drawing.Point(200, 11);
-            this.btnInventoryRemove.Name = "btnInventoryRemove";
-            this.btnInventoryRemove.Size = new System.Drawing.Size(184, 33);
-            this.btnInventoryRemove.TabIndex = 1;
-            this.btnInventoryRemove.Text = "Удалить тмц";
-            this.btnInventoryRemove.UseVisualStyleBackColor = true;
-            this.btnInventoryRemove.Click += new System.EventHandler(this.btnInventoryRemove_Click);
-            // 
-            // btnInventoryAdd
-            // 
-            this.btnInventoryAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnInventoryAdd.AutoSize = true;
-            this.btnInventoryAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnInventoryAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnInventoryAdd.Location = new System.Drawing.Point(10, 11);
-            this.btnInventoryAdd.Name = "btnInventoryAdd";
-            this.btnInventoryAdd.Size = new System.Drawing.Size(184, 33);
-            this.btnInventoryAdd.TabIndex = 0;
-            this.btnInventoryAdd.Text = "Добавить тмц";
-            this.btnInventoryAdd.UseVisualStyleBackColor = true;
-            this.btnInventoryAdd.Click += new System.EventHandler(this.btnInventoryAdd_Click);
-            // 
             // lvInventory
             // 
             this.lvInventory.AllowDrop = true;
@@ -383,6 +297,92 @@
             // 
             this.chBalance.DisplayIndex = 11;
             this.chBalance.Text = "Остаток";
+            // 
+            // panelMainBottom
+            // 
+            this.panelMainBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelMainBottom.Controls.Add(this.btnDemand);
+            this.panelMainBottom.Controls.Add(this.btnFilter);
+            this.panelMainBottom.Controls.Add(this.btnInventoryEdit);
+            this.panelMainBottom.Controls.Add(this.btnInventoryRemove);
+            this.panelMainBottom.Controls.Add(this.btnInventoryAdd);
+            this.panelMainBottom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMainBottom.Location = new System.Drawing.Point(0, 593);
+            this.panelMainBottom.Margin = new System.Windows.Forms.Padding(0);
+            this.panelMainBottom.Name = "panelMainBottom";
+            this.panelMainBottom.Size = new System.Drawing.Size(996, 55);
+            this.panelMainBottom.TabIndex = 1;
+            // 
+            // btnDemand
+            // 
+            this.btnDemand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDemand.AutoSize = true;
+            this.btnDemand.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnDemand.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnDemand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDemand.Location = new System.Drawing.Point(580, 11);
+            this.btnDemand.Name = "btnDemand";
+            this.btnDemand.Size = new System.Drawing.Size(184, 33);
+            this.btnDemand.TabIndex = 4;
+            this.btnDemand.Text = "Отпустить ТМЦ";
+            this.btnDemand.UseVisualStyleBackColor = false;
+            this.btnDemand.Click += new System.EventHandler(this.btnDemand_Click);
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter.AutoSize = true;
+            this.btnFilter.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFilter.Location = new System.Drawing.Point(801, 11);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(184, 33);
+            this.btnFilter.TabIndex = 3;
+            this.btnFilter.Text = "Фильтр";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // btnInventoryEdit
+            // 
+            this.btnInventoryEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnInventoryEdit.AutoSize = true;
+            this.btnInventoryEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnInventoryEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnInventoryEdit.Location = new System.Drawing.Point(390, 11);
+            this.btnInventoryEdit.Name = "btnInventoryEdit";
+            this.btnInventoryEdit.Size = new System.Drawing.Size(184, 33);
+            this.btnInventoryEdit.TabIndex = 2;
+            this.btnInventoryEdit.Text = "Редактировать";
+            this.btnInventoryEdit.UseVisualStyleBackColor = true;
+            this.btnInventoryEdit.Click += new System.EventHandler(this.btnInventoryEdit_Click);
+            // 
+            // btnInventoryRemove
+            // 
+            this.btnInventoryRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnInventoryRemove.AutoSize = true;
+            this.btnInventoryRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnInventoryRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnInventoryRemove.Location = new System.Drawing.Point(200, 11);
+            this.btnInventoryRemove.Name = "btnInventoryRemove";
+            this.btnInventoryRemove.Size = new System.Drawing.Size(184, 33);
+            this.btnInventoryRemove.TabIndex = 1;
+            this.btnInventoryRemove.Text = "Удалить тмц";
+            this.btnInventoryRemove.UseVisualStyleBackColor = true;
+            this.btnInventoryRemove.Click += new System.EventHandler(this.btnInventoryRemove_Click);
+            // 
+            // btnInventoryAdd
+            // 
+            this.btnInventoryAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnInventoryAdd.AutoSize = true;
+            this.btnInventoryAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnInventoryAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnInventoryAdd.Location = new System.Drawing.Point(10, 11);
+            this.btnInventoryAdd.Name = "btnInventoryAdd";
+            this.btnInventoryAdd.Size = new System.Drawing.Size(184, 33);
+            this.btnInventoryAdd.TabIndex = 0;
+            this.btnInventoryAdd.Text = "Добавить тмц";
+            this.btnInventoryAdd.UseVisualStyleBackColor = true;
+            this.btnInventoryAdd.Click += new System.EventHandler(this.btnInventoryAdd_Click);
             // 
             // panelInventoryTop
             // 

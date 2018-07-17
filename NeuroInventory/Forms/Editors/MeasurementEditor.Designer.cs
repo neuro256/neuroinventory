@@ -35,12 +35,12 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.splitContainerMeasurement = new System.Windows.Forms.SplitContainer();
-            this.lvMeasurement = new System.Windows.Forms.ListView();
-            this.chId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chOKEIcode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chSymbol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dlvMeasurement = new BrightIdeasSoftware.DataListView();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lblPlaces = new System.Windows.Forms.Label();
             this.nudPlaces = new System.Windows.Forms.NumericUpDown();
             this.tbSymbol = new System.Windows.Forms.TextBox();
@@ -54,6 +54,7 @@
             this.splitContainerMeasurement.Panel1.SuspendLayout();
             this.splitContainerMeasurement.Panel2.SuspendLayout();
             this.splitContainerMeasurement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dlvMeasurement)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPlaces)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderMeasurement)).BeginInit();
             this.SuspendLayout();
@@ -128,7 +129,7 @@
             // 
             // splitContainerMeasurement.Panel1
             // 
-            this.splitContainerMeasurement.Panel1.Controls.Add(this.lvMeasurement);
+            this.splitContainerMeasurement.Panel1.Controls.Add(this.dlvMeasurement);
             // 
             // splitContainerMeasurement.Panel2
             // 
@@ -150,50 +151,69 @@
             this.splitContainerMeasurement.SplitterDistance = 673;
             this.splitContainerMeasurement.TabIndex = 14;
             // 
-            // lvMeasurement
+            // dlvMeasurement
             // 
-            this.lvMeasurement.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lvMeasurement.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chId,
-            this.chNumber,
-            this.chOKEIcode,
-            this.chName,
-            this.chSymbol});
-            this.lvMeasurement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvMeasurement.FullRowSelect = true;
-            this.lvMeasurement.GridLines = true;
-            this.lvMeasurement.Location = new System.Drawing.Point(0, 0);
-            this.lvMeasurement.Margin = new System.Windows.Forms.Padding(0);
-            this.lvMeasurement.MultiSelect = false;
-            this.lvMeasurement.Name = "lvMeasurement";
-            this.lvMeasurement.Size = new System.Drawing.Size(673, 310);
-            this.lvMeasurement.TabIndex = 0;
-            this.lvMeasurement.UseCompatibleStateImageBehavior = false;
-            this.lvMeasurement.View = System.Windows.Forms.View.Details;
-            this.lvMeasurement.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvMeasurement_ColumnWidthChanged);
+            this.dlvMeasurement.AllColumns.Add(this.olvColumn1);
+            this.dlvMeasurement.AllColumns.Add(this.olvColumn2);
+            this.dlvMeasurement.AllColumns.Add(this.olvColumn3);
+            this.dlvMeasurement.AllColumns.Add(this.olvColumn4);
+            this.dlvMeasurement.AllColumns.Add(this.olvColumn5);
+            this.dlvMeasurement.CellEditUseWholeCell = false;
+            this.dlvMeasurement.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn1,
+            this.olvColumn2,
+            this.olvColumn3,
+            this.olvColumn4,
+            this.olvColumn5});
+            this.dlvMeasurement.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dlvMeasurement.DataSource = null;
+            this.dlvMeasurement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dlvMeasurement.Location = new System.Drawing.Point(0, 0);
+            this.dlvMeasurement.Name = "dlvMeasurement";
+            this.dlvMeasurement.Size = new System.Drawing.Size(673, 310);
+            this.dlvMeasurement.TabIndex = 0;
+            this.dlvMeasurement.UseCompatibleStateImageBehavior = false;
+            this.dlvMeasurement.View = System.Windows.Forms.View.Details;
+            this.dlvMeasurement.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.dlvMeasurement_ItemSelectionChanged);
             // 
-            // chId
+            // olvColumn1
             // 
-            this.chId.Text = "id";
+            this.olvColumn1.Groupable = false;
+            this.olvColumn1.IsEditable = false;
+            this.olvColumn1.Text = "№";
+            this.olvColumn1.Width = 50;
             // 
-            // chNumber
+            // olvColumn2
             // 
-            this.chNumber.Text = "№";
+            this.olvColumn2.AspectName = "codeOKEI";
+            this.olvColumn2.Groupable = false;
+            this.olvColumn2.IsEditable = false;
+            this.olvColumn2.Text = "Код ОКЕИ";
+            this.olvColumn2.Width = 200;
             // 
-            // chOKEIcode
+            // olvColumn3
             // 
-            this.chOKEIcode.Text = "код ОКЕИ";
-            this.chOKEIcode.Width = 80;
+            this.olvColumn3.AspectName = "name";
+            this.olvColumn3.Groupable = false;
+            this.olvColumn3.IsEditable = false;
+            this.olvColumn3.Text = "Наименование";
+            this.olvColumn3.Width = 200;
             // 
-            // chName
+            // olvColumn4
             // 
-            this.chName.Text = "Наименование";
-            this.chName.Width = 200;
+            this.olvColumn4.AspectName = "symbol";
+            this.olvColumn4.Groupable = false;
+            this.olvColumn4.IsEditable = false;
+            this.olvColumn4.Text = "Условное обозначение";
+            this.olvColumn4.Width = 200;
             // 
-            // chSymbol
+            // olvColumn5
             // 
-            this.chSymbol.Text = "Условное обозначение";
-            this.chSymbol.Width = 200;
+            this.olvColumn5.AspectName = "decimalPlaces";
+            this.olvColumn5.Groupable = false;
+            this.olvColumn5.IsEditable = false;
+            this.olvColumn5.Text = "Количество десятичных знаков";
+            this.olvColumn5.Width = 200;
             // 
             // lblPlaces
             // 
@@ -288,6 +308,7 @@
             this.splitContainerMeasurement.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMeasurement)).EndInit();
             this.splitContainerMeasurement.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dlvMeasurement)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPlaces)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderMeasurement)).EndInit();
             this.ResumeLayout(false);
@@ -301,19 +322,19 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.SplitContainer splitContainerMeasurement;
-        private System.Windows.Forms.ListView lvMeasurement;
-        private System.Windows.Forms.ColumnHeader chId;
-        private System.Windows.Forms.ColumnHeader chNumber;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripMeasurement;
         private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.ColumnHeader chOKEIcode;
-        private System.Windows.Forms.ColumnHeader chName;
-        private System.Windows.Forms.ColumnHeader chSymbol;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Label lblPlaces;
         private System.Windows.Forms.NumericUpDown nudPlaces;
         private System.Windows.Forms.TextBox tbSymbol;
         private System.Windows.Forms.Label lblSymbol;
         private System.Windows.Forms.ErrorProvider errorProviderMeasurement;
+        private BrightIdeasSoftware.DataListView dlvMeasurement;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn olvColumn4;
+        private BrightIdeasSoftware.OLVColumn olvColumn5;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrightIdeasSoftware;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -10,30 +11,81 @@ namespace NeuroInventory
 {
     public partial class DemandReportList : InventoryView
     {
+        BindingSource bindingSource = null;
+
         public DemandReportList()
         {
             InitializeComponent();
             SQLiteManager.GetInstance().DemandReport().SetCommandDataSet();
             InitForm();
-            InitListView();
-            InitContextMenuStrip();
-            InitContextMenuStripValues();
-            ShowTable();
-            ListviewSelectedIndex = 0;
-            SelectedItemId = 0;
+            InitControls();
+            InitCtxMenuStrip();
         }
 
-        private void InitContextMenuStripValues()
+        private void InitCtxMenuStrip()
         {
-            ContextMenuStripValues = new Dictionary<string, bool>
+            // Создаем элементы меню и добавляем их
+            ToolStripMenuItem addMenuItem = new ToolStripMenuItem("Добавить");
+            addMenuItem.Name = "addToolStripMenuItem";
+            addMenuItem.Click += addToolStripMenuItem_Click;
+            ToolStripMenuItem editMenuItem = new ToolStripMenuItem("Редактировать");
+            editMenuItem.Name = "editToolStripMenuItem";
+            editMenuItem.Click += editToolStripMenuItem_Click;
+            ToolStripMenuItem removeMenuItem = new ToolStripMenuItem("Удалить");
+            removeMenuItem.Name = "removeToolStripMenuItem";
+            removeMenuItem.Click += removeToolStripMenuItem_Click;
+            contextMenuStripDemandReportList.Items.Clear();
+            contextMenuStripDemandReportList.Items.AddRange(new[] { addMenuItem, editMenuItem, removeMenuItem });
+            // Ассоциируем контекстное меню со списком
+            dlvDemandReport.ContextMenuStrip = contextMenuStripDemandReportList;
+        }
+
+        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveRecord();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateRecord();
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddRecord();
+        }
+
+        private void InitControls()
+        {
+            dlvDemandReport.AutoGenerateColumns = false;
+            dlvDemandReport.FullRowSelect = true;
+            dlvDemandReport.GridLines = true;
+            dlvDemandReport.HideSelection = false;
+            dlvDemandReport.ShowGroups = false;
+            dlvDemandReport.SelectColumnsOnRightClickBehaviour = ObjectListView.ColumnSelectBehaviour.Submenu;
+            dlvDemandReport.ShowCommandMenuOnRightClick = true;
+            dlvDemandReport.ShowItemToolTips = true;
+            dlvDemandReport.UseCellFormatEvents = true;
+            dlvDemandReport.UseFilterIndicator = true;
+            dlvDemandReport.UseFiltering = true;
+            bindingSource = new BindingSource(ReturnDataSet(), "demandReport");
+            dlvDemandReport.DataSource = bindingSource;
+            dlvDemandReport.SelectedBackColor = Color.LightBlue;
+            dlvDemandReport.SelectedForeColor = Color.MidnightBlue;
+            dlvDemandReport.RowHeight = Definitions.ROW_HEIGHT;
+            dlvDemandReport.DoubleBuffered(true);
+            // Автоматическая нумерация строк
+            this.dlvDemandReport.FormatRow += delegate (object sender, FormatRowEventArgs args)
             {
-                { "addOnItem", false },
-                { "editOnItem", false },
-                { "removeOnItem", true },
-                { "addOnSpace", false },
-                { "editOnSpace", false },
-                { "removeOnSpace", false }
+                args.Item.Text = (args.RowIndex + 1).ToString();
             };
+
+            dlvDemandReport.RebuildColumns();
+        }
+
+        private void RefreshList()
+        {
+            bindingSource.DataSource = ReturnDataSet();
         }
 
         protected override void InitForm()
@@ -53,17 +105,6 @@ namespace NeuroInventory
         public override void InitListView()
         {
             base.InitListView();
-
-            lvDemandReportList.Columns.Clear();
-
-            List<ColumnSettings> lvDemandReportListSettings = UISettings.GetInstance().LvDemandReportListSettings.GetColumnSettingsList();
-
-            foreach (var colSettings in lvDemandReportListSettings)
-            {
-                lvDemandReportList.Columns.Add(new ColHeader(colSettings.Text, colSettings.Width, colSettings.Align, colSettings.Ascending));
-            }
-
-            lvDemandReportList.DoubleBuffered(true);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -73,22 +114,20 @@ namespace NeuroInventory
 
         public override void RemoveRecord()
         {
-            if(m_Listview.SelectedItems.Count > 0)
+            if (dlvDemandReport.SelectedObjects?.Count > 0)
             {
-                SQLiteManager.GetInstance().DemandReport().Remove(SelectedItemId);
-                m_Listview.SelectedItems.Clear();
+                foreach (var selectedObject in dlvDemandReport.SelectedObjects)
+                {
+                    DataRowView dataRowView = selectedObject as DataRowView;
+                    SQLiteManager.GetInstance().DemandReport().Remove(Convert.ToInt32(dataRowView["id"]));
+                }
                 SQLiteManager.GetInstance().DemandReport().SetCommandDataSet();
-                RemoveFromListViewAt(ListviewSelectedIndex);
+                RefreshList();
             }
             else
             {
                 MessageBox.Show(Definitions.REMOVE_WARNING_STRING);
             }
-        }
-
-        protected override ListView GetListView()
-        {
-            return lvDemandReportList;
         }
 
         protected override ContextMenuStrip GetContextMenuStrip()
@@ -101,55 +140,39 @@ namespace NeuroInventory
             return SQLiteManager.GetInstance().DemandReport().ReturnDataSet();
         }
 
-        public override void ListViewItemMouseUp(object sender, MouseEventArgs e)
+        private void dlvDemandReport_FormatCell(object sender, FormatCellEventArgs e)
         {
-            try
+            if (e.Column?.AspectName == "document")
             {
-                base.ListViewItemMouseUp(sender, e);
-
-                if (e.Button == MouseButtons.Left)
-                {
-                    if (m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"]?.Bounds.Contains(e.X, e.Y) ?? false)
-                    {
-                        string l_FileName = m_Listview.GetItemAt(e.X, e.Y)?.SubItems["document"].Tag.ToString();
-                        NeuroFile.OpenFileInExplorer(l_FileName);
-                        m_Listview.SelectedItems.Clear();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                e.SubItem.BackColor = Color.LightBlue;
+                e.SubItem.Text = Path.GetFileName(e.SubItem.Text);
             }
         }
 
-        public override void ShowTable_ModifySubItem(ListViewItem.ListViewSubItem subItem)
+        private void dlvDemandReport_CellClick(object sender, CellClickEventArgs e)
         {
-            base.ShowTable_ModifySubItem(subItem);
-
-            if (subItem.Name == "document")
+            if (e.Column?.AspectName == "document")
             {
-                subItem.BackColor = Color.LightBlue;
-                subItem.Tag = subItem.Text;
-                subItem.Text = Path.GetFileName(subItem.Text);
+                DataRowView dataRowView = e.Model as DataRowView;
+                NeuroFile.OpenFileInExplorer(dataRowView["document"].ToString());
             }
         }
 
-        private void lvDemandReportList_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        private void dlvDemandReport_CellRightClick(object sender, CellRightClickEventArgs e)
         {
-            List<ColumnSettings> lvNewSettings = UISettings.GetInstance().LvDemandReportListSettings.GetColumnSettingsList();
-
-            if (lvNewSettings != null)
+            if (e.Model != null)
             {
-                lvNewSettings[e.ColumnIndex].Width = lvDemandReportList.Columns[e.ColumnIndex].Width;
-
-                UISettings.GetInstance().LvDemandReportListSettings.SetColumnSettingsList(lvNewSettings);
+                contextMenuStripDemandReportList.Items["addToolStripMenuItem"].Visible = false;
+                contextMenuStripDemandReportList.Items["editToolStripMenuItem"].Visible = false;
+                contextMenuStripDemandReportList.Items["removeToolStripMenuItem"].Visible = true;
             }
-
-            if (lvDemandReportList.Columns[e.ColumnIndex].Width < Definitions.MIN_COLUMN_WIDTH)
+            else
             {
-                lvDemandReportList.Columns[e.ColumnIndex].Width = Definitions.MIN_COLUMN_WIDTH;
+                contextMenuStripDemandReportList.Items["addToolStripMenuItem"].Visible = false;
+                contextMenuStripDemandReportList.Items["editToolStripMenuItem"].Visible = false;
+                contextMenuStripDemandReportList.Items["removeToolStripMenuItem"].Visible = false;
             }
+            e.MenuStrip = contextMenuStripDemandReportList;
         }
     }
 }

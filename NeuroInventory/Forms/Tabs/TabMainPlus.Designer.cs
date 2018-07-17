@@ -328,6 +328,7 @@
             this.dlvInventory.AllColumns.Add(this.olvColumn12);
             this.dlvInventory.AllColumns.Add(this.olvColumn13);
             this.dlvInventory.CellEditUseWholeCell = false;
+            this.dlvInventory.CheckBoxes = true;
             this.dlvInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
             this.olvColumn2,
@@ -345,6 +346,7 @@
             this.dlvInventory.Cursor = System.Windows.Forms.Cursors.Default;
             this.dlvInventory.DataSource = null;
             this.dlvInventory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dlvInventory.HideSelection = false;
             this.dlvInventory.Location = new System.Drawing.Point(3, 58);
             this.dlvInventory.Name = "dlvInventory";
             this.dlvInventory.Size = new System.Drawing.Size(990, 587);

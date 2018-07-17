@@ -348,8 +348,6 @@ namespace NeuroInventory
             dlvInventory.RowHeight = Definitions.ROW_HEIGHT;
             dlvInventory.IsSimpleDragSource = true;
             dlvInventory.IsSimpleDropSink = true;
-            dlvInventory.SelectedObject = null;
-            dlvInventory.SelectedObjects = null;
             dlvInventory.DoubleBuffered(true);
             // Автоматическая нумерация строк
             this.dlvInventory.FormatRow += delegate (object sender, FormatRowEventArgs args)
@@ -402,6 +400,9 @@ namespace NeuroInventory
                     }
                 }
             };
+
+            dlvInventory.SelectedObject = null;
+            dlvInventory.SelectedObjects = null;
 
             // drag n drop
             SimpleDropSink dropSink = new SimpleDropSink();
@@ -609,7 +610,7 @@ namespace NeuroInventory
 
                 if (l_BalanceValue <= 0)
                 {
-                    e.Item.Checked = false;
+                    item.Checked = false;
                 }
             }
         }

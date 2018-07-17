@@ -35,6 +35,8 @@ namespace NeuroInventory
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanelReleased = new System.Windows.Forms.TableLayoutPanel();
             this.panelReleasedBottom = new System.Windows.Forms.Panel();
+            this.lblFilter = new System.Windows.Forms.Label();
+            this.tbFilter = new System.Windows.Forms.TextBox();
             this.btnDebitCancel = new System.Windows.Forms.Button();
             this.btnDebitReport = new System.Windows.Forms.Button();
             this.btnReleasedRemove = new System.Windows.Forms.Button();
@@ -57,8 +59,6 @@ namespace NeuroInventory
             this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblFilter = new System.Windows.Forms.Label();
-            this.tbFilter = new System.Windows.Forms.TextBox();
             this.tableLayoutPanelReleased.SuspendLayout();
             this.panelReleasedBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dlvReleased)).BeginInit();
@@ -95,6 +95,25 @@ namespace NeuroInventory
             this.panelReleasedBottom.Name = "panelReleasedBottom";
             this.panelReleasedBottom.Size = new System.Drawing.Size(1200, 55);
             this.panelReleasedBottom.TabIndex = 1;
+            // 
+            // lblFilter
+            // 
+            this.lblFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblFilter.AutoSize = true;
+            this.lblFilter.Location = new System.Drawing.Point(915, 15);
+            this.lblFilter.Name = "lblFilter";
+            this.lblFilter.Size = new System.Drawing.Size(67, 17);
+            this.lblFilter.TabIndex = 9;
+            this.lblFilter.Text = "Фильтр: ";
+            // 
+            // tbFilter
+            // 
+            this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbFilter.Location = new System.Drawing.Point(988, 12);
+            this.tbFilter.Name = "tbFilter";
+            this.tbFilter.Size = new System.Drawing.Size(200, 22);
+            this.tbFilter.TabIndex = 8;
+            this.tbFilter.TextChanged += new System.EventHandler(this.tbFilter_TextChanged);
             // 
             // btnDebitCancel
             // 
@@ -325,25 +344,6 @@ namespace NeuroInventory
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
             this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.removeToolStripMenuItem.Text = "Удалить";
-            // 
-            // lblFilter
-            // 
-            this.lblFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFilter.AutoSize = true;
-            this.lblFilter.Location = new System.Drawing.Point(915, 15);
-            this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(67, 17);
-            this.lblFilter.TabIndex = 9;
-            this.lblFilter.Text = "Фильтр: ";
-            // 
-            // tbFilter
-            // 
-            this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbFilter.Location = new System.Drawing.Point(988, 12);
-            this.tbFilter.Name = "tbFilter";
-            this.tbFilter.Size = new System.Drawing.Size(200, 22);
-            this.tbFilter.TabIndex = 8;
-            this.tbFilter.TextChanged += new System.EventHandler(this.tbFilter_TextChanged);
             // 
             // TabReleasedPlus
             // 

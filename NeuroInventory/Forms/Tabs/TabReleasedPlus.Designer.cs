@@ -206,6 +206,8 @@ namespace NeuroInventory
             this.olvColumn1.Groupable = false;
             this.olvColumn1.HeaderCheckBox = true;
             this.olvColumn1.IsEditable = false;
+            this.olvColumn1.MaximumWidth = 1000;
+            this.olvColumn1.MinimumWidth = 50;
             this.olvColumn1.Text = "№";
             this.olvColumn1.Width = 50;
             // 

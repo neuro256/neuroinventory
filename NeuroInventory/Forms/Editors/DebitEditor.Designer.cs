@@ -91,6 +91,8 @@
             // 
             this.olvColumn7.AspectName = "";
             this.olvColumn7.IsEditable = false;
+            this.olvColumn7.MaximumWidth = 1000;
+            this.olvColumn7.MinimumWidth = 50;
             this.olvColumn7.Text = "№";
             this.olvColumn7.Width = 50;
             // 
@@ -99,6 +101,8 @@
             this.olvColumn1.AspectName = "name";
             this.olvColumn1.ButtonPadding = new System.Drawing.Size(10, 10);
             this.olvColumn1.IsTileViewColumn = true;
+            this.olvColumn1.MaximumWidth = 1000;
+            this.olvColumn1.MinimumWidth = 50;
             this.olvColumn1.Text = "Название";
             this.olvColumn1.UseInitialLetterForGroup = true;
             this.olvColumn1.Width = 250;
@@ -107,6 +111,8 @@
             // 
             this.olvColumn2.AspectName = "OKEIcode";
             this.olvColumn2.IsEditable = false;
+            this.olvColumn2.MaximumWidth = 1000;
+            this.olvColumn2.MinimumWidth = 50;
             this.olvColumn2.Text = "Код ОКЕИ";
             this.olvColumn2.Width = 90;
             // 
@@ -114,6 +120,8 @@
             // 
             this.olvColumn8.AspectName = "invoice_code";
             this.olvColumn8.IsEditable = false;
+            this.olvColumn8.MaximumWidth = 1000;
+            this.olvColumn8.MinimumWidth = 50;
             this.olvColumn8.Text = "Номер накладной";
             this.olvColumn8.Width = 120;
             // 
@@ -121,6 +129,8 @@
             // 
             this.olvColumn3.AspectName = "measurement";
             this.olvColumn3.IsEditable = false;
+            this.olvColumn3.MaximumWidth = 1000;
+            this.olvColumn3.MinimumWidth = 50;
             this.olvColumn3.Text = "Единица измерения";
             this.olvColumn3.Width = 150;
             // 
@@ -129,6 +139,8 @@
             this.olvColumn4.AspectName = "price";
             this.olvColumn4.AspectToStringFormat = "{0:C}";
             this.olvColumn4.IsEditable = false;
+            this.olvColumn4.MaximumWidth = 1000;
+            this.olvColumn4.MinimumWidth = 50;
             this.olvColumn4.Text = "Цена";
             this.olvColumn4.Width = 100;
             // 
@@ -136,12 +148,16 @@
             // 
             this.olvColumn5.AspectName = "balance";
             this.olvColumn5.IsEditable = false;
+            this.olvColumn5.MaximumWidth = 1000;
+            this.olvColumn5.MinimumWidth = 50;
             this.olvColumn5.Text = "Остаток";
             this.olvColumn5.Width = 100;
             // 
             // olvColumn9
             // 
             this.olvColumn9.AspectName = "debit_amount";
+            this.olvColumn9.MaximumWidth = 1000;
+            this.olvColumn9.MinimumWidth = 50;
             this.olvColumn9.Text = "Списать";
             this.olvColumn9.Width = 100;
             // 
@@ -150,6 +166,8 @@
             this.olvColumn6.AspectName = "sum";
             this.olvColumn6.AspectToStringFormat = "{0:C}";
             this.olvColumn6.IsEditable = false;
+            this.olvColumn6.MaximumWidth = 1000;
+            this.olvColumn6.MinimumWidth = 50;
             this.olvColumn6.Text = "Сумма";
             this.olvColumn6.Width = 100;
             // 

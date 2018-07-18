@@ -116,6 +116,8 @@ namespace NeuroInventory
             // 
             this.olvColumn6.Groupable = false;
             this.olvColumn6.IsEditable = false;
+            this.olvColumn6.MaximumWidth = 1000;
+            this.olvColumn6.MinimumWidth = 50;
             this.olvColumn6.Text = "№";
             // 
             // olvColumn1
@@ -123,6 +125,8 @@ namespace NeuroInventory
             this.olvColumn1.AspectName = "surename";
             this.olvColumn1.Groupable = false;
             this.olvColumn1.IsEditable = false;
+            this.olvColumn1.MaximumWidth = 1000;
+            this.olvColumn1.MinimumWidth = 50;
             this.olvColumn1.Text = "Фамилия";
             this.olvColumn1.Width = 200;
             // 
@@ -131,6 +135,8 @@ namespace NeuroInventory
             this.olvColumn2.AspectName = "firstname";
             this.olvColumn2.Groupable = false;
             this.olvColumn2.IsEditable = false;
+            this.olvColumn2.MaximumWidth = 1000;
+            this.olvColumn2.MinimumWidth = 50;
             this.olvColumn2.Text = "Имя";
             this.olvColumn2.Width = 200;
             // 
@@ -139,6 +145,8 @@ namespace NeuroInventory
             this.olvColumn3.AspectName = "lastname";
             this.olvColumn3.Groupable = false;
             this.olvColumn3.IsEditable = false;
+            this.olvColumn3.MaximumWidth = 1000;
+            this.olvColumn3.MinimumWidth = 50;
             this.olvColumn3.Text = "Отчество";
             this.olvColumn3.Width = 200;
             // 
@@ -147,6 +155,8 @@ namespace NeuroInventory
             this.olvColumn4.AspectName = "post";
             this.olvColumn4.Groupable = false;
             this.olvColumn4.IsEditable = false;
+            this.olvColumn4.MaximumWidth = 1000;
+            this.olvColumn4.MinimumWidth = 50;
             this.olvColumn4.Text = "Должность";
             this.olvColumn4.Width = 200;
             // 
@@ -155,6 +165,8 @@ namespace NeuroInventory
             this.olvColumn5.AspectName = "department";
             this.olvColumn5.Groupable = false;
             this.olvColumn5.IsEditable = false;
+            this.olvColumn5.MaximumWidth = 1000;
+            this.olvColumn5.MinimumWidth = 50;
             this.olvColumn5.Text = "Отдел";
             this.olvColumn5.Width = 200;
             // 

@@ -125,6 +125,8 @@
             // 
             this.olvColumn1.Groupable = false;
             this.olvColumn1.IsEditable = false;
+            this.olvColumn1.MaximumWidth = 1000;
+            this.olvColumn1.MinimumWidth = 50;
             this.olvColumn1.Text = "№";
             this.olvColumn1.Width = 50;
             // 
@@ -133,6 +135,8 @@
             this.olvColumn2.AspectName = "date";
             this.olvColumn2.Groupable = false;
             this.olvColumn2.IsEditable = false;
+            this.olvColumn2.MaximumWidth = 1000;
+            this.olvColumn2.MinimumWidth = 50;
             this.olvColumn2.Text = "Дата";
             this.olvColumn2.Width = 200;
             // 
@@ -141,6 +145,8 @@
             this.olvColumn3.AspectName = "document";
             this.olvColumn3.Groupable = false;
             this.olvColumn3.IsEditable = false;
+            this.olvColumn3.MaximumWidth = 1000;
+            this.olvColumn3.MinimumWidth = 50;
             this.olvColumn3.Text = "Документ";
             this.olvColumn3.Width = 200;
             // 

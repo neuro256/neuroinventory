@@ -180,6 +180,8 @@
             // 
             this.olvColumn1.Groupable = false;
             this.olvColumn1.IsEditable = false;
+            this.olvColumn1.MaximumWidth = 1000;
+            this.olvColumn1.MinimumWidth = 50;
             this.olvColumn1.Text = "№";
             this.olvColumn1.Width = 50;
             // 
@@ -188,6 +190,8 @@
             this.olvColumn2.AspectName = "codeOKEI";
             this.olvColumn2.Groupable = false;
             this.olvColumn2.IsEditable = false;
+            this.olvColumn2.MaximumWidth = 1000;
+            this.olvColumn2.MinimumWidth = 50;
             this.olvColumn2.Text = "Код ОКЕИ";
             this.olvColumn2.Width = 200;
             // 
@@ -196,6 +200,8 @@
             this.olvColumn3.AspectName = "name";
             this.olvColumn3.Groupable = false;
             this.olvColumn3.IsEditable = false;
+            this.olvColumn3.MaximumWidth = 1000;
+            this.olvColumn3.MinimumWidth = 50;
             this.olvColumn3.Text = "Наименование";
             this.olvColumn3.Width = 200;
             // 
@@ -204,6 +210,8 @@
             this.olvColumn4.AspectName = "symbol";
             this.olvColumn4.Groupable = false;
             this.olvColumn4.IsEditable = false;
+            this.olvColumn4.MaximumWidth = 1000;
+            this.olvColumn4.MinimumWidth = 50;
             this.olvColumn4.Text = "Условное обозначение";
             this.olvColumn4.Width = 200;
             // 
@@ -212,6 +220,8 @@
             this.olvColumn5.AspectName = "decimalPlaces";
             this.olvColumn5.Groupable = false;
             this.olvColumn5.IsEditable = false;
+            this.olvColumn5.MaximumWidth = 1000;
+            this.olvColumn5.MinimumWidth = 50;
             this.olvColumn5.Text = "Количество десятичных знаков";
             this.olvColumn5.Width = 200;
             // 

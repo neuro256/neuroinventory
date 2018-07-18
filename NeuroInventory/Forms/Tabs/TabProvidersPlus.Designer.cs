@@ -111,6 +111,8 @@
             // 
             this.olvColumn1.Groupable = false;
             this.olvColumn1.IsEditable = false;
+            this.olvColumn1.MaximumWidth = 1000;
+            this.olvColumn1.MinimumWidth = 50;
             this.olvColumn1.Text = "№";
             this.olvColumn1.Width = 50;
             // 
@@ -119,6 +121,8 @@
             this.olvColumn2.AspectName = "name";
             this.olvColumn2.Groupable = false;
             this.olvColumn2.IsEditable = false;
+            this.olvColumn2.MaximumWidth = 1000;
+            this.olvColumn2.MinimumWidth = 50;
             this.olvColumn2.Text = "Название";
             this.olvColumn2.Width = 200;
             // 
@@ -127,6 +131,8 @@
             this.olvColumn3.AspectName = "address";
             this.olvColumn3.Groupable = false;
             this.olvColumn3.IsEditable = false;
+            this.olvColumn3.MaximumWidth = 1000;
+            this.olvColumn3.MinimumWidth = 50;
             this.olvColumn3.Text = "адрес";
             this.olvColumn3.Width = 200;
             // 
@@ -135,6 +141,8 @@
             this.olvColumn4.AspectName = "phone";
             this.olvColumn4.Groupable = false;
             this.olvColumn4.IsEditable = false;
+            this.olvColumn4.MaximumWidth = 1000;
+            this.olvColumn4.MinimumWidth = 50;
             this.olvColumn4.Text = "телефон";
             this.olvColumn4.Width = 200;
             // 
@@ -143,6 +151,8 @@
             this.olvColumn5.AspectName = "mail";
             this.olvColumn5.Groupable = false;
             this.olvColumn5.IsEditable = false;
+            this.olvColumn5.MaximumWidth = 1000;
+            this.olvColumn5.MinimumWidth = 50;
             this.olvColumn5.Text = "e-mail";
             this.olvColumn5.Width = 200;
             // 
@@ -151,6 +161,8 @@
             this.olvColumn6.AspectName = "inn";
             this.olvColumn6.Groupable = false;
             this.olvColumn6.IsEditable = false;
+            this.olvColumn6.MaximumWidth = 1000;
+            this.olvColumn6.MinimumWidth = 50;
             this.olvColumn6.Text = "ИНН";
             this.olvColumn6.Width = 200;
             // 
@@ -159,6 +171,8 @@
             this.olvColumn7.AspectName = "document";
             this.olvColumn7.Groupable = false;
             this.olvColumn7.IsEditable = false;
+            this.olvColumn7.MaximumWidth = 1000;
+            this.olvColumn7.MinimumWidth = 50;
             this.olvColumn7.Text = "Карточка предприятия";
             this.olvColumn7.Width = 200;
             // 

@@ -7,11 +7,11 @@ using System.IO;
 
 namespace NeuroInventory
 {
-    public partial class TabProvidersPlus : InventoryView
+    public partial class TabProviders : InventoryView
     {
         BindingSource bindingSource = null;
 
-        public TabProvidersPlus()
+        public TabProviders()
         {
             InitializeComponent();
             InitForm();
@@ -95,8 +95,8 @@ namespace NeuroInventory
         {
             base.InitForm();
 
-            this.Name = "tabProvidersPlus";
-            this.Text = "tabProvidersPlus";
+            this.Name = "TabProviders";
+            this.Text = "TabProviders";
         }
 
         public override void InitListView()

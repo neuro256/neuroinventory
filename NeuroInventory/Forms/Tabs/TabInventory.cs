@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public partial class TabMainPlus : InventoryView
+    public partial class TabInventory : InventoryView
     {
         /// <summary>
         /// Тип узла древовидного списка каталогов
@@ -32,7 +32,7 @@ namespace NeuroInventory
         BindingSource bindingSource = null;
         BindingSource bindingSourceCatalogs = null;
 
-        public TabMainPlus()
+        public TabInventory()
         {
             InitializeComponent();
             InitForm();

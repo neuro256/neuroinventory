@@ -104,29 +104,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\Tabs\TabEmployeesPlus.cs">
+    <Compile Include="Forms\Tabs\TabEmployees.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Tabs\TabEmployeesPlus.Designer.cs">
-      <DependentUpon>TabEmployeesPlus.cs</DependentUpon>
+    <Compile Include="Forms\Tabs\TabEmployees.Designer.cs">
+      <DependentUpon>TabEmployees.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Tabs\TabMainPlus.cs">
+    <Compile Include="Forms\Tabs\TabInventory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Tabs\TabMainPlus.Designer.cs">
-      <DependentUpon>TabMainPlus.cs</DependentUpon>
+    <Compile Include="Forms\Tabs\TabInventory.Designer.cs">
+      <DependentUpon>TabInventory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Tabs\TabProvidersPlus.cs">
+    <Compile Include="Forms\Tabs\TabProviders.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Tabs\TabProvidersPlus.Designer.cs">
-      <DependentUpon>TabProvidersPlus.cs</DependentUpon>
+    <Compile Include="Forms\Tabs\TabProviders.Designer.cs">
+      <DependentUpon>TabProviders.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Tabs\TabReleasedPlus.cs">
+    <Compile Include="Forms\Tabs\TabReleased.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Tabs\TabReleasedPlus.Designer.cs">
-      <DependentUpon>TabReleasedPlus.cs</DependentUpon>
+    <Compile Include="Forms\Tabs\TabReleased.Designer.cs">
+      <DependentUpon>TabReleased.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportsClasses\ReportBuilder.cs" />
     <Compile Include="ReportsClasses\ReportData.cs" />
@@ -300,17 +300,17 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tabs\TabEmployeesPlus.resx">
-      <DependentUpon>TabEmployeesPlus.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Tabs\TabEmployees.resx">
+      <DependentUpon>TabEmployees.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tabs\TabMainPlus.resx">
-      <DependentUpon>TabMainPlus.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Tabs\TabInventory.resx">
+      <DependentUpon>TabInventory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tabs\TabProvidersPlus.resx">
-      <DependentUpon>TabProvidersPlus.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Tabs\TabProviders.resx">
+      <DependentUpon>TabProviders.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Tabs\TabReleasedPlus.resx">
-      <DependentUpon>TabReleasedPlus.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Tabs\TabReleased.resx">
+      <DependentUpon>TabReleased.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Tabs\TabRecent.resx">
       <DependentUpon>TabRecent.cs</DependentUpon>

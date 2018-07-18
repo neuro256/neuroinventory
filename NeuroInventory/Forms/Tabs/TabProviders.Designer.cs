@@ -1,6 +1,6 @@
 ﻿namespace NeuroInventory
 {
-    partial class TabProvidersPlus
+    partial class TabProviders
     {
         /// <summary>
         /// Required designer variable.
@@ -255,7 +255,7 @@
             this.contextMenuStripProviders.Name = "contextMenuStripProviders";
             this.contextMenuStripProviders.Size = new System.Drawing.Size(61, 4);
             // 
-            // TabProvidersPlus
+            // TabProviders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -264,10 +264,10 @@
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanelProviders);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "TabProvidersPlus";
+            this.Name = "TabProviders";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "TabProvidersPlus";
+            this.Text = "TabProviders";
             this.tableLayoutPanelProviders.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dlvProviders)).EndInit();
             this.panelProvidersBottom.ResumeLayout(false);

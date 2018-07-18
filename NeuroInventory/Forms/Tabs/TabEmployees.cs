@@ -6,11 +6,11 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public partial class TabEmployeesPlus : InventoryView
+    public partial class TabEmployees : InventoryView
     {
         BindingSource bindingSource = null;
 
-        public TabEmployeesPlus()
+        public TabEmployees()
         {
             InitializeComponent();
             InitForm();
@@ -103,8 +103,8 @@ namespace NeuroInventory
         {
             base.InitForm();
 
-            this.Name = "TabEmployeesPlus";
-            this.Text = "TabEmployeesPlus";
+            this.Name = "TabEmployees";
+            this.Text = "TabEmployees";
         }
 
         public override void InitListView()

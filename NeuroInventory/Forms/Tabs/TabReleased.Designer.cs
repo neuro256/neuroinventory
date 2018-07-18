@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    partial class TabReleasedPlus
+    partial class TabReleased
     {
         /// <summary>
         /// Required designer variable.
@@ -347,7 +347,7 @@ namespace NeuroInventory
             this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.removeToolStripMenuItem.Text = "Удалить";
             // 
-            // TabReleasedPlus
+            // TabReleased
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -357,7 +357,7 @@ namespace NeuroInventory
             this.Controls.Add(this.tableLayoutPanelReleased);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "TabReleasedPlus";
+            this.Name = "TabReleased";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "TabDemand";

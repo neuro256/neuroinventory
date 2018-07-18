@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public partial class TabReleasedPlus : InventoryView
+    public partial class TabReleased : InventoryView
     {
         enum BalanceType
         {
@@ -70,7 +70,7 @@ namespace NeuroInventory
 
         BindingSource bindingSource = null;
 
-        public TabReleasedPlus()
+        public TabReleased()
         {
             InitializeComponent();
             InitForm();

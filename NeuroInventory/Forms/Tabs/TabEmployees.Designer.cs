@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    partial class TabEmployeesPlus
+    partial class TabEmployees
     {
         /// <summary>
         /// Required designer variable.
@@ -272,7 +272,7 @@ namespace NeuroInventory
             this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.removeToolStripMenuItem.Text = "Удалить";
             // 
-            // TabEmployeesPlus
+            // TabEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -281,10 +281,10 @@ namespace NeuroInventory
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanelEmployees);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "TabEmployeesPlus";
+            this.Name = "TabEmployees";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "TabEmployeesPlus";
+            this.Text = "TabEmployees";
             this.tableLayoutPanelEmployees.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dlvEmployees)).EndInit();
             this.panelEmployeesBottom.ResumeLayout(false);

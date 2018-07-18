@@ -1,6 +1,6 @@
 ﻿namespace NeuroInventory
 {
-    partial class TabMainPlus
+    partial class TabInventory
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabMainPlus));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabInventory));
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanelLeft = new System.Windows.Forms.TableLayoutPanel();
             this.panelLeftPanelBottom = new System.Windows.Forms.Panel();
@@ -144,8 +144,8 @@
             // 
             this.dtlCatalogs.AllColumns.Add(this.catalogsNameColumn);
             this.dtlCatalogs.AllColumns.Add(this.catalogsTypeColumn);
-            this.dtlCatalogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dtlCatalogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtlCatalogs.CellEditUseWholeCell = false;
             this.dtlCatalogs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -499,7 +499,7 @@
             this.contextMenuStripCatalogs.Name = "contextMenuStripCatalogs";
             this.contextMenuStripCatalogs.Size = new System.Drawing.Size(61, 4);
             // 
-            // TabMainPlus
+            // TabInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -509,10 +509,10 @@
             this.Controls.Add(this.splitContainerMain);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "TabMainPlus";
+            this.Name = "TabInventory";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "TabMainPlus";
+            this.Text = "TabInventory";
             this.splitContainerMain.Panel1.ResumeLayout(false);
             this.splitContainerMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();

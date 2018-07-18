@@ -111,9 +111,6 @@ namespace NeuroInventory
                 };
                 tabEmployees.Show();
                 inventoryTabs["tabEmployeesPlus"] = tabEmployees;
-
-                if (inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
-                    inventoryTabs[tabControl.SelectedTab.Name].ShowTable();
             }
             else
             {

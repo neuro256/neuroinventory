@@ -14,6 +14,7 @@ namespace NeuroInventory
         {
             InitializeComponent();
             InitForm();
+            ShowTable();
         }
 
         protected override void InitForm()
@@ -29,17 +30,12 @@ namespace NeuroInventory
             base.Exit();
         }
 
-        protected override ListView GetListView()
-        {
-            return lvRecent;
-        }
-
         public override DataSet ReturnDataSet()
         {
             return SQLiteSettingsManager.GetInstance().Recents().ReturnDataSet();
         }
 
-        public override void ShowTable()
+        private void ShowTable()
         {
             DataSet dataSet = ReturnDataSet();
             try

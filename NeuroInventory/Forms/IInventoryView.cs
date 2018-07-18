@@ -1,12 +1,8 @@
-﻿using System.Data;
-using System.Windows.Forms;
-
-namespace NeuroInventory
+﻿namespace NeuroInventory
 {
     interface IInventoryView
     {
         void InitListView();
-        void InitContextMenuStrip();
         void AddRecord();
         void RemoveRecord();
         void UpdateRecord();

@@ -112,11 +112,6 @@ namespace NeuroInventory
             }
         }
 
-        protected override ContextMenuStrip GetContextMenuStrip()
-        {
-            return contextMenuStripDebitReportList;
-        }
-
         public override DataSet ReturnDataSet()
         {
             return SQLiteManager.GetInstance().DebitReport().ReturnDataSet();

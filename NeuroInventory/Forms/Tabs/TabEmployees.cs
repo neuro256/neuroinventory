@@ -148,11 +148,6 @@ namespace NeuroInventory
             }
         }
 
-        protected override ContextMenuStrip GetContextMenuStrip()
-        {
-            return contextMenuStripEmployees;
-        }
-
         public override DataSet ReturnDataSet()
         {
             return SQLiteManager.GetInstance().Employees().ReturnDataSet();

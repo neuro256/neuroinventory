@@ -14,6 +14,7 @@ namespace NeuroInventory
         protected DataListView mDataListView = null;
         protected ContextMenuStrip m_ContextMenuStrip = null;
         private bool useCheckox = false;
+        private HighlightTextRenderer highlightTextRenderer1;
         private Dictionary<string, bool> contextMenuStripValues = null;
 
         protected bool UseCheckox { get => useCheckox; set => useCheckox = value; }
@@ -56,6 +57,12 @@ namespace NeuroInventory
             };
             mDataListView.SelectedObject = null;
             mDataListView.SelectedObjects = null;
+            // highlightrenderer
+            highlightTextRenderer1 = new HighlightTextRenderer();
+            highlightTextRenderer1.CornerRoundness = 0.0f;
+            highlightTextRenderer1.FramePen = new Pen(Color.MidnightBlue);
+            highlightTextRenderer1.FillBrush = new SolidBrush(Color.LightBlue);
+            mDataListView.DefaultRenderer = highlightTextRenderer1;
         }
 
         public void InitContextMenuStrip()
@@ -140,6 +147,19 @@ namespace NeuroInventory
                 olv.DefaultRenderer = new HighlightTextRenderer(filter);
 
             olv.AdditionalFilter = filter;
+        }
+
+        private void InitializeComponent()
+        {
+            this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
+            this.SuspendLayout();
+            // 
+            // InventoryView
+            // 
+            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.Name = "InventoryView";
+            this.ResumeLayout(false);
+
         }
     }
 }

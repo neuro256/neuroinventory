@@ -59,12 +59,6 @@ namespace NeuroInventory
             // binging source
             bindingSource = new BindingSource(ReturnDataSet(), "employees");
             dlvEmployees.DataSource = bindingSource;
-            // highlightrenderer
-            highlightTextRenderer1.CornerRoundness = 0.0f;
-            highlightTextRenderer1.FramePen = new Pen(Color.MidnightBlue);
-            highlightTextRenderer1.FillBrush = new SolidBrush(Color.LightBlue);
-            //
-            dlvEmployees.DefaultRenderer = highlightTextRenderer1;
             dlvEmployees.RebuildColumns();
         }
 

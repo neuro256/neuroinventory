@@ -276,6 +276,9 @@
     <EmbeddedResource Include="Forms\Editors\DebitEditor.resx">
       <DependentUpon>DebitEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryView.resx">
+      <DependentUpon>InventoryView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Reports\DebitReportList.resx">
       <DependentUpon>DebitReportList.cs</DependentUpon>
     </EmbeddedResource>

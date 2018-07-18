@@ -111,6 +111,7 @@
             this.olvColumn2,
             this.olvColumn3,
             this.olvColumn4});
+            this.dlvDemandReport.Cursor = System.Windows.Forms.Cursors.Default;
             this.dlvDemandReport.DataSource = null;
             this.dlvDemandReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dlvDemandReport.Location = new System.Drawing.Point(3, 3);
@@ -171,6 +172,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Список требований";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DemandReportList_FormClosing);
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.panelDemandReportListBottom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dlvDemandReport)).EndInit();

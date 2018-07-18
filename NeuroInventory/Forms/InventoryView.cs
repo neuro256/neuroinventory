@@ -373,6 +373,8 @@ namespace NeuroInventory
         protected virtual ContextMenuStrip GetContextMenuStrip() { return null; }
         public virtual void ShowTable_ModifySubItem(ListViewItem.ListViewSubItem subItem) { }
         public virtual void ShowTable_ModifySubItem(ListViewItem.ListViewSubItem subItem, DataRow dataRow) { }
+        public virtual void SaveState() { }
+        public virtual void RestoreState() { }
 
         public virtual void Exit()
         {

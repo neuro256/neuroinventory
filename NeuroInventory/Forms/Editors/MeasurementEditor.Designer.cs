@@ -302,6 +302,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Редактор единиц измерения";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MeasurementEditor_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nudOKEI)).EndInit();
             this.splitContainerMeasurement.Panel1.ResumeLayout(false);
             this.splitContainerMeasurement.Panel2.ResumeLayout(false);

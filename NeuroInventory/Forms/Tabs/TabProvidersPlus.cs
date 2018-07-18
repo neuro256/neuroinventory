@@ -17,6 +17,7 @@ namespace NeuroInventory
             InitForm();
             InitControls();
             InitCtxMenuStrip();
+            RestoreState();
         }
 
         private void InitCtxMenuStrip()
@@ -228,6 +229,21 @@ namespace NeuroInventory
             {
                 DataRowView dataRowView = e.Model as DataRowView;
                 NeuroFile.OpenFileInExplorer(dataRowView["document"].ToString());
+            }
+        }
+
+        public override void SaveState()
+        {
+            byte[] columnSettings = dlvProviders.SaveState();
+            ColumnSettings.GetInstance().LvProvidersSettings = columnSettings;
+        }
+
+        public override void RestoreState()
+        {
+            byte[] columnSettings = ColumnSettings.GetInstance().LvProvidersSettings;
+            if (columnSettings != null && columnSettings.Length > 0)
+            {
+                dlvProviders.RestoreState(columnSettings);
             }
         }
     }

@@ -38,13 +38,6 @@ namespace NeuroInventory
             // Необходимо добавлять столбцы именно так, иначе ColumnHeader не сможет преобразоваться в ColHeader (используется в методе сортировки)
             lvEmployees.Columns.Clear();
 
-            List<ColumnSettings> lvEmployeesSettings = UISettings.GetInstance().LvEmployeesSettings.GetColumnSettingsList();
-
-            foreach (var colSettings in lvEmployeesSettings)
-            {
-                lvEmployees.Columns.Add(new ColHeader(colSettings.Text, colSettings.Width, colSettings.Align, colSettings.Ascending));
-            }
-
             lvEmployees.DoubleBuffered(true);
         }
 
@@ -166,23 +159,6 @@ namespace NeuroInventory
         private void EmployeeFiltration()
         {
             ShowTable();
-        }
-
-        private void lvEmployees_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
-        {
-            List<ColumnSettings> lvNewSettings = UISettings.GetInstance().LvEmployeesSettings.GetColumnSettingsList();
-
-            if (lvNewSettings != null)
-            {
-                lvNewSettings[e.ColumnIndex].Width = lvEmployees.Columns[e.ColumnIndex].Width;
-
-                UISettings.GetInstance().LvEmployeesSettings.SetColumnSettingsList(lvNewSettings);
-            }
-
-            if (lvEmployees.Columns[e.ColumnIndex].Width < Definitions.MIN_COLUMN_WIDTH)
-            {
-                lvEmployees.Columns[e.ColumnIndex].Width = Definitions.MIN_COLUMN_WIDTH;
-            }
         }
     }
 }

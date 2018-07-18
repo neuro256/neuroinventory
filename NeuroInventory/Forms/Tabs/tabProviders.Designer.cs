@@ -89,7 +89,6 @@
             this.lvProviders.TabIndex = 0;
             this.lvProviders.UseCompatibleStateImageBehavior = false;
             this.lvProviders.View = System.Windows.Forms.View.Details;
-            this.lvProviders.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvProviders_ColumnWidthChanged);
             // 
             // columnHeader1
             // 

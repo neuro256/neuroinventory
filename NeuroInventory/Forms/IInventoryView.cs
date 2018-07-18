@@ -15,6 +15,8 @@ namespace NeuroInventory
         void ListViewColumnClick(object sender, ColumnClickEventArgs e);
         void ListViewItemDoubleClick(object sender, MouseEventArgs e);
         void ListViewItemMouseUp(object sender, MouseEventArgs e);
+        void SaveState();
+        void RestoreState();
         void Clear();
         void Exit();
     }

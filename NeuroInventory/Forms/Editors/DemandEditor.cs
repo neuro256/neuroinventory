@@ -13,7 +13,6 @@ namespace NeuroInventory
         private const decimal m_NudMaxValue = 9999999.0M;
         private DataSet m_DemandDataSet;
         private bool m_Clicked = false;
-        private bool m_UISettingsEnableEditing = false;
 
         public DataSet DemandDataSet { get => m_DemandDataSet; private set => m_DemandDataSet = value; }
 
@@ -26,6 +25,8 @@ namespace NeuroInventory
             DemandDataSet = p_DataSet;
 
             InitControls();
+
+            RestoreState();
         }
 
         private void InitControls()
@@ -49,17 +50,6 @@ namespace NeuroInventory
             {
                 args.Item.Text = (args.RowIndex + 1).ToString();
             };
-
-            List<ColumnSettings> lvDemandDataSettings = UISettings.GetInstance().LvDemandDataSettings.GetColumnSettingsList();
-
-            for (int i = 0; i < lvDemandDataSettings.Count; i++)
-            {
-                lvDemandData.Columns[i].Width = lvDemandDataSettings[i].Width;
-            }
-
-            // Флаг защиты от преждеверменного сохранения настроек ширины в столбцов. 
-            // ColumnWidthChanged вызывается сразу после биндинга с таблицей DemandReport и без этого флага перезаписывает данные UISetttings данными по умолчанию 
-            m_UISettingsEnableEditing = true;
 
             lvDemandData.RebuildColumns();
 
@@ -295,35 +285,24 @@ namespace NeuroInventory
             return DateAndMoneyConverter.CurrencyToTxtFull(GetTotalPrice(), false);
         }
 
-        private void lvDemandData_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        private void SaveState()
         {
-            if (!m_UISettingsEnableEditing)
-                return;
+            byte[] columnSettings = lvDemandData.SaveState();
+            ColumnSettings.GetInstance().LvDemandDataSettings = columnSettings;
+        }
 
-            List<ColumnSettings> lvNewSettings = UISettings.GetInstance().LvDemandDataSettings.GetColumnSettingsList();
-
-            if (lvNewSettings != null)
+        private void RestoreState()
+        {
+            byte[] columnSettings = ColumnSettings.GetInstance().LvDemandDataSettings;
+            if (columnSettings != null && columnSettings.Length > 0)
             {
-                lvNewSettings[e.ColumnIndex].Width = lvDemandData.Columns[e.ColumnIndex].Width;
-
-                UISettings.GetInstance().LvDemandDataSettings.SetColumnSettingsList(lvNewSettings);
-            }
-
-            if (lvDemandData.Columns[e.ColumnIndex].Width < Definitions.MIN_COLUMN_WIDTH)
-            {
-                lvDemandData.Columns[e.ColumnIndex].Width = Definitions.MIN_COLUMN_WIDTH;
+                lvDemandData.RestoreState(columnSettings);
             }
         }
 
         private void DemandEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            List<ColumnSettings> lvDemandDataSettings = UISettings.GetInstance().LvDemandDataSettings.GetColumnSettingsList();
-
-            // Сохранение данных о пользовательских настройках ширины столбцов. Данные сохраняются в классе UISettings
-            for(int i = 0; i < lvDemandData.Columns.Count; i++)
-            {
-                lvDemandDataSettings[i].Width = lvDemandData.Columns[i].Width;
-            }
+            SaveState();
         }
     }
 }

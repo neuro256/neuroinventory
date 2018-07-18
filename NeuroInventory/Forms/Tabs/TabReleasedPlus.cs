@@ -77,6 +77,7 @@ namespace NeuroInventory
             InitControls();
             InitCtxMenuStrip();
             SQLiteManager.GetInstance().Released().SetCommandSet();
+            RestoreState();
         }
 
         private void InitCtxMenuStrip()
@@ -392,6 +393,21 @@ namespace NeuroInventory
         private void tbFilter_TextChanged(object sender, EventArgs e)
         {
             TimedFilter(dlvReleased, ((TextBox)sender).Text, 0);
+        }
+
+        public override void SaveState()
+        {
+            byte[] columnSettings = dlvReleased.SaveState();
+            ColumnSettings.GetInstance().LvReleasedSettings = columnSettings;
+        }
+
+        public override void RestoreState()
+        {
+            byte[] columnSettings = ColumnSettings.GetInstance().LvReleasedSettings;
+            if (columnSettings != null && columnSettings.Length > 0)
+            {
+                dlvReleased.RestoreState(columnSettings);
+            }
         }
     }
 }

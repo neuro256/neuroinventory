@@ -39,7 +39,8 @@ namespace NeuroInventory
             InitControls();
             InitCtxMenuStrip();
             InitContextMenuStripCatalogs();
-            PopulateTreeView();
+            SetupTreeView();
+            RestoreState();
         }
 
         private void InitContextMenuStripCatalogs()
@@ -212,7 +213,7 @@ namespace NeuroInventory
         /// <summary>
         /// Заполнение древовидного списка каталогов
         /// </summary>
-        public void PopulateTreeView()
+        public void SetupTreeView()
         {
             DataSet dataSetCatalogs = SQLiteManager.GetInstance().Catalogs().ReturnDataSet();
 
@@ -723,6 +724,21 @@ namespace NeuroInventory
                 {
                     ResetList();
                 }
+            }
+        }
+
+        public override void SaveState()
+        {
+            byte[] columnSettings = dlvInventory.SaveState();
+            ColumnSettings.GetInstance().LvInventorySettings = columnSettings;
+        }
+
+        public override void RestoreState()
+        {
+            byte[] columnSettings = ColumnSettings.GetInstance().LvInventorySettings;
+            if (columnSettings != null && columnSettings.Length > 0)
+            {
+                dlvInventory.RestoreState(columnSettings);
             }
         }
     }

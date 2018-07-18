@@ -130,8 +130,6 @@
     </Compile>
     <Compile Include="ReportsClasses\ReportBuilder.cs" />
     <Compile Include="ReportsClasses\ReportData.cs" />
-    <Compile Include="UtilityClasses\ColumnSettingsList.cs" />
-    <Compile Include="UtilityClasses\ColumnsSettings.cs" />
     <Compile Include="UtilityClasses\DocumentNumeration.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
@@ -322,7 +320,7 @@
       <DependentUpon>TabEmployees.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilityClasses\TreeNodeExtension.cs" />
-    <Compile Include="UtilityClasses\UISettings.cs" />
+    <Compile Include="UtilityClasses\ColumnSettings.cs" />
     <EmbeddedResource Include="Forms\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>

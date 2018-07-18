@@ -85,7 +85,6 @@
             this.lvDemandData.View = System.Windows.Forms.View.Details;
             this.lvDemandData.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.lvDemandData_CellEditFinishing);
             this.lvDemandData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.lvDemandData_CellEditStarting);
-            this.lvDemandData.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvDemandData_ColumnWidthChanged);
             // 
             // olvColumn7
             // 

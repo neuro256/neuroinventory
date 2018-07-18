@@ -47,13 +47,6 @@ namespace NeuroInventory
             // Необходимо добавлять столбцы именно так, иначе ColumnHeader не сможет преобразоваться в ColHeader (используется в методе сортировки)
             lvProviders.Columns.Clear();
 
-            List<ColumnSettings> lvProvidersSettings = UISettings.GetInstance().LvProvidersSettings.GetColumnSettingsList();
-
-            foreach (var colSettings in lvProvidersSettings)
-            {
-                lvProviders.Columns.Add(new ColHeader(colSettings.Text, colSettings.Width, colSettings.Align, colSettings.Ascending));
-            }
-
             lvProviders.DoubleBuffered(true);
         }
 
@@ -203,23 +196,6 @@ namespace NeuroInventory
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void lvProviders_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
-        {
-            List<ColumnSettings> lvNewSettings = UISettings.GetInstance().LvProvidersSettings.GetColumnSettingsList();
-
-            if (lvNewSettings != null)
-            {
-                lvNewSettings[e.ColumnIndex].Width = lvProviders.Columns[e.ColumnIndex].Width;
-
-                UISettings.GetInstance().LvProvidersSettings.SetColumnSettingsList(lvNewSettings);
-            }
-
-            if (lvProviders.Columns[e.ColumnIndex].Width < Definitions.MIN_COLUMN_WIDTH)
-            {
-                lvProviders.Columns[e.ColumnIndex].Width = Definitions.MIN_COLUMN_WIDTH;
             }
         }
     }

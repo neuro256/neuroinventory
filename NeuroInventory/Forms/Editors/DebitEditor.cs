@@ -13,7 +13,6 @@ namespace NeuroInventory
         private const decimal m_NudMaxValue = 9999999.0M;
         private DataSet m_DebitDataSet;
         private bool m_Clicked = false;
-        private bool m_UISettingsEnableEditing = false;
 
         public DataSet DebitDataSet { get => m_DebitDataSet; private set => m_DebitDataSet = value; }
 
@@ -26,6 +25,8 @@ namespace NeuroInventory
             DebitDataSet = p_DataSet;
 
             InitControls();
+
+            RestoreState();
         }
 
         private void InitControls()
@@ -42,17 +43,6 @@ namespace NeuroInventory
             {
                 args.Item.Text = (args.RowIndex + 1).ToString();
             };
-
-            List<ColumnSettings> lvDebitDataSettings = UISettings.GetInstance().LvDebitDataSettings.GetColumnSettingsList();
-
-            for(int i = 0; i < lvDebitDataSettings.Count; i++)
-            {
-                lvDebitData.Columns[i].Width = lvDebitDataSettings[i].Width;
-            }
-
-            // Флаг защиты от преждеверменного сохранения настроек ширины в столбцов. 
-            // ColumnWidthChanged вызывается сразу после биндинга с таблицей DemandReport и без этого флага перезаписывает данные UISetttings данными по умолчанию 
-            m_UISettingsEnableEditing = true;
 
             this.lvDebitData.RebuildColumns();
 
@@ -316,35 +306,24 @@ namespace NeuroInventory
             return DateAndMoneyConverter.CurrencyToTxt(GetTotalPrice(), true);
         }
 
-        private void lvDebitData_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        private void SaveState()
         {
-            if (!m_UISettingsEnableEditing)
-                return;
+            byte[] columnSettings = lvDebitData.SaveState();
+            ColumnSettings.GetInstance().LvDebitDataSettings = columnSettings;
+        }
 
-            List<ColumnSettings> lvNewSettings = UISettings.GetInstance().LvDebitDataSettings.GetColumnSettingsList();
-
-            if(lvNewSettings != null)
+        private void RestoreState()
+        {
+            byte[] columnSettings = ColumnSettings.GetInstance().LvDebitDataSettings;
+            if (columnSettings != null && columnSettings.Length > 0)
             {
-                lvNewSettings[e.ColumnIndex].Width = lvDebitData.Columns[e.ColumnIndex].Width;
-
-                UISettings.GetInstance().LvDebitDataSettings.SetColumnSettingsList(lvNewSettings);
-            }
-
-            if (lvDebitData.Columns[e.ColumnIndex].Width < Definitions.MIN_COLUMN_WIDTH)
-            {
-                lvDebitData.Columns[e.ColumnIndex].Width = Definitions.MIN_COLUMN_WIDTH;
+                lvDebitData.RestoreState(columnSettings);
             }
         }
 
         private void DebitEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            List<ColumnSettings> lvDebitDataSettings = UISettings.GetInstance().LvDebitDataSettings.GetColumnSettingsList();
-
-            // Сохранение данных о пользовательских настройках ширины столбцов. Данные сохраняются в классе UISettings
-            for (int i = 0; i < lvDebitData.Columns.Count; i++)
-            {
-                lvDebitDataSettings[i].Width = lvDebitData.Columns[i].Width;
-            }
+            SaveState();
         }
     }
 }

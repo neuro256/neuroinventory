@@ -229,7 +229,6 @@
             this.lvInventory.TabIndex = 2;
             this.lvInventory.UseCompatibleStateImageBehavior = false;
             this.lvInventory.View = System.Windows.Forms.View.Details;
-            this.lvInventory.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvInventory_ColumnWidthChanged);
             this.lvInventory.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lvInventory_DrawColumnHeader);
             this.lvInventory.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lvInventory_DrawItem);
             this.lvInventory.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lvInventory_DrawSubItem);

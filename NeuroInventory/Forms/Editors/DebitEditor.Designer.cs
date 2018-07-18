@@ -86,7 +86,6 @@
             this.lvDebitData.View = System.Windows.Forms.View.Details;
             this.lvDebitData.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.lvDebitData_CellEditFinishing);
             this.lvDebitData.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.lvDebitData_CellEditStarting);
-            this.lvDebitData.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvDebitData_ColumnWidthChanged);
             // 
             // olvColumn7
             // 

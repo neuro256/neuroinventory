@@ -161,6 +161,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Список требований";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DebitReportList_FormClosing);
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.panelDebitReportListBottom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dlvDebitReport)).EndInit();

@@ -1,8 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SQLite;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -18,6 +16,7 @@ namespace NeuroInventory
             InitForm();
             InitControls();
             InitCtxMenuStrip();
+            RestoreState();
         }
 
         private void InitCtxMenuStrip()
@@ -233,6 +232,26 @@ namespace NeuroInventory
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public override void SaveState()
+        {
+            byte[] columnSettings = dlvMeasurement.SaveState();
+            ColumnSettings.GetInstance().LvMeasurementSettings = columnSettings;
+        }
+
+        public override void RestoreState()
+        {
+            byte[] columnSettings = ColumnSettings.GetInstance().LvMeasurementSettings;
+            if (columnSettings != null && columnSettings.Length > 0)
+            {
+                dlvMeasurement.RestoreState(columnSettings);
+            }
+        }
+
+        private void MeasurementEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveState();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace NeuroInventory
             InitEmptyTabs();
             TabRecent.LoadRecentFile += TabRecent_LoadRecentFile;
             Numeration.GetInstance().ParseDocNumeration();
-            UISettings.GetInstance().ParseSettings();
+            ColumnSettings.GetInstance().ParseSettings();
             //CheckDemo();
         }
 
@@ -211,8 +211,6 @@ namespace NeuroInventory
             {
                 SQLiteManager.GetInstance().UpdateDatabase();
                 InitTabs();
-                if (inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
-                    inventoryTabs[tabControl.SelectedTab.Name].ShowTable();
                 SQLiteManager.GetInstance().IsOpened = true;
                 SQLiteSettingsManager.GetInstance().Recents().Insert(p_DatabaseName);
             }
@@ -256,12 +254,6 @@ namespace NeuroInventory
             Close();
         }
 
-        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (inventoryTabs != null && inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
-                inventoryTabs[tabControl.SelectedTab.Name].ShowTable();
-        }
-
         private void единицыИзмеренияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MeasurementEditor editor = new MeasurementEditor();
@@ -282,8 +274,15 @@ namespace NeuroInventory
             {
                 e.Cancel = true;
             }
-            UISettings.GetInstance().WriteSettings();
-            Numeration.GetInstance().WriteDocNumeration();
+            if(e.Cancel == false)
+            {
+                foreach(KeyValuePair<string, IInventoryView> tab in inventoryTabs)
+                {
+                    tab.Value.SaveState();
+                }
+                ColumnSettings.GetInstance().WriteSettings();
+                Numeration.GetInstance().WriteDocNumeration();
+            }
         } 
 
         /// <summary>

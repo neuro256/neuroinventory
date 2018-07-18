@@ -1,8 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -20,6 +18,7 @@ namespace NeuroInventory
             InitForm();
             InitControls();
             InitCtxMenuStrip();
+            RestoreState();
         }
 
         private void InitCtxMenuStrip()
@@ -178,6 +177,26 @@ namespace NeuroInventory
                 contextMenuStripDebitReportList.Items["removeToolStripMenuItem"].Visible = false;
             }
             e.MenuStrip = contextMenuStripDebitReportList;
+        }
+
+        public override void SaveState()
+        {
+            byte[] columnSettings = dlvDebitReport.SaveState();
+            ColumnSettings.GetInstance().LvDebitReportListSettings = columnSettings;
+        }
+
+        public override void RestoreState()
+        {
+            byte[] columnSettings = ColumnSettings.GetInstance().LvDebitReportListSettings;
+            if (columnSettings != null && columnSettings.Length > 0)
+            {
+                dlvDebitReport.RestoreState(columnSettings);
+            }
+        }
+
+        private void DebitReportList_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveState();
         }
     }
 }

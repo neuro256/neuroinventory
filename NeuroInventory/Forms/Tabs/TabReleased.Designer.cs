@@ -165,7 +165,6 @@ namespace NeuroInventory
             this.lvReleased.TabIndex = 2;
             this.lvReleased.UseCompatibleStateImageBehavior = false;
             this.lvReleased.View = System.Windows.Forms.View.Details;
-            this.lvReleased.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvReleased_ColumnWidthChanged);
             this.lvReleased.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lvReleased_DrawColumnHeader);
             this.lvReleased.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lvReleased_DrawItem);
             this.lvReleased.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lvReleased_DrawSubItem);

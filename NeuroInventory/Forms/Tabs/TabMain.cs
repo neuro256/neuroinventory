@@ -544,13 +544,6 @@ namespace NeuroInventory
             lvInventory.DoubleBuffered(true);
 
             lvInventory.Columns.Clear();
-
-            List<ColumnSettings> lvInventorySettings = UISettings.GetInstance().LvInventorySettings.GetColumnSettingsList();
-
-            foreach (var colSettings in lvInventorySettings)
-            {
-                lvInventory.Columns.Add(new ColHeader(colSettings.Text, colSettings.Width, colSettings.Align, colSettings.Ascending));
-            }
         }
 
         private void btnInventoryAdd_Click(object sender, EventArgs e)
@@ -918,22 +911,5 @@ namespace NeuroInventory
         }
 
         #endregion
-
-        private void lvInventory_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
-        {
-            List<ColumnSettings> lvNewSettings = UISettings.GetInstance().LvInventorySettings.GetColumnSettingsList();
-
-            if (lvNewSettings != null)
-            {
-                lvNewSettings[e.ColumnIndex].Width = lvInventory.Columns[e.ColumnIndex].Width;
-
-                UISettings.GetInstance().LvInventorySettings.SetColumnSettingsList(lvNewSettings);
-            }
-
-            if (lvInventory.Columns[e.ColumnIndex].Width < Definitions.MIN_COLUMN_WIDTH)
-            {
-                lvInventory.Columns[e.ColumnIndex].Width = Definitions.MIN_COLUMN_WIDTH;
-            }
-        }
     }
 }

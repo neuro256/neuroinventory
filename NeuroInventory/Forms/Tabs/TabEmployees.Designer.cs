@@ -163,7 +163,6 @@ namespace NeuroInventory
             this.lvEmployees.TabIndex = 2;
             this.lvEmployees.UseCompatibleStateImageBehavior = false;
             this.lvEmployees.View = System.Windows.Forms.View.Details;
-            this.lvEmployees.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvEmployees_ColumnWidthChanged);
             // 
             // chID
             // 

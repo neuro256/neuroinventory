@@ -1,6 +1,5 @@
 ﻿using BrightIdeasSoftware;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -17,6 +16,7 @@ namespace NeuroInventory
             InitForm();
             InitControls();
             InitCtxMenuStrip();
+            RestoreState();
         }
 
         private void InitCtxMenuStrip()
@@ -218,6 +218,21 @@ namespace NeuroInventory
                 contextMenuStripEmployees.Items["removeToolStripMenuItem"].Visible = false;
             }
             e.MenuStrip = contextMenuStripEmployees;
+        }
+
+        public override void SaveState()
+        {
+            byte[] columnSettings = dlvEmployees.SaveState();
+            ColumnSettings.GetInstance().LvEmployeesSettings = columnSettings;
+        }
+
+        public override void RestoreState()
+        {
+            byte[] columnSettings = ColumnSettings.GetInstance().LvEmployeesSettings;
+            if (columnSettings != null && columnSettings.Length > 0)
+            {
+                dlvEmployees.RestoreState(columnSettings);
+            }
         }
     }
 }

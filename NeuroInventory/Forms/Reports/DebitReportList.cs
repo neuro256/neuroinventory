@@ -16,7 +16,7 @@ namespace NeuroInventory
             InitializeComponent();
             SQLiteManager.GetInstance().DebitReport().SetCommandDataSet();
             InitForm();
-            InitControls();
+            InitListView();
             InitCtxMenuStrip();
             RestoreState();
         }
@@ -54,35 +54,18 @@ namespace NeuroInventory
             AddRecord();
         }
 
-        private void InitControls()
+        public override void InitListView()
         {
-            dlvDebitReport.AutoGenerateColumns = false;
-            dlvDebitReport.FullRowSelect = true;
-            dlvDebitReport.GridLines = true;
-            dlvDebitReport.HideSelection = false;
-            dlvDebitReport.ShowGroups = false;
-            dlvDebitReport.SelectColumnsOnRightClickBehaviour = ObjectListView.ColumnSelectBehaviour.Submenu;
-            dlvDebitReport.ShowCommandMenuOnRightClick = true;
-            dlvDebitReport.ShowItemToolTips = true;
-            dlvDebitReport.UseCellFormatEvents = true;
-            dlvDebitReport.UseFilterIndicator = true;
-            dlvDebitReport.UseFiltering = true;
+            base.InitListView();
+
             bindingSource = new BindingSource(ReturnDataSet(), "debitReport");
             dlvDebitReport.DataSource = bindingSource;
-            dlvDebitReport.SelectedBackColor = Color.LightBlue;
-            dlvDebitReport.SelectedForeColor = Color.MidnightBlue;
-            dlvDebitReport.RowHeight = Definitions.ROW_HEIGHT;
-            dlvDebitReport.DoubleBuffered(true);
-            // Автоматическая нумерация строк
-            this.dlvDebitReport.FormatRow += delegate (object sender, FormatRowEventArgs args)
-            {
-                args.Item.Text = (args.RowIndex + 1).ToString();
-            };
-
-            dlvDebitReport.SelectedObject = null;
-            dlvDebitReport.SelectedObjects = null;
-
             dlvDebitReport.RebuildColumns();
+        }
+
+        protected override DataListView GetListView()
+        {
+            return dlvDebitReport;
         }
 
         private void RefreshList()
@@ -104,11 +87,6 @@ namespace NeuroInventory
 
             this.Name = "DebitReportList";
             this.Text = "Список списаний";
-        }
-
-        public override void InitListView()
-        {
-            base.InitListView();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

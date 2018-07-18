@@ -14,7 +14,7 @@ namespace NeuroInventory
         {
             InitializeComponent();
             InitForm();
-            InitControls();
+            InitListView();
             InitCtxMenuStrip();
             RestoreState();
         }
@@ -52,44 +52,25 @@ namespace NeuroInventory
             AddRecord();
         }
 
-        private void InitControls()
+        public override void InitListView()
         {
-            dlvEmployees.AutoGenerateColumns = false;
-            dlvEmployees.FullRowSelect = true;
-            dlvEmployees.GridLines = true;
-            dlvEmployees.HideSelection = false;
-            dlvEmployees.ShowGroups = false;
-            dlvEmployees.SelectColumnsOnRightClickBehaviour = ObjectListView.ColumnSelectBehaviour.Submenu;
-            dlvEmployees.ShowCommandMenuOnRightClick = true;
-            dlvEmployees.ShowItemToolTips = true;
-            dlvEmployees.UseCellFormatEvents = true;
-            dlvEmployees.UseFilterIndicator = true;
-            dlvEmployees.UseFiltering = true;
+            base.InitListView();
+
             // binging source
             bindingSource = new BindingSource(ReturnDataSet(), "employees");
             dlvEmployees.DataSource = bindingSource;
-            //
-            dlvEmployees.SelectedBackColor = Color.LightBlue;
-            dlvEmployees.SelectedForeColor = Color.MidnightBlue;
-            dlvEmployees.RowHeight = Definitions.ROW_HEIGHT;
             // highlightrenderer
             highlightTextRenderer1.CornerRoundness = 0.0f;
             highlightTextRenderer1.FramePen = new Pen(Color.MidnightBlue);
             highlightTextRenderer1.FillBrush = new SolidBrush(Color.LightBlue);
             //
             dlvEmployees.DefaultRenderer = highlightTextRenderer1;
-
-            dlvEmployees.DoubleBuffered(true);
-            // Автоматическая нумерация строк
-            this.dlvEmployees.FormatRow += delegate (object sender, FormatRowEventArgs args)
-            {
-                args.Item.Text = (args.RowIndex + 1).ToString();
-            };
-
-            dlvEmployees.SelectedObject = null;
-            dlvEmployees.SelectedObjects = null;
-
             dlvEmployees.RebuildColumns();
+        }
+
+        protected override DataListView GetListView()
+        {
+            return dlvEmployees;
         }
 
         private void RefreshList()
@@ -105,11 +86,6 @@ namespace NeuroInventory
 
             this.Name = "TabEmployees";
             this.Text = "TabEmployees";
-        }
-
-        public override void InitListView()
-        {
-            base.InitListView();
         }
 
         private void btnEmployeeAdd_Click(object sender, EventArgs e)

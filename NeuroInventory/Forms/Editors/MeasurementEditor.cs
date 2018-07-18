@@ -14,7 +14,7 @@ namespace NeuroInventory
         {
             InitializeComponent();
             InitForm();
-            InitControls();
+            InitListView();
             InitCtxMenuStrip();
             RestoreState();
         }
@@ -52,34 +52,11 @@ namespace NeuroInventory
             AddRecord();
         }
 
-        private void InitControls()
+        public override void InitListView()
         {
-            dlvMeasurement.AutoGenerateColumns = false;
-            dlvMeasurement.FullRowSelect = true;
-            dlvMeasurement.GridLines = true;
-            dlvMeasurement.HideSelection = false;
-            dlvMeasurement.ShowGroups = false;
-            dlvMeasurement.SelectColumnsOnRightClickBehaviour = ObjectListView.ColumnSelectBehaviour.Submenu;
-            dlvMeasurement.ShowCommandMenuOnRightClick = true;
-            dlvMeasurement.ShowItemToolTips = true;
-            dlvMeasurement.UseCellFormatEvents = true;
-            dlvMeasurement.UseFilterIndicator = true;
-            dlvMeasurement.UseFiltering = true;
+            base.InitListView();
             bindingSource = new BindingSource(ReturnDataSet(), "measurement");
             dlvMeasurement.DataSource = bindingSource;
-            dlvMeasurement.SelectedBackColor = Color.LightBlue;
-            dlvMeasurement.SelectedForeColor = Color.MidnightBlue;
-            dlvMeasurement.RowHeight = Definitions.ROW_HEIGHT;
-            dlvMeasurement.DoubleBuffered(true);
-            // Автоматическая нумерация строк
-            this.dlvMeasurement.FormatRow += delegate (object sender, FormatRowEventArgs args)
-            {
-                args.Item.Text = (args.RowIndex + 1).ToString();
-            };
-
-            dlvMeasurement.SelectedObject = null;
-            dlvMeasurement.SelectedObjects = null;
-
             dlvMeasurement.RebuildColumns();
         }
 
@@ -102,11 +79,6 @@ namespace NeuroInventory
 
             this.Name = "MeasurementEditor";
             this.Text = "Редактор единиц измерения";
-        }
-
-        public override void InitListView()
-        {
-            base.InitListView();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -252,6 +224,11 @@ namespace NeuroInventory
         private void MeasurementEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveState();
+        }
+
+        protected override DataListView GetListView()
+        {
+            return dlvMeasurement;
         }
     }
 }

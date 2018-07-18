@@ -74,7 +74,7 @@ namespace NeuroInventory
         {
             InitializeComponent();
             InitForm();
-            InitControls();
+            InitListView();
             InitCtxMenuStrip();
             SQLiteManager.GetInstance().Released().SetCommandSet();
             RestoreState();
@@ -113,32 +113,14 @@ namespace NeuroInventory
             AddRecord();
         }
 
-        private void InitControls()
+        public override void InitListView()
         {
-            dlvReleased.AutoGenerateColumns = false;
-            dlvReleased.FullRowSelect = true;
-            dlvReleased.GridLines = true;
-            dlvReleased.HideSelection = false;
-            dlvReleased.ShowGroups = false;
-            dlvReleased.SelectColumnsOnRightClickBehaviour = ObjectListView.ColumnSelectBehaviour.Submenu;
-            dlvReleased.ShowCommandMenuOnRightClick = true;
-            dlvReleased.ShowItemToolTips = true;
-            dlvReleased.UseCellFormatEvents = true;
-            dlvReleased.UseFilterIndicator = true;
-            dlvReleased.UseFiltering = true;
+            base.InitListView();
+
             dlvReleased.CheckBoxes = true;
             dlvReleased.PersistentCheckBoxes = true;
             bindingSource = new BindingSource(ReturnDataSet(), "demand");
             dlvReleased.DataSource = bindingSource;
-            dlvReleased.SelectedBackColor = Color.LightBlue;
-            dlvReleased.SelectedForeColor = Color.MidnightBlue;
-            dlvReleased.RowHeight = Definitions.ROW_HEIGHT;
-            dlvReleased.DoubleBuffered(true);
-            // Автоматическая нумерация строк
-            this.dlvReleased.FormatRow += delegate (object sender, FormatRowEventArgs args)
-            {
-                args.Item.Text = (args.RowIndex + 1).ToString();
-            };
 
             this.dlvReleased.FormatCell += delegate (object cender, FormatCellEventArgs args)
             {
@@ -167,20 +149,22 @@ namespace NeuroInventory
             {
                 DataRowView dataRowView = args.Model as DataRowView;
                 BalanceInfo balanceInfo = BalanceInfo.GetBalanceInfo(dataRowView["balance"], dataRowView["amount"]);
-                if(balanceInfo.balanceType == BalanceType.DEBIT)
+                if (balanceInfo.balanceType == BalanceType.DEBIT)
                 {
                     args.Item.BackColor = Color.LightGreen;
                 }
-                else if(balanceInfo.balanceType == BalanceType.ERROR_DEBIT)
+                else if (balanceInfo.balanceType == BalanceType.ERROR_DEBIT)
                 {
                     args.Item.BackColor = Color.LightPink;
                 }
             };
 
-            dlvReleased.SelectedObject = null;
-            dlvReleased.SelectedObjects = null;
-
             dlvReleased.RebuildColumns();
+        }
+
+        protected override DataListView GetListView()
+        {
+            return dlvReleased;
         }
 
         private void RefreshList()
@@ -196,11 +180,6 @@ namespace NeuroInventory
 
             this.Name = "tabReleased";
             this.Text = "tabReleased";
-        }
-
-        public override void InitListView()
-        {
-            base.InitListView();
         }
 
         private void btnReleasedRemove_Click(object sender, EventArgs e)

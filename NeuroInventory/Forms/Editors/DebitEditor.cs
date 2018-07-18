@@ -36,7 +36,7 @@ namespace NeuroInventory
             this.lvDebitData.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
             this.lvDebitData.SelectedBackColor = Color.LightBlue;
             this.lvDebitData.SelectedForeColor = Color.MidnightBlue;
-            this.lvDebitData.RowHeight = 26;
+            this.lvDebitData.RowHeight = Definitions.ROW_HEIGHT;
             this.lvDebitData.DoubleBuffered(true);
             // Автоматическая нумерация строк
             this.lvDebitData.FormatRow += delegate (object sender, FormatRowEventArgs args)

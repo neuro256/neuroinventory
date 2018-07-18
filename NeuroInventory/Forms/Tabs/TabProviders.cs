@@ -15,7 +15,7 @@ namespace NeuroInventory
         {
             InitializeComponent();
             InitForm();
-            InitControls();
+            InitListView();
             InitCtxMenuStrip();
             RestoreState();
         }
@@ -53,35 +53,18 @@ namespace NeuroInventory
             AddRecord();
         }
 
-        private void InitControls()
+        public override void InitListView()
         {
-            dlvProviders.AutoGenerateColumns = false;
-            dlvProviders.FullRowSelect = true;
-            dlvProviders.GridLines = true;
-            dlvProviders.HideSelection = false;
-            dlvProviders.ShowGroups = false;
-            dlvProviders.SelectColumnsOnRightClickBehaviour = ObjectListView.ColumnSelectBehaviour.Submenu;
-            dlvProviders.ShowCommandMenuOnRightClick = true;
-            dlvProviders.ShowItemToolTips = true;
-            dlvProviders.UseCellFormatEvents = true;
-            dlvProviders.UseFilterIndicator = true;
-            dlvProviders.UseFiltering = true;
+            base.InitListView();
+
             bindingSource = new BindingSource(ReturnDataSet(), "providers");
             dlvProviders.DataSource = bindingSource;
-            dlvProviders.SelectedBackColor = Color.LightBlue;
-            dlvProviders.SelectedForeColor = Color.MidnightBlue;
-            dlvProviders.RowHeight = Definitions.ROW_HEIGHT;
-            dlvProviders.DoubleBuffered(true);
-            // Автоматическая нумерация строк
-            this.dlvProviders.FormatRow += delegate (object sender, FormatRowEventArgs args)
-            {
-                args.Item.Text = (args.RowIndex + 1).ToString();
-            };
-
-            dlvProviders.SelectedObject = null;
-            dlvProviders.SelectedObjects = null;
-
             dlvProviders.RebuildColumns();
+        }
+
+        protected override DataListView GetListView()
+        {
+            return dlvProviders;
         }
 
         private void RefreshList()
@@ -97,11 +80,6 @@ namespace NeuroInventory
 
             this.Name = "TabProviders";
             this.Text = "TabProviders";
-        }
-
-        public override void InitListView()
-        {
-            base.InitListView();
         }
 
         private void btnProviderAdd_Click(object sender, EventArgs e)

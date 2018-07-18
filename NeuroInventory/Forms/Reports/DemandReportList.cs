@@ -16,7 +16,7 @@ namespace NeuroInventory
             InitializeComponent();
             SQLiteManager.GetInstance().DemandReport().SetCommandDataSet();
             InitForm();
-            InitControls();
+            InitListView();
             InitCtxMenuStrip();
             RestoreState();
         }
@@ -54,35 +54,18 @@ namespace NeuroInventory
             AddRecord();
         }
 
-        private void InitControls()
+        public override void InitListView()
         {
-            dlvDemandReport.AutoGenerateColumns = false;
-            dlvDemandReport.FullRowSelect = true;
-            dlvDemandReport.GridLines = true;
-            dlvDemandReport.HideSelection = false;
-            dlvDemandReport.ShowGroups = false;
-            dlvDemandReport.SelectColumnsOnRightClickBehaviour = ObjectListView.ColumnSelectBehaviour.Submenu;
-            dlvDemandReport.ShowCommandMenuOnRightClick = true;
-            dlvDemandReport.ShowItemToolTips = true;
-            dlvDemandReport.UseCellFormatEvents = true;
-            dlvDemandReport.UseFilterIndicator = true;
-            dlvDemandReport.UseFiltering = true;
+            base.InitListView();
+
             bindingSource = new BindingSource(ReturnDataSet(), "demandReport");
             dlvDemandReport.DataSource = bindingSource;
-            dlvDemandReport.SelectedBackColor = Color.LightBlue;
-            dlvDemandReport.SelectedForeColor = Color.MidnightBlue;
-            dlvDemandReport.RowHeight = Definitions.ROW_HEIGHT;
-            dlvDemandReport.DoubleBuffered(true);
-            // Автоматическая нумерация строк
-            this.dlvDemandReport.FormatRow += delegate (object sender, FormatRowEventArgs args)
-            {
-                args.Item.Text = (args.RowIndex + 1).ToString();
-            };
-
-            dlvDemandReport.SelectedObject = null;
-            dlvDemandReport.SelectedObjects = null;
-
             dlvDemandReport.RebuildColumns();
+        }
+
+        protected override DataListView GetListView()
+        {
+            return dlvDemandReport;
         }
 
         private void RefreshList()
@@ -104,11 +87,6 @@ namespace NeuroInventory
 
             this.Name = "DemandReportList";
             this.Text = "Список требований";
-        }
-
-        public override void InitListView()
-        {
-            base.InitListView();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

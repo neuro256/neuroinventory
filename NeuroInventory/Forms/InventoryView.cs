@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace NeuroInventory
@@ -10,6 +11,7 @@ namespace NeuroInventory
     {
         private int listviewSelectedIndex;
         private int selectedItemId;
+        protected DataListView mDataListView = null;
         protected ContextMenuStrip m_ContextMenuStrip = null;
         private bool useCheckox = false;
         private Dictionary<string, bool> contextMenuStripValues = null;
@@ -32,19 +34,28 @@ namespace NeuroInventory
 
         public virtual void InitListView()
         {
-            //m_Listview = GetListView();
-            //m_Listview.View = View.Details;
-            //m_Listview.FullRowSelect = true;
-            //m_Listview.MultiSelect = false;
-            //m_Listview.BorderStyle = BorderStyle.None;
-            //m_Listview.Scrollable = true;
-            //m_Listview.GridLines = true;
-            //m_Listview.ShowItemToolTips = true;
-            //m_Listview.MinimumSize = new System.Drawing.Size(0, 0);
-            //m_Listview.ItemSelectionChanged += ListViewItemSelectionChanged;
-            //m_Listview.ColumnClick += ListViewColumnClick;
-            //m_Listview.MouseDoubleClick += ListViewItemDoubleClick;
-            //m_Listview.MouseUp += ListViewItemMouseUp;
+            mDataListView = GetListView();
+            mDataListView.AutoGenerateColumns = false;
+            mDataListView.FullRowSelect = true;
+            mDataListView.GridLines = true;
+            mDataListView.HideSelection = false;
+            mDataListView.ShowGroups = false;
+            mDataListView.SelectColumnsOnRightClickBehaviour = ObjectListView.ColumnSelectBehaviour.Submenu;
+            mDataListView.ShowCommandMenuOnRightClick = true;
+            mDataListView.ShowItemToolTips = true;
+            mDataListView.UseCellFormatEvents = true;
+            mDataListView.UseFilterIndicator = true;
+            mDataListView.UseFiltering = true;
+            mDataListView.SelectedBackColor = Color.LightBlue;
+            mDataListView.SelectedForeColor = Color.MidnightBlue;
+            mDataListView.RowHeight = Definitions.ROW_HEIGHT;
+            mDataListView.DoubleBuffered(true);
+            mDataListView.FormatRow += delegate (object sender, FormatRowEventArgs args)
+            {
+                args.Item.Text = (args.RowIndex + 1).ToString();
+            };
+            mDataListView.SelectedObject = null;
+            mDataListView.SelectedObjects = null;
         }
 
         public void InitContextMenuStrip()
@@ -94,7 +105,7 @@ namespace NeuroInventory
         public virtual void RemoveRecord() { }
         public virtual void UpdateRecord() { }
         public virtual void Clear() { }
-        //protected virtual ListView GetListView() { return null; }
+        protected virtual DataListView GetListView() { return null; }
         protected virtual ContextMenuStrip GetContextMenuStrip() { return null; }
         public virtual void SaveState() { }
         public virtual void RestoreState() { }

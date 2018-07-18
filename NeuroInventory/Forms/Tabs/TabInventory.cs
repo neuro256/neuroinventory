@@ -36,7 +36,7 @@ namespace NeuroInventory
         {
             InitializeComponent();
             InitForm();
-            InitControls();
+            InitListView();
             InitCtxMenuStrip();
             InitContextMenuStripCatalogs();
             SetupTreeView();
@@ -327,44 +327,26 @@ namespace NeuroInventory
             AddRecord();
         }
 
-        private void InitControls()
+        public override void InitListView()
         {
-            dlvInventory.AutoGenerateColumns = false;
-            dlvInventory.FullRowSelect = true;
-            dlvInventory.GridLines = true;
-            dlvInventory.HideSelection = false;
-            dlvInventory.ShowGroups = false;
-            dlvInventory.SelectColumnsOnRightClickBehaviour = ObjectListView.ColumnSelectBehaviour.Submenu;
-            dlvInventory.ShowCommandMenuOnRightClick = true;
-            dlvInventory.ShowItemToolTips = true;
-            dlvInventory.UseCellFormatEvents = true;
-            dlvInventory.UseFilterIndicator = true;
-            dlvInventory.UseFiltering = true;
+            base.InitListView();
+
             dlvInventory.CheckBoxes = true;
             dlvInventory.PersistentCheckBoxes = true;
             bindingSource = new BindingSource();
             dlvInventory.DataSource = bindingSource;
-            dlvInventory.SelectedBackColor = Color.LightBlue;
-            dlvInventory.SelectedForeColor = Color.MidnightBlue;
-            dlvInventory.RowHeight = Definitions.ROW_HEIGHT;
             dlvInventory.IsSimpleDragSource = true;
             dlvInventory.IsSimpleDropSink = true;
-            dlvInventory.DoubleBuffered(true);
-            // Автоматическая нумерация строк
-            this.dlvInventory.FormatRow += delegate (object sender, FormatRowEventArgs args)
-            {
-                args.Item.Text = (args.RowIndex + 1).ToString();
-            };
 
             this.dlvInventory.FormatCell += delegate (object cender, FormatCellEventArgs args)
             {
-                if(args.Column?.AspectName == "amount")
+                if (args.Column?.AspectName == "amount")
                 {
                     DataRowView dataRowView = args.Model as DataRowView;
                     int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRowView["measurement"].ToString());
                     args.SubItem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", args.SubItem.Text);
                 }
-                else if(args.Column?.AspectName == "invoice")
+                else if (args.Column?.AspectName == "invoice")
                 {
                     args.SubItem.BackColor = Color.LightBlue;
                     args.SubItem.Text = Path.GetFileName(args.SubItem.Text);
@@ -375,9 +357,9 @@ namespace NeuroInventory
                     DataRowView dataRowView = args.Model as DataRowView;
                     object balance = dataRowView["balance"];
                     int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRowView["measurement"].ToString());
-                    if(!Equals(balance, DBNull.Value))
+                    if (!Equals(balance, DBNull.Value))
                     {
-                        if(Convert.ToDecimal(balance) <= 0)
+                        if (Convert.ToDecimal(balance) <= 0)
                         {
                             args.SubItem.BackColor = Color.Red;
                         }
@@ -393,17 +375,14 @@ namespace NeuroInventory
             this.dlvInventory.FormatRow += delegate (object cender, FormatRowEventArgs args)
             {
                 DataRowView dataRowView = args.Model as DataRowView;
-                if(!Equals(dataRowView["balance"], DBNull.Value))
+                if (!Equals(dataRowView["balance"], DBNull.Value))
                 {
-                    if(Convert.ToDecimal(dataRowView["balance"]) < 0)
+                    if (Convert.ToDecimal(dataRowView["balance"]) < 0)
                     {
                         args.Item.BackColor = Color.LightPink;
                     }
                 }
             };
-
-            dlvInventory.SelectedObject = null;
-            dlvInventory.SelectedObjects = null;
 
             // drag n drop
             SimpleDropSink dropSink = new SimpleDropSink();
@@ -412,6 +391,11 @@ namespace NeuroInventory
             dlvInventory.DropSink = dropSink;
 
             dlvInventory.RebuildColumns();
+        }
+
+        protected override DataListView GetListView()
+        {
+            return dlvInventory;
         }
 
         private void RefreshList()
@@ -436,11 +420,6 @@ namespace NeuroInventory
 
             this.Name = "tabInventoryPlus";
             this.Text = "tabInventoryPlus";
-        }
-
-        public override void InitListView()
-        {
-            base.InitListView();
         }
 
         private void btnInventoryAdd_Click(object sender, EventArgs e)

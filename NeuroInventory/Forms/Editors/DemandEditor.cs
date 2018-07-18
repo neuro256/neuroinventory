@@ -43,7 +43,7 @@ namespace NeuroInventory
             lvDemandData.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
             lvDemandData.SelectedBackColor = Color.LightBlue;
             lvDemandData.SelectedForeColor = Color.MidnightBlue;
-            lvDemandData.RowHeight = 26;
+            lvDemandData.RowHeight = Definitions.ROW_HEIGHT;
             lvDemandData.DoubleBuffered(true);
             // Автоматическая нумерация строк
             lvDemandData.FormatRow += delegate (object sender, FormatRowEventArgs args)

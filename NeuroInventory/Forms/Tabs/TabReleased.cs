@@ -202,18 +202,20 @@ namespace NeuroInventory
         }
 
         /// <summary>
-        /// Удаление записи из таблицы
+        /// Отмена отпуска
         /// </summary>
         public override void RemoveRecord()
         {
             if (dlvReleased.SelectedObjects?.Count > 0)
             {
+                dlvReleased.Freeze();
                 foreach (var selectedObject in dlvReleased.SelectedObjects)
                 {
                     DataRowView dataRowView = selectedObject as DataRowView;
                     SQLiteManager.GetInstance().Released().CancelDemand(Convert.ToInt32(dataRowView["demandId"]));
                 }
                 RefreshList();
+                dlvReleased.Unfreeze();
             }
             else
             {
@@ -230,12 +232,14 @@ namespace NeuroInventory
         {
             if (dlvReleased.SelectedObjects?.Count > 0)
             {
+                dlvReleased.Freeze();
                 foreach (var selectedObject in dlvReleased.SelectedObjects)
                 {
                     DataRowView dataRowView = selectedObject as DataRowView;
                     SQLiteManager.GetInstance().Released().CancelDebit(Convert.ToInt32(dataRowView["demandId"]));
                 }
                 RefreshList();
+                dlvReleased.Unfreeze();
             }
             else
             {

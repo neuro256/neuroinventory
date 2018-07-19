@@ -74,9 +74,9 @@ namespace NeuroInventory
             if (reportId != null && !reportId.Equals(DBNull.Value))
             {
                 string currentDocument = SQLiteManager.GetInstance().DebitReport().ReturnDocumentById(reportId);
-                SQLiteManager.GetInstance().DebitReport().Rollback(reportId, currentDocument);
-                SQLiteManager.GetInstance().Debit().RemoveByDemandId(p_SelectedItemId);
-            }          
+                SQLiteManager.GetInstance().DebitReport().Rollback(reportId, currentDocument);               
+            }
+            SQLiteManager.GetInstance().Debit().RemoveByDemandId(p_SelectedItemId);
         }
 
         public void Filter(DateTime p_Date, string p_Employee, string p_Name, string p_OKEIcode, string p_Measurement, object p_Amount, object p_Price)

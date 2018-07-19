@@ -45,7 +45,7 @@ namespace NeuroInventory
             mDataListView.SelectedBackColor = Color.LightBlue;
             mDataListView.SelectedForeColor = Color.MidnightBlue;
             mDataListView.RowHeight = Definitions.ROW_HEIGHT;
-            mDataListView.DoubleBuffered(true);
+            //mDataListView.DoubleBuffered(true);
             mDataListView.FormatRow += delegate (object sender, FormatRowEventArgs args)
             {
                 args.Item.Text = (args.RowIndex + 1).ToString();

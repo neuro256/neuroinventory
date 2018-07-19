@@ -117,10 +117,10 @@ namespace NeuroInventory
             // 
             // btnDebitCancel
             // 
-            this.btnDebitCancel.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnDebitCancel.BackColor = System.Drawing.Color.Silver;
             this.btnDebitCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDebitCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDebitCancel.Location = new System.Drawing.Point(392, 12);
+            this.btnDebitCancel.Location = new System.Drawing.Point(202, 12);
             this.btnDebitCancel.Name = "btnDebitCancel";
             this.btnDebitCancel.Size = new System.Drawing.Size(184, 33);
             this.btnDebitCancel.TabIndex = 5;
@@ -133,7 +133,7 @@ namespace NeuroInventory
             this.btnDebitReport.BackColor = System.Drawing.Color.CadetBlue;
             this.btnDebitReport.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDebitReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDebitReport.Location = new System.Drawing.Point(202, 12);
+            this.btnDebitReport.Location = new System.Drawing.Point(12, 12);
             this.btnDebitReport.Name = "btnDebitReport";
             this.btnDebitReport.Size = new System.Drawing.Size(184, 33);
             this.btnDebitReport.TabIndex = 4;
@@ -145,11 +145,11 @@ namespace NeuroInventory
             // 
             this.btnReleasedRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnReleasedRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnReleasedRemove.Location = new System.Drawing.Point(12, 12);
+            this.btnReleasedRemove.Location = new System.Drawing.Point(392, 12);
             this.btnReleasedRemove.Name = "btnReleasedRemove";
             this.btnReleasedRemove.Size = new System.Drawing.Size(184, 33);
             this.btnReleasedRemove.TabIndex = 1;
-            this.btnReleasedRemove.Text = "Отменить";
+            this.btnReleasedRemove.Text = "Отменить отпуск";
             this.btnReleasedRemove.UseVisualStyleBackColor = true;
             this.btnReleasedRemove.Click += new System.EventHandler(this.btnReleasedRemove_Click);
             // 
@@ -352,7 +352,6 @@ namespace NeuroInventory
             this.ClientSize = new System.Drawing.Size(1200, 650);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanelReleased);
-            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TabReleased";
             this.ShowIcon = false;

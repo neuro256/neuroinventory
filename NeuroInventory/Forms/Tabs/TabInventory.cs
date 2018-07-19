@@ -36,11 +36,26 @@ namespace NeuroInventory
         {
             InitializeComponent();
             InitForm();
+            InitControls();
+        }
+
+        private void InitControls()
+        {
             InitListView();
             InitCtxMenuStrip();
             InitContextMenuStripCatalogs();
             SetupTreeView();
             RestoreState();
+        }
+
+        public override void RebuildList()
+        {
+            if (!IsRebuilded)
+            {
+                dtlCatalogs.BuildList();
+                dlvInventory.BuildList();
+                IsRebuilded = true;
+            }
         }
 
         private void InitContextMenuStripCatalogs()

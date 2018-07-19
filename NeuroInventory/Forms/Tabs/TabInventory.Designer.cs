@@ -144,8 +144,8 @@
             // 
             this.dtlCatalogs.AllColumns.Add(this.catalogsNameColumn);
             this.dtlCatalogs.AllColumns.Add(this.catalogsTypeColumn);
-            this.dtlCatalogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dtlCatalogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtlCatalogs.CellEditUseWholeCell = false;
             this.dtlCatalogs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -375,6 +375,7 @@
             this.olvColumn2.MaximumWidth = 1000;
             this.olvColumn2.MinimumWidth = 50;
             this.olvColumn2.Text = "Поставщик";
+            this.olvColumn2.ToolTipText = "";
             this.olvColumn2.Width = 200;
             // 
             // olvColumn3

@@ -117,11 +117,10 @@ namespace NeuroInventory
             // 
             // btnDebitCancel
             // 
-            this.btnDebitCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDebitCancel.BackColor = System.Drawing.Color.CadetBlue;
             this.btnDebitCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDebitCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDebitCancel.Location = new System.Drawing.Point(392, 10);
+            this.btnDebitCancel.Location = new System.Drawing.Point(392, 12);
             this.btnDebitCancel.Name = "btnDebitCancel";
             this.btnDebitCancel.Size = new System.Drawing.Size(184, 33);
             this.btnDebitCancel.TabIndex = 5;
@@ -131,11 +130,10 @@ namespace NeuroInventory
             // 
             // btnDebitReport
             // 
-            this.btnDebitReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDebitReport.BackColor = System.Drawing.Color.CadetBlue;
             this.btnDebitReport.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDebitReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDebitReport.Location = new System.Drawing.Point(202, 10);
+            this.btnDebitReport.Location = new System.Drawing.Point(202, 12);
             this.btnDebitReport.Name = "btnDebitReport";
             this.btnDebitReport.Size = new System.Drawing.Size(184, 33);
             this.btnDebitReport.TabIndex = 4;
@@ -145,10 +143,9 @@ namespace NeuroInventory
             // 
             // btnReleasedRemove
             // 
-            this.btnReleasedRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnReleasedRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnReleasedRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnReleasedRemove.Location = new System.Drawing.Point(12, 10);
+            this.btnReleasedRemove.Location = new System.Drawing.Point(12, 12);
             this.btnReleasedRemove.Name = "btnReleasedRemove";
             this.btnReleasedRemove.Size = new System.Drawing.Size(184, 33);
             this.btnReleasedRemove.TabIndex = 1;

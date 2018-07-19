@@ -12,8 +12,10 @@ namespace NeuroInventory
         protected DataListView mDataListView = null;
         protected ContextMenuStrip m_ContextMenuStrip = null;
         private HighlightTextRenderer highlightTextRenderer1;
+        private bool isRebuilded = false;
 
         protected int ListviewSelectedIndex { get => listviewSelectedIndex; set => listviewSelectedIndex = value; }
+        public bool IsRebuilded { get => isRebuilded; set => isRebuilded = value; }
 
         protected virtual void InitForm()
         {
@@ -73,6 +75,7 @@ namespace NeuroInventory
             RemoveRecord();
         }
 
+        public virtual void RebuildList() { }
         public virtual DataSet ReturnDataSet() { return null; }
         public virtual void AddRecord() { }
         public virtual void RemoveRecord() { }

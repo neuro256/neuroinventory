@@ -212,10 +212,9 @@
             // 
             // btnProviderEdit
             // 
-            this.btnProviderEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnProviderEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnProviderEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnProviderEdit.Location = new System.Drawing.Point(392, 10);
+            this.btnProviderEdit.Location = new System.Drawing.Point(392, 12);
             this.btnProviderEdit.Name = "btnProviderEdit";
             this.btnProviderEdit.Size = new System.Drawing.Size(184, 33);
             this.btnProviderEdit.TabIndex = 5;
@@ -225,10 +224,9 @@
             // 
             // btnProviderRemove
             // 
-            this.btnProviderRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnProviderRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnProviderRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnProviderRemove.Location = new System.Drawing.Point(202, 10);
+            this.btnProviderRemove.Location = new System.Drawing.Point(202, 12);
             this.btnProviderRemove.Name = "btnProviderRemove";
             this.btnProviderRemove.Size = new System.Drawing.Size(184, 33);
             this.btnProviderRemove.TabIndex = 4;
@@ -238,10 +236,9 @@
             // 
             // btnProviderAdd
             // 
-            this.btnProviderAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnProviderAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnProviderAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnProviderAdd.Location = new System.Drawing.Point(12, 10);
+            this.btnProviderAdd.Location = new System.Drawing.Point(12, 12);
             this.btnProviderAdd.Name = "btnProviderAdd";
             this.btnProviderAdd.Size = new System.Drawing.Size(184, 33);
             this.btnProviderAdd.TabIndex = 3;

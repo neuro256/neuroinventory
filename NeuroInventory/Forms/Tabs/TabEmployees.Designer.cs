@@ -206,7 +206,6 @@ namespace NeuroInventory
             // 
             // btnEmployeeEdit
             // 
-            this.btnEmployeeEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEmployeeEdit.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnEmployeeEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEmployeeEdit.Location = new System.Drawing.Point(392, 12);
@@ -219,7 +218,6 @@ namespace NeuroInventory
             // 
             // btnEmployeeRemove
             // 
-            this.btnEmployeeRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEmployeeRemove.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnEmployeeRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEmployeeRemove.Location = new System.Drawing.Point(202, 12);
@@ -232,7 +230,6 @@ namespace NeuroInventory
             // 
             // btnEmployeeAdd
             // 
-            this.btnEmployeeAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEmployeeAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnEmployeeAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEmployeeAdd.Location = new System.Drawing.Point(12, 12);

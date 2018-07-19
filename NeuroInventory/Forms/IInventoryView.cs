@@ -2,6 +2,7 @@
 {
     interface IInventoryView
     {
+        void RebuildList();
         void InitListView();
         void AddRecord();
         void RemoveRecord();

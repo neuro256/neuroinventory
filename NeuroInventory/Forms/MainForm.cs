@@ -1,6 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using BrightIdeasSoftware;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -74,6 +76,8 @@ namespace NeuroInventory
 
         private void InitEmptyTabs()
         {
+            if (ObjectListView.IsVistaOrLater)
+                this.Font = new Font("Segoe UI", 9);
             if (SQLiteSettingsManager.GetInstance().Recents().ReturnCount() > 0)
             {
                 TabRecent tabInventory = new TabRecent
@@ -208,6 +212,8 @@ namespace NeuroInventory
             {
                 SQLiteManager.GetInstance().UpdateDatabase();
                 InitTabs();
+                if (inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
+                    inventoryTabs[tabControl.SelectedTab.Name].RebuildList();
                 SQLiteManager.GetInstance().IsOpened = true;
                 SQLiteSettingsManager.GetInstance().Recents().Insert(p_DatabaseName);
             }
@@ -342,6 +348,12 @@ namespace NeuroInventory
             SettingDocumentNumeration docNum = new SettingDocumentNumeration();
             docNum.StartPosition = FormStartPosition.CenterParent;
             docNum.ShowDialog();
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (inventoryTabs != null && inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
+                inventoryTabs[tabControl.SelectedTab.Name].RebuildList();
         }
     }
 }

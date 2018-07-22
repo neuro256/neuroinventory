@@ -167,7 +167,7 @@ namespace NeuroInventory
         /// <param name="_amount"></param>
         /// <param name="_firstCapital"></param>
         /// <returns></returns>
-        public static string CurrencyToTxt(double _amount, bool _firstCapital)
+        public static string CurrencyToTxt(decimal _amount, bool _firstCapital)
         {
             //Десять тысяч рублей 67 копеек
             long rublesAmount = (long)Math.Floor(_amount);
@@ -213,7 +213,7 @@ namespace NeuroInventory
         /// <param name="_amount"></param>
         /// <param name="_firstCapital"></param>
         /// <returns></returns>
-        public static string CurrencyToTxtFull(double _amount, bool _firstCapital)
+        public static string CurrencyToTxtFull(decimal _amount, bool _firstCapital)
         {
             //10 000 (Десять тысяч) рублей 67 копеек
             long rublesAmount = (long)Math.Floor(_amount);

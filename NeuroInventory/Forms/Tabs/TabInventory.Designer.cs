@@ -58,8 +58,8 @@
             this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn11 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn12 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnSum = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn13 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStripCatalogs = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -324,8 +324,8 @@
             this.dlvInventory.AllColumns.Add(this.olvColumn8);
             this.dlvInventory.AllColumns.Add(this.olvColumn9);
             this.dlvInventory.AllColumns.Add(this.olvColumn10);
-            this.dlvInventory.AllColumns.Add(this.olvColumn11);
-            this.dlvInventory.AllColumns.Add(this.olvColumn12);
+            this.dlvInventory.AllColumns.Add(this.columnPrice);
+            this.dlvInventory.AllColumns.Add(this.columnSum);
             this.dlvInventory.AllColumns.Add(this.olvColumn13);
             this.dlvInventory.CellEditUseWholeCell = false;
             this.dlvInventory.CheckBoxes = true;
@@ -340,8 +340,8 @@
             this.olvColumn8,
             this.olvColumn9,
             this.olvColumn10,
-            this.olvColumn11,
-            this.olvColumn12,
+            this.columnPrice,
+            this.columnSum,
             this.olvColumn13});
             this.dlvInventory.Cursor = System.Windows.Forms.Cursors.Default;
             this.dlvInventory.DataSource = null;
@@ -458,25 +458,25 @@
             this.olvColumn10.Text = "Количество";
             this.olvColumn10.Width = 200;
             // 
-            // olvColumn11
+            // columnPrice
             // 
-            this.olvColumn11.AspectName = "price";
-            this.olvColumn11.Groupable = false;
-            this.olvColumn11.IsEditable = false;
-            this.olvColumn11.MaximumWidth = 1000;
-            this.olvColumn11.MinimumWidth = 50;
-            this.olvColumn11.Text = "Цена";
-            this.olvColumn11.Width = 200;
+            this.columnPrice.AspectName = "price";
+            this.columnPrice.Groupable = false;
+            this.columnPrice.IsEditable = false;
+            this.columnPrice.MaximumWidth = 1000;
+            this.columnPrice.MinimumWidth = 50;
+            this.columnPrice.Text = "Цена";
+            this.columnPrice.Width = 200;
             // 
-            // olvColumn12
+            // columnSum
             // 
-            this.olvColumn12.AspectName = "sum";
-            this.olvColumn12.Groupable = false;
-            this.olvColumn12.IsEditable = false;
-            this.olvColumn12.MaximumWidth = 1000;
-            this.olvColumn12.MinimumWidth = 50;
-            this.olvColumn12.Text = "Сумма";
-            this.olvColumn12.Width = 200;
+            this.columnSum.AspectName = "sum";
+            this.columnSum.Groupable = false;
+            this.columnSum.IsEditable = false;
+            this.columnSum.MaximumWidth = 1000;
+            this.columnSum.MinimumWidth = 50;
+            this.columnSum.Text = "Сумма";
+            this.columnSum.Width = 200;
             // 
             // olvColumn13
             // 
@@ -557,8 +557,8 @@
         private BrightIdeasSoftware.OLVColumn olvColumn8;
         private BrightIdeasSoftware.OLVColumn olvColumn9;
         private BrightIdeasSoftware.OLVColumn olvColumn10;
-        private BrightIdeasSoftware.OLVColumn olvColumn11;
-        private BrightIdeasSoftware.OLVColumn olvColumn12;
+        private BrightIdeasSoftware.OLVColumn columnPrice;
+        private BrightIdeasSoftware.OLVColumn columnSum;
         private BrightIdeasSoftware.OLVColumn olvColumn13;
         private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.TextBox tbFilter;

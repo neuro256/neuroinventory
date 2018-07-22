@@ -34,9 +34,9 @@
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnSum = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.panelLeftUpper = new System.Windows.Forms.Panel();
@@ -57,9 +57,9 @@
             this.lvDemandData.AllColumns.Add(this.olvColumn2);
             this.lvDemandData.AllColumns.Add(this.olvColumn8);
             this.lvDemandData.AllColumns.Add(this.olvColumn3);
-            this.lvDemandData.AllColumns.Add(this.olvColumn4);
+            this.lvDemandData.AllColumns.Add(this.columnPrice);
             this.lvDemandData.AllColumns.Add(this.olvColumn5);
-            this.lvDemandData.AllColumns.Add(this.olvColumn6);
+            this.lvDemandData.AllColumns.Add(this.columnSum);
             this.lvDemandData.CellEditUseWholeCell = false;
             this.lvDemandData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn7,
@@ -67,9 +67,9 @@
             this.olvColumn2,
             this.olvColumn8,
             this.olvColumn3,
-            this.olvColumn4,
+            this.columnPrice,
             this.olvColumn5,
-            this.olvColumn6});
+            this.columnSum});
             this.lvDemandData.Cursor = System.Windows.Forms.Cursors.Default;
             this.lvDemandData.DataSource = null;
             this.lvDemandData.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -133,15 +133,15 @@
             this.olvColumn3.Text = "Единица измерения";
             this.olvColumn3.Width = 150;
             // 
-            // olvColumn4
+            // columnPrice
             // 
-            this.olvColumn4.AspectName = "price";
-            this.olvColumn4.AspectToStringFormat = "{0:C}";
-            this.olvColumn4.IsEditable = false;
-            this.olvColumn4.MaximumWidth = 1000;
-            this.olvColumn4.MinimumWidth = 50;
-            this.olvColumn4.Text = "Цена";
-            this.olvColumn4.Width = 100;
+            this.columnPrice.AspectName = "price";
+            this.columnPrice.AspectToStringFormat = "";
+            this.columnPrice.IsEditable = false;
+            this.columnPrice.MaximumWidth = 1000;
+            this.columnPrice.MinimumWidth = 50;
+            this.columnPrice.Text = "Цена";
+            this.columnPrice.Width = 100;
             // 
             // olvColumn5
             // 
@@ -151,15 +151,15 @@
             this.olvColumn5.Text = "Количество";
             this.olvColumn5.Width = 100;
             // 
-            // olvColumn6
+            // columnSum
             // 
-            this.olvColumn6.AspectName = "sum";
-            this.olvColumn6.AspectToStringFormat = "{0:C}";
-            this.olvColumn6.IsEditable = false;
-            this.olvColumn6.MaximumWidth = 1000;
-            this.olvColumn6.MinimumWidth = 50;
-            this.olvColumn6.Text = "Сумма";
-            this.olvColumn6.Width = 100;
+            this.columnSum.AspectName = "sum";
+            this.columnSum.AspectToStringFormat = "";
+            this.columnSum.IsEditable = false;
+            this.columnSum.MaximumWidth = 1000;
+            this.columnSum.MinimumWidth = 50;
+            this.columnSum.Text = "Сумма";
+            this.columnSum.Width = 100;
             // 
             // highlightTextRenderer1
             // 
@@ -286,9 +286,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn olvColumn3;
-        private BrightIdeasSoftware.OLVColumn olvColumn4;
+        private BrightIdeasSoftware.OLVColumn columnPrice;
         private BrightIdeasSoftware.OLVColumn olvColumn5;
-        private BrightIdeasSoftware.OLVColumn olvColumn6;
+        private BrightIdeasSoftware.OLVColumn columnSum;
         private System.Windows.Forms.Button btnReleased;
         private System.Windows.Forms.Panel panelLeftUpper;
         private System.Windows.Forms.Label lblEmployee;

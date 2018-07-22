@@ -51,6 +51,20 @@ namespace NeuroInventory
                 args.Item.Text = (args.RowIndex + 1).ToString();
             };
 
+            columnPrice.AspectToStringConverter = delegate (object obj)
+            {
+                return string.Format(new CultureInfo("ru-RU"),
+                      "{0:C}",
+                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+            };
+
+            columnSum.AspectToStringConverter = delegate (object obj)
+            {
+                return string.Format(new CultureInfo("ru-RU"),
+                      "{0:C}",
+                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+            };
+
             lvDemandData.RebuildColumns();
 
             dateTimePicker.Format = DateTimePickerFormat.Long;
@@ -72,7 +86,7 @@ namespace NeuroInventory
                 nud.Minimum = 0.0M;
                 nud.Maximum = NudMaxValue;
                 nud.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(e.ListViewItem.SubItems[2].Text); // subitem[2] is measurement
-                nud.Value = Convert.ToDecimal(e.Value, CultureInfo.GetCultureInfo("ru-RU"));
+                nud.Value = MoneyConverter.ToCurrency(e.Value);
                 e.Control = nud;
             }
         }
@@ -89,18 +103,18 @@ namespace NeuroInventory
 
             if (e.Column.AspectName == "amount")
             {
-                string l_BalanceStr = DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("balance");
-                decimal l_Balance = Convert.ToDecimal(l_BalanceStr, CultureInfo.GetCultureInfo("ru-RU"));
+                DataRowView dataRowView = e.RowObject as DataRowView;
+                decimal balance = MoneyConverter.ToCurrency(dataRowView["balance"]);
 
                 // Идет проверка, не выбрано ли количество, большее чем остаток тмц на складе
-                if (Convert.ToDecimal(e.NewValue, CultureInfo.InvariantCulture) > l_Balance)
-                    e.NewValue = l_Balance;
-                if (!String.Equals(e.NewValue.ToString(), e.Value.ToString()))
+                if (MoneyConverter.ToCurrency(e.NewValue) > balance)
+                    e.NewValue = balance;
+                if (!Equals(e.NewValue, e.Value))
                 {
                     // Вычисление стоимости отпущенного тмц
-                    string l_PriceStr = DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<string>("price");
-                    decimal l_SumNewValue = Convert.ToDecimal(e.NewValue, CultureInfo.GetCultureInfo("ru-RU")) * Decimal.Parse(l_PriceStr, CultureInfo.InvariantCulture);
-                    DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].SetField("sum", l_SumNewValue.ToString("C"));
+                    // ToString(CultureInfo.GetCultureInfo("en-US")) использовано т.к. локальная культура ru-RU использует в качестве разделителя целой и дробной части запятую, 
+                    // и эта запятая автоматически записывается в newRow. То есть, в newRow хранится не decimal, а строковое значение sum с учетом культуры
+                    dataRowView["sum"] = MoneyConverter.Multiply(e.NewValue, MoneyConverter.ToCurrency(dataRowView["price"])).ToString(CultureInfo.GetCultureInfo("en-US"));
                 }
             }
         }
@@ -117,8 +131,9 @@ namespace NeuroInventory
                 {
                     int reportLastId = SQLiteManager.GetInstance().DemandReport().ReturnLastInsertId();
                     // Отпускаем выбранные тмц 
-                    foreach (DataRow row in DemandDataSet.Tables[0].Rows)
+                    foreach(var obj in lvDemandData.Objects)
                     {
+                        DataRowView row = obj as DataRowView;
                         AddRecord(Convert.ToInt32(row["id"]), reportLastId, cbEmployee.SelectedValue, Convert.ToDecimal(row["amount"]), dateTimePicker.Value);
                     }
                     DialogResult = DialogResult.OK;
@@ -136,8 +151,9 @@ namespace NeuroInventory
         {
             bool amountChecked = true;
 
-            foreach (DataRow row in DemandDataSet.Tables[0].Rows)
+            foreach (var obj in lvDemandData.Objects)
             {
+                DataRowView row = obj as DataRowView;
                 if (Convert.ToDecimal(row["amount"]) <= 0)
                 {
                     amountChecked = false;
@@ -189,17 +205,18 @@ namespace NeuroInventory
             demandReportTable.Columns.Add("sum");
             demandReportTable.Columns.Add("amount");
 
-            foreach (DataRow row in DemandDataSet.Tables[0].Rows)
+            foreach(var obj in lvDemandData.Objects)
             {
+                DataRowView row = obj as DataRowView;
                 DataRow newRow = demandReportTable.NewRow();
 
-                newRow["id"] = row["id"].ToString();
-                newRow["name"] = row["name"].ToString();
-                newRow["OKEIcode"] = row["OKEIcode"].ToString();
+                newRow["id"] = row["id"];
+                newRow["name"] = row["name"];
+                newRow["OKEIcode"] = row["OKEIcode"];
                 newRow["measurement"] = SQLiteSettingsManager.GetInstance().Measurement().GetShortName(row["measurement"].ToString());
-                newRow["price"] = decimal.Parse(row["price"].ToString(), CultureInfo.InvariantCulture).ToString("0.00");
-                newRow["sum"] = decimal.Parse(row["sum"].ToString(), CultureInfo.InvariantCulture).ToString("0.00");
-                newRow["amount"] = row["amount"].ToString();
+                newRow["price"] = row["price"];
+                newRow["sum"] = row["sum"];
+                newRow["amount"] = row["amount"];
 
                 demandReportTable.Rows.Add(newRow);
             }
@@ -268,15 +285,15 @@ namespace NeuroInventory
             return SQLiteManager.GetInstance().Employees().GetEmployeePostById(l_SelectedEmployeeId);
         }
 
-        private double GetTotalPrice()
+        private decimal GetTotalPrice()
         {
-            double sum = 0.0;
+            decimal sum = 0.0m;
 
-            foreach (DataRow row in DemandDataSet.Tables[0].Rows)
+            foreach (var row in lvDemandData.Objects)
             {
-                sum += Double.Parse(row["sum"].ToString(), CultureInfo.InvariantCulture);
+                DataRowView dataRowView = row as DataRowView;
+                sum += Decimal.Parse(dataRowView["sum"].ToString(), NumberStyles.Currency, CultureInfo.InvariantCulture);
             }
-
             return sum;
         }
 

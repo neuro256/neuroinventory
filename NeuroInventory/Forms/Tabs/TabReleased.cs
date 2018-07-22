@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
@@ -173,6 +174,20 @@ namespace NeuroInventory
                 }
             };
 
+            columnPrice.AspectToStringConverter = delegate (object obj)
+            {
+                return string.Format(new CultureInfo("ru-RU"),
+                      "{0:C}",
+                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+            };
+
+            columnSum.AspectToStringConverter = delegate (object obj)
+            {
+                return string.Format(new CultureInfo("ru-RU"),
+                      "{0:C}",
+                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+            };
+
             dlvReleased.RebuildColumns();
         }
 
@@ -311,8 +326,10 @@ namespace NeuroInventory
                 newRow["measurement"] = dataRowView["measurement"];
                 newRow["price"] = dataRowView["price"];
                 newRow["balance"] = CalculateBalance(dataRowView);
-                newRow["debit_amount"] = 0;
-                newRow["sum"] = dataRowView["sum"];
+                newRow["debit_amount"] = CalculateBalance(dataRowView);
+                // ToString(CultureInfo.GetCultureInfo("en-US")) использовано т.к. локальная культура ru-RU использует в качестве разделителя целой и дробной части запятую, 
+                // и эта запятая автоматически записывается в newRow. То есть, в newRow хранится не decimal, а строковое значение sum с учетом культуры
+                newRow["sum"] = MoneyConverter.Multiply(CalculateBalance(dataRowView), dataRowView["price"]).ToString(CultureInfo.GetCultureInfo("en-US"));
 
                 debitTable.Rows.Add(newRow);
             }
@@ -333,7 +350,7 @@ namespace NeuroInventory
             }
             else
             {
-                balanceValue = dataRowView["balance"];
+                balanceValue = dataRowView["amount"];
             }
 
             return balanceValue;

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
@@ -399,6 +400,20 @@ namespace NeuroInventory
                 }
             };
 
+            columnPrice.AspectToStringConverter = delegate (object obj)
+            {
+                return string.Format(new CultureInfo("ru-RU"),
+                      "{0:C}",
+                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+            };
+
+            columnSum.AspectToStringConverter = delegate (object obj)
+            {
+                return string.Format(new CultureInfo("ru-RU"),
+                      "{0:C}",
+                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+            };
+
             // drag n drop
             SimpleDropSink dropSink = new SimpleDropSink();
             dropSink.CanDropOnItem = true;
@@ -574,8 +589,8 @@ namespace NeuroInventory
                 newRow["measurement"] = dataRowView["measurement"];
                 newRow["price"] = dataRowView["price"];
                 newRow["amount"] = 0;
-                newRow["sum"] = String.Format("{0:C}", 0);
-                newRow["balance"] = dataRowView["balance"];
+                newRow["sum"] = 0.0m;
+                newRow["balance"] = CalculateBalance(dataRowView);
 
                 demandTable.Rows.Add(newRow);
             }
@@ -584,6 +599,22 @@ namespace NeuroInventory
             demandDataSet.Tables.Add(demandTable);
 
             return demandDataSet;
+        }
+
+        private static object CalculateBalance(DataRowView dataRowView)
+        {
+            object balance = dataRowView["balance"];
+            object balanceValue = null;
+            if (balance != null && !Equals(balance, DBNull.Value))
+            {
+                balanceValue = balance;
+            }
+            else
+            {
+                balanceValue = dataRowView["amount"];
+            }
+
+            return balanceValue;
         }
 
         #endregion

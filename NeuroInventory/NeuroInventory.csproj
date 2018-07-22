@@ -200,6 +200,7 @@
     </Compile>
     <Compile Include="SQLiteClasses\Tables\ReleasedSql.cs" />
     <Compile Include="UtilityClasses\ListviewExtension.cs" />
+    <Compile Include="UtilityClasses\MoneyConverter.cs" />
     <Compile Include="UtilityClasses\MultiSelectTreeview.cs">
       <SubType>Component</SubType>
     </Compile>

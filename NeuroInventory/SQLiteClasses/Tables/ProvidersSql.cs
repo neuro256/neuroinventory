@@ -21,43 +21,6 @@ namespace NeuroInventory
             SetTargetPath(@"Документы\Поставщики");
         }
 
-        public void Filter(string p_Name, string p_Address, string p_Phone, string p_Mail, string p_INN, string p_Document)
-        {
-            string l_Address = !String.IsNullOrEmpty(p_Address) ? $"address like '%{p_Address}%'" : $"(address like '%{p_Address}%' OR address IS NULL)";
-            string l_Phone = !String.IsNullOrEmpty(p_Phone) ? $"phone like '%{p_Phone}%'" : $"(phone like '%{p_Phone}%' OR phone IS NULL)";
-            string l_Mail = !String.IsNullOrEmpty(p_Mail) ? $"mail like '%{p_Mail}%'" : $"(mail like '%{p_Mail}%' OR mail IS NULL)";
-            string l_INN = !String.IsNullOrEmpty(p_INN) ? $"inn like '%{p_INN}%'" : $"(inn like '%{p_INN}%' OR inn IS NULL)";
-            string l_Document = !String.IsNullOrEmpty(p_Document) ? $"document like '%{p_Document}%'" : $"(document like '%{p_Document}%' OR document IS NULL)";
-
-            CommandDataSet = "SELECT providers.id as id, " +
-                "providers.name, " +
-                "providers.address, " +
-                "providers.phone, " +
-                "providers.mail, " +
-                "providers.inn, " +
-                "providers.document " +
-                "FROM providers WHERE " + 
-                $"name like '%{p_Name}%' AND " +
-                $"{l_Address} AND " +
-                $"{l_Phone} AND " +
-                $"{l_Mail} AND " +
-                $"{l_INN} AND " +
-                $"{l_Document}" +
-                $" ORDER BY name ASC";
-        }
-
-        public void ClearFilter()
-        {
-            CommandDataSet = "SELECT providers.id as id, " +
-                "providers.name, " +
-                "providers.address, " +
-                "providers.phone, " +
-                "providers.mail, " +
-                "providers.inn, " +
-                "providers.document " +
-                "FROM providers ORDER BY name ASC";
-        }
-
         public void Insert(string p_Name, string p_Address, string p_Phone, string p_Mail, string p_INN, string p_Document)
         {
             Dictionary<string, object> values = new Dictionary<string, object>

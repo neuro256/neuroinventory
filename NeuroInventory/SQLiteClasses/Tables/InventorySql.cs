@@ -83,57 +83,6 @@ namespace NeuroInventory
             SelectedCatalogIds = p_CatalogIds;
         }
 
-        public void Filter(object p_Provider, DateTime p_Date, string p_InvoiceCode, string p_Name, string p_OKEIcode, string p_Measurement, object p_Amount, object p_Price)
-        {
-            string catalogIdsStr = String.Empty;
-            foreach (var id in SelectedCatalogIds)
-            {
-                catalogIdsStr += $" inventory.catalogId={id} OR";
-            }
-            catalogIdsStr = catalogIdsStr.Substring(0, catalogIdsStr.Length - 2);
-
-            string l_DateStr = p_Date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-
-            string l_Name = $" AND inventory.name like '%{p_Name}%'";
-            string l_Provider = p_Provider != null ? $" AND inventory.providerId={p_Provider}" : String.Empty;
-            string l_Date = !DateTime.Equals(p_Date, DateTime.MaxValue) ? $" AND inventory.date=Datetime('{l_DateStr}')" : String.Empty;
-            string l_InvoiceCode = !String.IsNullOrEmpty(p_InvoiceCode) ? $" AND invoiceCodeStr LIKE '%{p_InvoiceCode}%'" : $" AND (invoiceCodeStr LIKE '%{p_InvoiceCode}%' OR invoiceCodeStr IS NULL)";
-            string l_OKEIcode = !String.IsNullOrEmpty(p_OKEIcode) ? $" AND OKEIcode LIKE '%{p_OKEIcode}%'" : $" AND (OKEIcode LIKE '%{p_OKEIcode}%' OR OKEIcode IS NULL)";
-            string l_Measurement = !String.IsNullOrEmpty(p_Measurement) ? $" AND measurement LIKE '%{p_Measurement}%'" : $" AND (measurement LIKE '%{p_Measurement}%' OR measurement IS NULL)";
-            string l_Amount = p_Amount != null ? $" AND (inventory.amount={p_Amount})" : String.Empty;
-            l_Amount = l_Amount.Replace(",", ".");
-            string l_Price = p_Price != null ? $" AND (inventory.price={Convert.ToInt32(Convert.ToDecimal(p_Price) * 100)})" : String.Empty;
-
-            CommandDataSet = "SELECT inventory.id as id, " +
-                "(SELECT name FROM providers WHERE providers.id = inventory.providerId) AS providerId," + // Отображение имени поставщика вместо идентификатора
-                "strftime('%d.%m.%Y', DATE(inventory.date)) AS date," +
-                "inventory.invoice," +
-                "inventory.invoiceCodeStr, " +
-                "strftime('%d.%m.%Y', DATE(inventory.invoiceDate)) AS invoiceDate, " +
-                "inventory.name," +
-                "inventory.OKEIcode," +
-                "inventory.measurement," +
-                "inventory.amount," +
-                @"printf(""%.2f"", (CAST (inventory.price AS REAL) / 100)) AS price," +
-                @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
-                "(inventory.amount - SUM(demand.amount)) AS balance " +
-                $"FROM inventory LEFT JOIN demand ON demand.inventoryId = inventory.id WHERE ({catalogIdsStr}) " +
-                l_Name +
-                l_Provider +
-                l_Date +
-                l_InvoiceCode + 
-                l_OKEIcode +
-                l_Measurement +
-                l_Amount +
-                l_Price + 
-                $" GROUP BY inventory.id;";
-        }
-
-        public void ClearFilter()
-        {
-            CommandDataSet = CommandDataSetNotFiltered;
-        }
-
         public void Remove(int p_SelectedItemId)
         {
             DataRow dataRow = ReturnDataSet().Tables[0].Rows.Find(p_SelectedItemId);

@@ -199,11 +199,7 @@
       <DependentUpon>DemandEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLiteClasses\Tables\ReleasedSql.cs" />
-    <Compile Include="UtilityClasses\ListviewExtension.cs" />
     <Compile Include="UtilityClasses\MoneyConverter.cs" />
-    <Compile Include="UtilityClasses\MultiSelectTreeview.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="UtilityClasses\NeuroFile.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -248,9 +244,6 @@
     <Compile Include="SQLiteClasses\Tables\MeasurementSql.cs" />
     <Compile Include="SQLiteClasses\Tables\ProvidersSql.cs" />
     <Compile Include="SQLiteClasses\Tables\EmployeesSql.cs" />
-    <Compile Include="UtilityClasses\ColHeader.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Forms\Editors\EmployeeEditor.cs">
       <SubType>Form</SubType>
     </Compile>

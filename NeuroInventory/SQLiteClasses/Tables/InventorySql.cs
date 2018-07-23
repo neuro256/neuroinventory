@@ -7,11 +7,9 @@ namespace NeuroInventory
 {
     public class InventorySql : TableSql
     {
-        private string m_CommandDataSetNotFiltered;
         private int m_SelectedCatalogId;
         private List<int> m_SelectedCatalogIds;
 
-        private string CommandDataSetNotFiltered { get => m_CommandDataSetNotFiltered; set => m_CommandDataSetNotFiltered = value; }
         private int SelectedCatalogId { get => m_SelectedCatalogId; set => m_SelectedCatalogId = value; }
         public List<int> SelectedCatalogIds { get => m_SelectedCatalogIds; set => m_SelectedCatalogIds = value; }
 
@@ -31,7 +29,6 @@ namespace NeuroInventory
                 @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
                 "(inventory.amount - SUM(demand.amount)) AS balance " +
                 "FROM inventory LEFT JOIN demand ON demand.inventoryId = inventory.id GROUP BY inventory.id;";
-            CommandDataSetNotFiltered = CommandDataSet;
             TableName = "inventory";
             PrimaryKey = "id";
             SetTargetPath(@"Документы\Накладные");
@@ -53,7 +50,6 @@ namespace NeuroInventory
                 @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
                 "(inventory.amount - SUM(demand.amount)) AS balance " +
                 $"FROM inventory LEFT JOIN demand ON demand.inventoryId = inventory.id WHERE inventory.catalogId={p_Id} GROUP BY inventory.id;";
-            CommandDataSetNotFiltered = CommandDataSet;
             SelectedCatalogId = p_Id;
         }
 
@@ -79,7 +75,6 @@ namespace NeuroInventory
                 @"printf(""%.2f"", ((inventory.amount * price) / 100)) AS sum," +
                 "(inventory.amount - SUM(demand.amount)) AS balance " +
                 $"FROM inventory LEFT JOIN demand ON demand.inventoryId = inventory.id WHERE {catalogIdsStr} GROUP BY inventory.id;";
-            CommandDataSetNotFiltered = CommandDataSet;
             SelectedCatalogIds = p_CatalogIds;
         }
 

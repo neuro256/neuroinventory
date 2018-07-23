@@ -6,17 +6,12 @@ namespace NeuroInventory
 {
     public class ReleasedSql : TableSql
     {
-        private string m_CommandDataSetNotFiltered;
-
-        private string CommandDataSetNotFiltered { get => m_CommandDataSetNotFiltered; set => m_CommandDataSetNotFiltered = value; }
-
         public ReleasedSql()
         {
             CommandDataSet = String.Empty;
             TableName = "demand";
             PrimaryKey = "demandId";
             SetCommandSet();
-            CommandDataSetNotFiltered = CommandDataSet;
         }
 
         public void SetCommandSet()

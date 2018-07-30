@@ -185,13 +185,13 @@
             // 
             // tabInventory
             // 
+            this.tabInventory.BackColor = Definitions.COLOR_FORM_SLAVE_BACK_COLOR;
             this.tabInventory.Location = new System.Drawing.Point(4, 27);
             this.tabInventory.Margin = new System.Windows.Forms.Padding(0);
             this.tabInventory.Name = "tabInventory";
             this.tabInventory.Size = new System.Drawing.Size(1254, 669);
             this.tabInventory.TabIndex = 0;
             this.tabInventory.Text = "Склад ТМЦ";
-            this.tabInventory.UseVisualStyleBackColor = true;
             // 
             // tabReleased
             // 
@@ -265,6 +265,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSize = true;
+            this.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.ClientSize = new System.Drawing.Size(1262, 755);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.toolStrip);

@@ -174,7 +174,7 @@ namespace NeuroInventory
             // 
             // panelEmployeesBottom
             // 
-            this.panelEmployeesBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelEmployeesBottom.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.panelEmployeesBottom.Controls.Add(this.lblFilter);
             this.panelEmployeesBottom.Controls.Add(this.tbFilter);
             this.panelEmployeesBottom.Controls.Add(this.btnEmployeeEdit);

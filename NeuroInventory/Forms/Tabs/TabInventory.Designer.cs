@@ -117,7 +117,7 @@
             // 
             // panelLeftPanelBottom
             // 
-            this.panelLeftPanelBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelLeftPanelBottom.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.panelLeftPanelBottom.Controls.Add(this.tbSelectionHelp);
             this.panelLeftPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLeftPanelBottom.Location = new System.Drawing.Point(0, 593);
@@ -128,7 +128,7 @@
             // 
             // tbSelectionHelp
             // 
-            this.tbSelectionHelp.BackColor = System.Drawing.Color.Silver;
+            this.tbSelectionHelp.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.tbSelectionHelp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbSelectionHelp.Location = new System.Drawing.Point(0, 0);
             this.tbSelectionHelp.Multiline = true;
@@ -226,7 +226,7 @@
             // 
             // panelMainBottom
             // 
-            this.panelMainBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelMainBottom.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.panelMainBottom.Controls.Add(this.lblFilter);
             this.panelMainBottom.Controls.Add(this.tbFilter);
             this.panelMainBottom.Controls.Add(this.btnDemand);
@@ -262,7 +262,7 @@
             // btnDemand
             // 
             this.btnDemand.AutoSize = true;
-            this.btnDemand.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnDemand.BackColor = Definitions.COLOR_FORM_SLAVE_BACK_COLOR;
             this.btnDemand.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDemand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDemand.Location = new System.Drawing.Point(580, 11);

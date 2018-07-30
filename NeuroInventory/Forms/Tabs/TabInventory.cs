@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
@@ -258,7 +257,7 @@ namespace NeuroInventory
             // drag n drop
             SimpleDropSink dropSink = new SimpleDropSink();
             dropSink.CanDropOnItem = true;
-            dropSink.FeedbackColor = Color.LightBlue;
+            dropSink.FeedbackColor = Definitions.COLOR_DROPSINK_FEEDBACK_COLOR;//Color.LightBlue;
             dropSink.AutoScroll = true;
             dtlCatalogs.DropSink = dropSink;
 
@@ -359,7 +358,7 @@ namespace NeuroInventory
                 }
                 else if (args.Column?.AspectName == "invoice")
                 {
-                    args.SubItem.BackColor = Color.LightBlue;
+                    args.SubItem.BackColor = Definitions.COLOR_SUBITEM_DOCUMENT_BACK_COLOR;
                     args.SubItem.Text = Path.GetFileName(args.SubItem.Text);
                 }
                 else if (args.Column?.AspectName == "balance")
@@ -370,10 +369,10 @@ namespace NeuroInventory
                     int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRowView["measurement"].ToString());
                     if (!Equals(balance, DBNull.Value))
                     {
-                        if (Convert.ToDecimal(balance) <= 0)
-                        {
-                            args.SubItem.BackColor = Color.Red;
-                        }
+                        //if (Convert.ToDecimal(balance) <= 0)
+                        //{
+                        //    args.SubItem.BackColor = Definitions.COLOR_SUBITEM_BALANCE_MIN_BACK_COLOR;
+                        //}
                         args.SubItem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", balance);
                     }
                     else
@@ -388,9 +387,9 @@ namespace NeuroInventory
                 DataRowView dataRowView = args.Model as DataRowView;
                 if (!Equals(dataRowView["balance"], DBNull.Value))
                 {
-                    if (Convert.ToDecimal(dataRowView["balance"]) < 0)
+                    if (Convert.ToDecimal(dataRowView["balance"]) <= 0)
                     {
-                        args.Item.BackColor = Color.LightPink;
+                        args.Item.BackColor = Definitions.COLOR_ROW_BALANCE_BACK_COLOR;//Color.LightPink;
                     }
                 }
             };
@@ -442,7 +441,7 @@ namespace NeuroInventory
             // drag n drop
             SimpleDropSink dropSink = new SimpleDropSink();
             dropSink.CanDropOnItem = true;
-            dropSink.FeedbackColor = Color.LightBlue;
+            dropSink.FeedbackColor = Definitions.COLOR_DROPSINK_FEEDBACK_COLOR;
             dlvInventory.DropSink = dropSink;
 
             dlvInventory.RebuildColumns();
@@ -787,6 +786,7 @@ namespace NeuroInventory
 
         public override void FocusFilter()
         {
+            tbFilter.Clear();
             tbFilter.Focus();
         }
     }

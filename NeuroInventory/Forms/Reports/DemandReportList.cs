@@ -135,7 +135,7 @@ namespace NeuroInventory
         {
             if (e.Column?.AspectName == "document")
             {
-                e.SubItem.BackColor = Color.LightBlue;
+                e.SubItem.BackColor = Definitions.COLOR_SUBITEM_DOCUMENT_BACK_COLOR;
                 e.SubItem.Text = Path.GetFileName(e.SubItem.Text);
             }
         }

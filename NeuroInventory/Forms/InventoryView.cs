@@ -12,7 +12,6 @@ namespace NeuroInventory
         protected DataListView mDataListView = null;
         protected ContextMenuStrip m_ContextMenuStrip = null;
         private HighlightTextRenderer highlightTextRenderer1;
-        private bool isRebuilded = false;
 
         protected int ListviewSelectedIndex { get => listviewSelectedIndex; set => listviewSelectedIndex = value; }
 
@@ -41,8 +40,8 @@ namespace NeuroInventory
             mDataListView.UseCellFormatEvents = true;
             mDataListView.UseFilterIndicator = true;
             mDataListView.UseFiltering = true;
-            mDataListView.SelectedBackColor = Color.LightBlue;
-            mDataListView.SelectedForeColor = Color.MidnightBlue;
+            mDataListView.SelectedBackColor = Definitions.COLOR_SELECTED_BACK_COLOR;
+            mDataListView.SelectedForeColor = Definitions.COLOR_SELECTED_FORE_COLOR;
             mDataListView.RowHeight = Definitions.ROW_HEIGHT;
             //mDataListView.TintSortColumn = true;
             //mDataListView.SelectedColumnTint = Color.Red;
@@ -56,8 +55,8 @@ namespace NeuroInventory
             // highlightrenderer
             highlightTextRenderer1 = new HighlightTextRenderer();
             highlightTextRenderer1.CornerRoundness = 0.0f;
-            highlightTextRenderer1.FramePen = new Pen(Color.MidnightBlue);
-            highlightTextRenderer1.FillBrush = new SolidBrush(Color.LightBlue);
+            highlightTextRenderer1.FramePen = new Pen(Definitions.COLOR_HIGHLIGHTTEXTRENDERER_FRAMEPEN);
+            highlightTextRenderer1.FillBrush = new SolidBrush(Definitions.COLOR_HIGHLIGHTTEXTRENDERER_FILLBRUSH);
             mDataListView.DefaultRenderer = highlightTextRenderer1;
         }
 

@@ -38,7 +38,7 @@
             // 
             // groupBoxRecent
             // 
-            this.groupBoxRecent.BackColor = System.Drawing.Color.Azure;
+            this.groupBoxRecent.BackColor = Definitions.COLOR_FORM_SLAVE_BACK_COLOR;
             this.groupBoxRecent.Controls.Add(this.lvRecent);
             this.groupBoxRecent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxRecent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -51,7 +51,7 @@
             // 
             // lvRecent
             // 
-            this.lvRecent.BackColor = System.Drawing.Color.LightCyan;
+            this.lvRecent.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;//System.Drawing.Color.FromArgb(254, 250, 189);
             this.lvRecent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lvRecent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvRecent.LargeImageList = this.imageListRecents;

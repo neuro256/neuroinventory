@@ -36,31 +36,31 @@ namespace NeuroInventory
                 BalanceInfo balanceInfo = new BalanceInfo(balance, BalanceType.NOT_DEBIT);
                 if (Equals(balance, DBNull.Value))
                 {
-                    balanceInfo.Color = Color.DarkOrange;
+                    balanceInfo.Color = Definitions.COLOR_BALANCEINFO_NOT_DEBIT_NULL_COLOR;//Color.DarkOrange;
                     balanceInfo.BalanceTypeText = Definitions.NOT_DEBIT_STRING;
                     balanceInfo.balanceType = BalanceType.NOT_DEBIT;
                 }
                 else if (Convert.ToDecimal(balance) > 0 && Equals(balance, amount))
                 {
-                    balanceInfo.Color = Color.Coral;
+                    balanceInfo.Color = Definitions.COLOR_BALANCEINFO_NOT_DEBIT_COLOR;//Color.Coral;
                     balanceInfo.BalanceTypeText = Definitions.NOT_DEBIT_STRING;
                     balanceInfo.balanceType = BalanceType.NOT_DEBIT;
                 }
                 else if (Convert.ToDecimal(balance) > 0 && !Equals(balance, amount))
                 {
-                    balanceInfo.Color = Color.LightGreen;
+                    balanceInfo.Color = Definitions.COLOR_BALANCEINFO_PART_DEBIT_COLOR;//Color.LightGreen;
                     balanceInfo.BalanceTypeText = $"{Definitions.PARTIALLY_DEBIT} ({balance})";
                     balanceInfo.balanceType = BalanceType.PARTIALLY_DEBIT;
                 }
                 else if (Convert.ToDecimal(balance) < 0)
                 {
-                    balanceInfo.Color = Color.Red;
+                    balanceInfo.Color = Definitions.COLOR_BALANCEINFO_ERROR_DEBIT_COLOR;//Color.Red;
                     balanceInfo.BalanceTypeText = $"{Definitions.ERROR_DEBIT_STRING} ({balance})";
                     balanceInfo.balanceType = BalanceType.ERROR_DEBIT;
                 }
                 else
                 {
-                    balanceInfo.Color = Color.LightGreen;
+                    balanceInfo.Color = Definitions.COLOR_BALANCEINFO_DEBIT_COLOR;//Color.LightGreen;
                     balanceInfo.BalanceTypeText = Definitions.DEBIT_STRING;
                     balanceInfo.balanceType = BalanceType.DEBIT;
                 }
@@ -137,7 +137,7 @@ namespace NeuroInventory
             {
                 if (args.Column?.AspectName == "document")
                 {
-                    args.SubItem.BackColor = Color.LightBlue;
+                    args.SubItem.BackColor = Definitions.COLOR_SUBITEM_DOCUMENT_BACK_COLOR;
                     args.SubItem.Text = Path.GetFileName(args.SubItem.Text);
                 }
                 else if (args.Column?.AspectName == "amount")
@@ -151,7 +151,7 @@ namespace NeuroInventory
                     DataRowView dataRowView = args.Model as DataRowView;
                     BalanceInfo balanceInfo = BalanceInfo.GetBalanceInfo(dataRowView["balance"], dataRowView["amount"]);
 
-                    args.SubItem.BackColor = balanceInfo.Color;
+                    //args.SubItem.BackColor = balanceInfo.Color;
                     args.SubItem.Text = balanceInfo.BalanceTypeText;
                 }
             };
@@ -162,11 +162,11 @@ namespace NeuroInventory
                 BalanceInfo balanceInfo = BalanceInfo.GetBalanceInfo(dataRowView["balance"], dataRowView["amount"]);
                 if (balanceInfo.balanceType == BalanceType.DEBIT)
                 {
-                    args.Item.BackColor = Color.LightGreen;
+                    args.Item.BackColor = Definitions.COLOR_ROW_BALANCE_DEBIT_COLOR;//Color.LightGreen;
                 }
                 else if (balanceInfo.balanceType == BalanceType.ERROR_DEBIT)
                 {
-                    args.Item.BackColor = Color.LightPink;
+                    args.Item.BackColor = Definitions.COLOR_ROW_BALANCE_ERROR_DEBIT_COLOR;//Color.LightPink;
                 }
             };
 
@@ -453,6 +453,7 @@ namespace NeuroInventory
 
         public override void FocusFilter()
         {
+            tbFilter.Clear();
             tbFilter.Focus();
         }
     }

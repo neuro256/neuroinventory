@@ -22,6 +22,9 @@ namespace NeuroInventory
         {
             InitializeComponent();
 
+            this.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
+            panelLeftUpper.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
+
             DebitDataSet = p_DataSet;
 
             InitControls();
@@ -34,8 +37,8 @@ namespace NeuroInventory
             this.lvDebitData.AutoGenerateColumns = false;
             this.lvDebitData.DataSource = new BindingSource(DebitDataSet, "DebitReport");
             this.lvDebitData.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
-            this.lvDebitData.SelectedBackColor = Color.LightBlue;
-            this.lvDebitData.SelectedForeColor = Color.MidnightBlue;
+            this.lvDebitData.SelectedBackColor = Definitions.COLOR_SELECTED_BACK_COLOR;
+            this.lvDebitData.SelectedForeColor = Definitions.COLOR_SELECTED_FORE_COLOR;
             this.lvDebitData.RowHeight = Definitions.ROW_HEIGHT;
             //this.lvDebitData.DoubleBuffered(true);
             // Автоматическая нумерация строк

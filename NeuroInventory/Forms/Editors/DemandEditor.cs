@@ -22,6 +22,9 @@ namespace NeuroInventory
         {
             InitializeComponent();
 
+            this.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
+            panelLeftUpper.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
+
             DemandDataSet = p_DataSet;
 
             InitControls();
@@ -41,8 +44,8 @@ namespace NeuroInventory
             lvDemandData.AutoGenerateColumns = false;
             lvDemandData.DataSource = new BindingSource(DemandDataSet, "DemandReport");
             lvDemandData.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
-            lvDemandData.SelectedBackColor = Color.LightBlue;
-            lvDemandData.SelectedForeColor = Color.MidnightBlue;
+            lvDemandData.SelectedBackColor = Definitions.COLOR_SELECTED_BACK_COLOR;
+            lvDemandData.SelectedForeColor = Definitions.COLOR_SELECTED_FORE_COLOR;
             lvDemandData.RowHeight = Definitions.ROW_HEIGHT;
             // Автоматическая нумерация строк
             lvDemandData.FormatRow += delegate (object sender, FormatRowEventArgs args)

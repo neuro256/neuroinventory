@@ -182,7 +182,7 @@
             // 
             // panelProvidersBottom
             // 
-            this.panelProvidersBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelProvidersBottom.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.panelProvidersBottom.Controls.Add(this.lblFilter);
             this.panelProvidersBottom.Controls.Add(this.tbFilter);
             this.panelProvidersBottom.Controls.Add(this.btnProviderEdit);

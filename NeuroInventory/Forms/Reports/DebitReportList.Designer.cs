@@ -61,6 +61,7 @@
             // 
             // panelDebitReportListBottom
             // 
+            this.panelDebitReportListBottom.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.panelDebitReportListBottom.Controls.Add(this.btnDelete);
             this.panelDebitReportListBottom.Controls.Add(this.btnAdd);
             this.panelDebitReportListBottom.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -72,7 +73,7 @@
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnDelete.FlatAppearance.BorderColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnDelete.Location = new System.Drawing.Point(9, 6);
@@ -87,7 +88,7 @@
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdd.Enabled = false;
-            this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnAdd.FlatAppearance.BorderColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnAdd.Location = new System.Drawing.Point(113, 6);

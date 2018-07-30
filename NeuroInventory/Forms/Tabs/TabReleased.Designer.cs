@@ -83,7 +83,7 @@ namespace NeuroInventory
             // 
             // panelReleasedBottom
             // 
-            this.panelReleasedBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelReleasedBottom.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.panelReleasedBottom.Controls.Add(this.lblFilter);
             this.panelReleasedBottom.Controls.Add(this.tbFilter);
             this.panelReleasedBottom.Controls.Add(this.btnDebitCancel);
@@ -117,7 +117,7 @@ namespace NeuroInventory
             // 
             // btnDebitCancel
             // 
-            this.btnDebitCancel.BackColor = System.Drawing.Color.Silver;
+            this.btnDebitCancel.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.btnDebitCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDebitCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDebitCancel.Location = new System.Drawing.Point(202, 12);
@@ -130,7 +130,7 @@ namespace NeuroInventory
             // 
             // btnDebitReport
             // 
-            this.btnDebitReport.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnDebitReport.BackColor = Definitions.COLOR_FORM_SLAVE_BACK_COLOR;
             this.btnDebitReport.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDebitReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDebitReport.Location = new System.Drawing.Point(12, 12);

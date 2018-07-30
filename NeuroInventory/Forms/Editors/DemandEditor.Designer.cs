@@ -30,12 +30,12 @@
         {
             this.lvDemandData = new BrightIdeasSoftware.DataListView();
             this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnAmount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnSum = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
@@ -53,22 +53,22 @@
             // lvDemandData
             // 
             this.lvDemandData.AllColumns.Add(this.olvColumn7);
-            this.lvDemandData.AllColumns.Add(this.olvColumn1);
+            this.lvDemandData.AllColumns.Add(this.columnName);
             this.lvDemandData.AllColumns.Add(this.olvColumn2);
             this.lvDemandData.AllColumns.Add(this.olvColumn8);
             this.lvDemandData.AllColumns.Add(this.olvColumn3);
             this.lvDemandData.AllColumns.Add(this.columnPrice);
-            this.lvDemandData.AllColumns.Add(this.olvColumn5);
+            this.lvDemandData.AllColumns.Add(this.columnAmount);
             this.lvDemandData.AllColumns.Add(this.columnSum);
             this.lvDemandData.CellEditUseWholeCell = false;
             this.lvDemandData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn7,
-            this.olvColumn1,
+            this.columnName,
             this.olvColumn2,
             this.olvColumn8,
             this.olvColumn3,
             this.columnPrice,
-            this.olvColumn5,
+            this.columnAmount,
             this.columnSum});
             this.lvDemandData.Cursor = System.Windows.Forms.Cursors.Default;
             this.lvDemandData.DataSource = null;
@@ -92,19 +92,21 @@
             this.olvColumn7.IsEditable = false;
             this.olvColumn7.MaximumWidth = 1000;
             this.olvColumn7.MinimumWidth = 50;
+            this.olvColumn7.Searchable = false;
+            this.olvColumn7.Sortable = false;
             this.olvColumn7.Text = "№";
             this.olvColumn7.Width = 50;
             // 
-            // olvColumn1
+            // columnName
             // 
-            this.olvColumn1.AspectName = "name";
-            this.olvColumn1.ButtonPadding = new System.Drawing.Size(10, 10);
-            this.olvColumn1.IsTileViewColumn = true;
-            this.olvColumn1.MaximumWidth = 1000;
-            this.olvColumn1.MinimumWidth = 50;
-            this.olvColumn1.Text = "Название";
-            this.olvColumn1.UseInitialLetterForGroup = true;
-            this.olvColumn1.Width = 250;
+            this.columnName.AspectName = "name";
+            this.columnName.ButtonPadding = new System.Drawing.Size(10, 10);
+            this.columnName.IsTileViewColumn = true;
+            this.columnName.MaximumWidth = 1000;
+            this.columnName.MinimumWidth = 50;
+            this.columnName.Text = "Название";
+            this.columnName.UseInitialLetterForGroup = true;
+            this.columnName.Width = 250;
             // 
             // olvColumn2
             // 
@@ -143,13 +145,13 @@
             this.columnPrice.Text = "Цена";
             this.columnPrice.Width = 100;
             // 
-            // olvColumn5
+            // columnAmount
             // 
-            this.olvColumn5.AspectName = "amount";
-            this.olvColumn5.MaximumWidth = 1000;
-            this.olvColumn5.MinimumWidth = 50;
-            this.olvColumn5.Text = "Количество";
-            this.olvColumn5.Width = 100;
+            this.columnAmount.AspectName = "amount";
+            this.columnAmount.MaximumWidth = 1000;
+            this.columnAmount.MinimumWidth = 50;
+            this.columnAmount.Text = "Количество";
+            this.columnAmount.Width = 100;
             // 
             // columnSum
             // 
@@ -281,13 +283,13 @@
         #endregion
 
         private BrightIdeasSoftware.DataListView lvDemandData;
-        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn columnName;
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn olvColumn3;
         private BrightIdeasSoftware.OLVColumn columnPrice;
-        private BrightIdeasSoftware.OLVColumn olvColumn5;
+        private BrightIdeasSoftware.OLVColumn columnAmount;
         private BrightIdeasSoftware.OLVColumn columnSum;
         private System.Windows.Forms.Button btnReleased;
         private System.Windows.Forms.Panel panelLeftUpper;

@@ -51,12 +51,6 @@ namespace NeuroInventory
 
         public override void RebuildList()
         {
-            if (!IsRebuilded)
-            {
-                dtlCatalogs.BuildList();
-                dlvInventory.BuildList();
-                IsRebuilded = true;
-            }
             RefreshList();
         }
 
@@ -415,6 +409,36 @@ namespace NeuroInventory
                       Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
             };
 
+            // custom sorting by column
+            dlvInventory.CustomSorter = delegate (OLVColumn column, SortOrder order)
+            {
+                switch(column.AspectName)
+                {
+                    case "date":
+                        dlvInventory.ListViewItemSorter = new NeuroDateComparer(columnDate, order);
+                        break;
+                    case "invoiceDate":
+                        dlvInventory.ListViewItemSorter = new NeuroDateComparer(columnInvoiceDate, order);
+                        break;
+                    case "amount":
+                        dlvInventory.ListViewItemSorter = new NeuroNumberComparer(columnAmount, order);
+                        break;
+                    case "price":
+                        dlvInventory.ListViewItemSorter = new NeuroCurrencyComparer(columnPrice, order);
+                        break;
+                    case "sum":
+                        dlvInventory.ListViewItemSorter = new NeuroCurrencyComparer(columnSum, order);
+                        break;
+                    default:
+                        dlvInventory.ListViewItemSorter = new ColumnComparer(column, order);
+                        break;
+                }
+            };
+
+            dlvInventory.PrimarySortColumn = columnDate;
+            dlvInventory.PrimarySortOrder = SortOrder.Ascending;
+            dlvInventory.Sort();
+
             // drag n drop
             SimpleDropSink dropSink = new SimpleDropSink();
             dropSink.CanDropOnItem = true;
@@ -431,7 +455,7 @@ namespace NeuroInventory
 
         private void RefreshList()
         {
-            if (dtlCatalogs.SelectedObject != null && dtlCatalogs.SelectedObjects != null)
+            if (dtlCatalogs.SelectedObject != null || dtlCatalogs.SelectedObjects?.Count > 0)
             {
                 bindingSource.DataMember = "inventory";
                 bindingSource.DataSource = ReturnDataSet();
@@ -475,8 +499,7 @@ namespace NeuroInventory
             DataRowView dataRowViewCatalogs = dtlCatalogs.SelectedObject as DataRowView;
             DataRowView dataRowViewInventory = dlvInventory.SelectedObject as DataRowView;
 
-            if (dataRowViewCatalogs != null && GetNodeType(dataRowViewCatalogs["type"]) == TreeNodeType.FILE
-                && dataRowViewInventory != null)
+            if (dataRowViewCatalogs != null && GetNodeType(dataRowViewCatalogs["type"]) == TreeNodeType.FILE)
             {
                 InventoryEditor editor = new InventoryEditor(Convert.ToInt32(dataRowViewCatalogs["id"]));
                 editor.StartPosition = FormStartPosition.CenterParent;
@@ -723,7 +746,7 @@ namespace NeuroInventory
 
         private void SelectInventory(IList selectedObjects)
         {
-            if(selectedObjects != null && selectedObjects.Count > 0)
+            if(selectedObjects?.Count > 0)
             {
                 List<int> l_InventoryIds = new List<int>();
 

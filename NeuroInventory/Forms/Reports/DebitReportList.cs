@@ -60,6 +60,22 @@ namespace NeuroInventory
 
             bindingSource = new BindingSource(ReturnDataSet(), "debitReport");
             dlvDebitReport.DataSource = bindingSource;
+            // custom sorting by column
+            dlvDebitReport.CustomSorter = delegate (OLVColumn column, SortOrder order)
+            {
+                switch (column.AspectName)
+                {
+                    case "date":
+                        dlvDebitReport.ListViewItemSorter = new NeuroDateComparer(columnDate, order);
+                        break;
+                    default:
+                        dlvDebitReport.ListViewItemSorter = new ColumnComparer(column, order);
+                        break;
+                }
+            };
+            dlvDebitReport.PrimarySortColumn = columnDate;
+            dlvDebitReport.PrimarySortOrder = SortOrder.Ascending;
+            dlvDebitReport.Sort();
             dlvDebitReport.RebuildColumns();
         }
 

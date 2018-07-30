@@ -15,7 +15,6 @@ namespace NeuroInventory
         private bool isRebuilded = false;
 
         protected int ListviewSelectedIndex { get => listviewSelectedIndex; set => listviewSelectedIndex = value; }
-        public bool IsRebuilded { get => isRebuilded; set => isRebuilded = value; }
 
         protected virtual void InitForm()
         {
@@ -45,6 +44,8 @@ namespace NeuroInventory
             mDataListView.SelectedBackColor = Color.LightBlue;
             mDataListView.SelectedForeColor = Color.MidnightBlue;
             mDataListView.RowHeight = Definitions.ROW_HEIGHT;
+            //mDataListView.TintSortColumn = true;
+            //mDataListView.SelectedColumnTint = Color.Red;
             //mDataListView.DoubleBuffered(true);
             mDataListView.FormatRow += delegate (object sender, FormatRowEventArgs args)
             {

@@ -38,7 +38,7 @@
             this.dlvMeasurement = new BrightIdeasSoftware.DataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lblPlaces = new System.Windows.Forms.Label();
@@ -155,14 +155,14 @@
             // 
             this.dlvMeasurement.AllColumns.Add(this.olvColumn1);
             this.dlvMeasurement.AllColumns.Add(this.olvColumn2);
-            this.dlvMeasurement.AllColumns.Add(this.olvColumn3);
+            this.dlvMeasurement.AllColumns.Add(this.columnName);
             this.dlvMeasurement.AllColumns.Add(this.olvColumn4);
             this.dlvMeasurement.AllColumns.Add(this.olvColumn5);
             this.dlvMeasurement.CellEditUseWholeCell = false;
             this.dlvMeasurement.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
             this.olvColumn2,
-            this.olvColumn3,
+            this.columnName,
             this.olvColumn4,
             this.olvColumn5});
             this.dlvMeasurement.Cursor = System.Windows.Forms.Cursors.Default;
@@ -182,6 +182,8 @@
             this.olvColumn1.IsEditable = false;
             this.olvColumn1.MaximumWidth = 1000;
             this.olvColumn1.MinimumWidth = 50;
+            this.olvColumn1.Searchable = false;
+            this.olvColumn1.Sortable = false;
             this.olvColumn1.Text = "№";
             this.olvColumn1.Width = 50;
             // 
@@ -195,15 +197,15 @@
             this.olvColumn2.Text = "Код ОКЕИ";
             this.olvColumn2.Width = 200;
             // 
-            // olvColumn3
+            // columnName
             // 
-            this.olvColumn3.AspectName = "name";
-            this.olvColumn3.Groupable = false;
-            this.olvColumn3.IsEditable = false;
-            this.olvColumn3.MaximumWidth = 1000;
-            this.olvColumn3.MinimumWidth = 50;
-            this.olvColumn3.Text = "Наименование";
-            this.olvColumn3.Width = 200;
+            this.columnName.AspectName = "name";
+            this.columnName.Groupable = false;
+            this.columnName.IsEditable = false;
+            this.columnName.MaximumWidth = 1000;
+            this.columnName.MinimumWidth = 50;
+            this.columnName.Text = "Наименование";
+            this.columnName.Width = 200;
             // 
             // olvColumn4
             // 
@@ -344,7 +346,7 @@
         private BrightIdeasSoftware.DataListView dlvMeasurement;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
-        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn columnName;
         private BrightIdeasSoftware.OLVColumn olvColumn4;
         private BrightIdeasSoftware.OLVColumn olvColumn5;
     }

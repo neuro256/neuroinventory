@@ -30,13 +30,13 @@
         {
             this.lvDebitData = new BrightIdeasSoftware.DataListView();
             this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnBalance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnAmount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnSum = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.highlightTextRenderer1 = new BrightIdeasSoftware.HighlightTextRenderer();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
@@ -52,24 +52,24 @@
             // lvDebitData
             // 
             this.lvDebitData.AllColumns.Add(this.olvColumn7);
-            this.lvDebitData.AllColumns.Add(this.olvColumn1);
+            this.lvDebitData.AllColumns.Add(this.columnName);
             this.lvDebitData.AllColumns.Add(this.olvColumn2);
             this.lvDebitData.AllColumns.Add(this.olvColumn8);
             this.lvDebitData.AllColumns.Add(this.olvColumn3);
             this.lvDebitData.AllColumns.Add(this.columnPrice);
-            this.lvDebitData.AllColumns.Add(this.olvColumn5);
-            this.lvDebitData.AllColumns.Add(this.olvColumn9);
+            this.lvDebitData.AllColumns.Add(this.columnBalance);
+            this.lvDebitData.AllColumns.Add(this.columnAmount);
             this.lvDebitData.AllColumns.Add(this.columnSum);
             this.lvDebitData.CellEditUseWholeCell = false;
             this.lvDebitData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn7,
-            this.olvColumn1,
+            this.columnName,
             this.olvColumn2,
             this.olvColumn8,
             this.olvColumn3,
             this.columnPrice,
-            this.olvColumn5,
-            this.olvColumn9,
+            this.columnBalance,
+            this.columnAmount,
             this.columnSum});
             this.lvDebitData.Cursor = System.Windows.Forms.Cursors.Default;
             this.lvDebitData.DataSource = null;
@@ -93,19 +93,21 @@
             this.olvColumn7.IsEditable = false;
             this.olvColumn7.MaximumWidth = 1000;
             this.olvColumn7.MinimumWidth = 50;
+            this.olvColumn7.Searchable = false;
+            this.olvColumn7.Sortable = false;
             this.olvColumn7.Text = "№";
             this.olvColumn7.Width = 50;
             // 
-            // olvColumn1
+            // columnName
             // 
-            this.olvColumn1.AspectName = "name";
-            this.olvColumn1.ButtonPadding = new System.Drawing.Size(10, 10);
-            this.olvColumn1.IsTileViewColumn = true;
-            this.olvColumn1.MaximumWidth = 1000;
-            this.olvColumn1.MinimumWidth = 50;
-            this.olvColumn1.Text = "Название";
-            this.olvColumn1.UseInitialLetterForGroup = true;
-            this.olvColumn1.Width = 250;
+            this.columnName.AspectName = "name";
+            this.columnName.ButtonPadding = new System.Drawing.Size(10, 10);
+            this.columnName.IsTileViewColumn = true;
+            this.columnName.MaximumWidth = 1000;
+            this.columnName.MinimumWidth = 50;
+            this.columnName.Text = "Название";
+            this.columnName.UseInitialLetterForGroup = true;
+            this.columnName.Width = 250;
             // 
             // olvColumn2
             // 
@@ -144,22 +146,22 @@
             this.columnPrice.Text = "Цена";
             this.columnPrice.Width = 100;
             // 
-            // olvColumn5
+            // columnBalance
             // 
-            this.olvColumn5.AspectName = "balance";
-            this.olvColumn5.IsEditable = false;
-            this.olvColumn5.MaximumWidth = 1000;
-            this.olvColumn5.MinimumWidth = 50;
-            this.olvColumn5.Text = "Остаток";
-            this.olvColumn5.Width = 100;
+            this.columnBalance.AspectName = "balance";
+            this.columnBalance.IsEditable = false;
+            this.columnBalance.MaximumWidth = 1000;
+            this.columnBalance.MinimumWidth = 50;
+            this.columnBalance.Text = "Остаток";
+            this.columnBalance.Width = 100;
             // 
-            // olvColumn9
+            // columnAmount
             // 
-            this.olvColumn9.AspectName = "debit_amount";
-            this.olvColumn9.MaximumWidth = 1000;
-            this.olvColumn9.MinimumWidth = 50;
-            this.olvColumn9.Text = "Списать";
-            this.olvColumn9.Width = 100;
+            this.columnAmount.AspectName = "debit_amount";
+            this.columnAmount.MaximumWidth = 1000;
+            this.columnAmount.MinimumWidth = 50;
+            this.columnAmount.Text = "Списать";
+            this.columnAmount.Width = 100;
             // 
             // columnSum
             // 
@@ -263,13 +265,13 @@
         #endregion
 
         private BrightIdeasSoftware.DataListView lvDebitData;
-        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn columnName;
         private BrightIdeasSoftware.HighlightTextRenderer highlightTextRenderer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn olvColumn3;
         private BrightIdeasSoftware.OLVColumn columnPrice;
-        private BrightIdeasSoftware.OLVColumn olvColumn5;
+        private BrightIdeasSoftware.OLVColumn columnBalance;
         private BrightIdeasSoftware.OLVColumn columnSum;
         private System.Windows.Forms.Button btnReleased;
         private System.Windows.Forms.Panel panelLeftUpper;
@@ -277,6 +279,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private BrightIdeasSoftware.OLVColumn olvColumn7;
         private BrightIdeasSoftware.OLVColumn olvColumn8;
-        private BrightIdeasSoftware.OLVColumn olvColumn9;
+        private BrightIdeasSoftware.OLVColumn columnAmount;
     }
 }

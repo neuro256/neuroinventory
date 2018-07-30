@@ -42,15 +42,15 @@ namespace NeuroInventory
             this.btnReleasedRemove = new System.Windows.Forms.Button();
             this.dlvReleased = new BrightIdeasSoftware.DataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnDate1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnDate2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnDate3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnAmount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnSum = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn13 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -156,15 +156,15 @@ namespace NeuroInventory
             // dlvReleased
             // 
             this.dlvReleased.AllColumns.Add(this.olvColumn1);
-            this.dlvReleased.AllColumns.Add(this.olvColumn2);
-            this.dlvReleased.AllColumns.Add(this.olvColumn3);
+            this.dlvReleased.AllColumns.Add(this.columnDate1);
+            this.dlvReleased.AllColumns.Add(this.columnDate2);
             this.dlvReleased.AllColumns.Add(this.olvColumn4);
-            this.dlvReleased.AllColumns.Add(this.olvColumn5);
+            this.dlvReleased.AllColumns.Add(this.columnDate3);
             this.dlvReleased.AllColumns.Add(this.olvColumn6);
             this.dlvReleased.AllColumns.Add(this.olvColumn7);
             this.dlvReleased.AllColumns.Add(this.olvColumn8);
             this.dlvReleased.AllColumns.Add(this.olvColumn9);
-            this.dlvReleased.AllColumns.Add(this.olvColumn10);
+            this.dlvReleased.AllColumns.Add(this.columnAmount);
             this.dlvReleased.AllColumns.Add(this.columnPrice);
             this.dlvReleased.AllColumns.Add(this.columnSum);
             this.dlvReleased.AllColumns.Add(this.olvColumn13);
@@ -172,15 +172,15 @@ namespace NeuroInventory
             this.dlvReleased.CellEditUseWholeCell = false;
             this.dlvReleased.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
-            this.olvColumn2,
-            this.olvColumn3,
+            this.columnDate1,
+            this.columnDate2,
             this.olvColumn4,
-            this.olvColumn5,
+            this.columnDate3,
             this.olvColumn6,
             this.olvColumn7,
             this.olvColumn8,
             this.olvColumn9,
-            this.olvColumn10,
+            this.columnAmount,
             this.columnPrice,
             this.columnSum,
             this.olvColumn13,
@@ -205,24 +205,26 @@ namespace NeuroInventory
             this.olvColumn1.IsEditable = false;
             this.olvColumn1.MaximumWidth = 1000;
             this.olvColumn1.MinimumWidth = 50;
+            this.olvColumn1.Searchable = false;
+            this.olvColumn1.Sortable = false;
             this.olvColumn1.Text = "№";
             this.olvColumn1.Width = 50;
             // 
-            // olvColumn2
+            // columnDate1
             // 
-            this.olvColumn2.AspectName = "ordate";
-            this.olvColumn2.Groupable = false;
-            this.olvColumn2.IsEditable = false;
-            this.olvColumn2.Text = "Дата поступления";
-            this.olvColumn2.Width = 200;
+            this.columnDate1.AspectName = "ordate";
+            this.columnDate1.Groupable = false;
+            this.columnDate1.IsEditable = false;
+            this.columnDate1.Text = "Дата поступления";
+            this.columnDate1.Width = 200;
             // 
-            // olvColumn3
+            // columnDate2
             // 
-            this.olvColumn3.AspectName = "mydate";
-            this.olvColumn3.Groupable = false;
-            this.olvColumn3.IsEditable = false;
-            this.olvColumn3.Text = "Дата отпуска";
-            this.olvColumn3.Width = 200;
+            this.columnDate2.AspectName = "mydate";
+            this.columnDate2.Groupable = false;
+            this.columnDate2.IsEditable = false;
+            this.columnDate2.Text = "Дата отпуска";
+            this.columnDate2.Width = 200;
             // 
             // olvColumn4
             // 
@@ -232,14 +234,14 @@ namespace NeuroInventory
             this.olvColumn4.Text = "Номер накладной";
             this.olvColumn4.Width = 200;
             // 
-            // olvColumn5
+            // columnDate3
             // 
-            this.olvColumn5.AspectName = "invoiceDate";
-            this.olvColumn5.AspectToStringFormat = "";
-            this.olvColumn5.Groupable = false;
-            this.olvColumn5.IsEditable = false;
-            this.olvColumn5.Text = "Дата накладной";
-            this.olvColumn5.Width = 200;
+            this.columnDate3.AspectName = "invoiceDate";
+            this.columnDate3.AspectToStringFormat = "";
+            this.columnDate3.Groupable = false;
+            this.columnDate3.IsEditable = false;
+            this.columnDate3.Text = "Дата накладной";
+            this.columnDate3.Width = 200;
             // 
             // olvColumn6
             // 
@@ -273,13 +275,13 @@ namespace NeuroInventory
             this.olvColumn9.Text = "Кому отпущено";
             this.olvColumn9.Width = 200;
             // 
-            // olvColumn10
+            // columnAmount
             // 
-            this.olvColumn10.AspectName = "amount";
-            this.olvColumn10.Groupable = false;
-            this.olvColumn10.IsEditable = false;
-            this.olvColumn10.Text = "Количество";
-            this.olvColumn10.Width = 200;
+            this.columnAmount.AspectName = "amount";
+            this.columnAmount.Groupable = false;
+            this.columnAmount.IsEditable = false;
+            this.columnAmount.Text = "Количество";
+            this.columnAmount.Width = 200;
             // 
             // columnPrice
             // 
@@ -304,6 +306,8 @@ namespace NeuroInventory
             this.olvColumn13.AspectName = "document";
             this.olvColumn13.Groupable = false;
             this.olvColumn13.IsEditable = false;
+            this.olvColumn13.Searchable = false;
+            this.olvColumn13.Sortable = false;
             this.olvColumn13.Text = "Документ";
             this.olvColumn13.Width = 200;
             // 
@@ -312,6 +316,7 @@ namespace NeuroInventory
             this.olvColumn14.AspectName = "balance";
             this.olvColumn14.Groupable = false;
             this.olvColumn14.IsEditable = false;
+            this.olvColumn14.Searchable = false;
             this.olvColumn14.Text = "Состояние списания";
             this.olvColumn14.Width = 200;
             // 
@@ -379,15 +384,15 @@ namespace NeuroInventory
         private Button btnDebitCancel;
         private BrightIdeasSoftware.DataListView dlvReleased;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.OLVColumn olvColumn2;
-        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn columnDate1;
+        private BrightIdeasSoftware.OLVColumn columnDate2;
         private BrightIdeasSoftware.OLVColumn olvColumn4;
-        private BrightIdeasSoftware.OLVColumn olvColumn5;
+        private BrightIdeasSoftware.OLVColumn columnDate3;
         private BrightIdeasSoftware.OLVColumn olvColumn6;
         private BrightIdeasSoftware.OLVColumn olvColumn7;
         private BrightIdeasSoftware.OLVColumn olvColumn8;
         private BrightIdeasSoftware.OLVColumn olvColumn9;
-        private BrightIdeasSoftware.OLVColumn olvColumn10;
+        private BrightIdeasSoftware.OLVColumn columnAmount;
         private BrightIdeasSoftware.OLVColumn columnPrice;
         private BrightIdeasSoftware.OLVColumn columnSum;
         private BrightIdeasSoftware.OLVColumn olvColumn13;

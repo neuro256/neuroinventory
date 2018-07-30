@@ -64,6 +64,30 @@ namespace NeuroInventory
                       Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
             };
 
+            // custom sorting by column
+            lvDemandData.CustomSorter = delegate (OLVColumn column, SortOrder order)
+            {
+                switch (column.AspectName)
+                {
+                    case "amount":
+                        lvDemandData.ListViewItemSorter = new NeuroNumberComparer(columnAmount, order);
+                        break;
+                    case "price":
+                        lvDemandData.ListViewItemSorter = new NeuroCurrencyComparer(columnPrice, order);
+                        break;
+                    case "sum":
+                        lvDemandData.ListViewItemSorter = new NeuroCurrencyComparer(columnSum, order);
+                        break;
+                    default:
+                        lvDemandData.ListViewItemSorter = new ColumnComparer(column, order);
+                        break;
+                }
+            };
+
+            lvDemandData.PrimarySortColumn = columnName;
+            lvDemandData.PrimarySortOrder = SortOrder.Ascending;
+            lvDemandData.Sort();
+
             lvDemandData.RebuildColumns();
 
             dateTimePicker.Format = DateTimePickerFormat.Long;

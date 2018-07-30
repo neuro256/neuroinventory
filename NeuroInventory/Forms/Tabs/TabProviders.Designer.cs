@@ -32,7 +32,7 @@
             this.tableLayoutPanelProviders = new System.Windows.Forms.TableLayoutPanel();
             this.dlvProviders = new BrightIdeasSoftware.DataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -69,7 +69,7 @@
             // dlvProviders
             // 
             this.dlvProviders.AllColumns.Add(this.olvColumn1);
-            this.dlvProviders.AllColumns.Add(this.olvColumn2);
+            this.dlvProviders.AllColumns.Add(this.columnName);
             this.dlvProviders.AllColumns.Add(this.olvColumn3);
             this.dlvProviders.AllColumns.Add(this.olvColumn4);
             this.dlvProviders.AllColumns.Add(this.olvColumn5);
@@ -78,7 +78,7 @@
             this.dlvProviders.CellEditUseWholeCell = false;
             this.dlvProviders.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
-            this.olvColumn2,
+            this.columnName,
             this.olvColumn3,
             this.olvColumn4,
             this.olvColumn5,
@@ -113,18 +113,20 @@
             this.olvColumn1.IsEditable = false;
             this.olvColumn1.MaximumWidth = 1000;
             this.olvColumn1.MinimumWidth = 50;
+            this.olvColumn1.Searchable = false;
+            this.olvColumn1.Sortable = false;
             this.olvColumn1.Text = "№";
             this.olvColumn1.Width = 50;
             // 
-            // olvColumn2
+            // columnName
             // 
-            this.olvColumn2.AspectName = "name";
-            this.olvColumn2.Groupable = false;
-            this.olvColumn2.IsEditable = false;
-            this.olvColumn2.MaximumWidth = 1000;
-            this.olvColumn2.MinimumWidth = 50;
-            this.olvColumn2.Text = "Название";
-            this.olvColumn2.Width = 200;
+            this.columnName.AspectName = "name";
+            this.columnName.Groupable = false;
+            this.columnName.IsEditable = false;
+            this.columnName.MaximumWidth = 1000;
+            this.columnName.MinimumWidth = 50;
+            this.columnName.Text = "Название";
+            this.columnName.Width = 200;
             // 
             // olvColumn3
             // 
@@ -173,6 +175,8 @@
             this.olvColumn7.IsEditable = false;
             this.olvColumn7.MaximumWidth = 1000;
             this.olvColumn7.MinimumWidth = 50;
+            this.olvColumn7.Searchable = false;
+            this.olvColumn7.Sortable = false;
             this.olvColumn7.Text = "Карточка предприятия";
             this.olvColumn7.Width = 200;
             // 
@@ -283,7 +287,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStripProviders;
         private BrightIdeasSoftware.DataListView dlvProviders;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn columnName;
         private BrightIdeasSoftware.OLVColumn olvColumn3;
         private BrightIdeasSoftware.OLVColumn olvColumn4;
         private BrightIdeasSoftware.OLVColumn olvColumn5;

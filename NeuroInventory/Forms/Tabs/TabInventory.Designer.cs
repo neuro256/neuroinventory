@@ -50,14 +50,14 @@
             this.dlvInventory = new BrightIdeasSoftware.DataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnInvoiceDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnAmount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnSum = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn13 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -316,14 +316,14 @@
             // 
             this.dlvInventory.AllColumns.Add(this.olvColumn1);
             this.dlvInventory.AllColumns.Add(this.olvColumn2);
-            this.dlvInventory.AllColumns.Add(this.olvColumn3);
+            this.dlvInventory.AllColumns.Add(this.columnDate);
             this.dlvInventory.AllColumns.Add(this.olvColumn4);
             this.dlvInventory.AllColumns.Add(this.olvColumn5);
-            this.dlvInventory.AllColumns.Add(this.olvColumn6);
+            this.dlvInventory.AllColumns.Add(this.columnInvoiceDate);
             this.dlvInventory.AllColumns.Add(this.olvColumn7);
             this.dlvInventory.AllColumns.Add(this.olvColumn8);
             this.dlvInventory.AllColumns.Add(this.olvColumn9);
-            this.dlvInventory.AllColumns.Add(this.olvColumn10);
+            this.dlvInventory.AllColumns.Add(this.columnAmount);
             this.dlvInventory.AllColumns.Add(this.columnPrice);
             this.dlvInventory.AllColumns.Add(this.columnSum);
             this.dlvInventory.AllColumns.Add(this.olvColumn13);
@@ -332,14 +332,14 @@
             this.dlvInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
             this.olvColumn2,
-            this.olvColumn3,
+            this.columnDate,
             this.olvColumn4,
             this.olvColumn5,
-            this.olvColumn6,
+            this.columnInvoiceDate,
             this.olvColumn7,
             this.olvColumn8,
             this.olvColumn9,
-            this.olvColumn10,
+            this.columnAmount,
             this.columnPrice,
             this.columnSum,
             this.olvColumn13});
@@ -364,6 +364,8 @@
             this.olvColumn1.IsEditable = false;
             this.olvColumn1.MaximumWidth = 1000;
             this.olvColumn1.MinimumWidth = 50;
+            this.olvColumn1.Searchable = false;
+            this.olvColumn1.Sortable = false;
             this.olvColumn1.Text = "№";
             this.olvColumn1.Width = 50;
             // 
@@ -378,15 +380,15 @@
             this.olvColumn2.ToolTipText = "";
             this.olvColumn2.Width = 200;
             // 
-            // olvColumn3
+            // columnDate
             // 
-            this.olvColumn3.AspectName = "date";
-            this.olvColumn3.Groupable = false;
-            this.olvColumn3.IsEditable = false;
-            this.olvColumn3.MaximumWidth = 1000;
-            this.olvColumn3.MinimumWidth = 50;
-            this.olvColumn3.Text = "Дата поступления";
-            this.olvColumn3.Width = 200;
+            this.columnDate.AspectName = "date";
+            this.columnDate.Groupable = false;
+            this.columnDate.IsEditable = false;
+            this.columnDate.MaximumWidth = 1000;
+            this.columnDate.MinimumWidth = 50;
+            this.columnDate.Text = "Дата поступления";
+            this.columnDate.Width = 200;
             // 
             // olvColumn4
             // 
@@ -395,6 +397,8 @@
             this.olvColumn4.IsEditable = false;
             this.olvColumn4.MaximumWidth = 1000;
             this.olvColumn4.MinimumWidth = 50;
+            this.olvColumn4.Searchable = false;
+            this.olvColumn4.Sortable = false;
             this.olvColumn4.Text = "Накладная";
             this.olvColumn4.Width = 200;
             // 
@@ -408,15 +412,15 @@
             this.olvColumn5.Text = "Номер накладной";
             this.olvColumn5.Width = 200;
             // 
-            // olvColumn6
+            // columnInvoiceDate
             // 
-            this.olvColumn6.AspectName = "invoiceDate";
-            this.olvColumn6.Groupable = false;
-            this.olvColumn6.IsEditable = false;
-            this.olvColumn6.MaximumWidth = 1000;
-            this.olvColumn6.MinimumWidth = 50;
-            this.olvColumn6.Text = "Дата накладной";
-            this.olvColumn6.Width = 200;
+            this.columnInvoiceDate.AspectName = "invoiceDate";
+            this.columnInvoiceDate.Groupable = false;
+            this.columnInvoiceDate.IsEditable = false;
+            this.columnInvoiceDate.MaximumWidth = 1000;
+            this.columnInvoiceDate.MinimumWidth = 50;
+            this.columnInvoiceDate.Text = "Дата накладной";
+            this.columnInvoiceDate.Width = 200;
             // 
             // olvColumn7
             // 
@@ -448,15 +452,15 @@
             this.olvColumn9.Text = "Единица измерения";
             this.olvColumn9.Width = 200;
             // 
-            // olvColumn10
+            // columnAmount
             // 
-            this.olvColumn10.AspectName = "amount";
-            this.olvColumn10.Groupable = false;
-            this.olvColumn10.IsEditable = false;
-            this.olvColumn10.MaximumWidth = 1000;
-            this.olvColumn10.MinimumWidth = 50;
-            this.olvColumn10.Text = "Количество";
-            this.olvColumn10.Width = 200;
+            this.columnAmount.AspectName = "amount";
+            this.columnAmount.Groupable = false;
+            this.columnAmount.IsEditable = false;
+            this.columnAmount.MaximumWidth = 1000;
+            this.columnAmount.MinimumWidth = 50;
+            this.columnAmount.Text = "Количество";
+            this.columnAmount.Width = 200;
             // 
             // columnPrice
             // 
@@ -549,14 +553,14 @@
         private BrightIdeasSoftware.DataListView dlvInventory;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
-        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn columnDate;
         private BrightIdeasSoftware.OLVColumn olvColumn4;
         private BrightIdeasSoftware.OLVColumn olvColumn5;
-        private BrightIdeasSoftware.OLVColumn olvColumn6;
+        private BrightIdeasSoftware.OLVColumn columnInvoiceDate;
         private BrightIdeasSoftware.OLVColumn olvColumn7;
         private BrightIdeasSoftware.OLVColumn olvColumn8;
         private BrightIdeasSoftware.OLVColumn olvColumn9;
-        private BrightIdeasSoftware.OLVColumn olvColumn10;
+        private BrightIdeasSoftware.OLVColumn columnAmount;
         private BrightIdeasSoftware.OLVColumn columnPrice;
         private BrightIdeasSoftware.OLVColumn columnSum;
         private BrightIdeasSoftware.OLVColumn olvColumn13;

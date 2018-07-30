@@ -27,11 +27,6 @@ namespace NeuroInventory
 
         public override void RebuildList()
         {
-            if (!IsRebuilded)
-            {
-                dlvProviders.BuildList();
-                IsRebuilded = true;
-            }
             RefreshList();
         }
 
@@ -74,7 +69,10 @@ namespace NeuroInventory
 
             bindingSource = new BindingSource(ReturnDataSet(), "providers");
             dlvProviders.DataSource = bindingSource;
+            dlvProviders.PrimarySortColumn = columnName;
+            dlvProviders.PrimarySortOrder = SortOrder.Ascending;
             dlvProviders.RebuildColumns();
+            dlvProviders.Sort();
         }
 
         protected override DataListView GetListView()

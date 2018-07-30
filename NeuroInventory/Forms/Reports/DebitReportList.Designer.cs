@@ -35,7 +35,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.dlvDebitReport = new BrightIdeasSoftware.DataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStripDebitReportList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanelMain.SuspendLayout();
@@ -101,12 +101,12 @@
             // dlvDebitReport
             // 
             this.dlvDebitReport.AllColumns.Add(this.olvColumn1);
-            this.dlvDebitReport.AllColumns.Add(this.olvColumn2);
+            this.dlvDebitReport.AllColumns.Add(this.columnDate);
             this.dlvDebitReport.AllColumns.Add(this.olvColumn3);
             this.dlvDebitReport.CellEditUseWholeCell = false;
             this.dlvDebitReport.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
-            this.olvColumn2,
+            this.columnDate,
             this.olvColumn3});
             this.dlvDebitReport.Cursor = System.Windows.Forms.Cursors.Default;
             this.dlvDebitReport.DataSource = null;
@@ -127,18 +127,20 @@
             this.olvColumn1.IsEditable = false;
             this.olvColumn1.MaximumWidth = 1000;
             this.olvColumn1.MinimumWidth = 50;
+            this.olvColumn1.Searchable = false;
+            this.olvColumn1.Sortable = false;
             this.olvColumn1.Text = "№";
             this.olvColumn1.Width = 50;
             // 
-            // olvColumn2
+            // columnDate
             // 
-            this.olvColumn2.AspectName = "date";
-            this.olvColumn2.Groupable = false;
-            this.olvColumn2.IsEditable = false;
-            this.olvColumn2.MaximumWidth = 1000;
-            this.olvColumn2.MinimumWidth = 50;
-            this.olvColumn2.Text = "Дата";
-            this.olvColumn2.Width = 200;
+            this.columnDate.AspectName = "date";
+            this.columnDate.Groupable = false;
+            this.columnDate.IsEditable = false;
+            this.columnDate.MaximumWidth = 1000;
+            this.columnDate.MinimumWidth = 50;
+            this.columnDate.Text = "Дата";
+            this.columnDate.Width = 200;
             // 
             // olvColumn3
             // 
@@ -147,6 +149,8 @@
             this.olvColumn3.IsEditable = false;
             this.olvColumn3.MaximumWidth = 1000;
             this.olvColumn3.MinimumWidth = 50;
+            this.olvColumn3.Searchable = false;
+            this.olvColumn3.Sortable = false;
             this.olvColumn3.Text = "Документ";
             this.olvColumn3.Width = 200;
             // 
@@ -184,7 +188,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStripDebitReportList;
         private BrightIdeasSoftware.DataListView dlvDebitReport;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn columnDate;
         private BrightIdeasSoftware.OLVColumn olvColumn3;
     }
 }

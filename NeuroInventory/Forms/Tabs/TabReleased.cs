@@ -88,11 +88,6 @@ namespace NeuroInventory
 
         public override void RebuildList()
         {
-            if (!IsRebuilded)
-            {
-                dlvReleased.BuildList();
-                IsRebuilded = true;
-            }
             RefreshList();
         }
 
@@ -188,6 +183,39 @@ namespace NeuroInventory
                       "{0:C}",
                       Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
             };
+
+            // custom sorting by column
+            dlvReleased.CustomSorter = delegate (OLVColumn column, SortOrder order)
+            {
+                switch (column.AspectName)
+                {
+                    case "ordate":
+                        dlvReleased.ListViewItemSorter = new NeuroDateComparer(columnDate1, order);
+                        break;
+                    case "mydate":
+                        dlvReleased.ListViewItemSorter = new NeuroDateComparer(columnDate2, order);
+                        break;
+                    case "invoiceDate":
+                        dlvReleased.ListViewItemSorter = new NeuroDateComparer(columnDate3, order);
+                        break;
+                    case "amount":
+                        dlvReleased.ListViewItemSorter = new NeuroNumberComparer(columnAmount, order);
+                        break;
+                    case "price":
+                        dlvReleased.ListViewItemSorter = new NeuroCurrencyComparer(columnPrice, order);
+                        break;
+                    case "sum":
+                        dlvReleased.ListViewItemSorter = new NeuroCurrencyComparer(columnSum, order);
+                        break;
+                    default:
+                        dlvReleased.ListViewItemSorter = new ColumnComparer(column, order);
+                        break;
+                }
+            };
+
+            dlvReleased.PrimarySortColumn = columnDate1;
+            dlvReleased.PrimarySortOrder = SortOrder.Ascending;
+            dlvReleased.Sort();
 
             dlvReleased.RebuildColumns();
         }

@@ -59,6 +59,33 @@ namespace NeuroInventory
                 return str;
             };
 
+            // custom sorting by column
+            lvDebitData.CustomSorter = delegate (OLVColumn column, SortOrder order)
+            {
+                switch (column.AspectName)
+                {
+                    case "debit_amount":
+                        lvDebitData.ListViewItemSorter = new NeuroNumberComparer(columnAmount, order);
+                        break;
+                    case "price":
+                        lvDebitData.ListViewItemSorter = new NeuroCurrencyComparer(columnPrice, order);
+                        break;
+                    case "sum":
+                        lvDebitData.ListViewItemSorter = new NeuroCurrencyComparer(columnSum, order);
+                        break;
+                    case "balance":
+                        lvDebitData.ListViewItemSorter = new NeuroNumberComparer(columnBalance, order);
+                        break;
+                    default:
+                        lvDebitData.ListViewItemSorter = new ColumnComparer(column, order);
+                        break;
+                }
+            };
+
+            lvDebitData.PrimarySortColumn = columnName;
+            lvDebitData.PrimarySortOrder = SortOrder.Ascending;
+            lvDebitData.Sort();
+
             this.lvDebitData.RebuildColumns();
 
             dateTimePicker.Format = DateTimePickerFormat.Long;

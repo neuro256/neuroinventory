@@ -36,7 +36,7 @@
             this.dlvDemandReport = new BrightIdeasSoftware.DataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStripDemandReportList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanelMain.SuspendLayout();
@@ -103,13 +103,13 @@
             // 
             this.dlvDemandReport.AllColumns.Add(this.olvColumn1);
             this.dlvDemandReport.AllColumns.Add(this.olvColumn2);
-            this.dlvDemandReport.AllColumns.Add(this.olvColumn3);
+            this.dlvDemandReport.AllColumns.Add(this.columnDate);
             this.dlvDemandReport.AllColumns.Add(this.olvColumn4);
             this.dlvDemandReport.CellEditUseWholeCell = false;
             this.dlvDemandReport.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
             this.olvColumn2,
-            this.olvColumn3,
+            this.columnDate,
             this.olvColumn4});
             this.dlvDemandReport.Cursor = System.Windows.Forms.Cursors.Default;
             this.dlvDemandReport.DataSource = null;
@@ -130,6 +130,8 @@
             this.olvColumn1.IsEditable = false;
             this.olvColumn1.MaximumWidth = 1000;
             this.olvColumn1.MinimumWidth = 50;
+            this.olvColumn1.Searchable = false;
+            this.olvColumn1.Sortable = false;
             this.olvColumn1.Text = "№";
             this.olvColumn1.Width = 50;
             // 
@@ -143,15 +145,15 @@
             this.olvColumn2.Text = "Работник";
             this.olvColumn2.Width = 200;
             // 
-            // olvColumn3
+            // columnDate
             // 
-            this.olvColumn3.AspectName = "date";
-            this.olvColumn3.Groupable = false;
-            this.olvColumn3.IsEditable = false;
-            this.olvColumn3.MaximumWidth = 1000;
-            this.olvColumn3.MinimumWidth = 50;
-            this.olvColumn3.Text = "Дата";
-            this.olvColumn3.Width = 200;
+            this.columnDate.AspectName = "date";
+            this.columnDate.Groupable = false;
+            this.columnDate.IsEditable = false;
+            this.columnDate.MaximumWidth = 1000;
+            this.columnDate.MinimumWidth = 50;
+            this.columnDate.Text = "Дата";
+            this.columnDate.Width = 200;
             // 
             // olvColumn4
             // 
@@ -160,6 +162,8 @@
             this.olvColumn4.IsEditable = false;
             this.olvColumn4.MaximumWidth = 1000;
             this.olvColumn4.MinimumWidth = 50;
+            this.olvColumn4.Searchable = false;
+            this.olvColumn4.Sortable = false;
             this.olvColumn4.Text = "Документ";
             this.olvColumn4.Width = 200;
             // 
@@ -198,7 +202,7 @@
         private BrightIdeasSoftware.DataListView dlvDemandReport;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
-        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn columnDate;
         private BrightIdeasSoftware.OLVColumn olvColumn4;
     }
 }

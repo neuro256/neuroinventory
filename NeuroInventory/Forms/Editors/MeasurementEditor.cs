@@ -57,6 +57,9 @@ namespace NeuroInventory
             base.InitListView();
             bindingSource = new BindingSource(ReturnDataSet(), "measurement");
             dlvMeasurement.DataSource = bindingSource;
+            dlvMeasurement.PrimarySortColumn = columnName;
+            dlvMeasurement.PrimarySortOrder = SortOrder.Ascending;
+            dlvMeasurement.Sort();
             dlvMeasurement.RebuildColumns();
         }
 

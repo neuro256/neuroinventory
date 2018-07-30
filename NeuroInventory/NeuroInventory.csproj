@@ -200,6 +200,7 @@
     </Compile>
     <Compile Include="SQLiteClasses\Tables\ReleasedSql.cs" />
     <Compile Include="UtilityClasses\MoneyConverter.cs" />
+    <Compile Include="UtilityClasses\NeuroComparers.cs" />
     <Compile Include="UtilityClasses\NeuroFile.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

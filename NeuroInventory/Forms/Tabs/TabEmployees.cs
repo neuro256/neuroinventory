@@ -31,6 +31,7 @@ namespace NeuroInventory
                 dlvEmployees.BuildList(true);
                 IsRebuilded = true;
             }
+            RefreshList();
         }
 
         private void InitCtxMenuStrip()
@@ -84,8 +85,6 @@ namespace NeuroInventory
         private void RefreshList()
         {
             bindingSource.DataSource = ReturnDataSet();
-            dlvEmployees.SelectedObject = null;
-            dlvEmployees.SelectedObjects = null;
         }
 
         protected override void InitForm()

@@ -63,8 +63,6 @@ namespace NeuroInventory
         private void RefreshList()
         {
             bindingSource.DataSource = ReturnDataSet();
-            dlvMeasurement.SelectedObject = null;
-            dlvMeasurement.SelectedObjects = null;
         }
 
         protected override void InitForm()

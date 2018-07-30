@@ -17,7 +17,7 @@ namespace NeuroInventory
         /// </summary>
         enum TreeNodeType
         {
-            FOLDER, 
+            FOLDER,
             FILE
         }
 
@@ -57,6 +57,7 @@ namespace NeuroInventory
                 dlvInventory.BuildList();
                 IsRebuilded = true;
             }
+            RefreshList();
         }
 
         private void InitContextMenuStripCatalogs()
@@ -94,7 +95,7 @@ namespace NeuroInventory
         private void RemoveFileItem_Click(object sender, EventArgs e)
         {
             DataRowView dataRowView = dtlCatalogs.SelectedObject as DataRowView;
-            if(dataRowView != null && GetNodeType(dataRowView["type"]) == TreeNodeType.FILE)
+            if (dataRowView != null && GetNodeType(dataRowView["type"]) == TreeNodeType.FILE)
             {
                 // Удалить тмц из базы данных
                 SQLiteManager.GetInstance().Catalogs().Remove(Convert.ToInt32(dataRowView["id"]));
@@ -185,7 +186,7 @@ namespace NeuroInventory
                 if (dialogName.ShowDialog() == DialogResult.OK)
                 {
                     DataRowView dataRowView = dtlCatalogs.SelectedObject as DataRowView;
-                    if(dataRowView != null)
+                    if (dataRowView != null)
                     {
                         int type = Convert.ToInt32(dataRowView["type"]);
                         int id = Convert.ToInt32(dataRowView["id"]);
@@ -209,12 +210,12 @@ namespace NeuroInventory
         {
             DialogName dialogName = new DialogName();
             dialogName.StartPosition = FormStartPosition.CenterParent;
-            if(dialogName.ShowDialog() == DialogResult.OK)
+            if (dialogName.ShowDialog() == DialogResult.OK)
             {
-                if(dtlCatalogs.SelectedObject != null)
+                if (dtlCatalogs.SelectedObject != null)
                 {
                     DataRowView dataRowView = dtlCatalogs.SelectedObject as DataRowView;
-                    if(GetNodeType(dataRowView["type"]) == TreeNodeType.FOLDER)
+                    if (GetNodeType(dataRowView["type"]) == TreeNodeType.FOLDER)
                     {
                         // Добавить запись в таблицу Каталоги
                         int parent = Convert.ToInt32(dataRowView["id"]);
@@ -250,11 +251,11 @@ namespace NeuroInventory
             catalogsNameColumn.ImageGetter = delegate (object row)
             {
                 DataRowView dataRowView = row as DataRowView;
-                if(GetNodeType(dataRowView["type"]) == TreeNodeType.FOLDER)
+                if (GetNodeType(dataRowView["type"]) == TreeNodeType.FOLDER)
                 {
                     return "folder";
-                } 
-                else 
+                }
+                else
                 {
                     return "file";
                 }
@@ -291,7 +292,7 @@ namespace NeuroInventory
                     DataRowView sourceRow = row as DataRowView;
                     int catalogId = SQLiteManager.GetInstance().Inventory().GetCatalogId(Convert.ToInt32(sourceRow["id"]));
                     int targerId = Convert.ToInt32(targetRow["id"]);
-                    if(catalogId != targerId)
+                    if (catalogId != targerId)
                     {
                         SQLiteManager.GetInstance().Inventory().Update(Convert.ToInt32(sourceRow["id"]), targerId);
                     }
@@ -430,18 +431,17 @@ namespace NeuroInventory
 
         private void RefreshList()
         {
-            bindingSource.DataMember = "inventory";
-            bindingSource.DataSource = ReturnDataSet();
-            dlvInventory.SelectedObject = null;
-            dlvInventory.SelectedObjects = null;
+            if (dtlCatalogs.SelectedObject != null && dtlCatalogs.SelectedObjects != null)
+            {
+                bindingSource.DataMember = "inventory";
+                bindingSource.DataSource = ReturnDataSet();
+            }
         }
 
         private void ResetList()
         {
             bindingSource.DataMember = "inventory";
             bindingSource.DataSource = null;
-            dlvInventory.SelectedObject = null;
-            dlvInventory.SelectedObjects = null;
         }
 
         protected override void InitForm()

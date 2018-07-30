@@ -71,8 +71,6 @@ namespace NeuroInventory
         private void RefreshList()
         {
             bindingSource.DataSource = ReturnDataSet();
-            dlvDemandReport.SelectedObject = null;
-            dlvDemandReport.SelectedObjects = null;
         }
 
         protected override void InitForm()

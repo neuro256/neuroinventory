@@ -94,34 +94,34 @@ namespace NeuroInventory
         private void InitCtxMenuStrip()
         {
             // Создаем элементы меню и добавляем их
-            ToolStripMenuItem addMenuItem = new ToolStripMenuItem("Добавить");
-            addMenuItem.Name = "addToolStripMenuItem";
-            addMenuItem.Click += addToolStripMenuItem_Click;
-            ToolStripMenuItem editMenuItem = new ToolStripMenuItem("Редактировать");
-            editMenuItem.Name = "editToolStripMenuItem";
-            editMenuItem.Click += editToolStripMenuItem_Click;
-            ToolStripMenuItem removeMenuItem = new ToolStripMenuItem("Удалить");
-            removeMenuItem.Name = "removeToolStripMenuItem";
-            removeMenuItem.Click += removeToolStripMenuItem_Click;
+            ToolStripMenuItem debitMenuItem = new ToolStripMenuItem("Списать");
+            debitMenuItem.Name = "debitToolStripMenuItem";
+            debitMenuItem.Click += debitToolStripMenuItem_Click;
+            ToolStripMenuItem cancelDebitMenuItem = new ToolStripMenuItem("Отменить списание");
+            cancelDebitMenuItem.Name = "cancelDebitToolStripMenuItem";
+            cancelDebitMenuItem.Click += cancelDebitToolStripMenuItem_Click;
+            ToolStripMenuItem cancelDemandMenuItem = new ToolStripMenuItem("Отменить отпуск");
+            cancelDemandMenuItem.Name = "cancelDemandToolStripMenuItem";
+            cancelDemandMenuItem.Click += cancelDemandToolStripMenuItem_Click;
             contextMenuStripReleased.Items.Clear();
-            contextMenuStripReleased.Items.AddRange(new[] { addMenuItem, editMenuItem, removeMenuItem });
+            contextMenuStripReleased.Items.AddRange(new[] { debitMenuItem, cancelDebitMenuItem, cancelDemandMenuItem });
             // Ассоциируем контекстное меню со списком
             dlvReleased.ContextMenuStrip = contextMenuStripReleased;
         }
 
-        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void cancelDemandToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RemoveRecord();
+            CancelDemand();
         }
 
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        private void cancelDebitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UpdateRecord();
+            CancelDebit();
         }
 
-        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        private void debitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddRecord();
+            Debit();
         }
 
         public override void InitListView()
@@ -240,13 +240,13 @@ namespace NeuroInventory
 
         private void btnReleasedRemove_Click(object sender, EventArgs e)
         {
-            RemoveRecord();
+            CancelDemand();
         }
 
         /// <summary>
         /// Отмена отпуска
         /// </summary>
-        public override void RemoveRecord()
+        private void CancelDemand()
         {
             if (dlvReleased.SelectedObjects?.Count > 0)
             {
@@ -256,8 +256,8 @@ namespace NeuroInventory
                     DataRowView dataRowView = selectedObject as DataRowView;
                     SQLiteManager.GetInstance().Released().CancelDemand(Convert.ToInt32(dataRowView["demandId"]));
                 }
-                RefreshList();
                 dlvReleased.Unfreeze();
+                RefreshList();
             }
             else
             {
@@ -280,8 +280,8 @@ namespace NeuroInventory
                     DataRowView dataRowView = selectedObject as DataRowView;
                     SQLiteManager.GetInstance().Released().CancelDebit(Convert.ToInt32(dataRowView["demandId"]));
                 }
-                RefreshList();
                 dlvReleased.Unfreeze();
+                RefreshList();
             }
             else
             {
@@ -311,7 +311,12 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void btnDebitReport_Click(object sender, EventArgs e)
         {
-            if(dlvReleased.CheckedObjects?.Count > 0)
+            Debit();
+        }
+
+        private void Debit()
+        {
+            if (dlvReleased.CheckedObjects?.Count > 0)
             {
                 DebitEditor editor = new DebitEditor(GetDebitDataSet());
                 editor.StartPosition = FormStartPosition.CenterParent;
@@ -413,15 +418,15 @@ namespace NeuroInventory
         {
             if (e.Model != null)
             {
-                contextMenuStripReleased.Items["addToolStripMenuItem"].Visible = false;
-                contextMenuStripReleased.Items["editToolStripMenuItem"].Visible = true;
-                contextMenuStripReleased.Items["removeToolStripMenuItem"].Visible = true;
+                contextMenuStripReleased.Items["debitToolStripMenuItem"].Visible = true;
+                contextMenuStripReleased.Items["cancelDebitToolStripMenuItem"].Visible = true;
+                contextMenuStripReleased.Items["cancelDemandToolStripMenuItem"].Visible = true;
             }
             else
             {
-                contextMenuStripReleased.Items["addToolStripMenuItem"].Visible = true;
-                contextMenuStripReleased.Items["editToolStripMenuItem"].Visible = false;
-                contextMenuStripReleased.Items["removeToolStripMenuItem"].Visible = false;
+                contextMenuStripReleased.Items["debitToolStripMenuItem"].Visible = true;
+                contextMenuStripReleased.Items["cancelDebitToolStripMenuItem"].Visible = false;
+                contextMenuStripReleased.Items["cancelDemandToolStripMenuItem"].Visible = false;
             }
             e.MenuStrip = contextMenuStripReleased;
         }

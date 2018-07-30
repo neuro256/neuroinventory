@@ -128,11 +128,13 @@ namespace NeuroInventory
         {
             if(dlvProviders.SelectedObjects?.Count > 0)
             {
+                dlvProviders.Freeze();
                 foreach(var selectedObject in dlvProviders.SelectedObjects)
                 {
                     DataRowView dataRowView = selectedObject as DataRowView;
                     SQLiteManager.GetInstance().Providers().Remove(Convert.ToInt32(dataRowView["id"]));
                 }
+                dlvProviders.Unfreeze();
                 RefreshList();
             }
             else

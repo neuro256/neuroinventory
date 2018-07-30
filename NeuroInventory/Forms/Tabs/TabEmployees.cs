@@ -1,7 +1,6 @@
 ﻿using BrightIdeasSoftware;
 using System;
 using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace NeuroInventory
@@ -211,6 +210,11 @@ namespace NeuroInventory
             {
                 dlvEmployees.RestoreState(columnSettings);
             }
+        }
+
+        public override void FocusFilter()
+        {
+            tbFilter.Focus();
         }
     }
 }

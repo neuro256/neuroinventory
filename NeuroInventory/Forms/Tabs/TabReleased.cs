@@ -417,5 +417,10 @@ namespace NeuroInventory
                 dlvReleased.RestoreState(columnSettings);
             }
         }
+
+        public override void FocusFilter()
+        {
+            tbFilter.Focus();
+        }
     }
 }

@@ -84,6 +84,7 @@ namespace NeuroInventory
         protected virtual DataListView GetListView() { return null; }
         public virtual void SaveState() { }
         public virtual void RestoreState() { }
+        public virtual void FocusFilter() { }
 
         public virtual void Exit()
         {

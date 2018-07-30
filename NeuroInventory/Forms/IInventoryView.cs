@@ -9,6 +9,7 @@
         void UpdateRecord();
         void SaveState();
         void RestoreState();
+        void FocusFilter();
         void Clear();
         void Exit();
     }

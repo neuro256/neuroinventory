@@ -357,5 +357,14 @@ namespace NeuroInventory
             if (inventoryTabs != null && inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
                 inventoryTabs[tabControl.SelectedTab.Name].RebuildList();
         }
+
+        private void tabControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.F)
+            {
+                if (inventoryTabs != null && inventoryTabs.ContainsKey(tabControl.SelectedTab.Name))
+                    inventoryTabs[tabControl.SelectedTab.Name].FocusFilter();
+            }
+        }
     }
 }

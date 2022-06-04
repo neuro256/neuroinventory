@@ -36,7 +36,8 @@ namespace NeuroInventory
         {
             cbEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
             cbEmployee.Sorted = false;
-            DataSet employeeDataSet = SQLiteManager.GetInstance().Employees().ReturnDataSet("SELECT id, (surename || ' ' || firstname || ' ' || lastname) AS name FROM employees");
+            
+            DataSet employeeDataSet = SQLiteManager.GetInstance().Employees().ReturnDataSet("SELECT id, (surename || ' ' || firstname || ' ' || lastname) AS name FROM employees ORDER BY name ASC");
             cbEmployee.DataSource = employeeDataSet.Tables[0];
             cbEmployee.DisplayMember = "name";
             cbEmployee.ValueMember = "id";

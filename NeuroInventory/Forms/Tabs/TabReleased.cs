@@ -84,6 +84,7 @@ namespace NeuroInventory
             InitCtxMenuStrip();
             SQLiteManager.GetInstance().Released().SetCommandSet();
             RestoreState();
+            TimedFilter(dlvReleased, Definitions.DEFAULT_FILTER_TEXT, 0);
         }
 
         public override void RebuildList()
@@ -140,13 +141,13 @@ namespace NeuroInventory
                     args.SubItem.BackColor = Definitions.COLOR_SUBITEM_DOCUMENT_BACK_COLOR;
                     args.SubItem.Text = Path.GetFileName(args.SubItem.Text);
                 }
-                else if (args.Column?.AspectName == "amount")
+                else if (args.Column?.AspectName == "amount" && args.Model != null)
                 {
                     DataRowView dataRowView = args.Model as DataRowView;
                     int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRowView["measurement"].ToString());
                     args.SubItem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", args.SubItem.Text);
                 }
-                else if (args.Column?.AspectName == "balance")
+                else if (args.Column?.AspectName == "balance" && args.Model != null)
                 {
                     DataRowView dataRowView = args.Model as DataRowView;
                     BalanceInfo balanceInfo = BalanceInfo.GetBalanceInfo(dataRowView["balance"], dataRowView["amount"]);
@@ -159,6 +160,8 @@ namespace NeuroInventory
             this.dlvReleased.FormatRow += delegate (object cender, FormatRowEventArgs args)
             {
                 DataRowView dataRowView = args.Model as DataRowView;
+                if (dataRowView == null)
+                    return;
                 BalanceInfo balanceInfo = BalanceInfo.GetBalanceInfo(dataRowView["balance"], dataRowView["amount"]);
                 if (balanceInfo.balanceType == BalanceType.DEBIT)
                 {
@@ -433,7 +436,17 @@ namespace NeuroInventory
 
         private void tbFilter_TextChanged(object sender, EventArgs e)
         {
-            TimedFilter(dlvReleased, ((TextBox)sender).Text, 0);
+            if (checkBoxShowAll.Checked)
+            {
+                TimedFilter(dlvReleased, ((TextBox)sender).Text, 0);
+            }
+            else
+            {
+                if (((TextBox)sender).Text.Length > 2)
+                    TimedFilter(dlvReleased, ((TextBox)sender).Text, 0);
+                else
+                    TimedFilter(dlvReleased, Definitions.DEFAULT_FILTER_TEXT, 0);
+            }
         }
 
         public override void SaveState()
@@ -455,6 +468,23 @@ namespace NeuroInventory
         {
             tbFilter.Clear();
             tbFilter.Focus();
+        }
+
+        private void checkBoxShowAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxShowAll.Checked)
+            {
+                TimedFilter(dlvReleased, String.Empty, 0);
+                tbFilter.Clear();
+            }   
+            else
+            {
+                if(String.Equals(tbFilter.Text, String.Empty))
+                    TimedFilter(dlvReleased, Definitions.DEFAULT_FILTER_TEXT, 0);
+                else
+                    TimedFilter(dlvReleased, tbFilter.Text, 0);
+            }
+                
         }
     }
 }

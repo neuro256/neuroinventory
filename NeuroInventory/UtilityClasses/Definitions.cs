@@ -61,5 +61,6 @@ namespace NeuroInventory
         public static string DEMAND_ROLLBACK_PATH = @"Документы\Отмененные требования";
         public static string DEBIT_ROLLBACK_PATH = @"Документы\Отмененные списания";
         public static string INVENTORY_TOTAL_SUM = "Общая сумма = ";
+        public static string DEFAULT_FILTER_TEXT = "$Введите текст для поиска$";
     }
 }

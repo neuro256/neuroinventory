@@ -222,7 +222,7 @@ namespace NeuroInventory
             SaveState();
         }
 
-        protected override DataListView GetListView()
+        protected override FastDataListView GetListView()
         {
             return dlvMeasurement;
         }

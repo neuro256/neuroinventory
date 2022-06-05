@@ -75,7 +75,7 @@ namespace NeuroInventory
             dlvProviders.Sort();
         }
 
-        protected override DataListView GetListView()
+        protected override FastDataListView GetListView()
         {
             return dlvProviders;
         }

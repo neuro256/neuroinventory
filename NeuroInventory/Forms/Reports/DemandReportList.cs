@@ -79,7 +79,7 @@ namespace NeuroInventory
             dlvDemandReport.RebuildColumns();
         }
 
-        protected override DataListView GetListView()
+        protected override FastDataListView GetListView()
         {
             return dlvDemandReport;
         }

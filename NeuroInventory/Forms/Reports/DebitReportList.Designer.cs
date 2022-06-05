@@ -33,7 +33,7 @@
             this.panelDebitReportListBottom = new System.Windows.Forms.Panel();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.dlvDebitReport = new BrightIdeasSoftware.DataListView();
+            this.dlvDebitReport = new BrightIdeasSoftware.FastDataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -187,7 +187,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripDebitReportList;
-        private BrightIdeasSoftware.DataListView dlvDebitReport;
+        private BrightIdeasSoftware.FastDataListView dlvDebitReport;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn columnDate;
         private BrightIdeasSoftware.OLVColumn olvColumn3;

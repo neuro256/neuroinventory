@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanelProviders = new System.Windows.Forms.TableLayoutPanel();
-            this.dlvProviders = new BrightIdeasSoftware.DataListView();
+            this.dlvProviders = new BrightIdeasSoftware.FastDataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -285,7 +285,7 @@
         private System.Windows.Forms.Button btnProviderRemove;
         private System.Windows.Forms.Button btnProviderAdd;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripProviders;
-        private BrightIdeasSoftware.DataListView dlvProviders;
+        private BrightIdeasSoftware.FastDataListView dlvProviders;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn columnName;
         private BrightIdeasSoftware.OLVColumn olvColumn3;

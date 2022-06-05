@@ -40,7 +40,7 @@ namespace NeuroInventory
             this.btnDebitCancel = new System.Windows.Forms.Button();
             this.btnDebitReport = new System.Windows.Forms.Button();
             this.btnReleasedRemove = new System.Windows.Forms.Button();
-            this.dlvReleased = new BrightIdeasSoftware.DataListView();
+            this.dlvReleased = new BrightIdeasSoftware.FastDataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnDate1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnDate2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -382,7 +382,7 @@ namespace NeuroInventory
         private ToolStripMenuItem removeToolStripMenuItem;
         private Button btnDebitReport;
         private Button btnDebitCancel;
-        private BrightIdeasSoftware.DataListView dlvReleased;
+        private BrightIdeasSoftware.FastDataListView dlvReleased;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn columnDate1;
         private BrightIdeasSoftware.OLVColumn columnDate2;

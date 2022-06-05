@@ -220,7 +220,7 @@ namespace NeuroInventory
             dlvReleased.RebuildColumns();
         }
 
-        protected override DataListView GetListView()
+        protected override FastDataListView GetListView()
         {
             return dlvReleased;
         }

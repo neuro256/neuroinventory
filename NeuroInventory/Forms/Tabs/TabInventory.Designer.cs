@@ -47,7 +47,7 @@
             this.btnInventoryEdit = new System.Windows.Forms.Button();
             this.btnInventoryRemove = new System.Windows.Forms.Button();
             this.btnInventoryAdd = new System.Windows.Forms.Button();
-            this.dlvInventory = new BrightIdeasSoftware.DataListView();
+            this.dlvInventory = new BrightIdeasSoftware.FastDataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -551,7 +551,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStripCatalogs;
         private System.Windows.Forms.Button btnDemand;
         private System.Windows.Forms.TextBox tbSelectionHelp;
-        private BrightIdeasSoftware.DataListView dlvInventory;
+        private BrightIdeasSoftware.FastDataListView dlvInventory;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn columnDate;

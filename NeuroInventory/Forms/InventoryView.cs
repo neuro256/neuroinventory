@@ -9,7 +9,7 @@ namespace NeuroInventory
     public class InventoryView : Form, IInventoryView
     {
         private int listviewSelectedIndex;
-        protected DataListView mDataListView = null;
+        protected FastDataListView mDataListView = null;
         protected ContextMenuStrip m_ContextMenuStrip = null;
         private HighlightTextRenderer highlightTextRenderer1;
 
@@ -81,7 +81,7 @@ namespace NeuroInventory
         public virtual void RemoveRecord() { }
         public virtual void UpdateRecord() { }
         public virtual void Clear() { }
-        protected virtual DataListView GetListView() { return null; }
+        protected virtual FastDataListView GetListView() { return null; }
         public virtual void SaveState() { }
         public virtual void RestoreState() { }
         public virtual void FocusFilter() { }

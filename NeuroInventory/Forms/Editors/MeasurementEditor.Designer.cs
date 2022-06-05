@@ -35,7 +35,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.splitContainerMeasurement = new System.Windows.Forms.SplitContainer();
-            this.dlvMeasurement = new BrightIdeasSoftware.DataListView();
+            this.dlvMeasurement = new BrightIdeasSoftware.FastDataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -343,7 +343,7 @@
         private System.Windows.Forms.TextBox tbSymbol;
         private System.Windows.Forms.Label lblSymbol;
         private System.Windows.Forms.ErrorProvider errorProviderMeasurement;
-        private BrightIdeasSoftware.DataListView dlvMeasurement;
+        private BrightIdeasSoftware.FastDataListView dlvMeasurement;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn columnName;

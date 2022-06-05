@@ -463,7 +463,7 @@ namespace NeuroInventory
             dlvInventory.RebuildColumns();
         }
 
-        protected override DataListView GetListView()
+        protected override FastDataListView GetListView()
         {
             return dlvInventory;
         }

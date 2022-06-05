@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
@@ -444,6 +445,21 @@ namespace NeuroInventory
             dropSink.FeedbackColor = Definitions.COLOR_DROPSINK_FEEDBACK_COLOR;
             dlvInventory.DropSink = dropSink;
 
+            //dlvInventory.UseTranslucentHotItem = true;
+            //dlvInventory.UseTranslucentSelection = true;
+
+            // Make the hot item show an overlay when it changes
+            //if (dlvInventory.UseTranslucentHotItem)
+            //{
+            //    dlvInventory.HotItemStyle.Overlay = new InventoryOverlay();
+            //    dlvInventory.HotItemStyle = dlvInventory.HotItemStyle;
+            //}
+
+            //dlvInventory.UseTranslucentSelection = dlvInventory.UseTranslucentHotItem;
+
+            dlvInventory.CellToolTip.Font = new Font("Microsoft Sans Serif", 24);
+            dlvInventory.CellToolTip.IsBalloon = true;
+
             dlvInventory.RebuildColumns();
         }
 
@@ -788,6 +804,26 @@ namespace NeuroInventory
         {
             tbFilter.Clear();
             tbFilter.Focus();
+        }
+
+        private void dlvInventory_CellToolTipShowing(object sender, ToolTipShowingEventArgs e)
+        {
+            if (dlvInventory.SelectedObjects != null && dlvInventory.SelectedObjects.Count > 1)
+            {
+                decimal sum = 0;
+                foreach (object obj in dlvInventory.SelectedObjects)
+                {
+                    DataRowView dataRowView = obj as DataRowView;
+                    if (dataRowView != null && dataRowView["sum"] != null)
+                    {
+                        if (decimal.TryParse(dataRowView["sum"].ToString(), NumberStyles.Currency, CultureInfo.CreateSpecificCulture("en-EN"), out decimal result))
+                        {
+                            sum += result;
+                        }
+                    }
+                }
+                e.Text = $"{Definitions.INVENTORY_TOTAL_SUM}{sum}";
+            }
         }
     }
 }

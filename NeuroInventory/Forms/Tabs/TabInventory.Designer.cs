@@ -117,7 +117,7 @@
             // 
             // panelLeftPanelBottom
             // 
-            this.panelLeftPanelBottom.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
+            this.panelLeftPanelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.panelLeftPanelBottom.Controls.Add(this.tbSelectionHelp);
             this.panelLeftPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLeftPanelBottom.Location = new System.Drawing.Point(0, 593);
@@ -128,7 +128,7 @@
             // 
             // tbSelectionHelp
             // 
-            this.tbSelectionHelp.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
+            this.tbSelectionHelp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.tbSelectionHelp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbSelectionHelp.Location = new System.Drawing.Point(0, 0);
             this.tbSelectionHelp.Multiline = true;
@@ -226,7 +226,7 @@
             // 
             // panelMainBottom
             // 
-            this.panelMainBottom.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
+            this.panelMainBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.panelMainBottom.Controls.Add(this.lblFilter);
             this.panelMainBottom.Controls.Add(this.tbFilter);
             this.panelMainBottom.Controls.Add(this.btnDemand);
@@ -262,7 +262,7 @@
             // btnDemand
             // 
             this.btnDemand.AutoSize = true;
-            this.btnDemand.BackColor = Definitions.COLOR_FORM_SLAVE_BACK_COLOR;
+            this.btnDemand.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(250)))), ((int)(((byte)(189)))));
             this.btnDemand.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDemand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDemand.Location = new System.Drawing.Point(580, 11);
@@ -355,6 +355,7 @@
             this.dlvInventory.View = System.Windows.Forms.View.Details;
             this.dlvInventory.CellClick += new System.EventHandler<BrightIdeasSoftware.CellClickEventArgs>(this.dlvInventory_CellClick);
             this.dlvInventory.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.dlvInventory_CellRightClick);
+            this.dlvInventory.CellToolTipShowing += new System.EventHandler<BrightIdeasSoftware.ToolTipShowingEventArgs>(this.dlvInventory_CellToolTipShowing);
             this.dlvInventory.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.dlvInventory_ItemChecked);
             // 
             // olvColumn1

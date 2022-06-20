@@ -18,7 +18,7 @@ namespace NeuroInventory
             // База данных с настройками программы и данными о пользователе
             SQLiteSettingsManager.GetInstance().databaseName = @"settings.db";
             SQLiteSettingsManager.GetInstance().Password = "76cT8dbr";
-            string pathToSettingsDB = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/NeuroBlackBox/";
+            string pathToSettingsDB = Definitions.APPLICATION_SETTINGS_PATH;
             if(!Directory.Exists(pathToSettingsDB))
             {
                 Directory.CreateDirectory(pathToSettingsDB);

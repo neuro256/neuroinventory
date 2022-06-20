@@ -17,7 +17,7 @@ namespace NeuroInventory
 
         private DocumentNumeration m_DemandNumeration;
         private DocumentNumeration m_DebitNumeration;
-        private string m_DocNumerationPath = "numeration.json";
+        private string m_DocNumerationPath = Definitions.APPLICATION_SETTINGS_PATH + "numeration.json";
 
         public DocumentNumeration DemandNumeration { get => m_DemandNumeration; set => m_DemandNumeration = value; }
         public DocumentNumeration DebitNumeration { get => m_DebitNumeration; set => m_DebitNumeration = value; }

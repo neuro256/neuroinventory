@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace NeuroInventory
 {
@@ -62,5 +63,6 @@ namespace NeuroInventory
         public static string DEBIT_ROLLBACK_PATH = @"Документы\Отмененные списания";
         public static string INVENTORY_TOTAL_SUM = "Общая сумма = ";
         public static string DEFAULT_FILTER_TEXT = "$Введите текст для поиска$";
+        public static string APPLICATION_SETTINGS_PATH = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/NeuroBlackBox/";
     }
 }

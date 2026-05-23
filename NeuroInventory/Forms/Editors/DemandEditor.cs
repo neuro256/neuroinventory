@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -54,18 +53,22 @@ namespace NeuroInventory
                 args.Item.Text = (args.RowIndex + 1).ToString();
             };
 
-            columnPrice.AspectToStringConverter = delegate (object obj)
+            columnPrice.AspectToStringConverter = delegate (object value)
             {
-                return string.Format(new CultureInfo("ru-RU"),
-                      "{0:C}",
-                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+                if (value == null || value == DBNull.Value)
+                    return string.Empty;
+
+                decimal amount = MoneyConverter.ToCurrency(value);
+                return string.Format(CultureInfo.GetCultureInfo("ru-RU"), "{0:C}", amount);
             };
 
-            columnSum.AspectToStringConverter = delegate (object obj)
+            columnSum.AspectToStringConverter = delegate (object value)
             {
-                return string.Format(new CultureInfo("ru-RU"),
-                      "{0:C}",
-                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+                if (value == null || value == DBNull.Value)
+                    return string.Empty;
+
+                decimal sum = MoneyConverter.ToCurrency(value);
+                return string.Format(CultureInfo.GetCultureInfo("ru-RU"), "{0:C}", sum);
             };
 
             // custom sorting by column
@@ -77,8 +80,6 @@ namespace NeuroInventory
                         lvDemandData.ListViewItemSorter = new NeuroNumberComparer(columnAmount, order);
                         break;
                     case "price":
-                        lvDemandData.ListViewItemSorter = new NeuroCurrencyComparer(columnPrice, order);
-                        break;
                     case "sum":
                         lvDemandData.ListViewItemSorter = new NeuroCurrencyComparer(columnSum, order);
                         break;
@@ -91,7 +92,6 @@ namespace NeuroInventory
             lvDemandData.PrimarySortColumn = columnName;
             lvDemandData.PrimarySortOrder = SortOrder.Ascending;
             lvDemandData.Sort();
-
             lvDemandData.RebuildColumns();
 
             dateTimePicker.Format = DateTimePickerFormat.Long;
@@ -109,11 +109,25 @@ namespace NeuroInventory
             if (e.Column.AspectName == "amount")
             {
                 NumericUpDown nud = new NumericUpDown();
+
                 nud.Bounds = e.CellBounds;
-                nud.Minimum = 0.0M;
-                nud.Maximum = NudMaxValue;
-                nud.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(e.ListViewItem.SubItems[2].Text); // subitem[2] is measurement
-                nud.Value = MoneyConverter.ToCurrency(e.Value);
+                nud.Minimum = 0m;
+
+                var rowView = e.RowObject as DataRowView;
+
+                decimal balance = GetDecimalValue(rowView["balance"]);
+
+                // Ограничение остатком
+                nud.Maximum = balance;
+
+                nud.DecimalPlaces =
+                    SQLiteSettingsManager.GetInstance()
+                        .Measurement()
+                        .GetDecimalPlacesByName(
+                            rowView["measurement"].ToString());
+
+                nud.Value = GetDecimalValue(e.Value);
+
                 e.Control = nud;
             }
         }
@@ -125,25 +139,46 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void lvDemandData_CellEditFinishing(object sender, CellEditEventArgs e)
         {
-            // Тестовое определение id записи
-            //int id = Convert.ToInt32(DemandDataSet.Tables[0].Rows[e.ListViewItem.Index].Field<object>("id") ?? 0);
-
-            if (e.Column.AspectName == "amount")
+            if (e.Column.AspectName == "amount" && e.NewValue != null)
             {
-                DataRowView dataRowView = e.RowObject as DataRowView;
-                decimal balance = MoneyConverter.ToCurrency(dataRowView["balance"]);
+                var rowView = e.RowObject as DataRowView;
 
-                // Идет проверка, не выбрано ли количество, большее чем остаток тмц на складе
-                if (MoneyConverter.ToCurrency(e.NewValue) > balance)
-                    e.NewValue = balance;
-                if (!Equals(e.NewValue, e.Value))
+                decimal newAmount = GetDecimalValue(e.NewValue);
+                decimal oldAmount = GetDecimalValue(e.Value);
+
+                decimal balance = GetDecimalValue(rowView["balance"]);
+                decimal price = GetDecimalValue(rowView["price"]);
+
+                if (newAmount > balance)
+                    newAmount = balance;
+
+                e.NewValue = newAmount;
+                rowView["amount"] = newAmount;
+
+                if (newAmount != oldAmount)
                 {
-                    // Вычисление стоимости отпущенного тмц
-                    // ToString(CultureInfo.GetCultureInfo("en-US")) использовано т.к. локальная культура ru-RU использует в качестве разделителя целой и дробной части запятую, 
-                    // и эта запятая автоматически записывается в newRow. То есть, в newRow хранится не decimal, а строковое значение sum с учетом культуры
-                    dataRowView["sum"] = MoneyConverter.Multiply(e.NewValue, MoneyConverter.ToCurrency(dataRowView["price"])).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    rowView["sum"] = newAmount * price;
                 }
             }
+        }
+
+        private decimal GetDecimalValue(object value)
+        {
+            if (value == null || value == DBNull.Value)
+                return 0m;
+
+            if (value is decimal d)
+                return d;
+
+            if (value is double dbl)
+                return (decimal)dbl;
+
+            if (value is string str)
+            {
+                return MoneyConverter.ToCurrency(str);
+            }
+
+            return Convert.ToDecimal(value, CultureInfo.GetCultureInfo("ru-RU"));
         }
 
         private void btnReleased_Click(object sender, EventArgs e)
@@ -161,7 +196,14 @@ namespace NeuroInventory
                     foreach(var obj in lvDemandData.Objects)
                     {
                         DataRowView row = obj as DataRowView;
-                        AddRecord(Convert.ToInt32(row["id"]), reportLastId, cbEmployee.SelectedValue, Convert.ToDecimal(row["amount"]), dateTimePicker.Value);
+                        decimal amount = row["amount"] is decimal a ? a : Convert.ToDecimal(row["amount"]);
+                        AddRecord(
+                            Convert.ToInt32(row["id"]),
+                            reportLastId,
+                            cbEmployee.SelectedValue,
+                            amount,
+                            dateTimePicker.Value
+                        );
                     }
                     DialogResult = DialogResult.OK;
                     Close();
@@ -176,21 +218,18 @@ namespace NeuroInventory
 
         private bool CheckAmount()
         {
-            bool amountChecked = true;
-
             foreach (var obj in lvDemandData.Objects)
             {
                 DataRowView row = obj as DataRowView;
-                if (Convert.ToDecimal(row["amount"]) <= 0)
+                decimal amount = row["amount"] is decimal a ? a : Convert.ToDecimal(row["amount"]);
+
+                if (amount <= 0)
                 {
-                    amountChecked = false;
-                    break;
+                    MessageBox.Show(Definitions.ZERO_AMOUNT);
+                    return false;
                 }
             }
-
-            if (!amountChecked)
-                MessageBox.Show(Definitions.ZERO_AMOUNT);
-            return amountChecked;
+            return true;
         }
 
         private void AddRecord(int p_InventoryId, int p_ReportLastId, object p_EmployeeId, decimal p_Amount, DateTime p_Date)
@@ -274,24 +313,18 @@ namespace NeuroInventory
 
         private string GetDocumentNumber()
         {
-            // number
             int docNumber = Numeration.GetInstance().DemandNumeration.DocCurrentNumber;
             Numeration.GetInstance().DemandNumeration.IncrementNumber();
-            // prefix
-            string prefix = String.Empty;
-            if (!String.IsNullOrEmpty(Numeration.GetInstance().DemandNumeration.DocPrefix))
-            {
-                prefix = $"{Numeration.GetInstance().DemandNumeration.DocPrefix}_";
-            }
-            // date 
-            string date = String.Empty;
-            if(Numeration.GetInstance().DemandNumeration.IncludeDate)
-            {
-                date = $"_{ GetDate()}";
-            }
-            // result
-            string resultNumber = $"{prefix}{docNumber.ToString("0000")}{date}";
-            return resultNumber;
+
+            string prefix = string.IsNullOrEmpty(Numeration.GetInstance().DemandNumeration.DocPrefix)
+                ? string.Empty
+                : $"{Numeration.GetInstance().DemandNumeration.DocPrefix}_";
+
+            string date = Numeration.GetInstance().DemandNumeration.IncludeDate
+                ? $"_{GetDate()}"
+                : string.Empty;
+
+            return $"{prefix}{docNumber.ToString("0000")}{date}";
         }
 
         private string GetEmployeeInitials()
@@ -319,7 +352,8 @@ namespace NeuroInventory
             foreach (var row in lvDemandData.Objects)
             {
                 DataRowView dataRowView = row as DataRowView;
-                sum += Decimal.Parse(dataRowView["sum"].ToString(), NumberStyles.Currency, CultureInfo.InvariantCulture);
+                decimal rowSum = dataRowView["sum"] is decimal s ? s : Convert.ToDecimal(dataRowView["sum"]);
+                sum += rowSum;
             }
             return sum;
         }

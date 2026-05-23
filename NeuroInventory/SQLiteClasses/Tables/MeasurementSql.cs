@@ -122,7 +122,10 @@ namespace NeuroInventory
         {
             try
             {
-                return SQLiteSettingsManager.GetInstance().CommandExecuteScalar($"SELECT symbol FROM measurement where name='{p_Name}';").ToString();
+                object result = SQLiteSettingsManager.GetInstance()
+                    .CommandExecuteScalar($"SELECT symbol FROM measurement where name='{p_Name}';");
+
+                return result?.ToString() ?? String.Empty;
             }
             catch
             {

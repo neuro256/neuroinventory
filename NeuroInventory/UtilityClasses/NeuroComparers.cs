@@ -1,6 +1,7 @@
 ﻿using BrightIdeasSoftware;
 using System;
 using System.Collections;
+using System.Data;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -92,24 +93,54 @@ namespace NeuroInventory
 
         public int Compare(object x, object y)
         {
-            int result = 0;
-            if (x != null && y != null)
+            if (x == null || y == null)
+                return 0;
+
+            var rowX = (x as OLVListItem)?.RowObject as DataRowView;
+            var rowY = (y as OLVListItem)?.RowObject as DataRowView;
+
+            object rawX = rowX?[this.oLVColumn.AspectName];
+            object rawY = rowY?[this.oLVColumn.AspectName];
+
+            decimal xVal = ParseDecimal(rawX);
+            decimal yVal = ParseDecimal(rawY);
+
+            int result = decimal.Compare(xVal, yVal);
+
+            return this.order == SortOrder.Descending
+                ? -result
+                : result;
+        }
+
+        private decimal ParseDecimal(object value)
+        {
+            if (value == null || value == DBNull.Value)
+                return 0m;
+
+            if (value is decimal d)
+                return d;
+
+            string s = value.ToString();
+
+            if (decimal.TryParse(
+                s,
+                NumberStyles.Any,
+                CultureInfo.InvariantCulture,
+                out decimal result))
             {
-                string xValue = this.oLVColumn.AspectGetter((x as OLVListItem).RowObject)?.ToString() ?? string.Empty;
-                string yValue = this.oLVColumn.AspectGetter((y as OLVListItem).RowObject)?.ToString() ?? string.Empty;
-
-                if (String.IsNullOrEmpty(xValue))
-                    xValue = "0";
-                if (String.IsNullOrEmpty(yValue))
-                    yValue = "0";
-
-                result = Decimal.Compare(Decimal.Parse(xValue, NumberStyles.Currency, CultureInfo.GetCultureInfo("ru-RU")), Decimal.Parse(yValue, NumberStyles.Currency, CultureInfo.GetCultureInfo("ru-RU")));
-
-                if (this.order == SortOrder.Descending)
-                    result = 0 - result;
+                return result;
             }
 
-            return result;
+            if (decimal.TryParse(
+                s,
+                NumberStyles.Any,
+                CultureInfo.CurrentCulture,
+                out result))
+            {
+                return result;
+            }
+
+            return 0m;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BrightIdeasSoftware;
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -311,15 +312,19 @@ namespace NeuroInventory
             debitTable.Columns.Add("name");
             debitTable.Columns.Add("OKEIcode");
             debitTable.Columns.Add("measurement");
-            debitTable.Columns.Add("price");
-            debitTable.Columns.Add("balance");
-            debitTable.Columns.Add("debit_amount");
-            debitTable.Columns.Add("sum");
+            debitTable.Columns.Add("price", typeof(decimal));
+            debitTable.Columns.Add("balance", typeof(decimal));
+            debitTable.Columns.Add("debit_amount", typeof(decimal));
+            debitTable.Columns.Add("sum", typeof(decimal));
 
-            foreach(var obj in dlvReleased.CheckedObjects)
+            foreach (var obj in dlvReleased.CheckedObjects)
             {
-                DataRow newRow = debitTable.NewRow();
                 DataRowView dataRowView = obj as DataRowView;
+
+                decimal amount = CalculateBalance(dataRowView);
+                decimal price = MoneyConverter.ToCurrency(dataRowView["price"]);
+
+                DataRow newRow = debitTable.NewRow();
 
                 newRow["id"] = dataRowView["id"];
                 newRow["demandId"] = dataRowView["demandId"];
@@ -329,12 +334,11 @@ namespace NeuroInventory
                 newRow["name"] = dataRowView["name"];
                 newRow["OKEIcode"] = dataRowView["OKEIcode"];
                 newRow["measurement"] = dataRowView["measurement"];
-                newRow["price"] = dataRowView["price"];
-                newRow["balance"] = CalculateBalance(dataRowView);
-                newRow["debit_amount"] = CalculateBalance(dataRowView);
-                // ToString(CultureInfo.GetCultureInfo("en-US")) использовано т.к. локальная культура ru-RU использует в качестве разделителя целой и дробной части запятую, 
-                // и эта запятая автоматически записывается в newRow. То есть, в newRow хранится не decimal, а строковое значение sum с учетом культуры
-                newRow["sum"] = MoneyConverter.Multiply(CalculateBalance(dataRowView), dataRowView["price"]).ToString(CultureInfo.GetCultureInfo("en-US"));
+                
+                newRow["price"] = price;
+                newRow["balance"] = amount;
+                newRow["debit_amount"] = amount;
+                newRow["sum"] = amount * price;
 
                 debitTable.Rows.Add(newRow);
             }
@@ -345,20 +349,14 @@ namespace NeuroInventory
             return debitDataSet;
         }
 
-        private static object CalculateBalance(DataRowView dataRowView)
+        private static decimal CalculateBalance(DataRowView dataRowView)
         {
             object balance = dataRowView["balance"];
-            object balanceValue = null;
-            if (balance != null && !Equals(balance, DBNull.Value))
-            {
-                balanceValue = balance;
-            }
-            else
-            {
-                balanceValue = dataRowView["amount"];
-            }
 
-            return balanceValue;
+            if (balance != null && balance != DBNull.Value)
+                return Convert.ToDecimal(balance, CultureInfo.InvariantCulture);
+
+            return Convert.ToDecimal(dataRowView["amount"], CultureInfo.InvariantCulture);
         }
 
         private void dlvReleased_CellClick(object sender, CellClickEventArgs e)

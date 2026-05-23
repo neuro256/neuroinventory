@@ -19,10 +19,7 @@ namespace NeuroInventory
 
         public int Compare(OLVListItem x, OLVListItem y)
         {
-            string xValue = this.oLVColumn.GetStringValue(x.RowObject);
-            string yValue = this.oLVColumn.GetStringValue(y.RowObject);
-
-            return 0;
+            return Compare(x, y);
         }
 
         public int Compare(object x, object y)
@@ -30,8 +27,8 @@ namespace NeuroInventory
             int result = 0;
             if (x != null && y != null)
             {
-                string xValue = this.oLVColumn.GetStringValue((x as OLVListItem).RowObject);
-                string yValue = this.oLVColumn.GetStringValue((y as OLVListItem).RowObject);
+                string xValue = this.oLVColumn.AspectGetter((x as OLVListItem).RowObject)?.ToString() ?? string.Empty;
+                string yValue = this.oLVColumn.AspectGetter((y as OLVListItem).RowObject)?.ToString() ?? string.Empty;
 
                 if (String.IsNullOrEmpty(xValue))
                     xValue = DateTime.MinValue.ToShortDateString();
@@ -64,8 +61,8 @@ namespace NeuroInventory
             int result = 0;
             if (x != null && y != null)
             {
-                string xValue = this.oLVColumn.GetStringValue((x as OLVListItem).RowObject);
-                string yValue = this.oLVColumn.GetStringValue((y as OLVListItem).RowObject);
+                string xValue = this.oLVColumn.AspectGetter((x as OLVListItem).RowObject)?.ToString() ?? string.Empty;
+                string yValue = this.oLVColumn.AspectGetter((y as OLVListItem).RowObject)?.ToString() ?? string.Empty;
 
                 if (String.IsNullOrEmpty(xValue))
                     xValue = String.Format("0");
@@ -98,13 +95,13 @@ namespace NeuroInventory
             int result = 0;
             if (x != null && y != null)
             {
-                string xValue = this.oLVColumn.GetStringValue((x as OLVListItem).RowObject);
-                string yValue = this.oLVColumn.GetStringValue((y as OLVListItem).RowObject);
+                string xValue = this.oLVColumn.AspectGetter((x as OLVListItem).RowObject)?.ToString() ?? string.Empty;
+                string yValue = this.oLVColumn.AspectGetter((y as OLVListItem).RowObject)?.ToString() ?? string.Empty;
 
                 if (String.IsNullOrEmpty(xValue))
-                    xValue = String.Format("{0:C}", CultureInfo.GetCultureInfo("ru-RU"), 0);
+                    xValue = "0";
                 if (String.IsNullOrEmpty(yValue))
-                    yValue = String.Format("{0:C}", CultureInfo.GetCultureInfo("ru-RU"), 0);
+                    yValue = "0";
 
                 result = Decimal.Compare(Decimal.Parse(xValue, NumberStyles.Currency, CultureInfo.GetCultureInfo("ru-RU")), Decimal.Parse(yValue, NumberStyles.Currency, CultureInfo.GetCultureInfo("ru-RU")));
 

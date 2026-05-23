@@ -409,34 +409,6 @@ namespace NeuroInventory
                       Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
             };
 
-            // custom sorting by column
-            dlvInventory.CustomSorter = delegate (OLVColumn column, SortOrder order)
-            {
-                switch(column.AspectName)
-                {
-                    case "date":
-                        dlvInventory.ListViewItemSorter = new NeuroDateComparer(columnDate, order);
-                        break;
-                    case "invoiceDate":
-                        dlvInventory.ListViewItemSorter = new NeuroDateComparer(columnInvoiceDate, order);
-                        break;
-                    case "amount":
-                        dlvInventory.ListViewItemSorter = new NeuroNumberComparer(columnAmount, order);
-                        break;
-                    case "price":
-                        dlvInventory.ListViewItemSorter = new NeuroCurrencyComparer(columnPrice, order);
-                        break;
-                    case "sum":
-                        dlvInventory.ListViewItemSorter = new NeuroCurrencyComparer(columnSum, order);
-                        break;
-                    default:
-                        dlvInventory.ListViewItemSorter = new ColumnComparer(column, order);
-                        break;
-                }
-            };
-
-            dlvInventory.PrimarySortColumn = columnDate;
-            dlvInventory.PrimarySortOrder = SortOrder.Ascending;
             dlvInventory.Sort();
 
             // drag n drop

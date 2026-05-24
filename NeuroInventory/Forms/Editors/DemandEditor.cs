@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -61,7 +60,7 @@ namespace NeuroInventory
                 args.Item.Text = (args.RowIndex + 1).ToString();
             };
 
-            columnAmount.AspectGetter = r => GetDecimalValue(((DataRowView)r)["amount"]);
+            columnAmount.AspectGetter = r => MoneyConverter.GetDecimalValue(((DataRowView)r)["amount"]);
 
             lvDemandData.FormatCell += delegate (object sender, FormatCellEventArgs args)
             {
@@ -71,8 +70,8 @@ namespace NeuroInventory
                 if (!(args.Model is DataRowView rowView))
                     return;
 
-                decimal amount = GetDecimalValue(rowView["amount"]);
-                decimal balance = GetDecimalValue(rowView["balance"]);
+                decimal amount = MoneyConverter.GetDecimalValue(rowView["amount"]);
+                decimal balance = MoneyConverter.GetDecimalValue(rowView["balance"]);
                 string measurement = rowView["measurement"]?.ToString();
                 int decimalPlaces = GetDecimalPlaces(measurement);
 
@@ -175,7 +174,7 @@ namespace NeuroInventory
 
                 var rowView = e.RowObject as DataRowView;
 
-                decimal balance = GetDecimalValue(rowView["balance"]);
+                decimal balance = MoneyConverter.GetDecimalValue(rowView["balance"]);
 
                 // Ограничение остатком
                 nud.Maximum = balance;
@@ -186,7 +185,7 @@ namespace NeuroInventory
                         .GetDecimalPlacesByName(
                             rowView["measurement"].ToString());
 
-                nud.Value = GetDecimalValue(e.Value);
+                nud.Value = MoneyConverter.GetDecimalValue(e.Value);
 
                 e.Control = nud;
             }
@@ -203,11 +202,11 @@ namespace NeuroInventory
             {
                 var rowView = e.RowObject as DataRowView;
 
-                decimal newAmount = GetDecimalValue(e.NewValue);
-                decimal oldAmount = GetDecimalValue(e.Value);
+                decimal newAmount = MoneyConverter.GetDecimalValue(e.NewValue);
+                decimal oldAmount = MoneyConverter.GetDecimalValue(e.Value);
 
-                decimal balance = GetDecimalValue(rowView["balance"]);
-                decimal price = GetDecimalValue(rowView["price"]);
+                decimal balance = MoneyConverter.GetDecimalValue(rowView["balance"]);
+                decimal price = MoneyConverter.GetDecimalValue(rowView["price"]);
 
                 if (newAmount > balance)
                     newAmount = balance;
@@ -220,25 +219,6 @@ namespace NeuroInventory
                     rowView["sum"] = newAmount * price;
                 }
             }
-        }
-
-        private decimal GetDecimalValue(object value)
-        {
-            if (value == null || value == DBNull.Value)
-                return 0m;
-
-            if (value is decimal d)
-                return d;
-
-            if (value is double dbl)
-                return (decimal)dbl;
-
-            if (value is string str)
-            {
-                return MoneyConverter.ToCurrency(str);
-            }
-
-            return Convert.ToDecimal(value, CultureInfo.GetCultureInfo("ru-RU"));
         }
 
         private void btnReleased_Click(object sender, EventArgs e)

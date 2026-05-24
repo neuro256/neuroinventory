@@ -24,12 +24,12 @@ namespace NeuroInventory
             {
                 // Пробуем ru-RU
                 if (decimal.TryParse(str, NumberStyles.Number | NumberStyles.AllowCurrencySymbol,
-                    CultureInfo.GetCultureInfo("ru-RU"), out var result))
+                    RuCulture, out var result))
                     return result;
 
                 // Пробуем Invariant
                 if (decimal.TryParse(str, NumberStyles.Number | NumberStyles.AllowCurrencySymbol,
-                    CultureInfo.InvariantCulture, out result))
+                    InvariantCulture, out result))
                     return result;
 
                 // Очищаем и пробуем ещё раз
@@ -40,18 +40,37 @@ namespace NeuroInventory
                     cleaned = cleaned.Replace('.', ',');
 
                 if (decimal.TryParse(cleaned, NumberStyles.Number,
-                    CultureInfo.GetCultureInfo("ru-RU"), out result))
+                    RuCulture, out result))
                     return result;
             }
 
             try
             {
-                return Convert.ToDecimal(obj, CultureInfo.GetCultureInfo("ru-RU"));
+                return Convert.ToDecimal(obj, RuCulture);
             }
             catch
             {
                 return 0m;
             }
+        }
+
+        public static decimal GetDecimalValue(object value)
+        {
+            if (value == null || value == DBNull.Value)
+                return 0m;
+
+            if (value is decimal d)
+                return d;
+
+            if (value is double dbl)
+                return (decimal)dbl;
+
+            if (value is string str)
+            {
+                return ToCurrency(str);
+            }
+
+            return Convert.ToDecimal(value, RuCulture);
         }
     }
 }

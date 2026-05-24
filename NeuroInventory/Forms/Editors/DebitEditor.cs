@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -110,12 +109,12 @@ namespace NeuroInventory
                 Bounds = e.CellBounds,
                 Minimum = 0m,
                 Maximum = NudMaxValue,
-                Value = GetDecimalValue(e.Value)
+                Value = MoneyConverter.GetDecimalValue(e.Value)
             };
 
             if (e.RowObject is DataRowView rowView)
             {
-                decimal balance = GetDecimalValue(rowView["balance"]);
+                decimal balance = MoneyConverter.GetDecimalValue(rowView["balance"]);
                 nud.Maximum = Math.Min(NudMaxValue, balance);
 
                 nud.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement()
@@ -136,11 +135,11 @@ namespace NeuroInventory
             { 
                 DataRowView dataRowView = e.RowObject as DataRowView;
 
-                decimal newAmount = GetDecimalValue(e.NewValue);
-                decimal oldAmount = GetDecimalValue(e.Value);
+                decimal newAmount = MoneyConverter.GetDecimalValue(e.NewValue);
+                decimal oldAmount = MoneyConverter.GetDecimalValue(e.Value);
 
-                decimal balance = GetDecimalValue(dataRowView["balance"]);
-                decimal price = GetDecimalValue(dataRowView["price"]);
+                decimal balance = MoneyConverter.GetDecimalValue(dataRowView["balance"]);
+                decimal price = MoneyConverter.GetDecimalValue(dataRowView["price"]);
 
                 if (newAmount > balance)
                     newAmount = balance;
@@ -170,7 +169,7 @@ namespace NeuroInventory
                     foreach(var obj in lvDebitData.Objects)
                     {
                         DataRowView row = obj as DataRowView;
-                        decimal amount = GetDecimalValue(row["debit_amount"]);
+                        decimal amount = MoneyConverter.GetDecimalValue(row["debit_amount"]);
                         AddRecord(Convert.ToInt32(row["id"]), Convert.ToInt32(row["demandId"]), reportLastId, amount, dateTimePicker.Value);
                     }
                     DialogResult = DialogResult.OK;
@@ -189,7 +188,7 @@ namespace NeuroInventory
             foreach (var obj in lvDebitData.Objects)
             {
                 DataRowView row = obj as DataRowView;
-                decimal amount = GetDecimalValue(row["debit_amount"]);
+                decimal amount = MoneyConverter.GetDecimalValue(row["debit_amount"]);
 
                 if (amount <= 0)
                 {
@@ -299,9 +298,9 @@ namespace NeuroInventory
                     newRow["measurement"] = SQLiteSettingsManager.GetInstance().Measurement()
                         .GetShortName(row["measurement"]?.ToString() ?? string.Empty);
 
-                    newRow["amount"] = GetDecimalValue(row["debit_amount"]);
-                    newRow["price"] = GetDecimalValue(row["price"]);
-                    newRow["sum"] = GetDecimalValue(row["sum"]);
+                    newRow["amount"] = MoneyConverter.GetDecimalValue(row["debit_amount"]);
+                    newRow["price"] = MoneyConverter.GetDecimalValue(row["price"]);
+                    newRow["sum"] = MoneyConverter.GetDecimalValue(row["sum"]);
 
                     counter++;
                     debitReportTable.Rows.Add(newRow);
@@ -360,7 +359,7 @@ namespace NeuroInventory
             foreach(var row in lvDebitData.Objects)
             {
                 DataRowView dataRowView = row as DataRowView;
-                decimal rowSum = GetDecimalValue(dataRowView["sum"]);
+                decimal rowSum = MoneyConverter.GetDecimalValue(dataRowView["sum"]);
                 sum += rowSum;
             }
             return sum;
@@ -389,25 +388,6 @@ namespace NeuroInventory
         private void DebitEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveState();
-        }
-
-        private decimal GetDecimalValue(object value)
-        {
-            if (value == null || value == DBNull.Value)
-                return 0m;
-
-            if (value is decimal d)
-                return d;
-
-            if (value is double dbl)
-                return (decimal)dbl;
-
-            if (value is string str)
-            {
-                return MoneyConverter.ToCurrency(str);
-            }
-
-            return Convert.ToDecimal(value, CultureInfo.GetCultureInfo("ru-RU"));
         }
     }
 }

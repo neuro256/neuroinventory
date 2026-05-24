@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -10,6 +11,12 @@ namespace NeuroInventory
     public partial class DemandEditor : Form
     {
         private const decimal m_NudMaxValue = 9999999.0M;
+
+        private static readonly CultureInfo RuCulture = CultureInfo.GetCultureInfo("ru-RU");
+
+        private readonly Dictionary<int, string> m_FormatCache = new Dictionary<int, string>();
+        private readonly Dictionary<string, int> m_DecimalPlacesCache = new Dictionary<string, int>();
+
         private DataSet m_DemandDataSet;
         private bool m_Clicked = false;
 
@@ -42,6 +49,7 @@ namespace NeuroInventory
             cbEmployee.ValueMember = "id";
 
             lvDemandData.AutoGenerateColumns = false;
+            lvDemandData.UseCellFormatEvents = true;
             lvDemandData.DataSource = new BindingSource(DemandDataSet, "DemandReport");
             lvDemandData.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
             lvDemandData.SelectedBackColor = Definitions.COLOR_SELECTED_BACK_COLOR;
@@ -51,6 +59,26 @@ namespace NeuroInventory
             lvDemandData.FormatRow += delegate (object sender, FormatRowEventArgs args)
             {
                 args.Item.Text = (args.RowIndex + 1).ToString();
+            };
+
+            columnAmount.AspectGetter = r => GetDecimalValue(((DataRowView)r)["amount"]);
+
+            lvDemandData.FormatCell += delegate (object sender, FormatCellEventArgs args)
+            {
+                if (args.Column.AspectName != "amount")
+                    return;
+
+                if (!(args.Model is DataRowView rowView))
+                    return;
+
+                decimal amount = GetDecimalValue(rowView["amount"]);
+                decimal balance = GetDecimalValue(rowView["balance"]);
+                string measurement = rowView["measurement"]?.ToString();
+                int decimalPlaces = GetDecimalPlaces(measurement);
+
+                args.SubItem.Text =
+                    $"{FormatAmount(amount, decimalPlaces)} / " +
+                    $"{FormatAmount(balance, decimalPlaces)}";
             };
 
             columnPrice.AspectToStringConverter = delegate (object value)
@@ -97,6 +125,38 @@ namespace NeuroInventory
             dateTimePicker.Format = DateTimePickerFormat.Long;
             dateTimePicker.Value = DateTime.Today;
             dateTimePicker.ShowUpDown = false;
+
+            int GetDecimalPlaces(string measurement)
+            {
+                if(measurement == null) 
+                    measurement = string.Empty;
+
+                if (m_DecimalPlacesCache.TryGetValue(measurement, out int decimalPlaces))
+                    return decimalPlaces;
+
+                decimalPlaces =
+                    SQLiteSettingsManager.GetInstance()
+                        .Measurement()
+                        .GetDecimalPlacesByName(measurement);
+
+                m_DecimalPlacesCache[measurement] = decimalPlaces;
+
+                return decimalPlaces;
+            }
+
+            string FormatAmount(decimal value, int decimalPlaces)
+            {
+                if (!m_FormatCache.TryGetValue(decimalPlaces, out var format))
+                {
+                    format = decimalPlaces > 0
+                        ? "0." + new string('#', decimalPlaces)
+                        : "0";
+
+                    m_FormatCache[decimalPlaces] = format;
+                }
+
+                return value.ToString(format, RuCulture);
+            }
         }
 
         /// <summary>

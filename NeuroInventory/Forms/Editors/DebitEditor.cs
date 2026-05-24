@@ -53,7 +53,8 @@ namespace NeuroInventory
                     return string.Empty;
 
                 decimal price = MoneyConverter.ToCurrency(value);
-                return price.ToString("C", CultureInfo.GetCultureInfo("ru-RU"));
+
+                return MoneyConverter.FormatCurrency(price);
             };
 
             columnSum.AspectToStringConverter = delegate (object value)
@@ -62,7 +63,8 @@ namespace NeuroInventory
                     return string.Empty;
 
                 decimal sum = MoneyConverter.ToCurrency(value);
-                return sum.ToString("C", CultureInfo.GetCultureInfo("ru-RU"));
+
+                return MoneyConverter.FormatCurrency(sum);
             };
 
             // custom sorting by column
@@ -74,6 +76,8 @@ namespace NeuroInventory
                         lvDebitData.ListViewItemSorter = new NeuroNumberComparer(columnAmount, order);
                         break;
                     case "price":
+                        lvDebitData.ListViewItemSorter = new NeuroCurrencyComparer(columnPrice, order);
+                        break;
                     case "sum":
                         lvDebitData.ListViewItemSorter = new NeuroCurrencyComparer(columnSum, order);
                         break;
@@ -132,8 +136,9 @@ namespace NeuroInventory
         private void lvDebitData_CellEditFinishing(object sender, CellEditEventArgs e)
         {
             if (e.Column.AspectName == "debit_amount" && e.NewValue != null)
-            { 
-                DataRowView dataRowView = e.RowObject as DataRowView;
+            {
+                if (!(e.RowObject is DataRowView dataRowView))
+                    return;
 
                 decimal newAmount = MoneyConverter.GetDecimalValue(e.NewValue);
                 decimal oldAmount = MoneyConverter.GetDecimalValue(e.Value);
@@ -160,6 +165,7 @@ namespace NeuroInventory
             {
                 if (!CheckAmount() || m_Clicked)
                     return;
+
                 m_Clicked = true;
                 // В первую очередь создаем отчет. Если отчет успешно создан и сохранен, записываем данные в базу данных
                 if (CreateReport())
@@ -168,12 +174,18 @@ namespace NeuroInventory
                     // Отпускаем выбранные тмц 
                     foreach(var obj in lvDebitData.Objects)
                     {
-                        DataRowView row = obj as DataRowView;
+                        if (!(obj is DataRowView row))
+                            continue;
+
                         decimal amount = MoneyConverter.GetDecimalValue(row["debit_amount"]);
                         AddRecord(Convert.ToInt32(row["id"]), Convert.ToInt32(row["demandId"]), reportLastId, amount, dateTimePicker.Value);
                     }
                     DialogResult = DialogResult.OK;
                     Close();
+                }
+                else
+                {
+                    m_Clicked = false;
                 }
             }
             catch (Exception ex)
@@ -187,7 +199,9 @@ namespace NeuroInventory
         {
             foreach (var obj in lvDebitData.Objects)
             {
-                DataRowView row = obj as DataRowView;
+                if (!(obj is DataRowView row))
+                    continue;
+
                 decimal amount = MoneyConverter.GetDecimalValue(row["debit_amount"]);
 
                 if (amount <= 0)
@@ -242,20 +256,24 @@ namespace NeuroInventory
 
             foreach (var obj in lvDebitData.Objects)
             {
-                DataRowView row = obj as DataRowView;
+                if (!(obj is DataRowView row))
+                    continue;
+
                 string l_CurrentInvoiceCode = row["invoice_code"].ToString();
                 if (!String.IsNullOrEmpty(l_CurrentInvoiceCode) && !l_UniqueCodes.Contains(l_CurrentInvoiceCode))
                 {
                     DataRow newRow = debitReportTable.NewRow();
 
                     newRow["number"] = counter;
-                    string date = Convert.ToDateTime(row["date"]).ToShortDateString();
                     newRow["date_entrance"] = DateAndMoneyConverter.DateToTextSimple(Convert.ToDateTime(row["date"]));
                     newRow["date_debit"] = DateAndMoneyConverter.DateToTextSimple(dateTimePicker.Value);
                     newRow["invoice_code"] = row["invoice_code"].ToString();
-                    if (!String.IsNullOrEmpty(row["invoiceDate"].ToString()))
+                    
+                    if (row["invoiceDate"] != DBNull.Value)
                     {
-                        newRow["invoiceDate"] = DateAndMoneyConverter.DateToTextSimple(Convert.ToDateTime(row["invoiceDate"]));
+                        newRow["invoiceDate"] =
+                            DateAndMoneyConverter.DateToTextSimple(
+                                Convert.ToDateTime(row["invoiceDate"]));
                     }
 
                     counter++;
@@ -279,8 +297,8 @@ namespace NeuroInventory
             debitReportTable.Columns.Add("name");
             debitReportTable.Columns.Add("OKEIcode");
             debitReportTable.Columns.Add("measurement");
-            debitReportTable.Columns.Add("amount", typeof(decimal));   // ✅ decimal
-            debitReportTable.Columns.Add("price", typeof(decimal));    // ✅ decimal
+            debitReportTable.Columns.Add("amount", typeof(decimal));
+            debitReportTable.Columns.Add("price", typeof(decimal));
             debitReportTable.Columns.Add("sum", typeof(decimal));
 
             int counter = 1;
@@ -358,7 +376,9 @@ namespace NeuroInventory
 
             foreach(var row in lvDebitData.Objects)
             {
-                DataRowView dataRowView = row as DataRowView;
+                if (!(row is DataRowView dataRowView))
+                    continue;
+
                 decimal rowSum = MoneyConverter.GetDecimalValue(dataRowView["sum"]);
                 sum += rowSum;
             }

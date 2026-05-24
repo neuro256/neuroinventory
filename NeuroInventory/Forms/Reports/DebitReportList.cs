@@ -114,7 +114,9 @@ namespace NeuroInventory
             {
                 foreach (var selectedObject in dlvDebitReport.SelectedObjects)
                 {
-                    DataRowView dataRowView = selectedObject as DataRowView;
+                    if (!(selectedObject is DataRowView dataRowView))
+                        continue;
+
                     SQLiteManager.GetInstance().DebitReport().Remove(Convert.ToInt32(dataRowView["id"]));
                 }
                 SQLiteManager.GetInstance().DebitReport().SetCommandDataSet();

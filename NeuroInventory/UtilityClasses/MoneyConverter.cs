@@ -72,5 +72,22 @@ namespace NeuroInventory
 
             return Convert.ToDecimal(value, RuCulture);
         }
+
+        public static string FormatCurrency(decimal value)
+        {
+            return value.ToString("C", RuCulture);
+        }
+
+        public static string FormatNumber(object value, int decimalPlaces)
+        {
+            decimal amount = GetDecimalValue(value);
+
+            string format =
+                decimalPlaces > 0
+                    ? "0." + new string('#', decimalPlaces)
+                    : "0";
+
+            return amount.ToString(format, RuCulture);
+        }
     }
 }

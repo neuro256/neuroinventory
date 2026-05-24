@@ -60,7 +60,13 @@ namespace NeuroInventory
                 args.Item.Text = (args.RowIndex + 1).ToString();
             };
 
-            columnAmount.AspectGetter = r => MoneyConverter.GetDecimalValue(((DataRowView)r)["amount"]);
+            columnAmount.AspectGetter = r =>
+            {
+                if (!(r is DataRowView row))
+                    return 0m;
+
+                return MoneyConverter.GetDecimalValue(row["amount"]);
+            };
 
             lvDemandData.FormatCell += delegate (object sender, FormatCellEventArgs args)
             {
@@ -86,7 +92,7 @@ namespace NeuroInventory
                     return string.Empty;
 
                 decimal amount = MoneyConverter.ToCurrency(value);
-                return string.Format(CultureInfo.GetCultureInfo("ru-RU"), "{0:C}", amount);
+                return MoneyConverter.FormatCurrency(amount);
             };
 
             columnSum.AspectToStringConverter = delegate (object value)
@@ -95,7 +101,7 @@ namespace NeuroInventory
                     return string.Empty;
 
                 decimal sum = MoneyConverter.ToCurrency(value);
-                return string.Format(CultureInfo.GetCultureInfo("ru-RU"), "{0:C}", sum);
+                return MoneyConverter.FormatCurrency(sum);
             };
 
             // custom sorting by column
@@ -107,6 +113,8 @@ namespace NeuroInventory
                         lvDemandData.ListViewItemSorter = new NeuroNumberComparer(columnAmount, order);
                         break;
                     case "price":
+                        lvDemandData.ListViewItemSorter = new NeuroCurrencyComparer(columnPrice, order);
+                        break;
                     case "sum":
                         lvDemandData.ListViewItemSorter = new NeuroCurrencyComparer(columnSum, order);
                         break;
@@ -147,9 +155,7 @@ namespace NeuroInventory
             {
                 if (!m_FormatCache.TryGetValue(decimalPlaces, out var format))
                 {
-                    format = decimalPlaces > 0
-                        ? "0." + new string('#', decimalPlaces)
-                        : "0";
+                    format = MoneyConverter.FormatNumber(value, decimalPlaces);
 
                     m_FormatCache[decimalPlaces] = format;
                 }
@@ -167,12 +173,12 @@ namespace NeuroInventory
         {
             if (e.Column.AspectName == "amount")
             {
-                NumericUpDown nud = new NumericUpDown();
+                if (!(e.RowObject is DataRowView rowView))
+                    return;
 
+                NumericUpDown nud = new NumericUpDown();
                 nud.Bounds = e.CellBounds;
                 nud.Minimum = 0m;
-
-                var rowView = e.RowObject as DataRowView;
 
                 decimal balance = MoneyConverter.GetDecimalValue(rowView["balance"]);
 
@@ -183,7 +189,7 @@ namespace NeuroInventory
                     SQLiteSettingsManager.GetInstance()
                         .Measurement()
                         .GetDecimalPlacesByName(
-                            rowView["measurement"].ToString());
+                            rowView["measurement"]?.ToString() ?? string.Empty);
 
                 nud.Value = MoneyConverter.GetDecimalValue(e.Value);
 
@@ -200,7 +206,8 @@ namespace NeuroInventory
         {
             if (e.Column.AspectName == "amount" && e.NewValue != null)
             {
-                var rowView = e.RowObject as DataRowView;
+                if (!(e.RowObject is DataRowView rowView))
+                    return;
 
                 decimal newAmount = MoneyConverter.GetDecimalValue(e.NewValue);
                 decimal oldAmount = MoneyConverter.GetDecimalValue(e.Value);
@@ -235,8 +242,10 @@ namespace NeuroInventory
                     // Отпускаем выбранные тмц 
                     foreach(var obj in lvDemandData.Objects)
                     {
-                        DataRowView row = obj as DataRowView;
-                        decimal amount = row["amount"] is decimal a ? a : Convert.ToDecimal(row["amount"]);
+                        if(!(obj is DataRowView row))
+                            continue;
+
+                        decimal amount = MoneyConverter.GetDecimalValue(row["amount"]);
                         AddRecord(
                             Convert.ToInt32(row["id"]),
                             reportLastId,
@@ -260,8 +269,10 @@ namespace NeuroInventory
         {
             foreach (var obj in lvDemandData.Objects)
             {
-                DataRowView row = obj as DataRowView;
-                decimal amount = row["amount"] is decimal a ? a : Convert.ToDecimal(row["amount"]);
+                if (!(obj is DataRowView row))
+                    continue;
+
+                decimal amount = MoneyConverter.GetDecimalValue(row["amount"]);
 
                 if (amount <= 0)
                 {
@@ -307,22 +318,25 @@ namespace NeuroInventory
             demandReportTable.Columns.Add("name");
             demandReportTable.Columns.Add("OKEIcode");
             demandReportTable.Columns.Add("measurement");
-            demandReportTable.Columns.Add("price");
-            demandReportTable.Columns.Add("sum");
-            demandReportTable.Columns.Add("amount");
+            demandReportTable.Columns.Add("price", typeof(decimal));
+            demandReportTable.Columns.Add("sum", typeof(decimal));
+            demandReportTable.Columns.Add("amount", typeof(decimal));
 
             foreach(var obj in lvDemandData.Objects)
             {
-                DataRowView row = obj as DataRowView;
+                if (!(obj is DataRowView row))
+                    continue;
+
                 DataRow newRow = demandReportTable.NewRow();
 
                 newRow["id"] = row["id"];
                 newRow["name"] = row["name"];
                 newRow["OKEIcode"] = row["OKEIcode"];
                 newRow["measurement"] = SQLiteSettingsManager.GetInstance().Measurement().GetShortName(row["measurement"].ToString());
-                newRow["price"] = row["price"];
-                newRow["sum"] = row["sum"];
-                newRow["amount"] = row["amount"];
+               
+                newRow["price"] = MoneyConverter.GetDecimalValue(row["price"]);
+                newRow["sum"] = MoneyConverter.GetDecimalValue(row["sum"]);
+                newRow["amount"] = MoneyConverter.GetDecimalValue(row["amount"]);
 
                 demandReportTable.Rows.Add(newRow);
             }
@@ -391,9 +405,10 @@ namespace NeuroInventory
 
             foreach (var row in lvDemandData.Objects)
             {
-                DataRowView dataRowView = row as DataRowView;
-                decimal rowSum = dataRowView["sum"] is decimal s ? s : Convert.ToDecimal(dataRowView["sum"]);
-                sum += rowSum;
+                if (row is DataRowView dataRowView)
+                {
+                    sum += MoneyConverter.GetDecimalValue(dataRowView["sum"]);
+                }
             }
             return sum;
         }

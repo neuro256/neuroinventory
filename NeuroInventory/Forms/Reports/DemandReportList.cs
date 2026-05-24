@@ -114,7 +114,9 @@ namespace NeuroInventory
             {
                 foreach (var selectedObject in dlvDemandReport.SelectedObjects)
                 {
-                    DataRowView dataRowView = selectedObject as DataRowView;
+                    if (!(selectedObject is DataRowView dataRowView))
+                        continue;
+
                     SQLiteManager.GetInstance().DemandReport().Remove(Convert.ToInt32(dataRowView["id"]));
                 }
                 SQLiteManager.GetInstance().DemandReport().SetCommandDataSet();

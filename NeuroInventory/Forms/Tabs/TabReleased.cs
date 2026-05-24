@@ -1,4 +1,5 @@
 ﻿using BrightIdeasSoftware;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Data;
 using System.Diagnostics;
@@ -35,25 +36,29 @@ namespace NeuroInventory
             public static BalanceInfo GetBalanceInfo(object balance, object amount)
             {
                 BalanceInfo balanceInfo = new BalanceInfo(balance, BalanceType.NOT_DEBIT);
+
+                decimal balanceValue = MoneyConverter.GetDecimalValue(balance);
+                decimal amountValue = MoneyConverter.GetDecimalValue(amount);
+
                 if (Equals(balance, DBNull.Value))
                 {
                     balanceInfo.Color = Definitions.COLOR_BALANCEINFO_NOT_DEBIT_NULL_COLOR;//Color.DarkOrange;
                     balanceInfo.BalanceTypeText = Definitions.NOT_DEBIT_STRING;
                     balanceInfo.balanceType = BalanceType.NOT_DEBIT;
                 }
-                else if (Convert.ToDecimal(balance) > 0 && Equals(balance, amount))
+                else if (balanceValue > 0 && balanceValue == amountValue)
                 {
                     balanceInfo.Color = Definitions.COLOR_BALANCEINFO_NOT_DEBIT_COLOR;//Color.Coral;
                     balanceInfo.BalanceTypeText = Definitions.NOT_DEBIT_STRING;
                     balanceInfo.balanceType = BalanceType.NOT_DEBIT;
                 }
-                else if (Convert.ToDecimal(balance) > 0 && !Equals(balance, amount))
+                else if (balanceValue > 0 && balanceValue != amountValue)
                 {
                     balanceInfo.Color = Definitions.COLOR_BALANCEINFO_PART_DEBIT_COLOR;//Color.LightGreen;
                     balanceInfo.BalanceTypeText = $"{Definitions.PARTIALLY_DEBIT} ({balance})";
                     balanceInfo.balanceType = BalanceType.PARTIALLY_DEBIT;
                 }
-                else if (Convert.ToDecimal(balance) < 0)
+                else if (balanceValue < 0)
                 {
                     balanceInfo.Color = Definitions.COLOR_BALANCEINFO_ERROR_DEBIT_COLOR;//Color.Red;
                     balanceInfo.BalanceTypeText = $"{Definitions.ERROR_DEBIT_STRING} ({balance})";
@@ -144,13 +149,17 @@ namespace NeuroInventory
                 }
                 else if (args.Column?.AspectName == "amount" && args.Model != null)
                 {
-                    DataRowView dataRowView = args.Model as DataRowView;
-                    int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRowView["measurement"].ToString());
+                    if (!(args.Model is DataRowView dataRowView))
+                        return;
+
+                    int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRowView["measurement"]?.ToString() ?? string.Empty);
                     args.SubItem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", args.SubItem.Text);
                 }
                 else if (args.Column?.AspectName == "balance" && args.Model != null)
                 {
-                    DataRowView dataRowView = args.Model as DataRowView;
+                    if (!(args.Model is DataRowView dataRowView))
+                        return;
+
                     BalanceInfo balanceInfo = BalanceInfo.GetBalanceInfo(dataRowView["balance"], dataRowView["amount"]);
 
                     //args.SubItem.BackColor = balanceInfo.Color;
@@ -160,9 +169,12 @@ namespace NeuroInventory
 
             this.dlvReleased.FormatRow += delegate (object cender, FormatRowEventArgs args)
             {
-                DataRowView dataRowView = args.Model as DataRowView;
+                if (!(args.Model is DataRowView dataRowView))
+                    return;
+
                 if (dataRowView == null)
                     return;
+
                 BalanceInfo balanceInfo = BalanceInfo.GetBalanceInfo(dataRowView["balance"], dataRowView["amount"]);
                 if (balanceInfo.balanceType == BalanceType.DEBIT)
                 {
@@ -174,18 +186,24 @@ namespace NeuroInventory
                 }
             };
 
-            columnPrice.AspectToStringConverter = delegate (object obj)
+            columnPrice.AspectToStringConverter = delegate (object value)
             {
-                return string.Format(new CultureInfo("ru-RU"),
-                      "{0:C}",
-                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+                if (value == null || value == DBNull.Value)
+                    return string.Empty;
+
+                decimal price = MoneyConverter.ToCurrency(value);
+
+                return MoneyConverter.FormatCurrency(price);
             };
 
-            columnSum.AspectToStringConverter = delegate (object obj)
+            columnSum.AspectToStringConverter = delegate (object value)
             {
-                return string.Format(new CultureInfo("ru-RU"),
-                      "{0:C}",
-                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+                if (value == null || value == DBNull.Value)
+                    return string.Empty;
+
+                decimal sum = MoneyConverter.ToCurrency(value);
+
+                return MoneyConverter.FormatCurrency(sum);
             };
 
             dlvReleased.PrimarySortOrder = SortOrder.Ascending;
@@ -227,7 +245,9 @@ namespace NeuroInventory
                 dlvReleased.Freeze();
                 foreach (var selectedObject in dlvReleased.SelectedObjects)
                 {
-                    DataRowView dataRowView = selectedObject as DataRowView;
+                    if (!(selectedObject is DataRowView dataRowView))
+                        return;
+
                     SQLiteManager.GetInstance().Released().CancelDemand(Convert.ToInt32(dataRowView["demandId"]));
                 }
                 dlvReleased.Unfreeze();
@@ -251,7 +271,9 @@ namespace NeuroInventory
                 dlvReleased.Freeze();
                 foreach (var selectedObject in dlvReleased.SelectedObjects)
                 {
-                    DataRowView dataRowView = selectedObject as DataRowView;
+                    if (!(selectedObject is DataRowView dataRowView))
+                        return;
+
                     SQLiteManager.GetInstance().Released().CancelDebit(Convert.ToInt32(dataRowView["demandId"]));
                 }
                 dlvReleased.Unfreeze();
@@ -319,7 +341,8 @@ namespace NeuroInventory
 
             foreach (var obj in dlvReleased.CheckedObjects)
             {
-                DataRowView dataRowView = obj as DataRowView;
+                if (!(obj is DataRowView dataRowView))
+                    continue;
 
                 decimal amount = CalculateBalance(dataRowView);
                 decimal price = MoneyConverter.ToCurrency(dataRowView["price"]);
@@ -354,9 +377,9 @@ namespace NeuroInventory
             object balance = dataRowView["balance"];
 
             if (balance != null && balance != DBNull.Value)
-                return Convert.ToDecimal(balance, CultureInfo.InvariantCulture);
+                return MoneyConverter.GetDecimalValue(balance);
 
-            return Convert.ToDecimal(dataRowView["amount"], CultureInfo.InvariantCulture);
+            return MoneyConverter.GetDecimalValue(dataRowView["amount"]);
         }
 
         private void dlvReleased_CellClick(object sender, CellClickEventArgs e)
@@ -371,14 +394,16 @@ namespace NeuroInventory
         private void dlvReleased_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             OLVListItem item = e.Item as OLVListItem;
-            DataRowView dataRowView = item.RowObject as DataRowView;
+
+            if (!(item.RowObject is DataRowView dataRowView))
+                return;
 
             object l_Balance = dataRowView["balance"];
             if (!Equals(l_Balance, DBNull.Value))
             {
-                decimal l_BalanceValue = Convert.ToDecimal(l_Balance);
+                decimal balanceValue = MoneyConverter.GetDecimalValue(l_Balance);
 
-                if (l_BalanceValue <= 0 && e.Item.Checked == true)
+                if (balanceValue <= 0 && e.Item.Checked == true)
                 {
                     MessageBox.Show(Definitions.ALREADY_DEBIT_WARNING);
                 }

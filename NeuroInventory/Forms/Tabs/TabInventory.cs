@@ -23,10 +23,12 @@ namespace NeuroInventory
 
         private TreeNodeType GetNodeType(object obj)
         {
-            if (Convert.ToInt32(obj) == 0)
+            if (obj == null || obj == DBNull.Value)
                 return TreeNodeType.FOLDER;
-            else
-                return TreeNodeType.FILE;
+
+            return Convert.ToInt32(obj) == 0
+                ? TreeNodeType.FOLDER
+                : TreeNodeType.FILE;
         }
 
 
@@ -244,15 +246,12 @@ namespace NeuroInventory
             // Отображение иконок в элементах списка
             catalogsNameColumn.ImageGetter = delegate (object row)
             {
-                DataRowView dataRowView = row as DataRowView;
-                if (GetNodeType(dataRowView["type"]) == TreeNodeType.FOLDER)
-                {
-                    return "folder";
-                }
-                else
-                {
-                    return "file";
-                }
+                if (!(row is DataRowView dataRowView))
+                    return null;
+
+                return GetNodeType(dataRowView["type"]) == TreeNodeType.FOLDER
+                    ? "folder"
+                    : "file";
             };
 
             // drag n drop
@@ -283,7 +282,9 @@ namespace NeuroInventory
 
                 foreach (var row in e.SourceModels)
                 {
-                    DataRowView sourceRow = row as DataRowView;
+                    if (!(row is DataRowView sourceRow))
+                        continue;
+
                     int catalogId = SQLiteManager.GetInstance().Inventory().GetCatalogId(Convert.ToInt32(sourceRow["id"]));
                     int targerId = Convert.ToInt32(targetRow["id"]);
                     if (catalogId != targerId)
@@ -349,15 +350,26 @@ namespace NeuroInventory
             dlvInventory.IsSimpleDragSource = true;
             dlvInventory.IsSimpleDropSink = true;
 
-            columnPrice.AspectGetter =
-                rowObject => MoneyConverter.GetDecimalValue(((DataRowView)rowObject)["price"]);
+            columnPrice.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return 0m;
 
-            columnSum.AspectGetter =
-                rowObject => MoneyConverter.GetDecimalValue(((DataRowView)rowObject)["sum"]);
+                return MoneyConverter.GetDecimalValue(row["price"]);
+            };
+
+            columnSum.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return 0m;
+                
+                return MoneyConverter.GetDecimalValue(row["sum"]);
+            };
 
             columnBalance.AspectGetter = rowObject =>
             {
-                DataRowView row = (DataRowView)rowObject;
+                if (!(rowObject is DataRowView row))
+                    return 0m;
 
                 object balance = row["balance"];
 
@@ -370,7 +382,9 @@ namespace NeuroInventory
             {
                 if (args.Column?.AspectName == "amount")
                 {
-                    DataRowView dataRowView = args.Model as DataRowView;
+                    if (!(args.Model is DataRowView dataRowView))
+                        return;
+
                     int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRowView["measurement"].ToString());
                     args.SubItem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", args.SubItem.Text);
                 }
@@ -381,8 +395,9 @@ namespace NeuroInventory
                 }
                 else if (args.Column?.AspectName == "balance")
                 {
+                    if (!(args.Model is DataRowView dataRowView))
+                        return;
 
-                    DataRowView dataRowView = args.Model as DataRowView;
                     object balance = dataRowView["balance"];
                     int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRowView["measurement"].ToString());
                     if (!Equals(balance, DBNull.Value))
@@ -402,7 +417,9 @@ namespace NeuroInventory
 
             this.dlvInventory.FormatRow += delegate (object cender, FormatRowEventArgs args)
             {
-                DataRowView dataRowView = args.Model as DataRowView;
+                if (!(args.Model is DataRowView dataRowView))
+                    return;
+
                 if (!Equals(dataRowView["balance"], DBNull.Value))
                 {
                     if (Convert.ToDecimal(dataRowView["balance"]) <= 0)
@@ -414,16 +431,16 @@ namespace NeuroInventory
 
             columnPrice.AspectToStringConverter = delegate (object obj)
             {
-                return string.Format(new CultureInfo("ru-RU"),
-                      "{0:C}",
-                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+                decimal value = MoneyConverter.GetDecimalValue(obj);
+
+                return MoneyConverter.FormatCurrency(value);
             };
 
             columnSum.AspectToStringConverter = delegate (object obj)
             {
-                return string.Format(new CultureInfo("ru-RU"),
-                      "{0:C}",
-                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+                decimal value = MoneyConverter.GetDecimalValue(obj);
+
+                return MoneyConverter.FormatCurrency(value);
             };
 
             dlvInventory.Sort();
@@ -459,7 +476,7 @@ namespace NeuroInventory
 
         private void RefreshList()
         {
-            if (dtlCatalogs.SelectedObject != null || dtlCatalogs.SelectedObjects?.Count > 0)
+            if (dtlCatalogs.SelectedObjects?.Count > 0)
             {
                 bindingSource.DataMember = "inventory";
                 bindingSource.DataSource = ReturnDataSet();
@@ -527,7 +544,9 @@ namespace NeuroInventory
             {
                 foreach (var selectedObject in dlvInventory.SelectedObjects)
                 {
-                    DataRowView dataRowView = selectedObject as DataRowView;
+                    if (!(selectedObject is DataRowView dataRowView))
+                        continue;
+
                     SQLiteManager.GetInstance().Inventory().Remove(Convert.ToInt32(dataRowView["id"]));
                 }
                 RefreshList();
@@ -599,10 +618,10 @@ namespace NeuroInventory
             demandTable.Columns.Add("OKEIcode");
             demandTable.Columns.Add("invoice_code");
             demandTable.Columns.Add("measurement");
-            demandTable.Columns.Add("price");
-            demandTable.Columns.Add("amount");
-            demandTable.Columns.Add("sum");
-            demandTable.Columns.Add("balance");
+            demandTable.Columns.Add("price", typeof(decimal));
+            demandTable.Columns.Add("amount", typeof(decimal));
+            demandTable.Columns.Add("sum", typeof(decimal));
+            demandTable.Columns.Add("balance", typeof(decimal));
 
             foreach (var obj in dlvInventory.CheckedObjects)
             {
@@ -614,10 +633,10 @@ namespace NeuroInventory
                 newRow["OKEIcode"] = dataRowView["OKEIcode"];
                 newRow["invoice_code"] = dataRowView["invoiceCodeStr"];
                 newRow["measurement"] = dataRowView["measurement"];
-                newRow["price"] = dataRowView["price"];
+                newRow["price"] = MoneyConverter.ToCurrency(dataRowView["price"]);
                 newRow["amount"] = 0;
                 newRow["sum"] = 0.0m;
-                newRow["balance"] = CalculateBalance(dataRowView);
+                newRow["balance"] = MoneyConverter.GetDecimalValue(CalculateBalance(dataRowView));
 
                 demandTable.Rows.Add(newRow);
             }
@@ -649,7 +668,9 @@ namespace NeuroInventory
         private void dlvInventory_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             OLVListItem item = e.Item as OLVListItem;
-            DataRowView dataRowView = item.RowObject as DataRowView;
+
+            if (!(item.RowObject is DataRowView dataRowView))
+                return;
 
             object l_Balance = dataRowView["balance"];
             if (!Equals(l_Balance, DBNull.Value))
@@ -689,7 +710,9 @@ namespace NeuroInventory
         {
             if(e.Column?.AspectName == "invoice")
             {
-                DataRowView dataRowView = e.Model as DataRowView;
+                if (!(e.Model is DataRowView dataRowView))
+                    return;
+
                 NeuroFile.OpenFileInExplorer(dataRowView["invoice"].ToString());
             }
         }
@@ -756,7 +779,9 @@ namespace NeuroInventory
 
                 foreach(var node in selectedObjects)
                 {
-                    DataRowView dataRowView = node as DataRowView;
+                    if (!(node is DataRowView dataRowView))
+                        continue;
+
                     if (GetNodeType(dataRowView["type"]) == TreeNodeType.FILE) // is file
                     {
                         l_InventoryIds.Add(Convert.ToInt32(dataRowView["id"]));

@@ -60,7 +60,7 @@
             this.columnAmount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnSum = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn13 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnBalance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStripCatalogs = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
@@ -246,7 +246,7 @@
             this.lblFilter.AutoSize = true;
             this.lblFilter.Location = new System.Drawing.Point(712, 14);
             this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(67, 17);
+            this.lblFilter.Size = new System.Drawing.Size(62, 16);
             this.lblFilter.TabIndex = 9;
             this.lblFilter.Text = "Фильтр: ";
             // 
@@ -326,7 +326,7 @@
             this.dlvInventory.AllColumns.Add(this.columnAmount);
             this.dlvInventory.AllColumns.Add(this.columnPrice);
             this.dlvInventory.AllColumns.Add(this.columnSum);
-            this.dlvInventory.AllColumns.Add(this.olvColumn13);
+            this.dlvInventory.AllColumns.Add(this.columnBalance);
             this.dlvInventory.CellEditUseWholeCell = false;
             this.dlvInventory.CheckBoxes = true;
             this.dlvInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -342,17 +342,20 @@
             this.columnAmount,
             this.columnPrice,
             this.columnSum,
-            this.olvColumn13});
+            this.columnBalance});
             this.dlvInventory.Cursor = System.Windows.Forms.Cursors.Default;
             this.dlvInventory.DataSource = null;
             this.dlvInventory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dlvInventory.HideSelection = false;
             this.dlvInventory.Location = new System.Drawing.Point(3, 58);
             this.dlvInventory.Name = "dlvInventory";
+            this.dlvInventory.ShowGroups = false;
+            this.dlvInventory.ShowImagesOnSubItems = true;
             this.dlvInventory.Size = new System.Drawing.Size(990, 587);
             this.dlvInventory.TabIndex = 4;
             this.dlvInventory.UseCompatibleStateImageBehavior = false;
             this.dlvInventory.View = System.Windows.Forms.View.Details;
+            this.dlvInventory.VirtualMode = true;
             this.dlvInventory.CellClick += new System.EventHandler<BrightIdeasSoftware.CellClickEventArgs>(this.dlvInventory_CellClick);
             this.dlvInventory.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.dlvInventory_CellRightClick);
             this.dlvInventory.CellToolTipShowing += new System.EventHandler<BrightIdeasSoftware.ToolTipShowingEventArgs>(this.dlvInventory_CellToolTipShowing);
@@ -483,15 +486,15 @@
             this.columnSum.Text = "Сумма";
             this.columnSum.Width = 200;
             // 
-            // olvColumn13
+            // columnBalance
             // 
-            this.olvColumn13.AspectName = "balance";
-            this.olvColumn13.Groupable = false;
-            this.olvColumn13.IsEditable = false;
-            this.olvColumn13.MaximumWidth = 1000;
-            this.olvColumn13.MinimumWidth = 50;
-            this.olvColumn13.Text = "Остаток";
-            this.olvColumn13.Width = 200;
+            this.columnBalance.AspectName = "balance";
+            this.columnBalance.Groupable = false;
+            this.columnBalance.IsEditable = false;
+            this.columnBalance.MaximumWidth = 1000;
+            this.columnBalance.MinimumWidth = 50;
+            this.columnBalance.Text = "Остаток";
+            this.columnBalance.Width = 200;
             // 
             // contextMenuStripInventory
             // 
@@ -564,7 +567,7 @@
         private BrightIdeasSoftware.OLVColumn columnAmount;
         private BrightIdeasSoftware.OLVColumn columnPrice;
         private BrightIdeasSoftware.OLVColumn columnSum;
-        private BrightIdeasSoftware.OLVColumn olvColumn13;
+        private BrightIdeasSoftware.OLVColumn columnBalance;
         private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.TextBox tbFilter;
         private BrightIdeasSoftware.DataTreeListView dtlCatalogs;

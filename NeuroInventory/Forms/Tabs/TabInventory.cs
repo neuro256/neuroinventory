@@ -349,6 +349,23 @@ namespace NeuroInventory
             dlvInventory.IsSimpleDragSource = true;
             dlvInventory.IsSimpleDropSink = true;
 
+            columnPrice.AspectGetter =
+                rowObject => MoneyConverter.GetDecimalValue(((DataRowView)rowObject)["price"]);
+
+            columnSum.AspectGetter =
+                rowObject => MoneyConverter.GetDecimalValue(((DataRowView)rowObject)["sum"]);
+
+            columnBalance.AspectGetter = rowObject =>
+            {
+                DataRowView row = (DataRowView)rowObject;
+
+                object balance = row["balance"];
+
+                return balance == DBNull.Value
+                    ? MoneyConverter.GetDecimalValue(row["amount"])
+                    : MoneyConverter.GetDecimalValue(balance);
+            };
+
             this.dlvInventory.FormatCell += delegate (object cender, FormatCellEventArgs args)
             {
                 if (args.Column?.AspectName == "amount")

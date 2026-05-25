@@ -13,7 +13,6 @@ namespace NeuroInventory
 
         private static readonly CultureInfo RuCulture = CultureInfo.GetCultureInfo("ru-RU");
 
-        private readonly Dictionary<int, string> m_FormatCache = new Dictionary<int, string>();
         private readonly Dictionary<string, int> m_DecimalPlacesCache = new Dictionary<string, int>();
 
         private DataSet m_DemandDataSet;
@@ -153,14 +152,7 @@ namespace NeuroInventory
 
             string FormatAmount(decimal value, int decimalPlaces)
             {
-                if (!m_FormatCache.TryGetValue(decimalPlaces, out var format))
-                {
-                    format = MoneyConverter.FormatNumber(value, decimalPlaces);
-
-                    m_FormatCache[decimalPlaces] = format;
-                }
-
-                return value.ToString(format, RuCulture);
+                return value.ToString($"N{decimalPlaces}", RuCulture);
             }
         }
 

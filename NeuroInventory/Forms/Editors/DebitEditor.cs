@@ -317,8 +317,8 @@ namespace NeuroInventory
                         .GetShortName(row["measurement"]?.ToString() ?? string.Empty);
 
                     newRow["amount"] = MoneyConverter.GetDecimalValue(row["debit_amount"]);
-                    newRow["price"] = MoneyConverter.GetDecimalValue(row["price"]);
-                    newRow["sum"] = MoneyConverter.GetDecimalValue(row["sum"]);
+                    newRow["price"] = MoneyConverter.RoundCurrency(MoneyConverter.GetDecimalValue(row["price"]));
+                    newRow["sum"] = MoneyConverter.RoundCurrency(MoneyConverter.GetDecimalValue(row["sum"]));
 
                     counter++;
                     debitReportTable.Rows.Add(newRow);

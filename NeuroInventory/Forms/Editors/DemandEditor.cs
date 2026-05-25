@@ -325,9 +325,9 @@ namespace NeuroInventory
                 newRow["name"] = row["name"];
                 newRow["OKEIcode"] = row["OKEIcode"];
                 newRow["measurement"] = SQLiteSettingsManager.GetInstance().Measurement().GetShortName(row["measurement"].ToString());
-               
-                newRow["price"] = MoneyConverter.GetDecimalValue(row["price"]);
-                newRow["sum"] = MoneyConverter.GetDecimalValue(row["sum"]);
+                
+                newRow["price"] = MoneyConverter.RoundCurrency(MoneyConverter.GetDecimalValue(row["price"]));
+                newRow["sum"] = MoneyConverter.RoundCurrency(MoneyConverter.GetDecimalValue(row["sum"]));
                 newRow["amount"] = MoneyConverter.GetDecimalValue(row["amount"]);
 
                 demandReportTable.Rows.Add(newRow);

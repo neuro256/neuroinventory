@@ -358,10 +358,10 @@ namespace NeuroInventory
                 newRow["OKEIcode"] = dataRowView["OKEIcode"];
                 newRow["measurement"] = dataRowView["measurement"];
                 
-                newRow["price"] = price;
+                newRow["price"] = MoneyConverter.RoundCurrency(price);
                 newRow["balance"] = amount;
                 newRow["debit_amount"] = amount;
-                newRow["sum"] = amount * price;
+                newRow["sum"] = MoneyConverter.RoundCurrency(amount * price);
 
                 debitTable.Rows.Add(newRow);
             }

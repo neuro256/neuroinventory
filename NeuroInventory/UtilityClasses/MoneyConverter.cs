@@ -89,5 +89,10 @@ namespace NeuroInventory
 
             return amount.ToString(format, RuCulture);
         }
+
+        public static decimal RoundCurrency(decimal value)
+        {
+            return Math.Round(value, 2, MidpointRounding.AwayFromZero);
+        }
     }
 }

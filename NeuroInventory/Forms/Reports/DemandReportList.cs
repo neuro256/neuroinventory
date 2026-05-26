@@ -60,19 +60,33 @@ namespace NeuroInventory
 
             bindingSource = new BindingSource(ReturnDataSet(), "demandReport");
             dlvDemandReport.DataSource = bindingSource;
-            // custom sorting by column
-            dlvDemandReport.CustomSorter = delegate (OLVColumn column, SortOrder order)
+            
+            columnDate.AspectGetter = rowObject =>
             {
-                switch (column.AspectName)
-                {
-                    case "date":
-                        dlvDemandReport.ListViewItemSorter = new NeuroDateComparer(columnDate, order);
-                        break;
-                    default:
-                        dlvDemandReport.ListViewItemSorter = new ColumnComparer(column, order);
-                        break;
-                }
+                if (!(rowObject is DataRowView row))
+                    return null;
+
+                object value = row["date"];
+
+                if (value == null || value == DBNull.Value)
+                    return null;
+
+                if (value is DateTime dt)
+                    return dt;
+
+                return DateTime.TryParse(value.ToString(), out dt)
+                    ? (DateTime?)dt
+                    : null;
             };
+
+            columnDate.AspectToStringConverter = value =>
+            {
+                if (value is DateTime dt)
+                    return dt.ToString("dd.MM.yyyy");
+
+                return string.Empty;
+            };
+
             dlvDemandReport.PrimarySortColumn = columnDate;
             dlvDemandReport.PrimarySortOrder = SortOrder.Ascending;
             dlvDemandReport.Sort();

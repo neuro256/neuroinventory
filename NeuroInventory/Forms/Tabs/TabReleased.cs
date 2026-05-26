@@ -194,6 +194,22 @@ namespace NeuroInventory
                     : null;
             };
 
+            columnPrice.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return 0m;
+
+                return MoneyConverter.GetDecimalValue(row["price"]);
+            };
+
+            columnSum.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return 0m;
+
+                return MoneyConverter.GetDecimalValue(row["sum"]);
+            };
+
             this.dlvReleased.FormatCell += delegate (object cender, FormatCellEventArgs args)
             {
                 if (args.Column?.AspectName == "document")

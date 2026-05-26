@@ -140,6 +140,60 @@ namespace NeuroInventory
             bindingSource = new BindingSource(ReturnDataSet(), "demand");
             dlvReleased.DataSource = bindingSource;
 
+            columnDate1.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return null;
+
+                object value = row["ordate"];
+
+                if (value == null || value == DBNull.Value)
+                    return null;
+
+                if (value is DateTime dt)
+                    return dt;
+
+                return DateTime.TryParse(value.ToString(), out dt)
+                    ? (DateTime?)dt
+                    : null;
+            };
+
+            columnDate2.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return null;
+
+                object value = row["mydate"];
+
+                if (value == null || value == DBNull.Value)
+                    return null;
+
+                if (value is DateTime dt)
+                    return dt;
+
+                return DateTime.TryParse(value.ToString(), out dt)
+                    ? (DateTime?)dt
+                    : null;
+            };
+
+            columnDate3.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return null;
+
+                object value = row["invoiceDate"];
+
+                if (value == null || value == DBNull.Value)
+                    return null;
+
+                if (value is DateTime dt)
+                    return dt;
+
+                return DateTime.TryParse(value.ToString(), out dt)
+                    ? (DateTime?)dt
+                    : null;
+            };
+
             this.dlvReleased.FormatCell += delegate (object cender, FormatCellEventArgs args)
             {
                 if (args.Column?.AspectName == "document")
@@ -186,7 +240,31 @@ namespace NeuroInventory
                 }
             };
 
-            columnPrice.AspectToStringConverter = delegate (object value)
+            columnDate1.AspectToStringConverter = value =>
+            {
+                if (value is DateTime dt)
+                    return dt.ToString("dd.MM.yyyy");
+
+                return string.Empty;
+            };
+
+            columnDate2.AspectToStringConverter = value =>
+            {
+                if (value is DateTime dt)
+                    return dt.ToString("dd.MM.yyyy");
+
+                return string.Empty;
+            };
+
+            columnDate3.AspectToStringConverter = value =>
+            {
+                if (value is DateTime dt)
+                    return dt.ToString("dd.MM.yyyy");
+
+                return string.Empty;
+            };
+
+            columnPrice.AspectToStringConverter = value =>
             {
                 if (value == null || value == DBNull.Value)
                     return string.Empty;
@@ -196,7 +274,7 @@ namespace NeuroInventory
                 return MoneyConverter.FormatCurrency(price);
             };
 
-            columnSum.AspectToStringConverter = delegate (object value)
+            columnSum.AspectToStringConverter = value =>
             {
                 if (value == null || value == DBNull.Value)
                     return string.Empty;

@@ -82,7 +82,26 @@ namespace NeuroInventory
 
         private void RefreshList()
         {
-            bindingSource.DataSource = ReturnDataSet();
+            dlvProviders.BeginUpdate();
+
+            try
+            {
+                int topIndex = dlvProviders.TopItemIndex;
+
+                bindingSource.DataSource = ReturnDataSet();
+
+                if (dlvProviders.GetItemCount() > 0)
+                {
+                    topIndex = Math.Min(topIndex, dlvProviders.GetItemCount() - 1);
+
+                    if (topIndex >= 0)
+                        dlvProviders.TopItemIndex = topIndex;
+                }
+            }
+            finally
+            {
+                dlvProviders.EndUpdate();
+            }
         }
 
         protected override void InitForm()

@@ -518,8 +518,27 @@ namespace NeuroInventory
         {
             if (dtlCatalogs.SelectedObjects?.Count > 0)
             {
-                bindingSource.DataMember = "inventory";
-                bindingSource.DataSource = ReturnDataSet();
+                dlvInventory.BeginUpdate();
+
+                try
+                {
+                    int topIndex = dlvInventory.TopItemIndex;
+
+                    bindingSource.DataMember = "inventory";
+                    bindingSource.DataSource = ReturnDataSet();
+
+                    if (dlvInventory.GetItemCount() > 0)
+                    {
+                        topIndex = Math.Min(topIndex, dlvInventory.GetItemCount() - 1);
+
+                        if (topIndex >= 0)
+                            dlvInventory.TopItemIndex = topIndex;
+                    }
+                }
+                finally
+                {
+                    dlvInventory.EndUpdate();
+                }
             }
         }
 

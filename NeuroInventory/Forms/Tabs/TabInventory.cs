@@ -350,6 +350,42 @@ namespace NeuroInventory
             dlvInventory.IsSimpleDragSource = true;
             dlvInventory.IsSimpleDropSink = true;
 
+            columnDate.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return null;
+
+                object value = row["date"];
+
+                if (value == null || value == DBNull.Value)
+                    return null;
+
+                if (value is DateTime dt)
+                    return dt;
+
+                return DateTime.TryParse(value.ToString(), out dt)
+                    ? (DateTime?)dt
+                    : null;
+            };
+
+            columnInvoiceDate.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return null;
+
+                object value = row["invoiceDate"];
+
+                if (value == null || value == DBNull.Value)
+                    return null;
+
+                if (value is DateTime dt)
+                    return dt;
+
+                return DateTime.TryParse(value.ToString(), out dt)
+                    ? (DateTime?)dt
+                    : null;
+            };
+
             columnPrice.AspectGetter = rowObject =>
             {
                 if (!(rowObject is DataRowView row))
@@ -429,18 +465,34 @@ namespace NeuroInventory
                 }
             };
 
-            columnPrice.AspectToStringConverter = delegate (object obj)
+            columnDate.AspectToStringConverter = value =>
             {
-                decimal value = MoneyConverter.GetDecimalValue(obj);
+                if (value is DateTime dt)
+                    return dt.ToString("dd.MM.yyyy");
 
-                return MoneyConverter.FormatCurrency(value);
+                return string.Empty;
             };
 
-            columnSum.AspectToStringConverter = delegate (object obj)
+            columnInvoiceDate.AspectToStringConverter = value =>
             {
-                decimal value = MoneyConverter.GetDecimalValue(obj);
+                if (value is DateTime dt)
+                    return dt.ToString("dd.MM.yyyy");
 
-                return MoneyConverter.FormatCurrency(value);
+                return string.Empty;
+            };
+
+            columnPrice.AspectToStringConverter = value =>
+            {
+                decimal decimalValue = MoneyConverter.GetDecimalValue(value);
+
+                return MoneyConverter.FormatCurrency(decimalValue);
+            };
+
+            columnSum.AspectToStringConverter = value =>
+            {
+                decimal decimalValue = MoneyConverter.GetDecimalValue(value);
+
+                return MoneyConverter.FormatCurrency(decimalValue);
             };
 
             dlvInventory.Sort();
@@ -450,18 +502,6 @@ namespace NeuroInventory
             dropSink.CanDropOnItem = true;
             dropSink.FeedbackColor = Definitions.COLOR_DROPSINK_FEEDBACK_COLOR;
             dlvInventory.DropSink = dropSink;
-
-            //dlvInventory.UseTranslucentHotItem = true;
-            //dlvInventory.UseTranslucentSelection = true;
-
-            // Make the hot item show an overlay when it changes
-            //if (dlvInventory.UseTranslucentHotItem)
-            //{
-            //    dlvInventory.HotItemStyle.Overlay = new InventoryOverlay();
-            //    dlvInventory.HotItemStyle = dlvInventory.HotItemStyle;
-            //}
-
-            //dlvInventory.UseTranslucentSelection = dlvInventory.UseTranslucentHotItem;
 
             dlvInventory.CellToolTip.Font = new Font("Microsoft Sans Serif", 24);
             dlvInventory.CellToolTip.IsBalloon = true;

@@ -49,7 +49,8 @@ namespace NeuroInventory
 
                 if (ws.Cells.FindText("[InvoiceReport]", true, true, out row, out column))
                 {
-                    ws.Rows.InsertCopy(row + 1, m_InvoiceDataSet.Tables[0].Rows.Count - 1, ws.Rows[row]);
+                    InsertTemplateRows(ws, row, m_InvoiceDataSet.Tables[0].Rows.Count);
+
                     int i = 0;
                     foreach (DataRow dataRow in m_InvoiceDataSet.Tables[0].Rows)
                     {
@@ -65,7 +66,8 @@ namespace NeuroInventory
 
                 if (ws.Cells.FindText("[DebitReport]", true, true, out row, out column))
                 {
-                    ws.Rows.InsertCopy(row + 1, m_DebitDataSet.Tables[0].Rows.Count - 1, ws.Rows[row]);
+                    InsertTemplateRows(ws, row, m_DebitDataSet.Tables[0].Rows.Count);
+
                     int i = 0;
                     foreach (DataRow dataRow in m_DebitDataSet.Tables[0].Rows)
                     {
@@ -106,6 +108,19 @@ namespace NeuroInventory
                 NeuroFile.OpenFile(p_FileName);
             }
             catch { }
+        }
+
+        private void InsertTemplateRows(ExcelWorksheet worksheet, int templateRowIndex, int dataRowCount)
+        {
+            int additionalRows = Math.Max(0, dataRowCount - 1);
+
+            if (additionalRows > 0)
+            {
+                worksheet.Rows.InsertCopy(
+                    templateRowIndex + 1,
+                    additionalRows,
+                    worksheet.Rows[templateRowIndex]);
+            }
         }
     }
 }

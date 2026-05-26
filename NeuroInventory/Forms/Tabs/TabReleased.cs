@@ -1,6 +1,7 @@
 ﻿using BrightIdeasSoftware;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -22,7 +23,7 @@ namespace NeuroInventory
 
         class BalanceInfo
         {
-            public object Balance { get; set; } 
+            public object Balance { get; } 
             public BalanceType balanceType { get; set; }
             public Color Color { get; set; } 
             public string BalanceTypeText { get; set; }
@@ -46,7 +47,7 @@ namespace NeuroInventory
                     balanceInfo.BalanceTypeText = Definitions.NOT_DEBIT_STRING;
                     balanceInfo.balanceType = BalanceType.NOT_DEBIT;
                 }
-                else if (balanceValue > 0 && balanceValue == amountValue)
+                else if (Math.Abs(balanceValue - amountValue) < 0.0001m)
                 {
                     balanceInfo.Color = Definitions.COLOR_BALANCEINFO_NOT_DEBIT_COLOR;//Color.Coral;
                     balanceInfo.BalanceTypeText = Definitions.NOT_DEBIT_STRING;
@@ -223,7 +224,10 @@ namespace NeuroInventory
                         return;
 
                     int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRowView["measurement"]?.ToString() ?? string.Empty);
-                    args.SubItem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", args.SubItem.Text);
+
+                    decimal amount = MoneyConverter.GetDecimalValue(dataRowView["amount"]);
+
+                    args.SubItem.Text = amount.ToString($"N{l_DecimalPlaces}");
                 }
                 else if (args.Column?.AspectName == "balance" && args.Model != null)
                 {
@@ -337,15 +341,22 @@ namespace NeuroInventory
             if (dlvReleased.SelectedObjects?.Count > 0)
             {
                 dlvReleased.Freeze();
-                foreach (var selectedObject in dlvReleased.SelectedObjects)
-                {
-                    if (!(selectedObject is DataRowView dataRowView))
-                        return;
 
-                    SQLiteManager.GetInstance().Released().CancelDemand(Convert.ToInt32(dataRowView["demandId"]));
+                try
+                {
+                    foreach (var selectedObject in dlvReleased.SelectedObjects)
+                    {
+                        if (!(selectedObject is DataRowView dataRowView))
+                            continue;
+
+                        SQLiteManager.GetInstance().Released().CancelDemand(Convert.ToInt32(dataRowView["demandId"]));
+                    }
                 }
-                dlvReleased.Unfreeze();
-                RefreshList();
+                finally
+                {
+                    dlvReleased.Unfreeze();
+                    RefreshList();
+                }
             }
             else
             {
@@ -363,15 +374,22 @@ namespace NeuroInventory
             if (dlvReleased.SelectedObjects?.Count > 0)
             {
                 dlvReleased.Freeze();
-                foreach (var selectedObject in dlvReleased.SelectedObjects)
-                {
-                    if (!(selectedObject is DataRowView dataRowView))
-                        return;
 
-                    SQLiteManager.GetInstance().Released().CancelDebit(Convert.ToInt32(dataRowView["demandId"]));
+                try
+                {
+                    foreach (var selectedObject in dlvReleased.SelectedObjects)
+                    {
+                        if (!(selectedObject is DataRowView dataRowView))
+                            continue;
+
+                        SQLiteManager.GetInstance().Released().CancelDebit(Convert.ToInt32(dataRowView["demandId"]));
+                    }
                 }
-                dlvReleased.Unfreeze();
-                RefreshList();
+                finally
+                {
+                    dlvReleased.Unfreeze();
+                    RefreshList();
+                } 
             }
             else
             {
@@ -478,11 +496,18 @@ namespace NeuroInventory
 
         private void dlvReleased_CellClick(object sender, CellClickEventArgs e)
         {
-            if (e.Column?.AspectName == "document")
-            {
-                DataRowView dataRowView = e.Model as DataRowView;
-                NeuroFile.OpenFileInExplorer(dataRowView["document"].ToString());
-            }
+            if (e.Column?.AspectName != "document")
+                return;
+
+            if (!(e.Model is DataRowView row))
+                return;
+
+            object document = row["document"];
+
+            if (document == null || document == DBNull.Value)
+                return;
+
+            NeuroFile.OpenFileInExplorer(document.ToString());
         }
 
         private void dlvReleased_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -499,6 +524,7 @@ namespace NeuroInventory
 
                 if (balanceValue <= 0 && e.Item.Checked == true)
                 {
+                    item.Checked = false;
                     MessageBox.Show(Definitions.ALREADY_DEBIT_WARNING);
                 }
             }

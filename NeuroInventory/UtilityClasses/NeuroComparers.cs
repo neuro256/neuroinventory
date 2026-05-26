@@ -7,45 +7,6 @@ using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public class NeuroDateComparer : IComparer
-    {
-        private OLVColumn oLVColumn;
-        private SortOrder order;
-
-        public NeuroDateComparer(OLVColumn oLVColumn, SortOrder order)
-        {
-            this.oLVColumn = oLVColumn;
-            this.order = order;
-        }
-
-        public int Compare(OLVListItem x, OLVListItem y)
-        {
-            return Compare(x, y);
-        }
-
-        public int Compare(object x, object y)
-        {
-            int result = 0;
-            if (x != null && y != null)
-            {
-                string xValue = this.oLVColumn.AspectGetter((x as OLVListItem).RowObject)?.ToString() ?? string.Empty;
-                string yValue = this.oLVColumn.AspectGetter((y as OLVListItem).RowObject)?.ToString() ?? string.Empty;
-
-                if (String.IsNullOrEmpty(xValue))
-                    xValue = DateTime.MinValue.ToShortDateString();
-                if (String.IsNullOrEmpty(yValue))
-                    yValue = DateTime.MinValue.ToShortDateString();
-
-                result = DateTime.Compare(DateTime.Parse(xValue), DateTime.Parse(yValue));
-
-                if (this.order == SortOrder.Descending)
-                    result = 0 - result;
-            }
-
-            return result;
-        }
-    }
-
     public class NeuroNumberComparer : IComparer
     {
         private OLVColumn oLVColumn;

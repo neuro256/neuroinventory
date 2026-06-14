@@ -75,14 +75,33 @@ namespace NeuroInventory
             dlvProviders.Sort();
         }
 
-        protected override DataListView GetListView()
+        protected override FastDataListView GetListView()
         {
             return dlvProviders;
         }
 
         private void RefreshList()
         {
-            bindingSource.DataSource = ReturnDataSet();
+            dlvProviders.BeginUpdate();
+
+            try
+            {
+                int topIndex = dlvProviders.TopItemIndex;
+
+                bindingSource.DataSource = ReturnDataSet();
+
+                if (dlvProviders.GetItemCount() > 0)
+                {
+                    topIndex = Math.Min(topIndex, dlvProviders.GetItemCount() - 1);
+
+                    if (topIndex >= 0)
+                        dlvProviders.TopItemIndex = topIndex;
+                }
+            }
+            finally
+            {
+                dlvProviders.EndUpdate();
+            }
         }
 
         protected override void InitForm()
@@ -131,7 +150,9 @@ namespace NeuroInventory
                 dlvProviders.Freeze();
                 foreach(var selectedObject in dlvProviders.SelectedObjects)
                 {
-                    DataRowView dataRowView = selectedObject as DataRowView;
+                    if (!(selectedObject is DataRowView dataRowView))
+                        continue;
+
                     SQLiteManager.GetInstance().Providers().Remove(Convert.ToInt32(dataRowView["id"]));
                 }
                 dlvProviders.Unfreeze();
@@ -204,7 +225,7 @@ namespace NeuroInventory
         {
             if(e.Column?.AspectName == "document")
             {
-                e.SubItem.BackColor = Color.LightBlue;
+                e.SubItem.BackColor = Definitions.COLOR_SUBITEM_DOCUMENT_BACK_COLOR;
                 e.SubItem.Text = Path.GetFileName(e.SubItem.Text);
             }
         }
@@ -235,6 +256,7 @@ namespace NeuroInventory
 
         public override void FocusFilter()
         {
+            tbFilter.Clear();
             tbFilter.Focus();
         }
     }

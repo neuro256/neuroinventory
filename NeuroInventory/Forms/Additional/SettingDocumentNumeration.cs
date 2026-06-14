@@ -9,6 +9,7 @@ namespace NeuroInventory
         public SettingDocumentNumeration()
         {
             InitializeComponent();
+            this.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
         }
 
         private void SettingDocumentNumeration_Load(object sender, EventArgs e)

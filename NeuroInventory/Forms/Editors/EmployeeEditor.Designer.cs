@@ -52,7 +52,7 @@
             // lblFirstname
             // 
             this.lblFirstname.AutoSize = true;
-            this.lblFirstname.BackColor = System.Drawing.Color.LightCyan;
+            this.lblFirstname.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(250)))), ((int)(((byte)(189)))));
             this.lblFirstname.Location = new System.Drawing.Point(3, 40);
             this.lblFirstname.Name = "lblFirstname";
             this.lblFirstname.Size = new System.Drawing.Size(35, 17);
@@ -62,7 +62,7 @@
             // lblSurename
             // 
             this.lblSurename.AutoSize = true;
-            this.lblSurename.BackColor = System.Drawing.Color.LightCyan;
+            this.lblSurename.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(250)))), ((int)(((byte)(189)))));
             this.lblSurename.Location = new System.Drawing.Point(3, 0);
             this.lblSurename.Name = "lblSurename";
             this.lblSurename.Size = new System.Drawing.Size(70, 17);
@@ -72,7 +72,7 @@
             // lblLastname
             // 
             this.lblLastname.AutoSize = true;
-            this.lblLastname.BackColor = System.Drawing.Color.LightCyan;
+            this.lblLastname.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(250)))), ((int)(((byte)(189)))));
             this.lblLastname.Location = new System.Drawing.Point(3, 80);
             this.lblLastname.Name = "lblLastname";
             this.lblLastname.Size = new System.Drawing.Size(71, 17);
@@ -220,7 +220,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Silver;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(555, 283);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tbLayoutMain);

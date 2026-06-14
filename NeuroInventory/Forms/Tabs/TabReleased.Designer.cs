@@ -40,7 +40,7 @@ namespace NeuroInventory
             this.btnDebitCancel = new System.Windows.Forms.Button();
             this.btnDebitReport = new System.Windows.Forms.Button();
             this.btnReleasedRemove = new System.Windows.Forms.Button();
-            this.dlvReleased = new BrightIdeasSoftware.DataListView();
+            this.dlvReleased = new BrightIdeasSoftware.FastDataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnDate1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnDate2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -59,6 +59,7 @@ namespace NeuroInventory
             this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBoxShowAll = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanelReleased.SuspendLayout();
             this.panelReleasedBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dlvReleased)).BeginInit();
@@ -83,7 +84,8 @@ namespace NeuroInventory
             // 
             // panelReleasedBottom
             // 
-            this.panelReleasedBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelReleasedBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.panelReleasedBottom.Controls.Add(this.checkBoxShowAll);
             this.panelReleasedBottom.Controls.Add(this.lblFilter);
             this.panelReleasedBottom.Controls.Add(this.tbFilter);
             this.panelReleasedBottom.Controls.Add(this.btnDebitCancel);
@@ -102,7 +104,7 @@ namespace NeuroInventory
             this.lblFilter.AutoSize = true;
             this.lblFilter.Location = new System.Drawing.Point(915, 15);
             this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(67, 17);
+            this.lblFilter.Size = new System.Drawing.Size(62, 16);
             this.lblFilter.TabIndex = 9;
             this.lblFilter.Text = "Фильтр: ";
             // 
@@ -117,7 +119,7 @@ namespace NeuroInventory
             // 
             // btnDebitCancel
             // 
-            this.btnDebitCancel.BackColor = System.Drawing.Color.Silver;
+            this.btnDebitCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.btnDebitCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDebitCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDebitCancel.Location = new System.Drawing.Point(202, 12);
@@ -130,7 +132,7 @@ namespace NeuroInventory
             // 
             // btnDebitReport
             // 
-            this.btnDebitReport.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnDebitReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(250)))), ((int)(((byte)(189)))));
             this.btnDebitReport.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDebitReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDebitReport.Location = new System.Drawing.Point(12, 12);
@@ -188,12 +190,15 @@ namespace NeuroInventory
             this.dlvReleased.Cursor = System.Windows.Forms.Cursors.Default;
             this.dlvReleased.DataSource = null;
             this.dlvReleased.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dlvReleased.HideSelection = false;
             this.dlvReleased.Location = new System.Drawing.Point(3, 58);
             this.dlvReleased.Name = "dlvReleased";
+            this.dlvReleased.ShowGroups = false;
             this.dlvReleased.Size = new System.Drawing.Size(1194, 589);
             this.dlvReleased.TabIndex = 2;
             this.dlvReleased.UseCompatibleStateImageBehavior = false;
             this.dlvReleased.View = System.Windows.Forms.View.Details;
+            this.dlvReleased.VirtualMode = true;
             this.dlvReleased.CellClick += new System.EventHandler<BrightIdeasSoftware.CellClickEventArgs>(this.dlvReleased_CellClick);
             this.dlvReleased.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.dlvReleased_CellRightClick);
             this.dlvReleased.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.dlvReleased_ItemChecked);
@@ -349,6 +354,18 @@ namespace NeuroInventory
             this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.removeToolStripMenuItem.Text = "Удалить";
             // 
+            // checkBoxShowAll
+            // 
+            this.checkBoxShowAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBoxShowAll.AutoSize = true;
+            this.checkBoxShowAll.Location = new System.Drawing.Point(791, 14);
+            this.checkBoxShowAll.Name = "checkBoxShowAll";
+            this.checkBoxShowAll.Size = new System.Drawing.Size(118, 20);
+            this.checkBoxShowAll.TabIndex = 11;
+            this.checkBoxShowAll.Text = "Показать все";
+            this.checkBoxShowAll.UseVisualStyleBackColor = true;
+            this.checkBoxShowAll.CheckedChanged += new System.EventHandler(this.checkBoxShowAll_CheckedChanged);
+            // 
             // TabReleased
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -382,7 +399,7 @@ namespace NeuroInventory
         private ToolStripMenuItem removeToolStripMenuItem;
         private Button btnDebitReport;
         private Button btnDebitCancel;
-        private BrightIdeasSoftware.DataListView dlvReleased;
+        private BrightIdeasSoftware.FastDataListView dlvReleased;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn columnDate1;
         private BrightIdeasSoftware.OLVColumn columnDate2;
@@ -399,5 +416,6 @@ namespace NeuroInventory
         private BrightIdeasSoftware.OLVColumn olvColumn14;
         private Label lblFilter;
         private TextBox tbFilter;
+        private CheckBox checkBoxShowAll;
     }
 }

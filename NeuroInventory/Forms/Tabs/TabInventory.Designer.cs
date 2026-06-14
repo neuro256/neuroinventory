@@ -47,7 +47,7 @@
             this.btnInventoryEdit = new System.Windows.Forms.Button();
             this.btnInventoryRemove = new System.Windows.Forms.Button();
             this.btnInventoryAdd = new System.Windows.Forms.Button();
-            this.dlvInventory = new BrightIdeasSoftware.DataListView();
+            this.dlvInventory = new BrightIdeasSoftware.FastDataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -60,7 +60,7 @@
             this.columnAmount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnSum = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn13 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnBalance = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStripInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStripCatalogs = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
@@ -117,7 +117,7 @@
             // 
             // panelLeftPanelBottom
             // 
-            this.panelLeftPanelBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelLeftPanelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.panelLeftPanelBottom.Controls.Add(this.tbSelectionHelp);
             this.panelLeftPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLeftPanelBottom.Location = new System.Drawing.Point(0, 593);
@@ -128,7 +128,7 @@
             // 
             // tbSelectionHelp
             // 
-            this.tbSelectionHelp.BackColor = System.Drawing.Color.Silver;
+            this.tbSelectionHelp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.tbSelectionHelp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbSelectionHelp.Location = new System.Drawing.Point(0, 0);
             this.tbSelectionHelp.Multiline = true;
@@ -226,7 +226,7 @@
             // 
             // panelMainBottom
             // 
-            this.panelMainBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelMainBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.panelMainBottom.Controls.Add(this.lblFilter);
             this.panelMainBottom.Controls.Add(this.tbFilter);
             this.panelMainBottom.Controls.Add(this.btnDemand);
@@ -246,7 +246,7 @@
             this.lblFilter.AutoSize = true;
             this.lblFilter.Location = new System.Drawing.Point(712, 14);
             this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(67, 17);
+            this.lblFilter.Size = new System.Drawing.Size(62, 16);
             this.lblFilter.TabIndex = 9;
             this.lblFilter.Text = "Фильтр: ";
             // 
@@ -262,7 +262,7 @@
             // btnDemand
             // 
             this.btnDemand.AutoSize = true;
-            this.btnDemand.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnDemand.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(250)))), ((int)(((byte)(189)))));
             this.btnDemand.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.btnDemand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDemand.Location = new System.Drawing.Point(580, 11);
@@ -326,7 +326,7 @@
             this.dlvInventory.AllColumns.Add(this.columnAmount);
             this.dlvInventory.AllColumns.Add(this.columnPrice);
             this.dlvInventory.AllColumns.Add(this.columnSum);
-            this.dlvInventory.AllColumns.Add(this.olvColumn13);
+            this.dlvInventory.AllColumns.Add(this.columnBalance);
             this.dlvInventory.CellEditUseWholeCell = false;
             this.dlvInventory.CheckBoxes = true;
             this.dlvInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -342,19 +342,23 @@
             this.columnAmount,
             this.columnPrice,
             this.columnSum,
-            this.olvColumn13});
+            this.columnBalance});
             this.dlvInventory.Cursor = System.Windows.Forms.Cursors.Default;
             this.dlvInventory.DataSource = null;
             this.dlvInventory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dlvInventory.HideSelection = false;
             this.dlvInventory.Location = new System.Drawing.Point(3, 58);
             this.dlvInventory.Name = "dlvInventory";
+            this.dlvInventory.ShowGroups = false;
+            this.dlvInventory.ShowImagesOnSubItems = true;
             this.dlvInventory.Size = new System.Drawing.Size(990, 587);
             this.dlvInventory.TabIndex = 4;
             this.dlvInventory.UseCompatibleStateImageBehavior = false;
             this.dlvInventory.View = System.Windows.Forms.View.Details;
+            this.dlvInventory.VirtualMode = true;
             this.dlvInventory.CellClick += new System.EventHandler<BrightIdeasSoftware.CellClickEventArgs>(this.dlvInventory_CellClick);
             this.dlvInventory.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.dlvInventory_CellRightClick);
+            this.dlvInventory.CellToolTipShowing += new System.EventHandler<BrightIdeasSoftware.ToolTipShowingEventArgs>(this.dlvInventory_CellToolTipShowing);
             this.dlvInventory.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.dlvInventory_ItemChecked);
             // 
             // olvColumn1
@@ -482,15 +486,15 @@
             this.columnSum.Text = "Сумма";
             this.columnSum.Width = 200;
             // 
-            // olvColumn13
+            // columnBalance
             // 
-            this.olvColumn13.AspectName = "balance";
-            this.olvColumn13.Groupable = false;
-            this.olvColumn13.IsEditable = false;
-            this.olvColumn13.MaximumWidth = 1000;
-            this.olvColumn13.MinimumWidth = 50;
-            this.olvColumn13.Text = "Остаток";
-            this.olvColumn13.Width = 200;
+            this.columnBalance.AspectName = "balance";
+            this.columnBalance.Groupable = false;
+            this.columnBalance.IsEditable = false;
+            this.columnBalance.MaximumWidth = 1000;
+            this.columnBalance.MinimumWidth = 50;
+            this.columnBalance.Text = "Остаток";
+            this.columnBalance.Width = 200;
             // 
             // contextMenuStripInventory
             // 
@@ -550,7 +554,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStripCatalogs;
         private System.Windows.Forms.Button btnDemand;
         private System.Windows.Forms.TextBox tbSelectionHelp;
-        private BrightIdeasSoftware.DataListView dlvInventory;
+        private BrightIdeasSoftware.FastDataListView dlvInventory;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn columnDate;
@@ -563,7 +567,7 @@
         private BrightIdeasSoftware.OLVColumn columnAmount;
         private BrightIdeasSoftware.OLVColumn columnPrice;
         private BrightIdeasSoftware.OLVColumn columnSum;
-        private BrightIdeasSoftware.OLVColumn olvColumn13;
+        private BrightIdeasSoftware.OLVColumn columnBalance;
         private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.TextBox tbFilter;
         private BrightIdeasSoftware.DataTreeListView dtlCatalogs;

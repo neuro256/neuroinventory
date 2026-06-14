@@ -1,53 +1,12 @@
 ﻿using BrightIdeasSoftware;
 using System;
 using System.Collections;
+using System.Data;
 using System.Globalization;
 using System.Windows.Forms;
 
 namespace NeuroInventory
 {
-    public class NeuroDateComparer : IComparer
-    {
-        private OLVColumn oLVColumn;
-        private SortOrder order;
-
-        public NeuroDateComparer(OLVColumn oLVColumn, SortOrder order)
-        {
-            this.oLVColumn = oLVColumn;
-            this.order = order;
-        }
-
-        public int Compare(OLVListItem x, OLVListItem y)
-        {
-            string xValue = this.oLVColumn.GetStringValue(x.RowObject);
-            string yValue = this.oLVColumn.GetStringValue(y.RowObject);
-
-            return 0;
-        }
-
-        public int Compare(object x, object y)
-        {
-            int result = 0;
-            if (x != null && y != null)
-            {
-                string xValue = this.oLVColumn.GetStringValue((x as OLVListItem).RowObject);
-                string yValue = this.oLVColumn.GetStringValue((y as OLVListItem).RowObject);
-
-                if (String.IsNullOrEmpty(xValue))
-                    xValue = DateTime.MinValue.ToShortDateString();
-                if (String.IsNullOrEmpty(yValue))
-                    yValue = DateTime.MinValue.ToShortDateString();
-
-                result = DateTime.Compare(DateTime.Parse(xValue), DateTime.Parse(yValue));
-
-                if (this.order == SortOrder.Descending)
-                    result = 0 - result;
-            }
-
-            return result;
-        }
-    }
-
     public class NeuroNumberComparer : IComparer
     {
         private OLVColumn oLVColumn;
@@ -64,8 +23,8 @@ namespace NeuroInventory
             int result = 0;
             if (x != null && y != null)
             {
-                string xValue = this.oLVColumn.GetStringValue((x as OLVListItem).RowObject);
-                string yValue = this.oLVColumn.GetStringValue((y as OLVListItem).RowObject);
+                string xValue = this.oLVColumn.AspectGetter((x as OLVListItem).RowObject)?.ToString() ?? string.Empty;
+                string yValue = this.oLVColumn.AspectGetter((y as OLVListItem).RowObject)?.ToString() ?? string.Empty;
 
                 if (String.IsNullOrEmpty(xValue))
                     xValue = String.Format("0");
@@ -95,24 +54,54 @@ namespace NeuroInventory
 
         public int Compare(object x, object y)
         {
-            int result = 0;
-            if (x != null && y != null)
+            if (x == null || y == null)
+                return 0;
+
+            var rowX = (x as OLVListItem)?.RowObject as DataRowView;
+            var rowY = (y as OLVListItem)?.RowObject as DataRowView;
+
+            object rawX = rowX?[this.oLVColumn.AspectName];
+            object rawY = rowY?[this.oLVColumn.AspectName];
+
+            decimal xVal = ParseDecimal(rawX);
+            decimal yVal = ParseDecimal(rawY);
+
+            int result = decimal.Compare(xVal, yVal);
+
+            return this.order == SortOrder.Descending
+                ? -result
+                : result;
+        }
+
+        private decimal ParseDecimal(object value)
+        {
+            if (value == null || value == DBNull.Value)
+                return 0m;
+
+            if (value is decimal d)
+                return d;
+
+            string s = value.ToString();
+
+            if (decimal.TryParse(
+                s,
+                NumberStyles.Any,
+                CultureInfo.InvariantCulture,
+                out decimal result))
             {
-                string xValue = this.oLVColumn.GetStringValue((x as OLVListItem).RowObject);
-                string yValue = this.oLVColumn.GetStringValue((y as OLVListItem).RowObject);
-
-                if (String.IsNullOrEmpty(xValue))
-                    xValue = String.Format("{0:C}", CultureInfo.GetCultureInfo("ru-RU"), 0);
-                if (String.IsNullOrEmpty(yValue))
-                    yValue = String.Format("{0:C}", CultureInfo.GetCultureInfo("ru-RU"), 0);
-
-                result = Decimal.Compare(Decimal.Parse(xValue, NumberStyles.Currency, CultureInfo.GetCultureInfo("ru-RU")), Decimal.Parse(yValue, NumberStyles.Currency, CultureInfo.GetCultureInfo("ru-RU")));
-
-                if (this.order == SortOrder.Descending)
-                    result = 0 - result;
+                return result;
             }
 
-            return result;
+            if (decimal.TryParse(
+                s,
+                NumberStyles.Any,
+                CultureInfo.CurrentCulture,
+                out result))
+            {
+                return result;
+            }
+
+            return 0m;
         }
     }
 }

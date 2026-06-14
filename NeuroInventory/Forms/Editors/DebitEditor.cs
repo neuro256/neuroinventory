@@ -1,8 +1,8 @@
 ﻿using BrightIdeasSoftware;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -22,6 +22,9 @@ namespace NeuroInventory
         {
             InitializeComponent();
 
+            this.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
+            panelLeftUpper.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
+
             DebitDataSet = p_DataSet;
 
             InitControls();
@@ -34,8 +37,8 @@ namespace NeuroInventory
             this.lvDebitData.AutoGenerateColumns = false;
             this.lvDebitData.DataSource = new BindingSource(DebitDataSet, "DebitReport");
             this.lvDebitData.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
-            this.lvDebitData.SelectedBackColor = Color.LightBlue;
-            this.lvDebitData.SelectedForeColor = Color.MidnightBlue;
+            this.lvDebitData.SelectedBackColor = Definitions.COLOR_SELECTED_BACK_COLOR;
+            this.lvDebitData.SelectedForeColor = Definitions.COLOR_SELECTED_FORE_COLOR;
             this.lvDebitData.RowHeight = Definitions.ROW_HEIGHT;
             //this.lvDebitData.DoubleBuffered(true);
             // Автоматическая нумерация строк
@@ -44,19 +47,24 @@ namespace NeuroInventory
                 args.Item.Text = (args.RowIndex + 1).ToString();
             };
 
-            columnPrice.AspectToStringConverter = delegate (object obj)
+            columnPrice.AspectToStringConverter = delegate (object value)
             {
-                return string.Format(new CultureInfo("ru-RU"),
-                      "{0:C}",
-                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+                if (value == null || value == DBNull.Value)
+                    return string.Empty;
+
+                decimal price = MoneyConverter.ToCurrency(value);
+
+                return MoneyConverter.FormatCurrency(price);
             };
 
-            columnSum.AspectToStringConverter = delegate (object obj)
+            columnSum.AspectToStringConverter = delegate (object value)
             {
-                string str = string.Format(new CultureInfo("ru-RU"),
-                      "{0:C}",
-                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
-                return str;
+                if (value == null || value == DBNull.Value)
+                    return string.Empty;
+
+                decimal sum = MoneyConverter.ToCurrency(value);
+
+                return MoneyConverter.FormatCurrency(sum);
             };
 
             // custom sorting by column
@@ -100,17 +108,24 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void lvDebitData_CellEditStarting(object sender, CellEditEventArgs e)
         {
-            if (e.Column.AspectName == "debit_amount")
+            var nud = new NumericUpDown
             {
-                NumericUpDown nud = new NumericUpDown();
-                nud.Bounds = e.CellBounds;
-                nud.Minimum = 0.0M;
-                nud.Maximum = NudMaxValue;
-                DataRowView dataRowView = e.RowObject as DataRowView;
-                nud.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRowView["measurement"].ToString());
-                nud.Value = MoneyConverter.ToCurrency(e.Value);
-                e.Control = nud;
+                Bounds = e.CellBounds,
+                Minimum = 0m,
+                Maximum = NudMaxValue,
+                Value = MoneyConverter.GetDecimalValue(e.Value)
+            };
+
+            if (e.RowObject is DataRowView rowView)
+            {
+                decimal balance = MoneyConverter.GetDecimalValue(rowView["balance"]);
+                nud.Maximum = Math.Min(NudMaxValue, balance);
+
+                nud.DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement()
+                    .GetDecimalPlacesByName(rowView["measurement"]?.ToString() ?? string.Empty);
             }
+
+            e.Control = nud;
         }
 
         /// <summary>
@@ -120,21 +135,26 @@ namespace NeuroInventory
         /// <param name="e"></param>
         private void lvDebitData_CellEditFinishing(object sender, CellEditEventArgs e)
         {
-            if (e.Column.AspectName == "debit_amount")
-            { 
-                DataRowView dataRowView = e.RowObject as DataRowView;
-                decimal balance = MoneyConverter.ToCurrency(dataRowView["balance"]);
+            if (e.Column.AspectName == "debit_amount" && e.NewValue != null)
+            {
+                if (!(e.RowObject is DataRowView dataRowView))
+                    return;
 
-                // Идет проверка, не выбрано ли количество, большее чем остаток тмц на складе
-                if (MoneyConverter.ToCurrency(e.NewValue) > balance)
-                    e.NewValue = balance;
+                decimal newAmount = MoneyConverter.GetDecimalValue(e.NewValue);
+                decimal oldAmount = MoneyConverter.GetDecimalValue(e.Value);
 
-                if (!Equals(e.NewValue, e.Value))
+                decimal balance = MoneyConverter.GetDecimalValue(dataRowView["balance"]);
+                decimal price = MoneyConverter.GetDecimalValue(dataRowView["price"]);
+
+                if (newAmount > balance)
+                    newAmount = balance;
+
+                e.NewValue = newAmount;
+                dataRowView["debit_amount"] = newAmount;
+
+                if (newAmount != oldAmount)
                 {
-                    // Вычисление стоимости отпущенного тмц
-                    // ToString(CultureInfo.GetCultureInfo("en-US")) использовано т.к. локальная культура ru-RU использует в качестве разделителя целой и дробной части запятую, 
-                    // и эта запятая автоматически записывается в newRow. То есть, в newRow хранится не decimal, а строковое значение sum с учетом культуры
-                    dataRowView["sum"] = MoneyConverter.Multiply(e.NewValue, MoneyConverter.ToCurrency(dataRowView["price"])).ToString(CultureInfo.GetCultureInfo("en-US"));
+                    dataRowView["sum"] = newAmount * price;
                 }
             }
         }
@@ -145,6 +165,7 @@ namespace NeuroInventory
             {
                 if (!CheckAmount() || m_Clicked)
                     return;
+
                 m_Clicked = true;
                 // В первую очередь создаем отчет. Если отчет успешно создан и сохранен, записываем данные в базу данных
                 if (CreateReport())
@@ -153,11 +174,18 @@ namespace NeuroInventory
                     // Отпускаем выбранные тмц 
                     foreach(var obj in lvDebitData.Objects)
                     {
-                        DataRowView row = obj as DataRowView;
-                        AddRecord(Convert.ToInt32(row["id"]), Convert.ToInt32(row["demandId"]), reportLastId, MoneyConverter.ToCurrency(row["debit_amount"]), dateTimePicker.Value);
+                        if (!(obj is DataRowView row))
+                            continue;
+
+                        decimal amount = MoneyConverter.GetDecimalValue(row["debit_amount"]);
+                        AddRecord(Convert.ToInt32(row["id"]), Convert.ToInt32(row["demandId"]), reportLastId, amount, dateTimePicker.Value);
                     }
                     DialogResult = DialogResult.OK;
                     Close();
+                }
+                else
+                {
+                    m_Clicked = false;
                 }
             }
             catch (Exception ex)
@@ -169,21 +197,20 @@ namespace NeuroInventory
 
         private bool CheckAmount()
         {
-            bool amountChecked = true;
-
             foreach (var obj in lvDebitData.Objects)
             {
-                DataRowView row = obj as DataRowView;
-                if (Convert.ToDecimal(row["debit_amount"]) <= 0)
+                if (!(obj is DataRowView row))
+                    continue;
+
+                decimal amount = MoneyConverter.GetDecimalValue(row["debit_amount"]);
+
+                if (amount <= 0)
                 {
-                    amountChecked = false;
-                    break;
+                    MessageBox.Show(Definitions.ZERO_AMOUNT);
+                    return false;
                 }
             }
-
-            if (!amountChecked)
-                MessageBox.Show(Definitions.ZERO_AMOUNT);
-            return amountChecked;
+            return true;
         }
 
         private void AddRecord(int p_InventoryId, int p_DemandId, int p_reportId, decimal p_Amount, DateTime p_Date)
@@ -229,20 +256,24 @@ namespace NeuroInventory
 
             foreach (var obj in lvDebitData.Objects)
             {
-                DataRowView row = obj as DataRowView;
+                if (!(obj is DataRowView row))
+                    continue;
+
                 string l_CurrentInvoiceCode = row["invoice_code"].ToString();
                 if (!String.IsNullOrEmpty(l_CurrentInvoiceCode) && !l_UniqueCodes.Contains(l_CurrentInvoiceCode))
                 {
                     DataRow newRow = debitReportTable.NewRow();
 
                     newRow["number"] = counter;
-                    string date = Convert.ToDateTime(row["date"]).ToShortDateString();
                     newRow["date_entrance"] = DateAndMoneyConverter.DateToTextSimple(Convert.ToDateTime(row["date"]));
                     newRow["date_debit"] = DateAndMoneyConverter.DateToTextSimple(dateTimePicker.Value);
                     newRow["invoice_code"] = row["invoice_code"].ToString();
-                    if (!String.IsNullOrEmpty(row["invoiceDate"].ToString()))
+                    
+                    if (row["invoiceDate"] != DBNull.Value)
                     {
-                        newRow["invoiceDate"] = DateAndMoneyConverter.DateToTextSimple(Convert.ToDateTime(row["invoiceDate"]));
+                        newRow["invoiceDate"] =
+                            DateAndMoneyConverter.DateToTextSimple(
+                                Convert.ToDateTime(row["invoiceDate"]));
                     }
 
                     counter++;
@@ -266,29 +297,32 @@ namespace NeuroInventory
             debitReportTable.Columns.Add("name");
             debitReportTable.Columns.Add("OKEIcode");
             debitReportTable.Columns.Add("measurement");
-            debitReportTable.Columns.Add("amount");
-            debitReportTable.Columns.Add("price");
-            debitReportTable.Columns.Add("sum");
+            debitReportTable.Columns.Add("amount", typeof(decimal));
+            debitReportTable.Columns.Add("price", typeof(decimal));
+            debitReportTable.Columns.Add("sum", typeof(decimal));
 
             int counter = 1;
 
             foreach (var obj in lvDebitData.Objects)
             {
-                DataRowView row = obj as DataRowView;
-                DataRow newRow = debitReportTable.NewRow();
+                if (obj is DataRowView row)
+                {
+                    DataRow newRow = debitReportTable.NewRow();
 
-                newRow["id"] = row["id"];
-                newRow["number"] = counter;
-                newRow["name"] = row["name"];
-                newRow["OKEIcode"] = row["OKEIcode"];
-                newRow["measurement"] = SQLiteSettingsManager.GetInstance().Measurement().GetShortName(row["measurement"].ToString());
-                newRow["amount"] = row["debit_amount"].ToString();
-                newRow["price"] = row["price"];
-                newRow["sum"] = row["sum"];
+                    newRow["id"] = row["id"];
+                    newRow["number"] = counter;
+                    newRow["name"] = row["name"];
+                    newRow["OKEIcode"] = row["OKEIcode"];
+                    newRow["measurement"] = SQLiteSettingsManager.GetInstance().Measurement()
+                        .GetShortName(row["measurement"]?.ToString() ?? string.Empty);
 
-                counter++;
+                    newRow["amount"] = MoneyConverter.GetDecimalValue(row["debit_amount"]);
+                    newRow["price"] = MoneyConverter.RoundCurrency(MoneyConverter.GetDecimalValue(row["price"]));
+                    newRow["sum"] = MoneyConverter.RoundCurrency(MoneyConverter.GetDecimalValue(row["sum"]));
 
-                debitReportTable.Rows.Add(newRow);
+                    counter++;
+                    debitReportTable.Rows.Add(newRow);
+                }
             }
 
             DataSet debitReportDataSet = new DataSet("Debit");
@@ -342,8 +376,11 @@ namespace NeuroInventory
 
             foreach(var row in lvDebitData.Objects)
             {
-                DataRowView dataRowView = row as DataRowView;
-                sum += Decimal.Parse(dataRowView["sum"].ToString(), NumberStyles.Currency, CultureInfo.InvariantCulture);
+                if (!(row is DataRowView dataRowView))
+                    continue;
+
+                decimal rowSum = MoneyConverter.GetDecimalValue(dataRowView["sum"]);
+                sum += rowSum;
             }
             return sum;
         }

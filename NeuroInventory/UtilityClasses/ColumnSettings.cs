@@ -15,7 +15,7 @@ namespace NeuroInventory
             return instance;
         }
 
-        private string ColumnSettingsPath = "ColumnSettings.json";
+        private string ColumnSettingsPath = Definitions.APPLICATION_SETTINGS_PATH + "ColumnSettings.json";
 
         private byte[] lvInventorySettings;
         private byte[] lvReleasedSettings;

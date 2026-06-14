@@ -9,6 +9,7 @@ namespace NeuroInventory
         public AuthenticationEditor()
         {
             InitializeComponent();
+            this.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             tbPassword.Focus();
         }
 

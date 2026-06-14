@@ -66,7 +66,7 @@
             // lblProvider
             // 
             this.lblProvider.AutoSize = true;
-            this.lblProvider.BackColor = System.Drawing.Color.LightCyan;
+            this.lblProvider.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(250)))), ((int)(((byte)(189)))));
             this.lblProvider.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblProvider.Location = new System.Drawing.Point(3, 0);
             this.lblProvider.Name = "lblProvider";
@@ -77,7 +77,7 @@
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.BackColor = System.Drawing.Color.LightCyan;
+            this.lblDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(250)))), ((int)(((byte)(189)))));
             this.lblDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDate.Location = new System.Drawing.Point(3, 40);
             this.lblDate.Name = "lblDate";
@@ -98,7 +98,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.BackColor = System.Drawing.Color.LightCyan;
+            this.lblName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(250)))), ((int)(((byte)(189)))));
             this.lblName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblName.Location = new System.Drawing.Point(3, 200);
             this.lblName.Name = "lblName";
@@ -129,7 +129,7 @@
             // lblAmount
             // 
             this.lblAmount.AutoSize = true;
-            this.lblAmount.BackColor = System.Drawing.Color.LightCyan;
+            this.lblAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(250)))), ((int)(((byte)(189)))));
             this.lblAmount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAmount.Location = new System.Drawing.Point(3, 320);
             this.lblAmount.Name = "lblAmount";
@@ -140,7 +140,7 @@
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
-            this.lblPrice.BackColor = System.Drawing.Color.LightCyan;
+            this.lblPrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(250)))), ((int)(((byte)(189)))));
             this.lblPrice.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPrice.Location = new System.Drawing.Point(3, 360);
             this.lblPrice.Name = "lblPrice";
@@ -357,7 +357,7 @@
             // lblInvoiceDate
             // 
             this.lblInvoiceDate.AutoSize = true;
-            this.lblInvoiceDate.BackColor = System.Drawing.Color.Silver;
+            this.lblInvoiceDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.lblInvoiceDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblInvoiceDate.Location = new System.Drawing.Point(3, 160);
             this.lblInvoiceDate.Name = "lblInvoiceDate";
@@ -393,7 +393,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Silver;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(800, 493);
             this.Controls.Add(this.tbLayoutBottom);
             this.Controls.Add(this.tbLayoutMain);

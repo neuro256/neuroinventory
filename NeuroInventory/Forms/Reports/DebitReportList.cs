@@ -60,33 +60,66 @@ namespace NeuroInventory
 
             bindingSource = new BindingSource(ReturnDataSet(), "debitReport");
             dlvDebitReport.DataSource = bindingSource;
-            // custom sorting by column
-            dlvDebitReport.CustomSorter = delegate (OLVColumn column, SortOrder order)
+
+            columnDate.AspectGetter = rowObject =>
             {
-                switch (column.AspectName)
-                {
-                    case "date":
-                        dlvDebitReport.ListViewItemSorter = new NeuroDateComparer(columnDate, order);
-                        break;
-                    default:
-                        dlvDebitReport.ListViewItemSorter = new ColumnComparer(column, order);
-                        break;
-                }
+                if (!(rowObject is DataRowView row))
+                    return null;
+
+                object value = row["date"];
+
+                if (value == null || value == DBNull.Value)
+                    return null;
+
+                if (value is DateTime dt)
+                    return dt;
+
+                return DateTime.TryParse(value.ToString(), out dt)
+                    ? (DateTime?)dt
+                    : null;
             };
+
+            columnDate.AspectToStringConverter = value =>
+            {
+                if (value is DateTime dt)
+                    return dt.ToString("dd.MM.yyyy");
+
+                return string.Empty;
+            };
+
             dlvDebitReport.PrimarySortColumn = columnDate;
             dlvDebitReport.PrimarySortOrder = SortOrder.Ascending;
             dlvDebitReport.Sort();
             dlvDebitReport.RebuildColumns();
         }
 
-        protected override DataListView GetListView()
+        protected override FastDataListView GetListView()
         {
             return dlvDebitReport;
         }
 
         private void RefreshList()
         {
-            bindingSource.DataSource = ReturnDataSet();
+            dlvDebitReport.BeginUpdate();
+
+            try
+            {
+                int topIndex = dlvDebitReport.TopItemIndex;
+
+                bindingSource.DataSource = ReturnDataSet();
+
+                if (dlvDebitReport.GetItemCount() > 0)
+                {
+                    topIndex = Math.Min(topIndex, dlvDebitReport.GetItemCount() - 1);
+
+                    if (topIndex >= 0)
+                        dlvDebitReport.TopItemIndex = topIndex;
+                }
+            }
+            finally
+            {
+                dlvDebitReport.EndUpdate();
+            }
         }
 
         protected override void InitForm()
@@ -114,7 +147,9 @@ namespace NeuroInventory
             {
                 foreach (var selectedObject in dlvDebitReport.SelectedObjects)
                 {
-                    DataRowView dataRowView = selectedObject as DataRowView;
+                    if (!(selectedObject is DataRowView dataRowView))
+                        continue;
+
                     SQLiteManager.GetInstance().DebitReport().Remove(Convert.ToInt32(dataRowView["id"]));
                 }
                 SQLiteManager.GetInstance().DebitReport().SetCommandDataSet();
@@ -135,7 +170,7 @@ namespace NeuroInventory
         {
             if (e.Column?.AspectName == "document")
             {
-                e.SubItem.BackColor = Color.LightBlue;
+                e.SubItem.BackColor = Definitions.COLOR_SUBITEM_DOCUMENT_BACK_COLOR;//Color.LightBlue;
                 e.SubItem.Text = Path.GetFileName(e.SubItem.Text);
             }
         }

@@ -60,33 +60,66 @@ namespace NeuroInventory
 
             bindingSource = new BindingSource(ReturnDataSet(), "demandReport");
             dlvDemandReport.DataSource = bindingSource;
-            // custom sorting by column
-            dlvDemandReport.CustomSorter = delegate (OLVColumn column, SortOrder order)
+            
+            columnDate.AspectGetter = rowObject =>
             {
-                switch (column.AspectName)
-                {
-                    case "date":
-                        dlvDemandReport.ListViewItemSorter = new NeuroDateComparer(columnDate, order);
-                        break;
-                    default:
-                        dlvDemandReport.ListViewItemSorter = new ColumnComparer(column, order);
-                        break;
-                }
+                if (!(rowObject is DataRowView row))
+                    return null;
+
+                object value = row["date"];
+
+                if (value == null || value == DBNull.Value)
+                    return null;
+
+                if (value is DateTime dt)
+                    return dt;
+
+                return DateTime.TryParse(value.ToString(), out dt)
+                    ? (DateTime?)dt
+                    : null;
             };
+
+            columnDate.AspectToStringConverter = value =>
+            {
+                if (value is DateTime dt)
+                    return dt.ToString("dd.MM.yyyy");
+
+                return string.Empty;
+            };
+
             dlvDemandReport.PrimarySortColumn = columnDate;
             dlvDemandReport.PrimarySortOrder = SortOrder.Ascending;
             dlvDemandReport.Sort();
             dlvDemandReport.RebuildColumns();
         }
 
-        protected override DataListView GetListView()
+        protected override FastDataListView GetListView()
         {
             return dlvDemandReport;
         }
 
         private void RefreshList()
         {
-            bindingSource.DataSource = ReturnDataSet();
+            dlvDemandReport.BeginUpdate();
+
+            try
+            {
+                int topIndex = dlvDemandReport.TopItemIndex;
+
+                bindingSource.DataSource = ReturnDataSet();
+
+                if (dlvDemandReport.GetItemCount() > 0)
+                {
+                    topIndex = Math.Min(topIndex, dlvDemandReport.GetItemCount() - 1);
+
+                    if (topIndex >= 0)
+                        dlvDemandReport.TopItemIndex = topIndex;
+                }
+            }
+            finally
+            {
+                dlvDemandReport.EndUpdate();
+            }
         }
 
         protected override void InitForm()
@@ -114,7 +147,9 @@ namespace NeuroInventory
             {
                 foreach (var selectedObject in dlvDemandReport.SelectedObjects)
                 {
-                    DataRowView dataRowView = selectedObject as DataRowView;
+                    if (!(selectedObject is DataRowView dataRowView))
+                        continue;
+
                     SQLiteManager.GetInstance().DemandReport().Remove(Convert.ToInt32(dataRowView["id"]));
                 }
                 SQLiteManager.GetInstance().DemandReport().SetCommandDataSet();
@@ -135,7 +170,7 @@ namespace NeuroInventory
         {
             if (e.Column?.AspectName == "document")
             {
-                e.SubItem.BackColor = Color.LightBlue;
+                e.SubItem.BackColor = Definitions.COLOR_SUBITEM_DOCUMENT_BACK_COLOR;
                 e.SubItem.Text = Path.GetFileName(e.SubItem.Text);
             }
         }

@@ -1,6 +1,9 @@
 ﻿using BrightIdeasSoftware;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -20,7 +23,7 @@ namespace NeuroInventory
 
         class BalanceInfo
         {
-            public object Balance { get; set; } 
+            public object Balance { get; } 
             public BalanceType balanceType { get; set; }
             public Color Color { get; set; } 
             public string BalanceTypeText { get; set; }
@@ -34,33 +37,37 @@ namespace NeuroInventory
             public static BalanceInfo GetBalanceInfo(object balance, object amount)
             {
                 BalanceInfo balanceInfo = new BalanceInfo(balance, BalanceType.NOT_DEBIT);
+
+                decimal balanceValue = MoneyConverter.GetDecimalValue(balance);
+                decimal amountValue = MoneyConverter.GetDecimalValue(amount);
+
                 if (Equals(balance, DBNull.Value))
                 {
-                    balanceInfo.Color = Color.DarkOrange;
+                    balanceInfo.Color = Definitions.COLOR_BALANCEINFO_NOT_DEBIT_NULL_COLOR;//Color.DarkOrange;
                     balanceInfo.BalanceTypeText = Definitions.NOT_DEBIT_STRING;
                     balanceInfo.balanceType = BalanceType.NOT_DEBIT;
                 }
-                else if (Convert.ToDecimal(balance) > 0 && Equals(balance, amount))
+                else if (Math.Abs(balanceValue - amountValue) < 0.0001m)
                 {
-                    balanceInfo.Color = Color.Coral;
+                    balanceInfo.Color = Definitions.COLOR_BALANCEINFO_NOT_DEBIT_COLOR;//Color.Coral;
                     balanceInfo.BalanceTypeText = Definitions.NOT_DEBIT_STRING;
                     balanceInfo.balanceType = BalanceType.NOT_DEBIT;
                 }
-                else if (Convert.ToDecimal(balance) > 0 && !Equals(balance, amount))
+                else if (balanceValue > 0 && balanceValue != amountValue)
                 {
-                    balanceInfo.Color = Color.LightGreen;
+                    balanceInfo.Color = Definitions.COLOR_BALANCEINFO_PART_DEBIT_COLOR;//Color.LightGreen;
                     balanceInfo.BalanceTypeText = $"{Definitions.PARTIALLY_DEBIT} ({balance})";
                     balanceInfo.balanceType = BalanceType.PARTIALLY_DEBIT;
                 }
-                else if (Convert.ToDecimal(balance) < 0)
+                else if (balanceValue < 0)
                 {
-                    balanceInfo.Color = Color.Red;
+                    balanceInfo.Color = Definitions.COLOR_BALANCEINFO_ERROR_DEBIT_COLOR;//Color.Red;
                     balanceInfo.BalanceTypeText = $"{Definitions.ERROR_DEBIT_STRING} ({balance})";
                     balanceInfo.balanceType = BalanceType.ERROR_DEBIT;
                 }
                 else
                 {
-                    balanceInfo.Color = Color.LightGreen;
+                    balanceInfo.Color = Definitions.COLOR_BALANCEINFO_DEBIT_COLOR;//Color.LightGreen;
                     balanceInfo.BalanceTypeText = Definitions.DEBIT_STRING;
                     balanceInfo.balanceType = BalanceType.DEBIT;
                 }
@@ -84,6 +91,7 @@ namespace NeuroInventory
             InitCtxMenuStrip();
             SQLiteManager.GetInstance().Released().SetCommandSet();
             RestoreState();
+            TimedFilter(dlvReleased, Definitions.DEFAULT_FILTER_TEXT, 0);
         }
 
         public override void RebuildList()
@@ -133,101 +141,202 @@ namespace NeuroInventory
             bindingSource = new BindingSource(ReturnDataSet(), "demand");
             dlvReleased.DataSource = bindingSource;
 
+            columnDate1.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return null;
+
+                object value = row["ordate"];
+
+                if (value == null || value == DBNull.Value)
+                    return null;
+
+                if (value is DateTime dt)
+                    return dt;
+
+                return DateTime.TryParse(value.ToString(), out dt)
+                    ? (DateTime?)dt
+                    : null;
+            };
+
+            columnDate2.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return null;
+
+                object value = row["mydate"];
+
+                if (value == null || value == DBNull.Value)
+                    return null;
+
+                if (value is DateTime dt)
+                    return dt;
+
+                return DateTime.TryParse(value.ToString(), out dt)
+                    ? (DateTime?)dt
+                    : null;
+            };
+
+            columnDate3.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return null;
+
+                object value = row["invoiceDate"];
+
+                if (value == null || value == DBNull.Value)
+                    return null;
+
+                if (value is DateTime dt)
+                    return dt;
+
+                return DateTime.TryParse(value.ToString(), out dt)
+                    ? (DateTime?)dt
+                    : null;
+            };
+
+            columnPrice.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return 0m;
+
+                return MoneyConverter.GetDecimalValue(row["price"]);
+            };
+
+            columnSum.AspectGetter = rowObject =>
+            {
+                if (!(rowObject is DataRowView row))
+                    return 0m;
+
+                return MoneyConverter.GetDecimalValue(row["sum"]);
+            };
+
             this.dlvReleased.FormatCell += delegate (object cender, FormatCellEventArgs args)
             {
                 if (args.Column?.AspectName == "document")
                 {
-                    args.SubItem.BackColor = Color.LightBlue;
+                    args.SubItem.BackColor = Definitions.COLOR_SUBITEM_DOCUMENT_BACK_COLOR;
                     args.SubItem.Text = Path.GetFileName(args.SubItem.Text);
                 }
-                else if (args.Column?.AspectName == "amount")
+                else if (args.Column?.AspectName == "amount" && args.Model != null)
                 {
-                    DataRowView dataRowView = args.Model as DataRowView;
-                    int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRowView["measurement"].ToString());
-                    args.SubItem.Text = String.Format($"{{0:n{l_DecimalPlaces}}}", args.SubItem.Text);
+                    if (!(args.Model is DataRowView dataRowView))
+                        return;
+
+                    int l_DecimalPlaces = SQLiteSettingsManager.GetInstance().Measurement().GetDecimalPlacesByName(dataRowView["measurement"]?.ToString() ?? string.Empty);
+
+                    decimal amount = MoneyConverter.GetDecimalValue(dataRowView["amount"]);
+
+                    args.SubItem.Text = amount.ToString($"N{l_DecimalPlaces}");
                 }
-                else if (args.Column?.AspectName == "balance")
+                else if (args.Column?.AspectName == "balance" && args.Model != null)
                 {
-                    DataRowView dataRowView = args.Model as DataRowView;
+                    if (!(args.Model is DataRowView dataRowView))
+                        return;
+
                     BalanceInfo balanceInfo = BalanceInfo.GetBalanceInfo(dataRowView["balance"], dataRowView["amount"]);
 
-                    args.SubItem.BackColor = balanceInfo.Color;
+                    //args.SubItem.BackColor = balanceInfo.Color;
                     args.SubItem.Text = balanceInfo.BalanceTypeText;
                 }
             };
 
             this.dlvReleased.FormatRow += delegate (object cender, FormatRowEventArgs args)
             {
-                DataRowView dataRowView = args.Model as DataRowView;
+                if (!(args.Model is DataRowView dataRowView))
+                    return;
+
+                if (dataRowView == null)
+                    return;
+
                 BalanceInfo balanceInfo = BalanceInfo.GetBalanceInfo(dataRowView["balance"], dataRowView["amount"]);
                 if (balanceInfo.balanceType == BalanceType.DEBIT)
                 {
-                    args.Item.BackColor = Color.LightGreen;
+                    args.Item.BackColor = Definitions.COLOR_ROW_BALANCE_DEBIT_COLOR;//Color.LightGreen;
                 }
                 else if (balanceInfo.balanceType == BalanceType.ERROR_DEBIT)
                 {
-                    args.Item.BackColor = Color.LightPink;
+                    args.Item.BackColor = Definitions.COLOR_ROW_BALANCE_ERROR_DEBIT_COLOR;//Color.LightPink;
                 }
             };
 
-            columnPrice.AspectToStringConverter = delegate (object obj)
+            columnDate1.AspectToStringConverter = value =>
             {
-                return string.Format(new CultureInfo("ru-RU"),
-                      "{0:C}",
-                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+                if (value is DateTime dt)
+                    return dt.ToString("dd.MM.yyyy");
+
+                return string.Empty;
             };
 
-            columnSum.AspectToStringConverter = delegate (object obj)
+            columnDate2.AspectToStringConverter = value =>
             {
-                return string.Format(new CultureInfo("ru-RU"),
-                      "{0:C}",
-                      Convert.ToDecimal(obj, CultureInfo.InvariantCulture));
+                if (value is DateTime dt)
+                    return dt.ToString("dd.MM.yyyy");
+
+                return string.Empty;
             };
 
-            // custom sorting by column
-            dlvReleased.CustomSorter = delegate (OLVColumn column, SortOrder order)
+            columnDate3.AspectToStringConverter = value =>
             {
-                switch (column.AspectName)
-                {
-                    case "ordate":
-                        dlvReleased.ListViewItemSorter = new NeuroDateComparer(columnDate1, order);
-                        break;
-                    case "mydate":
-                        dlvReleased.ListViewItemSorter = new NeuroDateComparer(columnDate2, order);
-                        break;
-                    case "invoiceDate":
-                        dlvReleased.ListViewItemSorter = new NeuroDateComparer(columnDate3, order);
-                        break;
-                    case "amount":
-                        dlvReleased.ListViewItemSorter = new NeuroNumberComparer(columnAmount, order);
-                        break;
-                    case "price":
-                        dlvReleased.ListViewItemSorter = new NeuroCurrencyComparer(columnPrice, order);
-                        break;
-                    case "sum":
-                        dlvReleased.ListViewItemSorter = new NeuroCurrencyComparer(columnSum, order);
-                        break;
-                    default:
-                        dlvReleased.ListViewItemSorter = new ColumnComparer(column, order);
-                        break;
-                }
+                if (value is DateTime dt)
+                    return dt.ToString("dd.MM.yyyy");
+
+                return string.Empty;
             };
 
-            dlvReleased.PrimarySortColumn = columnDate1;
+            columnPrice.AspectToStringConverter = value =>
+            {
+                if (value == null || value == DBNull.Value)
+                    return string.Empty;
+
+                decimal price = MoneyConverter.ToCurrency(value);
+
+                return MoneyConverter.FormatCurrency(price);
+            };
+
+            columnSum.AspectToStringConverter = value =>
+            {
+                if (value == null || value == DBNull.Value)
+                    return string.Empty;
+
+                decimal sum = MoneyConverter.ToCurrency(value);
+
+                return MoneyConverter.FormatCurrency(sum);
+            };
+
             dlvReleased.PrimarySortOrder = SortOrder.Ascending;
             dlvReleased.Sort();
 
             dlvReleased.RebuildColumns();
         }
 
-        protected override DataListView GetListView()
+        protected override FastDataListView GetListView()
         {
             return dlvReleased;
         }
 
         private void RefreshList()
         {
-            bindingSource.DataSource = ReturnDataSet();
+            dlvReleased.BeginUpdate();
+
+            try
+            {
+                int topIndex = dlvReleased.TopItemIndex;
+
+                bindingSource.DataSource = ReturnDataSet();
+
+                if (dlvReleased.GetItemCount() > 0)
+                {
+                    topIndex = Math.Min(topIndex, dlvReleased.GetItemCount() - 1);
+
+                    if (topIndex >= 0)
+                        dlvReleased.TopItemIndex = topIndex;
+                }
+            }
+            finally
+            {
+                dlvReleased.EndUpdate();
+            }
         }
 
         protected override void InitForm()
@@ -251,13 +360,22 @@ namespace NeuroInventory
             if (dlvReleased.SelectedObjects?.Count > 0)
             {
                 dlvReleased.Freeze();
-                foreach (var selectedObject in dlvReleased.SelectedObjects)
+
+                try
                 {
-                    DataRowView dataRowView = selectedObject as DataRowView;
-                    SQLiteManager.GetInstance().Released().CancelDemand(Convert.ToInt32(dataRowView["demandId"]));
+                    foreach (var selectedObject in dlvReleased.SelectedObjects)
+                    {
+                        if (!(selectedObject is DataRowView dataRowView))
+                            continue;
+
+                        SQLiteManager.GetInstance().Released().CancelDemand(Convert.ToInt32(dataRowView["demandId"]));
+                    }
                 }
-                dlvReleased.Unfreeze();
-                RefreshList();
+                finally
+                {
+                    dlvReleased.Unfreeze();
+                    RefreshList();
+                }
             }
             else
             {
@@ -275,13 +393,22 @@ namespace NeuroInventory
             if (dlvReleased.SelectedObjects?.Count > 0)
             {
                 dlvReleased.Freeze();
-                foreach (var selectedObject in dlvReleased.SelectedObjects)
+
+                try
                 {
-                    DataRowView dataRowView = selectedObject as DataRowView;
-                    SQLiteManager.GetInstance().Released().CancelDebit(Convert.ToInt32(dataRowView["demandId"]));
+                    foreach (var selectedObject in dlvReleased.SelectedObjects)
+                    {
+                        if (!(selectedObject is DataRowView dataRowView))
+                            continue;
+
+                        SQLiteManager.GetInstance().Released().CancelDebit(Convert.ToInt32(dataRowView["demandId"]));
+                    }
                 }
-                dlvReleased.Unfreeze();
-                RefreshList();
+                finally
+                {
+                    dlvReleased.Unfreeze();
+                    RefreshList();
+                } 
             }
             else
             {
@@ -338,15 +465,20 @@ namespace NeuroInventory
             debitTable.Columns.Add("name");
             debitTable.Columns.Add("OKEIcode");
             debitTable.Columns.Add("measurement");
-            debitTable.Columns.Add("price");
-            debitTable.Columns.Add("balance");
-            debitTable.Columns.Add("debit_amount");
-            debitTable.Columns.Add("sum");
+            debitTable.Columns.Add("price", typeof(decimal));
+            debitTable.Columns.Add("balance", typeof(decimal));
+            debitTable.Columns.Add("debit_amount", typeof(decimal));
+            debitTable.Columns.Add("sum", typeof(decimal));
 
-            foreach(var obj in dlvReleased.CheckedObjects)
+            foreach (var obj in dlvReleased.CheckedObjects)
             {
+                if (!(obj is DataRowView dataRowView))
+                    continue;
+
+                decimal amount = CalculateBalance(dataRowView);
+                decimal price = MoneyConverter.ToCurrency(dataRowView["price"]);
+
                 DataRow newRow = debitTable.NewRow();
-                DataRowView dataRowView = obj as DataRowView;
 
                 newRow["id"] = dataRowView["id"];
                 newRow["demandId"] = dataRowView["demandId"];
@@ -356,12 +488,11 @@ namespace NeuroInventory
                 newRow["name"] = dataRowView["name"];
                 newRow["OKEIcode"] = dataRowView["OKEIcode"];
                 newRow["measurement"] = dataRowView["measurement"];
-                newRow["price"] = dataRowView["price"];
-                newRow["balance"] = CalculateBalance(dataRowView);
-                newRow["debit_amount"] = CalculateBalance(dataRowView);
-                // ToString(CultureInfo.GetCultureInfo("en-US")) использовано т.к. локальная культура ru-RU использует в качестве разделителя целой и дробной части запятую, 
-                // и эта запятая автоматически записывается в newRow. То есть, в newRow хранится не decimal, а строковое значение sum с учетом культуры
-                newRow["sum"] = MoneyConverter.Multiply(CalculateBalance(dataRowView), dataRowView["price"]).ToString(CultureInfo.GetCultureInfo("en-US"));
+                
+                newRow["price"] = MoneyConverter.RoundCurrency(price);
+                newRow["balance"] = amount;
+                newRow["debit_amount"] = amount;
+                newRow["sum"] = MoneyConverter.RoundCurrency(amount * price);
 
                 debitTable.Rows.Add(newRow);
             }
@@ -372,43 +503,47 @@ namespace NeuroInventory
             return debitDataSet;
         }
 
-        private static object CalculateBalance(DataRowView dataRowView)
+        private static decimal CalculateBalance(DataRowView dataRowView)
         {
             object balance = dataRowView["balance"];
-            object balanceValue = null;
-            if (balance != null && !Equals(balance, DBNull.Value))
-            {
-                balanceValue = balance;
-            }
-            else
-            {
-                balanceValue = dataRowView["amount"];
-            }
 
-            return balanceValue;
+            if (balance != null && balance != DBNull.Value)
+                return MoneyConverter.GetDecimalValue(balance);
+
+            return MoneyConverter.GetDecimalValue(dataRowView["amount"]);
         }
 
         private void dlvReleased_CellClick(object sender, CellClickEventArgs e)
         {
-            if (e.Column?.AspectName == "document")
-            {
-                DataRowView dataRowView = e.Model as DataRowView;
-                NeuroFile.OpenFileInExplorer(dataRowView["document"].ToString());
-            }
+            if (e.Column?.AspectName != "document")
+                return;
+
+            if (!(e.Model is DataRowView row))
+                return;
+
+            object document = row["document"];
+
+            if (document == null || document == DBNull.Value)
+                return;
+
+            NeuroFile.OpenFileInExplorer(document.ToString());
         }
 
         private void dlvReleased_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             OLVListItem item = e.Item as OLVListItem;
-            DataRowView dataRowView = item.RowObject as DataRowView;
+
+            if (!(item.RowObject is DataRowView dataRowView))
+                return;
 
             object l_Balance = dataRowView["balance"];
             if (!Equals(l_Balance, DBNull.Value))
             {
-                decimal l_BalanceValue = Convert.ToDecimal(l_Balance);
+                decimal balanceValue = MoneyConverter.GetDecimalValue(l_Balance);
 
-                if (l_BalanceValue <= 0 && e.Item.Checked == true)
+                if (balanceValue <= 0 && e.Item.Checked == true)
                 {
+                    item.Checked = false;
                     MessageBox.Show(Definitions.ALREADY_DEBIT_WARNING);
                 }
             }
@@ -433,7 +568,17 @@ namespace NeuroInventory
 
         private void tbFilter_TextChanged(object sender, EventArgs e)
         {
-            TimedFilter(dlvReleased, ((TextBox)sender).Text, 0);
+            if (checkBoxShowAll.Checked)
+            {
+                TimedFilter(dlvReleased, ((TextBox)sender).Text, 0);
+            }
+            else
+            {
+                if (((TextBox)sender).Text.Length > 2)
+                    TimedFilter(dlvReleased, ((TextBox)sender).Text, 0);
+                else
+                    TimedFilter(dlvReleased, Definitions.DEFAULT_FILTER_TEXT, 0);
+            }
         }
 
         public override void SaveState()
@@ -453,7 +598,25 @@ namespace NeuroInventory
 
         public override void FocusFilter()
         {
+            tbFilter.Clear();
             tbFilter.Focus();
+        }
+
+        private void checkBoxShowAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxShowAll.Checked)
+            {
+                TimedFilter(dlvReleased, String.Empty, 0);
+                tbFilter.Clear();
+            }   
+            else
+            {
+                if(String.Equals(tbFilter.Text, String.Empty))
+                    TimedFilter(dlvReleased, Definitions.DEFAULT_FILTER_TEXT, 0);
+                else
+                    TimedFilter(dlvReleased, tbFilter.Text, 0);
+            }
+                
         }
     }
 }

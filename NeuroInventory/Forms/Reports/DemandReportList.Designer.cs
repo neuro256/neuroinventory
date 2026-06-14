@@ -33,7 +33,7 @@
             this.panelDemandReportListBottom = new System.Windows.Forms.Panel();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.dlvDemandReport = new BrightIdeasSoftware.DataListView();
+            this.dlvDemandReport = new BrightIdeasSoftware.FastDataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -62,6 +62,7 @@
             // 
             // panelDemandReportListBottom
             // 
+            this.panelDemandReportListBottom.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.panelDemandReportListBottom.Controls.Add(this.btnDelete);
             this.panelDemandReportListBottom.Controls.Add(this.btnAdd);
             this.panelDemandReportListBottom.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -73,7 +74,7 @@
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnDelete.FlatAppearance.BorderColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnDelete.Location = new System.Drawing.Point(9, 6);
@@ -88,7 +89,7 @@
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdd.Enabled = false;
-            this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnAdd.FlatAppearance.BorderColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnAdd.Location = new System.Drawing.Point(113, 6);
@@ -199,7 +200,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripDemandReportList;
-        private BrightIdeasSoftware.DataListView dlvDemandReport;
+        private BrightIdeasSoftware.FastDataListView dlvDemandReport;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn columnDate;

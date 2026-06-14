@@ -1,10 +1,32 @@
-﻿namespace NeuroInventory
+﻿using System;
+using System.Drawing;
+
+namespace NeuroInventory
 {
     class Definitions
     {
         public static readonly int MAX_COLUMN_WIDTH = 1000;
         public static readonly int MIN_COLUMN_WIDTH = 25;
         public static readonly int ROW_HEIGHT = 23;
+        public static readonly Color COLOR_SELECTED_BACK_COLOR = Color.FromArgb(212, 209, 209);
+        public static readonly Color COLOR_SELECTED_FORE_COLOR = Color.Black;
+        public static readonly Color COLOR_HIGHLIGHTTEXTRENDERER_FRAMEPEN = Color.MidnightBlue;
+        public static readonly Color COLOR_HIGHLIGHTTEXTRENDERER_FILLBRUSH = Color.LightBlue;
+        public static readonly Color COLOR_SUBITEM_DOCUMENT_BACK_COLOR = System.Drawing.ColorTranslator.FromHtml("#F3D124");//Color.FromArgb(141, 165, 193);
+        public static readonly Color COLOR_DROPSINK_FEEDBACK_COLOR = Color.LightBlue;
+        public static readonly Color COLOR_SUBITEM_BALANCE_MIN_BACK_COLOR = Color.FromArgb(227, 112, 106);
+        public static readonly Color COLOR_ROW_BALANCE_BACK_COLOR = Color.LightPink;
+        // не используется 
+        public static readonly Color COLOR_BALANCEINFO_NOT_DEBIT_NULL_COLOR = Color.DarkOrange;
+        public static readonly Color COLOR_BALANCEINFO_NOT_DEBIT_COLOR = Color.Coral;
+        public static readonly Color COLOR_BALANCEINFO_PART_DEBIT_COLOR = Color.LightGreen;
+        public static readonly Color COLOR_BALANCEINFO_ERROR_DEBIT_COLOR = Color.Red;
+        public static readonly Color COLOR_BALANCEINFO_DEBIT_COLOR = Color.LightGreen;
+        // 
+        public static readonly Color COLOR_ROW_BALANCE_DEBIT_COLOR = Color.FromArgb(119, 185, 126);
+        public static readonly Color COLOR_ROW_BALANCE_ERROR_DEBIT_COLOR = Color.LightPink;
+        public static readonly Color COLOR_FORM_MAIN_BACK_COLOR = Color.FromArgb(230, 230, 230);
+        public static readonly Color COLOR_FORM_SLAVE_BACK_COLOR = Color.FromArgb(254, 250, 189);
         public static string REMOVE_WARNING_STRING = "Сначала выберите запись которую хотите удалить";
         public static string UPDATE_WARNING_STRING = "Сначала выберите запись которую хотите изменить";
         public static string VALIDATION_WARNING_STRING = "Сначала заполните обязательные поля";
@@ -39,5 +61,8 @@
         public static string ALREADY_DEBIT_WARNING = "Вы собираетесь редактировать уже списанную ТМЦ";
         public static string DEMAND_ROLLBACK_PATH = @"Документы\Отмененные требования";
         public static string DEBIT_ROLLBACK_PATH = @"Документы\Отмененные списания";
+        public static string INVENTORY_TOTAL_SUM = "Общая сумма = ";
+        public static string DEFAULT_FILTER_TEXT = "$Введите текст для поиска$";
+        public static string APPLICATION_SETTINGS_PATH = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/NeuroBlackBox/";
     }
 }

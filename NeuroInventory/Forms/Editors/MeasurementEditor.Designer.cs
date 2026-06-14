@@ -35,7 +35,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.splitContainerMeasurement = new System.Windows.Forms.SplitContainer();
-            this.dlvMeasurement = new BrightIdeasSoftware.DataListView();
+            this.dlvMeasurement = new BrightIdeasSoftware.FastDataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -63,7 +63,7 @@
             // 
             this.lblAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAmount.AutoSize = true;
-            this.lblAmount.BackColor = System.Drawing.Color.LightCyan;
+            this.lblAmount.BackColor = Definitions.COLOR_FORM_SLAVE_BACK_COLOR;
             this.lblAmount.Location = new System.Drawing.Point(103, 33);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(76, 17);
@@ -87,7 +87,7 @@
             // 
             this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblName.AutoSize = true;
-            this.lblName.BackColor = System.Drawing.Color.LightCyan;
+            this.lblName.BackColor = Definitions.COLOR_FORM_SLAVE_BACK_COLOR;
             this.lblName.Location = new System.Drawing.Point(107, 74);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(72, 17);
@@ -134,7 +134,7 @@
             // splitContainerMeasurement.Panel2
             // 
             this.splitContainerMeasurement.Panel2.AutoScroll = true;
-            this.splitContainerMeasurement.Panel2.BackColor = System.Drawing.Color.Silver;
+            this.splitContainerMeasurement.Panel2.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.splitContainerMeasurement.Panel2.Controls.Add(this.lblPlaces);
             this.splitContainerMeasurement.Panel2.Controls.Add(this.nudPlaces);
             this.splitContainerMeasurement.Panel2.Controls.Add(this.tbSymbol);
@@ -231,7 +231,7 @@
             // 
             this.lblPlaces.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPlaces.AutoSize = true;
-            this.lblPlaces.BackColor = System.Drawing.Color.LightCyan;
+            this.lblPlaces.BackColor = Definitions.COLOR_FORM_SLAVE_BACK_COLOR;
             this.lblPlaces.Location = new System.Drawing.Point(27, 159);
             this.lblPlaces.Name = "lblPlaces";
             this.lblPlaces.Size = new System.Drawing.Size(152, 17);
@@ -259,7 +259,7 @@
             // 
             this.lblSymbol.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSymbol.AutoSize = true;
-            this.lblSymbol.BackColor = System.Drawing.Color.LightCyan;
+            this.lblSymbol.BackColor = Definitions.COLOR_FORM_SLAVE_BACK_COLOR;
             this.lblSymbol.Location = new System.Drawing.Point(17, 116);
             this.lblSymbol.Name = "lblSymbol";
             this.lblSymbol.Size = new System.Drawing.Size(162, 17);
@@ -343,7 +343,7 @@
         private System.Windows.Forms.TextBox tbSymbol;
         private System.Windows.Forms.Label lblSymbol;
         private System.Windows.Forms.ErrorProvider errorProviderMeasurement;
-        private BrightIdeasSoftware.DataListView dlvMeasurement;
+        private BrightIdeasSoftware.FastDataListView dlvMeasurement;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn columnName;

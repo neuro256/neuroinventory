@@ -61,8 +61,8 @@
     <Reference Include="GemBox.Spreadsheet, Version=39.3.30.1125, Culture=neutral, PublicKeyToken=b1b72c69714d4847, processorArchitecture=MSIL">
       <HintPath>..\packages\GemBox.Spreadsheet.39.3.30.1125\lib\net30\GemBox.Spreadsheet.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
@@ -199,6 +199,7 @@
       <DependentUpon>DemandEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLiteClasses\Tables\ReleasedSql.cs" />
+    <Compile Include="UtilityClasses\InventoryOverlay.cs" />
     <Compile Include="UtilityClasses\MoneyConverter.cs" />
     <Compile Include="UtilityClasses\NeuroComparers.cs" />
     <Compile Include="UtilityClasses\NeuroFile.cs" />

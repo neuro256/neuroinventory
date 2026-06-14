@@ -16,6 +16,7 @@ namespace NeuroInventory
         public DialogName()
         {
             InitializeComponent();
+            this.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             tbName.Focus();
         }
 

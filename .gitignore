@@ -1,9 +1,15 @@
-/NeuroInventory/obj
-/NeuroInventory/bin/Debug/documents
-/SetupNeuroInventory
-/NeuroInventoryInstaller/NeuroInventoryInstaller-SetupFiles
-/.vs/NeuroInventory/v15/Server/sqlite3
-/UpgradeLog.htm
-/NeuroInventory/bin/Debug/UIsettings.json
-/NeuroInventoryInstaller/NeuroInventoryInstaller-cache/part3/SetupNeuroInventory_0.6.41.cab
-/NeuroInventoryInstaller/NeuroInventoryInstaller-cache/part3/output-info.ini
+# Visual Studio & IDE files
+.vs/
+UpgradeLog.htm
+
+# Build outputs & temporary folders
+/NeuroInventory/bin/
+/NeuroInventory/obj/
+/SetupNeuroInventory/
+
+# NuGet packages
+packages/
+
+# Installer cache & setup files
+/NeuroInventoryInstaller/NeuroInventoryInstaller-SetupFiles/
+/NeuroInventoryInstaller/NeuroInventoryInstaller-cache/

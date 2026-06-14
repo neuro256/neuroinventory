@@ -75,14 +75,33 @@ namespace NeuroInventory
             dlvEmployees.RebuildColumns();
         }
 
-        protected override DataListView GetListView()
+        protected override FastDataListView GetListView()
         {
             return dlvEmployees;
         }
 
         private void RefreshList()
         {
-            bindingSource.DataSource = ReturnDataSet();
+            dlvEmployees.BeginUpdate();
+
+            try
+            {
+                int topIndex = dlvEmployees.TopItemIndex;
+
+                bindingSource.DataSource = ReturnDataSet();
+
+                if (dlvEmployees.GetItemCount() > 0)
+                {
+                    topIndex = Math.Min(topIndex, dlvEmployees.GetItemCount() - 1);
+
+                    if (topIndex >= 0)
+                        dlvEmployees.TopItemIndex = topIndex;
+                }
+            }
+            finally
+            {
+                dlvEmployees.EndUpdate();
+            }
         }
 
         protected override void InitForm()
@@ -132,7 +151,8 @@ namespace NeuroInventory
                 dlvEmployees.Freeze();
                 foreach(var selectedObject in dlvEmployees.SelectedObjects)
                 {
-                    DataRowView dataRowView = selectedObject as DataRowView;
+                    if (!(selectedObject is DataRowView dataRowView))
+                        continue;
                     SQLiteManager.GetInstance().Employees().Remove(Convert.ToInt32(dataRowView["id"]));
                 }
                 dlvEmployees.Unfreeze();
@@ -215,6 +235,7 @@ namespace NeuroInventory
 
         public override void FocusFilter()
         {
+            tbFilter.Clear();
             tbFilter.Focus();
         }
     }

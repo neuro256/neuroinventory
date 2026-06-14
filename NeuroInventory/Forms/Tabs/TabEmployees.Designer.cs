@@ -34,7 +34,7 @@ namespace NeuroInventory
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanelEmployees = new System.Windows.Forms.TableLayoutPanel();
-            this.dlvEmployees = new BrightIdeasSoftware.DataListView();
+            this.dlvEmployees = new BrightIdeasSoftware.FastDataListView();
             this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -174,7 +174,7 @@ namespace NeuroInventory
             // 
             // panelEmployeesBottom
             // 
-            this.panelEmployeesBottom.BackColor = System.Drawing.Color.Silver;
+            this.panelEmployeesBottom.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.panelEmployeesBottom.Controls.Add(this.lblFilter);
             this.panelEmployeesBottom.Controls.Add(this.tbFilter);
             this.panelEmployeesBottom.Controls.Add(this.btnEmployeeEdit);
@@ -304,7 +304,7 @@ namespace NeuroInventory
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem1;
-        private BrightIdeasSoftware.DataListView dlvEmployees;
+        private BrightIdeasSoftware.FastDataListView dlvEmployees;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn olvColumn3;

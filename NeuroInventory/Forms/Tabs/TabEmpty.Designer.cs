@@ -35,11 +35,11 @@
             // 
             this.lblInfo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Font = new System.Drawing.Font("Open Sans Semibold", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblInfo.ForeColor = System.Drawing.Color.DimGray;
             this.lblInfo.Location = new System.Drawing.Point(92, 255);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(1016, 37);
+            this.lblInfo.Size = new System.Drawing.Size(930, 31);
             this.lblInfo.TabIndex = 0;
             this.lblInfo.Text = "Для того чтобы начать работу создайте или откройте файл базы данных";
             // 
@@ -48,6 +48,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.BackColor = Definitions.COLOR_FORM_MAIN_BACK_COLOR;
             this.ClientSize = new System.Drawing.Size(1200, 650);
             this.ControlBox = false;
             this.Controls.Add(this.lblInfo);
